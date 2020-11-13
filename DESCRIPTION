@@ -1,0 +1,35 @@
+Package: eggla
+Title: Early Growth Genetics Longitudinal Analysis
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Mickaël",
+           family = "Canouil",
+           role = c("aut", "cre"),
+           email = "mickael.canouil@cnrs.fr",
+           comment = c(ORCID = "0000-0002-3396-4549")),
+      person(given = "Nicole",
+           family = "Warrington",
+           role = c("aut"),
+           email = "n.warrington@uq.edu.au"))
+Description: Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
+License: MIT + file LICENSE
+Depends: R (>= 4.0.0)
+Imports:
+    data.table,
+    growthcleanr,
+    ggplot2,
+    patchwork,
+    scales,
+    nlme,
+    broom.mixed,
+    ggdendro,
+    spida2
+Suggests: 
+    testthat
+Remotes: 
+    github::mcanouil/growthcleanr
+    github::gmonette/spida2
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
