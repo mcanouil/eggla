@@ -7,6 +7,7 @@
 #'
 #' @return something
 #' @export
+#' @importFrom nlme fixef ranef
 predict_average_slopes <- function(
   fit,
   method,
@@ -31,8 +32,8 @@ predict_average_slopes <- function(
   pred <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period))
   colnames(pred) <- paste0("pred_period_", round(period, digits = 1))
 
-  fxef <- as.numeric(fixef(fit))
-  rnef <- ranef(fit)
+  fxef <- as.numeric(nlme::fixef(fit))
+  rnef <- nlme::ranef(fit)
 
   switch(
     EXPR = as.character(method),

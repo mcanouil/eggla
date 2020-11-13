@@ -7,6 +7,12 @@
 #'
 #' @return something
 #' @export
+#' @import ggplot2
+#' @import data.table
+#' @importFrom stats residuals fitted qnorm
+#' @importFrom nlme ACF random.effects
+#' @importFrom scales percent_format
+#' @importFrom patchwork wrap_plots
 plot_residuals <- function(x, y, fit, variables_unit) {
   revert_trans <- if (grepl("log", y)) exp else identity
   y <- gsub("log\\((.*)\\)", "\\1", y)
@@ -14,8 +20,8 @@ plot_residuals <- function(x, y, fit, variables_unit) {
   model_data <- as.data.table(fit$data)
   model_data[,
     c("resid", "fitted") := list(
-      residuals(fit, level = 1, type = "p"),
-      fitted(fit, level = 1)
+      stats::residuals(fit, level = 1, type = "p"),
+      stats::fitted(fit, level = 1)
     )
   ]
 
@@ -49,8 +55,8 @@ plot_residuals <- function(x, y, fit, variables_unit) {
 
   plotd <- ggplot(
     data = (function(model) {
-      out <- ACF(model, resType = "normal")
-      out[["stdv"]] <- qnorm(1 - 0.01 / 2) / sqrt(attr(out, "n.used"))
+      out <- nlme::ACF(model, resType = "normal")
+      out[["stdv"]] <- stats::qnorm(1 - 0.01 / 2) / sqrt(attr(out, "n.used"))
       out
     })(fit)
   ) +
@@ -59,10 +65,10 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     geom_point() +
     geom_ribbon(alpha = 0.10, fill = "dodgerblue") +
     geom_line(y = 0, linetype = 2, colour = "dodgerblue") +
-    scale_y_continuous(labels = percent_format(suffix = " %")) +
+    scale_y_continuous(labels = scales::percent_format(suffix = " %")) +
     labs(x = "Lag", y = "Correlation")
 
-  plote <- ggplot(data = data.frame(sample = revert_trans(random.effects(fit)[["(Intercept)"]]))) +
+  plote <- ggplot(data = data.frame(sample = revert_trans(nlme::random.effects(fit)[["(Intercept)"]]))) +
     aes(sample = sample) +
     stat_qq(size = 0.5, alpha = 0.25, shape = 1) +
     stat_qq_line(linetype = 2, colour = "dodgerblue") +
@@ -74,7 +80,7 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     stat_qq_line(linetype = 2, colour = "dodgerblue") +
     labs(x = "Theoretical Quantiles", y = "Residuals Quantiles")
 
-  wrap_plots(
+  patchwork::wrap_plots(
     lapply(
       X = list(plota, plotb, plotc, plotd, plote, plotf),
       FUN = `+`,

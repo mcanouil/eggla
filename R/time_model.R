@@ -8,6 +8,9 @@
 #'
 #' @return something
 #' @export
+#' @importFrom spida2 gsp
+#' @importFrom stats poly na.omit
+#' @importFrom nlme lme corCAR1 lmeControl
 time_model <- function(
   x,
   y,
@@ -22,12 +25,12 @@ time_model <- function(
   knots_fmt <- as.character(enquote(knots)[2])
   x_fmt <- switch(
     EXPR = method,
-    "cubic_slope" = paste0("poly(", x, ", degree = 3)"),
+    "cubic_slope" = paste0("stats::poly(", x, ", degree = 3)"),
     "linear_splines" = paste0(
-      "gsp(", x, ", knots = ", knots_fmt, ", degree = rep(1, ", length(knots) + 1, "), smooth = rep(0, ", length(knots), "))"
+      "spida2::gsp(", x, ", knots = ", knots_fmt, ", degree = rep(1, ", length(knots) + 1, "), smooth = rep(0, ", length(knots), "))"
     ),
     "cubic_splines" = paste0(
-      "gsp(", x, ", knots = ", knots_fmt, ", degree = rep(3, ", length(knots) + 1, "), smooth = rep(2, ", length(knots), "))"
+      "spida2::gsp(", x, ", knots = ", knots_fmt, ", degree = rep(3, ", length(knots) + 1, "), smooth = rep(2, ", length(knots), "))"
     ),
     stop(paste0("'", method, "' not defined!"))
   )
@@ -35,14 +38,14 @@ time_model <- function(
   form_random <- paste0("~ ", x_fmt, " | ID")
 
   eval(parse(text = paste(
-    'lme(
+    'nlme::lme(
       fixed = ', form_fixed, ',
       data = data,
       random = ', form_random, ',
-      na.action = na.omit,
+      na.action = stats::na.omit,
       method = "ML",
-      correlation = corCAR1(form = ~ 1 | ID),
-      control = lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+      correlation = nlme::corCAR1(form = ~ 1 | ID),
+      control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
     )'
   )))
 }

@@ -7,6 +7,8 @@
 #'
 #' @return something
 #' @export
+#' @importFrom stats integrate
+#' @importFrom nlme fixef ranef
 compute_auc <- function(
   fit,
   method,
@@ -29,8 +31,8 @@ compute_auc <- function(
     ), paste, collapse = "--")
   )
 
-  fxef <- as.numeric(fixef(fit))
-  rnef <- ranef(fit)
+  fxef <- as.numeric(nlme::fixef(fit))
+  rnef <- nlme::ranef(fit)
 
   switch(
     EXPR = as.character(method),
@@ -44,7 +46,7 @@ compute_auc <- function(
       for (i in seq_along(unique(fit$data[["ID"]]))) {
         coeff <- fxef + as.numeric(rnef[i, ])
         for (j in 1:(length(period) / 2)) {
-           pred_auc[i, j] <- integrate(f = y, coeff = coeff, lower = period[j * 2 - 1], upper = period[j * 2])$value
+           pred_auc[i, j] <- stats::integrate(f = y, coeff = coeff, lower = period[j * 2 - 1], upper = period[j * 2])$value
         }
       }
       cbind.data.frame(ID = unique(fit$data[["ID"]]), pred_auc)
@@ -62,7 +64,7 @@ compute_auc <- function(
       for (i in seq_along(unique(fit$data[["ID"]]))) {
         coeff <- fxef + as.numeric(rnef[i, ])
         for (j in 1:(length(period) / 2)) {
-           pred_auc[i, j] <- integrate(
+           pred_auc[i, j] <- stats::integrate(
              f = y,
              coeff = coeff,
              knots = knots,
@@ -86,7 +88,7 @@ compute_auc <- function(
       for (i in seq_along(unique(fit$data[["ID"]]))) {
         coeff <- fxef + as.numeric(rnef[i, ])
         for (j in 1:(length(period) / 2)) {
-           pred_auc[i, j] <- integrate(
+           pred_auc[i, j] <- stats::integrate(
              f = y,
              coeff = coeff,
              knots = knots,
