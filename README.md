@@ -9,6 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/eggla)](https://CRAN.R-project.org/package=eggla)
+[![R build
+status](https://github.com/mcanouil/eggla/workflows/R-CMD-check/badge.svg)](https://github.com/mcanouil/eggla/actions)
 <!-- badges: end -->
 
 Tools for longitudinal analysis within the EGG (Early Growth Genetics)
