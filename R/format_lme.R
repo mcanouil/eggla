@@ -1,11 +1,9 @@
-#' Title
+#' format_lme
 #'
-#' @param fit
+#' @param fit something
 #'
-#' @return
+#' @return something
 #' @export
-#'
-#' @examples
 format_lme <- function(fit) {
   res_tbl <- tidy(fit)
   res_tbl[["term"]] <- gsub("(gsp)\\(.*\\)\\)|(poly)\\(.*, degree = .\\)", "\\1\\2(...)", res_tbl[["term"]])
