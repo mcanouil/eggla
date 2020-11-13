@@ -11,27 +11,33 @@ Authors@R:
            family = "Warrington",
            role = c("aut"),
            email = "n.warrington@uq.edu.au"))
-Description: Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
+Description: Tools for longitudinal analysis within the EGG
+    (Early Growth Genetics) Consortium.
 License: MIT + file LICENSE
-Depends: R (>= 4.0.0)
+URL: https://github.com/mcanouil/eggla
+BugReports: https://github.com/mcanouil/eggla/issues
+Depends: 
+    R (>= 4.0.0)
 Imports:
-    data.table (>= 1.13.2),
-    growthcleanr (>= 1.2.1),
-    ggplot2 (>= 3.3.2),
-    patchwork (>= 1.0.1),
-    scales (>= 1.1.1),
+    stats, 
     nlme,
-    broom.mixed (>= 0.2.6),
-    ggdendro (>= 0.1.22),
-    spida2 (>= 0.2.1)
+    ggplot2 (>= 3.3.2),
+    patchwork (>= 1.1.0)
 Suggests: 
-    testthat (>= 2.3.2)
+    broom.mixed (>= 0.2.6),
+    data.table (>= 1.13.2),
+    ggdendro (>= 0.1.22),
+    growthcleanr (>= 1.2.1),
+    gt (>= 0.2.2),
+    here (>= 0.1),
+    knitr (>= 1.30),
+    roxygen2 (>= 7.1.1),
+    scales (>= 1.1.1),
+    sessioninfo (>= 1.1.1),
+    testthat (>= 3.0.0)
 Remotes: 
-    github::mcanouil/growthcleanr,
-    github::gmonette/spida2
+    github::mcanouil/growthcleanr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-URL: https://github.com/mcanouil/eggla
-BugReports: https://github.com/mcanouil/eggla/issues

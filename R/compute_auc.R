@@ -7,8 +7,6 @@
 #'
 #' @return something
 #' @export
-#' @importFrom stats integrate
-#' @importFrom nlme fixef ranef
 compute_auc <- function(
   fit,
   method,
@@ -37,7 +35,7 @@ compute_auc <- function(
   switch(
     EXPR = as.character(method),
     "cubic_slope" = {
-      y <- function(x, coeff) {
+      y <- function(x, coeff, knots) {
         sapply(
           X = x,
           FUN = function(x) sum(coeff * mapply("^", rep(x, length(coeff)), seq_along(coeff) - 1))

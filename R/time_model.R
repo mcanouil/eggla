@@ -8,9 +8,6 @@
 #'
 #' @return something
 #' @export
-#' @importFrom spida2 gsp
-#' @importFrom stats poly na.omit
-#' @importFrom nlme lme corCAR1 lmeControl
 time_model <- function(
   x,
   y,
@@ -27,10 +24,10 @@ time_model <- function(
     EXPR = method,
     "cubic_slope" = paste0("stats::poly(", x, ", degree = 3)"),
     "linear_splines" = paste0(
-      "spida2::gsp(", x, ", knots = ", knots_fmt, ", degree = rep(1, ", length(knots) + 1, "), smooth = rep(0, ", length(knots), "))"
+      "gsp(", x, ", knots = ", knots_fmt, ", degree = rep(1, ", length(knots) + 1, "), smooth = rep(0, ", length(knots), "))"
     ),
     "cubic_splines" = paste0(
-      "spida2::gsp(", x, ", knots = ", knots_fmt, ", degree = rep(3, ", length(knots) + 1, "), smooth = rep(2, ", length(knots), "))"
+      "gsp(", x, ", knots = ", knots_fmt, ", degree = rep(3, ", length(knots) + 1, "), smooth = rep(2, ", length(knots), "))"
     ),
     stop(paste0("'", method, "' not defined!"))
   )
