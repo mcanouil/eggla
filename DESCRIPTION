@@ -15,17 +15,17 @@ Description: Tools for longitudinal analysis within the EGG (Early Growth Geneti
 License: MIT + file LICENSE
 Depends: R (>= 4.0.0)
 Imports:
-    data.table,
-    growthcleanr,
-    ggplot2,
-    patchwork,
-    scales,
+    data.table (>= 1.13.2),
+    growthcleanr (>= 1.2.1),
+    ggplot2 (>= 3.3.2),
+    patchwork (>= 1.0.1),
+    scales (>= 1.1.1),
     nlme,
-    broom.mixed,
-    ggdendro,
-    spida2
+    broom.mixed (>= 0.2.6),
+    ggdendro (>= 0.1.22),
+    spida2 (>= 0.2.1)
 Suggests: 
-    testthat
+    testthat (>= 2.3.2)
 Remotes: 
     github::mcanouil/growthcleanr,
     github::gmonette/spida2

@@ -1,14 +1,12 @@
-#' Title
+#' plot_residuals
 #'
-#' @param x
-#' @param y
-#' @param fit
-#' @param variables_unit
+#' @param x something
+#' @param y something
+#' @param fit something
+#' @param variables_unit something
 #'
-#' @return
+#' @return something
 #' @export
-#'
-#' @examples
 plot_residuals <- function(x, y, fit, variables_unit) {
   revert_trans <- if (grepl("log", y)) exp else identity
   y <- gsub("log\\((.*)\\)", "\\1", y)
