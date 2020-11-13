@@ -1,10 +1,54 @@
-## From https://github.com/gmonette/spida2 because namespace and depency not properly listed
+#' General regression splines with variable degrees and ness, smoothing splines
+#'
+#' From https://github.com/gmonette/spida2 because namespace and depencies are not properly listed.
+#'
 #' @author Monette, G. \email{georges@@yorku.ca}
-#' @keywords internal
-#' @noRd
-gsp <- function(x, knots, degree = 3,
-                smoothness = pmax(pmin(degree[-1], degree[-length(degree)]) - 1, -1),
-                lin = NULL, periodic = FALSE, intercept = 0, signif = 3) {
+#'
+#' @param x value(s) where spline is evaluated.
+#' @param knots vector of knots.
+#' @param degree vector giving the degree of the spline in each interval. Note
+#'     the number of intervals is equal to the number of knots + 1. A value of 0
+#'     corresponds to a constant in the interval. If the spline should evaluate to
+#'     0 in the interval, use the \code{intercept} argument to specify some value
+#'     in the interval at which the spline must evaluate to 0.
+#' @param smoothness vector with the degree of smoothness at each knot
+#'     (0 = continuity, 1 = smoothness with continuous first derivative, 2 = continuous
+#'     second derivative, etc. The value -1 allows a discontinuity at the knot.
+#'     A scalar is recycled so its length equals the number of knots. Alternatively,
+#'     a list of length equal to the number of knots. Each element of the list is a
+#'     vector of the orders of derivatives which are required to be smooth. THis allows
+#'     non-sequential constraints, e.g. to have the same first and second derivative
+#'     on either side of a knot but a possible discontinuity and change in
+#'     higher-order derivatives, the vector would be c(1,2). Note that if a list is used,
+#'     all elements must provide all desired constraints. That is the list argument corresponding
+#'     to `smoothness = c(1,2,-1)` is `smoothness=list(0:1, 0:2, -1)`.
+#' @param lin provides a matrix specifying additional linear contraints on the
+#'     'full' parametrization consisting of blocks of polynomials of degree equal
+#'     to max(degree) in each of the length(knots)+1 intervals of the spline. See
+#'     below for examples of a spline that is 0 outside of its boundary knots.
+#' @param periodic if TRUE generates a period spline on the base interval (0,max(knots)).
+#'     A constraint is generated so that the coefficients generate
+#'     the same values to the right of max(knots) as they do to the right of 0.
+#'     Note that all knots should be strictly positive.
+#' @param intercept value(s) of x at which the spline has value 0, i.e. the
+#'     value(s) of x for which yhat is estimated by the intercept term in the
+#'     model. The default is 0. If NULL, the spline is not constrained to evaluate
+#'     to 0 for any x.
+#' @param signif number of significant digits used to label coefficients.
+#'
+#' @return \code{gsp} returns a matrix generating a spline.
+#'
+#' @export
+gsp <- function(
+  x,
+  knots,
+  degree = 3,
+  smoothness = pmax(pmin(degree[-1], degree[-length(degree)]) - 1, -1),
+  lin = NULL,
+  periodic = FALSE,
+  intercept = 0,
+  signif = 3
+) {
   if (periodic) {
     maxd <- max(degree)
     maxk <- max(knots)
