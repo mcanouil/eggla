@@ -1,15 +1,13 @@
-#' Title
+#' time_model
 #'
-#' @param x
-#' @param y
-#' @param data
-#' @param method
-#' @param knots
+#' @param x something
+#' @param y something
+#' @param data something
+#' @param method something
+#' @param knots something
 #'
-#' @return
+#' @return something
 #' @export
-#'
-#' @examples
 time_model <- function(
   x,
   y,

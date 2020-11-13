@@ -1,14 +1,12 @@
-#' Title
+#' predict_average_slopes
 #'
-#' @param fit
-#' @param method
-#' @param period
-#' @param knots
+#' @param fit something
+#' @param method something
+#' @param period something
+#' @param knots something
 #'
-#' @return
+#' @return something
 #' @export
-#'
-#' @examples
 predict_average_slopes <- function(
   fit,
   method,

@@ -1,11 +1,9 @@
-#' Title
+#' sex_to_character
 #'
-#' @param x
+#' @param x something
 #'
-#' @return
+#' @return something
 #' @export
-#'
-#' @examples
 sex_to_character <- function(x) {
   c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE")[as.character(x)]
 }

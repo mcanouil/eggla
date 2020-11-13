@@ -1,14 +1,12 @@
-#' Title
+#' compute_auc
 #'
-#' @param fit
-#' @param method
-#' @param period
-#' @param knots
+#' @param fit something
+#' @param method something
+#' @param period something
+#' @param knots something
 #'
-#' @return
+#' @return something
 #' @export
-#'
-#' @examples
 compute_auc <- function(
   fit,
   method,
