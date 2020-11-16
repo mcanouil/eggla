@@ -7,7 +7,7 @@
 #' @param ... Parameters to pass to `rmarkdown::render()`.
 #'
 #' @return NULL
-#' @export
+#' @keywords internal
 run_eggla <- function(
   phenotypes = NULL,
   trait = "bmi",
@@ -32,18 +32,18 @@ run_eggla <- function(
     stop("Packages listed in 'Suggests' field are needed to run this function.")
   }
 
-  invisible(
-    rmarkdown::render(
-      input = file.path(output_directory, "eggla.Rmd"),
-      # output_file = output_file,
-      # output_dir = output_directory,
-      params = list(
-        cohort_name =  cohort_name,
-        phenotypes = phenotypes,
-        trait = trait,
-        output_directory = output_directory
-      ),
-      ...
-    )
+  rmarkdown::render(
+    input = file.path(output_directory, "eggla.Rmd"),
+    # output_file = output_file,
+    # output_dir = output_directory,
+    params = list(
+      cohort_name =  cohort_name,
+      phenotypes = phenotypes,
+      trait = trait,
+      output_directory = output_directory
+    ),
+    ...
   )
+
+  invisible()
 }

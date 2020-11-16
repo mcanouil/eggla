@@ -253,10 +253,44 @@ ggplot(
 ### Render Analyses As Rmarkdown
 
 ``` r
-run_eggla(
-  phenotypes = bmigrowth,
-  trait = "bmi",
-  cohort_name = "cohort",
-  output_directory = tempdir()
+library(eggla)
+data("bmigrowth")
+
+file.copy(
+  from = system.file("rmarkdown", "templates", "eggla", "skeleton", "skeleton.Rmd", package = "eggla"),
+  to = file.path(tempdir(), "eggla.Rmd"),
+  overwrite = TRUE
 )
+#> [1] TRUE
+
+rmarkdown::render(
+  input = file.path(tempdir(), "eggla.Rmd"),
+  params = list(
+    cohort_name =  "BMI Growth (Demo)",
+    phenotypes = bmigrowth,
+    trait = "bmi",
+    output_directory = tempdir()
+  )
+)
+#> processing file: eggla.Rmd
+#> output file: eggla.knit.md
+#> /usr/lib/rstudio-server/bin/pandoc/pandoc +RTS -K512m -RTS eggla.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output eggla.html --lua-filter /usr/local/lib/R/site-library/bookdown/rmarkdown/lua/custom-environment.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --wrap preserve --standalone --section-divs --table-of-contents --toc-depth 4 --variable toc_float=1 --variable toc_selectors=h1,h2,h3,h4 --variable toc_smooth_scroll=1 --variable toc_print=1 --template /usr/local/lib/R/site-library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:lumen' --include-in-header /tmp/RtmpiIAcOF/rmarkdown-stre9fd38796c69.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+#> 
+#> Output created: eggla.html
 ```
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- run_eggla( -->
+
+<!--   phenotypes = bmigrowth, -->
+
+<!--   trait = "bmi", -->
+
+<!--   cohort_name = "cohort", -->
+
+<!--   output_directory = tempdir() -->
+
+<!-- ) -->
+
+<!-- ``` -->
