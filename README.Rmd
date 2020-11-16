@@ -65,10 +65,10 @@ bmigrowth[bmigrowth[["ID"]] == "001", ]
 
 **eggla** includes three models, namely `cubic_slope`, `linear_splines` and `linear_splines`, all implemented with the R package `nlme`.
 
-`x` and `y`, the variables as character with possible transformation.
-`data`, the data in which the variables are.
-`method`, the method or model to be performed.
-`knots`, the knots for "splines" methods.
+* `x` and `y`, the variables as character with possible transformation.
+* `data`, the data in which the variables are.
+* `method`, the method or model to be performed.
+* `knots`, the knots for "splines" methods.
     Default is the following:
     ```{r, eval = FALSE}
     knots = list(
@@ -208,6 +208,8 @@ rmarkdown::render(
     output_directory = tempdir()
   )
 )
+
+file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 ```
 
 <!-- ```{r, eval = FALSE} -->
