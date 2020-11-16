@@ -189,12 +189,33 @@ ggplot(
 
 ### Render Analyses As Rmarkdown
 
-```{r, eval = FALSE}
-run_eggla(
-  phenotypes = bmigrowth,
-  trait = "bmi",
-  cohort_name = "cohort",
-  output_directory = tempdir()
+```{r}
+library(eggla)
+data("bmigrowth")
+
+file.copy(
+  from = system.file("rmarkdown", "templates", "eggla", "skeleton", "skeleton.Rmd", package = "eggla"),
+  to = file.path(tempdir(), "eggla.Rmd"),
+  overwrite = TRUE
+)
+
+rmarkdown::render(
+  input = file.path(tempdir(), "eggla.Rmd"),
+  params = list(
+    cohort_name =  "BMI Growth (Demo)",
+    phenotypes = bmigrowth,
+    trait = "bmi",
+    output_directory = tempdir()
+  )
 )
 ```
+
+<!-- ```{r, eval = FALSE} -->
+<!-- run_eggla( -->
+<!--   phenotypes = bmigrowth, -->
+<!--   trait = "bmi", -->
+<!--   cohort_name = "cohort", -->
+<!--   output_directory = tempdir() -->
+<!-- ) -->
+<!-- ``` -->
 
