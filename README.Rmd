@@ -63,7 +63,7 @@ bmigrowth[bmigrowth[["ID"]] == "001", ]
 
 ### Modelling
 
-**eggla** includes three models, namely `cubic_slope`, `linear_splines` and `linear_splines`, all implemented with the R package `nlme`.
+**eggla** includes three models, namely `cubic_slope`, `linear_splines` and `cubic_splines`, all implemented with the R package `nlme`.
 
 * `x` and `y`, the variables as character with possible transformation.
 * `data`, the data in which the variables are.
