@@ -30,8 +30,8 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     geom_point(size = 0.5, alpha = 0.25, shape = 1) +
     stat_smooth(method = "lm", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
     labs(
-      x = paste0("Fitted ", toupper(y), " Values (", variables_unit[[paste0(y, "_unit")]], ")"),
-      y = paste0("Observed ", toupper(y), " Values (", variables_unit[[paste0(y, "_unit")]], ")")
+      x = paste0("Fitted ", toupper(y), " Values (", variables_unit[[y]], ")"),
+      y = paste0("Observed ", toupper(y), " Values (", variables_unit[[y]], ")")
     )
 
   plotb <- ggplot(data = model_data) +
@@ -40,7 +40,7 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
     geom_hline(yintercept = 0, linetype = 2, colour = "dodgerblue") +
     labs(
-      x = paste0("Fitted ", toupper(y), " Values (", variables_unit[[paste0(y, "_unit")]], ")"),
+      x = paste0("Fitted ", toupper(y), " Values (", variables_unit[[y]], ")"),
       y = "Marginal Residuals"
     )
 
@@ -49,7 +49,7 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     geom_point(size = 0.5, alpha = 0.25, shape = 1) +
     geom_hline(yintercept = 0, linetype = 2, colour = "dodgerblue") +
     labs(
-      x = paste0("Fitted ", toupper(x), " Values (", variables_unit[[paste0(x, "_unit")]], ")"),
+      x = paste0("Fitted ", toupper(x), " Values (", variables_unit[[x]], ")"),
       y = "Marginal Residuals"
     )
 
