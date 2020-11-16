@@ -1,4 +1,4 @@
 library(testthat)
 library(eggla)
 
-test_check("eggla")
+# test_check("eggla")
