@@ -179,7 +179,7 @@ visits_clean <- visits_clean[!is.na(bmi)]
 
 * Exclusion:
     - Number of `r params[["trait"]]` observations: `r length(bmigrowth[["bmi"]]) - length(visits_clean[["bmi"]])`.
-    - Number of individuals: `r length(bmigrowth[["ID"]]) - length(visits_clean[["ID"]])`.
+    - Number of individuals: `r length(unique(bmigrowth[["ID"]])) - length(unique(visits_clean[["ID"]]))`.
 
 * `r comma(length(unique(visits_clean[["ID"]])))` individuals.
     - `r comma(length(unique(visits_clean[sex == 0, ID])))` females.
