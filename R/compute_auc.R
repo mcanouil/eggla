@@ -44,7 +44,7 @@ compute_auc <- function(
       for (i in seq_along(unique(fit$data[["ID"]]))) {
         coeff <- fxef + as.numeric(rnef[i, ])
         for (j in 1:(length(period) / 2)) {
-           pred_auc[i, j] <- stats::integrate(f = y, coeff = coeff, lower = period[j * 2 - 1], upper = period[j * 2])$value
+          pred_auc[i, j] <- stats::integrate(f = y, coeff = coeff, lower = period[j * 2 - 1], upper = period[j * 2])$value
         }
       }
       cbind.data.frame(ID = unique(fit$data[["ID"]]), pred_auc)
@@ -55,7 +55,7 @@ compute_auc <- function(
           X = x,
           FUN = function(x) {
             x_pos <- findInterval(x, knots, left.open = TRUE)
-            sum(c(coeff * c(1, x_pos - c(0, knots)))[1:(x_pos + 2)])
+            sum(c(coeff * c(1, x - c(0, knots)))[1:(x_pos + 2)])
           }
         )
       }
