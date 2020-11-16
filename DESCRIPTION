@@ -19,10 +19,11 @@ BugReports: https://github.com/mcanouil/eggla/issues
 Depends: 
     R (>= 4.0.0)
 Imports:
-    stats, 
+    stats,
     nlme,
     ggplot2 (>= 3.3.2),
-    patchwork (>= 1.0.1)
+    patchwork (>= 1.0.1),
+    rmarkdown (>= 2.5)
 Suggests: 
     broom.mixed (>= 0.2.6),
     data.table (>= 1.13.2),
@@ -34,7 +35,7 @@ Suggests:
     roxygen2 (>= 7.1.1),
     scales (>= 1.1.1),
     sessioninfo (>= 1.1.1),
-    testthat (>= 3.0.0)
+    testthat (>= 2.3.2)
 Remotes: 
     github::mcanouil/growthcleanr
 Encoding: UTF-8
