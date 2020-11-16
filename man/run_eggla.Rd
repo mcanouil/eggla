@@ -9,7 +9,6 @@ run_eggla(
   trait = "bmi",
   cohort_name = "cohort",
   output_directory = tempdir(),
-  encoding = "UTF-8",
   ...
 )
 }
