@@ -13,7 +13,6 @@ run_eggla <- function(
   trait = "bmi",
   cohort_name = "cohort",
   output_directory = tempdir(),
-  encoding = "UTF-8",
   ...
 ) {
   if (is.null(phenotypes) || (!grepl("\\.csv", phenotypes) && !inherits(x = phenotypes, what = "data.frame"))) {
@@ -38,7 +37,6 @@ run_eggla <- function(
       input = file.path(output_directory, "eggla.Rmd"),
       # output_file = output_file,
       # output_dir = output_directory,
-      encoding = encoding,
       params = list(
         cohort_name =  cohort_name,
         phenotypes = phenotypes,
