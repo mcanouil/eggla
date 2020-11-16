@@ -4,6 +4,7 @@ params:
   phenotypes: bmigrowth
   output_directory: !r tempdir()
   trait: "bmi"
+  qc: TRUE
 title: '[EGG consortium] `r params[["cohort_name"]]`'
 subtitle: 'Trait: `r toupper(params[["trait"]])`'
 author: | 
@@ -50,6 +51,7 @@ suppressPackageStartupMessages({
   library(broom.mixed)
   library(data.table)
   library(gt)
+  library(growthcleanr)
 })
 
 # if (
@@ -100,6 +102,8 @@ theme_set(
 )
 ```
 
+# Data Overview
+
 ```{r read-data, include = FALSE}
 if (inherits(x = params[["phenotypes"]], what = "data.frame")) {
   pheno_dt <- as.data.table(params[["phenotypes"]])
@@ -116,10 +120,116 @@ trait_model <- if (params[["trait"]] == "bmi") "log(bmi)" else params[["trait"]]
 revert_trans <- if (grepl("log", trait_model)) exp else identity
 ```
 
+Data includes:
+
+- `r comma(length(unique(pheno_dt[["ID"]])))` individuals.
+    - `r comma(length(unique(pheno_dt[sex == 0, ID])))` females.
+    - `r comma(length(unique(pheno_dt[sex == 1, ID])))` males.
+    
+
+```{r display-trajectories}
+ggplot(data = pheno_dt, mapping = aes(x = age, y = .data[[trait]], colour = ID)) +
+  geom_path(na.rm = TRUE, alpha = 0.25) +
+  geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
+  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick") +
+  theme(legend.position = "none") +
+  labs(
+    x = paste0("AGE (", variables_unit[["age"]], ")"), 
+    y = paste0(toupper(trait), " (", variables_unit[[trait]], ")")
+  ) +
+  facet_grid(
+    cols = vars(sex), 
+    margins = TRUE, 
+    labeller = labeller(
+      .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+    )
+  )
+```
+
+# Data Quality-Control (`growthcleanr`)
+
+```{r daymont-qc, include = FALSE}
+pheno_dt[, "agedays" := floor(age * 365.25)] # convert to age in days and as integers ...
+pheno_dt[, "sex_daymont" := c("0" = "1", "1" = "0")[as.character(sex)]] # recode sex with Male = 0 and Female = 1...
+pheno_dt[, "WEIGHTKG" := as.numeric(weight)]
+pheno_dt[, "HEIGHTCM" := as.numeric(height)]
+visits_long <- melt(
+  data = pheno_dt, 
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
+  variable.name = "param", 
+  value.name = "measurement"
+)
+visits_long[, clean := cleangrowth(
+  subjid = ID,
+  param = param,
+  agedays = agedays, 
+  sex = sex_daymont, 
+  measurement = measurement,
+  quietly = FALSE
+)]
+visits_clean <- dcast(
+  data = visits_long[clean %in% "Include"], 
+  formula = ... ~ param, 
+  value.var = "measurement"
+)
+visits_clean[, "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2]
+visits_clean <- visits_clean[!is.na(bmi)]
+```
+
+* Number of `r params[["trait"]]` observations: `r length(bmigrowth[["bmi"]]) - length(visits_clean[["bmi"]])`.
+* Number of individuals excluded: `r length(bmigrowth[["bmi"]]) - length(visits_clean[["bmi"]])`.
+
+* `r comma(length(unique(visits_clean[["ID"]])))` individuals.
+    - `r comma(length(unique(visits_clean[sex == 0, ID])))` females.
+    - `r comma(length(unique(visits_clean[sex == 1, ID])))` males.
+    
+```{r daymont-display}
+visits_qc_summary <- dcast(
+  data = visits_long[, -c("measurement")], 
+  formula = ... ~ param, 
+  value.var = "clean"
+)
+visits_qc_summary[, 
+  "clean" := max(c(WEIGHTKG, HEIGHTCM)),
+  by = 1:nrow(visits_qc_summary)
+][,
+  "clean" := factor(levels(visits_long$clean)[clean], levels = levels(visits_long$clean))
+]
+
+gt(
+  data = dcast(
+    data = visits_qc_summary[, .N, by = c("age", "sex", "clean")][order(clean, sex, age)], 
+    formula = ... ~ age, 
+    fill = 0, 
+    value.var = "N"
+  )[, 
+    "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
+  ][, "sex" := NULL], 
+  rowname_col = "clean", 
+  groupname_col = c("sex_chr")
+) %>% 
+  tab_spanner(label = "Age (years)", columns = everything()) %>%
+  data_color(
+    columns = everything(), 
+    colors = col_numeric(
+      palette = viridis_pal(begin = 0.15, direction = -1, option = "plasma")(10),
+      domain = NULL
+    )
+  ) %>% 
+  opt_all_caps()
+```
+
+```{r do-daymont-qc, eval = params[["qc"]]}
+visits_clean <- pheno_dt
+```
+
+# Linear Mixed Effect Model
+
 ```{r modelling-lmm, include = FALSE}
 ### Linear Mixed Models --------------------------------------------------------------------------
 mres <- melt(
-  data = pheno_dt[, 
+  data = visits_clean[, 
     list(
       cubic_slope = list(time_model("age", trait_model, .SD, "cubic_slope")),
       linear_splines = list(time_model("age", trait_model, .SD, "linear_splines")),
@@ -448,43 +558,6 @@ cor_dt[,
   by = "sex"
 ]
 ```
-
-# Data Overview
-
-Data includes:
-
-- `r comma(length(unique(pheno_dt[["ID"]])))` individuals.
-    - `r comma(length(unique(pheno_dt[sex == 0, ID])))` females.
-    - `r comma(length(unique(pheno_dt[sex == 1, ID])))` males.
-    
-Data overview of five random rows (`ID` column is hidden):
-
-```{r overview}
-gt(pheno_dt[sample(1:nrow(pheno_dt), 5), -"ID"]) %>% 
-  opt_all_caps() %>% 
-  opt_row_striping()
-```
-
-```{r display-trajectories}
-ggplot(data = pheno_dt, mapping = aes(x = age, y = .data[[trait]], colour = ID)) +
-  geom_path(na.rm = TRUE, alpha = 0.25) +
-  geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
-  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick") +
-  theme(legend.position = "none") +
-  labs(
-    x = paste0("AGE (", variables_unit[["age"]], ")"), 
-    y = paste0(toupper(trait), " (", variables_unit[[trait]], ")")
-  ) +
-  facet_grid(
-    cols = vars(sex), 
-    margins = TRUE, 
-    labeller = labeller(
-      .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
-    )
-  )
-```
-
-# Linear Mixed Effect Model
 
 ```{r display-lmm}
 for (isex in sort(unique(mres[["sex"]]))) {
