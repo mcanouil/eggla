@@ -1,7 +1,7 @@
 ---
 params:
   cohort_name: "bmigrowth"
-  phenotypes: NULL
+  phenotypes: bmigrowth
   output_directory: !r tempdir()
   trait: "bmi"
 title: '[EGG consortium] `r params[["cohort_name"]]`'
