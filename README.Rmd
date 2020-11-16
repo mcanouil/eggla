@@ -189,7 +189,7 @@ ggplot(
 
 ### Render Analyses As Rmarkdown
 
-```{r}
+```{r, eval = FALSE}
 run_eggla(
   phenotypes = bmigrowth,
   trait = "bmi",
