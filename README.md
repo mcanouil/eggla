@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# eggla
+# Early Growth Genetics Longitudinal Analysis <img src="man/figures/eggla.png" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -267,7 +267,6 @@ file.copy(
   to = file.path(tempdir(), "eggla.Rmd"),
   overwrite = TRUE
 )
-#> [1] TRUE
 
 rmarkdown::render(
   input = file.path(tempdir(), "eggla.Rmd"),
@@ -278,14 +277,8 @@ rmarkdown::render(
     output_directory = tempdir()
   )
 )
-#> processing file: eggla.Rmd
-#> output file: eggla.knit.md
-#> /usr/lib/rstudio-server/bin/pandoc/pandoc +RTS -K512m -RTS eggla.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output eggla.html --lua-filter /usr/local/lib/R/site-library/bookdown/rmarkdown/lua/custom-environment.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --email-obfuscation none --self-contained --wrap preserve --standalone --section-divs --table-of-contents --toc-depth 4 --variable toc_float=1 --variable toc_selectors=h1,h2,h3,h4 --variable toc_smooth_scroll=1 --variable toc_print=1 --template /usr/local/lib/R/site-library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable 'theme:lumen' --include-in-header /tmp/Rtmp8xPBgY/rmarkdown-str125bf4225bac1.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
-#> 
-#> Output created: eggla.html
 
 file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
-#> [1] TRUE
 ```
 
 <!-- ```{r, eval = FALSE} -->
