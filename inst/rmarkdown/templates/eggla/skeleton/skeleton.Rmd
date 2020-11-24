@@ -603,12 +603,18 @@ ggplot(
     (function(mr) {
       data_pred <- data.table(
         age = seq(min(pheno_dt[["age"]], na.rm = TRUE), max(pheno_dt[["age"]], na.rm = TRUE), 0.1)
-      )[, trait := revert_trans(predict(mr[[1]], .SD, level = 0)), .SDcols = "age"]
+      )[, (trait) := revert_trans(predict(mr[[1]], .SD, level = 0)), .SDcols = "age"]
     })(model_results), 
     by = c("sex", "model_name")
   ]
 ) +
-  aes(x = age, y = trait, colour = model_name, linetype = model_name) +
+  aes(x = age, y = .data[[trait]], colour = model_name, linetype = model_name) +
+  stat_smooth(
+    data = pheno_dt, 
+    mapping = aes(x = age, y = .data[[trait]], colour = "Loess", linetype = "Loess"),
+    method = "loess", formula = y ~ x, se = FALSE, 
+    na.rm = TRUE, inherit.aes = FALSE
+  ) +
   geom_path() +
   scale_colour_viridis_d(labels = function(z) toupper(gsub("_", " ", z)), begin = 0.15, end = 0.85) +
   scale_linetype_discrete(labels = function(z) toupper(gsub("_", " ", z))) +
