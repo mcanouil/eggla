@@ -601,8 +601,9 @@ for (isex in sort(unique(mres[["sex"]]))) {
 ggplot(
   data = mres[, 
     (function(mr) {
-      data_pred <- data.table(age = seq(1, 15, 0.1))
-      data_pred[, trait := revert_trans(predict(mr[[1]], .SD, level = 0)), .SDcols = "age"]
+      data_pred <- data.table(
+        age = seq(min(pheno_dt[["age"]], na.rm = TRUE), max(pheno_dt[["age"]], na.rm = TRUE), 0.1)
+      )[, trait := revert_trans(predict(mr[[1]], .SD, level = 0)), .SDcols = "age"]
     })(model_results), 
     by = c("sex", "model_name")
   ]
