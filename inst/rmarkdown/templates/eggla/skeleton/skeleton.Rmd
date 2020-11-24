@@ -131,7 +131,7 @@ Data includes:
 ggplot(data = pheno_dt, mapping = aes(x = age, y = .data[[trait]], colour = ID)) +
   geom_path(na.rm = TRUE, alpha = 0.25) +
   geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
-  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick") +
+  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE) +
   theme(legend.position = "none") +
   labs(
     x = paste0("AGE (", variables_unit[["age"]], ")"), 
@@ -178,8 +178,8 @@ visits_clean <- visits_clean[!is.na(bmi)]
 ```
 
 * Exclusion:
-    - Number of `r params[["trait"]]` observations: `r length(bmigrowth[["bmi"]]) - length(visits_clean[["bmi"]])`.
-    - Number of individuals: `r length(unique(bmigrowth[["ID"]])) - length(unique(visits_clean[["ID"]]))`.
+    - Number of `r params[["trait"]]` observations: `r comma(abs(length(bmigrowth[["bmi"]]) - length(visits_clean[["bmi"]])))`.
+    - Number of individuals: `r comma(abs(length(unique(bmigrowth[["ID"]])) - length(unique(visits_clean[["ID"]]))))`.
 
 * `r comma(length(unique(visits_clean[["ID"]])))` individuals.
     - `r comma(length(unique(visits_clean[sex == 0, ID])))` females.
