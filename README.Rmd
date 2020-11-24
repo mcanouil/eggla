@@ -115,15 +115,15 @@ ggplot() +
   aes(x = age, y = bmi) +
   stat_smooth(
     data = bmigrowth[bmigrowth$sex == 0, ], 
-    mapping = aes(colour = "Linear Splines"),
-    method = "loess", formula = y ~ x, linetype = 1, se = FALSE
+    mapping = aes(colour = "Loess"),
+    method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
     data = data.table(age = seq(1, 15, 0.1))[, 
       bmi := exp(predict(ls_mod, .SD, level = 0)), 
       .SDcols = "age"
     ],
-    mapping = aes(colour = "Loess"),
+    mapping = aes(colour = "Linear Splines"),
   ) +
   labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
 ```
