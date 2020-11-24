@@ -68,6 +68,24 @@ bmigrowth[bmigrowth[["ID"]] == "001", ]
 #> 1028 001 14.00   0 92.021767    156 37.81302
 ```
 
+``` r
+ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
+  geom_path(na.rm = TRUE, alpha = 0.25) +
+  geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
+  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+  theme(legend.position = "none") +
+  labs(x = "AGE (years)", y = "BMI (kg/m²)") +
+  facet_grid(
+    cols = vars(sex), 
+    margins = TRUE, 
+    labeller = labeller(
+      .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+    )
+  )
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
 ### Modelling
 
 **eggla** includes three models, namely `cubic_slope`, `linear_splines`
@@ -102,7 +120,7 @@ ls_mod <- time_model(
 ```
 
 The results of `time_model` is an `lme` object, on which any usual
-methods can be applied, \*e.g., `summary()` or `coefficients()`.
+methods can be applied, *e.g.*, `summary()` or `coefficients()`.
 
 ``` r
 class(ls_mod)
@@ -128,6 +146,26 @@ tidy(ls_mod)
 #> 15 ran_pa… Resid… sd_Observation     1.29e-1  NA          NA     NA    NA
 ```
 
+``` r
+ggplot() +
+  aes(x = age, y = bmi) +
+  stat_smooth(
+    data = bmigrowth[bmigrowth$sex == 0, ], 
+    mapping = aes(colour = "Linear Splines"),
+    method = "loess", formula = y ~ x, linetype = 1, se = FALSE
+  ) +
+  geom_path(
+    data = data.table(age = seq(1, 15, 0.1))[, 
+      bmi := exp(predict(ls_mod, .SD, level = 0)), 
+      .SDcols = "age"
+    ],
+    mapping = aes(colour = "Loess"),
+  ) +
+  labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
+```
+
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+
 ### Residuals
 
 Different plot are available for model diagnostic, using the residuals
@@ -146,7 +184,7 @@ plot_residuals(
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 ### Predicted Average Slopes
 
@@ -207,7 +245,7 @@ ggplot(
   labs(x = "Predicted Slope", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ### Area Under The Curves
 
@@ -254,7 +292,7 @@ ggplot(
   labs(x = "Area Under The Curve (AUC)", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
 ### Render Analyses As Rmarkdown
 

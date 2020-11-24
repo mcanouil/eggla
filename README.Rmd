@@ -60,6 +60,22 @@ data("bmigrowth")
 bmigrowth[bmigrowth[["ID"]] == "001", ]
 ```
 
+```{r}
+ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
+  geom_path(na.rm = TRUE, alpha = 0.25) +
+  geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
+  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+  theme(legend.position = "none") +
+  labs(x = "AGE (years)", y = "BMI (kg/m²)") +
+  facet_grid(
+    cols = vars(sex), 
+    margins = TRUE, 
+    labeller = labeller(
+      .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+    )
+  )
+```
+
 
 ### Modelling
 
@@ -87,12 +103,31 @@ ls_mod <- time_model(
 )
 ```
 
-The results of `time_model` is an `lme` object, on which any usual methods can be applied, *e.g., `summary()` or `coefficients()`.
+The results of `time_model` is an `lme` object, on which any usual methods can be applied, *e.g.*, `summary()` or `coefficients()`.
 
 ```{r}
 class(ls_mod)
 tidy(ls_mod)
 ```
+
+```{r}
+ggplot() +
+  aes(x = age, y = bmi) +
+  stat_smooth(
+    data = bmigrowth[bmigrowth$sex == 0, ], 
+    mapping = aes(colour = "Linear Splines"),
+    method = "loess", formula = y ~ x, linetype = 1, se = FALSE
+  ) +
+  geom_path(
+    data = data.table(age = seq(1, 15, 0.1))[, 
+      bmi := exp(predict(ls_mod, .SD, level = 0)), 
+      .SDcols = "age"
+    ],
+    mapping = aes(colour = "Loess"),
+  ) +
+  labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
+```
+
 
 ### Residuals
 
