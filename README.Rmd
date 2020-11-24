@@ -119,7 +119,7 @@ ggplot() +
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
-    data = data.table(age = seq(1, 15, 0.1))[, 
+    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[, 
       bmi := exp(predict(ls_mod, .SD, level = 0)), 
       .SDcols = "age"
     ],
