@@ -69,10 +69,11 @@ bmigrowth[bmigrowth[["ID"]] == "001", ]
 ```
 
 ``` r
-ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
+p <- ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
   geom_path(na.rm = TRUE, alpha = 0.25) +
   geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
   stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+  scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
   theme(legend.position = "none") +
   labs(x = "AGE (years)", y = "BMI (kg/m²)") +
   facet_grid(
@@ -82,9 +83,18 @@ ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
     )
   )
+p
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+``` r
+p + scale_x_sqrt(limits = c(0, NA), expand = expansion(mult = c(0, 0.1)))
+#> Scale for 'x' is already present. Adding another scale for 'x', which will
+#> replace the existing scale.
+```
+
+<img src="man/figures/README-unnamed-chunk-5-2.png" width="100%" />
 
 ### Modelling
 
@@ -166,6 +176,26 @@ ggplot() +
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
+Model call can also be exported.
+
+``` r
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "linear_splines", as_text = TRUE
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
+#>   data = data,
+#>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+```
+
 ### Residuals
 
 Different plot are available for model diagnostic, using the residuals
@@ -184,7 +214,7 @@ plot_residuals(
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 ### Predicted Average Slopes
 
@@ -245,7 +275,7 @@ ggplot(
   labs(x = "Predicted Slope", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ### Area Under The Curves
 
@@ -292,7 +322,7 @@ ggplot(
   labs(x = "Area Under The Curve (AUC)", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 ### Render Analyses As Rmarkdown
 
