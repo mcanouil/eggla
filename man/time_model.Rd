@@ -10,7 +10,8 @@ time_model(
   data,
   method = c("cubic_slope", "linear_splines", "cubic_splines"),
   knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(2, 8,
-    12))[[method]]
+    12))[[method]],
+  as_text = FALSE
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ time_model(
 \item{method}{something}
 
 \item{knots}{something}
+
+\item{as_text}{something}
 }
 \value{
 something
