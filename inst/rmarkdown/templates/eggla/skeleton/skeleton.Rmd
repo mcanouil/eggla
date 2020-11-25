@@ -227,7 +227,7 @@ ggplot(
     method = "loess", formula = y ~ x, 
     linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE
   ) +
-  # scale_x_continuous(trans = sqrt_trans(), limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
+  scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
   theme(legend.position = "none") +
   labs(
     x = paste0("AGE (", variables_unit[["age"]], ")"),
@@ -266,7 +266,7 @@ ggplot(
     method = "loess", formula = y ~ x, 
     linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE
   ) +
-  scale_x_continuous(trans = sqrt_trans(), limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
+  scale_x_sqrt(limits = c(0, NA), expand = expansion(mult = c(0, 0.1)))
   theme(legend.position = "none") +
   labs(
     x = paste0("AGE (", variables_unit[["age"]], ")"),
