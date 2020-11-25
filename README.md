@@ -173,7 +173,8 @@ time_model(
   x = "age", 
   y = "log(bmi)", 
   data = bmigrowth[bmigrowth$sex == 0, ], 
-  method = "linear_splines", as_text = TRUE
+  method = "linear_splines", 
+  as_text = TRUE
 )
 #> nlme::lme(
 #>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
@@ -188,7 +189,7 @@ time_model(
 
 ### Residuals
 
-Different plot are available for model diagnostic, using the residuals
+Different plots are available for model diagnostic, using the residuals
 mostly.
 
 ``` r
