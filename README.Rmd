@@ -134,13 +134,14 @@ time_model(
   x = "age", 
   y = "log(bmi)", 
   data = bmigrowth[bmigrowth$sex == 0, ], 
-  method = "linear_splines", as_text = TRUE
+  method = "linear_splines", 
+  as_text = TRUE
 )
 ```
 
 ### Residuals
 
-Different plot are available for model diagnostic, using the residuals mostly.
+Different plots are available for model diagnostic, using the residuals mostly.
 
 ```{r}
 plot_residuals(
