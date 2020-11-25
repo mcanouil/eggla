@@ -5,6 +5,7 @@
 #' @param data something
 #' @param method something
 #' @param knots something
+#' @param as_text something
 #'
 #' @return something
 #' @export
@@ -17,7 +18,8 @@ time_model <- function(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
     "cubic_splines" = c(2, 8, 12)
-  )[[method]]
+  )[[method]],
+  as_text = FALSE
 ) {
   knots_fmt <- as.character(enquote(knots)[2])
   x_fmt <- switch(
@@ -34,15 +36,17 @@ time_model <- function(
   form_fixed <- paste0(y, " ~ ",  x_fmt)
   form_random <- paste0("~ ", x_fmt, " | ID")
 
-  eval(parse(text = paste(
-    'nlme::lme(
-      fixed = ', form_fixed, ',
-      data = data,
-      random = ', form_random, ',
-      na.action = stats::na.omit,
-      method = "ML",
-      correlation = nlme::corCAR1(form = ~ 1 | ID),
-      control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-    )'
-  )))
+
+  model_call <- c(
+    'nlme::lme(',
+    paste0('  fixed = ', form_fixed, ','),
+    '  data = data,',
+    paste0('  random = ', form_random, ','),
+    '  na.action = stats::na.omit,',
+    '  method = "ML",',
+    '  correlation = nlme::corCAR1(form = ~ 1 | ID),',
+    '  control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)',
+    ')'
+  )
+  if (as_text) cat(model_call, sep = "\n") else eval(parse(text = paste(model_call, collapse = "")))
 }
