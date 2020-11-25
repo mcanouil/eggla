@@ -166,7 +166,7 @@ ggplot() +
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
-Model call can also be exported.
+Model call can also be exported for copy/paste and manual editing.
 
 ``` r
 time_model(
