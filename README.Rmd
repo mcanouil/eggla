@@ -127,7 +127,7 @@ ggplot() +
   labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
 ```
 
-Model call can also be exported.
+Model call can also be exported for copy/paste and manual editing.
 
 ```{r}
 time_model(
