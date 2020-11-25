@@ -227,7 +227,7 @@ ggplot(
     method = "loess", formula = y ~ x, 
     linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE
   ) +
-  scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
+  # scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
   theme(legend.position = "none") +
   labs(
     x = paste0("AGE (", variables_unit[["age"]], ")"),
@@ -247,44 +247,44 @@ ggplot(
   )
 ```
 
-## Trajectories (square root scale)
+<!-- ## Trajectories (square root scale) -->
 
-```{r display-trajectories-sqrt}
-ggplot(
-  data = melt(
-    data = pheno_dt[
-      j = (c("bmi", "height", "weight")) := lapply(.SD, as.double),
-      .SDcols = c("bmi", "height", "weight")
-    ], 
-    measure.vars = c("bmi", "height", "weight")
-  )
-) +
-  aes(x = age, y = value, colour = factor(ID)) +
-  geom_path(na.rm = TRUE, alpha = 0.25) +
-  geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
-  stat_smooth(
-    method = "loess", formula = y ~ x, 
-    linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE
-  ) +
-  scale_x_sqrt(limits = c(0, NA), expand = expansion(mult = c(0, 0.1)))
-  theme(legend.position = "none") +
-  labs(
-    x = paste0("AGE (", variables_unit[["age"]], ")"),
-    y = NULL
-  ) +
-  facet_grid(
-    rows = vars(variable),
-    cols = vars(sex), 
-    margins = "sex", 
-    scales = "free",
-    # space = "free",
-    # switch = "y",
-    labeller = labeller(
-      .rows = function(x) paste0(toupper(x), " (", variables_unit[x], ")"),
-      .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
-    )
-  )
-```
+<!-- ```{r display-trajectories-sqrt} -->
+<!-- ggplot( -->
+<!--   data = melt( -->
+<!--     data = pheno_dt[ -->
+<!--       j = (c("bmi", "height", "weight")) := lapply(.SD, as.double), -->
+<!--       .SDcols = c("bmi", "height", "weight") -->
+<!--     ],  -->
+<!--     measure.vars = c("bmi", "height", "weight") -->
+<!--   ) -->
+<!-- ) + -->
+<!--   aes(x = age, y = value, colour = factor(ID)) + -->
+<!--   geom_path(na.rm = TRUE, alpha = 0.25) + -->
+<!--   geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) + -->
+<!--   stat_smooth( -->
+<!--     method = "loess", formula = y ~ x,  -->
+<!--     linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE -->
+<!--   ) + -->
+<!--   scale_x_sqrt(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) -->
+<!--   theme(legend.position = "none") + -->
+<!--   labs( -->
+<!--     x = paste0("AGE (", variables_unit[["age"]], ")"), -->
+<!--     y = NULL -->
+<!--   ) + -->
+<!--   facet_grid( -->
+<!--     rows = vars(variable), -->
+<!--     cols = vars(sex),  -->
+<!--     margins = "sex",  -->
+<!--     scales = "free", -->
+<!--     # space = "free", -->
+<!--     # switch = "y", -->
+<!--     labeller = labeller( -->
+<!--       .rows = function(x) paste0(toupper(x), " (", variables_unit[x], ")"), -->
+<!--       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x] -->
+<!--     ) -->
+<!--   ) -->
+<!-- ``` -->
 
 # Data Quality-Control (`growthcleanr`)
 

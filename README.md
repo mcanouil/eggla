@@ -69,11 +69,10 @@ bmigrowth[bmigrowth[["ID"]] == "001", ]
 ```
 
 ``` r
-p <- ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
+ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
   geom_path(na.rm = TRUE, alpha = 0.25) +
   geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
   stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
-  scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
   theme(legend.position = "none") +
   labs(x = "AGE (years)", y = "BMI (kg/m²)") +
   facet_grid(
@@ -83,18 +82,9 @@ p <- ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID
       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
     )
   )
-p
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
-
-``` r
-p + scale_x_sqrt(limits = c(0, NA), expand = expansion(mult = c(0, 0.1)))
-#> Scale for 'x' is already present. Adding another scale for 'x', which will
-#> replace the existing scale.
-```
-
-<img src="man/figures/README-unnamed-chunk-5-2.png" width="100%" />
 
 ### Modelling
 
