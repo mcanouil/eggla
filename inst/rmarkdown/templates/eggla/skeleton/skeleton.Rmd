@@ -1,7 +1,7 @@
 ---
 params:
   cohort_name: "bmigrowth"
-  phenotypes: bmigrowth
+  phenotypes: !r get(data(bmigrowth, package = "eggla"))
   output_directory: !r tempdir()
   trait: "bmi"
   qc: TRUE
@@ -51,6 +51,7 @@ suppressPackageStartupMessages({
   library(broom.mixed)
   library(data.table)
   library(gt)
+  library(gtsummary)
   library(growthcleanr)
 })
 
@@ -77,7 +78,6 @@ opts_chunk$set(
   comment = "#>",
   fig.align = "center",
   fig.pos = "H",
-  # fig.path = file.path(output_directory, "images/"), 
   dev = "png"
 )
 
@@ -92,7 +92,7 @@ options(
 theme_set(
   theme_minimal() +
     theme(
-      strip.background = element_rect(colour = "grey70"),
+      # strip.background = element_rect(colour = "grey70"),
       plot.title.position = "plot",
       plot.caption.position = "plot",
       plot.title = element_text(),
@@ -127,24 +127,123 @@ Data includes:
     - `r comma(length(unique(pheno_dt[sex == 1, ID])))` males.
     
 
-```{r display-trajectories}
-ggplot(data = pheno_dt, mapping = aes(x = age, y = .data[[trait]], colour = ID)) +
+```{r display-trajectories, fig.height = 6}
+ggplot(
+  data = melt(
+    data = pheno_dt[
+      j = (c("bmi", "height", "weight")) := lapply(.SD, as.double),
+      .SDcols = c("bmi", "height", "weight")
+    ], 
+    measure.vars = c("bmi", "height", "weight")
+  )
+) +
+  aes(x = age, y = value, colour = factor(ID)) +
   geom_path(na.rm = TRUE, alpha = 0.25) +
   geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
-  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE) +
+  stat_smooth(
+    method = "loess", formula = y ~ x, 
+    linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE
+  ) +
+  scale_x_sqrt() +
   theme(legend.position = "none") +
   labs(
-    x = paste0("AGE (", variables_unit[["age"]], ")"), 
-    y = paste0(toupper(trait), " (", variables_unit[[trait]], ")")
+    x = paste0("AGE (", variables_unit[["age"]], ")"),
+    y = NULL
   ) +
   facet_grid(
+    rows = vars(variable),
     cols = vars(sex), 
-    margins = TRUE, 
+    margins = "sex", 
+    scales = "free",
+    # space = "free",
+    # switch = "y",
     labeller = labeller(
+      .rows = function(x) paste0(toupper(x), " (", variables_unit[x], ")"),
       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
     )
   )
 ```
+
+```{r display-clinical}
+pheno_tbl <- copy(pheno_dt)
+summary_cols <- intersect(c("ID", "sex", "ethnicity"), names(pheno_tbl))
+setnames(
+  x = pheno_tbl, 
+  old = setdiff(summary_cols, "ID"), 
+  new = (function(string) {
+    capped <- grep("^[A-Z]", string, invert = TRUE)
+    substr(string[capped], 1, 1) <- toupper(substr(string[capped], 1, 1))
+    string
+  })(setdiff(summary_cols, "ID"))
+)
+
+summary_cols <- c(
+  "ID", 
+  (function(string) {
+    capped <- grep("^[A-Z]", string, invert = TRUE)
+    substr(string[capped], 1, 1) <- toupper(substr(string[capped], 1, 1))
+    string
+  })(setdiff(summary_cols, "ID"))
+)
+
+chr_cols <- pheno_tbl[
+  j = names(which(sapply(.SD, function(x) is.character(x) | is.factor(x)))), 
+  .SDcols = setdiff(summary_cols, "ID")
+]
+if (length(chr_cols) > 0) {
+  pheno_tbl[
+    j = (chr_cols) := lapply(
+      X = .SD, 
+      FUN = function(string) {
+        capped <- grep("^[A-Z]", string, invert = TRUE)
+        substr(string[capped], 1, 1) <- toupper(substr(string[capped], 1, 1))
+        string
+      }
+    ),
+    .SDcols = chr_cols
+]
+}
+
+tbl_summary(
+  data = pheno_tbl[j = list(n_patients = .N), by = summary_cols], 
+  by = grep("sex", summary_cols, ignore.case = TRUE, value = TRUE),
+  label = list(n_patients ~ "Number of visits per patient"),
+  statistic = list(
+    all_continuous() ~ c(
+      "{median} ({p25}, {p75})", 
+      "{min}, {max}"
+    ),
+    all_categorical() ~ "{n}"
+  ),
+  type = all_continuous() ~ "continuous2",
+  missing = "ifany",
+  percent = "row",
+  include = setdiff(c("n_patients", summary_cols), "ID")
+) %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  modify_header(
+    update = list(label ~ ""),
+    stat_by = md("**{c('0' = 'Female', '1' = 'Male')[level]}**<br>N = {n} ({style_percent(p)} %)")
+  ) %>%
+  modify_spanning_header(num_range("stat_", 1:2) ~ "**Sex**") %>% 
+  add_overall(last = TRUE, col_label = md("**Overall**<br>N = {n}"))
+
+
+# tbl_cross(
+#   data = pheno_tbl[, .(ID, age, sex)], 
+#   row = "age", 
+#   col = "sex",
+#   percent = "cell",
+#   statistic = "{n} ({p} %)",
+#   label = list(sex ~ "Sex", age ~ "Age (years)"),
+# ) %>% 
+#   modify_header(
+#     update = list(label ~ ""),
+#     stat_by = md("**{c('0' = 'Female', '1' = 'Male')[level]}**<br>N = {n} ({style_percent(p)} %)")
+#   )
+```
+
 
 # Data Quality-Control (`growthcleanr`)
 
@@ -178,8 +277,8 @@ visits_clean <- visits_clean[!is.na(bmi)]
 ```
 
 * Exclusion:
-    - Number of `r params[["trait"]]` observations: `r comma(abs(length(bmigrowth[["bmi"]]) - length(visits_clean[["bmi"]])))`.
-    - Number of individuals: `r comma(abs(length(unique(bmigrowth[["ID"]])) - length(unique(visits_clean[["ID"]]))))`.
+    - Number of `r params[["trait"]]` observations: `r comma(abs(length(pheno_dt[["bmi"]]) - length(visits_clean[["bmi"]])))`.
+    - Number of individuals: `r comma(abs(length(unique(pheno_dt[["ID"]])) - length(unique(visits_clean[["ID"]]))))`.
 
 * `r comma(length(unique(visits_clean[["ID"]])))` individuals.
     - `r comma(length(unique(visits_clean[sex == 0, ID])))` females.
