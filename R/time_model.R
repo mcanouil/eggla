@@ -37,16 +37,54 @@ time_model <- function(
   form_random <- paste0("~ ", x_fmt, " | ID")
 
 
-  model_call <- c(
-    'nlme::lme(',
-    paste0('  fixed = ', form_fixed, ','),
-    '  data = data,',
-    paste0('  random = ', form_random, ','),
-    '  na.action = stats::na.omit,',
-    '  method = "ML",',
-    '  correlation = nlme::corCAR1(form = ~ 1 | ID),',
-    '  control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)',
-    ')'
+  f_model_call <- function(form_fixed, form_random, n_iteration) {
+    c(
+      'nlme::lme(',
+      paste0('  fixed = ', form_fixed, ','),
+      '  data = data,',
+      paste0('  random = ', form_random, ','),
+      '  na.action = stats::na.omit,',
+      '  method = "ML",',
+      '  correlation = nlme::corCAR1(form = ~ 1 | ID),',
+      '  control = nlme::lmeControl(opt = "optim", maxIter = ', n_iteration, ', msMaxIter = ', n_iteration, ')',
+      ')'
+    )
+  }
+
+  model_call <- f_model_call(
+    form_fixed = paste0(y, " ~ ",  x_fmt),
+    form_random = paste0("~ ", x_fmt, " | ID"),
+    n_iteration = 500
   )
-  if (as_text) cat(model_call, sep = "\n") else eval(parse(text = paste(model_call, collapse = "")))
+  res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
+  if (inherits(res_model, "try-error")) {
+    message("Number of iteration has been increased from 500 to 1,000.", appendLF = TRUE)
+    model_call <- f_model_call(
+      form_fixed = paste0(y, " ~ ",  x_fmt),
+      form_random = paste0("~ ", x_fmt, " | ID"),
+      n_iteration = 1000
+    )
+    res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
+  }
+  if (inherits(res_model, "try-error")) {
+    if (method == "cubic_slope") {
+      message("Polynom's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
+      model_call <- f_model_call(
+        form_fixed = paste0(y, " ~ ",  x_fmt),
+        form_random = paste0("~ ", gsub("degree = 3", "degree = 2", x_fmt), " | ID", fixed = TRUE),
+        n_iteration = 1000
+      )
+      res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
+    }
+  }
+
+  if (as_text) {
+    cat(model_call, sep = "\n")
+  } else {
+    if (inherits(res_model, "try-error")) {
+      stop(gsub("Error in try\\([^:]*\\) : ", paste0('"', method, '": '), res_model))
+    } else {
+      res_model
+    }
+  }
 }
