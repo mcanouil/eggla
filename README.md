@@ -185,11 +185,7 @@ time_model(
 #>   na.action = stats::na.omit,
 #>   method = "ML",
 #>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 
-#> 500
-#> , msMaxIter = 
-#> 500
-#> )
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
 #> )
 ```
 
