@@ -1,6 +1,6 @@
 test_that("Cubic slope", {
 
-  x <- time_model("age", "log(bmi)", bmigrowth[bmigrowth$sex == 0, ], "cubic_slope")
+  x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "cubic_slope")
 
   y1 <- compute_auc(
     fit = x,
@@ -42,7 +42,7 @@ test_that("Cubic slope", {
 
 test_that("Linear Splines", {
 
-  x <- time_model("age", "log(bmi)", bmigrowth[bmigrowth$sex == 0, ], "linear_splines")
+  x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "linear_splines")
 
   y1 <- compute_auc(
     fit = x,
@@ -98,7 +98,7 @@ test_that("Linear Splines", {
 
 test_that("Cubic Splines", {
 
-  x <- time_model("age", "log(bmi)", bmigrowth[bmigrowth$sex == 0, ], "cubic_splines")
+  x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "cubic_splines")
 
   y1 <- compute_auc(
     fit = x,
