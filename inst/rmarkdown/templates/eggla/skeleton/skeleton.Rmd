@@ -4,6 +4,7 @@ params:
   phenotypes: !r get(data(bmigrowth, package = "eggla"))
   output_directory: !r tempdir()
   trait: "bmi"
+  covariates: NULL
   qc: TRUE
 title: '[EGG consortium] `r params[["cohort_name"]]`'
 subtitle: 'Trait: `r toupper(params[["trait"]])`'
@@ -129,6 +130,10 @@ Data includes:
 ## Descriptive Table
 
 ```{r display-clinical}
+if (!inherits(pheno_dt, "data.table")) {
+  pheno_dt <- setDT(pheno_dt)
+}
+
 pheno_tbl <- copy(pheno_dt)
 summary_cols <- intersect(c("ID", "sex", "ethnicity"), names(pheno_tbl))
 setnames(
@@ -165,7 +170,7 @@ if (length(chr_cols) > 0) {
       }
     ),
     .SDcols = chr_cols
-]
+  ]
 }
 
 tbl_summary(
@@ -214,7 +219,7 @@ tbl_summary(
 ggplot(
   data = melt(
     data = pheno_dt[
-      j = (c("bmi", "height", "weight")) := lapply(.SD, as.double),
+      j = c("bmi", "height", "weight") := lapply(.SD, as.double),
       .SDcols = c("bmi", "height", "weight")
     ], 
     measure.vars = c("bmi", "height", "weight")
@@ -289,10 +294,10 @@ ggplot(
 # Data Quality-Control (`growthcleanr`)
 
 ```{r daymont-qc, include = FALSE}
-pheno_dt[, "agedays" := floor(age * 365.25)] # convert to age in days and as integers ...
-pheno_dt[, "sex_daymont" := c("0" = "1", "1" = "0")[as.character(sex)]] # recode sex with Male = 0 and Female = 1...
-pheno_dt[, "WEIGHTKG" := as.numeric(weight)]
-pheno_dt[, "HEIGHTCM" := as.numeric(height)]
+pheno_dt[j = "agedays" := floor(age * 365.25)] # convert to age in days and as integers ...
+pheno_dt[j = "sex_daymont" := c("0" = "1", "1" = "0")[as.character(sex)]] # recode sex with Male = 0 and Female = 1...
+pheno_dt[j = "WEIGHTKG" := as.numeric(weight)]
+pheno_dt[j = "HEIGHTCM" := as.numeric(height)]
 visits_long <- melt(
   data = pheno_dt, 
   id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
@@ -372,9 +377,9 @@ visits_clean <- pheno_dt
 mres <- melt(
   data = visits_clean[, 
     list(
-      cubic_slope = list(time_model("age", trait_model, .SD, "cubic_slope")),
-      linear_splines = list(time_model("age", trait_model, .SD, "linear_splines")),
-      cubic_splines = list(time_model("age", trait_model, .SD, "cubic_splines"))
+      cubic_slope = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "cubic_slope")),
+      linear_splines = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "linear_splines")),
+      cubic_splines = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "cubic_splines"))
     ), 
     by = "sex"
   ], 
