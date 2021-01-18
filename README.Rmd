@@ -98,6 +98,18 @@ ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
 ls_mod <- time_model(
   x = "age", 
   y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "linear_splines"
+)
+```
+
+Also possible to provides additional covariates (and their transformation), as long as they are available in the dataset.
+```{r, eval = FALSE}
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = c("height", "log(weight)"),
   data = bmigrowth[bmigrowth$sex == 0, ], 
   method = "linear_splines"
 )
