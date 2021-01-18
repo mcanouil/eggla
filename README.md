@@ -46,14 +46,12 @@ library(broom.mixed)
 
 **eggla** includes a small dataset with 1050 rows and 6 variables.
 
-  - `ID` (`character`): ID using three digits.
-  - `age` (`numeric`): age in years.
-  - `sex` (`integer`): sex with 1: male and 0: female.
-  - `weight` (`numeric`): weight in kilograms.
-  - `height` (`integer`): height in centimetres.
-  - `bmi` (`numeric`): Body Mass Index in kilograms per quare metre.
-
-<!-- end list -->
+-   `ID` (`character`): ID using three digits.
+-   `age` (`numeric`): age in years.
+-   `sex` (`integer`): sex with 1: male and 0: female.
+-   `weight` (`numeric`): weight in kilograms.
+-   `height` (`integer`): height in centimetres.
+-   `bmi` (`numeric`): Body Mass Index in kilograms per quare metre.
 
 ``` r
 data("bmigrowth")
@@ -93,15 +91,15 @@ ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
 **eggla** includes three models, namely `cubic_slope`, `linear_splines`
 and `cubic_splines`, all implemented with the R package `nlme`.
 
-  - `x` and `y`, the variables as character with possible
+-   `x` and `y`, the variables as character with possible
     transformation.
 
-  - `data`, the data in which the variables are.
+-   `data`, the data in which the variables are.
 
-  - `method`, the method or model to be performed.
+-   `method`, the method or model to be performed.
 
-  - `knots`, the knots for “splines” methods. Default is the following:
-    
+-   `knots`, the knots for “splines” methods. Default is the following:
+
     ``` r
     knots = list(
       "cubic_slope" = NULL,
@@ -110,12 +108,24 @@ and `cubic_splines`, all implemented with the R package `nlme`.
     )[[method]]
     ```
 
-<!-- end list -->
-
 ``` r
 ls_mod <- time_model(
   x = "age", 
   y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "linear_splines"
+)
+```
+
+Also possible to provides additional covariates (and their
+transformation), as long as they are available in the dataset.
+
+``` r
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = c("height", "log(weight)"),
   data = bmigrowth[bmigrowth$sex == 0, ], 
   method = "linear_splines"
 )
@@ -166,7 +176,7 @@ ggplot() +
   labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 Model call can also be exported for copy/paste and manual editing.
 
@@ -207,7 +217,7 @@ plot_residuals(
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ### Predicted Average Slopes
 
@@ -268,7 +278,7 @@ ggplot(
   labs(x = "Predicted Slope", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
 ### Area Under The Curves
 
@@ -315,7 +325,7 @@ ggplot(
   labs(x = "Area Under The Curve (AUC)", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
 
 ### Render Analyses As Rmarkdown
 
@@ -343,17 +353,10 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 ```
 
 <!-- ```{r, eval = FALSE} -->
-
 <!-- run_eggla( -->
-
 <!--   phenotypes = bmigrowth, -->
-
 <!--   trait = "bmi", -->
-
 <!--   cohort_name = "cohort", -->
-
 <!--   output_directory = tempdir() -->
-
 <!-- ) -->
-
 <!-- ``` -->
