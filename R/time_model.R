@@ -2,6 +2,7 @@
 #'
 #' @param x something
 #' @param y something
+#' @param cov something
 #' @param data something
 #' @param method something
 #' @param knots something
@@ -12,6 +13,7 @@
 time_model <- function(
   x,
   y,
+  cov = NULL,
   data,
   method = c("cubic_slope", "linear_splines", "cubic_splines"),
   knots = list(
@@ -36,6 +38,21 @@ time_model <- function(
   form_fixed <- paste0(y, " ~ ",  x_fmt)
   form_random <- paste0("~ ", x_fmt, " | ID")
 
+  if (!is.null(cov)) {
+    form_fixed <- paste(form_fixed, "+", paste(cov, collapse = " + "))
+  }
+
+  vars_available <- all.vars(as.formula(form_fixed)) %in% colnames(data)
+
+  if (!all(vars_available)) {
+    stop(paste0(
+      c(
+        "Some variables are not available in the datast provided:",
+        paste("  * ", all.vars(as.formula(form_fixed))[!vars_available])
+      ),
+      collapse = "\n"
+    ))
+  }
 
   f_model_call <- function(form_fixed, form_random, n_iteration) {
     c(
