@@ -7,6 +7,9 @@
 run_eggla(
   phenotypes = NULL,
   trait = "bmi",
+  covariates = NULL,
+  daymont_qc = TRUE,
+  daymont_flags_exclude = TRUE,
   cohort_name = "cohort",
   output_directory = tempdir(),
   ...
@@ -16,6 +19,12 @@ run_eggla(
 \item{phenotypes}{something}
 
 \item{trait}{something}
+
+\item{covariates}{something}
+
+\item{daymont_qc}{something}
+
+\item{daymont_flags_exclude}{something}
 
 \item{cohort_name}{something}
 
