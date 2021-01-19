@@ -113,7 +113,7 @@ if (
 
 if (is.logical(params[["daymont_flags_exclude"]])) {
   if (isTRUE(params[["daymont_flags_exclude"]])) {
-    daymont_flags_exclude <- c(
+    daymont_flags_exclude <- c( # Switch to "Include" flag
       "Swapped-Measurement", "Unit-Error-High", "Unit-Error-Low", "Unit-Error-Possible", 
       "Exclude-SD-Cutoff", 
       "Exclude-Carried-Forward", 
