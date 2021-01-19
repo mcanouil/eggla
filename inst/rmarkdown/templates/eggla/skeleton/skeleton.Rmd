@@ -13,7 +13,6 @@ author: |
   Nicole Warrington, *Ph.D.* (n.warrington@uq.edu.au)  
   Mickaël Canouil, *Ph.D.* (***REMOVED***)
 date: '`r format(Sys.time(), "%B %d, %Y")`'
-knit: (function(inputFile, encoding) rmarkdown::render(inputFile, encoding = encoding, output_dir = here::here("outputs/99-analysis_plan")))
 output:
   bookdown::html_document2:
     theme: lumen
@@ -121,7 +120,7 @@ if (is.logical(params[["daymont_flags_exclude"]])) {
       "Exclude-Extraneous-Same-Day", 
       "Exclude-Min-Height-Change", "Exclude-Max-Height-Change", 
       "Exclude-Pair-Delta-17", "Exclude-Pair-Delta-18", "Exclude-Pair-Delta-19", "Exclude-Single-Outlier",
-      "Exclude-Too-Many-Errors", "Exclude-Too-Many-Errors-Other_Parameter",
+      "Exclude-Too-Many-Errors", "Exclude-Too-Many-Errors-Other-Parameter",
       "Exclude-EWMA-Extreme", "Exclude-EWMA-Extreme-Pair", "Exclude-EWMA-8", "Exclude-EWMA-9", 
       "Exclude-EWMA-10", "Exclude-EWMA-11", "Exclude-EWMA-12", "Exclude-EWMA-13", "Exclude-EWMA-14"
     )
@@ -162,10 +161,6 @@ Data includes:
 ## Descriptive Table
 
 ```{r display-clinical}
-if (!inherits(pheno_dt, "data.table")) {
-  pheno_dt <- setDT(pheno_dt)
-}
-
 pheno_tbl <- copy(pheno_dt)
 summary_cols <- intersect(c("ID", "sex", "ethnicity"), names(pheno_tbl))
 setnames(
@@ -399,8 +394,8 @@ mres <- melt(
 
 ```{r modelling-rp, include = FALSE}
 ### Residuals Plots ------------------------------------------------------------------------------
-mres[, 
-  gg_residuals := list(list(
+mres[
+  j = gg_residuals := list(list(
     plot_residuals(
       x = "age", 
       y = trait_model, 
@@ -423,8 +418,8 @@ mres[,
 
 ```{r modelling-s, include = FALSE}
 ### Slopes ---------------------------------------------------------------------------------------
-mres[,
-  slope := list(list(predict_average_slopes(
+mres[
+  j = slope := list(list(predict_average_slopes(
     fit = model_results[[1]],
     method = model_name,
     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
@@ -435,8 +430,8 @@ mres[,
 
 ```{r modelling-sp, include = FALSE}
 ### Slopes Plots ---------------------------------------------------------------------------------
-mres[, 
-  gg_slope := list(list(
+mres[
+  j = gg_slope := list(list(
     ggplot(
       data = melt(
         data = .SD[, unlist(slope, recursive = FALSE), by = "sex"], 
@@ -476,13 +471,13 @@ gg_comp_slope <- melt(
   measure.vars = patterns("^slope_"),
   variable.name = "period_interval", 
   value.name = "slope"
-)[, 
-  period_interval := factor(
+)[ 
+  j = period_interval := factor(
     x = gsub("slope_", "", period_interval), 
     levels = gsub("slope_", "", unique(period_interval))
   )
-][,
-  list(
+][ 
+  j = list(
     gg = (function(data) {
       apply(
         X = combn(unique(as.character(data[["model_name"]])), 2),
@@ -507,8 +502,8 @@ gg_comp_slope <- melt(
 
 ```{r modelling-auc, include = FALSE}
 ### AUCs -----------------------------------------------------------------------------------------
-mres[,
-  auc := list(list(compute_auc(
+mres[ 
+  j = auc := list(list(compute_auc(
     fit = model_results[[1]],
     method = model_name,
     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
@@ -519,8 +514,8 @@ mres[,
 
 ```{r modelling-aucp, include = FALSE}
 ### AUCs Plots -----------------------------------------------------------------------------------
-mres[,
-  gg_auc := list(list(
+mres[ 
+  j = gg_auc := list(list(
     ggplot(
       data = melt(
         data = .SD[, unlist(auc, recursive = FALSE), by = "sex"], 
@@ -560,13 +555,13 @@ gg_comp_auc <- melt(
   measure.vars = patterns("^auc_"),
   variable.name = "period_interval", 
   value.name = "auc"
-)[, 
-  period_interval := factor(
+)[ 
+  j = period_interval := factor(
     x = gsub("auc_", "", period_interval), 
     levels = gsub("auc_", "", unique(period_interval))
   )
-][,
-  list(
+][ 
+  j = list(
     gg = (function(data) {
       apply(
         X = combn(unique(as.character(data[["model_name"]])), 2),
@@ -591,8 +586,8 @@ gg_comp_auc <- melt(
 
 ```{r modelling-aucsc, include = FALSE}
 ### AUCs/Slopes Correlations ---------------------------------------------------------------------
-cor_dt <- mres[,
-  (function(x, y) {
+cor_dt <- mres[
+  j = (function(x, y) {
     xdf <- as.data.frame(x, check.names = FALSE)
     ydf <- as.data.frame(y, check.names = FALSE)
     merge(
@@ -602,8 +597,8 @@ cor_dt <- mres[,
     )
   })(slope, auc),
   by = c("sex", "model_name")
-][,
-  list(cor = list(cor(
+][ 
+  j = list(cor = list(cor(
     x = dcast(
       data = melt(
         data = .SD,
@@ -628,8 +623,8 @@ cor_dt <- mres[,
 
 ```{r modelling-aucscp, include = FALSE}
 ### AUCs/Slopes Correlations Plots ---------------------------------------------------------------
-cor_dt[,
-  gg_cor := list(list(
+cor_dt[ 
+  j = gg_cor := list(list(
     (function(cor) {
       dd <- as.dendrogram(
         hclust(
@@ -722,8 +717,8 @@ for (isex in sort(unique(mres[["sex"]]))) {
     } else {
       cat("\n\n\\clearpage\n\n###", toupper(gsub("_", " ", imodel)), "\n\n")
     }
-    res_tbl <- setDT(tidy(mres[sex == isex & model_name == imodel, model_results][[1]]))[,
-      `:=`(
+    res_tbl <- setDT(tidy(mres[sex == isex & model_name == imodel, model_results][[1]]))[
+      j = `:=`(
         term = gsub("(gsp)\\(.*\\)\\)|(poly)\\(.*, degree = .\\)", "\\1\\2(...)", term),
         effect = fifelse(
           test = group %in% c("Residual", "fixed"),
