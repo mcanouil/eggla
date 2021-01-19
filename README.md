@@ -345,6 +345,9 @@ rmarkdown::render(
     cohort_name =  "BMI Growth (Demo)",
     phenotypes = bmigrowth,
     trait = "bmi",
+    covariates =  NULL,
+    daymont_qc = TRUE,
+    daymont_flags_exclude = TRUE,
     output_directory = tempdir()
   )
 )
