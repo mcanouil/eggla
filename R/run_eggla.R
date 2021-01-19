@@ -2,6 +2,9 @@
 #'
 #' @param phenotypes something
 #' @param trait something
+#' @param covariates something
+#' @param daymont_qc something
+#' @param daymont_flags_exclude something
 #' @param cohort_name  something
 #' @param output_directory something
 #' @param ... Parameters to pass to `rmarkdown::render()`.
@@ -11,6 +14,9 @@
 run_eggla <- function(
   phenotypes = NULL,
   trait = "bmi",
+  covariates = NULL,
+  daymont_qc = TRUE,
+  daymont_flags_exclude = TRUE,
   cohort_name = "cohort",
   output_directory = tempdir(),
   ...
@@ -40,6 +46,9 @@ run_eggla <- function(
       cohort_name =  cohort_name,
       phenotypes = phenotypes,
       trait = trait,
+      covariates = covariates,
+      daymont_qc = daymont_qc,
+      daymont_flags_exclude = daymont_flags_exclude,
       output_directory = output_directory
     ),
     ...
