@@ -27,12 +27,12 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 ## Installation
 
 ```{r, eval = FALSE}
-# Install insane from CRAN:
-install.packages("eggla")
-
-# Or the the development version from GitHub:
+# Install the development version from GitHub:
 # install.packages("remotes")
 remotes::install_github("mcanouil/eggla")
+
+# Or a particular version:
+remotes::install_github("mcanouil/eggla@v0.2.0")
 ```
 
 ## Hands on **eggla**
@@ -282,3 +282,187 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 <!-- ) -->
 <!-- ``` -->
 
+## Run A Complete Analysis
+
+## Without Daymont's QC
+
+```{r, error = TRUE}
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla")
+library(eggla)
+library(broom.mixed)
+data("bmigrowth")
+
+## Linear Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "linear_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "linear_splines"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+
+## Cubic Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_splines"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+
+## Cubic Slope
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_slope", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_slope"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
+sres
+```
+
+## With Daymont's QC
+
+```{r, error = TRUE}
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla")
+library(eggla)
+# remotes::install_github("carriedaymont/growthcleanr")
+library(growthcleanr)
+library(broom.mixed)
+library(data.table)
+
+data("bmigrowth")
+pheno_dt <- as.data.table(bmigrowth)
+pheno_dt[
+  j = `:=`(
+    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+    "WEIGHTKG" = as.numeric(weight),
+    "HEIGHTCM" = as.numeric(height)
+  )
+]
+
+pheno_dt[# recode sex with Male = 0 and Female = 1...
+  j = `:=`(
+    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
+  )
+]
+
+visits_long <- melt(
+  data = pheno_dt, 
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
+  variable.name = "param", 
+  value.name = "measurement"
+)
+visits_long[ 
+  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+    subjid = ID,
+    param = param,
+    agedays = agedays, 
+    sex = sex_daymont, 
+    measurement = measurement,
+    quietly = FALSE
+  )
+]
+visits_clean <- dcast(
+  data = visits_long[clean %in% "Include"], # Exclude all flags
+  formula = ... ~ param, 
+  value.var = "measurement"
+)
+visits_clean[j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2] # recompute bmi based on QC variables
+visits_clean <- visits_clean[!is.na(bmi)] # exclude missing bmi
+
+## Linear Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "linear_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "linear_splines"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+
+## Cubic Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_splines"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+
+## Cubic Slope
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_slope", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_slope"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
+sres
+```
