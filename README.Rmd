@@ -302,16 +302,18 @@ time_model(
   method = "linear_splines", 
   as_text = TRUE # To have a look at the code actually running behind the scene
 )
-res <- time_model(
+res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
   data = bmigrowth[bmigrowth$sex == 0, ], 
   method = "linear_splines"
-)
-sres <- tidy(res)
-sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-sres
+))
+if (!inherits(res, "try-error")) {
+  sres <- tidy(res)
+  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+  sres
+}
 
 ## Cubic Splines
 time_model(
@@ -322,16 +324,18 @@ time_model(
   method = "cubic_splines", 
   as_text = TRUE # To have a look at the code actually running behind the scene
 )
-res <- time_model(
+res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
   data = bmigrowth[bmigrowth$sex == 0, ], 
   method = "cubic_splines"
-)
-sres <- tidy(res)
-sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-sres
+))
+if (!inherits(res, "try-error")) {
+  sres <- tidy(res)
+  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+  sres
+}
 
 ## Cubic Slope
 time_model(
@@ -342,16 +346,18 @@ time_model(
   method = "cubic_slope", 
   as_text = TRUE # To have a look at the code actually running behind the scene
 )
-res <- time_model(
+res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
   data = bmigrowth[bmigrowth$sex == 0, ], 
   method = "cubic_slope"
-)
-sres <- tidy(res)
-sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
-sres
+))
+if (!inherits(res, "try-error")) {
+  sres <- tidy(res)
+  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+  sres
+}
 ```
 
 ## With Daymont's QC
@@ -415,16 +421,18 @@ time_model(
   method = "linear_splines", 
   as_text = TRUE # To have a look at the code actually running behind the scene
 )
-res <- time_model(
+res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
   data = visits_clean[sex_daymont == 1, ], 
   method = "linear_splines"
-)
-sres <- tidy(res)
-sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-sres
+))
+if (!inherits(res, "try-error")) {
+  sres <- tidy(res)
+  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+  sres
+}
 
 ## Cubic Splines
 time_model(
@@ -435,16 +443,18 @@ time_model(
   method = "cubic_splines", 
   as_text = TRUE # To have a look at the code actually running behind the scene
 )
-res <- time_model(
+res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
   data = visits_clean[sex_daymont == 1, ], 
   method = "cubic_splines"
-)
-sres <- tidy(res)
-sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-sres
+))
+if (!inherits(res, "try-error")) {
+  sres <- tidy(res)
+  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+  sres
+}
 
 ## Cubic Slope
 time_model(
@@ -455,14 +465,16 @@ time_model(
   method = "cubic_slope", 
   as_text = TRUE # To have a look at the code actually running behind the scene
 )
-res <- time_model(
+res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
   data = visits_clean[sex_daymont == 1, ], 
   method = "cubic_slope"
-)
-sres <- tidy(res)
-sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
-sres
+))
+if (!inherits(res, "try-error")) {
+  sres <- tidy(res)
+  sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
+  sres
+}
 ```
