@@ -21,12 +21,12 @@ Consortium.
 ## Installation
 
 ``` r
-# Install insane from CRAN:
-install.packages("eggla")
-
-# Or the the development version from GitHub:
+# Install the development version from GitHub:
 # install.packages("remotes")
 remotes::install_github("mcanouil/eggla")
+
+# Or a particular version:
+remotes::install_github("mcanouil/eggla@v0.2.0")
 ```
 
 ## Hands on **eggla**
@@ -363,3 +363,369 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 <!--   output_directory = tempdir() -->
 <!-- ) -->
 <!-- ``` -->
+
+## Run A Complete Analysis
+
+## Without Daymont’s QC
+
+``` r
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla")
+library(eggla)
+library(broom.mixed)
+data("bmigrowth")
+
+## Linear Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "linear_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
+#>   data = data,
+#>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "linear_splines"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 15 x 8
+#>    effect  group   term             estimate std.error    df statistic   p.value
+#>    <chr>   <chr>   <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed   fixed   (Intercept)       2.74e+0   0.0143    481    191.    0.      
+#>  2 fixed   fixed   gsp(...)D1(0)     5.02e-2   0.00447   481     11.2   3.38e-26
+#>  3 fixed   fixed   gsp(...)C(5.5).1  1.47e-2   0.00823   481      1.78  7.55e- 2
+#>  4 fixed   fixed   gsp(...)C(11).1  -1.41e-2   0.0124    481     -1.13  2.59e- 1
+#>  5 ran_pa… ID      sd_(Intercept)    3.22e-4  NA          NA     NA    NA       
+#>  6 ran_pa… ID      cor_gsp(...)D1(… -5.33e-1  NA          NA     NA    NA       
+#>  7 ran_pa… ID      cor_gsp(...)C(5…  8.19e-3  NA          NA     NA    NA       
+#>  8 ran_pa… ID      cor_gsp(...)C(1…  1.77e-3  NA          NA     NA    NA       
+#>  9 ran_pa… ID      sd_gsp(...)D1(0)  9.14e-3  NA          NA     NA    NA       
+#> 10 ran_pa… ID      cor_gsp(...)D1(… -5.39e-2  NA          NA     NA    NA       
+#> 11 ran_pa… ID      cor_gsp(...)D1(… -5.46e-3  NA          NA     NA    NA       
+#> 12 ran_pa… ID      sd_gsp(...)C(5.…  7.24e-4  NA          NA     NA    NA       
+#> 13 ran_pa… ID      cor_gsp(...)C(5… -1.37e-2  NA          NA     NA    NA       
+#> 14 ran_pa… ID      sd_gsp(...)C(11…  5.35e-4  NA          NA     NA    NA       
+#> 15 ran_pa… Residu… sd_Observation    1.29e-1  NA          NA     NA    NA
+
+## Cubic Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
+#>   data = data,
+#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_splines"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 36 x 8
+#>    effect   group term              estimate std.error    df statistic   p.value
+#>    <chr>    <chr> <chr>                <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed (Intercept)         2.63     0.0156    478    169.    0.      
+#>  2 fixed    fixed gsp(...)D1(0)       0.528    0.0353    478     14.9   1.06e-41
+#>  3 fixed    fixed gsp(...)D2(0)      -0.626    0.0455    478    -13.8   1.42e-36
+#>  4 fixed    fixed gsp(...)D3(0)       0.342    0.0251    478     13.6   7.21e-36
+#>  5 fixed    fixed gsp(...)C(2).3     -0.355    0.0264    478    -13.4   3.56e-35
+#>  6 fixed    fixed gsp(...)C(8).3      0.0251   0.00525   478      4.78  2.35e- 6
+#>  7 fixed    fixed gsp(...)C(12).3    -0.0325   0.0124    478     -2.63  8.77e- 3
+#>  8 ran_pars ID    sd_(Intercept)      0.0573  NA          NA     NA    NA       
+#>  9 ran_pars ID    cor_gsp(...)D1(0…  -0.456   NA          NA     NA    NA       
+#> 10 ran_pars ID    cor_gsp(...)D2(0…   0.305   NA          NA     NA    NA       
+#> # … with 26 more rows
+
+## Cubic Slope
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_slope", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ stats::poly(age, degree = 3),
+#>   data = data,
+#>   random = ~ stats::poly(age, degree = 3) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = bmigrowth[bmigrowth$sex == 0, ], 
+  method = "cubic_slope"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 15 x 8
+#>    effect   group  term             estimate std.error    df statistic   p.value
+#>    <chr>    <chr>  <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed  (Intercept)        2.95      0.0115   481  256.      0.      
+#>  2 fixed    fixed  poly(...)1         5.37      0.225    481   23.9     1.01e-83
+#>  3 fixed    fixed  poly(...)2         0.162     0.171    481    0.946   3.44e- 1
+#>  4 fixed    fixed  poly(...)3         0.0154    0.172    481    0.0898  9.29e- 1
+#>  5 ran_pars ID     sd_(Intercept)     0.0438   NA         NA   NA      NA       
+#>  6 ran_pars ID     cor_poly(...)1.…   0.999    NA         NA   NA      NA       
+#>  7 ran_pars ID     cor_poly(...)2.…  -0.995    NA         NA   NA      NA       
+#>  8 ran_pars ID     cor_poly(...)3.…   0.999    NA         NA   NA      NA       
+#>  9 ran_pars ID     sd_poly(...)1      0.896    NA         NA   NA      NA       
+#> 10 ran_pars ID     cor_poly(...)1    -0.996    NA         NA   NA      NA       
+#> 11 ran_pars ID     cor_poly(...)1     0.998    NA         NA   NA      NA       
+#> 12 ran_pars ID     sd_poly(...)2      0.189    NA         NA   NA      NA       
+#> 13 ran_pars ID     cor_poly(...)2    -0.998    NA         NA   NA      NA       
+#> 14 ran_pars ID     sd_poly(...)3      0.555    NA         NA   NA      NA       
+#> 15 ran_pars Resid… sd_Observation     0.126    NA         NA   NA      NA
+```
+
+## With Daymont’s QC
+
+``` r
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla")
+library(eggla)
+# remotes::install_github("carriedaymont/growthcleanr")
+library(growthcleanr)
+library(broom.mixed)
+library(data.table)
+
+data("bmigrowth")
+pheno_dt <- as.data.table(bmigrowth)
+pheno_dt[
+  j = `:=`(
+    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+    "WEIGHTKG" = as.numeric(weight),
+    "HEIGHTCM" = as.numeric(height)
+  )
+]
+
+pheno_dt[# recode sex with Male = 0 and Female = 1...
+  j = `:=`(
+    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
+  )
+]
+
+visits_long <- melt(
+  data = pheno_dt, 
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
+  variable.name = "param", 
+  value.name = "measurement"
+)
+visits_long[ 
+  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+    subjid = ID,
+    param = param,
+    agedays = agedays, 
+    sex = sex_daymont, 
+    measurement = measurement,
+    quietly = FALSE
+  )
+]
+#> [2021-01-19 14:18:06] Calculating z-scores...
+#> [2021-01-19 14:18:06] Calculating SD-scores...
+#> [2021-01-19 14:18:06] Re-centering data...
+#> [2021-01-19 14:18:06] Cleaning growth data in 1 batch(es)...
+#> [2021-01-19 14:18:06] Processing Batch #1...
+#> [2021-01-19 14:18:06] Preliminarily identify potential extraneous...
+#> [2021-01-19 14:18:06] Identify potentially swapped measurements...
+#> [2021-01-19 14:18:06] Exclude measurements carried forward...
+#> [2021-01-19 14:18:07] Exclude extreme measurements based on SD...
+#> [2021-01-19 14:18:07] Exclude extreme measurements based on EWMA...
+#> [2021-01-19 14:18:07] Exclude extraneous based on EWMA...
+#> [2021-01-19 14:18:07] Exclude moderate errors based on EWMA...
+#> [2021-01-19 14:18:10] Exclude heights based on growth velocity...
+#> [2021-01-19 14:18:12] Exclude single measurements and pairs...
+#> [2021-01-19 14:18:12] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-01-19 14:18:12] Completed Batch #1...
+#> [2021-01-19 14:18:12] Done!
+visits_clean <- dcast(
+  data = visits_long[clean %in% "Include"], # Exclude all flags
+  formula = ... ~ param, 
+  value.var = "measurement"
+)
+visits_clean[j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2] # recompute bmi based on QC variables
+visits_clean <- visits_clean[!is.na(bmi)] # exclude missing bmi
+
+## Linear Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "linear_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
+#>   data = data,
+#>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "linear_splines"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 15 x 8
+#>    effect  group   term             estimate std.error    df statistic   p.value
+#>    <chr>   <chr>   <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed   fixed   (Intercept)      2.74e+ 0   0.0143    456   192.     0.      
+#>  2 fixed   fixed   gsp(...)D1(0)    4.85e- 2   0.00491   456     9.87   5.77e-21
+#>  3 fixed   fixed   gsp(...)C(5.5)…  1.65e- 2   0.00898   456     1.83   6.75e- 2
+#>  4 fixed   fixed   gsp(...)C(11).1 -1.03e- 2   0.0136    456    -0.754  4.51e- 1
+#>  5 ran_pa… ID      sd_(Intercept)   1.49e-11  NA          NA    NA     NA       
+#>  6 ran_pa… ID      cor_gsp(...)D1…  9.46e- 1  NA          NA    NA     NA       
+#>  7 ran_pa… ID      cor_gsp(...)C(… -9.51e- 1  NA          NA    NA     NA       
+#>  8 ran_pa… ID      cor_gsp(...)C(…  9.51e- 1  NA          NA    NA     NA       
+#>  9 ran_pa… ID      sd_gsp(...)D1(…  1.90e- 2  NA          NA    NA     NA       
+#> 10 ran_pa… ID      cor_gsp(...)D1… -9.95e- 1  NA          NA    NA     NA       
+#> 11 ran_pa… ID      cor_gsp(...)D1…  9.95e- 1  NA          NA    NA     NA       
+#> 12 ran_pa… ID      sd_gsp(...)C(5…  3.11e- 2  NA          NA    NA     NA       
+#> 13 ran_pa… ID      cor_gsp(...)C(… -9.99e- 1  NA          NA    NA     NA       
+#> 14 ran_pa… ID      sd_gsp(...)C(1…  3.89e- 2  NA          NA    NA     NA       
+#> 15 ran_pa… Residu… sd_Observation   1.25e- 1  NA          NA    NA     NA
+
+## Cubic Splines
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_splines", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+#> Number of iteration has been increased from 500 to 1,000.
+#> Spline's degree was decreased in the random effect formula.
+#> nlme::lme(
+#>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
+#>   data = data,
+#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[, 1:3] | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 1000, msMaxIter = 1000)
+#> )
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_splines"
+)
+#> Number of iteration has been increased from 500 to 1,000.
+#> Spline's degree was decreased in the random effect formula.
+#> Error in time_model(x = "age", y = "log(bmi)", cov = NULL, data = visits_clean[sex_daymont == : Error in logLik.reStruct(object, conLin) : 
+#>   NA/NaN/Inf in foreign function call (arg 3)
+sres <- tidy(res)
+sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 15 x 8
+#>    effect  group   term             estimate std.error    df statistic   p.value
+#>    <chr>   <chr>   <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed   fixed   (Intercept)      2.74e+ 0   0.0143    456   192.     0.      
+#>  2 fixed   fixed   gsp(...)D1(0)    4.85e- 2   0.00491   456     9.87   5.77e-21
+#>  3 fixed   fixed   gsp(...)C(5.5)…  1.65e- 2   0.00898   456     1.83   6.75e- 2
+#>  4 fixed   fixed   gsp(...)C(11).1 -1.03e- 2   0.0136    456    -0.754  4.51e- 1
+#>  5 ran_pa… ID      sd_(Intercept)   1.49e-11  NA          NA    NA     NA       
+#>  6 ran_pa… ID      cor_gsp(...)D1…  9.46e- 1  NA          NA    NA     NA       
+#>  7 ran_pa… ID      cor_gsp(...)C(… -9.51e- 1  NA          NA    NA     NA       
+#>  8 ran_pa… ID      cor_gsp(...)C(…  9.51e- 1  NA          NA    NA     NA       
+#>  9 ran_pa… ID      sd_gsp(...)D1(…  1.90e- 2  NA          NA    NA     NA       
+#> 10 ran_pa… ID      cor_gsp(...)D1… -9.95e- 1  NA          NA    NA     NA       
+#> 11 ran_pa… ID      cor_gsp(...)D1…  9.95e- 1  NA          NA    NA     NA       
+#> 12 ran_pa… ID      sd_gsp(...)C(5…  3.11e- 2  NA          NA    NA     NA       
+#> 13 ran_pa… ID      cor_gsp(...)C(… -9.99e- 1  NA          NA    NA     NA       
+#> 14 ran_pa… ID      sd_gsp(...)C(1…  3.89e- 2  NA          NA    NA     NA       
+#> 15 ran_pa… Residu… sd_Observation   1.25e- 1  NA          NA    NA     NA
+
+## Cubic Slope
+time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_slope", 
+  as_text = TRUE # To have a look at the code actually running behind the scene
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ stats::poly(age, degree = 3),
+#>   data = data,
+#>   random = ~ stats::poly(age, degree = 3) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+res <- time_model(
+  x = "age", 
+  y = "log(bmi)", 
+  cov = NULL,
+  data = visits_clean[sex_daymont == 1, ], 
+  method = "cubic_slope"
+)
+sres <- tidy(res)
+sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 15 x 8
+#>    effect   group  term             estimate std.error    df statistic   p.value
+#>    <chr>    <chr>  <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed  (Intercept)       2.95       0.0122   456   241.     0.      
+#>  2 fixed    fixed  poly(...)1        5.11       0.216    456    23.7    2.71e-81
+#>  3 fixed    fixed  poly(...)2        0.141      0.155    456     0.912  3.62e- 1
+#>  4 fixed    fixed  poly(...)3       -0.108      0.136    456    -0.789  4.31e- 1
+#>  5 ran_pars ID     sd_(Intercept)    0.0396    NA         NA    NA     NA       
+#>  6 ran_pars ID     cor_poly(...)1.…  0.999     NA         NA    NA     NA       
+#>  7 ran_pars ID     cor_poly(...)2.…  0.132     NA         NA    NA     NA       
+#>  8 ran_pars ID     cor_poly(...)3.…  0.00424   NA         NA    NA     NA       
+#>  9 ran_pars ID     sd_poly(...)1     0.740     NA         NA    NA     NA       
+#> 10 ran_pars ID     cor_poly(...)1    0.130     NA         NA    NA     NA       
+#> 11 ran_pars ID     cor_poly(...)1    0.00308   NA         NA    NA     NA       
+#> 12 ran_pars ID     sd_poly(...)2     0.00184   NA         NA    NA     NA       
+#> 13 ran_pars ID     cor_poly(...)2   -0.0244    NA         NA    NA     NA       
+#> 14 ran_pars ID     sd_poly(...)3     0.00143   NA         NA    NA     NA       
+#> 15 ran_pars Resid… sd_Observation    0.129     NA         NA    NA     NA
+```
