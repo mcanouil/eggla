@@ -87,15 +87,25 @@ time_model <- function(
     res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   }
   if (inherits(res_model, "try-error")) {
-    if (method == "cubic_slope") {
-      message("Polynom's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
-      model_call <- f_model_call(
-        form_fixed = paste0(y, " ~ ",  x_fmt),
-        form_random = paste0("~ ", gsub("degree = 3", "degree = 2", x_fmt), " | ID", fixed = TRUE),
-        n_iteration = 1000
-      )
-      res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
-    }
+    model_call <- switch(EXPR = method,
+      "cubic_slope" = {
+        message("Polynom's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
+        f_model_call(
+          form_fixed = paste0(y, " ~ ",  x_fmt),
+          form_random = paste0("~ ", gsub("degree = 3", "degree = 2", x_fmt), " | ID", fixed = TRUE),
+          n_iteration = 1000
+        )
+      },
+      "cubic_splines" = {
+        message("Spline's degree was decreased in the random effect formula.", appendLF = TRUE)
+        f_model_call(
+          form_fixed = paste0(y, " ~ ",  x_fmt),
+          form_random = paste0("~ ", paste0(x_fmt, "[, 1:3]"), " | ID"),
+          n_iteration = 1000
+        )
+      }
+    )
+    res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   }
 
   if (as_text) {
@@ -108,3 +118,4 @@ time_model <- function(
     }
   }
 }
+

@@ -5,7 +5,8 @@ params:
   output_directory: !r tempdir()
   trait: "bmi"
   covariates: NULL
-  qc: TRUE
+  daymont_qc: TRUE
+  daymont_flags_exclude: TRUE
 title: '[EGG consortium] `r params[["cohort_name"]]`'
 subtitle: 'Trait: `r toupper(params[["trait"]])`'
 author: | 
@@ -101,6 +102,37 @@ theme_set(
       plot.caption = element_text(face = "italic", size = rel(0.5))
     )
 )
+```
+
+```{r daymont-flags}
+if (
+  !is.logical(params[["daymont_flags_exclude"]]) && 
+    !is.vector(params[["daymont_flags_exclude"]], mode = "character")
+) {
+  stop('"daymont_flags_exclude" must be a boolean or a character vector with exclusion flags.')
+}
+
+if (is.logical(params[["daymont_flags_exclude"]])) {
+  if (isTRUE(params[["daymont_flags_exclude"]])) {
+    daymont_flags_exclude <- c(
+      "Swapped-Measurement", "Unit-Error-High", "Unit-Error-Low", "Unit-Error-Possible", 
+      "Exclude-SD-Cutoff", 
+      "Exclude-Carried-Forward", 
+      "Exclude-Extraneous-Same-Day", 
+      "Exclude-Min-Height-Change", "Exclude-Max-Height-Change", 
+      "Exclude-Pair-Delta-17", "Exclude-Pair-Delta-18", "Exclude-Pair-Delta-19", "Exclude-Single-Outlier",
+      "Exclude-Too-Many-Errors", "Exclude-Too-Many-Errors-Other_Parameter",
+      "Exclude-EWMA-Extreme", "Exclude-EWMA-Extreme-Pair", "Exclude-EWMA-8", "Exclude-EWMA-9", 
+      "Exclude-EWMA-10", "Exclude-EWMA-11", "Exclude-EWMA-12", "Exclude-EWMA-13", "Exclude-EWMA-14"
+    )
+  } else {
+    daymont_flags_exclude <- NULL
+  }
+}
+
+if (is.vector(params[["daymont_flags_exclude"]], mode = "character")) {
+  daymont_flags_exclude <- params[["daymont_flags_exclude"]]
+}
 ```
 
 # Data Overview
@@ -232,7 +264,6 @@ ggplot(
     method = "loess", formula = y ~ x, 
     linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE
   ) +
-  # scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) +
   theme(legend.position = "none") +
   labs(
     x = paste0("AGE (", variables_unit[["age"]], ")"),
@@ -243,8 +274,6 @@ ggplot(
     cols = vars(sex), 
     margins = "sex", 
     scales = "free",
-    # space = "free",
-    # switch = "y",
     labeller = labeller(
       .rows = function(x) paste0(toupper(x), " (", variables_unit[x], ")"),
       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
@@ -252,52 +281,17 @@ ggplot(
   )
 ```
 
-<!-- ## Trajectories (square root scale) -->
-
-<!-- ```{r display-trajectories-sqrt} -->
-<!-- ggplot( -->
-<!--   data = melt( -->
-<!--     data = pheno_dt[ -->
-<!--       j = (c("bmi", "height", "weight")) := lapply(.SD, as.double), -->
-<!--       .SDcols = c("bmi", "height", "weight") -->
-<!--     ],  -->
-<!--     measure.vars = c("bmi", "height", "weight") -->
-<!--   ) -->
-<!-- ) + -->
-<!--   aes(x = age, y = value, colour = factor(ID)) + -->
-<!--   geom_path(na.rm = TRUE, alpha = 0.25) + -->
-<!--   geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) + -->
-<!--   stat_smooth( -->
-<!--     method = "loess", formula = y ~ x,  -->
-<!--     linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE -->
-<!--   ) + -->
-<!--   scale_x_sqrt(limits = c(0, NA), expand = expansion(mult = c(0, 0.1))) -->
-<!--   theme(legend.position = "none") + -->
-<!--   labs( -->
-<!--     x = paste0("AGE (", variables_unit[["age"]], ")"), -->
-<!--     y = NULL -->
-<!--   ) + -->
-<!--   facet_grid( -->
-<!--     rows = vars(variable), -->
-<!--     cols = vars(sex),  -->
-<!--     margins = "sex",  -->
-<!--     scales = "free", -->
-<!--     # space = "free", -->
-<!--     # switch = "y", -->
-<!--     labeller = labeller( -->
-<!--       .rows = function(x) paste0(toupper(x), " (", variables_unit[x], ")"), -->
-<!--       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x] -->
-<!--     ) -->
-<!--   ) -->
-<!-- ``` -->
-
 # Data Quality-Control (`growthcleanr`)
 
 ```{r daymont-qc, include = FALSE}
-pheno_dt[j = "agedays" := floor(age * 365.25)] # convert to age in days and as integers ...
-pheno_dt[j = "sex_daymont" := c("0" = "1", "1" = "0")[as.character(sex)]] # recode sex with Male = 0 and Female = 1...
-pheno_dt[j = "WEIGHTKG" := as.numeric(weight)]
-pheno_dt[j = "HEIGHTCM" := as.numeric(height)]
+pheno_dt[
+  j = `:=`(
+    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)], # recode sex with Male = 0 and Female = 1...
+    "WEIGHTKG" = as.numeric(weight),
+    "HEIGHTCM" = as.numeric(height)
+  )
+]
 visits_long <- melt(
   data = pheno_dt, 
   id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
@@ -305,20 +299,22 @@ visits_long <- melt(
   variable.name = "param", 
   value.name = "measurement"
 )
-visits_long[, clean := cleangrowth(
-  subjid = ID,
-  param = param,
-  agedays = agedays, 
-  sex = sex_daymont, 
-  measurement = measurement,
-  quietly = FALSE
-)]
+visits_long[
+  j = clean := cleangrowth(
+    subjid = ID,
+    param = param,
+    agedays = agedays, 
+    sex = sex_daymont, 
+    measurement = measurement,
+    quietly = FALSE
+  )
+]
 visits_clean <- dcast(
-  data = visits_long[clean %in% "Include"], 
+  data = visits_long[!clean %in% daymont_flags_exclude], 
   formula = ... ~ param, 
   value.var = "measurement"
 )
-visits_clean[, "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2]
+visits_clean[j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2]
 visits_clean <- visits_clean[!is.na(bmi)]
 ```
 
@@ -366,7 +362,19 @@ gt(
   opt_all_caps()
 ```
 
-```{r do-daymont-qc, eval = params[["qc"]]}
+```{r daymont-display-remaining, eval = params[["daymont_qc"]]}
+remaining_flags <- setdiff(as.character(unique(visits_clean$clean)), "Include")
+if (length(remaining_flags) > 0) {
+  cat(
+    "After exclusion based on Daymont flags provided, the following flags remain in the dataset:\n",
+    paste(paste("  *", remaining_flags), collapse = "\n"),
+    "",
+    sep = "\n"
+  )
+}
+```
+
+```{r no-daymont-qc, eval = !params[["daymont_qc"]]}
 visits_clean <- pheno_dt
 ```
 
@@ -375,8 +383,8 @@ visits_clean <- pheno_dt
 ```{r modelling-lmm, include = FALSE}
 ### Linear Mixed Models --------------------------------------------------------------------------
 mres <- melt(
-  data = visits_clean[, 
-    list(
+  data = visits_clean[
+    j = list(
       cubic_slope = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "cubic_slope")),
       linear_splines = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "linear_splines")),
       cubic_splines = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "cubic_splines"))
