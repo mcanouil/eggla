@@ -13,6 +13,7 @@
     + Use `performance` to compare models.
     + Add `summary_variables` parameter to show in the summary table.
     + Decrease font size in Daymont's QC summary table .
+    + Fix numbers in the summary table.
 
 # eggla 0.2.0
 
