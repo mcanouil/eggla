@@ -5,6 +5,7 @@ params:
   output_directory: !r tempdir()
   trait: "bmi"
   covariates: NULL
+  summary_variables: NULL
   daymont_qc: TRUE
   daymont_flags_exclude: TRUE
 title: '[EGG consortium] `r params[["cohort_name"]]`'
@@ -156,7 +157,10 @@ Data includes:
 
 ```{r display-clinical}
 pheno_tbl <- copy(pheno_dt)
-summary_cols <- unique(c("ID", "sex", "age", "bmi", "height", "weight", params[["covariates"]], params[["trait"]]))
+summary_cols <- unique(c(
+  "ID", "sex", "age", "bmi", "height", "weight", 
+  params[["covariates"]], params[["trait"]], params[["summary_variables"]]
+))
 
 vars_available <- summary_cols %in% names(pheno_tbl)
 if (!all(vars_available)) {
@@ -365,7 +369,8 @@ gt(
       domain = NULL
     )
   ) %>% 
-  opt_all_caps()
+  opt_all_caps() %>% 
+  tab_options(container.width = "100%", table.width = "100%", table.font.size = pct(75))
 ```
 
 ```{r daymont-display-remaining, eval = params[["daymont_qc"]]}
@@ -781,26 +786,28 @@ for (isex in sort(unique(mres[["sex"]]))) {
 # Model Performance
 
 ```{r performance}
-gt(
-  data = mres[
-    j = (function(mods, names) {
-      out <- eval(parse(text = paste0(
-        "compare_performance(", 
-        paste(paste0("mods[[", 1:length(mods), "]]"), collapse = ", "),
-        ", rank = TRUE)"
-      )))
-      out[["Model"]] <- names
-      out
-    })(model_results, model_name),
-    by = "sex"
-  ][ 
-    j = "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
-  ][
-    j = "sex" := NULL
-  ], 
-  groupname_col = "sex_chr"
-) %>% 
-  fmt_number(columns = c("AIC", "BIC", "RMSE", "Sigma", "BF"), n_sigfig = 3) %>% 
+models_comp <- mres[
+  j = (function(mods, names) {
+    out <- eval(parse(text = paste0(
+      "compare_performance(", 
+      paste(paste0("mods[[", 1:length(mods), "]]"), collapse = ", "),
+      ", rank = TRUE, bayesfactor = FALSE)"
+    )))
+    out[["Model"]] <- names
+    out
+  })(model_results, model_name),
+  by = "sex"
+][ 
+  j = "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
+][
+  j = "sex" := NULL
+]
+
+gt(data = models_comp, groupname_col = "sex_chr") %>% 
+  fmt_number(
+    columns = setdiff(names(models_comp)[sapply(models_comp, is.numeric)], "Performance_Score"), 
+    n_sigfig = 3
+  ) %>% 
   fmt_percent(columns = "Performance_Score", decimals = 2) %>% 
   opt_all_caps() %>% 
   opt_row_striping()

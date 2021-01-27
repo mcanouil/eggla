@@ -7,10 +7,12 @@
 
 * In `inst/rmarkdown/templates/eggla/skeleton/skeleton.Rmd`,
     + Add Daymont flag exclusion argument and control before modelling step.
-    + Param `covariates` is used for summary table and models.
+    + Summary table and models use `covariates` parameter.
     + Uses "sex" coded as `1` for male and `0` for female.
     + Small code refactoring.
     + Use `performance` to compare models.
+    + Add `summary_variables` parameter to show in the summary table.
+    + Decrease font size in Daymont's QC summary table .
 
 # eggla 0.2.0
 
