@@ -195,6 +195,13 @@ if (length(chr_cols) > 0) {
   ]
 }
 
+span_headers <- pheno_tbl[j = list(N = uniqueN(ID)), by = "sex"][
+  j = setNames(paste0(
+    "**", c('0' = 'Female', '1' = 'Male')[as.character(sex)], "**",
+    "<br>N = ", N, " (", style_percent(N / sum(N)), " %)"
+  ), sex)
+]
+
 tbl_summary(
   data = pheno_tbl[j = n_patients := .N, by = "ID"][j = .SD, .SDcols = c(summary_cols, "n_patients")], 
   by = grep("sex", summary_cols, ignore.case = TRUE, value = TRUE),
@@ -214,14 +221,10 @@ tbl_summary(
   bold_labels() %>% 
   italicize_levels() %>% 
   modify_header(
-    update = list(label ~ ""),
-    stat_by = md("**{c('0' = 'Female', '1' = 'Male')[level]}**<br>N = {n} ({style_percent(p)} %)")
+    update = all_stat_cols() ~ md("{ span_headers[level] }")
   ) %>%
   modify_spanning_header(num_range("stat_", 1:2) ~ "**Sex**") %>% 
-  add_overall(last = TRUE, col_label = md("**Overall**<br>N = {N}")) %>% 
-  as_gt() %>% 
-  opt_all_caps()
-
+  add_overall(last = TRUE, col_label = md("**Overall**<br>N = {uniqueN(pheno_tbl[['ID']])}"))
 
 # tbl_cross(
 #   data = pheno_tbl[, .(ID, age, sex)], 
