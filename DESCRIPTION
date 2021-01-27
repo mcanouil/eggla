@@ -23,6 +23,7 @@ Imports:
     nlme,
     ggplot2 (>= 3.3.3),
     patchwork (>= 1.1.1),
+    performance (>= 0.6.1),
     rmarkdown (>= 2.6)
 Suggests: 
     bookdown (>= 0.21),

@@ -58,7 +58,8 @@ library(broom.mixed)
 
 ```{r}
 data("bmigrowth")
-bmigrowth[bmigrowth[["ID"]] == "001", ]
+bmigrowth <- as.data.table(bmigrowth)
+bmigrowth[bmigrowth[["ID"]] == "001"]
 ```
 
 ```{r}
@@ -99,7 +100,7 @@ ls_mod <- time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
-  data = bmigrowth[bmigrowth$sex == 0, ], 
+  data = bmigrowth[sex == 0], 
   method = "linear_splines"
 )
 ```
@@ -110,7 +111,7 @@ time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = c("height", "log(weight)"),
-  data = bmigrowth[bmigrowth$sex == 0, ], 
+  data = bmigrowth[sex == 0], 
   method = "linear_splines"
 )
 ```
@@ -126,7 +127,7 @@ tidy(ls_mod)
 ggplot() +
   aes(x = age, y = bmi) +
   stat_smooth(
-    data = bmigrowth[bmigrowth$sex == 0, ], 
+    data = bmigrowth[sex == 0], 
     mapping = aes(colour = "Loess"),
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
@@ -146,7 +147,7 @@ Model call can also be exported for copy/paste and manual editing.
 time_model(
   x = "age", 
   y = "log(bmi)", 
-  data = bmigrowth[bmigrowth$sex == 0, ], 
+  data = bmigrowth[sex == 0], 
   method = "linear_splines", 
   as_text = TRUE
 )
@@ -291,22 +292,17 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 # remotes::install_github("mcanouil/eggla")
 library(eggla)
 library(broom.mixed)
+library(data.table)
 data("bmigrowth")
 
+bmigrowth <- as.data.table(bmigrowth)
+
 ## Linear Splines
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = bmigrowth[bmigrowth$sex == 0, ], 
-  method = "linear_splines", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
 res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
-  data = bmigrowth[bmigrowth$sex == 0, ], 
+  data = bmigrowth[sex == 0], 
   method = "linear_splines"
 ))
 if (!inherits(res, "try-error")) {
@@ -316,19 +312,11 @@ if (!inherits(res, "try-error")) {
 }
 
 ## Cubic Splines
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = bmigrowth[bmigrowth$sex == 0, ], 
-  method = "cubic_splines", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
 res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
-  data = bmigrowth[bmigrowth$sex == 0, ], 
+  data = bmigrowth[sex == 0], 
   method = "cubic_splines"
 ))
 if (!inherits(res, "try-error")) {
@@ -338,19 +326,11 @@ if (!inherits(res, "try-error")) {
 }
 
 ## Cubic Slope
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = bmigrowth[bmigrowth$sex == 0, ], 
-  method = "cubic_slope", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
 res <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
-  data = bmigrowth[bmigrowth$sex == 0, ], 
+  data = bmigrowth[sex == 0], 
   method = "cubic_slope"
 ))
 if (!inherits(res, "try-error")) {
@@ -393,8 +373,7 @@ visits_long <- melt(
   measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
   variable.name = "param", 
   value.name = "measurement"
-)
-visits_long[ 
+)[ 
   j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
     subjid = ID,
     param = param,
@@ -408,73 +387,57 @@ visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param, 
   value.var = "measurement"
-)
-visits_clean[j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2] # recompute bmi based on QC variables
-visits_clean <- visits_clean[!is.na(bmi)] # exclude missing bmi
+)[
+  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
+][
+  !is.na(bmi) # exclude missing BMI related to measurements exclusion
+]
 
 ## Linear Splines
-time_model(
+linear_splines_model <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
-  data = visits_clean[sex_daymont == 1, ], 
-  method = "linear_splines", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
-res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1, ], 
+  data = visits_clean[sex_daymont == 1], 
   method = "linear_splines"
 ))
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
+if (!inherits(linear_splines_model, "try-error")) {
+  sres <- tidy(linear_splines_model)
   sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
   sres
 }
 
 ## Cubic Splines
-time_model(
+cubic_splines_model <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
-  data = visits_clean[sex_daymont == 1, ], 
-  method = "cubic_splines", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
-res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1, ], 
+  data = visits_clean[sex_daymont == 1], 
   method = "cubic_splines"
 ))
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
+if (!inherits(cubic_splines_model, "try-error")) {
+  sres <- tidy(cubic_splines_model)
   sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
   sres
 }
 
 ## Cubic Slope
-time_model(
+cubic_slope_model <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
-  data = visits_clean[sex_daymont == 1, ], 
-  method = "cubic_slope", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
-res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1, ], 
+  data = visits_clean[sex_daymont == 1], 
   method = "cubic_slope"
 ))
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
+if (!inherits(cubic_slope_model, "try-error")) {
+  sres <- tidy(cubic_slope_model)
   sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
   sres
 }
 ```
+
+```{r}
+library(performance)
+compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
+```
+

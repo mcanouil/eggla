@@ -54,14 +54,8 @@ suppressPackageStartupMessages({
   library(gt)
   library(gtsummary)
   library(growthcleanr)
+  library(performance)
 })
-
-# if (
-#   nchar(system.file(package = "remotes")) != 0 && nchar(system.file(package = "eggla")) == 0
-# ) {
-#   remotes::install_github(repo = "mcanouil/eggla", lib = output_directory)
-# }
-# library("eggla", lib.loc = output_directory)
 
 
 ### knitr settings =================================================================================
@@ -162,7 +156,19 @@ Data includes:
 
 ```{r display-clinical}
 pheno_tbl <- copy(pheno_dt)
-summary_cols <- intersect(c("ID", "sex", "ethnicity"), names(pheno_tbl))
+summary_cols <- unique(c("ID", "sex", "age", "bmi", "height", "weight", params[["covariates"]], params[["trait"]]))
+
+vars_available <- summary_cols %in% names(pheno_tbl)
+if (!all(vars_available)) {
+  stop(paste0(
+    c(
+      "Some variables are not available in the dataset provided:",
+      paste("  * ", summary_cols[!vars_available])
+    ),
+    collapse = "\n"
+  ))
+}
+
 setnames(
   x = pheno_tbl, 
   old = setdiff(summary_cols, "ID"), 
@@ -289,12 +295,11 @@ pheno_dt[
 ]
 visits_long <- melt(
   data = pheno_dt, 
-  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
+  id.vars = unique(c("ID", "age", "sex", "agedays", "sex_daymont", params[["covariates"]])), 
   measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
   variable.name = "param", 
   value.name = "measurement"
-)
-visits_long[
+)[
   j = clean := cleangrowth(
     subjid = ID,
     param = param,
@@ -308,9 +313,11 @@ visits_clean <- dcast(
   data = visits_long[!clean %in% daymont_flags_exclude], 
   formula = ... ~ param, 
   value.var = "measurement"
-)
-visits_clean[j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2]
-visits_clean <- visits_clean[!is.na(bmi)]
+)[
+  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2
+][
+  !is.na(bmi)
+]
 ```
 
 * Exclusion:
@@ -327,24 +334,28 @@ visits_qc_summary <- dcast(
   formula = ... ~ param, 
   value.var = "clean"
 )
-visits_qc_summary[, 
-  "clean" := max(c(WEIGHTKG, HEIGHTCM)),
+visits_qc_summary[
+  j = "clean" := max(c(WEIGHTKG, HEIGHTCM)),
   by = 1:nrow(visits_qc_summary)
-][,
-  "clean" := factor(levels(visits_long$clean)[clean], levels = levels(visits_long$clean))
+][
+  j = "clean" := factor(levels(visits_long$clean)[clean], levels = levels(visits_long$clean))
+][
+  j = "age_interval" := cut(x = age, breaks = c(0, 0.25, 0.5, 1:(ceiling(max(age)))), include.lowest = TRUE)
 ]
 
 gt(
   data = dcast(
-    data = visits_qc_summary[, .N, by = c("age", "sex", "clean")][order(clean, sex, age)], 
-    formula = ... ~ age, 
+    data = visits_qc_summary[j = .N, by = c("age_interval", "sex", "clean")][order(clean, sex, age_interval)], 
+    formula = ... ~ age_interval, 
     fill = 0, 
     value.var = "N"
-  )[, 
-    "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
-  ][, "sex" := NULL], 
+  )[ 
+    j = "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
+  ][
+    j = "sex" := NULL
+  ], 
   rowname_col = "clean", 
-  groupname_col = c("sex_chr")
+  groupname_col = "sex_chr"
 ) %>% 
   tab_spanner(label = "Age (years)", columns = everything()) %>%
   data_color(
@@ -380,9 +391,33 @@ visits_clean <- pheno_dt
 mres <- melt(
   data = visits_clean[
     j = list(
-      cubic_slope = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "cubic_slope")),
-      linear_splines = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "linear_splines")),
-      cubic_splines = list(time_model(x = "age", y = trait_model, cov = params[["covariates"]], data = .SD, method = "cubic_splines"))
+      cubic_slope = list(
+        time_model(
+          x = "age", 
+          y = trait_model, 
+          cov = params[["covariates"]], 
+          data = .SD, 
+          method = "cubic_slope"
+        )
+      ),
+      linear_splines = list(
+        time_model(
+          x = "age", 
+          y = trait_model, 
+          cov = params[["covariates"]], 
+          data = .SD, 
+          method = "linear_splines"
+        )
+      ),
+      cubic_splines = list(
+        time_model(
+          x = "age", 
+          y = trait_model, 
+          cov = params[["covariates"]], 
+          data = .SD, 
+          method = "cubic_splines"
+        )
+      )
     ), 
     by = "sex"
   ], 
@@ -434,13 +469,13 @@ mres[
   j = gg_slope := list(list(
     ggplot(
       data = melt(
-        data = .SD[, unlist(slope, recursive = FALSE), by = "sex"], 
+        data = .SD[j = unlist(slope, recursive = FALSE), by = "sex"], 
         id.vars = c("ID", "sex"), 
         measure.vars = patterns("^slope_"),
         variable.name = "period_interval", 
         value.name = "slope"
-      )[, 
-        period_interval := factor(
+      )[
+        j = period_interval := factor(
           x = gsub("slope_", "", period_interval), 
           levels = gsub("slope_", "", unique(period_interval))
         )
@@ -466,7 +501,7 @@ mres[
 ```{r modelling-scp, include = FALSE}
 ### Slopes Comparisons Plots ---------------------------------------------------------------------
 gg_comp_slope <- melt(
-  data = mres[, unlist(slope, recursive = FALSE), by = c("sex", "model_name")], 
+  data = mres[j = unlist(slope, recursive = FALSE), by = c("sex", "model_name")], 
   id.vars = c("ID", "sex","model_name"), 
   measure.vars = patterns("^slope_"),
   variable.name = "period_interval", 
@@ -518,13 +553,13 @@ mres[
   j = gg_auc := list(list(
     ggplot(
       data = melt(
-        data = .SD[, unlist(auc, recursive = FALSE), by = "sex"], 
+        data = .SD[j = unlist(auc, recursive = FALSE), by = "sex"], 
         id.vars = c("ID", "sex"), 
         measure.vars = patterns("^auc_"),
         variable.name = "period_interval", 
         value.name = "auc"
-      )[, 
-        period_interval := factor(
+      )[ 
+        j = period_interval := factor(
           x = gsub("auc_", "", period_interval), 
           levels = gsub("auc_", "", unique(period_interval))
         )
@@ -550,7 +585,7 @@ mres[
 ```{r modelling-auccp, include = FALSE}
 ### AUCs Comparisons Plots -----------------------------------------------------------------------
 gg_comp_auc <- melt(
-  data = mres[, unlist(auc, recursive = FALSE), by = c("sex", "model_name")], 
+  data = mres[j = unlist(auc, recursive = FALSE), by = c("sex", "model_name")], 
   id.vars = c("ID", "sex","model_name"), 
   measure.vars = patterns("^auc_"),
   variable.name = "period_interval", 
@@ -743,12 +778,40 @@ for (isex in sort(unique(mres[["sex"]]))) {
 }
 ```
 
+# Model Performance
+
+```{r performance}
+gt(
+  data = mres[
+    j = (function(mods, names) {
+      out <- eval(parse(text = paste0(
+        "compare_performance(", 
+        paste(paste0("mods[[", 1:length(mods), "]]"), collapse = ", "),
+        ", rank = TRUE)"
+      )))
+      out[["Model"]] <- names
+      out
+    })(model_results, model_name),
+    by = "sex"
+  ][ 
+    j = "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
+  ][
+    j = "sex" := NULL
+  ], 
+  groupname_col = "sex_chr"
+) %>% 
+  fmt_number(columns = c("AIC", "BIC", "RMSE", "Sigma", "BF"), n_sigfig = 3) %>% 
+  fmt_percent(columns = "Performance_Score", decimals = 2) %>% 
+  opt_all_caps() %>% 
+  opt_row_striping()
+```
+
 # Estimated Average Curves
 
 ```{r display-eac}
 ggplot(
-  data = mres[, 
-    (function(mr) {
+  data = mres[ 
+    j = (function(mr) {
       data_pred <- data.table(
         age = seq(min(pheno_dt[["age"]], na.rm = TRUE), max(pheno_dt[["age"]], na.rm = TRUE), 0.1)
       )[, (trait) := revert_trans(predict(mr[[1]], .SD, level = 0)), .SDcols = "age"]
