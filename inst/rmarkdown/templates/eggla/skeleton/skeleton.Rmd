@@ -21,7 +21,7 @@ output:
     toc: true
     toc_depth: 4
     toc_float: 
-      collapsed: false
+      collapsed: true
     fig_width: 6
     fig_height: 4.5
     self_contained: true
