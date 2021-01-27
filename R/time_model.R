@@ -47,7 +47,7 @@ time_model <- function(
   if (!all(vars_available)) {
     stop(paste0(
       c(
-        "Some variables are not available in the datast provided:",
+        "Some variables are not available in the dataset provided:",
         paste("  * ", all.vars(stats::as.formula(form_fixed))[!vars_available])
       ),
       collapse = "\n"
@@ -92,21 +92,33 @@ time_model <- function(
         message("Polynom's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
         f_model_call(
           form_fixed = paste0(y, " ~ ",  x_fmt),
-          form_random = paste0("~ ", gsub("degree = 3", "degree = 2", x_fmt), " | ID", fixed = TRUE),
+          form_random = paste0("~ ", gsub("degree = 3", "degree = 2", x_fmt, fixed = TRUE), " | ID"),
           n_iteration = 1000
         )
       },
       "cubic_splines" = {
-        message("Spline's degree was decreased in the random effect formula.", appendLF = TRUE)
+        message("Spline's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
         f_model_call(
           form_fixed = paste0(y, " ~ ",  x_fmt),
-          form_random = paste0("~ ", paste0(x_fmt, "[, 1:3]"), " | ID"),
+          form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(2", x_fmt, fixed = TRUE), " | ID"),
           n_iteration = 1000
         )
       }
     )
     res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   }
+
+  if (inherits(res_model, "try-error")) {
+    message('The random effect formula has been set to "~ 1 | ID".', appendLF = TRUE)
+    model_call <- f_model_call(
+      form_fixed = paste0(y, " ~ ",  x_fmt),
+      form_random = "~ 1 | ID",
+      n_iteration = 1000
+    )
+    res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
+  }
+
+  message(paste(model_call, collapse = "\n"), appendLF = TRUE)
 
   if (as_text) {
     cat(model_call, sep = "\n")
