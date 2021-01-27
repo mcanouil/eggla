@@ -158,8 +158,10 @@ Data includes:
 ```{r display-clinical}
 pheno_tbl <- copy(pheno_dt)
 summary_cols <- unique(c(
-  "ID", "sex", "age", "bmi", "height", "weight", 
-  params[["covariates"]], params[["trait"]], params[["summary_variables"]]
+  "ID", "sex", "age", 
+  # params[["trait"]],
+  # "bmi", "height", "weight", params[["covariates"]], 
+  params[["summary_variables"]]
 ))
 
 vars_available <- summary_cols %in% names(pheno_tbl)
@@ -173,24 +175,7 @@ if (!all(vars_available)) {
   ))
 }
 
-setnames(
-  x = pheno_tbl, 
-  old = setdiff(summary_cols, "ID"), 
-  new = (function(string) {
-    capped <- grep("^[A-Z]", string, invert = TRUE)
-    substr(string[capped], 1, 1) <- toupper(substr(string[capped], 1, 1))
-    string
-  })(setdiff(summary_cols, "ID"))
-)
-
-summary_cols <- c(
-  "ID", 
-  (function(string) {
-    capped <- grep("^[A-Z]", string, invert = TRUE)
-    substr(string[capped], 1, 1) <- toupper(substr(string[capped], 1, 1))
-    string
-  })(setdiff(summary_cols, "ID"))
-)
+summary_cols <- intersect(summary_cols, names(pheno_tbl))
 
 chr_cols <- pheno_tbl[
   j = names(which(sapply(.SD, function(x) is.character(x) | is.factor(x)))), 
@@ -211,7 +196,7 @@ if (length(chr_cols) > 0) {
 }
 
 tbl_summary(
-  data = pheno_tbl[j = list(n_patients = .N), by = summary_cols], 
+  data = pheno_tbl[j = n_patients := .N, by = "ID"][j = .SD, .SDcols = c(summary_cols, "n_patients")], 
   by = grep("sex", summary_cols, ignore.case = TRUE, value = TRUE),
   label = list(n_patients ~ "Number of visits per patient"),
   statistic = list(
@@ -224,7 +209,7 @@ tbl_summary(
   type = all_continuous() ~ "continuous2",
   missing = "ifany",
   percent = "row",
-  include = setdiff(c("n_patients", summary_cols), "ID")
+  include = setdiff(c("n_patients", summary_cols), c("ID", params[["trait"]]))
 ) %>% 
   bold_labels() %>% 
   italicize_levels() %>% 
@@ -233,7 +218,9 @@ tbl_summary(
     stat_by = md("**{c('0' = 'Female', '1' = 'Male')[level]}**<br>N = {n} ({style_percent(p)} %)")
   ) %>%
   modify_spanning_header(num_range("stat_", 1:2) ~ "**Sex**") %>% 
-  add_overall(last = TRUE, col_label = md("**Overall**<br>N = {n}"))
+  add_overall(last = TRUE, col_label = md("**Overall**<br>N = {N}")) %>% 
+  as_gt() %>% 
+  opt_all_caps()
 
 
 # tbl_cross(
