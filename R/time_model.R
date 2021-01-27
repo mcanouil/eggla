@@ -6,7 +6,6 @@
 #' @param data something
 #' @param method something
 #' @param knots something
-#' @param as_text something
 #'
 #' @return something
 #' @export
@@ -20,8 +19,7 @@ time_model <- function(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
     "cubic_splines" = c(2, 8, 12)
-  )[[method]],
-  as_text = FALSE
+  )[[method]]
 ) {
   knots_fmt <- as.character(enquote(knots)[2])
   x_fmt <- switch(
@@ -120,14 +118,10 @@ time_model <- function(
 
   message(paste(model_call, collapse = "\n"), appendLF = TRUE)
 
-  if (as_text) {
-    cat(model_call, sep = "\n")
+  if (inherits(res_model, "try-error")) {
+    stop(gsub("Error in try\\([^:]*\\) : ", paste0('"', method, '": '), res_model))
   } else {
-    if (inherits(res_model, "try-error")) {
-      stop(gsub("Error in try\\([^:]*\\) : ", paste0('"', method, '": '), res_model))
-    } else {
-      res_model
-    }
+    res_model
   }
 }
 

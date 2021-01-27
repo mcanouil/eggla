@@ -141,18 +141,6 @@ ggplot() +
   labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
 ```
 
-Model call can also be exported for copy/paste and manual editing.
-
-```{r}
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  data = bmigrowth[sex == 0], 
-  method = "linear_splines", 
-  as_text = TRUE
-)
-```
-
 ### Residuals
 
 Different plots are available for model diagnostic, using the residuals mostly.

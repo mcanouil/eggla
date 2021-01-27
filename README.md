@@ -38,8 +38,8 @@ library(ggplot2)
 library(patchwork)
 library(broom.mixed)
 #> Warning in checkMatrixPackageVersion(): Package version inconsistency detected.
-#> TMB was built with Matrix version 1.3.2
-#> Current Matrix version is 1.2.18
+#> TMB was built with Matrix version 1.2.18
+#> Current Matrix version is 1.3.2
 #> Please re-install 'TMB' from source using install.packages('TMB', type = 'source') or ask CRAN for a binary version of 'TMB' matching CRAN's 'Matrix' package
 #> Registered S3 method overwritten by 'broom.mixed':
 #>   method      from 
@@ -192,36 +192,6 @@ ggplot() +
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
-Model call can also be exported for copy/paste and manual editing.
-
-``` r
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  data = bmigrowth[sex == 0], 
-  method = "linear_splines", 
-  as_text = TRUE
-)
-#> nlme::lme(
-#>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
-#>   data = data,
-#>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#> )
-#> nlme::lme(
-#>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
-#>   data = data,
-#>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#> )
-```
-
 ### Residuals
 
 Different plots are available for model diagnostic, using the residuals
@@ -240,7 +210,7 @@ plot_residuals(
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 ### Predicted Average Slopes
 
@@ -301,7 +271,7 @@ ggplot(
   labs(x = "Predicted Slope", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ### Area Under The Curves
 
@@ -348,7 +318,7 @@ ggplot(
   labs(x = "Area Under The Curve (AUC)", y = "Count")
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 ### Render Analyses As Rmarkdown
 
@@ -564,23 +534,23 @@ visits_long <- melt(
     quietly = FALSE
   )
 ]
-#> [2021-01-27 13:02:11] Calculating z-scores...
-#> [2021-01-27 13:02:11] Calculating SD-scores...
-#> [2021-01-27 13:02:11] Re-centering data...
-#> [2021-01-27 13:02:11] Cleaning growth data in 1 batch(es)...
-#> [2021-01-27 13:02:11] Processing Batch #1...
-#> [2021-01-27 13:02:11] Preliminarily identify potential extraneous...
-#> [2021-01-27 13:02:11] Identify potentially swapped measurements...
-#> [2021-01-27 13:02:12] Exclude measurements carried forward...
-#> [2021-01-27 13:02:12] Exclude extreme measurements based on SD...
-#> [2021-01-27 13:02:12] Exclude extreme measurements based on EWMA...
-#> [2021-01-27 13:02:12] Exclude extraneous based on EWMA...
-#> [2021-01-27 13:02:12] Exclude moderate errors based on EWMA...
-#> [2021-01-27 13:02:15] Exclude heights based on growth velocity...
-#> [2021-01-27 13:02:17] Exclude single measurements and pairs...
-#> [2021-01-27 13:02:17] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-01-27 13:02:17] Completed Batch #1...
-#> [2021-01-27 13:02:17] Done!
+#> [2021-01-27 15:08:27] Calculating z-scores...
+#> [2021-01-27 15:08:28] Calculating SD-scores...
+#> [2021-01-27 15:08:28] Re-centering data...
+#> [2021-01-27 15:08:28] Cleaning growth data in 1 batch(es)...
+#> [2021-01-27 15:08:28] Processing Batch #1...
+#> [2021-01-27 15:08:28] Preliminarily identify potential extraneous...
+#> [2021-01-27 15:08:28] Identify potentially swapped measurements...
+#> [2021-01-27 15:08:28] Exclude measurements carried forward...
+#> [2021-01-27 15:08:28] Exclude extreme measurements based on SD...
+#> [2021-01-27 15:08:28] Exclude extreme measurements based on EWMA...
+#> [2021-01-27 15:08:28] Exclude extraneous based on EWMA...
+#> [2021-01-27 15:08:29] Exclude moderate errors based on EWMA...
+#> [2021-01-27 15:08:31] Exclude heights based on growth velocity...
+#> [2021-01-27 15:08:33] Exclude single measurements and pairs...
+#> [2021-01-27 15:08:33] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-01-27 15:08:34] Completed Batch #1...
+#> [2021-01-27 15:08:34] Done!
 visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param, 
@@ -592,33 +562,7 @@ visits_clean <- dcast(
 ]
 
 ## Linear Splines
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
-  method = "linear_splines", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
-#> nlme::lme(
-#>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
-#>   data = data,
-#>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#> )
-#> nlme::lme(
-#>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),
-#>   data = data,
-#>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#> )
-res <- try(time_model(
+linear_splines_model <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
@@ -634,8 +578,8 @@ res <- try(time_model(
 #>   correlation = nlme::corCAR1(form = ~ 1 | ID),
 #>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
 #> )
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
+if (!inherits(linear_splines_model, "try-error")) {
+  sres <- tidy(linear_splines_model)
   sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
   sres
 }
@@ -659,35 +603,7 @@ if (!inherits(res, "try-error")) {
 #> 15 ran_pa… Residu… sd_Observation   1.25e- 1  NA          NA    NA     NA
 
 ## Cubic Splines
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
-  method = "cubic_splines", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
-#> Number of iteration has been increased from 500 to 1,000.
-#> Spline's degree was decreased from 3 to 2 in the random effect formula.
-#> nlme::lme(
-#>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
-#>   data = data,
-#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(2, 4), smooth = rep(2, 3)) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 1000, msMaxIter = 1000)
-#> )
-#> nlme::lme(
-#>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
-#>   data = data,
-#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(2, 4), smooth = rep(2, 3)) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 1000, msMaxIter = 1000)
-#> )
-res <- try(time_model(
+cubic_splines_model <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
@@ -705,8 +621,8 @@ res <- try(time_model(
 #>   correlation = nlme::corCAR1(form = ~ 1 | ID),
 #>   control = nlme::lmeControl(opt = "optim", maxIter = 1000, msMaxIter = 1000)
 #> )
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
+if (!inherits(cubic_splines_model, "try-error")) {
+  sres <- tidy(cubic_splines_model)
   sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
   sres
 }
@@ -729,33 +645,7 @@ if (!inherits(res, "try-error")) {
 #> 14 ran_pa… Residu… sd_Observation    0.0966   NA          NA     NA    NA
 
 ## Cubic Slope
-time_model(
-  x = "age", 
-  y = "log(bmi)", 
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
-  method = "cubic_slope", 
-  as_text = TRUE # To have a look at the code actually running behind the scene
-)
-#> nlme::lme(
-#>   fixed = log(bmi) ~ stats::poly(age, degree = 3),
-#>   data = data,
-#>   random = ~ stats::poly(age, degree = 3) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#> )
-#> nlme::lme(
-#>   fixed = log(bmi) ~ stats::poly(age, degree = 3),
-#>   data = data,
-#>   random = ~ stats::poly(age, degree = 3) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#> )
-res <- try(time_model(
+cubic_slope_model <- try(time_model(
   x = "age", 
   y = "log(bmi)", 
   cov = NULL,
@@ -771,8 +661,8 @@ res <- try(time_model(
 #>   correlation = nlme::corCAR1(form = ~ 1 | ID),
 #>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
 #> )
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
+if (!inherits(cubic_slope_model, "try-error")) {
+  sres <- tidy(cubic_slope_model)
   sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
   sres
 }
@@ -794,4 +684,17 @@ if (!inherits(res, "try-error")) {
 #> 13 ran_pars ID     cor_poly(...)2   -0.0244    NA         NA    NA     NA       
 #> 14 ran_pars ID     sd_poly(...)3     0.00143   NA         NA    NA     NA       
 #> 15 ran_pars Resid… sd_Observation    0.129     NA         NA    NA     NA
+```
+
+``` r
+library(performance)
+compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
+#> Bayes factor is based on BIC approximation, thus BF and BIC hold the same information. Ignoring BF for performance-score.
+#> # Comparison of Model Performance Indices
+#> 
+#> Model                | Type |     AIC |     BIC |  RMSE | Sigma |     BF | Performance-Score
+#> --------------------------------------------------------------------------------------------
+#> cubic_splines_model  |  lme | -976.16 | -912.70 | 17.85 |  0.10 | > 1000 |           100.00%
+#> linear_splines_model |  lme | -840.08 | -772.39 | 17.87 |  0.12 |   1.00 |             7.49%
+#> cubic_slope_model    |  lme | -828.55 | -760.86 | 17.87 |  0.13 |  0.003 |             0.00%
 ```
