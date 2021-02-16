@@ -32,7 +32,7 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 remotes::install_github("mcanouil/eggla")
 
 # Or a particular version:
-remotes::install_github("mcanouil/eggla@v0.2.0")
+remotes::install_github("mcanouil/eggla@v0.3.0")
 ```
 
 ## Hands on **eggla**
