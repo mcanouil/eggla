@@ -7,6 +7,7 @@
 time_model(
   x,
   y,
+  cov = NULL,
   data,
   method = c("cubic_slope", "linear_splines", "cubic_splines"),
   knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(2, 8,
@@ -18,6 +19,8 @@ time_model(
 \item{x}{something}
 
 \item{y}{something}
+
+\item{cov}{something}
 
 \item{data}{something}
 
