@@ -42,13 +42,13 @@ time_model <- function(
     form_fixed <- paste(form_fixed, "+", paste(cov, collapse = " + "))
   }
 
-  vars_available <- all.vars(as.formula(form_fixed)) %in% colnames(data)
+  vars_available <- all.vars(stats::as.formula(form_fixed)) %in% colnames(data)
 
   if (!all(vars_available)) {
     stop(paste0(
       c(
         "Some variables are not available in the datast provided:",
-        paste("  * ", all.vars(as.formula(form_fixed))[!vars_available])
+        paste("  * ", all.vars(stats::as.formula(form_fixed))[!vars_available])
       ),
       collapse = "\n"
     ))
