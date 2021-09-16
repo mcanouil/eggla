@@ -1,4 +1,4 @@
-# eggla 0.3.0
+# eggla (development version)
 
 * In `R/time_model.R`,
     + Add fall back (simpler random effect) model for "cubic_splines".
