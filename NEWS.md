@@ -1,6 +1,4 @@
-# eggla (development version)
-
-## Minor improvements and fixes
+# eggla 0.2.0
 
 * In `R/time_model.R`,
   + Fix output when using `as_text = TRUE`.
