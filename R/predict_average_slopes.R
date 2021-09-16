@@ -7,7 +7,6 @@
 #'
 #' @return something
 #' @export
-#' @importFrom nlme fixef ranef
 predict_average_slopes <- function(
   fit,
   method,
