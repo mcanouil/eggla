@@ -9,7 +9,7 @@
 #'   \item{age}{(numeric) age in years.}
 #'   \item{sex}{(integer) sex with 1: male and 0: female.}
 #'   \item{weight}{(numeric) weight in kilograms.}
-#'   \item{height}{(integerà height in centimetres.}
+#'   \item{height}{(integer) height in centimetres.}
 #'   \item{bmi}{(numeric) Body Mass Index in kilograms per quare metre.}
 #' }
 "bmigrowth"
