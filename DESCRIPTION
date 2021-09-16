@@ -38,13 +38,8 @@ Suggests:
     roxygen2 (>= 7.1.1),
     scales (>= 1.1.1),
     sessioninfo (>= 1.1.1),
-<<<<<<< HEAD
-    testthat (>= 2.3.2)
-Remotes:
-=======
     testthat (>= 3.0.1)
 Remotes:
->>>>>>> f1be634 (fix docs and import)
     github::carriedaymont/growthcleanr@main
 Encoding: UTF-8
 LazyData: true
