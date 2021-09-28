@@ -1,3 +1,9 @@
+# eggla (development)
+
+* In `inst/models-diagnostics`,
+    + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
+    + `models-best.R`, R script to compare models performance from `models-diagnostics.R`.
+
 # eggla 0.3.0
 
 * In `R/time_model.R`,
@@ -20,7 +26,7 @@
 * In `R/time_model.R`,
     + Fix output when using `as_text = TRUE`.
     + Add `cov` to allow additional covariates.
-  
+
 * In `inst/rmarkdown/templates/eggla/skeleton/skeleton.Rmd`,
     + Add `cov` to allow additional covariates.
 
