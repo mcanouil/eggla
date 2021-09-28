@@ -98,15 +98,16 @@ svglite(filename = file.path(output_directory, "perfs.svg"), width = 16, height 
       labs(x = NULL),
     nrow = 3,
     ncol = 1
-  ) + plot_annotation(
-    title = "Working Models for Male And Female",
-    subtitle = sprintf(
-      "Cohorts: %s<br>Datasets: %s",
-      glue_collapse(sort(unique(perfs_dt[["cohort"]])), sep = ", ", last = " and "),
-      glue_collapse(sort(unique(perfs_dt[["dataset"]])), sep = ", ", last = " and ")
-    ),
-    tag_levels = "A"
-  )
+  ) +
+    plot_annotation(
+      title = "Working Models for Male And Female",
+      subtitle = sprintf(
+        "Cohorts: %s<br>Datasets: %s",
+        glue_collapse(sort(unique(perfs_dt[["cohort"]])), sep = ", ", last = " and "),
+        glue_collapse(sort(unique(perfs_dt[["dataset"]])), sep = ", ", last = " and ")
+      ),
+      tag_levels = "A"
+    )
 invisible(dev.off())
 
 
