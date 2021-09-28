@@ -13,6 +13,7 @@ tag](https://img.shields.io/github/tag/mcanouil/eggla.svg?label=latest%20tag&inc
 status](https://www.r-pkg.org/badges/version/eggla)](https://CRAN.R-project.org/package=eggla)
 [![R build
 status](https://github.com/mcanouil/eggla/workflows/R-CMD-check/badge.svg)](https://github.com/mcanouil/eggla/actions)
+[![R-CMD-check](https://github.com/mcanouil/eggla/workflows/R-CMD-check/badge.svg)](https://github.com/mcanouil/eggla/actions)
 <!-- badges: end -->
 
 Tools for longitudinal analysis within the EGG (Early Growth Genetics)
@@ -34,12 +35,11 @@ remotes::install_github("mcanouil/eggla@v0.3.0")
 ``` r
 library(eggla)
 library(data.table)
+#> data.table 1.14.0 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
 library(ggplot2)
 library(patchwork)
 library(broom.mixed)
-#> Registered S3 method overwritten by 'broom.mixed':
-#>   method      from 
-#>   tidy.gamlss broom
+#> Warning: package 'broom.mixed' was built under R version 4.1.1
 ```
 
 ### Data
@@ -77,8 +77,8 @@ ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
   theme(legend.position = "none") +
   labs(x = "AGE (years)", y = "BMI (kg/m²)") +
   facet_grid(
-    cols = vars(sex), 
-    margins = TRUE, 
+    cols = vars(sex),
+    margins = TRUE,
     labeller = labeller(
       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
     )
@@ -111,10 +111,10 @@ and `cubic_splines`, all implemented with the R package `nlme`.
 
 ``` r
 ls_mod <- time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "linear_splines"
 )
 #> nlme::lme(
@@ -133,10 +133,10 @@ transformation), as long as they are available in the dataset.
 
 ``` r
 time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = c("height", "log(weight)"),
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "linear_splines"
 )
 ```
@@ -149,36 +149,36 @@ class(ls_mod)
 #> [1] "lme"
 tidy(ls_mod)
 #> # A tibble: 15 x 8
-#>    effect  group  term              estimate std.error    df statistic   p.value
-#>    <chr>   <chr>  <chr>                <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed   fixed  (Intercept)        2.74e+0   0.0143    481    191.    0.      
-#>  2 fixed   fixed  gsp(age, knots =…  5.02e-2   0.00447   481     11.2   3.38e-26
-#>  3 fixed   fixed  gsp(age, knots =…  1.47e-2   0.00823   481      1.78  7.55e- 2
-#>  4 fixed   fixed  gsp(age, knots =… -1.41e-2   0.0124    481     -1.13  2.59e- 1
-#>  5 ran_pa… ID     sd_(Intercept)     3.22e-4  NA          NA     NA    NA       
-#>  6 ran_pa… ID     cor_gsp(age, kno… -5.33e-1  NA          NA     NA    NA       
-#>  7 ran_pa… ID     cor_gsp(age, kno…  8.19e-3  NA          NA     NA    NA       
-#>  8 ran_pa… ID     cor_gsp(age, kno…  1.77e-3  NA          NA     NA    NA       
-#>  9 ran_pa… ID     sd_gsp(age, knot…  9.14e-3  NA          NA     NA    NA       
-#> 10 ran_pa… ID     cor_gsp(age, kno… -5.39e-2  NA          NA     NA    NA       
-#> 11 ran_pa… ID     cor_gsp(age, kno… -5.46e-3  NA          NA     NA    NA       
-#> 12 ran_pa… ID     sd_gsp(age, knot…  7.24e-4  NA          NA     NA    NA       
-#> 13 ran_pa… ID     cor_gsp(age, kno… -1.37e-2  NA          NA     NA    NA       
-#> 14 ran_pa… ID     sd_gsp(age, knot…  5.35e-4  NA          NA     NA    NA       
-#> 15 ran_pa… Resid… sd_Observation     1.29e-1  NA          NA     NA    NA
+#>    effect   group    term                                                                                                                                                         estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>                                                                                                                                                           <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)                                                                                                                                                   2.74e+0   0.0143    481    191.    0       
+#>  2 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                                                                     5.02e-2   0.00447   481     11.2   3.38e-26
+#>  3 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                                                                  1.47e-2   0.00823   481      1.78  7.55e- 2
+#>  4 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1                                                                                  -1.41e-2   0.0124    481     -1.13  2.59e- 1
+#>  5 ran_pars ID       sd_(Intercept)                                                                                                                                                3.22e-4  NA          NA     NA    NA       
+#>  6 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0).(Intercept)                                                                    -5.33e-1  NA          NA     NA    NA       
+#>  7 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1.(Intercept)                                                                  8.19e-3  NA          NA     NA    NA       
+#>  8 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.(Intercept)                                                                   1.77e-3  NA          NA     NA    NA       
+#>  9 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                                                                  9.14e-3  NA          NA     NA    NA       
+#> 10 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)   -5.39e-2  NA          NA     NA    NA       
+#> 11 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -5.46e-3  NA          NA     NA    NA       
+#> 12 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                                                               7.24e-4  NA          NA     NA    NA       
+#> 13 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 -1.37e-2  NA          NA     NA    NA       
+#> 14 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1                                                                                5.35e-4  NA          NA     NA    NA       
+#> 15 ran_pars Residual sd_Observation                                                                                                                                                1.29e-1  NA          NA     NA    NA
 ```
 
 ``` r
 ggplot() +
   aes(x = age, y = bmi) +
   stat_smooth(
-    data = bmigrowth[sex == 0], 
+    data = bmigrowth[sex == 0],
     mapping = aes(colour = "Loess"),
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
-    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[, 
-      bmi := exp(predict(ls_mod, .SD, level = 0)), 
+    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[,
+      bmi := exp(predict(ls_mod, .SD, level = 0)),
       .SDcols = "age"
     ],
     mapping = aes(colour = "Linear Splines"),
@@ -195,13 +195,13 @@ mostly.
 
 ``` r
 plot_residuals(
-  x = "age", 
-  y = "log(bmi)", 
-  fit = ls_mod, 
+  x = "age",
+  y = "log(bmi)",
+  fit = ls_mod,
   variables_unit = list(age = "years", bmi = "kg/m²")
-) + 
+) +
   plot_annotation(
-    title = "LINEAR SPLINES - BMI - Female", 
+    title = "LINEAR SPLINES - BMI - Female",
     tag_levels = "A"
   )
 ```
@@ -222,40 +222,26 @@ ls_pred_slopes <- predict_average_slopes(
   # )[[method]]
 )
 head(ls_pred_slopes)
-#>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6
-#> 1 082      2.735439        2.762511        2.816655      3.006160      3.067621
-#> 2 083      2.735490        2.761140        2.812441      2.991992      3.050623
-#> 3 080      2.735416        2.763044        2.818299      3.011694      3.074279
-#> 4 031      2.735635        2.757395        2.800915      2.953235      3.004088
-#> 5 007      2.735343        2.764931        2.824107      3.031223      3.097708
-#> 6 033      2.735522        2.760322        2.809922      2.983523      3.040459
-#>   pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5
-#> 1       3.342735       3.466240       3.739871   0.05414430   0.05414430
-#> 2       3.314462       3.432331       3.691878   0.05130055   0.05130055
-#> 3       3.353938       3.479719       3.759049   0.05525556   0.05525556
-#> 4       3.236837       3.339155       3.559810   0.04351995   0.04351995
-#> 5       3.392892       3.526430       3.825145   0.05917600   0.05917600
-#> 6       3.297546       3.412039       3.663148   0.04960030   0.04960030
-#>   slope_6--10 slope_12--17
-#> 1  0.06877847   0.05472615
-#> 2  0.06595982   0.05190939
-#> 3  0.06991477   0.05586604
-#> 4  0.05818719   0.04413098
-#> 5  0.07379578   0.05974289
-#> 6  0.06427164   0.05022171
+#>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6 pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5 slope_6--10 slope_12--17
+#> 1 082      2.735439        2.762511        2.816655      3.006160      3.067621       3.342735       3.466240       3.739871   0.05414430   0.05414430  0.06877847   0.05472615
+#> 2 083      2.735490        2.761140        2.812441      2.991992      3.050623       3.314462       3.432331       3.691878   0.05130055   0.05130055  0.06595982   0.05190939
+#> 3 080      2.735416        2.763044        2.818299      3.011694      3.074279       3.353938       3.479719       3.759049   0.05525556   0.05525556  0.06991477   0.05586604
+#> 4 031      2.735635        2.757395        2.800915      2.953235      3.004088       3.236837       3.339155       3.559810   0.04351995   0.04351995  0.05818719   0.04413098
+#> 5 007      2.735343        2.764931        2.824107      3.031223      3.097708       3.392892       3.526430       3.825145   0.05917600   0.05917600  0.07379578   0.05974289
+#> 6 033      2.735522        2.760322        2.809922      2.983523      3.040459       3.297546       3.412039       3.663148   0.04960030   0.04960030  0.06427164   0.05022171
 ```
 
 ``` r
 ggplot(
   data = melt(
-    data = setDT(ls_pred_slopes), 
-    id.vars = c("ID"), 
+    data = setDT(ls_pred_slopes),
+    id.vars = c("ID"),
     measure.vars = patterns("^slope_"),
-    variable.name = "period_interval", 
+    variable.name = "period_interval",
     value.name = "slope"
-  )[, 
+  )[,
     period_interval := factor(
-      x = gsub("slope_", "", period_interval), 
+      x = gsub("slope_", "", period_interval),
       levels = gsub("slope_", "", unique(period_interval))
     )
   ]
@@ -295,14 +281,14 @@ head(ls_auc)
 ``` r
 ggplot(
   data = melt(
-    data = setDT(ls_auc), 
-    id.vars = "ID", 
+    data = setDT(ls_auc),
+    id.vars = "ID",
     measure.vars = patterns("^auc_"),
-    variable.name = "period_interval", 
+    variable.name = "period_interval",
     value.name = "auc"
-  )[, 
+  )[,
     period_interval := factor(
-      x = gsub("auc_", "", period_interval), 
+      x = gsub("auc_", "", period_interval),
       levels = gsub("auc_", "", unique(period_interval))
     )
   ]
@@ -359,7 +345,7 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 
 ``` r
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla")
+# remotes::install_github("mcanouil/eggla@v0.3.0")
 library(eggla)
 library(broom.mixed)
 library(data.table)
@@ -369,10 +355,10 @@ bmigrowth <- as.data.table(bmigrowth)
 
 ## Linear Splines
 res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "linear_splines"
 ))
 #> nlme::lme(
@@ -390,30 +376,29 @@ if (!inherits(res, "try-error")) {
   sres
 }
 #> # A tibble: 15 x 8
-#>    effect  group   term             estimate std.error    df statistic   p.value
-#>    <chr>   <chr>   <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed   fixed   (Intercept)       2.74e+0   0.0143    481    191.    0.      
-#>  2 fixed   fixed   gsp(...)D1(0)     5.02e-2   0.00447   481     11.2   3.38e-26
-#>  3 fixed   fixed   gsp(...)C(5.5).1  1.47e-2   0.00823   481      1.78  7.55e- 2
-#>  4 fixed   fixed   gsp(...)C(11).1  -1.41e-2   0.0124    481     -1.13  2.59e- 1
-#>  5 ran_pa… ID      sd_(Intercept)    3.22e-4  NA          NA     NA    NA       
-#>  6 ran_pa… ID      cor_gsp(...)D1(… -5.33e-1  NA          NA     NA    NA       
-#>  7 ran_pa… ID      cor_gsp(...)C(5…  8.19e-3  NA          NA     NA    NA       
-#>  8 ran_pa… ID      cor_gsp(...)C(1…  1.77e-3  NA          NA     NA    NA       
-#>  9 ran_pa… ID      sd_gsp(...)D1(0)  9.14e-3  NA          NA     NA    NA       
-#> 10 ran_pa… ID      cor_gsp(...)D1(… -5.39e-2  NA          NA     NA    NA       
-#> 11 ran_pa… ID      cor_gsp(...)D1(… -5.46e-3  NA          NA     NA    NA       
-#> 12 ran_pa… ID      sd_gsp(...)C(5.…  7.24e-4  NA          NA     NA    NA       
-#> 13 ran_pa… ID      cor_gsp(...)C(5… -1.37e-2  NA          NA     NA    NA       
-#> 14 ran_pa… ID      sd_gsp(...)C(11…  5.35e-4  NA          NA     NA    NA       
-#> 15 ran_pa… Residu… sd_Observation    1.29e-1  NA          NA     NA    NA
-
+#>    effect   group    term                              estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>                                <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)                       2.74       0.0143    481    191.    0       
+#>  2 fixed    fixed    gsp(...)D1(0)                     0.0502     0.00447   481     11.2   3.38e-26
+#>  3 fixed    fixed    gsp(...)C(5.5).1                  0.0147     0.00823   481      1.78  7.55e- 2
+#>  4 fixed    fixed    gsp(...)C(11).1                  -0.0141     0.0124    481     -1.13  2.59e- 1
+#>  5 ran_pars ID       sd_(Intercept)                    0.000322  NA          NA     NA    NA       
+#>  6 ran_pars ID       cor_gsp(...)D1(0).(Intercept)    -0.533     NA          NA     NA    NA       
+#>  7 ran_pars ID       cor_gsp(...)C(5.5).1.(Intercept)  0.00819   NA          NA     NA    NA       
+#>  8 ran_pars ID       cor_gsp(...)C(11).1.(Intercept)   0.00177   NA          NA     NA    NA       
+#>  9 ran_pars ID       sd_gsp(...)D1(0)                  0.00914   NA          NA     NA    NA       
+#> 10 ran_pars ID       cor_gsp(...)D1(0)                -0.0539    NA          NA     NA    NA       
+#> 11 ran_pars ID       cor_gsp(...)D1(0)                -0.00546   NA          NA     NA    NA       
+#> 12 ran_pars ID       sd_gsp(...)C(5.5).1               0.000724  NA          NA     NA    NA       
+#> 13 ran_pars ID       cor_gsp(...)C(5.5).1             -0.0137    NA          NA     NA    NA       
+#> 14 ran_pars ID       sd_gsp(...)C(11).1                0.000535  NA          NA     NA    NA       
+#> 15 ran_pars Residual sd_Observation                    0.129     NA          NA     NA    NA
 ## Cubic Splines
 res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "cubic_splines"
 ))
 #> nlme::lme(
@@ -431,26 +416,25 @@ if (!inherits(res, "try-error")) {
   sres
 }
 #> # A tibble: 36 x 8
-#>    effect   group term              estimate std.error    df statistic   p.value
-#>    <chr>    <chr> <chr>                <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed    fixed (Intercept)         2.63     0.0156    478    169.    0.      
-#>  2 fixed    fixed gsp(...)D1(0)       0.528    0.0353    478     14.9   1.06e-41
-#>  3 fixed    fixed gsp(...)D2(0)      -0.626    0.0455    478    -13.8   1.42e-36
-#>  4 fixed    fixed gsp(...)D3(0)       0.342    0.0251    478     13.6   7.21e-36
-#>  5 fixed    fixed gsp(...)C(2).3     -0.355    0.0264    478    -13.4   3.56e-35
-#>  6 fixed    fixed gsp(...)C(8).3      0.0251   0.00525   478      4.78  2.35e- 6
-#>  7 fixed    fixed gsp(...)C(12).3    -0.0325   0.0124    478     -2.63  8.77e- 3
-#>  8 ran_pars ID    sd_(Intercept)      0.0573  NA          NA     NA    NA       
-#>  9 ran_pars ID    cor_gsp(...)D1(0…  -0.456   NA          NA     NA    NA       
-#> 10 ran_pars ID    cor_gsp(...)D2(0…   0.305   NA          NA     NA    NA       
-#> # … with 26 more rows
-
+#>    effect   group term                          estimate std.error    df statistic   p.value
+#>    <chr>    <chr> <chr>                            <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed (Intercept)                     2.63     0.0156    478    169.    0       
+#>  2 fixed    fixed gsp(...)D1(0)                   0.528    0.0353    478     14.9   1.09e-41
+#>  3 fixed    fixed gsp(...)D2(0)                  -0.626    0.0455    478    -13.8   1.43e-36
+#>  4 fixed    fixed gsp(...)D3(0)                   0.342    0.0251    478     13.6   7.27e-36
+#>  5 fixed    fixed gsp(...)C(2).3                 -0.355    0.0264    478    -13.4   3.59e-35
+#>  6 fixed    fixed gsp(...)C(8).3                  0.0251   0.00525   478      4.78  2.35e- 6
+#>  7 fixed    fixed gsp(...)C(12).3                -0.0325   0.0124    478     -2.63  8.84e- 3
+#>  8 ran_pars ID    sd_(Intercept)                  0.0573  NA          NA     NA    NA       
+#>  9 ran_pars ID    cor_gsp(...)D1(0).(Intercept)  -0.455   NA          NA     NA    NA       
+#> 10 ran_pars ID    cor_gsp(...)D2(0).(Intercept)   0.305   NA          NA     NA    NA       
+#> # ... with 26 more rows
 ## Cubic Slope
 res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "cubic_slope"
 ))
 #> nlme::lme(
@@ -468,32 +452,32 @@ if (!inherits(res, "try-error")) {
   sres
 }
 #> # A tibble: 15 x 8
-#>    effect  group  term              estimate std.error    df statistic   p.value
-#>    <chr>   <chr>  <chr>                <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed   fixed  (Intercept)         2.95      0.0115   481  256.      0.      
-#>  2 fixed   fixed  stats::poly(age,…   5.37      0.225    481   23.9     1.01e-83
-#>  3 fixed   fixed  stats::poly(age,…   0.162     0.171    481    0.946   3.44e- 1
-#>  4 fixed   fixed  stats::poly(age,…   0.0154    0.172    481    0.0898  9.29e- 1
-#>  5 ran_pa… ID     sd_(Intercept)      0.0438   NA         NA   NA      NA       
-#>  6 ran_pa… ID     cor_stats::poly(…   0.999    NA         NA   NA      NA       
-#>  7 ran_pa… ID     cor_stats::poly(…  -0.995    NA         NA   NA      NA       
-#>  8 ran_pa… ID     cor_stats::poly(…   0.999    NA         NA   NA      NA       
-#>  9 ran_pa… ID     sd_stats::poly(a…   0.896    NA         NA   NA      NA       
-#> 10 ran_pa… ID     cor_stats::poly(…  -0.996    NA         NA   NA      NA       
-#> 11 ran_pa… ID     cor_stats::poly(…   0.998    NA         NA   NA      NA       
-#> 12 ran_pa… ID     sd_stats::poly(a…   0.189    NA         NA   NA      NA       
-#> 13 ran_pa… ID     cor_stats::poly(…  -0.998    NA         NA   NA      NA       
-#> 14 ran_pa… ID     sd_stats::poly(a…   0.555    NA         NA   NA      NA       
-#> 15 ran_pa… Resid… sd_Observation      0.126    NA         NA   NA      NA
+#>    effect   group    term                                                            estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>                                                              <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)                                                       2.95      0.0115   481  256.      0       
+#>  2 fixed    fixed    stats::poly(age, degree = 3)1                                     5.37      0.225    481   23.9     1.01e-83
+#>  3 fixed    fixed    stats::poly(age, degree = 3)2                                     0.162     0.171    481    0.946   3.44e- 1
+#>  4 fixed    fixed    stats::poly(age, degree = 3)3                                     0.0154    0.172    481    0.0898  9.29e- 1
+#>  5 ran_pars ID       sd_(Intercept)                                                    0.0438   NA         NA   NA      NA       
+#>  6 ran_pars ID       cor_stats::poly(age, degree = 3)1.(Intercept)                     0.999    NA         NA   NA      NA       
+#>  7 ran_pars ID       cor_stats::poly(age, degree = 3)2.(Intercept)                    -0.995    NA         NA   NA      NA       
+#>  8 ran_pars ID       cor_stats::poly(age, degree = 3)3.(Intercept)                     0.999    NA         NA   NA      NA       
+#>  9 ran_pars ID       sd_stats::poly(age, degree = 3)1                                  0.896    NA         NA   NA      NA       
+#> 10 ran_pars ID       cor_stats::poly(age, degree = 3)2.stats::poly(age, degree = 3)1  -0.996    NA         NA   NA      NA       
+#> 11 ran_pars ID       cor_stats::poly(age, degree = 3)3.stats::poly(age, degree = 3)1   0.998    NA         NA   NA      NA       
+#> 12 ran_pars ID       sd_stats::poly(age, degree = 3)2                                  0.189    NA         NA   NA      NA       
+#> 13 ran_pars ID       cor_stats::poly(age, degree = 3)3.stats::poly(age, degree = 3)2  -0.998    NA         NA   NA      NA       
+#> 14 ran_pars ID       sd_stats::poly(age, degree = 3)3                                  0.555    NA         NA   NA      NA       
+#> 15 ran_pars Residual sd_Observation                                                    0.126    NA         NA   NA      NA
 ```
 
 ## With Daymont’s QC
 
 ``` r
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla")
+# remotes::install_github("mcanouil/eggla@v0.3.0")
 library(eggla)
-# remotes::install_github("carriedaymont/growthcleanr")
+# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
 library(data.table)
@@ -515,41 +499,45 @@ pheno_dt[# recode sex with Male = 0 and Female = 1...
 ]
 
 visits_long <- melt(
-  data = pheno_dt, 
-  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
-  measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
-  variable.name = "param", 
+  data = pheno_dt,
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+  variable.name = "param",
   value.name = "measurement"
-)[ 
+)[
   j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
     subjid = ID,
     param = param,
-    agedays = agedays, 
-    sex = sex_daymont, 
+    agedays = agedays,
+    sex = sex_daymont,
     measurement = measurement,
     quietly = FALSE
   )
 ]
-#> [2021-02-16 15:55:19] Calculating z-scores...
-#> [2021-02-16 15:55:19] Calculating SD-scores...
-#> [2021-02-16 15:55:19] Re-centering data...
-#> [2021-02-16 15:55:19] Cleaning growth data in 1 batch(es)...
-#> [2021-02-16 15:55:19] Processing Batch #1...
-#> [2021-02-16 15:55:19] Preliminarily identify potential extraneous...
-#> [2021-02-16 15:55:19] Identify potentially swapped measurements...
-#> [2021-02-16 15:55:19] Exclude measurements carried forward...
-#> [2021-02-16 15:55:19] Exclude extreme measurements based on SD...
-#> [2021-02-16 15:55:19] Exclude extreme measurements based on EWMA...
-#> [2021-02-16 15:55:20] Exclude extraneous based on EWMA...
-#> [2021-02-16 15:55:20] Exclude moderate errors based on EWMA...
-#> [2021-02-16 15:55:23] Exclude heights based on growth velocity...
-#> [2021-02-16 15:55:24] Exclude single measurements and pairs...
-#> [2021-02-16 15:55:24] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-02-16 15:55:25] Completed Batch #1...
-#> [2021-02-16 15:55:25] Done!
+#> [2021-09-28 13:44:28] Begin processing pediatric data...
+#> [2021-09-28 13:44:28] Calculating z-scores...
+#> [2021-09-28 13:44:29] Calculating SD-scores...
+#> [2021-09-28 13:44:29] Re-centering data...
+#> [2021-09-28 13:44:29] Using NHANES reference medians...
+#> [2021-09-28 13:44:29] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-09-28 13:44:29] Cleaning growth data in 1 batch(es)...
+#> [2021-09-28 13:44:29] Processing Batch #1...
+#> [2021-09-28 13:44:29] Preliminarily identify potential extraneous...
+#> [2021-09-28 13:44:29] Identify potentially swapped measurements...
+#> [2021-09-28 13:44:29] Exclude measurements carried forward...
+#> [2021-09-28 13:44:29] Exclude extreme measurements based on SD...
+#> [2021-09-28 13:44:29] Exclude extreme measurements based on EWMA...
+#> [2021-09-28 13:44:30] Exclude extraneous based on EWMA...
+#> [2021-09-28 13:44:30] Exclude moderate errors based on EWMA...
+#> [2021-09-28 13:44:33] Exclude heights based on growth velocity...
+#> [2021-09-28 13:44:35] Exclude single measurements and pairs...
+#> [2021-09-28 13:44:35] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-09-28 13:44:36] Completed Batch #1...
+#> [2021-09-28 13:44:36] Done with pediatric data!
+#> [2021-09-28 13:44:36] No adult data. Moving to postprocessing...
 visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
-  formula = ... ~ param, 
+  formula = ... ~ param,
   value.var = "measurement"
 )[
   j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
@@ -559,10 +547,10 @@ visits_clean <- dcast(
 
 ## Linear Splines
 linear_splines_model <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
+  data = visits_clean[sex_daymont == 1],
   method = "linear_splines"
 ))
 #> nlme::lme(
@@ -580,72 +568,65 @@ if (!inherits(linear_splines_model, "try-error")) {
   sres
 }
 #> # A tibble: 15 x 8
-#>    effect  group   term             estimate std.error    df statistic   p.value
-#>    <chr>   <chr>   <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed   fixed   (Intercept)      2.74e+ 0   0.0143    456   192.     0.      
-#>  2 fixed   fixed   gsp(...)D1(0)    4.85e- 2   0.00491   456     9.87   5.77e-21
-#>  3 fixed   fixed   gsp(...)C(5.5)…  1.65e- 2   0.00898   456     1.83   6.75e- 2
-#>  4 fixed   fixed   gsp(...)C(11).1 -1.03e- 2   0.0136    456    -0.754  4.51e- 1
-#>  5 ran_pa… ID      sd_(Intercept)   1.49e-11  NA          NA    NA     NA       
-#>  6 ran_pa… ID      cor_gsp(...)D1…  9.46e- 1  NA          NA    NA     NA       
-#>  7 ran_pa… ID      cor_gsp(...)C(… -9.51e- 1  NA          NA    NA     NA       
-#>  8 ran_pa… ID      cor_gsp(...)C(…  9.51e- 1  NA          NA    NA     NA       
-#>  9 ran_pa… ID      sd_gsp(...)D1(…  1.90e- 2  NA          NA    NA     NA       
-#> 10 ran_pa… ID      cor_gsp(...)D1… -9.95e- 1  NA          NA    NA     NA       
-#> 11 ran_pa… ID      cor_gsp(...)D1…  9.95e- 1  NA          NA    NA     NA       
-#> 12 ran_pa… ID      sd_gsp(...)C(5…  3.11e- 2  NA          NA    NA     NA       
-#> 13 ran_pa… ID      cor_gsp(...)C(… -9.99e- 1  NA          NA    NA     NA       
-#> 14 ran_pa… ID      sd_gsp(...)C(1…  3.89e- 2  NA          NA    NA     NA       
-#> 15 ran_pa… Residu… sd_Observation   1.25e- 1  NA          NA    NA     NA
-
+#>    effect   group    term                             estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>                               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)                        2.81     0.0148    412   190.     0       
+#>  2 fixed    fixed    gsp(...)D1(0)                      0.0348   0.00493   412     7.06   6.93e-12
+#>  3 fixed    fixed    gsp(...)C(5.5).1                   0.0325   0.00853   412     3.81   1.58e- 4
+#>  4 fixed    fixed    gsp(...)C(11).1                   -0.0106   0.0121    412    -0.874  3.83e- 1
+#>  5 ran_pars ID       sd_(Intercept)                     0.0732  NA          NA    NA     NA       
+#>  6 ran_pars ID       cor_gsp(...)D1(0).(Intercept)     -0.489   NA          NA    NA     NA       
+#>  7 ran_pars ID       cor_gsp(...)C(5.5).1.(Intercept)   0.248   NA          NA    NA     NA       
+#>  8 ran_pars ID       cor_gsp(...)C(11).1.(Intercept)   -0.133   NA          NA    NA     NA       
+#>  9 ran_pars ID       sd_gsp(...)D1(0)                   0.0266  NA          NA    NA     NA       
+#> 10 ran_pars ID       cor_gsp(...)D1(0)                 -0.927   NA          NA    NA     NA       
+#> 11 ran_pars ID       cor_gsp(...)D1(0)                  0.846   NA          NA    NA     NA       
+#> 12 ran_pars ID       sd_gsp(...)C(5.5).1                0.0417  NA          NA    NA     NA       
+#> 13 ran_pars ID       cor_gsp(...)C(5.5).1              -0.978   NA          NA    NA     NA       
+#> 14 ran_pars ID       sd_gsp(...)C(11).1                 0.0467  NA          NA    NA     NA       
+#> 15 ran_pars Residual sd_Observation                     0.0877  NA          NA    NA     NA
 ## Cubic Splines
 cubic_splines_model <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
+  data = visits_clean[sex_daymont == 1],
   method = "cubic_splines"
 ))
-#> Number of iteration has been increased from 500 to 1,000.
-#> Spline's degree was decreased from 3 to 2 in the random effect formula.
 #> nlme::lme(
 #>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
 #>   data = data,
-#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(2, 4), smooth = rep(2, 3)) | ID,
+#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID,
 #>   na.action = stats::na.omit,
 #>   method = "ML",
 #>   correlation = nlme::corCAR1(form = ~ 1 | ID),
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 1000, msMaxIter = 1000)
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
 #> )
 if (!inherits(cubic_splines_model, "try-error")) {
   sres <- tidy(cubic_splines_model)
   sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
   sres
 }
-#> # A tibble: 14 x 8
-#>    effect  group   term             estimate std.error    df statistic   p.value
-#>    <chr>   <chr>   <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed   fixed   (Intercept)       2.64      0.0161    453    164.    0.      
-#>  2 fixed   fixed   gsp(...)D1(0)     0.503     0.0353    453     14.3   2.33e-38
-#>  3 fixed   fixed   gsp(...)D2(0)    -0.606     0.0453    453    -13.4   1.07e-34
-#>  4 fixed   fixed   gsp(...)D3(0)     0.333     0.0250    453     13.3   1.69e-34
-#>  5 fixed   fixed   gsp(...)C(2).3   -0.347     0.0262    453    -13.2   4.77e-34
-#>  6 fixed   fixed   gsp(...)C(8).3    0.0255    0.00490   453      5.20  3.01e- 7
-#>  7 fixed   fixed   gsp(...)C(12).3  -0.0302    0.0114    453     -2.66  8.01e- 3
-#>  8 ran_pa… ID      sd_(Intercept)    0.0535   NA          NA     NA    NA       
-#>  9 ran_pa… ID      cor_gsp(...)D1(… -0.390    NA          NA     NA    NA       
-#> 10 ran_pa… ID      cor_gsp(...)D2(…  0.386    NA          NA     NA    NA       
-#> 11 ran_pa… ID      sd_gsp(...)D1(0)  0.0244   NA          NA     NA    NA       
-#> 12 ran_pa… ID      cor_gsp(...)D1(… -0.924    NA          NA     NA    NA       
-#> 13 ran_pa… ID      sd_gsp(...)D2(0)  0.00288  NA          NA     NA    NA       
-#> 14 ran_pa… Residu… sd_Observation    0.0966   NA          NA     NA    NA
-
+#> # A tibble: 36 x 8
+#>    effect   group term                          estimate std.error    df statistic    p.value
+#>    <chr>    <chr> <chr>                            <dbl>     <dbl> <dbl>     <dbl>      <dbl>
+#>  1 fixed    fixed (Intercept)                     2.75     0.0234    409    117.    3.08e-317
+#>  2 fixed    fixed gsp(...)D1(0)                   0.251    0.0499    409      5.03  7.31e-  7
+#>  3 fixed    fixed gsp(...)D2(0)                  -0.308    0.0602    409     -5.12  4.72e-  7
+#>  4 fixed    fixed gsp(...)D3(0)                   0.175    0.0323    409      5.42  1.00e-  7
+#>  5 fixed    fixed gsp(...)C(2).3                 -0.185    0.0335    409     -5.53  5.79e-  8
+#>  6 fixed    fixed gsp(...)C(8).3                  0.0186   0.00478   409      3.90  1.14e-  4
+#>  7 fixed    fixed gsp(...)C(12).3                -0.0266   0.0106    409     -2.51  1.26e-  2
+#>  8 ran_pars ID    sd_(Intercept)                  0.0746  NA          NA     NA    NA        
+#>  9 ran_pars ID    cor_gsp(...)D1(0).(Intercept)  -0.480   NA          NA     NA    NA        
+#> 10 ran_pars ID    cor_gsp(...)D2(0).(Intercept)   0.244   NA          NA     NA    NA        
+#> # ... with 26 more rows
 ## Cubic Slope
 cubic_slope_model <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
+  data = visits_clean[sex_daymont == 1],
   method = "cubic_slope"
 ))
 #> nlme::lme(
@@ -663,33 +644,34 @@ if (!inherits(cubic_slope_model, "try-error")) {
   sres
 }
 #> # A tibble: 15 x 8
-#>    effect   group  term             estimate std.error    df statistic   p.value
-#>    <chr>    <chr>  <chr>               <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed    fixed  (Intercept)       2.95       0.0122   456   241.     0.      
-#>  2 fixed    fixed  poly(...)1        5.11       0.216    456    23.7    2.71e-81
-#>  3 fixed    fixed  poly(...)2        0.141      0.155    456     0.912  3.62e- 1
-#>  4 fixed    fixed  poly(...)3       -0.108      0.136    456    -0.789  4.31e- 1
-#>  5 ran_pars ID     sd_(Intercept)    0.0396    NA         NA    NA     NA       
-#>  6 ran_pars ID     cor_poly(...)1.…  0.999     NA         NA    NA     NA       
-#>  7 ran_pars ID     cor_poly(...)2.…  0.132     NA         NA    NA     NA       
-#>  8 ran_pars ID     cor_poly(...)3.…  0.00424   NA         NA    NA     NA       
-#>  9 ran_pars ID     sd_poly(...)1     0.740     NA         NA    NA     NA       
-#> 10 ran_pars ID     cor_poly(...)1    0.130     NA         NA    NA     NA       
-#> 11 ran_pars ID     cor_poly(...)1    0.00308   NA         NA    NA     NA       
-#> 12 ran_pars ID     sd_poly(...)2     0.00184   NA         NA    NA     NA       
-#> 13 ran_pars ID     cor_poly(...)2   -0.0244    NA         NA    NA     NA       
-#> 14 ran_pars ID     sd_poly(...)3     0.00143   NA         NA    NA     NA       
-#> 15 ran_pars Resid… sd_Observation    0.129     NA         NA    NA     NA
+#>    effect   group    term                       estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>                         <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)                  3.00      0.0121   412    248.    0       
+#>  2 fixed    fixed    poly(...)1                   4.50      0.203    412     22.2   2.95e-72
+#>  3 fixed    fixed    poly(...)2                   0.563     0.129    412      4.38  1.54e- 5
+#>  4 fixed    fixed    poly(...)3                  -0.444     0.133    412     -3.34  9.14e- 4
+#>  5 ran_pars ID       sd_(Intercept)               0.0710   NA         NA     NA    NA       
+#>  6 ran_pars ID       cor_poly(...)1.(Intercept)   0.391    NA         NA     NA    NA       
+#>  7 ran_pars ID       cor_poly(...)2.(Intercept)  -0.650    NA         NA     NA    NA       
+#>  8 ran_pars ID       cor_poly(...)3.(Intercept)   0.602    NA         NA     NA    NA       
+#>  9 ran_pars ID       sd_poly(...)1                1.11     NA         NA     NA    NA       
+#> 10 ran_pars ID       cor_poly(...)1              -0.815    NA         NA     NA    NA       
+#> 11 ran_pars ID       cor_poly(...)1               0.628    NA         NA     NA    NA       
+#> 12 ran_pars ID       sd_poly(...)2                0.289    NA         NA     NA    NA       
+#> 13 ran_pars ID       cor_poly(...)2              -0.943    NA         NA     NA    NA       
+#> 14 ran_pars ID       sd_poly(...)3                0.534    NA         NA     NA    NA       
+#> 15 ran_pars Residual sd_Observation               0.0862   NA         NA     NA    NA
 ```
 
 ``` r
 library(performance)
+#> Warning: package 'performance' was built under R version 4.1.1
 compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
 #> # Comparison of Model Performance Indices
 #> 
-#> Name                 | Model |      AIC |      BIC |  RMSE | Sigma | Performance-Score
-#> --------------------------------------------------------------------------------------
-#> cubic_splines_model  |   lme | -976.159 | -912.701 | 0.083 | 0.097 |           100.00%
-#> linear_splines_model |   lme | -840.079 | -772.392 | 0.115 | 0.125 |            11.04%
-#> cubic_slope_model    |   lme | -828.549 | -760.862 | 0.121 | 0.129 |             0.00%
+#> Name                 | Model |      AIC |      BIC | R2 (cond.) | R2 (marg.) |   ICC |  RMSE | Sigma | Performance-Score
+#> ------------------------------------------------------------------------------------------------------------------------
+#> cubic_splines_model  |   lme | -924.662 | -771.407 |      0.885 |      0.745 | 0.550 | 0.069 | 0.083 |            71.43%
+#> cubic_slope_model    |   lme | -929.640 | -863.367 |      0.878 |      0.738 | 0.534 | 0.071 | 0.086 |            53.29%
+#> linear_splines_model |   lme | -927.194 | -860.922 |      0.873 |      0.738 | 0.514 | 0.072 | 0.088 |            21.82%
 ```
