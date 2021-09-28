@@ -45,7 +45,9 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - run: |
+      - name: Install libcurl
+        if: if runner.os == "Linux"
+        run: |
           sudo apt-get update
           sudo apt-get install libcurl4-openssl-dev
 
