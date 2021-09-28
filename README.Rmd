@@ -71,8 +71,8 @@ ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
   theme(legend.position = "none") +
   labs(x = "AGE (years)", y = "BMI (kg/m²)") +
   facet_grid(
-    cols = vars(sex), 
-    margins = TRUE, 
+    cols = vars(sex),
+    margins = TRUE,
     labeller = labeller(
       .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
     )
@@ -98,10 +98,10 @@ ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
 
 ```{r}
 ls_mod <- time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "linear_splines"
 )
 ```
@@ -109,10 +109,10 @@ ls_mod <- time_model(
 Also possible to provides additional covariates (and their transformation), as long as they are available in the dataset.
 ```{r, eval = FALSE}
 time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = c("height", "log(weight)"),
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "linear_splines"
 )
 ```
@@ -128,13 +128,13 @@ tidy(ls_mod)
 ggplot() +
   aes(x = age, y = bmi) +
   stat_smooth(
-    data = bmigrowth[sex == 0], 
+    data = bmigrowth[sex == 0],
     mapping = aes(colour = "Loess"),
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
-    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[, 
-      bmi := exp(predict(ls_mod, .SD, level = 0)), 
+    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[,
+      bmi := exp(predict(ls_mod, .SD, level = 0)),
       .SDcols = "age"
     ],
     mapping = aes(colour = "Linear Splines"),
@@ -148,13 +148,13 @@ Different plots are available for model diagnostic, using the residuals mostly.
 
 ```{r}
 plot_residuals(
-  x = "age", 
-  y = "log(bmi)", 
-  fit = ls_mod, 
+  x = "age",
+  y = "log(bmi)",
+  fit = ls_mod,
   variables_unit = list(age = "years", bmi = "kg/m²")
-) + 
+) +
   plot_annotation(
-    title = "LINEAR SPLINES - BMI - Female", 
+    title = "LINEAR SPLINES - BMI - Female",
     tag_levels = "A"
   )
 ```
@@ -178,14 +178,14 @@ head(ls_pred_slopes)
 ```{r}
 ggplot(
   data = melt(
-    data = setDT(ls_pred_slopes), 
-    id.vars = c("ID"), 
+    data = setDT(ls_pred_slopes),
+    id.vars = c("ID"),
     measure.vars = patterns("^slope_"),
-    variable.name = "period_interval", 
+    variable.name = "period_interval",
     value.name = "slope"
-  )[, 
+  )[,
     period_interval := factor(
-      x = gsub("slope_", "", period_interval), 
+      x = gsub("slope_", "", period_interval),
       levels = gsub("slope_", "", unique(period_interval))
     )
   ]
@@ -216,14 +216,14 @@ head(ls_auc)
 ```{r}
 ggplot(
   data = melt(
-    data = setDT(ls_auc), 
-    id.vars = "ID", 
+    data = setDT(ls_auc),
+    id.vars = "ID",
     measure.vars = patterns("^auc_"),
-    variable.name = "period_interval", 
+    variable.name = "period_interval",
     value.name = "auc"
-  )[, 
+  )[,
     period_interval := factor(
-      x = gsub("auc_", "", period_interval), 
+      x = gsub("auc_", "", period_interval),
       levels = gsub("auc_", "", unique(period_interval))
     )
   ]
@@ -278,7 +278,7 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 
 ```{r, error = TRUE}
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla")
+# remotes::install_github("mcanouil/eggla@v0.3.0")
 library(eggla)
 library(broom.mixed)
 library(data.table)
@@ -288,10 +288,10 @@ bmigrowth <- as.data.table(bmigrowth)
 
 ## Linear Splines
 res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "linear_splines"
 ))
 if (!inherits(res, "try-error")) {
@@ -302,10 +302,10 @@ if (!inherits(res, "try-error")) {
 
 ## Cubic Splines
 res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "cubic_splines"
 ))
 if (!inherits(res, "try-error")) {
@@ -316,10 +316,10 @@ if (!inherits(res, "try-error")) {
 
 ## Cubic Slope
 res <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = bmigrowth[sex == 0], 
+  data = bmigrowth[sex == 0],
   method = "cubic_slope"
 ))
 if (!inherits(res, "try-error")) {
@@ -333,9 +333,9 @@ if (!inherits(res, "try-error")) {
 
 ```{r, error = TRUE}
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla")
+# remotes::install_github("mcanouil/eggla@v0.3.0")
 library(eggla)
-# remotes::install_github("carriedaymont/growthcleanr")
+# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
 library(data.table)
@@ -357,24 +357,24 @@ pheno_dt[# recode sex with Male = 0 and Female = 1...
 ]
 
 visits_long <- melt(
-  data = pheno_dt, 
-  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"), 
-  measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
-  variable.name = "param", 
+  data = pheno_dt,
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+  variable.name = "param",
   value.name = "measurement"
-)[ 
+)[
   j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
     subjid = ID,
     param = param,
-    agedays = agedays, 
-    sex = sex_daymont, 
+    agedays = agedays,
+    sex = sex_daymont,
     measurement = measurement,
     quietly = FALSE
   )
 ]
 visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
-  formula = ... ~ param, 
+  formula = ... ~ param,
   value.var = "measurement"
 )[
   j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
@@ -384,10 +384,10 @@ visits_clean <- dcast(
 
 ## Linear Splines
 linear_splines_model <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
+  data = visits_clean[sex_daymont == 1],
   method = "linear_splines"
 ))
 if (!inherits(linear_splines_model, "try-error")) {
@@ -398,10 +398,10 @@ if (!inherits(linear_splines_model, "try-error")) {
 
 ## Cubic Splines
 cubic_splines_model <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
+  data = visits_clean[sex_daymont == 1],
   method = "cubic_splines"
 ))
 if (!inherits(cubic_splines_model, "try-error")) {
@@ -412,10 +412,10 @@ if (!inherits(cubic_splines_model, "try-error")) {
 
 ## Cubic Slope
 cubic_slope_model <- try(time_model(
-  x = "age", 
-  y = "log(bmi)", 
+  x = "age",
+  y = "log(bmi)",
   cov = NULL,
-  data = visits_clean[sex_daymont == 1], 
+  data = visits_clean[sex_daymont == 1],
   method = "cubic_slope"
 ))
 if (!inherits(cubic_slope_model, "try-error")) {
@@ -429,4 +429,3 @@ if (!inherits(cubic_slope_model, "try-error")) {
 library(performance)
 compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
 ```
-
