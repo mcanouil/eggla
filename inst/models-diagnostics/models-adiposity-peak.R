@@ -109,7 +109,7 @@ svglite(filename = file.path(output_directory, "models-adiposity.svg"), width = 
       y = "BMI (kg/m²)",
       colour = NULL
     ) +
-    facet_grid(cols = vars(sub(" --.*", "", model))))
+    facet_grid(cols = vars(sub(" --.*", "", model)))
 invisible(dev.off())
 
 
