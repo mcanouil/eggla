@@ -56,7 +56,7 @@ files <- list.files(here("data"), ".*models-performance.csv$", full.names = TRUE
 
 perfs_dt <- rbindlist(lapply(
   X = files,
-  FUN = \(x) fread(x)[j = cohort := sub("-.*", "", basename(x))]
+  FUN = function(x) fread(x)[j = cohort := sub("-.*", "", basename(x))]
 ))[j = .SD[.N == length(files) * 2], by = c("dataset", "model")]
 
 
