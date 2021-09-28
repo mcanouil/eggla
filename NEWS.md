@@ -3,6 +3,7 @@
 * In `inst/models-diagnostics`,
     + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
     + `models-best.R`, R script to compare models performance from `models-diagnostics.R`.
+    + `models-adiposity.R`, R script to compare predicted BMI values to check for the "adiposity peak".
 
 # eggla 0.3.0
 
