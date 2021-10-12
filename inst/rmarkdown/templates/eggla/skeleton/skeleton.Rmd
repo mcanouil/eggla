@@ -10,8 +10,8 @@ params:
   daymont_flags_exclude: TRUE
 title: '[EGG consortium] `r params[["cohort_name"]]`'
 subtitle: 'Trait: `r toupper(params[["trait"]])`'
-author: | 
-  Nicole Warrington, *Ph.D.* (n.warrington@uq.edu.au)  
+author: |
+  Nicole Warrington, *Ph.D.* (n.warrington@uq.edu.au)
   Mickaël Canouil, *Ph.D.* (mickael.canouil@cnrs.fr)
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output:
@@ -20,12 +20,12 @@ output:
     number_sections: true
     toc: true
     toc_depth: 4
-    toc_float: 
+    toc_float:
       collapsed: true
     fig_width: 6
     fig_height: 4.5
     self_contained: true
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -100,7 +100,7 @@ theme_set(
 
 ```{r daymont-flags}
 if (
-  !is.logical(params[["daymont_flags_exclude"]]) && 
+  !is.logical(params[["daymont_flags_exclude"]]) &&
     !is.vector(params[["daymont_flags_exclude"]], mode = "character")
 ) {
   stop('"daymont_flags_exclude" must be a boolean or a character vector with exclusion flags.')
@@ -109,14 +109,14 @@ if (
 if (is.logical(params[["daymont_flags_exclude"]])) {
   if (isTRUE(params[["daymont_flags_exclude"]])) {
     daymont_flags_exclude <- c( # Switch to "Include" flag
-      "Swapped-Measurement", "Unit-Error-High", "Unit-Error-Low", "Unit-Error-Possible", 
-      "Exclude-SD-Cutoff", 
-      "Exclude-Carried-Forward", 
-      "Exclude-Extraneous-Same-Day", 
-      "Exclude-Min-Height-Change", "Exclude-Max-Height-Change", 
+      "Swapped-Measurement", "Unit-Error-High", "Unit-Error-Low", "Unit-Error-Possible",
+      "Exclude-SD-Cutoff",
+      "Exclude-Carried-Forward",
+      "Exclude-Extraneous-Same-Day",
+      "Exclude-Min-Height-Change", "Exclude-Max-Height-Change",
       "Exclude-Pair-Delta-17", "Exclude-Pair-Delta-18", "Exclude-Pair-Delta-19", "Exclude-Single-Outlier",
       "Exclude-Too-Many-Errors", "Exclude-Too-Many-Errors-Other-Parameter",
-      "Exclude-EWMA-Extreme", "Exclude-EWMA-Extreme-Pair", "Exclude-EWMA-8", "Exclude-EWMA-9", 
+      "Exclude-EWMA-Extreme", "Exclude-EWMA-Extreme-Pair", "Exclude-EWMA-8", "Exclude-EWMA-9",
       "Exclude-EWMA-10", "Exclude-EWMA-11", "Exclude-EWMA-12", "Exclude-EWMA-13", "Exclude-EWMA-14"
     )
   } else {
@@ -152,15 +152,15 @@ Data includes:
 - `r comma(length(unique(pheno_dt[["ID"]])))` individuals.
     - `r comma(length(unique(pheno_dt[sex == 0, ID])))` females.
     - `r comma(length(unique(pheno_dt[sex == 1, ID])))` males.
-    
+
 ## Descriptive Table
 
 ```{r display-clinical}
 pheno_tbl <- copy(pheno_dt)
 summary_cols <- unique(c(
-  "ID", "sex", "age", 
+  "ID", "sex", "age",
   # params[["trait"]],
-  # "bmi", "height", "weight", params[["covariates"]], 
+  # "bmi", "height", "weight", params[["covariates"]],
   params[["summary_variables"]]
 ))
 
@@ -178,13 +178,13 @@ if (!all(vars_available)) {
 summary_cols <- intersect(summary_cols, names(pheno_tbl))
 
 chr_cols <- pheno_tbl[
-  j = names(which(sapply(.SD, function(x) is.character(x) | is.factor(x)))), 
+  j = names(which(sapply(.SD, function(x) is.character(x) | is.factor(x)))),
   .SDcols = setdiff(summary_cols, "ID")
 ]
 if (length(chr_cols) > 0) {
   pheno_tbl[
     j = (chr_cols) := lapply(
-      X = .SD, 
+      X = .SD,
       FUN = function(string) {
         capped <- grep("^[A-Z]", string, invert = TRUE)
         substr(string[capped], 1, 1) <- toupper(substr(string[capped], 1, 1))
@@ -197,18 +197,18 @@ if (length(chr_cols) > 0) {
 
 span_headers <- pheno_tbl[j = list(N = uniqueN(ID)), by = "sex"][
   j = setNames(paste0(
-    "**", c('0' = 'Female', '1' = 'Male')[as.character(sex)], "**",
+    "**", c("0" = "Female", "1" = "Male")[as.character(sex)], "**",
     "<br>N = ", N, " (", style_percent(N / sum(N)), " %)"
   ), sex)
 ]
 
 tbl_summary(
-  data = pheno_tbl[j = n_patients := .N, by = "ID"][j = .SD, .SDcols = c(summary_cols, "n_patients")], 
+  data = pheno_tbl[j = n_patients := .N, by = "ID"][j = .SD, .SDcols = c(summary_cols, "n_patients")],
   by = grep("sex", summary_cols, ignore.case = TRUE, value = TRUE),
   label = list(n_patients ~ "Number of visits per patient"),
   statistic = list(
     all_continuous() ~ c(
-      "{median} ({p25}, {p75})", 
+      "{median} ({p25}, {p75})",
       "{min}, {max}"
     ),
     all_categorical() ~ "{n}"
@@ -217,23 +217,23 @@ tbl_summary(
   missing = "ifany",
   percent = "row",
   include = setdiff(c("n_patients", summary_cols), c("ID", params[["trait"]]))
-) %>% 
-  bold_labels() %>% 
-  italicize_levels() %>% 
+) %>%
+  bold_labels() %>%
+  italicize_levels() %>%
   modify_header(
     update = all_stat_cols() ~ md("{ span_headers[level] }")
   ) %>%
-  modify_spanning_header(num_range("stat_", 1:2) ~ "**Sex**") %>% 
+  modify_spanning_header(num_range("stat_", 1:2) ~ "**Sex**") %>%
   add_overall(last = TRUE, col_label = md("**Overall**<br>N = {uniqueN(pheno_tbl[['ID']])}"))
 
 # tbl_cross(
-#   data = pheno_tbl[, .(ID, age, sex)], 
-#   row = "age", 
+#   data = pheno_tbl[j = list(ID, age, sex)],
+#   row = "age",
 #   col = "sex",
 #   percent = "cell",
 #   statistic = "{n} ({p} %)",
 #   label = list(sex ~ "Sex", age ~ "Age (years)"),
-# ) %>% 
+# ) %>%
 #   modify_header(
 #     update = list(label ~ ""),
 #     stat_by = md("**{c('0' = 'Female', '1' = 'Male')[level]}**<br>N = {n} ({style_percent(p)} %)")
@@ -248,7 +248,7 @@ ggplot(
     data = pheno_dt[
       j = c("bmi", "height", "weight") := lapply(.SD, as.double),
       .SDcols = c("bmi", "height", "weight")
-    ], 
+    ],
     measure.vars = c("bmi", "height", "weight")
   )
 ) +
@@ -256,7 +256,7 @@ ggplot(
   geom_path(na.rm = TRUE, alpha = 0.25) +
   geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
   stat_smooth(
-    method = "loess", formula = y ~ x, 
+    method = "loess", formula = y ~ x,
     linetype = 1, colour = "firebrick", se = FALSE, na.rm = TRUE
   ) +
   theme(legend.position = "none") +
@@ -266,8 +266,8 @@ ggplot(
   ) +
   facet_grid(
     rows = vars(variable),
-    cols = vars(sex), 
-    margins = "sex", 
+    cols = vars(sex),
+    margins = "sex",
     scales = "free",
     labeller = labeller(
       .rows = function(x) paste0(toupper(x), " (", variables_unit[x], ")"),
@@ -288,24 +288,24 @@ pheno_dt[
   )
 ]
 visits_long <- melt(
-  data = pheno_dt, 
-  id.vars = unique(c("ID", "age", "sex", "agedays", "sex_daymont", params[["covariates"]])), 
-  measure.vars = c("WEIGHTKG", "HEIGHTCM"), 
-  variable.name = "param", 
+  data = pheno_dt,
+  id.vars = unique(c("ID", "age", "sex", "agedays", "sex_daymont", params[["covariates"]])),
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+  variable.name = "param",
   value.name = "measurement"
 )[
   j = clean := cleangrowth(
     subjid = ID,
     param = param,
-    agedays = agedays, 
-    sex = sex_daymont, 
+    agedays = agedays,
+    sex = sex_daymont,
     measurement = measurement,
     quietly = FALSE
   )
 ]
 visits_clean <- dcast(
-  data = visits_long[!clean %in% daymont_flags_exclude], 
-  formula = ... ~ param, 
+  data = visits_long[!clean %in% daymont_flags_exclude],
+  formula = ... ~ param,
   value.var = "measurement"
 )[
   j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2
@@ -321,16 +321,16 @@ visits_clean <- dcast(
 * `r comma(length(unique(visits_clean[["ID"]])))` individuals.
     - `r comma(length(unique(visits_clean[sex == 0, ID])))` females.
     - `r comma(length(unique(visits_clean[sex == 1, ID])))` males.
-    
+
 ```{r daymont-display}
 visits_qc_summary <- dcast(
-  data = visits_long[, -c("measurement")], 
-  formula = ... ~ param, 
+  data = visits_long[, -c("measurement")],
+  formula = ... ~ param,
   value.var = "clean"
 )
 visits_qc_summary[
   j = "clean" := max(c(WEIGHTKG, HEIGHTCM)),
-  by = 1:nrow(visits_qc_summary)
+  by = seq_len(nrow(visits_qc_summary))
 ][
   j = "clean" := factor(levels(visits_long$clean)[clean], levels = levels(visits_long$clean))
 ][
@@ -339,27 +339,27 @@ visits_qc_summary[
 
 gt(
   data = dcast(
-    data = visits_qc_summary[j = .N, by = c("age_interval", "sex", "clean")][order(clean, sex, age_interval)], 
-    formula = ... ~ age_interval, 
-    fill = 0, 
+    data = visits_qc_summary[j = .N, by = c("age_interval", "sex", "clean")][order(clean, sex, age_interval)],
+    formula = ... ~ age_interval,
+    fill = 0,
     value.var = "N"
-  )[ 
+  )[
     j = "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
   ][
     j = "sex" := NULL
-  ], 
-  rowname_col = "clean", 
+  ],
+  rowname_col = "clean",
   groupname_col = "sex_chr"
-) %>% 
+) %>%
   tab_spanner(label = "Age (years)", columns = everything()) %>%
   data_color(
-    columns = everything(), 
+    columns = everything(),
     colors = col_numeric(
       palette = viridis_pal(begin = 0.15, direction = -1, option = "plasma")(10),
       domain = NULL
     )
-  ) %>% 
-  opt_all_caps() %>% 
+  ) %>%
+  opt_all_caps() %>%
   tab_options(container.width = "100%", table.width = "100%", table.font.size = pct(75))
 ```
 
@@ -388,36 +388,36 @@ mres <- melt(
     j = list(
       cubic_slope = list(
         time_model(
-          x = "age", 
-          y = trait_model, 
-          cov = params[["covariates"]], 
-          data = .SD, 
+          x = "age",
+          y = trait_model,
+          cov = params[["covariates"]],
+          data = .SD,
           method = "cubic_slope"
         )
       ),
       linear_splines = list(
         time_model(
-          x = "age", 
-          y = trait_model, 
-          cov = params[["covariates"]], 
-          data = .SD, 
+          x = "age",
+          y = trait_model,
+          cov = params[["covariates"]],
+          data = .SD,
           method = "linear_splines"
         )
       ),
       cubic_splines = list(
         time_model(
-          x = "age", 
-          y = trait_model, 
-          cov = params[["covariates"]], 
-          data = .SD, 
+          x = "age",
+          y = trait_model,
+          cov = params[["covariates"]],
+          data = .SD,
           method = "cubic_splines"
         )
       )
-    ), 
+    ),
     by = "sex"
-  ], 
-  variable.name = "model_name", 
-  value.name = "model_results", 
+  ],
+  variable.name = "model_name",
+  value.name = "model_results",
   id.vars = "sex"
 )
 ```
@@ -427,21 +427,21 @@ mres <- melt(
 mres[
   j = gg_residuals := list(list(
     plot_residuals(
-      x = "age", 
-      y = trait_model, 
-      fit = model_results[[1]], 
+      x = "age",
+      y = trait_model,
+      fit = model_results[[1]],
       variables_unit = variables_unit
-    ) + 
+    ) +
       plot_annotation(
         title = paste(
-          toupper(gsub("_", " ", model_name)), 
-          toupper(trait), 
-          sex_to_character(sex), 
+          toupper(gsub("_", " ", model_name)),
+          toupper(trait),
+          sex_to_character(sex),
           sep = " - "
-        ), 
+        ),
         tag_levels = "A"
       )
-  )), 
+  )),
   by = c("sex", "model_name")
 ]
 ```
@@ -453,7 +453,7 @@ mres[
     fit = model_results[[1]],
     method = model_name,
     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
-  ))), 
+  ))),
   by = c("sex", "model_name")
 ]
 ```
@@ -464,14 +464,14 @@ mres[
   j = gg_slope := list(list(
     ggplot(
       data = melt(
-        data = .SD[j = unlist(slope, recursive = FALSE), by = "sex"], 
-        id.vars = c("ID", "sex"), 
+        data = .SD[j = unlist(slope, recursive = FALSE), by = "sex"],
+        id.vars = c("ID", "sex"),
         measure.vars = patterns("^slope_"),
-        variable.name = "period_interval", 
+        variable.name = "period_interval",
         value.name = "slope"
       )[
         j = period_interval := factor(
-          x = gsub("slope_", "", period_interval), 
+          x = gsub("slope_", "", period_interval),
           levels = gsub("slope_", "", unique(period_interval))
         )
       ]
@@ -485,10 +485,10 @@ mres[
         scales = "free"
       ) +
       labs(
-        x = "Predicted Slope", 
+        x = "Predicted Slope",
         y = "Count"
       )
-    )), 
+    )),
   by = "model_name"
 ]
 ```
@@ -496,17 +496,17 @@ mres[
 ```{r modelling-scp, include = FALSE}
 ### Slopes Comparisons Plots ---------------------------------------------------------------------
 gg_comp_slope <- melt(
-  data = mres[j = unlist(slope, recursive = FALSE), by = c("sex", "model_name")], 
-  id.vars = c("ID", "sex","model_name"), 
+  data = mres[j = unlist(slope, recursive = FALSE), by = c("sex", "model_name")],
+  id.vars = c("ID", "sex", "model_name"),
   measure.vars = patterns("^slope_"),
-  variable.name = "period_interval", 
+  variable.name = "period_interval",
   value.name = "slope"
-)[ 
+)[
   j = period_interval := factor(
-    x = gsub("slope_", "", period_interval), 
+    x = gsub("slope_", "", period_interval),
     levels = gsub("slope_", "", unique(period_interval))
   )
-][ 
+][
   j = list(
     gg = (function(data) {
       apply(
@@ -525,37 +525,37 @@ gg_comp_slope <- melt(
         }
       )
     })(.SD)
-  ), 
+  ),
   by = c("sex", "period_interval")
 ]
 ```
 
 ```{r modelling-auc, include = FALSE}
 ### AUCs -----------------------------------------------------------------------------------------
-mres[ 
+mres[
   j = auc := list(list(compute_auc(
     fit = model_results[[1]],
     method = model_name,
     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
-  ))), 
+  ))),
   by = c("sex", "model_name")
 ]
 ```
 
 ```{r modelling-aucp, include = FALSE}
 ### AUCs Plots -----------------------------------------------------------------------------------
-mres[ 
+mres[
   j = gg_auc := list(list(
     ggplot(
       data = melt(
-        data = .SD[j = unlist(auc, recursive = FALSE), by = "sex"], 
-        id.vars = c("ID", "sex"), 
+        data = .SD[j = unlist(auc, recursive = FALSE), by = "sex"],
+        id.vars = c("ID", "sex"),
         measure.vars = patterns("^auc_"),
-        variable.name = "period_interval", 
+        variable.name = "period_interval",
         value.name = "auc"
-      )[ 
+      )[
         j = period_interval := factor(
-          x = gsub("auc_", "", period_interval), 
+          x = gsub("auc_", "", period_interval),
           levels = gsub("auc_", "", unique(period_interval))
         )
       ]
@@ -569,10 +569,10 @@ mres[
         scales = "free"
       ) +
       labs(
-        x = "Area Under The Curve (AUC)", 
+        x = "Area Under The Curve (AUC)",
         y = "Count"
       )
-    )), 
+    )),
   by = "model_name"
 ]
 ```
@@ -580,17 +580,17 @@ mres[
 ```{r modelling-auccp, include = FALSE}
 ### AUCs Comparisons Plots -----------------------------------------------------------------------
 gg_comp_auc <- melt(
-  data = mres[j = unlist(auc, recursive = FALSE), by = c("sex", "model_name")], 
-  id.vars = c("ID", "sex","model_name"), 
+  data = mres[j = unlist(auc, recursive = FALSE), by = c("sex", "model_name")],
+  id.vars = c("ID", "sex", "model_name"),
   measure.vars = patterns("^auc_"),
-  variable.name = "period_interval", 
+  variable.name = "period_interval",
   value.name = "auc"
-)[ 
+)[
   j = period_interval := factor(
-    x = gsub("auc_", "", period_interval), 
+    x = gsub("auc_", "", period_interval),
     levels = gsub("auc_", "", unique(period_interval))
   )
-][ 
+][
   j = list(
     gg = (function(data) {
       apply(
@@ -609,7 +609,7 @@ gg_comp_auc <- melt(
         }
       )
     })(.SD)
-  ), 
+  ),
   by = c("sex", "period_interval")
 ]
 ```
@@ -627,15 +627,15 @@ cor_dt <- mres[
     )
   })(slope, auc),
   by = c("sex", "model_name")
-][ 
+][
   j = list(cor = list(cor(
     x = dcast(
       data = melt(
         data = .SD,
         id.vars = c("ID", "model_name"),
         measure.vars = patterns("^slope_|^auc_")
-      )[,
-        model := toupper(gsub("_", " ", paste(
+      )[
+        j = model := toupper(gsub("_", " ", paste(
           sex_to_character(sex),
           model_name,
           variable,
@@ -644,7 +644,7 @@ cor_dt <- mres[
       ],
       formula = ID ~ model,
       value.var = "value"
-    )[, -"ID"],
+    )[j = -"ID"],
     method = "pearson"
   ))),
   by = "sex"
@@ -653,7 +653,7 @@ cor_dt <- mres[
 
 ```{r modelling-aucscp, include = FALSE}
 ### AUCs/Slopes Correlations Plots ---------------------------------------------------------------
-cor_dt[ 
+cor_dt[
   j = gg_cor := list(list(
     (function(cor) {
       dd <- as.dendrogram(
@@ -697,8 +697,8 @@ cor_dt[
           theme(
             axis.title = element_blank(),
             axis.ticks = element_line(colour = "black"),
-            axis.ticks.length = unit(x = 0.1, units = "line"), 
-            axis.text.x.top = element_text(size = rel(0.5)), 
+            axis.ticks.length = unit(x = 0.1, units = "line"),
+            axis.text.x.top = element_text(size = rel(0.5)),
             axis.text.y.right = element_text(size = rel(0.5))
           ),
 
@@ -759,12 +759,12 @@ for (isex in sort(unique(mres[["sex"]]))) {
       )
     ]
     print(
-      gt(res_tbl, groupname_col = "effect") %>% 
-        fmt_number(columns = c("estimate", "std.error", "statistic"), n_sigfig = 3) %>% 
-        fmt_number(columns = "df", decimals = 0) %>% 
-        fmt_scientific(columns = "p.value", decimals = 2) %>% 
-        fmt_missing(columns = everything()) %>% 
-        opt_all_caps() %>% 
+      gt(res_tbl, groupname_col = "effect") %>%
+        fmt_number(columns = c("estimate", "std.error", "statistic"), n_sigfig = 3) %>%
+        fmt_number(columns = "df", decimals = 0) %>%
+        fmt_scientific(columns = "p.value", decimals = 2) %>%
+        fmt_missing(columns = everything()) %>%
+        opt_all_caps() %>%
         opt_row_striping()
     )
     cat("\n\n")
@@ -779,27 +779,27 @@ for (isex in sort(unique(mres[["sex"]]))) {
 models_comp <- mres[
   j = (function(mods, names) {
     out <- eval(parse(text = paste0(
-      "compare_performance(", 
-      paste(paste0("mods[[", 1:length(mods), "]]"), collapse = ", "),
+      "compare_performance(",
+      paste(paste0("mods[[", seq_along(mods), "]]"), collapse = ", "),
       ", rank = TRUE, bayesfactor = FALSE)"
     )))
     out[["Model"]] <- names
     out
   })(model_results, model_name),
   by = "sex"
-][ 
+][
   j = "sex_chr" := c("0" = "Female", "1" = "Male")[as.character(sex)]
 ][
   j = "sex" := NULL
 ]
 
-gt(data = models_comp, groupname_col = "sex_chr") %>% 
+gt(data = models_comp, groupname_col = "sex_chr") %>%
   fmt_number(
-    columns = setdiff(names(models_comp)[sapply(models_comp, is.numeric)], "Performance_Score"), 
+    columns = setdiff(names(models_comp)[sapply(models_comp, is.numeric)], "Performance_Score"),
     n_sigfig = 3
-  ) %>% 
-  fmt_percent(columns = "Performance_Score", decimals = 2) %>% 
-  opt_all_caps() %>% 
+  ) %>%
+  fmt_percent(columns = "Performance_Score", decimals = 2) %>%
+  opt_all_caps() %>%
   opt_row_striping()
 ```
 
@@ -807,33 +807,33 @@ gt(data = models_comp, groupname_col = "sex_chr") %>%
 
 ```{r display-eac}
 ggplot(
-  data = mres[ 
+  data = mres[
     j = (function(mr) {
       data_pred <- data.table(
         age = seq(min(pheno_dt[["age"]], na.rm = TRUE), max(pheno_dt[["age"]], na.rm = TRUE), 0.1)
-      )[, (trait) := revert_trans(predict(mr[[1]], .SD, level = 0)), .SDcols = "age"]
-    })(model_results), 
+      )[j = (trait) := revert_trans(predict(mr[[1]], .SD, level = 0)), .SDcols = "age"]
+    })(model_results),
     by = c("sex", "model_name")
   ]
 ) +
   aes(x = age, y = .data[[trait]], colour = model_name, linetype = model_name) +
   stat_smooth(
-    data = pheno_dt, 
+    data = pheno_dt,
     mapping = aes(x = age, y = .data[[trait]], colour = "Loess", linetype = "Loess"),
-    method = "loess", formula = y ~ x, se = FALSE, 
+    method = "loess", formula = y ~ x, se = FALSE,
     na.rm = TRUE, inherit.aes = FALSE
   ) +
   geom_path() +
   scale_colour_viridis_d(labels = function(z) toupper(gsub("_", " ", z)), begin = 0.15, end = 0.85) +
   scale_linetype_discrete(labels = function(z) toupper(gsub("_", " ", z))) +
   labs(
-    x = paste0("AGE (", variables_unit[["age"]], ")"), 
+    x = paste0("AGE (", variables_unit[["age"]], ")"),
     y = paste0(toupper(trait), " (", variables_unit[[trait]], ")"),
     colour = "Model",
     linetype = "Model"
   ) +
   facet_grid(
-    cols = vars(sex), 
+    cols = vars(sex),
     labeller = labeller(.cols = sex_to_character)
   ) +
   theme(
