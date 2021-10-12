@@ -6,8 +6,7 @@
 \alias{eggla-package}
 \title{eggla: Early Growth Genetics Longitudinal Analysis}
 \description{
-Tools for longitudinal analysis within the EGG
-    (Early Growth Genetics) Consortium.
+Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
 }
 \seealso{
 Useful links:

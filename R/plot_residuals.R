@@ -1,11 +1,11 @@
 #' plot_residuals
 #'
-#' @param x something
-#' @param y something
-#' @param fit something
-#' @param variables_unit something
+#' @param x A length one character vector with the main covariate name (_i.e._, right-hand side), as defined in `fit`.
+#' @param y A length one character vector with the variable name to be explained (_i.e._, left-hand side), as defined in `fit`.
+#' @param fit A model object from a statistical model such as from a call `nlme::lme()` and `time_model()`.
+#' @param variables_unit The unit of the variable set in `y`.
 #'
-#' @return something
+#' @return A `patchwork` `ggplot2` object.
 #' @export
 plot_residuals <- function(x, y, fit, variables_unit) {
   .data <- ggplot2::.data

@@ -15,20 +15,20 @@ time_model(
 )
 }
 \arguments{
-\item{x}{something}
+\item{x}{A length one character vector with the main covariate name (\emph{i.e.}, right-hand side).}
 
-\item{y}{something}
+\item{y}{A length one character vector with the variable name to be explained (\emph{i.e.}, left-hand side).}
 
-\item{cov}{something}
+\item{cov}{A vector of addtional/optional covariates names to included in the fixed effect part of the linear mixed-effects models.}
 
-\item{data}{something}
+\item{data}{A data.frame containing the variables named in \code{x} and \code{y}.}
 
-\item{method}{something}
+\item{method}{The type of model, \emph{i.e.}, one of \code{"cubic_slope"}, \code{"linear_splines"} or \code{"cubic_splines"}.}
 
-\item{knots}{something}
+\item{knots}{The knots defining the splines for \code{"linear_splines"} ànd \code{"cubic_splines"} methods.}
 }
 \value{
-something
+An object of class "lme" representing the linear mixed-effects model fit.
 }
 \description{
 time_model
