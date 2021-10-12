@@ -54,32 +54,32 @@ time_model <- function(
 
   f_model_call <- function(form_fixed, form_random, n_iteration) {
     c(
-      'nlme::lme(',
-      paste0('  fixed = ', form_fixed, ','),
-      '  data = data,',
-      paste0('  random = ', form_random, ','),
-      '  na.action = stats::na.omit,',
-      '  method = "ML",',
-      '  correlation = nlme::corCAR1(form = ~ 1 | ID),',
+      "nlme::lme(",
+      paste0("  fixed = ", form_fixed, ","),
+      "  data = data,",
+      paste0("  random = ", form_random, ","),
+      "  na.action = stats::na.omit,",
+      "  method = \"ML\",",
+      "  correlation = nlme::corCAR1(form = ~ 1 | ID),",
       paste0(
-        '  control = nlme::lmeControl(opt = "optim", maxIter = ',
-        n_iteration, ', msMaxIter = ', n_iteration, ')'
+        "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
+        n_iteration, ", msMaxIter = ", n_iteration, ")"
       ),
-      ')'
+      ")"
     )
   }
 
   model_call <- f_model_call(
-    form_fixed = paste0(y, " ~ ",  x_fmt),
-    form_random = paste0("~ ", x_fmt, " | ID"),
+    form_fixed = form_fixed,
+    form_random = form_random,
     n_iteration = 500
   )
   res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   if (inherits(res_model, "try-error")) {
     message("Number of iteration has been increased from 500 to 1,000.", appendLF = TRUE)
     model_call <- f_model_call(
-      form_fixed = paste0(y, " ~ ",  x_fmt),
-      form_random = paste0("~ ", x_fmt, " | ID"),
+      form_fixed = form_fixed,
+      form_random = form_random,
       n_iteration = 1000
     )
     res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
@@ -89,7 +89,7 @@ time_model <- function(
       "cubic_slope" = {
         message("Polynom's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
         f_model_call(
-          form_fixed = paste0(y, " ~ ",  x_fmt),
+          form_fixed = form_fixed,
           form_random = paste0("~ ", gsub("degree = 3", "degree = 2", x_fmt, fixed = TRUE), " | ID"),
           n_iteration = 1000
         )
@@ -97,7 +97,7 @@ time_model <- function(
       "cubic_splines" = {
         message("Spline's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
         f_model_call(
-          form_fixed = paste0(y, " ~ ",  x_fmt),
+          form_fixed = form_fixed,
           form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(2", x_fmt, fixed = TRUE), " | ID"),
           n_iteration = 1000
         )
@@ -109,7 +109,7 @@ time_model <- function(
   if (inherits(res_model, "try-error")) {
     message('The random effect formula has been set to "~ 1 | ID".', appendLF = TRUE)
     model_call <- f_model_call(
-      form_fixed = paste0(y, " ~ ",  x_fmt),
+      form_fixed = form_fixed,
       form_random = "~ 1 | ID",
       n_iteration = 1000
     )
@@ -124,4 +124,3 @@ time_model <- function(
     res_model
   }
 }
-
