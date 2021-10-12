@@ -13,16 +13,16 @@ predict_average_slopes(
 )
 }
 \arguments{
-\item{fit}{something}
+\item{fit}{A model object from a statistical model such as from a call to \code{nlme::lme()} and \code{time_model()}.}
 
-\item{method}{something}
+\item{method}{The type of model provided in \code{fit}, \emph{i.e.}, one of \code{"cubic_slope"}, \code{"linear_splines"} or \code{"cubic_splines"}.}
 
-\item{period}{something}
+\item{period}{The intervals knots on which slopes are to be computed.}
 
-\item{knots}{something}
+\item{knots}{The knots as defined \code{fit} and according to \code{method}.}
 }
 \value{
-something
+A \code{data.frame} with slopes for each individuals/samples.
 }
 \description{
 predict_average_slopes

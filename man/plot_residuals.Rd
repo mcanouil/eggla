@@ -7,16 +7,16 @@
 plot_residuals(x, y, fit, variables_unit)
 }
 \arguments{
-\item{x}{something}
+\item{x}{A length one character vector with the main covariate name (\emph{i.e.}, right-hand side), as defined in \code{fit}.}
 
-\item{y}{something}
+\item{y}{A length one character vector with the variable name to be explained (\emph{i.e.}, left-hand side), as defined in \code{fit}.}
 
-\item{fit}{something}
+\item{fit}{A model object from a statistical model such as from a call \code{nlme::lme()} and \code{time_model()}.}
 
-\item{variables_unit}{something}
+\item{variables_unit}{The unit of the variable set in \code{y}.}
 }
 \value{
-something
+A \code{patchwork} \code{ggplot2} object.
 }
 \description{
 plot_residuals

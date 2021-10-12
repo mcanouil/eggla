@@ -7,10 +7,10 @@
 sex_to_character(x)
 }
 \arguments{
-\item{x}{something}
+\item{x}{A vector of numeric to be converted to character.}
 }
 \value{
-something
+A vector of character.
 }
 \description{
 sex_to_character
