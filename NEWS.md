@@ -5,6 +5,17 @@
     + `models-best.R`, R script to compare models performance from `models-diagnostics.R`.
     + `models-adiposity.R`, R script to compare predicted BMI values to check for the "adiposity peak".
 
+* In `inst`,
+    + Add `renv.lock` file to list dependencies with version and help install or restore them.
+
+* In `R`,
+    + Remove trailing spaces.
+    + Comment code not used.
+    + Add missing documentation.
+
+* In `R/time_model.R`,
+    + Fix model specification where additional covariates were not properly added to the model formula.
+
 # eggla 0.3.0
 
 * In `R/time_model.R`,
