@@ -16,6 +16,12 @@
 * In `R/time_model.R`,
     + Fix model specification where additional covariates were not properly added to the model formula.
 
+* In `LICENSE`,
+    + Add Nicole Warrington.
+
+* In `README.(R)md`,
+    + Add table of content.
+
 # eggla 0.3.0
 
 * In `R/time_model.R`,
