@@ -33,6 +33,7 @@ remotes::install_github("mcanouil/eggla@v0.3.0")
 ``` r
 library(eggla)
 library(data.table)
+#> data.table 1.14.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
 library(ggplot2)
 library(patchwork)
 library(broom.mixed)
@@ -145,23 +146,23 @@ class(ls_mod)
 #> [1] "lme"
 tidy(ls_mod)
 #> # A tibble: 15 x 8
-#>    effect   group    term                                                                                                                                                         estimate std.error    df statistic   p.value
-#>    <chr>    <chr>    <chr>                                                                                                                                                           <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed    fixed    (Intercept)                                                                                                                                                   2.74e+0   0.0143    481    191.    0       
-#>  2 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                                                                     5.02e-2   0.00447   481     11.2   3.38e-26
-#>  3 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                                                                  1.47e-2   0.00823   481      1.78  7.55e- 2
-#>  4 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1                                                                                  -1.41e-2   0.0124    481     -1.13  2.59e- 1
-#>  5 ran_pars ID       sd_(Intercept)                                                                                                                                                3.22e-4  NA          NA     NA    NA       
-#>  6 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0).(Intercept)                                                                    -5.33e-1  NA          NA     NA    NA       
-#>  7 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1.(Intercept)                                                                  8.19e-3  NA          NA     NA    NA       
-#>  8 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.(Intercept)                                                                   1.77e-3  NA          NA     NA    NA       
-#>  9 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                                                                  9.14e-3  NA          NA     NA    NA       
-#> 10 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)   -5.39e-2  NA          NA     NA    NA       
-#> 11 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -5.46e-3  NA          NA     NA    NA       
-#> 12 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                                                               7.24e-4  NA          NA     NA    NA       
-#> 13 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 -1.37e-2  NA          NA     NA    NA       
-#> 14 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1                                                                                5.35e-4  NA          NA     NA    NA       
-#> 15 ran_pars Residual sd_Observation                                                                                                                                                1.29e-1  NA          NA     NA    NA
+#>    effect   group    term                                                                                                                                                          estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>                                                                                                                                                            <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)                                                                                                                                                   2.74       0.0143    481    191.    0       
+#>  2 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                                                                     0.0502     0.00447   481     11.2   3.38e-26
+#>  3 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                                                                  0.0147     0.00823   481      1.78  7.55e- 2
+#>  4 fixed    fixed    gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1                                                                                  -0.0141     0.0124    481     -1.13  2.59e- 1
+#>  5 ran_pars ID       sd_(Intercept)                                                                                                                                                0.000322  NA          NA     NA    NA       
+#>  6 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0).(Intercept)                                                                    -0.533     NA          NA     NA    NA       
+#>  7 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1.(Intercept)                                                                  0.00819   NA          NA     NA    NA       
+#>  8 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.(Intercept)                                                                   0.00177   NA          NA     NA    NA       
+#>  9 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                                                                  0.00914   NA          NA     NA    NA       
+#> 10 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)   -0.0539    NA          NA     NA    NA       
+#> 11 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -0.00546   NA          NA     NA    NA       
+#> 12 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                                                               0.000724  NA          NA     NA    NA       
+#> 13 ran_pars ID       cor_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1.gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 -0.0137    NA          NA     NA    NA       
+#> 14 ran_pars ID       sd_gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1                                                                                0.000535  NA          NA     NA    NA       
+#> 15 ran_pars Residual sd_Observation                                                                                                                                                0.129     NA          NA     NA    NA
 ```
 
 ``` r
@@ -389,6 +390,7 @@ if (!inherits(res, "try-error")) {
 #> 13 ran_pars ID       cor_gsp(...)C(5.5).1             -0.0137    NA          NA     NA    NA       
 #> 14 ran_pars ID       sd_gsp(...)C(11).1                0.000535  NA          NA     NA    NA       
 #> 15 ran_pars Residual sd_Observation                    0.129     NA          NA     NA    NA
+
 ## Cubic Splines
 res <- try(time_model(
   x = "age",
@@ -425,6 +427,7 @@ if (!inherits(res, "try-error")) {
 #>  9 ran_pars ID    cor_gsp(...)D1(0).(Intercept)  -0.455   NA          NA     NA    NA       
 #> 10 ran_pars ID    cor_gsp(...)D2(0).(Intercept)   0.305   NA          NA     NA    NA       
 #> # ... with 26 more rows
+
 ## Cubic Slope
 res <- try(time_model(
   x = "age",
@@ -510,27 +513,27 @@ visits_long <- melt(
     quietly = FALSE
   )
 ]
-#> [2021-09-28 14:28:31] Begin processing pediatric data...
-#> [2021-09-28 14:28:31] Calculating z-scores...
-#> [2021-09-28 14:28:31] Calculating SD-scores...
-#> [2021-09-28 14:28:31] Re-centering data...
-#> [2021-09-28 14:28:31] Using NHANES reference medians...
-#> [2021-09-28 14:28:31] Note: input data has at least one age-year with < 100 subjects...
-#> [2021-09-28 14:28:31] Cleaning growth data in 1 batch(es)...
-#> [2021-09-28 14:28:31] Processing Batch #1...
-#> [2021-09-28 14:28:31] Preliminarily identify potential extraneous...
-#> [2021-09-28 14:28:31] Identify potentially swapped measurements...
-#> [2021-09-28 14:28:32] Exclude measurements carried forward...
-#> [2021-09-28 14:28:32] Exclude extreme measurements based on SD...
-#> [2021-09-28 14:28:32] Exclude extreme measurements based on EWMA...
-#> [2021-09-28 14:28:32] Exclude extraneous based on EWMA...
-#> [2021-09-28 14:28:32] Exclude moderate errors based on EWMA...
-#> [2021-09-28 14:28:36] Exclude heights based on growth velocity...
-#> [2021-09-28 14:28:38] Exclude single measurements and pairs...
-#> [2021-09-28 14:28:38] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-09-28 14:28:38] Completed Batch #1...
-#> [2021-09-28 14:28:38] Done with pediatric data!
-#> [2021-09-28 14:28:38] No adult data. Moving to postprocessing...
+#> [2021-10-12 10:55:57] Begin processing pediatric data...
+#> [2021-10-12 10:55:57] Calculating z-scores...
+#> [2021-10-12 10:55:57] Calculating SD-scores...
+#> [2021-10-12 10:55:57] Re-centering data...
+#> [2021-10-12 10:55:57] Using NHANES reference medians...
+#> [2021-10-12 10:55:57] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-10-12 10:55:57] Cleaning growth data in 1 batch(es)...
+#> [2021-10-12 10:55:57] Processing Batch #1...
+#> [2021-10-12 10:55:57] Preliminarily identify potential extraneous...
+#> [2021-10-12 10:55:57] Identify potentially swapped measurements...
+#> [2021-10-12 10:55:57] Exclude measurements carried forward...
+#> [2021-10-12 10:55:57] Exclude extreme measurements based on SD...
+#> [2021-10-12 10:55:57] Exclude extreme measurements based on EWMA...
+#> [2021-10-12 10:55:58] Exclude extraneous based on EWMA...
+#> [2021-10-12 10:55:58] Exclude moderate errors based on EWMA...
+#> [2021-10-12 10:56:03] Exclude heights based on growth velocity...
+#> [2021-10-12 10:56:06] Exclude single measurements and pairs...
+#> [2021-10-12 10:56:06] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-10-12 10:56:07] Completed Batch #1...
+#> [2021-10-12 10:56:07] Done with pediatric data!
+#> [2021-10-12 10:56:07] No adult data. Moving to postprocessing...
 visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param,
@@ -581,6 +584,7 @@ if (!inherits(linear_splines_model, "try-error")) {
 #> 13 ran_pars ID       cor_gsp(...)C(5.5).1              -0.978   NA          NA    NA     NA       
 #> 14 ran_pars ID       sd_gsp(...)C(11).1                 0.0467  NA          NA    NA     NA       
 #> 15 ran_pars Residual sd_Observation                     0.0877  NA          NA    NA     NA
+
 ## Cubic Splines
 cubic_splines_model <- try(time_model(
   x = "age",
@@ -617,6 +621,7 @@ if (!inherits(cubic_splines_model, "try-error")) {
 #>  9 ran_pars ID    cor_gsp(...)D1(0).(Intercept)  -0.480   NA          NA     NA    NA        
 #> 10 ran_pars ID    cor_gsp(...)D2(0).(Intercept)   0.244   NA          NA     NA    NA        
 #> # ... with 26 more rows
+
 ## Cubic Slope
 cubic_slope_model <- try(time_model(
   x = "age",
@@ -664,9 +669,16 @@ library(performance)
 compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
 #> # Comparison of Model Performance Indices
 #> 
-#> Name                 | Model |      AIC |      BIC | R2 (cond.) | R2 (marg.) |   ICC |  RMSE | Sigma | Performance-Score
-#> ------------------------------------------------------------------------------------------------------------------------
-#> cubic_splines_model  |   lme | -924.662 | -771.407 |      0.885 |      0.745 | 0.550 | 0.069 | 0.083 |            71.43%
-#> cubic_slope_model    |   lme | -929.640 | -863.367 |      0.878 |      0.738 | 0.534 | 0.071 | 0.086 |            53.29%
-#> linear_splines_model |   lme | -927.194 | -860.922 |      0.873 |      0.738 | 0.514 | 0.072 | 0.088 |            21.82%
+#> Name                 | Model | R2 (cond.) | R2 (marg.) |   ICC |  RMSE | Sigma | AIC_wt |  BIC_wt | Performance-Score
+#> ---------------------------------------------------------------------------------------------------------------------
+#> cubic_splines_model  |   lme |      0.885 |      0.745 | 0.550 | 0.069 | 0.083 |  0.060 | < 0.001 |            71.43%
+#> cubic_slope_model    |   lme |      0.878 |      0.738 | 0.534 | 0.071 | 0.086 |  0.726 |   0.773 |            53.29%
+#> linear_splines_model |   lme |      0.873 |      0.738 | 0.514 | 0.072 | 0.088 |  0.214 |   0.227 |             8.14%
 ```
+
+## Code of Conduct
+
+Please note that the `eggla` project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
