@@ -24,6 +24,24 @@ knitr::opts_chunk$set(
 
 Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
 
+---
+
++ [Installation](#installation)
++ [Hands on `eggla`](#hands-on-eggla)
+    - [Data](#data)
+    - [Modelling](#modelling)
+    - [Residuals](#residuals)
+    - [Predicted Average Slopes](#predicted-average-slopes)
+    - [Area Under The Curves](#area-under-the-curves)
+    - [Render Analyses As Rmarkdown](#render-analyses-as-rmarkdown)
++ [Run A Complete Analysis](#run-a-complete-analysis)
+    - [Without Daymont's QC](#without-daymonts-qc)
+    - [With Daymont's QC](#with-daymonts-qc)
++ [License](#license)
++ [Code of Conduct](#code-of-conduct)
+
+---
+
 ## Installation
 
 ```{r, eval = FALSE}
@@ -273,7 +291,7 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 
 ## Run A Complete Analysis
 
-## Without Daymont's QC
+### Without Daymont's QC
 
 ```{r, error = TRUE}
 # install.packages("remotes")
@@ -328,7 +346,7 @@ if (!inherits(res, "try-error")) {
 }
 ```
 
-## With Daymont's QC
+### With Daymont's QC
 
 ```{r, error = TRUE}
 # install.packages("remotes")
@@ -428,6 +446,10 @@ if (!inherits(cubic_slope_model, "try-error")) {
 library(performance)
 compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
 ```
+
+## License
+
+MIT © [Mickaël Canouil](https://github.com/mcanouil), Nicole Warrington
 
 ## Code of Conduct
 
