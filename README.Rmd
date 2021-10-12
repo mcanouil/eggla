@@ -150,8 +150,8 @@ ggplot() +
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
-    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[,
-      bmi := exp(predict(ls_mod, .SD, level = 0)),
+    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[
+      j = bmi := exp(predict(ls_mod, .SD, level = 0)),
       .SDcols = "age"
     ],
     mapping = aes(colour = "Linear Splines"),
@@ -200,8 +200,8 @@ ggplot(
     measure.vars = patterns("^slope_"),
     variable.name = "period_interval",
     value.name = "slope"
-  )[,
-    period_interval := factor(
+  )[
+    j = period_interval := factor(
       x = gsub("slope_", "", period_interval),
       levels = gsub("slope_", "", unique(period_interval))
     )
@@ -238,8 +238,8 @@ ggplot(
     measure.vars = patterns("^auc_"),
     variable.name = "period_interval",
     value.name = "auc"
-  )[,
-    period_interval := factor(
+  )[
+    j = period_interval := factor(
       x = gsub("auc_", "", period_interval),
       levels = gsub("auc_", "", unique(period_interval))
     )
