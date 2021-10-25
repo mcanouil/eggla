@@ -28,7 +28,7 @@ Consortium.
     -   [Predicted values](#predicted-values)
     -   [Residuals](#residuals)
     -   [Predicted Average Slopes](#predicted-average-slopes)
-    -   [Area Under The Curves](#area-under-the-curves)
+    -   [Area Under The Curves](#area-under-the-curve)
 -   [License](#license)
 -   [Code of Conduct](#code-of-conduct)
 
@@ -112,74 +112,74 @@ library(data.table)
 
     <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
-1.  With Daymont’s QC
+#### With Daymont’s QC
 
-    ``` r
-    pheno_dt <- bmigrowth[
-      j = `:=`(
-        "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
-        "WEIGHTKG" = as.numeric(weight),
-        "HEIGHTCM" = as.numeric(height)
-      )
-    ][
-      j = `:=`(# recode sex with Male = 0 and Female = 1...
-        "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
-      )
-    ]
+``` r
+pheno_dt <- bmigrowth[
+  j = `:=`(
+    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+    "WEIGHTKG" = as.numeric(weight),
+    "HEIGHTCM" = as.numeric(height)
+  )
+][
+  j = `:=`(# recode sex with Male = 0 and Female = 1...
+    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
+  )
+]
 
-    visits_long <- melt(
-      data = pheno_dt,
-      id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
-      measure.vars = c("WEIGHTKG", "HEIGHTCM"),
-      variable.name = "param",
-      value.name = "measurement"
-    )[
-      j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
-        subjid = ID,
-        param = param,
-        agedays = agedays,
-        sex = sex_daymont,
-        measurement = measurement,
-        quietly = FALSE
-      )
-    ]
-    #> [2021-10-25 16:33:57] Begin processing pediatric data...
-    #> [2021-10-25 16:33:57] Calculating z-scores...
-    #> [2021-10-25 16:33:58] Calculating SD-scores...
-    #> [2021-10-25 16:33:58] Re-centering data...
-    #> [2021-10-25 16:33:58] Using NHANES reference medians...
-    #> [2021-10-25 16:33:58] Note: input data has at least one age-year with < 100 subjects...
-    #> [2021-10-25 16:33:58] Cleaning growth data in 1 batch(es)...
-    #> [2021-10-25 16:33:58] Processing Batch #1...
-    #> [2021-10-25 16:33:58] Preliminarily identify potential extraneous...
-    #> [2021-10-25 16:33:58] Identify potentially swapped measurements...
-    #> [2021-10-25 16:33:58] Exclude measurements carried forward...
-    #> [2021-10-25 16:33:58] Exclude extreme measurements based on SD...
-    #> [2021-10-25 16:33:58] Exclude extreme measurements based on EWMA...
-    #> [2021-10-25 16:33:58] Exclude extraneous based on EWMA...
-    #> [2021-10-25 16:33:59] Exclude moderate errors based on EWMA...
-    #> [2021-10-25 16:34:02] Exclude heights based on growth velocity...
-    #> [2021-10-25 16:34:04] Exclude single measurements and pairs...
-    #> [2021-10-25 16:34:04] Exclude all measurements if maximum threshold of errors is exceeded...
-    #> [2021-10-25 16:34:05] Completed Batch #1...
-    #> [2021-10-25 16:34:05] Done with pediatric data!
-    #> [2021-10-25 16:34:05] No adult data. Moving to postprocessing...
-    visits_clean <- dcast(
-      data = visits_long[clean %in% "Include"], # Exclude all flags
-      formula = ... ~ param,
-      value.var = "measurement"
-    )[
-      j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
-    ][
-      !is.na(bmi) # exclude missing BMI related to measurements exclusion
-    ]
-    ```
+visits_long <- melt(
+  data = pheno_dt,
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+  variable.name = "param",
+  value.name = "measurement"
+)[
+  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+    subjid = ID,
+    param = param,
+    agedays = agedays,
+    sex = sex_daymont,
+    measurement = measurement,
+    quietly = FALSE
+  )
+]
+#> [2021-10-25 16:42:29] Begin processing pediatric data...
+#> [2021-10-25 16:42:29] Calculating z-scores...
+#> [2021-10-25 16:42:29] Calculating SD-scores...
+#> [2021-10-25 16:42:29] Re-centering data...
+#> [2021-10-25 16:42:30] Using NHANES reference medians...
+#> [2021-10-25 16:42:30] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-10-25 16:42:30] Cleaning growth data in 1 batch(es)...
+#> [2021-10-25 16:42:30] Processing Batch #1...
+#> [2021-10-25 16:42:30] Preliminarily identify potential extraneous...
+#> [2021-10-25 16:42:30] Identify potentially swapped measurements...
+#> [2021-10-25 16:42:30] Exclude measurements carried forward...
+#> [2021-10-25 16:42:30] Exclude extreme measurements based on SD...
+#> [2021-10-25 16:42:30] Exclude extreme measurements based on EWMA...
+#> [2021-10-25 16:42:30] Exclude extraneous based on EWMA...
+#> [2021-10-25 16:42:30] Exclude moderate errors based on EWMA...
+#> [2021-10-25 16:42:33] Exclude heights based on growth velocity...
+#> [2021-10-25 16:42:35] Exclude single measurements and pairs...
+#> [2021-10-25 16:42:35] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-10-25 16:42:36] Completed Batch #1...
+#> [2021-10-25 16:42:36] Done with pediatric data!
+#> [2021-10-25 16:42:36] No adult data. Moving to postprocessing...
+visits_clean <- dcast(
+  data = visits_long[clean %in% "Include"], # Exclude all flags
+  formula = ... ~ param,
+  value.var = "measurement"
+)[
+  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based using QCed variables
+][
+  !is.na(bmi) # exclude missing BMI related to measurements exclusion
+]
+```
 
-2.  Without Daymont’s QC
+#### Without Daymont’s QC
 
-    ``` r
-    pheno_dt <- bmigrowth
-    ```
+``` r
+pheno_dt <- bmigrowth
+```
 
 ### Modelling female
 
