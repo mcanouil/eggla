@@ -26,19 +26,22 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 
 ---
 
-+ [Installation](#installation)
-+ [Hands on `eggla`](#hands-on-eggla)
-    - [Data](#data)
-    - [Modelling](#modelling)
-    - [Residuals](#residuals)
-    - [Predicted Average Slopes](#predicted-average-slopes)
-    - [Area Under The Curves](#area-under-the-curves)
-    - [Render Analyses As Rmarkdown](#render-analyses-as-rmarkdown)
-+ [Run A Complete Analysis](#run-a-complete-analysis)
-    - [Without Daymont's QC](#without-daymonts-qc)
-    - [With Daymont's QC](#with-daymonts-qc)
-+ [License](#license)
-+ [Code of Conduct](#code-of-conduct)
+* [Installation](#installation)
+* [Hands on `eggla`](#hands-on-eggla)
+    + [Data](#data)
+    + [Modelling](#modelling)
+    + [Residuals](#residuals)
+    + [Predicted Average Slopes](#predicted-average-slopes)
+    + [Area Under The Curves](#area-under-the-curves)
+    + [Render Analyses As Rmarkdown](#render-analyses-as-rmarkdown)
+* [Run A Complete Analysis](#run-a-complete-analysis)
+    + [Without Daymont's QC](#without-daymonts-qc)
+    + [With Daymont's QC](#with-daymonts-qc)
+* [Run The Cubic Splines (Random Linear Splines) Analysis](#run-the-cubic-splines-random-linear-splines-analysis)
+    + [Without Daymont's QC](#without-daymonts-qc)
+    + [With Daymont's QC](#with-daymonts-qc)
+* [License](#license)
+* [Code of Conduct](#code-of-conduct)
 
 ---
 
@@ -50,7 +53,7 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 remotes::install_github("mcanouil/eggla")
 
 # Or a particular version:
-remotes::install_github("mcanouil/eggla@v0.3.0")
+remotes::install_github("mcanouil/eggla@v0.4.0")
 ```
 
 ## Hands on **eggla**
@@ -289,13 +292,13 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 <!-- ) -->
 <!-- ``` -->
 
-## Run A Complete Analysis
+## Run A Complete Analysis With All Models
 
 ### Without Daymont's QC
 
 ```{r, error = TRUE}
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.3.0")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
 library(eggla)
 library(broom.mixed)
 library(data.table)
@@ -350,7 +353,7 @@ if (!inherits(res, "try-error")) {
 
 ```{r, error = TRUE}
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.3.0")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
 library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
@@ -445,6 +448,88 @@ if (!inherits(cubic_slope_model, "try-error")) {
 ```{r}
 library(performance)
 compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
+```
+
+## Run The Cubic Splines (Random Linear Splines) Analysis
+
+### Without Daymont's QC
+
+```{r, error = TRUE}
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
+library(eggla)
+library(broom.mixed)
+library(data.table)
+
+data("bmigrowth")
+bmigrowth <- as.data.table(bmigrowth)
+
+res <- egg_model(
+  formula = log(bmi) ~ age,
+  data = bmigrowth[sex == 0]
+)
+sres <- tidy(res)
+sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+```
+
+### With Daymont's QC
+
+```{r, error = TRUE}
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
+library(eggla)
+# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
+library(growthcleanr)
+library(broom.mixed)
+library(data.table)
+
+data("bmigrowth")
+pheno_dt <- as.data.table(bmigrowth)[
+  j = `:=`(
+    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+    "WEIGHTKG" = as.numeric(weight),
+    "HEIGHTCM" = as.numeric(height)
+  )
+][
+  j = `:=`(# recode sex with Male = 0 and Female = 1...
+    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
+  )
+]
+
+visits_long <- melt(
+  data = pheno_dt,
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+  variable.name = "param",
+  value.name = "measurement"
+)[
+  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+    subjid = ID,
+    param = param,
+    agedays = agedays,
+    sex = sex_daymont,
+    measurement = measurement,
+    quietly = FALSE
+  )
+]
+visits_clean <- dcast(
+  data = visits_long[clean %in% "Include"], # Exclude all flags
+  formula = ... ~ param,
+  value.var = "measurement"
+)[
+  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
+][
+  !is.na(bmi) # exclude missing BMI related to measurements exclusion
+]
+
+res <- egg_model(
+  formula = log(bmi) ~ age,
+  data = visits_clean[sex_daymont == 1]
+)
+sres <- tidy(res)
+sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
 ```
 
 ## License
