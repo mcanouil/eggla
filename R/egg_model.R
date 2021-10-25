@@ -1,5 +1,5 @@
 #' egg_model
-#' 
+#'
 #' Fit a cubic splines mixed model regression with linear splines as random effect.
 #'
 #' @param formula An object of class "formula": a symbolic description of the model to be fitted with, time component as the first term in the right-hand side.
