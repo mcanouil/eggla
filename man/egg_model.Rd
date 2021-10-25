@@ -7,17 +7,13 @@
 egg_model(formula, data)
 }
 \arguments{
-\item{data}{A data.frame containing the variables named in \code{x} and \code{y}.}
+\item{formula}{An object of class "formula": a symbolic description of the model to be fitted with, time component as the first term in the right-hand side.}
 
-\item{x}{A length one character vector with the main covariate name (\emph{i.e.}, right-hand side).}
-
-\item{y}{A length one character vector with the variable name to be explained (\emph{i.e.}, left-hand side).}
-
-\item{cov}{A vector of addtional/optional covariates names to included in the fixed effect part of the linear mixed-effects models.}
+\item{data}{A data.frame containing the variables defined in formula.}
 }
 \value{
 An object of class "lme" representing the linear mixed-effects model fit.
 }
 \description{
-egg_model
+Fit a cubic splines mixed model regression with linear splines as random effect.
 }

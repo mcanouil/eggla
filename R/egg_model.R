@@ -1,9 +1,9 @@
 #' egg_model
+#' 
+#' Fit a cubic splines mixed model regression with linear splines as random effect.
 #'
-#' @param x A length one character vector with the main covariate name (_i.e._, right-hand side).
-#' @param y A length one character vector with the variable name to be explained (_i.e._, left-hand side).
-#' @param cov A vector of addtional/optional covariates names to included in the fixed effect part of the linear mixed-effects models.
-#' @param data A data.frame containing the variables named in `x` and `y`.
+#' @param formula An object of class "formula": a symbolic description of the model to be fitted with, time component as the first term in the right-hand side.
+#' @param data A data.frame containing the variables defined in formula.
 #'
 #' @return An object of class "lme" representing the linear mixed-effects model fit.
 #' @export
