@@ -201,9 +201,8 @@ plot_residuals(
 ### Predicted average slopes
 
 ```{r}
-res_pred_slopes <- predict_average_slopes(
+res_pred_slopes <- egg_slopes(
   fit = res,
-  method = "cubic_splines",
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
 head(res_pred_slopes)
@@ -234,9 +233,8 @@ ggplot(
 ### Area under the curve
 
 ```{r}
-res_auc <- compute_auc(
+res_auc <- egg_auc(
   fit = res,
-  method = "cubic_splines",
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
 head(res_auc)

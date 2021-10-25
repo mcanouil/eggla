@@ -141,27 +141,27 @@ visits_long <- melt(
     quietly = FALSE
   )
 ]
-#> [2021-10-25 16:43:39] Begin processing pediatric data...
-#> [2021-10-25 16:43:39] Calculating z-scores...
-#> [2021-10-25 16:43:40] Calculating SD-scores...
-#> [2021-10-25 16:43:40] Re-centering data...
-#> [2021-10-25 16:43:40] Using NHANES reference medians...
-#> [2021-10-25 16:43:40] Note: input data has at least one age-year with < 100 subjects...
-#> [2021-10-25 16:43:40] Cleaning growth data in 1 batch(es)...
-#> [2021-10-25 16:43:40] Processing Batch #1...
-#> [2021-10-25 16:43:40] Preliminarily identify potential extraneous...
-#> [2021-10-25 16:43:40] Identify potentially swapped measurements...
-#> [2021-10-25 16:43:40] Exclude measurements carried forward...
-#> [2021-10-25 16:43:40] Exclude extreme measurements based on SD...
-#> [2021-10-25 16:43:40] Exclude extreme measurements based on EWMA...
-#> [2021-10-25 16:43:40] Exclude extraneous based on EWMA...
-#> [2021-10-25 16:43:40] Exclude moderate errors based on EWMA...
-#> [2021-10-25 16:43:44] Exclude heights based on growth velocity...
-#> [2021-10-25 16:43:46] Exclude single measurements and pairs...
-#> [2021-10-25 16:43:46] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-10-25 16:43:47] Completed Batch #1...
-#> [2021-10-25 16:43:47] Done with pediatric data!
-#> [2021-10-25 16:43:47] No adult data. Moving to postprocessing...
+#> [2021-10-25 17:26:22] Begin processing pediatric data...
+#> [2021-10-25 17:26:23] Calculating z-scores...
+#> [2021-10-25 17:26:23] Calculating SD-scores...
+#> [2021-10-25 17:26:23] Re-centering data...
+#> [2021-10-25 17:26:23] Using NHANES reference medians...
+#> [2021-10-25 17:26:23] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-10-25 17:26:23] Cleaning growth data in 1 batch(es)...
+#> [2021-10-25 17:26:23] Processing Batch #1...
+#> [2021-10-25 17:26:23] Preliminarily identify potential extraneous...
+#> [2021-10-25 17:26:23] Identify potentially swapped measurements...
+#> [2021-10-25 17:26:23] Exclude measurements carried forward...
+#> [2021-10-25 17:26:23] Exclude extreme measurements based on SD...
+#> [2021-10-25 17:26:23] Exclude extreme measurements based on EWMA...
+#> [2021-10-25 17:26:24] Exclude extraneous based on EWMA...
+#> [2021-10-25 17:26:25] Exclude moderate errors based on EWMA...
+#> [2021-10-25 17:26:30] Exclude heights based on growth velocity...
+#> [2021-10-25 17:26:36] Exclude single measurements and pairs...
+#> [2021-10-25 17:26:36] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-10-25 17:26:38] Completed Batch #1...
+#> [2021-10-25 17:26:38] Done with pediatric data!
+#> [2021-10-25 17:26:38] No adult data. Moving to postprocessing...
 visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param,
@@ -243,136 +243,36 @@ ggplot() +
 
 ### Residuals
 
-    ```r
-    plot_residuals(
-      x = "age",
-      y = "log(bmi)",
-      fit = res,
-      variables_unit = list(age = "years", bmi = "kg/m²")
-    ) +
-      plot_annotation(
-        title = "Cubic Splines (Random Linear Splines) - BMI - Female",
-        tag_levels = "A"
-      )
-    ```
+``` r
+plot_residuals(
+  x = "age",
+  y = "log(bmi)",
+  fit = res,
+  variables_unit = list(age = "years", bmi = "kg/m²")
+) +
+  plot_annotation(
+    title = "Cubic Splines (Random Linear Splines) - BMI - Female",
+    tag_levels = "A"
+  )
+```
 
-    <img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ### Predicted average slopes
 
 ``` r
-res_pred_slopes <- predict_average_slopes(
+res_pred_slopes <- egg_slopes(
   fit = res,
-  method = "cubic_splines",
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
 head(res_pred_slopes)
 #>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6 pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5 slope_6--10 slope_12--17
-#> 1 082      2.778006        2.976054        3.182224     5.2907551     6.8812493     20.9519265      34.424008      97.919239    0.3960961  0.602437412  3.51766931   12.6990460
-#> 2 083      2.617273        2.797292        2.848834     2.4998666     2.2791658     -0.2564255      -2.868036     -15.437107    0.3600383 -0.099705014 -0.63389782   -2.5138142
-#> 3 080      2.634690        2.818808        2.893454     2.9086731     2.9508104      2.7747475       2.452312       0.788656    0.3682351  0.004348234 -0.04401571   -0.3327312
-#> 4 031      2.540167        2.705490        2.664957     0.8611134    -0.4161378    -12.4969440     -24.364382     -80.930349    0.3306469 -0.515383889 -3.02020155  -11.3131932
-#> 5 007      2.638875        2.841808        2.974785     3.8913017     4.5500573      9.5968827      14.366314      37.461554    0.4058660  0.261861938  1.26170633    4.6190480
-#> 6 033      2.630668        2.804737        2.847105     2.3627886     2.0616905     -1.0360734      -4.205708     -19.689278    0.3481373 -0.138376036 -0.77444097   -3.0967139
+#> 1 082      2.778006        2.959951        3.037129      3.092756      3.174435       3.453177       3.563087       3.793297    0.3638897  0.015893264  0.06968560   0.04604207
+#> 2 083      2.617273        2.801198        2.882337      2.951825      3.037464       3.332048       3.449879       3.699892    0.3678502  0.019853743  0.07364608   0.05000255
+#> 3 080      2.634690        2.820459        2.905287      2.987686      3.077014       3.386354       3.511562       3.780019    0.3715390  0.023542526  0.07733486   0.05369133
+#> 4 031      2.540167        2.719237        2.790665      2.826167      2.902096       3.157839       3.256249       3.457710    0.3581398  0.010143374  0.06393571   0.04029218
+#> 5 007      2.638875        2.842205        2.962154      3.167477      3.291927       3.741751       3.937202       4.381265    0.4066602  0.058663771  0.11245611   0.08881258
+#> 6 033      2.630668        2.807273        2.873772      2.892021      2.963021       3.199046       3.287597       3.464411    0.3532104  0.005213961  0.05900630   0.03536277
 ```
 
 ``` r
@@ -402,118 +302,18 @@ ggplot(
 ### Area under the curve
 
 ``` r
-res_auc <- compute_auc(
+res_auc <- egg_auc(
   fit = res,
-  method = "cubic_splines",
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
-
-#> Warning in fxef + as.numeric(rnef[i, ]): longer object length is not a multiple of shorter object length
 head(res_auc)
-#>    ID auc_0--0.5 auc_1.5--5  auc_6--10  auc_12--17
-#> 1 082   1.442592  13.643044  50.906453  309.546353
-#> 2 083   1.359382   9.427155   5.109394  -41.152079
-#> 3 080   1.368925  10.037208  11.700014    9.003379
-#> 4 031   1.317984   6.972776 -21.449909 -243.650962
-#> 5 007   1.375586  11.457524  26.817790  122.090360
-#> 6 033   1.364491   9.246099   3.268964  -54.156793
+#>    ID auc_0--0.5 auc_1.5--5 auc_6--10 auc_12--17
+#> 1 082   1.439909  10.587170  13.32182   18.63462
+#> 2 083   1.360037  10.069653  12.80563   18.11809
+#> 3 080   1.369207  10.172574  12.99334   18.47262
+#> 4 031   1.320271   9.689328  12.18647   17.02856
+#> 5 007   1.375690  10.586726  14.13396   21.03983
+#> 6 033   1.364905   9.950009  12.39073   17.12369
 ```
 
 ``` r

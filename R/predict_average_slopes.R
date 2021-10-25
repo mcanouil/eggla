@@ -9,7 +9,7 @@
 #' @export
 predict_average_slopes <- function(
   fit,
-  method = "cubic_splines",
+  method,
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
   knots = list(
     "cubic_slope" = NULL,
@@ -31,14 +31,16 @@ predict_average_slopes <- function(
   pred <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period))
   colnames(pred) <- paste0("pred_period_", round(period, digits = 1))
 
-  fxef <- as.numeric(nlme::fixef(fit))
+  fxef <- nlme::fixef(fit)
+  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)", names(fxef))])
   rnef <- nlme::ranef(fit)
+  rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)", names(rnef))]
 
   switch(
     EXPR = as.character(method),
     "cubic_slope" = {
       for (i in seq_along(unique(fit$data[["ID"]]))) {
-        coeff <- fxef + as.numeric(rnef[i, ])
+        coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           x1 <- period[j * 2 - 1]
           y1 <- sum(coeff * mapply("^", rep(x1, length(coeff)), seq_along(coeff) - 1))
@@ -55,7 +57,7 @@ predict_average_slopes <- function(
     },
     "linear_splines" = {
       for (i in seq_along(unique(fit$data[["ID"]]))) {
-        coeff <- fxef + as.numeric(rnef[i, ])
+        coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           x1 <- period[j * 2 - 1]
           x1_pos <- findInterval(x1, knots, left.open = TRUE)
@@ -74,7 +76,7 @@ predict_average_slopes <- function(
     },
     "cubic_splines" = {
       for (i in seq_along(unique(fit$data[["ID"]]))) {
-        coeff <- fxef + as.numeric(rnef[i, ])
+        coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           x1 <- period[j * 2 - 1]
           y1_tmp <- coeff * c(x1^0, x1^1, x1^2, x1^3, (x1 - knots)^3) / c(1, 1, 2, rep(6, 4))
