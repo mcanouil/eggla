@@ -30,6 +30,10 @@ Consortium.
 -   [Run A Complete Analysis](#run-a-complete-analysis)
     -   [Without Daymont’s QC](#without-daymonts-qc)
     -   [With Daymont’s QC](#with-daymonts-qc)
+-   [Run The Cubic Splines (Random Linear Splines)
+    Analysis](#run-the-cubic-splines-random-linear-splines-analysis)
+    -   [Without Daymont’s QC](#without-daymonts-qc)
+    -   [With Daymont’s QC](#with-daymonts-qc)
 -   [License](#license)
 -   [Code of Conduct](#code-of-conduct)
 
@@ -43,7 +47,7 @@ Consortium.
 remotes::install_github("mcanouil/eggla")
 
 # Or a particular version:
-remotes::install_github("mcanouil/eggla@v0.3.0")
+remotes::install_github("mcanouil/eggla@v0.4.0")
 ```
 
 ## Hands on **eggla**
@@ -51,6 +55,7 @@ remotes::install_github("mcanouil/eggla@v0.3.0")
 ``` r
 library(eggla)
 library(data.table)
+#> data.table 1.14.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
 library(ggplot2)
 library(patchwork)
 library(broom.mixed)
@@ -353,13 +358,13 @@ file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
 <!-- ) -->
 <!-- ``` -->
 
-## Run A Complete Analysis
+## Run A Complete Analysis With All Models
 
 ### Without Daymont’s QC
 
 ``` r
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.3.0")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
 library(eggla)
 library(broom.mixed)
 library(data.table)
@@ -491,7 +496,7 @@ if (!inherits(res, "try-error")) {
 
 ``` r
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.3.0")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
 library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
@@ -530,27 +535,27 @@ visits_long <- melt(
     quietly = FALSE
   )
 ]
-#> [2021-10-12 13:01:52] Begin processing pediatric data...
-#> [2021-10-12 13:01:52] Calculating z-scores...
-#> [2021-10-12 13:01:52] Calculating SD-scores...
-#> [2021-10-12 13:01:52] Re-centering data...
-#> [2021-10-12 13:01:52] Using NHANES reference medians...
-#> [2021-10-12 13:01:52] Note: input data has at least one age-year with < 100 subjects...
-#> [2021-10-12 13:01:52] Cleaning growth data in 1 batch(es)...
-#> [2021-10-12 13:01:52] Processing Batch #1...
-#> [2021-10-12 13:01:52] Preliminarily identify potential extraneous...
-#> [2021-10-12 13:01:52] Identify potentially swapped measurements...
-#> [2021-10-12 13:01:53] Exclude measurements carried forward...
-#> [2021-10-12 13:01:53] Exclude extreme measurements based on SD...
-#> [2021-10-12 13:01:53] Exclude extreme measurements based on EWMA...
-#> [2021-10-12 13:01:53] Exclude extraneous based on EWMA...
-#> [2021-10-12 13:01:53] Exclude moderate errors based on EWMA...
-#> [2021-10-12 13:01:57] Exclude heights based on growth velocity...
-#> [2021-10-12 13:02:00] Exclude single measurements and pairs...
-#> [2021-10-12 13:02:00] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-10-12 13:02:01] Completed Batch #1...
-#> [2021-10-12 13:02:01] Done with pediatric data!
-#> [2021-10-12 13:02:01] No adult data. Moving to postprocessing...
+#> [2021-10-25 16:06:28] Begin processing pediatric data...
+#> [2021-10-25 16:06:28] Calculating z-scores...
+#> [2021-10-25 16:06:28] Calculating SD-scores...
+#> [2021-10-25 16:06:28] Re-centering data...
+#> [2021-10-25 16:06:28] Using NHANES reference medians...
+#> [2021-10-25 16:06:28] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-10-25 16:06:28] Cleaning growth data in 1 batch(es)...
+#> [2021-10-25 16:06:28] Processing Batch #1...
+#> [2021-10-25 16:06:28] Preliminarily identify potential extraneous...
+#> [2021-10-25 16:06:28] Identify potentially swapped measurements...
+#> [2021-10-25 16:06:28] Exclude measurements carried forward...
+#> [2021-10-25 16:06:28] Exclude extreme measurements based on SD...
+#> [2021-10-25 16:06:28] Exclude extreme measurements based on EWMA...
+#> [2021-10-25 16:06:29] Exclude extraneous based on EWMA...
+#> [2021-10-25 16:06:29] Exclude moderate errors based on EWMA...
+#> [2021-10-25 16:06:32] Exclude heights based on growth velocity...
+#> [2021-10-25 16:06:34] Exclude single measurements and pairs...
+#> [2021-10-25 16:06:34] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-10-25 16:06:35] Completed Batch #1...
+#> [2021-10-25 16:06:35] Done with pediatric data!
+#> [2021-10-25 16:06:35] No adult data. Moving to postprocessing...
 visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param,
@@ -691,6 +696,153 @@ compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model
 #> cubic_splines_model  |   lme |      0.885 |      0.745 | 0.550 | 0.069 | 0.083 |  0.060 | < 0.001 |            71.43%
 #> cubic_slope_model    |   lme |      0.878 |      0.738 | 0.534 | 0.071 | 0.086 |  0.726 |   0.773 |            53.29%
 #> linear_splines_model |   lme |      0.873 |      0.738 | 0.514 | 0.072 | 0.088 |  0.214 |   0.227 |             8.14%
+```
+
+## Run The Cubic Splines (Random Linear Splines) Analysis
+
+### Without Daymont’s QC
+
+``` r
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
+library(eggla)
+library(broom.mixed)
+library(data.table)
+
+data("bmigrowth")
+bmigrowth <- as.data.table(bmigrowth)
+
+res <- egg_model(
+  formula = log(bmi) ~ age,
+  data = bmigrowth[sex == 0]
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
+#>   data = data,
+#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+sres <- tidy(res)
+sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 11 x 8
+#>    effect   group    term                     estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>                       <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)                2.65     0.0148    478    179.    0       
+#>  2 fixed    fixed    gsp(...)D1(0)              0.500    0.0306    478     16.3   5.41e-48
+#>  3 fixed    fixed    gsp(...)D2(0)             -0.603    0.0404    478    -14.9   1.47e-41
+#>  4 fixed    fixed    gsp(...)D3(0)              0.331    0.0225    478     14.7   1.39e-40
+#>  5 fixed    fixed    gsp(...)C(2).3            -0.345    0.0238    478    -14.5   1.47e-39
+#>  6 fixed    fixed    gsp(...)C(8).3             0.0239   0.00499   478      4.78  2.33e- 6
+#>  7 fixed    fixed    gsp(...)C(12).3           -0.0278   0.0121    478     -2.30  2.21e- 2
+#>  8 ran_pars ID       sd_(Intercept)             0.0727  NA          NA     NA    NA       
+#>  9 ran_pars ID       cor_gsp(...).(Intercept)  -0.376   NA          NA     NA    NA       
+#> 10 ran_pars ID       sd_gsp(...)                0.0170  NA          NA     NA    NA       
+#> 11 ran_pars Residual sd_Observation             0.0834  NA          NA     NA    NA
+```
+
+### With Daymont’s QC
+
+``` r
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
+library(eggla)
+# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
+library(growthcleanr)
+library(broom.mixed)
+library(data.table)
+
+data("bmigrowth")
+pheno_dt <- as.data.table(bmigrowth)[
+  j = `:=`(
+    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+    "WEIGHTKG" = as.numeric(weight),
+    "HEIGHTCM" = as.numeric(height)
+  )
+][
+  j = `:=`(# recode sex with Male = 0 and Female = 1...
+    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
+  )
+]
+
+visits_long <- melt(
+  data = pheno_dt,
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+  variable.name = "param",
+  value.name = "measurement"
+)[
+  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+    subjid = ID,
+    param = param,
+    agedays = agedays,
+    sex = sex_daymont,
+    measurement = measurement,
+    quietly = FALSE
+  )
+]
+#> [2021-10-25 16:06:48] Begin processing pediatric data...
+#> [2021-10-25 16:06:48] Calculating z-scores...
+#> [2021-10-25 16:06:48] Calculating SD-scores...
+#> [2021-10-25 16:06:48] Re-centering data...
+#> [2021-10-25 16:06:48] Using NHANES reference medians...
+#> [2021-10-25 16:06:48] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-10-25 16:06:48] Cleaning growth data in 1 batch(es)...
+#> [2021-10-25 16:06:48] Processing Batch #1...
+#> [2021-10-25 16:06:48] Preliminarily identify potential extraneous...
+#> [2021-10-25 16:06:48] Identify potentially swapped measurements...
+#> [2021-10-25 16:06:48] Exclude measurements carried forward...
+#> [2021-10-25 16:06:48] Exclude extreme measurements based on SD...
+#> [2021-10-25 16:06:49] Exclude extreme measurements based on EWMA...
+#> [2021-10-25 16:06:49] Exclude extraneous based on EWMA...
+#> [2021-10-25 16:06:49] Exclude moderate errors based on EWMA...
+#> [2021-10-25 16:06:52] Exclude heights based on growth velocity...
+#> [2021-10-25 16:06:54] Exclude single measurements and pairs...
+#> [2021-10-25 16:06:54] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-10-25 16:06:56] Completed Batch #1...
+#> [2021-10-25 16:06:56] Done with pediatric data!
+#> [2021-10-25 16:06:56] No adult data. Moving to postprocessing...
+visits_clean <- dcast(
+  data = visits_long[clean %in% "Include"], # Exclude all flags
+  formula = ... ~ param,
+  value.var = "measurement"
+)[
+  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
+][
+  !is.na(bmi) # exclude missing BMI related to measurements exclusion
+]
+
+res <- egg_model(
+  formula = log(bmi) ~ age,
+  data = visits_clean[sex_daymont == 1]
+)
+#> nlme::lme(
+#>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
+#>   data = data,
+#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,
+#>   na.action = stats::na.omit,
+#>   method = "ML",
+#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#> )
+sres <- tidy(res)
+sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+#> # A tibble: 11 x 8
+#>    effect   group    term                     estimate std.error    df statistic       p.value
+#>    <chr>    <chr>    <chr>                       <dbl>     <dbl> <dbl>     <dbl>         <dbl>
+#>  1 fixed    fixed    (Intercept)                2.76     0.0223    409    124.    0           
+#>  2 fixed    fixed    gsp(...)D1(0)              0.240    0.0463    409      5.19  0.000000332 
+#>  3 fixed    fixed    gsp(...)D2(0)             -0.305    0.0566    409     -5.39  0.000000121 
+#>  4 fixed    fixed    gsp(...)D3(0)              0.175    0.0306    409      5.72  0.0000000205
+#>  5 fixed    fixed    gsp(...)C(2).3            -0.185    0.0318    409     -5.82  0.0000000121
+#>  6 fixed    fixed    gsp(...)C(8).3             0.0167   0.00452   409      3.70  0.000244    
+#>  7 fixed    fixed    gsp(...)C(12).3           -0.0201   0.0107    409     -1.89  0.0601      
+#>  8 ran_pars ID       sd_(Intercept)             0.0861  NA          NA     NA    NA           
+#>  9 ran_pars ID       cor_gsp(...).(Intercept)  -0.387   NA          NA     NA    NA           
+#> 10 ran_pars ID       sd_gsp(...)                0.0160  NA          NA     NA    NA           
+#> 11 ran_pars Residual sd_Observation             0.0714  NA          NA     NA    NA
 ```
 
 ## License
