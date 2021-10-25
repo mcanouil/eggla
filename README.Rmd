@@ -27,19 +27,14 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 ---
 
 * [Installation](#installation)
-* [Hands on `eggla`](#hands-on-eggla)
+* [Run The Cubic Splines (Random Linear Splines) Analysis](#run-the-cubic-splines-random-linear-splines-analysis)
+    + [Setup](#setup)
     + [Data](#data)
-    + [Modelling](#modelling)
+    + [Modelling female](#modelling-female)
+    + [Predicted values](#predicted-values)
     + [Residuals](#residuals)
     + [Predicted Average Slopes](#predicted-average-slopes)
     + [Area Under The Curves](#area-under-the-curves)
-    + [Render Analyses As Rmarkdown](#render-analyses-as-rmarkdown)
-* [Run A Complete Analysis](#run-a-complete-analysis)
-    + [Without Daymont's QC](#without-daymonts-qc)
-    + [With Daymont's QC](#with-daymonts-qc)
-* [Run The Cubic Splines (Random Linear Splines) Analysis](#run-the-cubic-splines-random-linear-splines-analysis)
-    + [Without Daymont's QC](#without-daymonts-qc)
-    + [With Daymont's QC](#with-daymonts-qc)
 * [License](#license)
 * [Code of Conduct](#code-of-conduct)
 
@@ -56,14 +51,18 @@ remotes::install_github("mcanouil/eggla")
 remotes::install_github("mcanouil/eggla@v0.4.0")
 ```
 
-## Hands on **eggla**
+## Run The Cubic Splines (Random Linear Splines) Analysis
+
+### Setup
 
 ```{r}
+# install.packages("remotes")
+# remotes::install_github("mcanouil/eggla@v0.4.0")
 library(eggla)
-library(data.table)
-library(ggplot2)
-library(patchwork)
+# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
+library(growthcleanr)
 library(broom.mixed)
+library(data.table)
 ```
 
 ### Data
@@ -77,128 +76,141 @@ library(broom.mixed)
 * `height` (`integer`): height in centimetres.
 * `bmi` (`numeric`): Body Mass Index in kilograms per quare metre.
 
-```{r}
-data("bmigrowth")
-bmigrowth <- as.data.table(bmigrowth)
-bmigrowth[bmigrowth[["ID"]] == "001"]
-```
-
-```{r}
-ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
-  geom_path(na.rm = TRUE, alpha = 0.25) +
-  geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
-  stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
-  theme(legend.position = "none") +
-  labs(x = "AGE (years)", y = "BMI (kg/m²)") +
-  facet_grid(
-    cols = vars(sex),
-    margins = TRUE,
-    labeller = labeller(
-      .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+  ```{r}
+  data("bmigrowth")
+  bmigrowth <- as.data.table(bmigrowth)
+  ```
+  ```{r}
+  bmigrowth[bmigrowth[["ID"]] == "001"]
+  ```
+  ```{r}
+  ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
+    geom_path(na.rm = TRUE, alpha = 0.25) +
+    geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
+    stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+    theme(legend.position = "none") +
+    labs(x = "AGE (years)", y = "BMI (kg/m²)") +
+    facet_grid(
+      cols = vars(sex),
+      margins = TRUE,
+      labeller = labeller(
+        .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+      )
     )
-  )
-```
+  ```
 
-### Modelling
+a. With Daymont's QC
+    ```{r}
+    pheno_dt <- bmigrowth[
+      j = `:=`(
+        "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+        "WEIGHTKG" = as.numeric(weight),
+        "HEIGHTCM" = as.numeric(height)
+      )
+    ][
+      j = `:=`(# recode sex with Male = 0 and Female = 1...
+        "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
+      )
+    ]
 
-**eggla** includes three models, namely `cubic_slope`, `linear_splines` and `cubic_splines`, all implemented with the R package `nlme`.
-
-* `x` and `y`, the variables as character with possible transformation.
-* `data`, the data in which the variables are.
-* `method`, the method or model to be performed.
-* `knots`, the knots for "splines" methods.
-    Default is the following:
-    ```{r, eval = FALSE}
-    knots = list(
-      "cubic_slope" = NULL,
-      "linear_splines" = c(5.5, 11),
-      "cubic_splines" = c(2, 8, 12)
-    )[[method]]
+    visits_long <- melt(
+      data = pheno_dt,
+      id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
+      measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+      variable.name = "param",
+      value.name = "measurement"
+    )[
+      j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+        subjid = ID,
+        param = param,
+        agedays = agedays,
+        sex = sex_daymont,
+        measurement = measurement,
+        quietly = FALSE
+      )
+    ]
+    visits_clean <- dcast(
+      data = visits_long[clean %in% "Include"], # Exclude all flags
+      formula = ... ~ param,
+      value.var = "measurement"
+    )[
+      j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
+    ][
+      !is.na(bmi) # exclude missing BMI related to measurements exclusion
+    ]
     ```
 
-```{r}
-ls_mod <- time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = NULL,
-  data = bmigrowth[sex == 0],
-  method = "linear_splines"
-)
-```
+b. Without Daymont's QC
+    ```{r, eval = FALSE}
+    pheno_dt <- bmigrowth
+    ```
 
-Also possible to provides additional covariates (and their transformation), as long as they are available in the dataset.
-```{r, eval = FALSE}
-time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = c("height", "log(weight)"),
-  data = bmigrowth[sex == 0],
-  method = "linear_splines"
-)
-```
-
-The results of `time_model` is an `lme` object, on which any usual methods can be applied, *e.g.*, `summary()` or `coefficients()`.
+### Modelling female
 
 ```{r}
-class(ls_mod)
-tidy(ls_mod)
+pheno_dt_female <- pheno_dt[sex_daymont == 1]
 ```
+
+```{r}
+res <- egg_model(
+  formula = log(bmi) ~ age, # covariates can be added after the term used for the time component, e.g., `log(bmi) ~ age + covariate`
+  data = pheno_dt_female
+)
+class(res)
+sres <- tidy(res)
+sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+```
+
+### Predicted values
 
 ```{r}
 ggplot() +
   aes(x = age, y = bmi) +
   stat_smooth(
-    data = bmigrowth[sex == 0],
+    data = pheno_dt_female,
     mapping = aes(colour = "Loess"),
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
-    data = data.table(age = seq(min(bmigrowth[["age"]]), max(bmigrowth[["age"]]), 0.1))[
-      j = bmi := exp(predict(ls_mod, .SD, level = 0)),
+    data = data.table(age = seq(min(pheno_dt_female[["age"]]), max(pheno_dt_female[["age"]]), 0.1))[
+      j = bmi := exp(predict(res, .SD, level = 0)),
       .SDcols = "age"
     ],
-    mapping = aes(colour = "Linear Splines"),
+    mapping = aes(colour = "Cubic Splines (Random Linear Splines)"),
   ) +
   labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
 ```
 
 ### Residuals
+    ```{r}
+    plot_residuals(
+      x = "age",
+      y = "log(bmi)",
+      fit = res,
+      variables_unit = list(age = "years", bmi = "kg/m²")
+    ) +
+      plot_annotation(
+        title = "Cubic Splines (Random Linear Splines) - BMI - Female",
+        tag_levels = "A"
+      )
+    ```
 
-Different plots are available for model diagnostic, using the residuals mostly.
-
-```{r}
-plot_residuals(
-  x = "age",
-  y = "log(bmi)",
-  fit = ls_mod,
-  variables_unit = list(age = "years", bmi = "kg/m²")
-) +
-  plot_annotation(
-    title = "LINEAR SPLINES - BMI - Female",
-    tag_levels = "A"
-  )
-```
-
-### Predicted Average Slopes
+### Predicted average slopes
 
 ```{r}
-ls_pred_slopes <- predict_average_slopes(
-  fit = ls_mod,
-  method = "linear_splines",
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)#,
-  # knots = list(
-  #   "cubic_slope" = NULL,
-  #   "linear_splines" = c(5.5, 11),
-  #   "cubic_splines" = c(2, 8, 12)
-  # )[[method]]
+res_pred_slopes <- predict_average_slopes(
+  fit = res,
+  method = "cubic_splines",
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
-head(ls_pred_slopes)
+head(res_pred_slopes)
 ```
 
 ```{r}
 ggplot(
   data = melt(
-    data = setDT(ls_pred_slopes),
+    data = setDT(res_pred_slopes),
     id.vars = c("ID"),
     measure.vars = patterns("^slope_"),
     variable.name = "period_interval",
@@ -217,26 +229,21 @@ ggplot(
   labs(x = "Predicted Slope", y = "Count")
 ```
 
-### Area Under The Curves
+### Area under the curve
 
 ```{r}
-ls_auc <- compute_auc(
-  fit = ls_mod,
-  method = "linear_splines",
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)#,
-  # knots = list(
-  #   "cubic_slope" = NULL,
-  #   "linear_splines" = c(5.5, 11),
-  #   "cubic_splines" = c(2, 8, 12)
-  # )[[method]]
+res_auc <- compute_auc(
+  fit = res,
+  method = "cubic_splines",
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
-head(ls_auc)
+head(res_auc)
 ```
 
 ```{r}
 ggplot(
   data = melt(
-    data = setDT(ls_auc),
+    data = setDT(res_auc),
     id.vars = "ID",
     measure.vars = patterns("^auc_"),
     variable.name = "period_interval",
@@ -253,283 +260,6 @@ ggplot(
   scale_y_continuous(expand = expansion(c(0, 0.1))) +
   facet_grid(cols = vars(period_interval), scales = "free") +
   labs(x = "Area Under The Curve (AUC)", y = "Count")
-```
-
-### Render Analyses As Rmarkdown
-
-```{r, eval = FALSE}
-library(eggla)
-data("bmigrowth")
-
-file.copy(
-  from = system.file("rmarkdown", "templates", "eggla", "skeleton", "skeleton.Rmd", package = "eggla"),
-  to = file.path(tempdir(), "eggla.Rmd"),
-  overwrite = TRUE
-)
-
-rmarkdown::render(
-  input = file.path(tempdir(), "eggla.Rmd"),
-  params = list(
-    cohort_name =  "BMI Growth (Demo)",
-    phenotypes = bmigrowth,
-    trait = "bmi",
-    covariates =  NULL,
-    daymont_qc = TRUE,
-    daymont_flags_exclude = TRUE,
-    output_directory = tempdir()
-  )
-)
-
-file.copy(file.path(tempdir(), "eggla.html"), "eggla.html")
-```
-
-<!-- ```{r, eval = FALSE} -->
-<!-- run_eggla( -->
-<!--   phenotypes = bmigrowth, -->
-<!--   trait = "bmi", -->
-<!--   cohort_name = "cohort", -->
-<!--   output_directory = tempdir() -->
-<!-- ) -->
-<!-- ``` -->
-
-## Run A Complete Analysis With All Models
-
-### Without Daymont's QC
-
-```{r, error = TRUE}
-# install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.4.0")
-library(eggla)
-library(broom.mixed)
-library(data.table)
-data("bmigrowth")
-
-bmigrowth <- as.data.table(bmigrowth)
-
-## Linear Splines
-res <- try(time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = NULL,
-  data = bmigrowth[sex == 0],
-  method = "linear_splines"
-))
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
-  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-  sres
-}
-
-## Cubic Splines
-res <- try(time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = NULL,
-  data = bmigrowth[sex == 0],
-  method = "cubic_splines"
-))
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
-  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-  sres
-}
-
-## Cubic Slope
-res <- try(time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = NULL,
-  data = bmigrowth[sex == 0],
-  method = "cubic_slope"
-))
-if (!inherits(res, "try-error")) {
-  sres <- tidy(res)
-  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-  sres
-}
-```
-
-### With Daymont's QC
-
-```{r, error = TRUE}
-# install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.4.0")
-library(eggla)
-# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
-library(growthcleanr)
-library(broom.mixed)
-library(data.table)
-
-data("bmigrowth")
-pheno_dt <- as.data.table(bmigrowth)
-pheno_dt[
-  j = `:=`(
-    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
-    "WEIGHTKG" = as.numeric(weight),
-    "HEIGHTCM" = as.numeric(height)
-  )
-]
-
-pheno_dt[# recode sex with Male = 0 and Female = 1...
-  j = `:=`(
-    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
-  )
-]
-
-visits_long <- melt(
-  data = pheno_dt,
-  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
-  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
-  variable.name = "param",
-  value.name = "measurement"
-)[
-  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
-    subjid = ID,
-    param = param,
-    agedays = agedays,
-    sex = sex_daymont,
-    measurement = measurement,
-    quietly = FALSE
-  )
-]
-visits_clean <- dcast(
-  data = visits_long[clean %in% "Include"], # Exclude all flags
-  formula = ... ~ param,
-  value.var = "measurement"
-)[
-  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
-][
-  !is.na(bmi) # exclude missing BMI related to measurements exclusion
-]
-
-## Linear Splines
-linear_splines_model <- try(time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1],
-  method = "linear_splines"
-))
-if (!inherits(linear_splines_model, "try-error")) {
-  sres <- tidy(linear_splines_model)
-  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-  sres
-}
-
-## Cubic Splines
-cubic_splines_model <- try(time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1],
-  method = "cubic_splines"
-))
-if (!inherits(cubic_splines_model, "try-error")) {
-  sres <- tidy(cubic_splines_model)
-  sres[["term"]] <- gsub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-  sres
-}
-
-## Cubic Slope
-cubic_slope_model <- try(time_model(
-  x = "age",
-  y = "log(bmi)",
-  cov = NULL,
-  data = visits_clean[sex_daymont == 1],
-  method = "cubic_slope"
-))
-if (!inherits(cubic_slope_model, "try-error")) {
-  sres <- tidy(cubic_slope_model)
-  sres[["term"]] <- gsub("stats::poly\\(.*[0-9]\\)", "poly(...)", sres[["term"]]) # simplify output
-  sres
-}
-```
-
-```{r}
-library(performance)
-compare_performance(linear_splines_model, cubic_splines_model, cubic_slope_model, rank = TRUE)
-```
-
-## Run The Cubic Splines (Random Linear Splines) Analysis
-
-### Without Daymont's QC
-
-```{r, error = TRUE}
-# install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.4.0")
-library(eggla)
-library(broom.mixed)
-library(data.table)
-
-data("bmigrowth")
-bmigrowth <- as.data.table(bmigrowth)
-
-res <- egg_model(
-  formula = log(bmi) ~ age,
-  data = bmigrowth[sex == 0]
-)
-sres <- tidy(res)
-sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-sres
-```
-
-### With Daymont's QC
-
-```{r, error = TRUE}
-# install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.4.0")
-library(eggla)
-# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
-library(growthcleanr)
-library(broom.mixed)
-library(data.table)
-
-data("bmigrowth")
-pheno_dt <- as.data.table(bmigrowth)[
-  j = `:=`(
-    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
-    "WEIGHTKG" = as.numeric(weight),
-    "HEIGHTCM" = as.numeric(height)
-  )
-][
-  j = `:=`(# recode sex with Male = 0 and Female = 1...
-    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
-  )
-]
-
-visits_long <- melt(
-  data = pheno_dt,
-  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
-  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
-  variable.name = "param",
-  value.name = "measurement"
-)[
-  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
-    subjid = ID,
-    param = param,
-    agedays = agedays,
-    sex = sex_daymont,
-    measurement = measurement,
-    quietly = FALSE
-  )
-]
-visits_clean <- dcast(
-  data = visits_long[clean %in% "Include"], # Exclude all flags
-  formula = ... ~ param,
-  value.var = "measurement"
-)[
-  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based on QC variables
-][
-  !is.na(bmi) # exclude missing BMI related to measurements exclusion
-]
-
-res <- egg_model(
-  formula = log(bmi) ~ age,
-  data = visits_clean[sex_daymont == 1]
-)
-sres <- tidy(res)
-sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
-sres
 ```
 
 ## License
