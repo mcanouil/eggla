@@ -110,9 +110,9 @@ egg_slopes <- function(
   colnames(pred) <- paste0("pred_period_", round(period, digits = 1))
 
   fxef <- nlme::fixef(fit)
-  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)", names(fxef))])
+  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))])
   rnef <- nlme::ranef(fit)
-  rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)", names(rnef))]
+  rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
   rnef <- cbind(
     rnef,
@@ -167,9 +167,9 @@ egg_auc <- function(
   )
 
   fxef <- nlme::fixef(fit)
-  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)", names(fxef))])
+  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))])
   rnef <- nlme::ranef(fit)
-  rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)", names(rnef))]
+  rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
   rnef <- cbind(
     rnef,
