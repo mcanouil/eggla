@@ -184,18 +184,19 @@ ggplot() +
 ```
 
 ### Residuals
-    ```{r}
-    plot_residuals(
-      x = "age",
-      y = "log(bmi)",
-      fit = res,
-      variables_unit = list(age = "years", bmi = "kg/m²")
-    ) +
-      plot_annotation(
-        title = "Cubic Splines (Random Linear Splines) - BMI - Female",
-        tag_levels = "A"
-      )
-    ```
+
+```{r}
+plot_residuals(
+  x = "age",
+  y = "log(bmi)",
+  fit = res,
+  variables_unit = list(age = "years", bmi = "kg/m²")
+) +
+  plot_annotation(
+    title = "Cubic Splines (Random Linear Splines) - BMI - Female",
+    tag_levels = "A"
+  )
+```
 
 ### Predicted average slopes
 
