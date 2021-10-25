@@ -29,8 +29,10 @@ compute_auc <- function(
     ), paste, collapse = "--")
   )
 
-  fxef <- as.numeric(nlme::fixef(fit))
+  fxef <- nlme::fixef(fit)
+  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)", names(fxef))])
   rnef <- nlme::ranef(fit)
+  rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)", names(rnef))]
 
   switch(
     EXPR = as.character(method),
@@ -42,7 +44,7 @@ compute_auc <- function(
         )
       }
       for (i in seq_along(unique(fit$data[["ID"]]))) {
-        coeff <- fxef + as.numeric(rnef[i, ])
+        coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           pred_auc[i, j] <- stats::integrate(
             f = y,
@@ -65,7 +67,7 @@ compute_auc <- function(
         )
       }
       for (i in seq_along(unique(fit$data[["ID"]]))) {
-        coeff <- fxef + as.numeric(rnef[i, ])
+        coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
            pred_auc[i, j] <- stats::integrate(
              f = y,
@@ -89,7 +91,7 @@ compute_auc <- function(
         )
       }
       for (i in seq_along(unique(fit$data[["ID"]]))) {
-        coeff <- fxef + as.numeric(rnef[i, ])
+        coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
            pred_auc[i, j] <- stats::integrate(
              f = y,
