@@ -9,7 +9,7 @@
 #' @export
 predict_average_slopes <- function(
   fit,
-  method,
+  method = "cubic_splines",
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
   knots = list(
     "cubic_slope" = NULL,
