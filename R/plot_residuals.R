@@ -3,15 +3,14 @@
 #' @param x A length one character vector with the main covariate name (_i.e._, right-hand side), as defined in `fit`.
 #' @param y A length one character vector with the variable name to be explained (_i.e._, left-hand side), as defined in `fit`.
 #' @param fit A model object from a statistical model such as from a call `nlme::lme()` and `time_model()`.
-#' @param variables_unit The unit of the variable set in `y`.
 #'
 #' @return A `patchwork` `ggplot2` object.
 #' @export
-plot_residuals <- function(x, y, fit, variables_unit) {
+plot_residuals <- function(x, y, fit) {
   .data <- ggplot2::.data
 
   revert_trans <- if (grepl("log", y)) exp else identity
-  y <- gsub("log\\((.*)\\)", "\\1", y)
+  y <- sub("log\\((.*)\\)", "\\1", y)
 
   model_data <- as.data.frame(fit$data)
   model_data[["resid"]] <- stats::residuals(fit, level = 1, type = "p")
@@ -22,8 +21,8 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     ggplot2::geom_point(size = 0.5, alpha = 0.25, shape = 1) +
     ggplot2::stat_smooth(method = "lm", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
     ggplot2::labs(
-      x = paste0("Fitted ", toupper(y), " Values (", variables_unit[[paste0(y, "_unit")]], ")"),
-      y = paste0("Observed ", toupper(y), " Values (", variables_unit[[paste0(y, "_unit")]], ")")
+      x = paste0("Fitted ", toupper(y), " Values"),
+      y = paste0("Observed ", toupper(y), " Values")
     )
 
   plotb <- ggplot2::ggplot(data = model_data) +
@@ -32,7 +31,7 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     ggplot2::stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
     ggplot2::geom_hline(yintercept = 0, linetype = 2, colour = "dodgerblue") +
     ggplot2::labs(
-      x = paste0("Fitted ", toupper(y), " Values (", variables_unit[[paste0(y, "_unit")]], ")"),
+      x = paste0("Fitted ", toupper(y), " Values"),
       y = "Marginal Residuals"
     )
 
@@ -42,7 +41,7 @@ plot_residuals <- function(x, y, fit, variables_unit) {
     ggplot2::stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
     ggplot2::geom_hline(yintercept = 0, linetype = 2, colour = "dodgerblue") +
     ggplot2::labs(
-      x = paste0("Fitted ", toupper(x), " Values (", variables_unit[[paste0(x, "_unit")]], ")"),
+      x = paste0("Fitted ", toupper(x), " Values"),
       y = "Marginal Residuals"
     )
 

@@ -49,11 +49,14 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 ## Installation
 
 * Install the development version from GitHub:
+
 ```{r, eval = FALSE}
 # install.packages("remotes")
 remotes::install_github("mcanouil/eggla")
+```
 
 * Install a particular version:
+
 ```{r, eval = FALSE}
 # install.packages("remotes")
 remotes::install_github("mcanouil/eggla@v0.3.0")
@@ -212,8 +215,7 @@ ggplot() +
 plot_residuals(
   x = "age",
   y = "log(bmi)",
-  fit = res,
-  variables_unit = list(age = "years", bmi = "kg/m²")
+  fit = res
 ) +
   plot_annotation(
     title = "Cubic Splines (Random Linear Splines) - BMI - Female",

@@ -4,7 +4,7 @@
 \alias{plot_residuals}
 \title{plot_residuals}
 \usage{
-plot_residuals(x, y, fit, variables_unit)
+plot_residuals(x, y, fit)
 }
 \arguments{
 \item{x}{A length one character vector with the main covariate name (\emph{i.e.}, right-hand side), as defined in \code{fit}.}
@@ -12,8 +12,6 @@ plot_residuals(x, y, fit, variables_unit)
 \item{y}{A length one character vector with the variable name to be explained (\emph{i.e.}, left-hand side), as defined in \code{fit}.}
 
 \item{fit}{A model object from a statistical model such as from a call \code{nlme::lme()} and \code{time_model()}.}
-
-\item{variables_unit}{The unit of the variable set in \code{y}.}
 }
 \value{
 A \code{patchwork} \code{ggplot2} object.
