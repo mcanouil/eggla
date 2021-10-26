@@ -429,8 +429,7 @@ mres[
     plot_residuals(
       x = "age",
       y = trait_model,
-      fit = model_results[[1]],
-      variables_unit = variables_unit
+      fit = model_results[[1]]
     ) +
       plot_annotation(
         title = paste(

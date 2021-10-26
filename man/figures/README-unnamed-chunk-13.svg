@@ -595,8 +595,8 @@
 <text x='88.65' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>20</text>
 <text x='118.16' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>30</text>
 <text x='147.68' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>40</text>
-<text x='118.18' y='181.92' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='62.60px' lengthAdjust='spacingAndGlyphs'>Fitted BMI Values ()</text>
-<text transform='translate(25.41,102.24) rotate(-90)' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='75.70px' lengthAdjust='spacingAndGlyphs'>Observed BMI Values ()</text>
+<text x='118.18' y='181.92' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='55.86px' lengthAdjust='spacingAndGlyphs'>Fitted BMI Values</text>
+<text transform='translate(25.41,102.24) rotate(-90)' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='68.96px' lengthAdjust='spacingAndGlyphs'>Observed BMI Values</text>
 <text x='15.65' y='39.56' text-anchor='middle' style='font-size: 13.20px; font-family: Arial;' textLength='8.80px' lengthAdjust='spacingAndGlyphs'>A</text>
 </g>
 <defs>
@@ -1174,7 +1174,7 @@
 <text x='247.70' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='7.65px' lengthAdjust='spacingAndGlyphs'>2.8</text>
 <text x='278.40' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='7.65px' lengthAdjust='spacingAndGlyphs'>3.2</text>
 <text x='309.10' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='7.65px' lengthAdjust='spacingAndGlyphs'>3.6</text>
-<text x='276.88' y='181.92' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='62.60px' lengthAdjust='spacingAndGlyphs'>Fitted BMI Values ()</text>
+<text x='276.88' y='181.92' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='55.86px' lengthAdjust='spacingAndGlyphs'>Fitted BMI Values</text>
 <text transform='translate(201.12,102.24) rotate(-90)' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='60.74px' lengthAdjust='spacingAndGlyphs'>Marginal Residuals</text>
 <text x='191.72' y='39.56' text-anchor='middle' style='font-size: 13.20px; font-family: Arial;' textLength='8.80px' lengthAdjust='spacingAndGlyphs'>B</text>
 </g>
@@ -1755,7 +1755,7 @@
 <text x='412.99' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='3.06px' lengthAdjust='spacingAndGlyphs'>5</text>
 <text x='444.14' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>10</text>
 <text x='475.29' y='172.42' text-anchor='middle' style='font-size: 5.50px; fill: #4D4D4D; font-family: Arial;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>15</text>
-<text x='434.79' y='181.92' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='64.59px' lengthAdjust='spacingAndGlyphs'>Fitted AGE Values ()</text>
+<text x='434.79' y='181.92' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='57.85px' lengthAdjust='spacingAndGlyphs'>Fitted AGE Values</text>
 <text transform='translate(360.54,102.24) rotate(-90)' text-anchor='middle' style='font-size: 7.15px; font-family: Arial;' textLength='60.74px' lengthAdjust='spacingAndGlyphs'>Marginal Residuals</text>
 <text x='350.78' y='39.56' text-anchor='middle' style='font-size: 13.20px; font-family: Arial;' textLength='9.53px' lengthAdjust='spacingAndGlyphs'>C</text>
 </g>
