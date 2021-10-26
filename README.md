@@ -54,7 +54,21 @@ library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
+
 library(data.table)
+
+library(ggplot2)
+library(patchwork)
+# remotes::install_github("eclarke/ggbeeswarm")
+library(ggbeeswarm)
+library(ggdist)
+theme_set(theme_minimal())
+options(
+  ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 0.15, end = 0.85),
+  ggplot2.discrete.fill = function(...) scale_fill_viridis_d(..., begin = 0.15, end = 0.85),
+  ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 0.15, end = 0.85),
+  ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 0.15, end = 0.85)
+)
 ```
 
 ### Data
@@ -108,7 +122,7 @@ library(data.table)
       )
     ```
 
-    <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+    <img src="man/figures/README-unnamed-chunk-6-1.svg" width="100%" />
 
 #### With Daymont’s QC
 
@@ -141,27 +155,27 @@ visits_long <- melt(
     quietly = FALSE
   )
 ]
-#> [2021-10-25 17:26:22] Begin processing pediatric data...
-#> [2021-10-25 17:26:23] Calculating z-scores...
-#> [2021-10-25 17:26:23] Calculating SD-scores...
-#> [2021-10-25 17:26:23] Re-centering data...
-#> [2021-10-25 17:26:23] Using NHANES reference medians...
-#> [2021-10-25 17:26:23] Note: input data has at least one age-year with < 100 subjects...
-#> [2021-10-25 17:26:23] Cleaning growth data in 1 batch(es)...
-#> [2021-10-25 17:26:23] Processing Batch #1...
-#> [2021-10-25 17:26:23] Preliminarily identify potential extraneous...
-#> [2021-10-25 17:26:23] Identify potentially swapped measurements...
-#> [2021-10-25 17:26:23] Exclude measurements carried forward...
-#> [2021-10-25 17:26:23] Exclude extreme measurements based on SD...
-#> [2021-10-25 17:26:23] Exclude extreme measurements based on EWMA...
-#> [2021-10-25 17:26:24] Exclude extraneous based on EWMA...
-#> [2021-10-25 17:26:25] Exclude moderate errors based on EWMA...
-#> [2021-10-25 17:26:30] Exclude heights based on growth velocity...
-#> [2021-10-25 17:26:36] Exclude single measurements and pairs...
-#> [2021-10-25 17:26:36] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-10-25 17:26:38] Completed Batch #1...
-#> [2021-10-25 17:26:38] Done with pediatric data!
-#> [2021-10-25 17:26:38] No adult data. Moving to postprocessing...
+#> [2021-10-26 17:04:19] Begin processing pediatric data...
+#> [2021-10-26 17:04:19] Calculating z-scores...
+#> [2021-10-26 17:04:19] Calculating SD-scores...
+#> [2021-10-26 17:04:19] Re-centering data...
+#> [2021-10-26 17:04:19] Using NHANES reference medians...
+#> [2021-10-26 17:04:19] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-10-26 17:04:19] Cleaning growth data in 1 batch(es)...
+#> [2021-10-26 17:04:19] Processing Batch #1...
+#> [2021-10-26 17:04:19] Preliminarily identify potential extraneous...
+#> [2021-10-26 17:04:19] Identify potentially swapped measurements...
+#> [2021-10-26 17:04:20] Exclude measurements carried forward...
+#> [2021-10-26 17:04:20] Exclude extreme measurements based on SD...
+#> [2021-10-26 17:04:20] Exclude extreme measurements based on EWMA...
+#> [2021-10-26 17:04:21] Exclude extraneous based on EWMA...
+#> [2021-10-26 17:04:21] Exclude moderate errors based on EWMA...
+#> [2021-10-26 17:04:25] Exclude heights based on growth velocity...
+#> [2021-10-26 17:04:28] Exclude single measurements and pairs...
+#> [2021-10-26 17:04:28] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-10-26 17:04:29] Completed Batch #1...
+#> [2021-10-26 17:04:29] Done with pediatric data!
+#> [2021-10-26 17:04:29] No adult data. Moving to postprocessing...
 visits_clean <- dcast(
   data = visits_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param,
@@ -239,7 +253,7 @@ ggplot() +
   labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />
 
 ### Residuals
 
@@ -256,7 +270,7 @@ plot_residuals(
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.svg" width="100%" />
 
 ### Predicted average slopes
 
@@ -276,28 +290,62 @@ head(res_pred_slopes)
 ```
 
 ``` r
-ggplot(
-  data = melt(
-    data = setDT(res_pred_slopes),
-    id.vars = c("ID"),
-    measure.vars = patterns("^slope_"),
-    variable.name = "period_interval",
-    value.name = "slope"
-  )[
-    j = period_interval := factor(
-      x = gsub("slope_", "", period_interval),
-      levels = gsub("slope_", "", unique(period_interval))
-    )
-  ]
+wrap_plots(
+  ggplot(
+    data = melt(
+      data = setDT(res_pred_slopes),
+      id.vars = c("ID"),
+      measure.vars = patterns("^slope_"),
+      variable.name = "period_interval",
+      value.name = "slope"
+    )[
+      j = period_interval := factor(
+        x = gsub("slope_", "", period_interval),
+        levels = gsub("slope_", "", unique(period_interval))
+      )
+    ]
+  ) +
+    aes(x = slope, y = period_interval) +
+    stat_halfeye(
+      mapping = aes(fill = period_interval),
+      justification = -0.30,
+      .width = 0,
+      scale = 0.5
+    ) +
+    geom_boxplot(mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA) +
+    geom_quasirandom(
+      mapping = aes(fill = period_interval, colour = period_interval),
+      # colour = "white",
+      shape = 21,
+      alpha = 0.25,
+      groupOnX = FALSE,
+      width = 0.15#,
+      # side = -1,
+      # cex = 0.5
+    ) +
+    labs(x = "Predicted Slope", y = "Period Interval (years)") +
+    theme(legend.position = "none"),
+  ggplot(
+    data = melt(
+      data = setDT(res_pred_slopes),
+      id.vars = c("ID"),
+      measure.vars = patterns("^pred_period_"),
+      variable.name = "period",
+      value.name = "pred"
+    )[
+      j = period := as.numeric(gsub("pred_period_", "", period))
+    ]
+  ) +
+    aes(x = period, y = pred, colour = factor(ID)) +
+    geom_path() +
+    labs(x = "Age (years)", y = "Predicted Values") +
+    theme(legend.position = "none"),
+    ncol = 2
 ) +
-  aes(x = slope) +
-  geom_histogram(bins = 30) +
-  scale_y_continuous(expand = expansion(c(0, 0.1))) +
-  facet_grid(cols = vars(period_interval), scales = "free") +
-  labs(x = "Predicted Slope", y = "Count")
+  plot_annotation(tag_levels = "A")
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.svg" width="100%" />
 
 ### Area under the curve
 
@@ -320,7 +368,7 @@ head(res_auc)
 ggplot(
   data = melt(
     data = setDT(res_auc),
-    id.vars = "ID",
+    id.vars = c("ID"),
     measure.vars = patterns("^auc_"),
     variable.name = "period_interval",
     value.name = "auc"
@@ -331,14 +379,29 @@ ggplot(
     )
   ]
 ) +
-  aes(x = auc) +
-  geom_histogram(bins = 30) +
-  scale_y_continuous(expand = expansion(c(0, 0.1))) +
-  facet_grid(cols = vars(period_interval), scales = "free") +
-  labs(x = "Area Under The Curve (AUC)", y = "Count")
+  aes(x = auc, y = period_interval) +
+  stat_halfeye(
+    mapping = aes(fill = period_interval),
+    justification = -0.20,
+    .width = 0,
+    scale = 1
+  ) +
+  geom_boxplot(mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA) +
+  geom_quasirandom(
+    mapping = aes(fill = period_interval, colour = period_interval),
+    # colour = "white",
+    shape = 21,
+    alpha = 0.25,
+    groupOnX = FALSE,
+    width = 0.15#,
+    # side = -1,
+    # cex = 0.5
+  ) +
+  labs(x = "Area Under The Curve (AUC)", y = "Period Interval (years)") +
+  theme(legend.position = "none")
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.svg" width="100%" />
 
 ## License
 
