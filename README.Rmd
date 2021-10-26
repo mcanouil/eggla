@@ -10,7 +10,13 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  dev = "svglite"
+  dev = "svglite",
+  fig.process = function(path) {
+    new_path <- sub("-1\\.", ".", path)
+    file.copy(path, new_path, overwrite = TRUE)
+    on.exit(unlink(normalizePath(path)))
+    new_path
+  }
 )
 ```
 
@@ -42,13 +48,15 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 
 ## Installation
 
+* Install the development version from GitHub:
 ```{r, eval = FALSE}
-# Install the development version from GitHub:
 # install.packages("remotes")
 remotes::install_github("mcanouil/eggla")
 
-# Or a particular version:
-remotes::install_github("mcanouil/eggla@v0.4.0")
+* Install a particular version:
+```{r, eval = FALSE}
+# install.packages("remotes")
+remotes::install_github("mcanouil/eggla@v0.3.0")
 ```
 
 ## Run The Cubic Splines (Random Linear Splines) Analysis
@@ -57,14 +65,14 @@ remotes::install_github("mcanouil/eggla@v0.4.0")
 
 ```{r}
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.4.0")
+# remotes::install_github("mcanouil/eggla")
 library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
-
 library(data.table)
 
+# Setup for plots
 library(ggplot2)
 library(patchwork)
 # remotes::install_github("eclarke/ggbeeswarm")
