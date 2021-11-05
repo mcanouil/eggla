@@ -169,7 +169,7 @@ pheno_dt_clean <- dcast(
 #### Without Daymont's QC
 
 ```{r, eval = FALSE}
-pheno_dt <- bmigrowth
+pheno_dt_clean <- bmigrowth
 ```
 
 ### Modelling female
