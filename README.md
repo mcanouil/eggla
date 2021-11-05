@@ -144,7 +144,7 @@ pheno_dt <- bmigrowth[
   )
 ]
 
-visits_long <- melt(
+pheno_dt_long <- melt(
   data = pheno_dt,
   id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
   measure.vars = c("WEIGHTKG", "HEIGHTCM"),
@@ -160,29 +160,29 @@ visits_long <- melt(
     quietly = FALSE
   )
 ]
-#> [2021-10-26 17:34:48] Begin processing pediatric data...
-#> [2021-10-26 17:34:48] Calculating z-scores...
-#> [2021-10-26 17:34:48] Calculating SD-scores...
-#> [2021-10-26 17:34:48] Re-centering data...
-#> [2021-10-26 17:34:48] Using NHANES reference medians...
-#> [2021-10-26 17:34:48] Note: input data has at least one age-year with < 100 subjects...
-#> [2021-10-26 17:34:48] Cleaning growth data in 1 batch(es)...
-#> [2021-10-26 17:34:48] Processing Batch #1...
-#> [2021-10-26 17:34:48] Preliminarily identify potential extraneous...
-#> [2021-10-26 17:34:48] Identify potentially swapped measurements...
-#> [2021-10-26 17:34:48] Exclude measurements carried forward...
-#> [2021-10-26 17:34:48] Exclude extreme measurements based on SD...
-#> [2021-10-26 17:34:48] Exclude extreme measurements based on EWMA...
-#> [2021-10-26 17:34:49] Exclude extraneous based on EWMA...
-#> [2021-10-26 17:34:49] Exclude moderate errors based on EWMA...
-#> [2021-10-26 17:34:53] Exclude heights based on growth velocity...
-#> [2021-10-26 17:34:55] Exclude single measurements and pairs...
-#> [2021-10-26 17:34:55] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-10-26 17:34:56] Completed Batch #1...
-#> [2021-10-26 17:34:56] Done with pediatric data!
-#> [2021-10-26 17:34:56] No adult data. Moving to postprocessing...
-visits_clean <- dcast(
-  data = visits_long[clean %in% "Include"], # Exclude all flags
+#> [2021-11-05 11:52:06] Begin processing pediatric data...
+#> [2021-11-05 11:52:06] Calculating z-scores...
+#> [2021-11-05 11:52:06] Calculating SD-scores...
+#> [2021-11-05 11:52:06] Re-centering data...
+#> [2021-11-05 11:52:06] Using NHANES reference medians...
+#> [2021-11-05 11:52:06] Note: input data has at least one age-year with < 100 subjects...
+#> [2021-11-05 11:52:06] Cleaning growth data in 1 batch(es)...
+#> [2021-11-05 11:52:06] Processing Batch #1...
+#> [2021-11-05 11:52:06] Preliminarily identify potential extraneous...
+#> [2021-11-05 11:52:06] Identify potentially swapped measurements...
+#> [2021-11-05 11:52:07] Exclude measurements carried forward...
+#> [2021-11-05 11:52:07] Exclude extreme measurements based on SD...
+#> [2021-11-05 11:52:07] Exclude extreme measurements based on EWMA...
+#> [2021-11-05 11:52:07] Exclude extraneous based on EWMA...
+#> [2021-11-05 11:52:07] Exclude moderate errors based on EWMA...
+#> [2021-11-05 11:52:10] Exclude heights based on growth velocity...
+#> [2021-11-05 11:52:12] Exclude single measurements and pairs...
+#> [2021-11-05 11:52:12] Exclude all measurements if maximum threshold of errors is exceeded...
+#> [2021-11-05 11:52:13] Completed Batch #1...
+#> [2021-11-05 11:52:13] Done with pediatric data!
+#> [2021-11-05 11:52:13] No adult data. Moving to postprocessing...
+pheno_dt_clean <- dcast(
+  data = pheno_dt_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param,
   value.var = "measurement"
 )[
@@ -201,7 +201,7 @@ pheno_dt <- bmigrowth
 ### Modelling female
 
 ``` r
-pheno_dt_female <- pheno_dt[sex_daymont == 1]
+pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
 ```
 
 ``` r
@@ -223,19 +223,19 @@ sres <- tidy(res)
 sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
 sres
 #> # A tibble: 11 x 8
-#>    effect   group    term                     estimate std.error    df statistic   p.value
-#>    <chr>    <chr>    <chr>                       <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed    fixed    (Intercept)                2.65     0.0148    478    179.    0       
-#>  2 fixed    fixed    gsp(...)D1(0)              0.500    0.0306    478     16.3   5.41e-48
-#>  3 fixed    fixed    gsp(...)D2(0)             -0.603    0.0404    478    -14.9   1.47e-41
-#>  4 fixed    fixed    gsp(...)D3(0)              0.331    0.0225    478     14.7   1.39e-40
-#>  5 fixed    fixed    gsp(...)C(2).3            -0.345    0.0238    478    -14.5   1.47e-39
-#>  6 fixed    fixed    gsp(...)C(8).3             0.0239   0.00499   478      4.78  2.33e- 6
-#>  7 fixed    fixed    gsp(...)C(12).3           -0.0278   0.0121    478     -2.30  2.21e- 2
-#>  8 ran_pars ID       sd_(Intercept)             0.0727  NA          NA     NA    NA       
-#>  9 ran_pars ID       cor_gsp(...).(Intercept)  -0.376   NA          NA     NA    NA       
-#> 10 ran_pars ID       sd_gsp(...)                0.0170  NA          NA     NA    NA       
-#> 11 ran_pars Residual sd_Observation             0.0834  NA          NA     NA    NA
+#>    effect   group    term                     estimate std.error    df statistic       p.value
+#>    <chr>    <chr>    <chr>                       <dbl>     <dbl> <dbl>     <dbl>         <dbl>
+#>  1 fixed    fixed    (Intercept)                2.76     0.0223    409    124.    0           
+#>  2 fixed    fixed    gsp(...)D1(0)              0.240    0.0463    409      5.19  0.000000332 
+#>  3 fixed    fixed    gsp(...)D2(0)             -0.305    0.0566    409     -5.39  0.000000121 
+#>  4 fixed    fixed    gsp(...)D3(0)              0.175    0.0306    409      5.72  0.0000000205
+#>  5 fixed    fixed    gsp(...)C(2).3            -0.185    0.0318    409     -5.82  0.0000000121
+#>  6 fixed    fixed    gsp(...)C(8).3             0.0167   0.00452   409      3.70  0.000244    
+#>  7 fixed    fixed    gsp(...)C(12).3           -0.0201   0.0107    409     -1.89  0.0601      
+#>  8 ran_pars ID       sd_(Intercept)             0.0861  NA          NA     NA    NA           
+#>  9 ran_pars ID       cor_gsp(...).(Intercept)  -0.387   NA          NA     NA    NA           
+#> 10 ran_pars ID       sd_gsp(...)                0.0160  NA          NA     NA    NA           
+#> 11 ran_pars Residual sd_Observation             0.0714  NA          NA     NA    NA
 ```
 
 ### Predicted values
@@ -285,12 +285,12 @@ res_pred_slopes <- egg_slopes(
 )
 head(res_pred_slopes)
 #>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6 pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5 slope_6--10 slope_12--17
-#> 1 082      2.778006        2.959951        3.037129      3.092756      3.174435       3.453177       3.563087       3.793297    0.3638897  0.015893264  0.06968560   0.04604207
-#> 2 083      2.617273        2.801198        2.882337      2.951825      3.037464       3.332048       3.449879       3.699892    0.3678502  0.019853743  0.07364608   0.05000255
-#> 3 080      2.634690        2.820459        2.905287      2.987686      3.077014       3.386354       3.511562       3.780019    0.3715390  0.023542526  0.07733486   0.05369133
-#> 4 031      2.540167        2.719237        2.790665      2.826167      2.902096       3.157839       3.256249       3.457710    0.3581398  0.010143374  0.06393571   0.04029218
-#> 5 007      2.638875        2.842205        2.962154      3.167477      3.291927       3.741751       3.937202       4.381265    0.4066602  0.058663771  0.11245611   0.08881258
-#> 6 033      2.630668        2.807273        2.873772      2.892021      2.963021       3.199046       3.287597       3.464411    0.3532104  0.005213961  0.05900630   0.03536277
+#> 1 001      2.896950        2.982138        3.011172      3.093593      3.168655       3.443546       3.558354       3.764686    0.1703750   0.02354874  0.06872264   0.04126650
+#> 2 004      2.758294        2.841876        2.867700      2.938884      3.010736       3.272785       3.381172       3.571453    0.1671645   0.02033832  0.06551222   0.03805608
+#> 3 005      2.731514        2.821683        2.860679      2.977967      3.062991       3.377730       3.512462       3.768604    0.1803370   0.03351077  0.07868467   0.05122853
+#> 4 006      2.645488        2.729430        2.755975      2.829683      2.902255       3.167188       3.277017       3.470902    0.1678855   0.02105924  0.06623314   0.03877700
+#> 5 007      2.914267        3.009222        3.057790      3.208579      3.303175       3.656200       3.810076       4.114077    0.1899087   0.04308251  0.08825641   0.06080027
+#> 6 009      2.726611        2.808914        2.832178      2.894402      2.963694       3.215504       3.318771       3.496252    0.1646047   0.01777847  0.06295237   0.03549623
 ```
 
 ``` r
@@ -360,12 +360,12 @@ res_auc <- egg_auc(
 )
 head(res_auc)
 #>    ID auc_0--0.5 auc_1.5--5 auc_6--10 auc_12--17
-#> 1 082   1.439909  10.587170  13.32182   18.63462
-#> 2 083   1.360037  10.069653  12.80563   18.11809
-#> 3 080   1.369207  10.172574  12.99334   18.47262
-#> 4 031   1.320271   9.689328  12.18647   17.02856
-#> 5 007   1.375690  10.586726  14.13396   21.03983
-#> 6 033   1.364905   9.950009  12.39073   17.12369
+#> 1 001   1.472495  10.573508  13.26934   18.52345
+#> 2 004   1.402765  10.051692  12.61198   17.59741
+#> 3 005   1.391022  10.107799  12.92638   18.41851
+#> 4 006   1.346452   9.665070  12.18383   17.08564
+#> 5 007   1.483595  10.856314  13.96369   20.02623
+#> 6 009   1.386604   9.911684  12.40334   17.25341
 ```
 
 ``` r

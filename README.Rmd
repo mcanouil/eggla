@@ -139,7 +139,7 @@ pheno_dt <- bmigrowth[
   )
 ]
 
-visits_long <- melt(
+pheno_dt_long <- melt(
   data = pheno_dt,
   id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
   measure.vars = c("WEIGHTKG", "HEIGHTCM"),
@@ -155,8 +155,8 @@ visits_long <- melt(
     quietly = FALSE
   )
 ]
-visits_clean <- dcast(
-  data = visits_long[clean %in% "Include"], # Exclude all flags
+pheno_dt_clean <- dcast(
+  data = pheno_dt_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param,
   value.var = "measurement"
 )[
@@ -175,7 +175,7 @@ pheno_dt <- bmigrowth
 ### Modelling female
 
 ```{r}
-pheno_dt_female <- pheno_dt[sex_daymont == 1]
+pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
 ```
 
 ```{r}
