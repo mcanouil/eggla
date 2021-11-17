@@ -73,10 +73,10 @@ library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
-library(data.table)
+library(data.table, quietly = TRUE)
 
 # Setup for plots
-library(ggplot2)
+library(ggplot2, quietly = TRUE)
 library(patchwork)
 # remotes::install_github("eclarke/ggbeeswarm")
 library(ggbeeswarm)
@@ -152,7 +152,7 @@ pheno_dt_long <- melt(
     agedays = agedays,
     sex = sex_daymont,
     measurement = measurement,
-    quietly = FALSE
+    quietly = TRUE
   )
 ]
 pheno_dt_clean <- dcast(
