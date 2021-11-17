@@ -1,5 +1,8 @@
 # eggla (development)
 
+* In `inst/setup.R`,
+    + `renv` project setup.
+
 * In `inst/models-diagnostics`,
     + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
     + `models-best.R`, R script to compare models performance from `models-diagnostics.R`.
