@@ -10,3 +10,4 @@ install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org
 library("renv", lib.loc = temp_library)
 init()
 install("mcanouil/eggla@v0.3.0")
+restore(lockfile = system.file("renv.lock", package = "eggla"))
