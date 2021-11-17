@@ -1,6 +1,7 @@
 # eggla (development)
 
 * In `inst/setup`,
+    + Add `renv.lock` file to list dependencies with version and help install or restore them.
     + `renv` project setup.
     + R script for analysis.
 
@@ -11,9 +12,6 @@
     + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
     + `models-best.R`, R script to compare models performance from `models-diagnostics.R`.
     + `models-adiposity.R`, R script to compare predicted BMI values to check for the "adiposity peak".
-
-* In `inst`,
-    + Add `renv.lock` file to list dependencies with version and help install or restore them.
 
 * In `R`,
     + Remove trailing spaces.
