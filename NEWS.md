@@ -2,11 +2,18 @@
 
 * In `inst/setup`,
     + Add `renv.lock` file to list dependencies with version and help install or restore them.
-    + `renv` project setup.
-    + R script for analysis.
+    + `setup.R`, `renv` project setup.
+    + `analysis.R`, R script for analysis.
 
 * In `R/egg_model.R`,
     + Mixed model selected inside a helper/wrapper function.
+
+* In `R/run_eggla.R`,
+    + Compute quaility-control for BMI.
+    + Compute modelling.
+    + Write model object.
+    + Write derived parameters.
+    + Generate residuals plot.
 
 * In `inst/models-diagnostics`,
     + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
