@@ -1,7 +1,11 @@
 # eggla (development)
 
-* In `inst/setup.R`,
+* In `inst/setup`,
     + `renv` project setup.
+    + R script for analysis.
+
+* In `R/egg_model.R`,
+    + Mixed model selected inside a helper/wrapper function.
 
 * In `inst/models-diagnostics`,
     + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
