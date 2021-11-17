@@ -4,10 +4,11 @@
 #'
 #' @param formula An object of class "formula": a symbolic description of the model to be fitted with, time component as the first term in the right-hand side.
 #' @param data A data.frame containing the variables defined in formula.
+#' @param id_var A string indicating the name of the variable to be used as the individual identifier.
 #'
 #' @return An object of class "lme" representing the linear mixed-effects model fit.
 #' @export
-egg_model <- function(formula, data) {
+egg_model <- function(formula, data, id_var = "ID") {
   y <- as.character(formula)[[2]]
   x_cov <- strsplit(as.character(formula)[[3]], " \\+ ")[[1]]
 
@@ -27,8 +28,9 @@ egg_model <- function(formula, data) {
     y, paste(x_fmt, collapse = " + ")
   )
   form_random <- sprintf(
-    "~ %s | ID",
-    sub("degree = rep\\(3,", "degree = rep\\(1,", x_fmt[1])
+    "~ %s | %s",
+    sub("degree = rep\\(3,", "degree = rep\\(1,", x_fmt[1]),
+    id_var
   )
 
   if (!all(vars_available <- all.vars(formula) %in% colnames(data))) {
@@ -86,16 +88,18 @@ egg_model <- function(formula, data) {
 #'
 #' @param fit A model object from a statistical model such as from a call to `nlme::lme()` and `time_model()`.#'
 #' @param period The intervals knots on which slopes are to be computed.
+#' @param id_var A string indicating the name of the variable to be used as the individual identifier.
 #'
 #' @return A `data.frame` with slopes for each individuals/samples.
 #' @export
 egg_slopes <- function(
   fit,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+  id_var = "ID"
 ) {
   knots <- c(2, 8, 12)
 
-  slopes <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period) / 2)
+  slopes <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period) / 2)
   colnames(slopes) <- paste0(
     "slope_",
     sapply(split(
@@ -106,7 +110,7 @@ egg_slopes <- function(
       )
     ), paste, collapse = "--")
   )
-  pred <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period))
+  pred <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period))
   colnames(pred) <- paste0("pred_period_", round(period, digits = 1))
 
   fxef <- nlme::fixef(fit)
@@ -123,7 +127,7 @@ egg_slopes <- function(
     )
   )
 
-  for (i in seq_along(unique(fit$data[["ID"]]))) {
+  for (i in seq_along(unique(fit$data[[id_var]]))) {
      coeff <- fxef + as.numeric(rnef[i, ])
     for (j in 1:(length(period) / 2)) {
       x1 <- period[j * 2 - 1]
@@ -139,22 +143,26 @@ egg_slopes <- function(
       slopes[i, j] <- (y2 - y1) / (x2 - x1)
     }
   }
-  cbind.data.frame(ID = unique(fit$data[["ID"]]), pred, slopes)
+  out <- cbind.data.frame(ID = unique(fit$data[[id_var]]), pred, slopes)
+  names(out)[1] <- id_var
+  out
 }
 
 #' egg_auc
 #'
 #' @param fit A model object from a statistical model such as from a call to `nlme::lme()` and `time_model()`.
 #' @param period The intervals knots on which AUCs are to be computed.
+#' @param id_var A string indicating the name of the variable to be used as the individual identifier.
 #'
 #' @return A `data.frame` with AUC for each individuals/samples.
 #' @export
 egg_auc <- function(
   fit,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+  id_var = "ID"
 ) {
   knots <- c(2, 8, 12)
-  pred_auc <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period) / 2)
+  pred_auc <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period) / 2)
   colnames(pred_auc) <- paste0(
     "auc_",
     sapply(split(
@@ -189,7 +197,7 @@ egg_auc <- function(
       }
     )
   }
-  for (i in seq_along(unique(fit$data[["ID"]]))) {
+  for (i in seq_along(unique(fit$data[[id_var]]))) {
     coeff <- fxef + as.numeric(rnef[i, ])
     for (j in 1:(length(period) / 2)) {
         pred_auc[i, j] <- stats::integrate(
@@ -201,5 +209,7 @@ egg_auc <- function(
         )$value
     }
   }
-  cbind.data.frame(ID = unique(fit$data[["ID"]]), pred_auc)
+  out <- cbind.data.frame(ID = unique(fit$data[[id_var]]), pred_auc)
+  names(out)[1] <- id_var
+  out
 }
