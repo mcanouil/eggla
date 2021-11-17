@@ -21,23 +21,16 @@ Depends:
 Imports:
     stats,
     nlme,
+    utils,
+    grDevices,
+    data.table (>= 1.14.2),
+    growthcleanr (>= 2.0.0),
     ggplot2 (>= 3.3.5),
     patchwork (>= 1.1.1),
-    performance (>= 0.8.0),
-    rmarkdown (>= 2.11)
-Suggests:
-    bookdown (>= 0.24),
     broom.mixed (>= 0.2.7),
-    data.table (>= 1.14.2),
-    ggdendro (>= 0.1.22),
-    growthcleanr (>= 2.0.0),
-    gt (>= 0.3.1),
-    gtsummary (>= 1.4.2),
-    here (>= 1.0.1),
-    knitr (>= 1.36),
+    svglite (>= 2.0.0)
+Suggests:
     roxygen2 (>= 7.1.2),
-    scales (>= 1.1.1),
-    sessioninfo (>= 1.1.1),
     testthat (>= 3.1.0)
 Remotes:
     github::carriedaymont/growthcleanr@v2.0.0
