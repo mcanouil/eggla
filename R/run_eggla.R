@@ -93,7 +93,7 @@ run_eggla <- function(
 
   y_variable <- "log(bmi)"
   x_variable <- "egg_ageyears"
-  base_model <- stats::as.formula(sprintf("%s ~ x", y, x))
+  base_model <- stats::as.formula(sprintf("%s ~ x", y_variable, x_variable))
   if (!is.null(covariates)) {
     base_model <- stats::update(
       base_model,
