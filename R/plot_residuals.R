@@ -36,7 +36,7 @@ plot_residuals <- function(x, y, fit) {
     )
 
   plotc <- ggplot2::ggplot(data = model_data) +
-    ggplot2::aes(x = .data[["age"]], y = .data[["resid"]]) +
+    ggplot2::aes(x = .data[[x]], y = .data[["resid"]]) +
     ggplot2::geom_point(size = 0.5, alpha = 0.25, shape = 1) +
     ggplot2::stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
     ggplot2::geom_hline(yintercept = 0, linetype = 2, colour = "dodgerblue") +
