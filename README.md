@@ -46,7 +46,7 @@ remotes::install_github("mcanouil/eggla")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.3.0")
+remotes::install_github("mcanouil/eggla@v0.4.0")
 ```
 
 ## Run The Cubic Splines (Random Linear Splines) Analysis
@@ -408,7 +408,7 @@ ggplot(
       -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
       -e 'library("renv", lib.loc = temp_library)' \
       -e 'init()' \
-      -e 'install("mcanouil/eggla@mcanouil/issue3")' \
+      -e 'install("mcanouil/eggla@v0.4.0")' \
       -e 'restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
       -e 'unlink(temp_library, recursive = TRUE)'
 
