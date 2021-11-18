@@ -362,9 +362,9 @@ Rscript \
 
 Rscript -e 'renv::activate()'
 
-Rscript -e '
-  library(eggla)
-  run_eggla(
+Rscript \
+  -e 'library(eggla)' \
+  -e 'run_eggla(
     data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
     id_variable = "ID",
     age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
@@ -374,8 +374,8 @@ Rscript -e '
     sex_variable = "sex",
     covariates = NULL,
     male_coded_zero = FALSE,
-    parallel = FALSE, # to parallelise Daymont's QC
-    parallel_n_chunks = 1, # to parallelise Daymont's QC
+    parallel = FALSE, # to parallelise Daymont QC
+    parallel_n_chunks = 1, # to parallelise Daymont QC
     working_directory = getwd() # or in that case "/tmp/egg_analysis"
   )'
 
