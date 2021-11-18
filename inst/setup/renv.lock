@@ -384,19 +384,6 @@
       "Repository": "CRAN",
       "Hash": "6c825746f32a68f4d8c40f94da5b1ac5"
     },
-    "renv": {
-      "Package": "renv",
-      "Version": "0.14.0",
-      "Source": "CRAN",
-      "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "renv",
-      "RemoteRef": "renv",
-      "RemoteRepos": "https://cran.r-project.org",
-      "RemotePkgPlatform": "source",
-      "RemoteSha": "0.14.0",
-      "Hash": "30e5eba91b67f7f4d75d31de14bbfbdc"
-    },
     "rlang": {
       "Package": "rlang",
       "Version": "0.4.12",
