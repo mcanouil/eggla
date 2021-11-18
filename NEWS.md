@@ -1,4 +1,4 @@
-# eggla (development)
+# eggla 0.4.0
 
 * In `README.(R)md`,
     + Add table of content.
