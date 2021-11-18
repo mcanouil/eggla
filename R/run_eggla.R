@@ -43,7 +43,8 @@ run_eggla <- function(
   dt_long <- data.table::melt(
     data = data.table::as.data.table(data)[
       j = list(
-        "egg_id" = get(id_variable),
+        "egg_id" = as.character(get(id_variable)),
+        "egg_ageyears" = get(age_years_variable),
         "egg_agedays" = if (is.null(age_days_variable)) {
           floor(get(age_years_variable) * 365.25) # convert age in years to age in days and as integers ...
         } else {
@@ -52,16 +53,17 @@ run_eggla <- function(
         "WEIGHTKG" = as.numeric(get(weight_kilograms_variable)),
         "HEIGHTCM" = as.numeric(get(height_centimetres_variable)),
         "egg_sex" = if (male_coded_zero) {
-          as.character(get(sex_variable))
+          as.integer(get(sex_variable))
         } else {
-          c("0" = "1", "1" = "0")[as.character(get(sex_variable))] # recode sex with Male = 0 and Female = 1 ...
+          c("0" = 1L, "1" = 0L)[as.character(get(sex_variable))] # recode sex with Male = 0 and Female = 1 ...
         }
       )
     ],
-    id.vars = c(sprintf("egg_%s", c("id", "agedays", "sex")), covariates),
+    id.vars = c(sprintf("egg_%s", c("id", "ageyears", "agedays", "sex")), covariates),
     measure.vars = c("WEIGHTKG", "HEIGHTCM"),
     variable.name = "param",
-    value.name = "measurement"
+    value.name = "measurement",
+    variable.factor = FALSE
   )
 
   dt_long[
@@ -89,7 +91,7 @@ run_eggla <- function(
     !is.na(bmi) # exclude missing BMI related to measurements exclusion
   ]
 
-  base_model <- log(bmi) ~ egg_agedays
+  base_model <- log(bmi) ~ egg_ageyears
   if (!is.null(covariates)) {
     base_model <- stats::update(
       base_model,
