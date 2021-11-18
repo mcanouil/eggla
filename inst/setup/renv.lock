@@ -156,19 +156,6 @@
       "Repository": "CRAN",
       "Hash": "36f1ae62f026c8ba9f9b5c9a08c03297"
     },
-    "eggla": {
-      "Package": "eggla",
-      "Version": "0.3.0.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "mcanouil",
-      "RemoteRepo": "eggla",
-      "RemoteRef": "mcanouil/issue3",
-      "RemoteSha": "a71ea11a091d3db1829a5af7e7987091612b134e",
-      "Remotes": "github::carriedaymont/growthcleanr@v2.0.0",
-      "Hash": "7015a4e6f3c3190aaaa192753071f785"
-    },
     "ellipsis": {
       "Package": "ellipsis",
       "Version": "0.3.2",
