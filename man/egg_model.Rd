@@ -4,12 +4,14 @@
 \alias{egg_model}
 \title{egg_model}
 \usage{
-egg_model(formula, data)
+egg_model(formula, data, id_var = "ID")
 }
 \arguments{
 \item{formula}{An object of class "formula": a symbolic description of the model to be fitted with, time component as the first term in the right-hand side.}
 
 \item{data}{A data.frame containing the variables defined in formula.}
+
+\item{id_var}{A string indicating the name of the variable to be used as the individual identifier.}
 }
 \value{
 An object of class "lme" representing the linear mixed-effects model fit.

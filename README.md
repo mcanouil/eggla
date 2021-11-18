@@ -22,11 +22,12 @@ Consortium.
     Analysis](#run-the-cubic-splines-random-linear-splines-analysis)
     -   [Setup](#setup)
     -   [Data](#data)
-    -   [Modelling female](#modelling-female)
-    -   [Predicted values](#predicted-values)
+    -   [Modelling Female](#modelling-female)
+    -   [Predicted Values](#predicted-values)
     -   [Residuals](#residuals)
     -   [Predicted Average Slopes](#predicted-average-slopes)
     -   [Area Under The Curves](#area-under-the-curve)
+-   [Run In Bash](#run-in-bash)
 -   [License](#license)
 -   [Code of Conduct](#code-of-conduct)
 
@@ -59,10 +60,10 @@ library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
-library(data.table)
+library(data.table, quietly = TRUE)
 
 # Setup for plots
-library(ggplot2)
+library(ggplot2, quietly = TRUE)
 library(patchwork)
 # remotes::install_github("eclarke/ggbeeswarm")
 library(ggbeeswarm)
@@ -157,30 +158,9 @@ pheno_dt_long <- melt(
     agedays = agedays,
     sex = sex_daymont,
     measurement = measurement,
-    quietly = FALSE
+    quietly = TRUE
   )
 ]
-#> [2021-11-05 11:56:23] Begin processing pediatric data...
-#> [2021-11-05 11:56:23] Calculating z-scores...
-#> [2021-11-05 11:56:23] Calculating SD-scores...
-#> [2021-11-05 11:56:23] Re-centering data...
-#> [2021-11-05 11:56:23] Using NHANES reference medians...
-#> [2021-11-05 11:56:23] Note: input data has at least one age-year with < 100 subjects...
-#> [2021-11-05 11:56:23] Cleaning growth data in 1 batch(es)...
-#> [2021-11-05 11:56:23] Processing Batch #1...
-#> [2021-11-05 11:56:23] Preliminarily identify potential extraneous...
-#> [2021-11-05 11:56:23] Identify potentially swapped measurements...
-#> [2021-11-05 11:56:24] Exclude measurements carried forward...
-#> [2021-11-05 11:56:24] Exclude extreme measurements based on SD...
-#> [2021-11-05 11:56:24] Exclude extreme measurements based on EWMA...
-#> [2021-11-05 11:56:24] Exclude extraneous based on EWMA...
-#> [2021-11-05 11:56:24] Exclude moderate errors based on EWMA...
-#> [2021-11-05 11:56:29] Exclude heights based on growth velocity...
-#> [2021-11-05 11:56:31] Exclude single measurements and pairs...
-#> [2021-11-05 11:56:31] Exclude all measurements if maximum threshold of errors is exceeded...
-#> [2021-11-05 11:56:32] Completed Batch #1...
-#> [2021-11-05 11:56:32] Done with pediatric data!
-#> [2021-11-05 11:56:32] No adult data. Moving to postprocessing...
 pheno_dt_clean <- dcast(
   data = pheno_dt_long[clean %in% "Include"], # Exclude all flags
   formula = ... ~ param,
@@ -198,7 +178,7 @@ pheno_dt_clean <- dcast(
 pheno_dt_clean <- bmigrowth
 ```
 
-### Modelling female
+### Modelling Female
 
 ``` r
 pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
@@ -238,7 +218,7 @@ sres
 #> 11 ran_pars Residual sd_Observation             0.0714  NA          NA     NA    NA
 ```
 
-### Predicted values
+### Predicted Values
 
 ``` r
 ggplot() +
@@ -276,7 +256,7 @@ plot_residuals(
 
 <img src="man/figures/README-unnamed-chunk-13.svg" width="100%" />
 
-### Predicted average slopes
+### Predicted Average Slopes
 
 ``` r
 res_pred_slopes <- egg_slopes(
@@ -351,7 +331,7 @@ wrap_plots(
 
 <img src="man/figures/README-unnamed-chunk-15.svg" width="100%" />
 
-### Area under the curve
+### Area Under The Curve
 
 ``` r
 res_auc <- egg_auc(
@@ -406,6 +386,64 @@ ggplot(
 ```
 
 <img src="man/figures/README-unnamed-chunk-17.svg" width="100%" />
+
+## Run In Bash
+
+1.  Copy and edit the following code to a new file (e.g.,
+    `run_eggla.sh`) on the server that will run the analysis with the
+    appropriate parameters.
+
+    ``` bash
+    #!/bin/bash
+
+    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+
+    mkdir $home_analysis 
+
+    cd $home_analysis
+
+    Rscript \
+      -e 'temp_library <- file.path(tempdir(), "R")' \
+      -e 'dir.create(temp_library, recursive = TRUE)' \
+      -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
+      -e 'library("renv", lib.loc = temp_library)' \
+      -e 'init()' \
+      -e 'install("mcanouil/eggla@mcanouil/issue3")' \
+      -e 'restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
+      -e 'unlink(temp_library, recursive = TRUE)'
+
+    Rscript -e 'renv::activate()'
+
+    Rscript \
+      -e 'library(eggla)' \
+      -e 'run_eggla(
+        data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+        id_variable = "ID",
+        age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+        age_years_variable = "age", 
+        weight_kilograms_variable = "weight",
+        height_centimetres_variable = "height",
+        sex_variable = "sex",
+        covariates = NULL,
+        male_coded_zero = FALSE,
+        parallel = FALSE, # to parallelise Daymont QC
+        parallel_n_chunks = 1, # to parallelise Daymont QC
+        working_directory = getwd() # or in that case "/tmp/egg_analysis"
+      )'
+    ```
+
+2.  Run it in bash
+
+    ``` bash
+    bash run_eggla.sh
+    ```
+
+3.  Retrieve the two archives
+
+        /tmp/egg_analysis/
+        ├── 2021-11-18-female.zip
+        ├── 2021-11-18-male.zip
+        └── renv.lock
 
 ## License
 

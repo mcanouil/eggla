@@ -8,7 +8,7 @@
 NULL
 
 
-# @import ggplot2
-# @importFrom stats integrate residuals fitted qnorm poly na.omit
-# @importFrom nlme ACF random.effects lme corCAR1 lmeControl fixef ranef
-# @importFrom patchwork wrap_plots
+#' @import data.table
+#' @import ggplot2
+# @importFrom stats integrate residuals fitted qnorm poly na.omit as.formula update
+# @importFrom patchwork wrap_plots plot_annotation
