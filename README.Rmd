@@ -367,15 +367,15 @@ Rscript -e '
   run_eggla(
     data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
     id_variable = "ID",
-    age_days_variable = NULL,
-    age_years_variable = "age",
+    age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+    age_years_variable = "age", 
     weight_kilograms_variable = "weight",
     height_centimetres_variable = "height",
     sex_variable = "sex",
     covariates = NULL,
     male_coded_zero = FALSE,
-    parallel = FALSE,
-    parallel_n_chunks = 1,
+    parallel = FALSE, # to parallelise Daymont's QC
+    parallel_n_chunks = 1, # to parallelise Daymont's QC
     working_directory = getwd() # or in that case "/tmp/egg_analysis"
   )'
 
