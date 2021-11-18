@@ -17,6 +17,12 @@
     + Write derived parameters.
     + Generate residuals plot.
 
+* In `R/time_model.R`,
+    + Fix model specification where additional covariates were not properly added to the model formula.
+
+* In `R/plot_residuals.R`,
+    + Fix hardcoded variable, i.e., "age".
+
 * In `inst/models-diagnostics`,
     + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
     + `models-best.R`, R script to compare models performance from `models-diagnostics.R`.
@@ -26,9 +32,6 @@
     + Remove trailing spaces.
     + Comment code not used.
     + Add missing documentation.
-
-* In `R/time_model.R`,
-    + Fix model specification where additional covariates were not properly added to the model formula.
 
 * In `LICENSE`,
     + Add Nicole Warrington.
