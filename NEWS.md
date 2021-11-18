@@ -1,9 +1,11 @@
 # eggla (development)
 
+* In `README.(R)md`,
+    + Add table of content.
+    + Add Bash script to run everything.
+
 * In `inst/setup`,
     + Add `renv.lock` file to list dependencies with version and help install or restore them.
-    + `setup.R`, `renv` project setup.
-    + `analysis.R`, R script for analysis.
 
 * In `R/egg_model.R`,
     + Mixed model selected inside a helper/wrapper function.
@@ -30,9 +32,6 @@
 
 * In `LICENSE`,
     + Add Nicole Warrington.
-
-* In `README.(R)md`,
-    + Add table of content.
 
 # eggla 0.3.0
 

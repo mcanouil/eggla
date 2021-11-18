@@ -36,11 +36,12 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 * [Run The Cubic Splines (Random Linear Splines) Analysis](#run-the-cubic-splines-random-linear-splines-analysis)
     + [Setup](#setup)
     + [Data](#data)
-    + [Modelling female](#modelling-female)
-    + [Predicted values](#predicted-values)
+    + [Modelling Female](#modelling-female)
+    + [Predicted Values](#predicted-values)
     + [Residuals](#residuals)
     + [Predicted Average Slopes](#predicted-average-slopes)
     + [Area Under The Curves](#area-under-the-curve)
+* [Run In Bash](#run-in-bash)
 * [License](#license)
 * [Code of Conduct](#code-of-conduct)
 
@@ -172,7 +173,7 @@ pheno_dt_clean <- dcast(
 pheno_dt_clean <- bmigrowth
 ```
 
-### Modelling female
+### Modelling Female
 
 ```{r}
 pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
@@ -189,7 +190,7 @@ sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify o
 sres
 ```
 
-### Predicted values
+### Predicted Values
 
 ```{r}
 ggplot() +
@@ -223,7 +224,7 @@ plot_residuals(
   )
 ```
 
-### Predicted average slopes
+### Predicted Average Slopes
 
 ```{r}
 res_pred_slopes <- egg_slopes(
@@ -289,7 +290,7 @@ wrap_plots(
   plot_annotation(tag_levels = "A")
 ```
 
-### Area under the curve
+### Area Under The Curve
 
 ```{r}
 res_auc <- egg_auc(
@@ -334,6 +335,56 @@ ggplot(
   ) +
   labs(x = "Area Under The Curve (AUC)", y = "Period Interval (years)") +
   theme(legend.position = "none")
+```
+
+## Run In Bash
+
+1. Copy the following code to a new file (e.g., `run_eggla.sh`) on the server that will run the analysis with appropriate parameters.
+
+```{bash}
+#!/bin/bash
+
+home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+
+mkdir $home_analysis 
+
+cd $home_analysis
+
+Rscript \
+  -e 'temp_library <- file.path(tempdir(), "R")' \
+  -e 'dir.create(temp_library, recursive = TRUE)' \
+  -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
+  -e 'library("renv", lib.loc = temp_library)' \
+  -e 'init()' \
+  -e 'install("mcanouil/eggla@mcanouil/issue3")' \
+  -e 'restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
+  -e 'unlink(temp_library, recursive = TRUE)'
+
+Rscript -e 'renv::activate()'
+
+Rscript -e '
+  library(eggla)
+  run_eggla(
+    data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+    id_variable = "ID",
+    age_days_variable = NULL,
+    age_years_variable = "age",
+    weight_kilograms_variable = "weight",
+    height_centimetres_variable = "height",
+    sex_variable = "sex",
+    covariates = NULL,
+    male_coded_zero = FALSE,
+    parallel = FALSE,
+    parallel_n_chunks = 1,
+    working_directory = getwd() # or in that case "/tmp/egg_analysis"
+  )'
+
+```
+
+2.  Run it in bash
+
+```{bash}
+bash run_eggla.sh
 ```
 
 ## License
