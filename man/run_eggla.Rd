@@ -5,34 +5,51 @@
 \title{run_eggla}
 \usage{
 run_eggla(
-  phenotypes = NULL,
-  trait = "bmi",
-  covariates = NULL,
-  daymont_qc = TRUE,
-  daymont_flags_exclude = TRUE,
-  cohort_name = "cohort",
-  output_directory = tempdir(),
-  ...
+  data,
+  id_variable,
+  age_days_variable,
+  age_years_variable,
+  weight_kilograms_variable,
+  height_centimetres_variable,
+  sex_variable,
+  covariates,
+  male_coded_zero = FALSE,
+  parallel = FALSE,
+  parallel_n_chunks = 1,
+  working_directory = getwd()
 )
 }
 \arguments{
-\item{phenotypes}{something}
+\item{data}{something}
 
-\item{trait}{something}
+\item{id_variable}{something}
+
+\item{age_days_variable}{something}
+
+\item{age_years_variable}{something}
+
+\item{weight_kilograms_variable}{something}
+
+\item{height_centimetres_variable}{something}
+
+\item{sex_variable}{something}
 
 \item{covariates}{something}
 
-\item{daymont_qc}{something}
+\item{male_coded_zero}{something}
 
-\item{daymont_flags_exclude}{something}
+\item{parallel}{something}
 
-\item{cohort_name}{something}
+\item{parallel_n_chunks}{something}
 
-\item{output_directory}{something}
-
-\item{...}{Parameters to pass to \code{rmarkdown::render()}.}
+\item{working_directory}{something}
+}
+\value{
+Path to zip archives
 }
 \description{
-run_eggla
+Perform Daymont's quality-control for BMI,
+fit a cubic splines mixed model regression with linear splines as random effect,
+save model object, generates residuals figures fot model validity,
+derived area under the curve and slopes for male and femal.
 }
-\keyword{internal}

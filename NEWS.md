@@ -1,26 +1,40 @@
 # eggla (development)
 
+* In `README.(R)md`,
+    + Add table of content.
+    + Add Bash script to run everything.
+
+* In `inst/setup`,
+    + Add `renv.lock` file to list dependencies with version and help install or restore them.
+
+* In `R/egg_model.R`,
+    + Mixed model selected inside a helper/wrapper function.
+
+* In `R/run_eggla.R`,
+    + Compute quaility-control for BMI.
+    + Compute modelling.
+    + Write model object.
+    + Write derived parameters.
+    + Generate residuals plot.
+
+* In `R/time_model.R`,
+    + Fix model specification where additional covariates were not properly added to the model formula.
+
+* In `R/plot_residuals.R`,
+    + Fix hardcoded variable, i.e., "age".
+
 * In `inst/models-diagnostics`,
     + `models-diagnostics.R`, R script to compute different models and extract performance metrics.
     + `models-best.R`, R script to compare models performance from `models-diagnostics.R`.
     + `models-adiposity.R`, R script to compare predicted BMI values to check for the "adiposity peak".
-
-* In `inst`,
-    + Add `renv.lock` file to list dependencies with version and help install or restore them.
 
 * In `R`,
     + Remove trailing spaces.
     + Comment code not used.
     + Add missing documentation.
 
-* In `R/time_model.R`,
-    + Fix model specification where additional covariates were not properly added to the model formula.
-
 * In `LICENSE`,
     + Add Nicole Warrington.
-
-* In `README.(R)md`,
-    + Add table of content.
 
 # eggla 0.3.0
 
