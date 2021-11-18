@@ -339,53 +339,62 @@ ggplot(
 
 ## Run In Bash
 
-1. Copy the following code to a new file (e.g., `run_eggla.sh`) on the server that will run the analysis with appropriate parameters.
+1. Copy and edit the following code to a new file (e.g., `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
-```{bash}
-#!/bin/bash
+    ```{bash, eval = FALSE}
+    #!/bin/bash
 
-home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
 
-mkdir $home_analysis 
+    mkdir $home_analysis 
 
-cd $home_analysis
+    cd $home_analysis
 
-Rscript \
-  -e 'temp_library <- file.path(tempdir(), "R")' \
-  -e 'dir.create(temp_library, recursive = TRUE)' \
-  -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
-  -e 'library("renv", lib.loc = temp_library)' \
-  -e 'init()' \
-  -e 'install("mcanouil/eggla@mcanouil/issue3")' \
-  -e 'restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
-  -e 'unlink(temp_library, recursive = TRUE)'
+    Rscript \
+      -e 'temp_library <- file.path(tempdir(), "R")' \
+      -e 'dir.create(temp_library, recursive = TRUE)' \
+      -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
+      -e 'library("renv", lib.loc = temp_library)' \
+      -e 'init()' \
+      -e 'install("mcanouil/eggla@mcanouil/issue3")' \
+      -e 'restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
+      -e 'unlink(temp_library, recursive = TRUE)'
 
-Rscript -e 'renv::activate()'
+    Rscript -e 'renv::activate()'
 
-Rscript \
-  -e 'library(eggla)' \
-  -e 'run_eggla(
-    data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
-    id_variable = "ID",
-    age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-    age_years_variable = "age", 
-    weight_kilograms_variable = "weight",
-    height_centimetres_variable = "height",
-    sex_variable = "sex",
-    covariates = NULL,
-    male_coded_zero = FALSE,
-    parallel = FALSE, # to parallelise Daymont QC
-    parallel_n_chunks = 1, # to parallelise Daymont QC
-    working_directory = getwd() # or in that case "/tmp/egg_analysis"
-  )'
+    Rscript \
+      -e 'library(eggla)' \
+      -e 'run_eggla(
+        data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+        id_variable = "ID",
+        age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+        age_years_variable = "age", 
+        weight_kilograms_variable = "weight",
+        height_centimetres_variable = "height",
+        sex_variable = "sex",
+        covariates = NULL,
+        male_coded_zero = FALSE,
+        parallel = FALSE, # to parallelise Daymont QC
+        parallel_n_chunks = 1, # to parallelise Daymont QC
+        working_directory = getwd() # or in that case "/tmp/egg_analysis"
+      )'
 
-```
+    ```
 
 2.  Run it in bash
 
-```{bash}
-bash run_eggla.sh
-```
+    ```{bash, eval = FALSE}
+    bash run_eggla.sh
+    ```
+
+3. Retrieve the two archives
+
+    ```
+    /tmp/egg_analysis/
+    ├── 2021-11-18-female.zip
+    ├── 2021-11-18-male.zip
+    └── renv.lock
+    ```
 
 ## License
 
