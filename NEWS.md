@@ -1,3 +1,7 @@
+# eggla (development)
+
+* In `README.(R)md`,
+    + Add `renv` cleaning in bash example script.
 # eggla 0.4.0
 
 * In `README.(R)md`,

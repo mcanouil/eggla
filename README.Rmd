@@ -377,7 +377,8 @@ ggplot(
         parallel = FALSE, # to parallelise Daymont QC
         parallel_n_chunks = 1, # to parallelise Daymont QC
         working_directory = getwd() # or in that case "/tmp/egg_analysis"
-      )'
+      )' \
+      -e 'unlink(file.path(getwd(), "renv"), recursive = TRUE)'
 
     ```
 
