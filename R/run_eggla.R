@@ -91,7 +91,9 @@ run_eggla <- function(
     !is.na(bmi) # exclude missing BMI related to measurements exclusion
   ]
 
-  base_model <- log(bmi) ~ egg_ageyears
+  y_variable <- "log(bmi)"
+  x_variable <- "egg_ageyears"
+  base_model <- stats::as.formula(sprintf("%s ~ x", y, x))
   if (!is.null(covariates)) {
     base_model <- stats::update(
       base_model,
@@ -145,8 +147,8 @@ run_eggla <- function(
       )
       print(
         plot_residuals(
-          x = "age",
-          y = "log(bmi)",
+          x = x_variable,
+          y = y_variable,
           fit = results
         ) +
           patchwork::plot_annotation(
