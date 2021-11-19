@@ -61,9 +61,11 @@ library(eggla)
 library(growthcleanr)
 library(broom.mixed)
 library(data.table, quietly = TRUE)
+#> data.table 1.14.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
 # Setup for plots
 library(ggplot2, quietly = TRUE)
+#> Keep up to date with changes at https://www.tidyverse.org/blog/
 library(patchwork)
 # remotes::install_github("eclarke/ggbeeswarm")
 library(ggbeeswarm)
@@ -429,8 +431,9 @@ ggplot(
         parallel = FALSE, # to parallelise Daymont QC
         parallel_n_chunks = 1, # to parallelise Daymont QC
         working_directory = getwd() # or in that case "/tmp/egg_analysis"
-      )' \
-      -e 'unlink(file.path(getwd(), "renv"), recursive = TRUE)'
+      )'
+
+    Rscript -e 'unlink(c(file.path(getwd(), "renv"), file.path(getwd(), "renv.lock")), recursive = TRUE)'
     ```
 
 2.  Run it in bash
@@ -443,8 +446,7 @@ ggplot(
 
         /tmp/egg_analysis/
         ├── 2021-11-18-female.zip
-        ├── 2021-11-18-male.zip
-        └── renv.lock
+        └── 2021-11-18-male.zip
 
 ## License
 
