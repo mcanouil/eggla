@@ -65,7 +65,6 @@ library(data.table, quietly = TRUE)
 
 # Setup for plots
 library(ggplot2, quietly = TRUE)
-#> Keep up to date with changes at https://www.tidyverse.org/blog/
 library(patchwork)
 # remotes::install_github("eclarke/ggbeeswarm")
 library(ggbeeswarm)
@@ -417,8 +416,9 @@ ggplot(
     Rscript -e 'renv::activate()'
 
     Rscript \
+      -e 'wd <- "/tmp/egg_analysis"' \
       -e 'library(eggla)' \
-      -e 'run_eggla(
+      -e 'res <- try(run_eggla(
         data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
         id_variable = "ID",
         age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
@@ -430,10 +430,13 @@ ggplot(
         male_coded_zero = FALSE,
         parallel = FALSE, # to parallelise Daymont QC
         parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = getwd() # or in that case "/tmp/egg_analysis"
-      )'
-
-    Rscript -e 'unlink(c(file.path(getwd(), "renv"), file.path(getwd(), "renv.lock")), recursive = TRUE)'
+        working_directory = wd # or in that case "/tmp/egg_analysis"
+      ))' \
+      -e 'if (inherits(res, "try-error")) {' \
+        unlink(wd, recursive = TRUE)
+      } else {
+        unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
+      }'
     ```
 
 2.  Run it in bash
