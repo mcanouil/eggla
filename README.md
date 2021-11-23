@@ -478,8 +478,8 @@ ggplot(
     cd $home_analysis
     ```
 
-2.  Setup working directory using `renv` to restore predefined version
-    of packages
+2.  Start R and setup working directory using `renv` to restore
+    predefined version of packages
 
     ``` r
     temp_library <- file.path(tempdir(), "R")
