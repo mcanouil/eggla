@@ -27,7 +27,8 @@ Consortium.
     -   [Residuals](#residuals)
     -   [Predicted Average Slopes](#predicted-average-slopes)
     -   [Area Under The Curves](#area-under-the-curve)
--   [Run In Bash](#run-in-bash)
+-   [Run Non-Interactively](#run-non-interactively)
+-   [Run Interactively](#run-interactively)
 -   [License](#license)
 -   [Code of Conduct](#code-of-conduct)
 
@@ -61,7 +62,6 @@ library(eggla)
 library(growthcleanr)
 library(broom.mixed)
 library(data.table, quietly = TRUE)
-#> data.table 1.14.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
 # Setup for plots
 library(ggplot2, quietly = TRUE)
@@ -204,19 +204,19 @@ sres <- tidy(res)
 sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
 sres
 #> # A tibble: 11 x 8
-#>    effect   group    term                     estimate std.error    df statistic       p.value
-#>    <chr>    <chr>    <chr>                       <dbl>     <dbl> <dbl>     <dbl>         <dbl>
-#>  1 fixed    fixed    (Intercept)                2.76     0.0223    409    124.    0           
-#>  2 fixed    fixed    gsp(...)D1(0)              0.240    0.0463    409      5.19  0.000000332 
-#>  3 fixed    fixed    gsp(...)D2(0)             -0.305    0.0566    409     -5.39  0.000000121 
-#>  4 fixed    fixed    gsp(...)D3(0)              0.175    0.0306    409      5.72  0.0000000205
-#>  5 fixed    fixed    gsp(...)C(2).3            -0.185    0.0318    409     -5.82  0.0000000121
-#>  6 fixed    fixed    gsp(...)C(8).3             0.0167   0.00452   409      3.70  0.000244    
-#>  7 fixed    fixed    gsp(...)C(12).3           -0.0201   0.0107    409     -1.89  0.0601      
-#>  8 ran_pars ID       sd_(Intercept)             0.0861  NA          NA     NA    NA           
-#>  9 ran_pars ID       cor_gsp(...).(Intercept)  -0.387   NA          NA     NA    NA           
-#> 10 ran_pars ID       sd_gsp(...)                0.0160  NA          NA     NA    NA           
-#> 11 ran_pars Residual sd_Observation             0.0714  NA          NA     NA    NA
+#>    effect   group    term          estimate std.error    df statistic    p.value
+#>    <chr>    <chr>    <chr>            <dbl>     <dbl> <dbl>     <dbl>      <dbl>
+#>  1 fixed    fixed    (Intercept)     2.76     0.0223    409    124.      0      
+#>  2 fixed    fixed    gsp(...)D1(0)   0.240    0.0463    409      5.19    3.32e-7
+#>  3 fixed    fixed    gsp(...)D2(0)  -0.305    0.0566    409     -5.39    1.21e-7
+#>  4 fixed    fixed    gsp(...)D3(0)   0.175    0.0306    409      5.72    2.05e-8
+#>  5 fixed    fixed    gsp(...)C(2)~  -0.185    0.0318    409     -5.82    1.21e-8
+#>  6 fixed    fixed    gsp(...)C(8)~   0.0167   0.00452   409      3.70    2.44e-4
+#>  7 fixed    fixed    gsp(...)C(12~  -0.0201   0.0107    409     -1.89    6.01e-2
+#>  8 ran_pars ID       sd_(Intercep~   0.0861  NA          NA     NA      NA      
+#>  9 ran_pars ID       cor_gsp(...)~  -0.387   NA          NA     NA      NA      
+#> 10 ran_pars ID       sd_gsp(...)     0.0160  NA          NA     NA      NA      
+#> 11 ran_pars Residual sd_Observati~   0.0714  NA          NA     NA      NA
 ```
 
 ### Predicted Values
@@ -265,13 +265,27 @@ res_pred_slopes <- egg_slopes(
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
 head(res_pred_slopes)
-#>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6 pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5 slope_6--10 slope_12--17
-#> 1 001      2.896950        2.982138        3.011172      3.093593      3.168655       3.443546       3.558354       3.764686    0.1703750   0.02354874  0.06872264   0.04126650
-#> 2 004      2.758294        2.841876        2.867700      2.938884      3.010736       3.272785       3.381172       3.571453    0.1671645   0.02033832  0.06551222   0.03805608
-#> 3 005      2.731514        2.821683        2.860679      2.977967      3.062991       3.377730       3.512462       3.768604    0.1803370   0.03351077  0.07868467   0.05122853
-#> 4 006      2.645488        2.729430        2.755975      2.829683      2.902255       3.167188       3.277017       3.470902    0.1678855   0.02105924  0.06623314   0.03877700
-#> 5 007      2.914267        3.009222        3.057790      3.208579      3.303175       3.656200       3.810076       4.114077    0.1899087   0.04308251  0.08825641   0.06080027
-#> 6 009      2.726611        2.808914        2.832178      2.894402      2.963694       3.215504       3.318771       3.496252    0.1646047   0.01777847  0.06295237   0.03549623
+#>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6
+#> 1 001      2.896950        2.982138        3.011172      3.093593      3.168655
+#> 2 004      2.758294        2.841876        2.867700      2.938884      3.010736
+#> 3 005      2.731514        2.821683        2.860679      2.977967      3.062991
+#> 4 006      2.645488        2.729430        2.755975      2.829683      2.902255
+#> 5 007      2.914267        3.009222        3.057790      3.208579      3.303175
+#> 6 009      2.726611        2.808914        2.832178      2.894402      2.963694
+#>   pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5
+#> 1       3.443546       3.558354       3.764686    0.1703750   0.02354874
+#> 2       3.272785       3.381172       3.571453    0.1671645   0.02033832
+#> 3       3.377730       3.512462       3.768604    0.1803370   0.03351077
+#> 4       3.167188       3.277017       3.470902    0.1678855   0.02105924
+#> 5       3.656200       3.810076       4.114077    0.1899087   0.04308251
+#> 6       3.215504       3.318771       3.496252    0.1646047   0.01777847
+#>   slope_6--10 slope_12--17
+#> 1  0.06872264   0.04126650
+#> 2  0.06551222   0.03805608
+#> 3  0.07868467   0.05122853
+#> 4  0.06623314   0.03877700
+#> 5  0.08825641   0.06080027
+#> 6  0.06295237   0.03549623
 ```
 
 ``` r
@@ -388,7 +402,7 @@ ggplot(
 
 <img src="man/figures/README-unnamed-chunk-17.svg" width="100%" />
 
-## Run In Bash
+## Run Non-Interactively
 
 1.  Copy and edit the following code to a new file (e.g.,
     `run_eggla.sh`) on the server that will run the analysis with the
@@ -408,9 +422,9 @@ ggplot(
       -e 'dir.create(temp_library, recursive = TRUE)' \
       -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
       -e 'library("renv", lib.loc = temp_library)' \
-      -e 'init()' \
-      -e 'install("mcanouil/eggla@v0.4.0")' \
-      -e 'restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
+      -e 'renv::init(base = TRUE)' \
+      -e 'renv::install("mcanouil/eggla@v0.4.0")' \
+      -e 'renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
       -e 'unlink(temp_library, recursive = TRUE)'
 
     Rscript -e 'renv::activate()'
@@ -418,8 +432,9 @@ ggplot(
     Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
       -e 'library(eggla)' \
+      -e 'library(data.table)' \
       -e 'res <- try(run_eggla(
-        data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+        data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
         id_variable = "ID",
         age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
         age_years_variable = "age", 
@@ -432,14 +447,14 @@ ggplot(
         parallel_n_chunks = 1, # to parallelise Daymont QC
         working_directory = wd # or in that case "/tmp/egg_analysis"
       ))' \
-      -e 'if (inherits(res, "try-error")) {' \
+      -e 'if (inherits(res, "try-error")) { # cleanup' \
         unlink(wd, recursive = TRUE)
       } else {
         unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
       }'
     ```
 
-2.  Run it in bash
+2.  Run the analysis in bash
 
     ``` bash
     bash run_eggla.sh
@@ -448,8 +463,61 @@ ggplot(
 3.  Retrieve the two archives
 
         /tmp/egg_analysis/
-        ├── 2021-11-18-female.zip
-        └── 2021-11-18-male.zip
+        ├── 2021-11-23-female.zip
+        └── 2021-11-23-male.zip
+
+## Run Non Interactively
+
+1.  Setup working directory using `renv` to restore predefined version
+    of packages
+
+``` r
+temp_library <- file.path(tempdir(), "R")
+dir.create(temp_library, recursive = TRUE)
+install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
+library("renv", lib.loc = temp_library)
+renv::init(base = TRUE)
+renv::install("mcanouil/eggla@v0.4.1")
+renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
+unlink(temp_library, recursive = TRUE)
+```
+
+2.  Restart R
+
+3.  Run the analysis
+
+    ``` r
+    wd <- "/tmp/egg_analysis"
+    library(eggla)
+    library(data.table)
+    res <- try(
+      run_eggla(
+        data = fread("/tmp/bmigrowth.csv"),
+        id_variable = "ID",
+        age_days_variable = NULL,
+        age_years_variable = "age",
+        weight_kilograms_variable = "weight",
+        height_centimetres_variable = "height",
+        sex_variable = "sex",
+        covariates = NULL,
+        male_coded_zero = FALSE,
+        parallel = FALSE,
+        parallel_n_chunks = 1,
+        working_directory = wd
+      )
+    )
+    if (inherits(res, "try-error")) { # cleanup
+      unlink(wd, recursive = TRUE)
+    } else {
+      unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
+    }
+    ```
+
+4.  Retrieve the two archives
+
+        /tmp/egg_analysis/
+        ├── 2021-11-23-female.zip
+        └── 2021-11-23-male.zip
 
 ## License
 

@@ -2,6 +2,7 @@
 
 * In `README.(R)md`,
     + Add `renv` cleaning in bash example script.
+    + Add setup for both interactive and non-interactive use.
 
 * In `R/run_eggla.R`,
     + Switch from `svglite` to `ragg` to avoid issues with high number of elements.
