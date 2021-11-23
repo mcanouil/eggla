@@ -468,7 +468,17 @@ ggplot(
 
 ## Run Interactively
 
-1.  Setup working directory using `renv` to restore predefined version
+1.  Create the working directory
+
+    ``` bash
+    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+
+    mkdir $home_analysis 
+
+    cd $home_analysis
+    ```
+
+2.  Setup working directory using `renv` to restore predefined version
     of packages
 
     ``` r
@@ -482,9 +492,9 @@ ggplot(
     unlink(temp_library, recursive = TRUE)
     ```
 
-2.  Restart R
+3.  Restart R
 
-3.  Run the analysis
+4.  Run the analysis
 
     ``` r
     wd <- "/tmp/egg_analysis"
@@ -513,7 +523,7 @@ ggplot(
     }
     ```
 
-4.  Retrieve the two archives
+5.  Retrieve the two archives
 
         /tmp/egg_analysis/
         ├── 2021-11-23-female.zip
