@@ -41,7 +41,8 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
     + [Residuals](#residuals)
     + [Predicted Average Slopes](#predicted-average-slopes)
     + [Area Under The Curves](#area-under-the-curve)
-* [Run In Bash](#run-in-bash)
+* [Run Non-Interactively](#run-non-interactively)
+* [Run Interactively](#run-interactively)
 * [License](#license)
 * [Code of Conduct](#code-of-conduct)
 
@@ -337,7 +338,7 @@ ggplot(
   theme(legend.position = "none")
 ```
 
-## Run In Bash
+## Run Non-Interactively
 
 1. Copy and edit the following code to a new file (e.g., `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
@@ -355,9 +356,9 @@ ggplot(
       -e 'dir.create(temp_library, recursive = TRUE)' \
       -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
       -e 'library("renv", lib.loc = temp_library)' \
-      -e 'init()' \
-      -e 'install("mcanouil/eggla@v0.4.0")' \
-      -e 'restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
+      -e 'renv::init(base = TRUE)' \
+      -e 'renv::install("mcanouil/eggla@v0.4.0")' \
+      -e 'renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
       -e 'unlink(temp_library, recursive = TRUE)'
 
     Rscript -e 'renv::activate()'
@@ -365,8 +366,9 @@ ggplot(
     Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
       -e 'library(eggla)' \
+      -e 'library(data.table)' \
       -e 'res <- try(run_eggla(
-        data = data.table::fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+        data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
         id_variable = "ID",
         age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
         age_years_variable = "age", 
@@ -379,14 +381,14 @@ ggplot(
         parallel_n_chunks = 1, # to parallelise Daymont QC
         working_directory = wd # or in that case "/tmp/egg_analysis"
       ))' \
-      -e 'if (inherits(res, "try-error")) {' \
+      -e 'if (inherits(res, "try-error")) { # cleanup' \
         unlink(wd, recursive = TRUE)
       } else {
         unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
       }'
     ```
 
-2.  Run it in bash
+2.  Run the analysis in bash
 
     ```{bash, eval = FALSE}
     bash run_eggla.sh
@@ -396,8 +398,62 @@ ggplot(
 
     ```
     /tmp/egg_analysis/
-    ├── 2021-11-18-female.zip
-    └── 2021-11-18-male.zip
+    ├── 2021-11-23-female.zip
+    └── 2021-11-23-male.zip
+    ```
+
+## Run Non Interactively
+
+1. Setup working directory using `renv` to restore predefined version of packages
+
+  ```{r, eval = FALSE}
+  temp_library <- file.path(tempdir(), "R")
+  dir.create(temp_library, recursive = TRUE)
+  install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
+  library("renv", lib.loc = temp_library)
+  renv::init(base = TRUE)
+  renv::install("mcanouil/eggla@v0.4.1")
+  renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
+  unlink(temp_library, recursive = TRUE)
+  ```
+
+2. Restart R
+
+3. Run the analysis
+
+    ```{r, eval = FALSE}
+    wd <- "/tmp/egg_analysis"
+    library(eggla)
+    library(data.table)
+    res <- try(
+      run_eggla(
+        data = fread("/tmp/bmigrowth.csv"),
+        id_variable = "ID",
+        age_days_variable = NULL,
+        age_years_variable = "age",
+        weight_kilograms_variable = "weight",
+        height_centimetres_variable = "height",
+        sex_variable = "sex",
+        covariates = NULL,
+        male_coded_zero = FALSE,
+        parallel = FALSE,
+        parallel_n_chunks = 1,
+        working_directory = wd
+      )
+    )
+    if (inherits(res, "try-error")) { # cleanup
+      unlink(wd, recursive = TRUE)
+    } else {
+      unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
+    }
+    ```
+
+4. Retrieve the two archives
+
+    ```
+    /tmp/egg_analysis/
+    ├── 2021-11-23-female.zip
+    └── 2021-11-23-male.zip
     ```
 
 ## License
