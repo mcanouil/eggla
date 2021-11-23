@@ -2,6 +2,13 @@
 
 * In `README.(R)md`,
     + Add `renv` cleaning in bash example script.
+
+* In `R/run_eggla.R`,
+    + Switch from `svglite` to `ragg` to avoid issues with high number of elements.
+
+* In `DESCRIPTION`,
+    + Switch from `svglite` to `ragg` to avoid issues with high number of elements.
+
 # eggla 0.4.0
 
 * In `README.(R)md`,

@@ -140,10 +140,11 @@ run_eggla <- function(
         file = file.path(results_directory, "derived-auc.csv")
       )
 
-      svglite::svglite(
+      ragg::agg_png(
         filename = file.path(results_directory, "model-residuals.svg"),
-        width = 10,
-        height = 8
+        width = 1000,
+        height = 800,
+        res = 72
       )
       print(
         plot_residuals(
