@@ -466,7 +466,7 @@ ggplot(
         ├── 2021-11-23-female.zip
         └── 2021-11-23-male.zip
 
-## Run Non Interactively
+## Run Interactively
 
 1.  Setup working directory using `renv` to restore predefined version
     of packages
