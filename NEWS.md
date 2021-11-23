@@ -5,7 +5,7 @@
 
 * In `R/run_eggla.R`,
     + Switch from `svglite` to `ragg` to avoid issues with high number of elements.
-    + Fix `id_var` which was  not set with `id_var = "egg_id"` internally. 
+    + Fix `id_var` which was not set with `id_var = "egg_id"` internally.
 
 * In `DESCRIPTION`,
     + Switch from `svglite` to `ragg` to avoid issues with high number of elements.

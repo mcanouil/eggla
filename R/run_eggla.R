@@ -143,9 +143,9 @@ run_eggla <- function(
       )
 
       ragg::agg_png(
-        filename = file.path(results_directory, "model-residuals.svg"),
-        width = 1000,
-        height = 800,
+        filename = file.path(results_directory, "model-residuals.png"),
+        width = 600,
+        height = 480,
         res = 72
       )
       print(
