@@ -381,7 +381,7 @@ ggplot(
         parallel_n_chunks = 1, # to parallelise Daymont QC
         working_directory = wd # or in that case "/tmp/egg_analysis"
       ))' \
-      -e 'if (inherits(res, "try-error")) { # cleanup' \
+      -e 'if (inherits(res, "try-error")) { # cleanup
         unlink(wd, recursive = TRUE)
       } else {
         unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
