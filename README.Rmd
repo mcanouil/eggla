@@ -406,16 +406,16 @@ ggplot(
 
 1. Setup working directory using `renv` to restore predefined version of packages
 
-  ```{r, eval = FALSE}
-  temp_library <- file.path(tempdir(), "R")
-  dir.create(temp_library, recursive = TRUE)
-  install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-  library("renv", lib.loc = temp_library)
-  renv::init(base = TRUE)
-  renv::install("mcanouil/eggla@v0.4.1")
-  renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
-  unlink(temp_library, recursive = TRUE)
-  ```
+    ```{r, eval = FALSE}
+    temp_library <- file.path(tempdir(), "R")
+    dir.create(temp_library, recursive = TRUE)
+    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
+    library("renv", lib.loc = temp_library)
+    renv::init(base = TRUE)
+    renv::install("mcanouil/eggla@v0.4.1")
+    renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
+    unlink(temp_library, recursive = TRUE)
+    ```
 
 2. Restart R
 
