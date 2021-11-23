@@ -10,10 +10,10 @@
 #     }
 #   }
 # )
-options("repos" = list(CRAN = "https://cran.rstudio.com"))
+options("repos" = list(CRAN = "https://cran.r-project.org"))
 renv::snapshot(
-  packages = desc::description$new()$get_deps()[-1, 2],
-  lockfile = "inst/renv.lock",
+  packages = subset(desc::description$new()$get_deps(), type %in% "Imports")[["package"]],
+  lockfile = "inst/setup/renv.lock",
   prompt  = FALSE,
   force = TRUE
 )
