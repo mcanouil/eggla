@@ -1,5 +1,8 @@
 # eggla 0.4.2
 
+* In `README.(R)md`,
+    + Fix typo in `renv::init` calls.
+
 # eggla 0.4.1
 
 * In `README.(R)md`,
