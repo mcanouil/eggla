@@ -1,4 +1,4 @@
-# eggla (development version)
+# eggla 0.4.2
 
 # eggla 0.4.1
 
