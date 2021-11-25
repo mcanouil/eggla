@@ -422,7 +422,7 @@ ggplot(
       -e 'dir.create(temp_library, recursive = TRUE)' \
       -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
       -e 'library("renv", lib.loc = temp_library)' \
-      -e 'renv::init(base = TRUE)' \
+      -e 'renv::init(bare = TRUE)' \
       -e 'renv::install("mcanouil/eggla@v0.4.1")' \
       -e 'renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
       -e 'unlink(temp_library, recursive = TRUE)'
@@ -486,7 +486,7 @@ ggplot(
     dir.create(temp_library, recursive = TRUE)
     install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
     library("renv", lib.loc = temp_library)
-    renv::init(base = TRUE)
+    renv::init(bare = TRUE)
     renv::install("mcanouil/eggla@v0.4.1")
     renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
     unlink(temp_library, recursive = TRUE)
