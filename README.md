@@ -204,19 +204,19 @@ sres <- tidy(res)
 sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
 sres
 #> # A tibble: 11 x 8
-#>    effect   group    term          estimate std.error    df statistic    p.value
-#>    <chr>    <chr>    <chr>            <dbl>     <dbl> <dbl>     <dbl>      <dbl>
-#>  1 fixed    fixed    (Intercept)     2.76     0.0223    409    124.      0      
-#>  2 fixed    fixed    gsp(...)D1(0)   0.240    0.0463    409      5.19    3.32e-7
-#>  3 fixed    fixed    gsp(...)D2(0)  -0.305    0.0566    409     -5.39    1.21e-7
-#>  4 fixed    fixed    gsp(...)D3(0)   0.175    0.0306    409      5.72    2.05e-8
-#>  5 fixed    fixed    gsp(...)C(2)~  -0.185    0.0318    409     -5.82    1.21e-8
-#>  6 fixed    fixed    gsp(...)C(8)~   0.0167   0.00452   409      3.70    2.44e-4
-#>  7 fixed    fixed    gsp(...)C(12~  -0.0201   0.0107    409     -1.89    6.01e-2
-#>  8 ran_pars ID       sd_(Intercep~   0.0861  NA          NA     NA      NA      
-#>  9 ran_pars ID       cor_gsp(...)~  -0.387   NA          NA     NA      NA      
-#> 10 ran_pars ID       sd_gsp(...)     0.0160  NA          NA     NA      NA      
-#> 11 ran_pars Residual sd_Observati~   0.0714  NA          NA     NA      NA
+#>    effect   group    term            estimate std.error    df statistic  p.value
+#>    <chr>    <chr>    <chr>              <dbl>     <dbl> <dbl>     <dbl>    <dbl>
+#>  1 fixed    fixed    (Intercept)       2.76     0.0223    409    124.    0      
+#>  2 fixed    fixed    gsp(...)D1(0)     0.240    0.0463    409      5.19  3.32e-7
+#>  3 fixed    fixed    gsp(...)D2(0)    -0.305    0.0566    409     -5.39  1.21e-7
+#>  4 fixed    fixed    gsp(...)D3(0)     0.175    0.0306    409      5.72  2.05e-8
+#>  5 fixed    fixed    gsp(...)C(2).3   -0.185    0.0318    409     -5.82  1.21e-8
+#>  6 fixed    fixed    gsp(...)C(8).3    0.0167   0.00452   409      3.70  2.44e-4
+#>  7 fixed    fixed    gsp(...)C(12).3  -0.0201   0.0107    409     -1.89  6.01e-2
+#>  8 ran_pars ID       sd_(Intercept)    0.0861  NA          NA     NA    NA      
+#>  9 ran_pars ID       cor_gsp(...).(~  -0.387   NA          NA     NA    NA      
+#> 10 ran_pars ID       sd_gsp(...)       0.0160  NA          NA     NA    NA      
+#> 11 ran_pars Residual sd_Observation    0.0714  NA          NA     NA    NA
 ```
 
 ### Predicted Values
@@ -486,7 +486,7 @@ ggplot(
     dir.create(temp_library, recursive = TRUE)
     install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
     library("renv", lib.loc = temp_library)
-    renv::init(bare = TRUE)
+    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
     renv::install("mcanouil/eggla@v0.4.2")
     renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
     unlink(temp_library, recursive = TRUE)
