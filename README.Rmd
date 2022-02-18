@@ -352,21 +352,14 @@ ggplot(
     cd $home_analysis
 
     Rscript \
-      -e 'temp_library <- file.path(tempdir(), "R")' \
-      -e 'dir.create(temp_library, recursive = TRUE)' \
-      -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
-      -e 'library("renv", lib.loc = temp_library)' \
-      -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
-      -e 'renv::install("mcanouil/eggla@v0.4.3")' \
-      -e 'renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
-      -e 'unlink(temp_library, recursive = TRUE)'
-
-    Rscript -e 'renv::activate()'
-
-    Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'library(eggla)' \
-      -e 'library(data.table)' \
+      -e 'temp_library <- file.path(wd, "R")' \
+      -e 'dir.create(temp_library, recursive = TRUE)' \
+      -e 'install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")' \
+      -e 'pak::lockfile_install(lockfile = system.file("setup", "pkg.lock", package = "eggla"))' \
+      -e 'setwd(wd)' \
+      -e 'library(eggla, lib.loc = temp_library)' \
+      -e 'library(data.table, lib.loc = temp_library)' \
       -e 'res <- try(run_eggla(
         data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
         id_variable = "ID",
@@ -381,11 +374,7 @@ ggplot(
         parallel_n_chunks = 1, # to parallelise Daymont QC
         working_directory = wd # or in that case "/tmp/egg_analysis"
       ))' \
-      -e 'if (inherits(res, "try-error")) { # cleanup
-        unlink(wd, recursive = TRUE)
-      } else {
-        unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
-      }'
+      -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
     ```
 
 2.  Run the analysis in bash
@@ -417,24 +406,19 @@ ggplot(
 2. Start R and setup working directory using `renv` to restore predefined version of packages
 
     ```{r, eval = FALSE}
-    temp_library <- file.path(tempdir(), "R")
+    wd <- "/tmp/egg_analysis"
+    temp_library <- file.path(wd, "R")
     dir.create(temp_library, recursive = TRUE)
-    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-    library("renv", lib.loc = temp_library)
-    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-    renv::install("mcanouil/eggla@v0.4.3")
-    renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
-    unlink(temp_library, recursive = TRUE)
+    install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")
+    pak::lockfile_install(lockfile = system.file("setup", "pkg.lock", package = "eggla"))
     ```
 
-3. Restart R
-
-4. Run the analysis
+3. Run the analysis
 
     ```{r, eval = FALSE}
-    wd <- "/tmp/egg_analysis"
-    library(eggla)
-    library(data.table)
+    setwd(wd)
+    library(eggla, lib.loc = temp_library)
+    library(data.table, lib.loc = temp_library)
     res <- try(
       run_eggla(
         data = fread("/tmp/bmigrowth.csv"),
@@ -451,11 +435,7 @@ ggplot(
         working_directory = wd
       )
     )
-    if (inherits(res, "try-error")) { # cleanup
-      unlink(wd, recursive = TRUE)
-    } else {
-      unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
-    }
+    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
     ```
 
 5. Retrieve the two archives
