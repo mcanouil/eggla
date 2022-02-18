@@ -1,4 +1,4 @@
-# eggla (development version)
+# eggla 0.4.3
 
 - In `README.(R)md`,
   - Disable `renv` caching.
