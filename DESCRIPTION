@@ -27,8 +27,7 @@ Imports:
     growthcleanr (>= 2.0.0),
     ggplot2 (>= 3.3.5),
     patchwork (>= 1.1.1),
-    broom.mixed (>= 0.2.7),
-    ragg (>= 1.2.0)
+    broom.mixed (>= 0.2.7)
 Suggests:
     roxygen2 (>= 7.1.2),
     testthat (>= 3.1.0)
