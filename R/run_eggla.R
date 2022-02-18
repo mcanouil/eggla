@@ -142,7 +142,7 @@ run_eggla <- function(
         file = file.path(results_directory, "derived-auc.csv")
       )
 
-      ragg::agg_png(
+      grDevices::png(
         filename = file.path(results_directory, "model-residuals.png"),
         width = 600,
         height = 480,

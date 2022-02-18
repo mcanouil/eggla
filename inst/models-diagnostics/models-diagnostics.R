@@ -40,7 +40,7 @@ suppressPackageStartupMessages({
   library(nlme)
   library(stats)
 
-  library(ragg)
+  library(grDevices)
   library(ggplot2)
   library(ggtext)
   library(patchwork)
@@ -299,7 +299,7 @@ fmt_models <- all_models[
 
 names_before_unlist <- names(fmt_models)
 
-agg_png(
+png(
   filename = file.path(output_directory, "models-diagnostics.png"),
   width = 16, height = 12, units = "cm", res = 300, scaling = 0.80
 )

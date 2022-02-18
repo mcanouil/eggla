@@ -7,7 +7,6 @@ dir.create(output_directory, recursive = TRUE, showWarnings = FALSE, mode = "077
 
 ### Load Packages ==================================================================================
 suppressPackageStartupMessages({
-  library(ragg)
   library(svglite)
   library(ggplot2)
   library(ggtext)
