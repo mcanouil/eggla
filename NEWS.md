@@ -8,7 +8,7 @@
 
 - In `inst/setup`,
   - Add Dockerfile.
-  - Upgrade `renv` to `0.15.2` in `renv.lock`.
+  - Use `pak`.
 
 - In `R/run_eggla.R`,
   - Remove `ragg` dependency, uses `grDevices` instead.
