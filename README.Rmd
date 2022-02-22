@@ -342,6 +342,53 @@ ggplot(
 
 1. Copy and edit the following code to a new file (e.g., `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
+  - `renv` (recommended):
+
+    ```{bash, eval = FALSE}
+    #!/bin/bash
+
+    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+
+    mkdir $home_analysis 
+
+    cd $home_analysis
+
+    Rscript \
+      -e 'wd <- "/tmp/egg_analysis"' \
+      -e 'temp_library <- file.path(wd, "R")' \
+      -e 'dir.create(temp_library, recursive = TRUE)' \
+      -e '.libPaths(temp_library)' \
+      -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
+      -e 'library("renv")' \
+      -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
+      -e 'renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")' \
+      -e 'renv::install("mcanouil/eggla@v0.4.3")' \
+      -e 'unlink(temp_library, recursive = TRUE)'
+
+    Rscript \
+      -e 'wd <- "/tmp/egg_analysis"' \
+      -e 'setwd(wd)' \
+      -e 'library(eggla)' \
+      -e 'library(data.table)' \
+      -e 'res <- try(run_eggla(
+        data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+        id_variable = "ID",
+        age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+        age_years_variable = "age", 
+        weight_kilograms_variable = "weight",
+        height_centimetres_variable = "height",
+        sex_variable = "sex",
+        covariates = NULL,
+        male_coded_zero = FALSE,
+        parallel = FALSE, # to parallelise Daymont QC
+        parallel_n_chunks = 1, # to parallelise Daymont QC
+        working_directory = wd # or in that case "/tmp/egg_analysis"
+      ))' \
+      -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
+    ```
+
+  - `pak` (faster):
+
     ```{bash, eval = FALSE}
     #!/bin/bash
 
@@ -362,7 +409,10 @@ ggplot(
         lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
         lib = temp_library
       )' \
-      -e 'pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)' \
+      -e 'pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
+    
+    Rscript \
+      -e 'wd <- "/tmp/egg_analysis"' \
       -e 'setwd(wd)' \
       -e 'library(eggla)' \
       -e 'library(data.table)' \
@@ -409,7 +459,24 @@ ggplot(
     cd $home_analysis
     ```
 
-2. Start R and setup working directory using `renv` to restore predefined version of packages
+2. Start R and setup working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages
+
+  - `renv` (recommended):
+
+    ```{r, eval = FALSE}
+    wd <- "/tmp/egg_analysis"
+    temp_library <- file.path(wd, "R")
+    dir.create(temp_library, recursive = TRUE)
+    .libPaths(temp_library)
+    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
+    library("renv")
+    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
+    renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")
+    renv::install("mcanouil/eggla@v0.4.3")
+    unlink(temp_library, recursive = TRUE)
+    ```
+
+  - `pak` (faster):
 
     ```{r, eval = FALSE}
     wd <- "/tmp/egg_analysis"
@@ -425,7 +492,9 @@ ggplot(
     pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
-3. Run the analysis
+3. Restart R
+
+4. Run the analysis
 
     ```{r, eval = FALSE}
     setwd(wd)

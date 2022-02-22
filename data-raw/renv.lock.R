@@ -1,7 +1,5 @@
-options("repos" = list(CRAN = "https://cran.r-project.org"))
 renv::init(bare = TRUE, force = TRUE)
-renv::install(".", prompt = FALSE)
-renv::snapshot(lockfile = "inst/setup/renv.lock", type = "explicit", force = TRUE)
+renv::snapshot(lockfile = "inst/setup/renv.lock", packages = ".", force = TRUE)
 unlink(".Rprofile")
 unlink("renv", recursive = TRUE)
 renv::record("renv@0.15.2", lockfile = "inst/setup/renv.lock")
