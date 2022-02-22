@@ -47,7 +47,7 @@ remotes::install_github("mcanouil/eggla")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.4.2")
+remotes::install_github("mcanouil/eggla@v0.4.3")
 ```
 
 ## Run The Cubic Splines (Random Linear Splines) Analysis
@@ -418,19 +418,18 @@ ggplot(
     cd $home_analysis
 
     Rscript \
-      -e 'temp_library <- file.path(tempdir(), "R")' \
-      -e 'dir.create(temp_library, recursive = TRUE)' \
-      -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
-      -e 'library("renv", lib.loc = temp_library)' \
-      -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
-      -e 'renv::install("mcanouil/eggla@v0.4.2")' \
-      -e 'renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))' \
-      -e 'unlink(temp_library, recursive = TRUE)'
-
-    Rscript -e 'renv::activate()'
-
-    Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
+      -e 'temp_library <- file.path(wd, "R")' \
+      -e 'dir.create(temp_library, recursive = TRUE)' \
+      -e '.libPaths(temp_library)' \
+      -e 'install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")' \
+      -e 'library(pak)' \
+      -e 'lockfile_install(
+        lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
+        lib = temp_library
+      )' \
+      -e 'pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)' \
+      -e 'setwd(wd)' \
       -e 'library(eggla)' \
       -e 'library(data.table)' \
       -e 'res <- try(run_eggla(
@@ -447,11 +446,7 @@ ggplot(
         parallel_n_chunks = 1, # to parallelise Daymont QC
         working_directory = wd # or in that case "/tmp/egg_analysis"
       ))' \
-      -e 'if (inherits(res, "try-error")) { # cleanup
-        unlink(wd, recursive = TRUE)
-      } else {
-        unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
-      }'
+      -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
     ```
 
 2.  Run the analysis in bash
@@ -482,22 +477,23 @@ ggplot(
     predefined version of packages
 
     ``` r
-    temp_library <- file.path(tempdir(), "R")
+    wd <- "/tmp/egg_analysis"
+    temp_library <- file.path(wd, "R")
     dir.create(temp_library, recursive = TRUE)
-    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-    library("renv", lib.loc = temp_library)
-    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-    renv::install("mcanouil/eggla@v0.4.2")
-    renv::restore(lockfile = system.file("setup", "renv.lock", package = "eggla"))
-    unlink(temp_library, recursive = TRUE)
+    .libPaths(temp_library)
+    install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")
+    library(pak)
+    lockfile_install(
+      lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
+      lib = temp_library
+    )
+    pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
-3.  Restart R
-
-4.  Run the analysis
+3.  Run the analysis
 
     ``` r
-    wd <- "/tmp/egg_analysis"
+    setwd(wd)
     library(eggla)
     library(data.table)
     res <- try(
@@ -516,14 +512,10 @@ ggplot(
         working_directory = wd
       )
     )
-    if (inherits(res, "try-error")) { # cleanup
-      unlink(wd, recursive = TRUE)
-    } else {
-      unlink(c(file.path(wd, "renv"), file.path(wd, "renv.lock")), recursive = TRUE)
-    }
+    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
     ```
 
-5.  Retrieve the two archives
+4.  Retrieve the two archives
 
         /tmp/egg_analysis/
         ├── 2021-11-23-female.zip
