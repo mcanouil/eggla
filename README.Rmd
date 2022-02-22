@@ -362,7 +362,7 @@ ggplot(
         lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
         lib = temp_library
       )' \
-      -e 'pkg_install("mcanouil/eggla@0.4.3", lib = temp_library)' \
+      -e 'pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)' \
       -e 'setwd(wd)' \
       -e 'library(eggla)' \
       -e 'library(data.table)' \
@@ -422,7 +422,7 @@ ggplot(
       lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
       lib = temp_library
     )
-    pkg_install("mcanouil/eggla@0.4.3", lib = temp_library)
+    pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
 3. Run the analysis
