@@ -26,10 +26,14 @@ time_model <- function(
     EXPR = method,
     "cubic_slope" = paste0("stats::poly(", x, ", degree = 3)"),
     "linear_splines" = paste0(
-      "gsp(", x, ", knots = ", knots_fmt, ", degree = rep(1, ", length(knots) + 1, "), smooth = rep(0, ", length(knots), "))"
+      "gsp(", x, ", knots = ", knots_fmt,
+      ", degree = rep(1, ", length(knots) + 1,
+      "), smooth = rep(0, ", length(knots), "))"
     ),
     "cubic_splines" = paste0(
-      "gsp(", x, ", knots = ", knots_fmt, ", degree = rep(3, ", length(knots) + 1, "), smooth = rep(2, ", length(knots), "))"
+      "gsp(", x, ", knots = ", knots_fmt,
+      ", degree = rep(3, ", length(knots) + 1,
+      "), smooth = rep(2, ", length(knots), "))"
     ),
     stop(paste0("'", method, "' not defined!"))
   )
@@ -87,18 +91,18 @@ time_model <- function(
   if (inherits(res_model, "try-error")) {
     model_call <- switch(EXPR = method,
       "cubic_slope" = {
-        message("Polynom's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
+        message("Polynom's degree was decreased from 3 to 1 in the random effect formula.", appendLF = TRUE)
         f_model_call(
           form_fixed = form_fixed,
-          form_random = paste0("~ ", gsub("degree = 3", "degree = 2", x_fmt, fixed = TRUE), " | ID"),
+          form_random = paste0("~ ", gsub("degree = 3", "degree = 1", x_fmt, fixed = TRUE), " | ID"),
           n_iteration = 1000
         )
       },
       "cubic_splines" = {
-        message("Spline's degree was decreased from 3 to 2 in the random effect formula.", appendLF = TRUE)
+        message("Spline's degree was decreased from 3 to 1 in the random effect formula.", appendLF = TRUE)
         f_model_call(
           form_fixed = form_fixed,
-          form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(2", x_fmt, fixed = TRUE), " | ID"),
+          form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(1", x_fmt, fixed = TRUE), " | ID"),
           n_iteration = 1000
         )
       }
