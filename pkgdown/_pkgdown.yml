@@ -1,7 +1,7 @@
 url: https://m.canouil.fr/eggla/
 template:
   bootstrap: 5
-  bootswatch: lux
+  bootswatch: superhero
 development:
   mode: auto
 authors:

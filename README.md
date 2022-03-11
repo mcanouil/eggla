@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Early Growth Genetics Longitudinal Analysis <img src="man/figures/eggla.png" align="right" width="120" />
+# EGG Longitudinal Analysis <img src="man/figures/logo.png" align="right" width="120" />
 
 <!-- badges: start -->
 
