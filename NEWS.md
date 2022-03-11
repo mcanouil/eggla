@@ -6,6 +6,7 @@
     2. `~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[,1:3] | ID`
     3. `~ gsp(age, knots = c(2, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID`
   - Add message about which model is currently being computed.
+- Add `pkgdown` website.
 
 # eggla 0.4.3
 

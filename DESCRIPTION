@@ -14,7 +14,8 @@ Authors@R:
 Description: Tools for longitudinal analysis within the EGG
     (Early Growth Genetics) Consortium.
 License: MIT + file LICENSE
-URL: https://github.com/mcanouil/eggla
+URL: https://github.com/mcanouil/eggla,
+    https://m.canouil.fr/eggla/
 BugReports: https://github.com/mcanouil/eggla/issues
 Depends:
     R (>= 4.0.0)

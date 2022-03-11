@@ -8,3 +8,6 @@
 ^\.github$
 ^data-raw$
 ^.Rprofile$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -1,0 +1,9 @@
+url: https://m.canouil.fr/eggla/
+template:
+  bootstrap: 5
+  bootswatch: lux
+development:
+  mode: auto
+authors:
+  Mickaël Canouil:
+    href: https://mickael.canouil.fr
