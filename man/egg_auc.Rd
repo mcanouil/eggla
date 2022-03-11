@@ -7,11 +7,13 @@
 egg_auc(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17), id_var = "ID")
 }
 \arguments{
-\item{fit}{A model object from a statistical model such as from a call to \code{nlme::lme()} and \code{time_model()}.}
+\item{fit}{A model object from a statistical model
+such as from a call to \code{nlme::lme()} and \code{time_model()}.}
 
 \item{period}{The intervals knots on which AUCs are to be computed.}
 
-\item{id_var}{A string indicating the name of the variable to be used as the individual identifier.}
+\item{id_var}{A string indicating the name of the variable
+to be used as the individual identifier.}
 }
 \value{
 A \code{data.frame} with AUC for each individuals/samples.

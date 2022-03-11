@@ -49,7 +49,8 @@ Path to zip archives
 }
 \description{
 Perform Daymont's quality-control for BMI,
-fit a cubic splines mixed model regression with linear splines as random effect,
+fit a cubic splines mixed model regression
+with linear splines as random effect,
 save model object, generates residuals figures fot model validity,
 derived area under the curve and slopes for male and femal.
 }
