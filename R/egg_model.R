@@ -1,12 +1,17 @@
 #' egg_model
 #'
-#' Fit a cubic splines mixed model regression with linear splines as random effect.
+#' Fit a cubic splines mixed model regression
+#' with linear splines as random effect.
 #'
-#' @param formula An object of class "formula": a symbolic description of the model to be fitted with, time component as the first term in the right-hand side.
+#' @param formula An object of class "formula":
+#'   a symbolic description of the model to be fitted with,
+#'   time component as the first term in the right-hand side.
 #' @param data A data.frame containing the variables defined in formula.
-#' @param id_var A string indicating the name of the variable to be used as the individual identifier.
+#' @param id_var A string indicating the name of the variable
+#'   to be used as the individual identifier.
 #'
-#' @return An object of class "lme" representing the linear mixed-effects model fit.
+#' @return An object of class "lme" representing
+#'   the linear mixed-effects model fit.
 #' @export
 egg_model <- function(formula, data, id_var = "ID") {
   y <- as.character(formula)[[2]]
@@ -27,10 +32,23 @@ egg_model <- function(formula, data, id_var = "ID") {
     "%s ~ %s",
     y, paste(x_fmt, collapse = " + ")
   )
-  form_random <- sprintf(
-    "~ %s | %s",
-    sub("degree = rep\\(3,", "degree = rep\\(1,", x_fmt[1]),
-    id_var
+
+  form_random <- c(
+    sprintf(
+      "~ %s | %s",
+      x_fmt[1],
+      id_var
+    ),
+    sprintf(
+      "~ %s[,1:3] | %s",
+      x_fmt[1],
+      id_var
+    ),
+    sprintf(
+      "~ %s | %s",
+      sub("degree = rep\\(3,", "degree = rep\\(1,", x_fmt[1]),
+      id_var
+    )
   )
 
   if (!all(vars_available <- all.vars(formula) %in% colnames(data))) {
@@ -59,26 +77,41 @@ egg_model <- function(formula, data, id_var = "ID") {
     )
   }
 
-  model_call <- f_model_call(
-    form_fixed = form_fixed,
-    form_random = form_random,
-    n_iteration = 500
-  )
-  res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
-  if (inherits(res_model, "try-error")) {
-    message("Number of iteration has been increased from 500 to 1,000.", appendLF = TRUE)
+  irandom <- 1
+  res_model <- `class<-`(list(), "try-error")
+  while (inherits(res_model, "try-error") & irandom <= length(form_random)) {
     model_call <- f_model_call(
       form_fixed = form_fixed,
-      form_random = form_random,
-      n_iteration = 1000
+      form_random = form_random[[irandom]],
+      n_iteration = 500
     )
-    res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
+    res_model <- try(
+      expr = eval(parse(text = paste(model_call, collapse = ""))),
+      silent = TRUE
+    )
+    if (inherits(res_model, "try-error")) {
+      message(
+        "Number of iteration has been increased from 500 to 1,000.",
+        appendLF = TRUE
+      )
+      model_call <- f_model_call(
+        form_fixed = form_fixed,
+        form_random = form_random[[irandom]],
+        n_iteration = 1000
+      )
+      res_model <- try(
+        expr = eval(parse(text = paste(model_call, collapse = ""))),
+        silent = TRUE
+      )
+    }
+
+    irandom <- irandom + 1
   }
 
-  message(paste(model_call, collapse = "\n"), appendLF = TRUE)
+  message(paste(res_model[["call"]], collapse = "\n"), appendLF = TRUE)
 
   if (inherits(res_model, "try-error")) {
-    stop(attr(res_model, "condition")$message)
+    stop(attr(res_model, "condition")[["message"]])
   } else {
     res_model
   }
@@ -86,9 +119,11 @@ egg_model <- function(formula, data, id_var = "ID") {
 
 #' egg_slopes
 #'
-#' @param fit A model object from a statistical model such as from a call to `nlme::lme()` and `time_model()`.#'
+#' @param fit A model object from a statistical model
+#'   such as from a call to `nlme::lme()` and `time_model()`.
 #' @param period The intervals knots on which slopes are to be computed.
-#' @param id_var A string indicating the name of the variable to be used as the individual identifier.
+#' @param id_var A string indicating the name of the variable
+#'   to be used as the individual identifier.
 #'
 #' @return A `data.frame` with slopes for each individuals/samples.
 #' @export
@@ -99,7 +134,11 @@ egg_slopes <- function(
 ) {
   knots <- c(2, 8, 12)
 
-  slopes <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period) / 2)
+  slopes <- matrix(
+    data = NA_real_,
+    nrow = length(unique(fit$data[[id_var]])),
+    ncol = length(period) / 2
+  )
   colnames(slopes) <- paste0(
     "slope_",
     sapply(split(
@@ -110,11 +149,17 @@ egg_slopes <- function(
       )
     ), paste, collapse = "--")
   )
-  pred <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period))
+  pred <- matrix(
+    data = NA_real_,
+    nrow = length(unique(fit$data[[id_var]])),
+    ncol = length(period)
+  )
   colnames(pred) <- paste0("pred_period_", round(period, digits = 1))
 
   fxef <- nlme::fixef(fit)
-  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))])
+  fxef <- unname(fxef[
+    grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))
+  ])
   rnef <- nlme::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
@@ -131,11 +176,15 @@ egg_slopes <- function(
      coeff <- fxef + as.numeric(rnef[i, ])
     for (j in 1:(length(period) / 2)) {
       x1 <- period[j * 2 - 1]
-      y1_tmp <- coeff * c(x1^0, x1^1, x1^2, x1^3, (x1 - knots)^3) / c(1, 1, 2, rep(6, 4))
+      y1_tmp <- coeff *
+        c(x1^0, x1^1, x1^2, x1^3, (x1 - knots)^3) /
+        c(1, 1, 2, rep(6, 4))
       y1 <- sum(y1_tmp[1:(4 + findInterval(x1, knots, left.open = TRUE))])
 
       x2 <- period[j * 2]
-      y2_tmp <- coeff * c(x2^0, x2^1, x2^2, x2^3, (x2 - knots)^3) / c(1, 1, 2, rep(6, 4))
+      y2_tmp <- coeff *
+        c(x2^0, x2^1, x2^2, x2^3, (x2 - knots)^3) /
+        c(1, 1, 2, rep(6, 4))
       y2 <- sum(y2_tmp[1:(4 + findInterval(x2, knots, left.open = TRUE))])
 
       pred[i, j * 2 - 1] <- y1
@@ -150,9 +199,11 @@ egg_slopes <- function(
 
 #' egg_auc
 #'
-#' @param fit A model object from a statistical model such as from a call to `nlme::lme()` and `time_model()`.
+#' @param fit A model object from a statistical model
+#' such as from a call to `nlme::lme()` and `time_model()`.
 #' @param period The intervals knots on which AUCs are to be computed.
-#' @param id_var A string indicating the name of the variable to be used as the individual identifier.
+#' @param id_var A string indicating the name of the variable
+#' to be used as the individual identifier.
 #'
 #' @return A `data.frame` with AUC for each individuals/samples.
 #' @export
@@ -162,7 +213,11 @@ egg_auc <- function(
   id_var = "ID"
 ) {
   knots <- c(2, 8, 12)
-  pred_auc <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period) / 2)
+  pred_auc <- matrix(
+    data = NA_real_,
+    nrow = length(unique(fit$data[[id_var]])),
+    ncol = length(period) / 2
+  )
   colnames(pred_auc) <- paste0(
     "auc_",
     sapply(split(
@@ -175,7 +230,9 @@ egg_auc <- function(
   )
 
   fxef <- nlme::fixef(fit)
-  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))])
+  fxef <- unname(fxef[
+    grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))
+  ])
   rnef <- nlme::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
@@ -192,7 +249,9 @@ egg_auc <- function(
     sapply(
       X = x,
       FUN = function(x) {
-        y_tmp <- coeff * c(x^0, x^1, x^2, x^3, (x - knots)^3) / c(1, 1, 2, rep(6, 4))
+        y_tmp <- coeff *
+          c(x^0, x^1, x^2, x^3, (x - knots)^3) /
+          c(1, 1, 2, rep(6, 4))
         sum(y_tmp[1:(4 + findInterval(x, knots, left.open = TRUE))])
       }
     )
