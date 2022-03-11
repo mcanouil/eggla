@@ -1,7 +1,8 @@
 #' run_eggla
 #'
-#' Perform Daymont's quality-control for BMI, 
-#' fit a cubic splines mixed model regression with linear splines as random effect,
+#' Perform Daymont's quality-control for BMI,
+#' fit a cubic splines mixed model regression
+#' with linear splines as random effect,
 #' save model object, generates residuals figures fot model validity,
 #' derived area under the curve and slopes for male and femal.
 #'
@@ -46,7 +47,8 @@ run_eggla <- function(
         "egg_id" = as.character(get(id_variable)),
         "egg_ageyears" = get(age_years_variable),
         "egg_agedays" = if (is.null(age_days_variable)) {
-          floor(get(age_years_variable) * 365.25) # convert age in years to age in days and as integers ...
+          # convert age in years to age in days and as integers ...
+          floor(get(age_years_variable) * 365.25)
         } else {
           get(age_days_variable)
         },
@@ -55,11 +57,15 @@ run_eggla <- function(
         "egg_sex" = if (male_coded_zero) {
           as.integer(get(sex_variable))
         } else {
-          c("0" = 1L, "1" = 0L)[as.character(get(sex_variable))] # recode sex with Male = 0 and Female = 1 ...
+          # recode sex with Male = 0 and Female = 1 ...
+          c("0" = 1L, "1" = 0L)[as.character(get(sex_variable))]
         }
       )
     ],
-    id.vars = c(sprintf("egg_%s", c("id", "ageyears", "agedays", "sex")), covariates),
+    id.vars = c(
+      sprintf("egg_%s", c("id", "ageyears", "agedays", "sex")),
+      covariates
+    ),
     measure.vars = c("WEIGHTKG", "HEIGHTCM"),
     variable.name = "param",
     value.name = "measurement",
@@ -86,7 +92,7 @@ run_eggla <- function(
     formula = ... ~ param,
     value.var = "measurement"
   )[
-    j = `:=`("bmi" = WEIGHTKG / (HEIGHTCM / 100)^2) # recompute bmi based using QCed variables
+    j = `:=`("bmi" = WEIGHTKG / (HEIGHTCM / 100)^2)
   ][
     !is.na(bmi) # exclude missing BMI related to measurements exclusion
   ]
@@ -97,7 +103,9 @@ run_eggla <- function(
   if (!is.null(covariates)) {
     base_model <- stats::update(
       base_model,
-      stats::as.formula(sprintf(". ~ . + %s", paste(covariates, collapse = " + ")))
+      stats::as.formula(
+        sprintf(". ~ . + %s", paste(covariates, collapse = " + "))
+      )
     )
   }
 
