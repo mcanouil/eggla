@@ -61,7 +61,7 @@ remotes::install_github("mcanouil/eggla")
 
 ```{r, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.4.3")
+remotes::install_github("mcanouil/eggla@v0.4.4")
 ```
 
 ## Run The Cubic Splines (Random Linear Splines) Analysis
@@ -70,7 +70,7 @@ remotes::install_github("mcanouil/eggla@v0.4.3")
 
 ```{r}
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla")
+# remotes::install_github("mcanouil/eggla@v0.4.4")
 library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
@@ -148,7 +148,7 @@ pheno_dt_long <- melt(
   variable.name = "param",
   value.name = "measurement"
 )[
-  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+  j = clean := cleangrowth(# Daymont's QC from 'growthcleanr'
     subjid = ID,
     param = param,
     agedays = agedays,
@@ -258,16 +258,15 @@ wrap_plots(
       .width = 0,
       scale = 0.5
     ) +
-    geom_boxplot(mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA) +
+    geom_boxplot(
+      mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA
+    ) +
     geom_quasirandom(
       mapping = aes(fill = period_interval, colour = period_interval),
-      # colour = "white",
       shape = 21,
       alpha = 0.25,
       groupOnX = FALSE,
-      width = 0.15#,
-      # side = -1,
-      # cex = 0.5
+      width = 0.15
     ) +
     labs(x = "Predicted Slope", y = "Period Interval (years)") +
     theme(legend.position = "none"),
@@ -323,16 +322,15 @@ ggplot(
     .width = 0,
     scale = 1
   ) +
-  geom_boxplot(mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA) +
+  geom_boxplot(
+    mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA
+  ) +
   geom_quasirandom(
     mapping = aes(fill = period_interval, colour = period_interval),
-    # colour = "white",
     shape = 21,
     alpha = 0.25,
     groupOnX = FALSE,
-    width = 0.15#,
-    # side = -1,
-    # cex = 0.5
+    width = 0.15
   ) +
   labs(x = "Area Under The Curve (AUC)", y = "Period Interval (years)") +
   theme(legend.position = "none")
@@ -362,7 +360,7 @@ ggplot(
       -e 'library("renv")' \
       -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
       -e 'renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")' \
-      -e 'renv::install("mcanouil/eggla@v0.4.3")' \
+      -e 'renv::install("mcanouil/eggla@v0.4.4")' \
       -e 'unlink(temp_library, recursive = TRUE)'
 
     Rscript \
@@ -409,7 +407,7 @@ ggplot(
         lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
         lib = temp_library
       )' \
-      -e 'pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
+      -e 'pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
     
     Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
@@ -472,7 +470,7 @@ ggplot(
     library("renv")
     renv::init(bare = TRUE, settings = list(use.cache = FALSE))
     renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")
-    renv::install("mcanouil/eggla@v0.4.3")
+    renv::install("mcanouil/eggla@v0.4.4")
     unlink(temp_library, recursive = TRUE)
     ```
 
@@ -489,7 +487,7 @@ ggplot(
       lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
       lib = temp_library
     )
-    pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+    pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
 3. Restart R
