@@ -6,12 +6,15 @@
 \alias{eggla-package}
 \title{eggla: Early Growth Genetics Longitudinal Analysis}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/mcanouil/eggla}
+  \item \url{https://m.canouil.fr/eggla/}
   \item Report bugs at \url{https://github.com/mcanouil/eggla/issues}
 }
 
