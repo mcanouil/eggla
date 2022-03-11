@@ -13,7 +13,7 @@
 #' @return An object of class "lme" representing
 #'   the linear mixed-effects model fit.
 #' @export
-egg_model <- function(formula, data, id_var = "ID") {
+egg_model <- function(formula, data, id_var) {
   y <- as.character(formula)[[2]]
   x_cov <- strsplit(as.character(formula)[[3]], " \\+ ")[[1]]
 
@@ -84,6 +84,13 @@ egg_model <- function(formula, data, id_var = "ID") {
       form_fixed = form_fixed,
       form_random = form_random[[irandom]],
       n_iteration = 500
+    )
+    message(
+      "Fitting model:\n",
+      paste(
+        paste0("  ", model_call),
+        collapse = "\n"
+      )
     )
     res_model <- try(
       expr = eval(parse(text = paste(model_call, collapse = ""))),
