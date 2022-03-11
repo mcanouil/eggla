@@ -1,3 +1,11 @@
+# eggla 0.4.4
+
+- In `R/egg_model.R`,
+  - Three cublic spline random effects formula are tested in the following order:
+    1. `~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID`
+    2. `~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[,1:3] | ID`
+    3. `~ gsp(age, knots = c(2, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID`
+
 # eggla 0.4.3
 
 - In `README.(R)md`,
