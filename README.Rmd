@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Early Growth Genetics Longitudinal Analysis <img src="man/figures/eggla.png" align="right" width="120" />
+# EGG Longitudinal Analysis <img src="man/figures/logo.png" align="right" width="120" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
