@@ -47,7 +47,7 @@ remotes::install_github("mcanouil/eggla")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.4.3")
+remotes::install_github("mcanouil/eggla@v0.4.4")
 ```
 
 ## Run The Cubic Splines (Random Linear Splines) Analysis
@@ -56,7 +56,7 @@ remotes::install_github("mcanouil/eggla@v0.4.3")
 
 ``` r
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla")
+# remotes::install_github("mcanouil/eggla@v0.4.4")
 library(eggla)
 # remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
@@ -153,7 +153,7 @@ pheno_dt_long <- melt(
   variable.name = "param",
   value.name = "measurement"
 )[
-  j = clean := cleangrowth( # Daymont's QC from 'growthcleanr'
+  j = clean := cleangrowth(# Daymont's QC from 'growthcleanr'
     subjid = ID,
     param = param,
     agedays = agedays,
@@ -188,35 +188,44 @@ pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
 ``` r
 res <- egg_model(
   formula = log(bmi) ~ age, # covariates can be added after the term used for the time component, e.g., `log(bmi) ~ age + covariate`
-  data = pheno_dt_female
+  data = pheno_dt_female,
+  id_var = "ID"
 )
-#> nlme::lme(
-#>   fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
-#>   data = data,
-#>   random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,
-#>   na.action = stats::na.omit,
-#>   method = "ML",
-#>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#> )
+#> Fitting model:
+#>   nlme::lme(
+#>     fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
+#>     data = data,
+#>     random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID,
+#>     na.action = stats::na.omit,
+#>     method = "ML",
+#>     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+#>   )
+#> lme.formula
+#> log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))
+#> data
+#> ~gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID
+#> ML
+#> stats::na.omit
+#> nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
 class(res)
 #> [1] "lme"
 sres <- tidy(res)
 sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
 sres
-#> # A tibble: 11 x 8
-#>    effect   group    term            estimate std.error    df statistic  p.value
-#>    <chr>    <chr>    <chr>              <dbl>     <dbl> <dbl>     <dbl>    <dbl>
-#>  1 fixed    fixed    (Intercept)       2.76     0.0223    409    124.    0      
-#>  2 fixed    fixed    gsp(...)D1(0)     0.240    0.0463    409      5.19  3.32e-7
-#>  3 fixed    fixed    gsp(...)D2(0)    -0.305    0.0566    409     -5.39  1.21e-7
-#>  4 fixed    fixed    gsp(...)D3(0)     0.175    0.0306    409      5.72  2.05e-8
-#>  5 fixed    fixed    gsp(...)C(2).3   -0.185    0.0318    409     -5.82  1.21e-8
-#>  6 fixed    fixed    gsp(...)C(8).3    0.0167   0.00452   409      3.70  2.44e-4
-#>  7 fixed    fixed    gsp(...)C(12).3  -0.0201   0.0107    409     -1.89  6.01e-2
-#>  8 ran_pars ID       sd_(Intercept)    0.0861  NA          NA     NA    NA      
-#>  9 ran_pars ID       cor_gsp(...).(~  -0.387   NA          NA     NA    NA      
-#> 10 ran_pars ID       sd_gsp(...)       0.0160  NA          NA     NA    NA      
-#> 11 ran_pars Residual sd_Observation    0.0714  NA          NA     NA    NA
+#> # A tibble: 36 x 8
+#>    effect   group term              estimate std.error    df statistic   p.value
+#>    <chr>    <chr> <chr>                <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed (Intercept)         2.76     0.0212    409    131.    0       
+#>  2 fixed    fixed gsp(...)D1(0)       0.237    0.0394    409      6.01  4.05e- 9
+#>  3 fixed    fixed gsp(...)D2(0)      -0.298    0.0478    409     -6.24  1.13e- 9
+#>  4 fixed    fixed gsp(...)D3(0)       0.171    0.0257    409      6.65  9.24e-11
+#>  5 fixed    fixed gsp(...)C(2).3     -0.182    0.0267    409     -6.82  3.35e-11
+#>  6 fixed    fixed gsp(...)C(8).3      0.0225   0.00504   409      4.46  1.06e- 5
+#>  7 fixed    fixed gsp(...)C(12).3    -0.0427   0.0115    409     -3.71  2.38e- 4
+#>  8 ran_pars ID    sd_(Intercept)      0.106   NA          NA     NA    NA       
+#>  9 ran_pars ID    cor_gsp(...)D1(0~  -0.553   NA          NA     NA    NA       
+#> 10 ran_pars ID    cor_gsp(...)D2(0~   0.299   NA          NA     NA    NA       
+#> # ... with 26 more rows
 ```
 
 ### Predicted Values
@@ -266,26 +275,26 @@ res_pred_slopes <- egg_slopes(
 )
 head(res_pred_slopes)
 #>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6
-#> 1 001      2.896950        2.982138        3.011172      3.093593      3.168655
-#> 2 004      2.758294        2.841876        2.867700      2.938884      3.010736
-#> 3 005      2.731514        2.821683        2.860679      2.977967      3.062991
-#> 4 006      2.645488        2.729430        2.755975      2.829683      2.902255
-#> 5 007      2.914267        3.009222        3.057790      3.208579      3.303175
-#> 6 009      2.726611        2.808914        2.832178      2.894402      2.963694
+#> 1 001      2.830262        2.954593        3.056354      3.209645      3.265056
+#> 2 004      2.731078        2.826844        2.881856      2.976368      3.034997
+#> 3 005      2.728717        2.807048        2.837548      2.996263      3.095257
+#> 4 006      2.564294        2.704655        2.780084      2.822716      2.880735
+#> 5 007      2.863814        2.942015        3.031412      3.287667      3.357286
+#> 6 009      2.790176        2.845252        2.811302      2.859965      2.962467
 #>   pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5
-#> 1       3.443546       3.558354       3.764686    0.1703750   0.02354874
-#> 2       3.272785       3.381172       3.571453    0.1671645   0.02033832
-#> 3       3.377730       3.512462       3.768604    0.1803370   0.03351077
-#> 4       3.167188       3.277017       3.470902    0.1678855   0.02105924
-#> 5       3.656200       3.810076       4.114077    0.1899087   0.04308251
-#> 6       3.215504       3.318771       3.496252    0.1646047   0.01777847
+#> 1       3.447789       3.542716       3.360931    0.2486612   0.04379745
+#> 2       3.246087       3.377745       3.454336    0.1915324   0.02700367
+#> 3       3.382815       3.498699       3.623440    0.1566620   0.04534708
+#> 4       3.231716       3.390766       3.236967    0.2807226   0.01218036
+#> 5       3.438101       3.527315       3.597911    0.1564016   0.07321565
+#> 6       3.282805       3.385378       3.629244    0.1101509   0.01390381
 #>   slope_6--10 slope_12--17
-#> 1  0.06872264   0.04126650
-#> 2  0.06551222   0.03805608
-#> 3  0.07868467   0.05122853
-#> 4  0.06623314   0.03877700
-#> 5  0.08825641   0.06080027
-#> 6  0.06295237   0.03549623
+#> 1  0.04568318  -0.03635702
+#> 2  0.05277257   0.01531826
+#> 3  0.07188952   0.02494810
+#> 4  0.08774527  -0.03075987
+#> 5  0.02020367   0.01411908
+#> 6  0.08008440   0.04877325
 ```
 
 ``` r
@@ -311,16 +320,15 @@ wrap_plots(
       .width = 0,
       scale = 0.5
     ) +
-    geom_boxplot(mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA) +
+    geom_boxplot(
+      mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA
+    ) +
     geom_quasirandom(
       mapping = aes(fill = period_interval, colour = period_interval),
-      # colour = "white",
       shape = 21,
       alpha = 0.25,
       groupOnX = FALSE,
-      width = 0.15#,
-      # side = -1,
-      # cex = 0.5
+      width = 0.15
     ) +
     labs(x = "Predicted Slope", y = "Period Interval (years)") +
     theme(legend.position = "none"),
@@ -355,12 +363,12 @@ res_auc <- egg_auc(
 )
 head(res_auc)
 #>    ID auc_0--0.5 auc_1.5--5 auc_6--10 auc_12--17
-#> 1 001   1.472495  10.573508  13.26934   18.52345
-#> 2 004   1.402765  10.051692  12.61198   17.59741
-#> 3 005   1.391022  10.107799  12.92638   18.41851
-#> 4 006   1.346452   9.665070  12.18383   17.08564
-#> 5 007   1.483595  10.856314  13.96369   20.02623
-#> 6 009   1.386604   9.911684  12.40334   17.25341
+#> 1 001   1.448937  10.938453  13.45367   17.94577
+#> 2 004   1.392064  10.183604  12.58859   17.69752
+#> 3 005   1.386418  10.083230  13.04979   18.32934
+#> 4 006   1.321069   9.728103  12.18476   17.00055
+#> 5 007   1.452732  11.039439  13.69363   18.78107
+#> 6 009   1.411747   9.727825  12.59621   17.77482
 ```
 
 ``` r
@@ -385,16 +393,15 @@ ggplot(
     .width = 0,
     scale = 1
   ) +
-  geom_boxplot(mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA) +
+  geom_boxplot(
+    mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA
+  ) +
   geom_quasirandom(
     mapping = aes(fill = period_interval, colour = period_interval),
-    # colour = "white",
     shape = 21,
     alpha = 0.25,
     groupOnX = FALSE,
-    width = 0.15#,
-    # side = -1,
-    # cex = 0.5
+    width = 0.15
   ) +
   labs(x = "Area Under The Curve (AUC)", y = "Period Interval (years)") +
   theme(legend.position = "none")
@@ -428,7 +435,7 @@ ggplot(
       -e 'library("renv")' \
       -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
       -e 'renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")' \
-      -e 'renv::install("mcanouil/eggla@v0.4.3")' \
+      -e 'renv::install("mcanouil/eggla@v0.4.4")' \
       -e 'unlink(temp_library, recursive = TRUE)'
 
     Rscript \
@@ -475,7 +482,7 @@ ggplot(
         lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
         lib = temp_library
       )' \
-      -e 'pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
+      -e 'pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
 
     Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
@@ -537,7 +544,7 @@ ggplot(
     library("renv")
     renv::init(bare = TRUE, settings = list(use.cache = FALSE))
     renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")
-    renv::install("mcanouil/eggla@v0.4.3")
+    renv::install("mcanouil/eggla@v0.4.4")
     unlink(temp_library, recursive = TRUE)
     ```
 
@@ -554,7 +561,7 @@ ggplot(
       lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
       lib = temp_library
     )
-    pkg_install("mcanouil/eggla@0.4.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+    pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
 3.  Restart R
