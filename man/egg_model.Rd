@@ -4,7 +4,7 @@
 \alias{egg_model}
 \title{egg_model}
 \usage{
-egg_model(formula, data, id_var = "ID")
+egg_model(formula, data, id_var)
 }
 \arguments{
 \item{formula}{An object of class "formula":
