@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsp.R
 \name{gsp}
 \alias{gsp}
-\title{General regression splines with variable degrees and ness, smoothing splines}
+\title{General regression splines with variable degrees and ness, smoothing splines.}
 \usage{
 gsp(
   x,

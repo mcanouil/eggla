@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_auc.R
 \name{compute_auc}
 \alias{compute_auc}
-\title{compute_auc}
+\title{Compute area under the curves for several intervals using a model fitted by \code{time_model}.}
 \usage{
 compute_auc(
   fit,
@@ -13,9 +13,11 @@ compute_auc(
 )
 }
 \arguments{
-\item{fit}{A model object from a statistical model such as from a call to \code{nlme::lme()} and \code{time_model()}.}
+\item{fit}{A model object from a statistical model such as
+from a call to \code{nlme::lme()} and \code{time_model()}.}
 
-\item{method}{The type of model provided in \code{fit}, \emph{i.e.}, one of \code{"cubic_slope"}, \code{"linear_splines"} or \code{"cubic_splines"}.}
+\item{method}{The type of model provided in \code{fit},
+\emph{i.e.}, one of \code{"cubic_slope"}, \code{"linear_splines"} or \code{"cubic_splines"}.}
 
 \item{period}{The intervals knots on which AUCs are to be computed.}
 
@@ -25,5 +27,6 @@ compute_auc(
 A \code{data.frame} with AUC for each individuals/samples.
 }
 \description{
-compute_auc
+Comoute area under the curves for "clubic slope", "linear splines" and "cubic splines"
+fitted using \code{time_model}.
 }

@@ -1,7 +1,8 @@
-#' egg_model
+#' Fit a a cubic splines mixed model.
 #'
 #' Fit a cubic splines mixed model regression
-#' with linear splines as random effect.
+#' with three splines parametrisation as random effect.  
+#' This function a specific version of `time_model`.
 #'
 #' @param formula An object of class "formula":
 #'   a symbolic description of the model to be fitted with,
@@ -9,11 +10,14 @@
 #' @param data A data.frame containing the variables defined in formula.
 #' @param id_var A string indicating the name of the variable
 #'   to be used as the individual identifier.
+#' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
+#'  Default, `"auto"` will try from the more complex to the less complex if no success.
 #'
 #' @return An object of class "lme" representing
 #'   the linear mixed-effects model fit.
 #' @export
-egg_model <- function(formula, data, id_var) {
+egg_model <- function(formula, data, id_var, random_complexity = "auto") {
+  random_complexity <- match.arg(random_complexity, c("auto", 1, 2, 3))
   y <- as.character(formula)[[2]]
   x_cov <- strsplit(as.character(formula)[[3]], " \\+ ")[[1]]
 
@@ -50,6 +54,10 @@ egg_model <- function(formula, data, id_var) {
       id_var
     )
   )
+
+  if (random_complexity != "auto") {
+    form_random <- form_random[random_complexity]
+  }
 
   if (!all(vars_available <- all.vars(formula) %in% colnames(data))) {
     stop(paste0(
@@ -124,7 +132,12 @@ egg_model <- function(formula, data, id_var) {
   }
 }
 
-#' egg_slopes
+#' Derived slopes from a cubic splines mixed-effects model.
+#'
+#' Derived slopes for different intervals based on a fitted
+#' cubic splines mixed-effects model from `egg_model`.  
+#' This function a specific version of `predict_average_slopes`
+#' designed to work specifically on `egg_model`.
 #'
 #' @param fit A model object from a statistical model
 #'   such as from a call to `nlme::lme()` and `time_model()`.
@@ -204,7 +217,12 @@ egg_slopes <- function(
   out
 }
 
-#' egg_auc
+#' Derived areas under the curve from a cubic splines mixed-effects model.
+#'
+#' Derived areas under the curve (AUCs) for differentintervals based
+#' on a fitted cubic splines mixed-effects model from `egg_model`.  
+#' This function is a specific version of `compute_auc`
+#' designed to work specifically on `egg_model`.
 #'
 #' @param fit A model object from a statistical model
 #' such as from a call to `nlme::lme()` and `time_model()`.

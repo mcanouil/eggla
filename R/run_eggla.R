@@ -1,10 +1,11 @@
-#' run_eggla
+#' Perform EGG longitudinal analysis and derived areas under the curves and slopes.
 #'
 #' Perform Daymont's quality-control for BMI,
 #' fit a cubic splines mixed model regression
 #' with linear splines as random effect,
 #' save model object, generates residuals figures fot model validity,
-#' derived area under the curve and slopes for male and femal.
+#' derived area under the curve and slopes for male and femal.  
+#' This function is a wrapper around `egg_model`, `egg_slopes` and `egg_auc`.
 #'
 #' @param data something
 #' @param id_variable something
@@ -19,7 +20,7 @@
 #' @param parallel_n_chunks something
 #' @param working_directory something
 #'
-#' @return Path to zip archives
+#' @return Path to zip archives.
 #' @import data.table
 #'
 #' @export

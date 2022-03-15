@@ -1,8 +1,11 @@
-#' plot_residuals
+#' Plot several residuals plots for diagnostics.
 #'
-#' @param x A length one character vector with the main covariate name (_i.e._, right-hand side), as defined in `fit`.
-#' @param y A length one character vector with the variable name to be explained (_i.e._, left-hand side), as defined in `fit`.
-#' @param fit A model object from a statistical model such as from a call `nlme::lme()` and `time_model()`.
+#' @param x A length one character vector with the main covariate name
+#'   (_i.e._, right-hand side), as defined in `fit`.
+#' @param y A length one character vector with the variable name to be explained
+#'   (_i.e._, left-hand side), as defined in `fit`.
+#' @param fit A model object from a statistical model
+#'   such as from a call `nlme::lme()` and `time_model()`.
 #'
 #' @return A `patchwork` `ggplot2` object.
 #' @export

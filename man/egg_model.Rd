@@ -2,9 +2,9 @@
 % Please edit documentation in R/egg_model.R
 \name{egg_model}
 \alias{egg_model}
-\title{egg_model}
+\title{Fit a a cubic splines mixed model.}
 \usage{
-egg_model(formula, data, id_var)
+egg_model(formula, data, id_var, random_complexity = "auto")
 }
 \arguments{
 \item{formula}{An object of class "formula":
@@ -15,6 +15,9 @@ time component as the first term in the right-hand side.}
 
 \item{id_var}{A string indicating the name of the variable
 to be used as the individual identifier.}
+
+\item{random_complexity}{A numeric (1-3) indicating the complexity of the random effect term.
+Default, \code{"auto"} will try from the more complex to the less complex if no success.}
 }
 \value{
 An object of class "lme" representing
@@ -22,5 +25,6 @@ the linear mixed-effects model fit.
 }
 \description{
 Fit a cubic splines mixed model regression
-with linear splines as random effect.
+with three splines parametrisation as random effect.
+This function a specific version of \code{time_model}.
 }

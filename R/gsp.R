@@ -1,4 +1,4 @@
-#' General regression splines with variable degrees and ness, smoothing splines
+#' General regression splines with variable degrees and ness, smoothing splines.
 #'
 #' From https://github.com/gmonette/spida2 because namespace and depencies are not properly listed.
 #'
