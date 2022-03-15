@@ -30,6 +30,7 @@ Imports:
     patchwork (>= 1.1.1),
     broom.mixed (>= 0.2.7)
 Suggests:
+    rmarkdown,
     roxygen2 (>= 7.1.2),
     testthat (>= 3.1.0)
 Remotes:
