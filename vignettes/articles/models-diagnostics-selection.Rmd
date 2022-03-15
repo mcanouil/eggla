@@ -145,7 +145,9 @@ visits_long <- melt(
     ]
     ```
 
-# Model diagnostics (With Daymont's code for sex, Female: 1 and Male: 0)
+# Model diagnostics 
+
+*With Daymont's code for sex, Female: 1 and Male: 0.*
 
 ## Setup all models to be tested
 
@@ -202,7 +204,9 @@ all_models <- all_models[# subset
 ]
 ```
 
-## Run all models in parallel using `future`
+## Run all models
+
+*In parallel using `future`.*
 
 ```{r models-try}
 all_models[["lme"]] <- future_mapply(
@@ -258,7 +262,7 @@ saveRDS(
 )
 ```
 
-## Models diagnostics
+## Models results
 
 ```{r models-diagnostics}
 fmt_models <- all_models[
