@@ -185,7 +185,7 @@ all_models <- setDT(
         "method = \"ML\"",
         "control = lmeControl(opt = \"optim\", maxIter = 500, msMaxIter = 500)"
       ),
-      sep = ", "
+      collapse = ", "
     ),
     lme = list(NULL),
     results = list(NULL),
@@ -194,6 +194,11 @@ all_models <- setDT(
     stringsAsFactors = FALSE
   )
 )
+
+all_models <- all_models[# subset
+  sub(".*random = ", "", models) %in% random_effect[c(1, 3, 8)] &
+    correlation_structure %in% "NULL"
+]
 ```
 
 ## Run all models in parallel using `future`
@@ -232,7 +237,12 @@ all_models[["is_good"]] <- future_mapply(
   USE.NAMES = FALSE
 )
 
-all_models[j = results := fifelse(is_good, "Good", lme)]
+all_models[
+  j = results := "Good"
+][
+  i = !(is_good),
+  j = results := lme
+]
 
 all_models[
   i = (is_good),
