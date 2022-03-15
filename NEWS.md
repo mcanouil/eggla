@@ -1,3 +1,7 @@
+# eggla (development version)
+
+- Improve documentation.
+
 # eggla 0.4.4
 
 - In `R/egg_model.R`,

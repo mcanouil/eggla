@@ -2,7 +2,7 @@
 % Please edit documentation in R/egg_model.R
 \name{egg_auc}
 \alias{egg_auc}
-\title{egg_auc}
+\title{Derived areas under the curve from a cubic splines mixed-effects model.}
 \usage{
 egg_auc(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17), id_var = "ID")
 }
@@ -19,5 +19,8 @@ to be used as the individual identifier.}
 A \code{data.frame} with AUC for each individuals/samples.
 }
 \description{
-egg_auc
+Derived areas under the curve (AUCs) for differentintervals based
+on a fitted cubic splines mixed-effects model from \code{egg_model}.
+This function is a specific version of \code{compute_auc}
+designed to work specifically on \code{egg_model}.
 }

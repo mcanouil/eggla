@@ -2,20 +2,23 @@
 % Please edit documentation in R/plot_residuals.R
 \name{plot_residuals}
 \alias{plot_residuals}
-\title{plot_residuals}
+\title{Plot several residuals plots for diagnostics.}
 \usage{
 plot_residuals(x, y, fit)
 }
 \arguments{
-\item{x}{A length one character vector with the main covariate name (\emph{i.e.}, right-hand side), as defined in \code{fit}.}
+\item{x}{A length one character vector with the main covariate name
+(\emph{i.e.}, right-hand side), as defined in \code{fit}.}
 
-\item{y}{A length one character vector with the variable name to be explained (\emph{i.e.}, left-hand side), as defined in \code{fit}.}
+\item{y}{A length one character vector with the variable name to be explained
+(\emph{i.e.}, left-hand side), as defined in \code{fit}.}
 
-\item{fit}{A model object from a statistical model such as from a call \code{nlme::lme()} and \code{time_model()}.}
+\item{fit}{A model object from a statistical model
+such as from a call \code{nlme::lme()} and \code{time_model()}.}
 }
 \value{
 A \code{patchwork} \code{ggplot2} object.
 }
 \description{
-plot_residuals
+Plot several residuals plots for diagnostics.
 }

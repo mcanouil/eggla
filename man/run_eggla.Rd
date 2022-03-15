@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_eggla.R
 \name{run_eggla}
 \alias{run_eggla}
-\title{run_eggla}
+\title{Perform EGG longitudinal analysis and derived areas under the curves and slopes.}
 \usage{
 run_eggla(
   data,
@@ -45,7 +45,7 @@ run_eggla(
 \item{working_directory}{something}
 }
 \value{
-Path to zip archives
+Path to zip archives.
 }
 \description{
 Perform Daymont's quality-control for BMI,
@@ -53,4 +53,5 @@ fit a cubic splines mixed model regression
 with linear splines as random effect,
 save model object, generates residuals figures fot model validity,
 derived area under the curve and slopes for male and femal.
+This function is a wrapper around \code{egg_model}, \code{egg_slopes} and \code{egg_auc}.
 }
