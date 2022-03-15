@@ -18,8 +18,8 @@ Consortium.
 ------------------------------------------------------------------------
 
 -   [Installation](#installation)
--   [Run The Cubic Splines (Random Linear Splines)
-    Analysis](#run-the-cubic-splines-random-linear-splines-analysis)
+-   [Run The Cubic Splines (Random Cubic/Linear Splines)
+    Analysis](#run-the-cubic-splines-random-clubic-linear-splines-analysis)
     -   [Setup](#setup)
     -   [Data](#data)
     -   [Modelling Female](#modelling-female)
@@ -50,7 +50,7 @@ remotes::install_github("mcanouil/eggla")
 remotes::install_github("mcanouil/eggla@v0.4.4")
 ```
 
-## Run The Cubic Splines (Random Linear Splines) Analysis
+## Run The Cubic Splines (Random Cubic/Linear Splines) Analysis
 
 ### Setup
 
@@ -61,6 +61,7 @@ library(eggla)
 library(growthcleanr)
 library(broom.mixed)
 library(data.table, quietly = TRUE)
+#> data.table 1.14.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
 # Setup for plots
 library(ggplot2, quietly = TRUE)
