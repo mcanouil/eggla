@@ -5,7 +5,8 @@ title: "Models Diagnostics & Selection"
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
@@ -188,7 +189,7 @@ all_models <- setDT(
       collapse = ", "
     ),
     lme = list(NULL),
-    results = list(NULL),
+    results = "Good",
     perf_check_model = list(NULL),
     perf_model_performance = list(NULL),
     stringsAsFactors = FALSE
@@ -238,8 +239,6 @@ all_models[["is_good"]] <- future_mapply(
 )
 
 all_models[
-  j = results := "Good"
-][
   i = !(is_good),
   j = results := lme
 ]
@@ -446,7 +445,7 @@ gtsave(perf_tab, file.path(output_directory, "models-performance.html"))
 
 ## Select best model
 
-```{r select-best-model, eval = FALSE}
+```{r select-best-model}
 files <- list.files(
   path = output_directory,
   pattern = ".*models-performance.csv$",
