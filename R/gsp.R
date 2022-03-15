@@ -1,6 +1,8 @@
 #' General regression splines with variable degrees and ness, smoothing splines.
 #'
-#' From https://github.com/gmonette/spida2 because namespace and depencies are not properly listed.
+#' From https://github.com/gmonette/spida2 because namespace and dependencies are not properly listed.
+#' Source: https://github.com/gmonette/spida2/blob/master/R/gsp.R,
+#' https://github.com/gmonette/spida2/blob/master/R/gsp_util.R
 #'
 #' @author Monette, G. \email{georges@@yorku.ca}
 #'
@@ -39,6 +41,18 @@
 #' @return \code{gsp} returns a matrix generating a spline.
 #'
 #' @export
+#' 
+#' @examples
+#' simd <- data.frame(
+#'   age = rep(1:50, 2),
+#'   y = sin(2 * pi * (1:100) / 5) + rnorm(100),
+#'   G = rep(c("male", "female"), c(50, 50))
+#' )
+#' sp <- function(x) {
+#'   gsp(x, knots = c(10, 25, 40), degree = c(1, 2, 2, 1), smoothness = c(1, 1 ,1))
+#' }
+#'
+#' summary(lm(formula = y ~ sp(age) * G, data = simd))
 gsp <- function(
   x,
   knots,

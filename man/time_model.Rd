@@ -33,3 +33,16 @@ An object of class "lme" representing the linear mixed-effects model fit.
 \description{
 time_model
 }
+\examples{
+data("bmigrowth")
+ls_mod <- time_model(
+  x = "age",
+  y = "log(bmi)",
+  cov = NULL,
+  data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+  method = "linear_splines"
+)
+sres <- as.data.frame(summary(ls_mod)[["tTable"]])
+rownames(sres) <- sub("gsp\\\\(.*\\\\)\\\\)", "gsp(...)", rownames(sres))
+sres
+}
