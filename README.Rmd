@@ -109,17 +109,26 @@ options(
   bmigrowth[bmigrowth[["ID"]] == "001"]
   ```
   ```{r}
-  ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
+  ggplot(data = bmigrowth) +
+    aes(x = age, y = bmi, colour = factor(ID)) +
     geom_path(na.rm = TRUE, alpha = 0.25) +
     geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
-    stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+    stat_smooth(
+      method = "loess",
+      formula = y ~ x,
+      linetype = 1,
+      colour = "firebrick",
+      se = FALSE
+    ) +
     theme(legend.position = "none") +
     labs(x = "AGE (years)", y = "BMI (kg/m²)") +
     facet_grid(
       cols = vars(sex),
       margins = TRUE,
       labeller = labeller(
-        .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+        .cols = function(x) {
+          c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+        }
       )
     )
   ```
@@ -180,7 +189,7 @@ pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
 
 ```{r}
 res <- egg_model(
-  formula = log(bmi) ~ age, # covariates can be added after the term used for the time component, e.g., `log(bmi) ~ age + covariate`
+  formula = log(bmi) ~ age, # + covariates, e.g., `log(bmi) ~ age + covariates`
   data = pheno_dt_female,
   id_var = "ID",
   random_complexity = 2 # "auto", 3, 2 or 1.
@@ -202,7 +211,9 @@ ggplot() +
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
-    data = data.table(age = seq(min(pheno_dt_female[["age"]]), max(pheno_dt_female[["age"]]), 0.1))[
+    data = data.table(
+      age = seq(min(pheno_dt_female[["age"]]), max(pheno_dt_female[["age"]]), 0.1)
+    )[
       j = bmi := exp(predict(res, .SD, level = 0)),
       .SDcols = "age"
     ],
