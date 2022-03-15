@@ -14,6 +14,7 @@ run_eggla(
   sex_variable,
   covariates,
   male_coded_zero = FALSE,
+  random_complexity = "auto",
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd()
@@ -38,6 +39,9 @@ run_eggla(
 
 \item{male_coded_zero}{something}
 
+\item{random_complexity}{A numeric (1-3) indicating the complexity of the random effect term.
+Default, \code{"auto"} will try from the more complex to the less complex if no success.}
+
 \item{parallel}{something}
 
 \item{parallel_n_chunks}{something}
@@ -54,4 +58,28 @@ with linear splines as random effect,
 save model object, generates residuals figures fot model validity,
 derived area under the curve and slopes for male and femal.
 This function is a wrapper around \code{egg_model}, \code{egg_slopes} and \code{egg_auc}.
+}
+\examples{
+if (interactive()) {
+  data("bmigrowth")
+  fwrite(
+    x = bmigrowth,
+    file = file.path(tempdir(), "bmigrowth.csv")
+  )
+  res <- try(run_eggla(
+    data = fread(file.path(tempdir(), "bmigrowth.csv")),
+    id_variable = "ID",
+    age_days_variable = NULL,
+    age_years_variable = "age",
+    weight_kilograms_variable = "weight",
+    height_centimetres_variable = "height",
+    sex_variable = "sex",
+    covariates = NULL,
+    male_coded_zero = FALSE,
+    random_complexity = 1,
+    parallel = FALSE,
+    parallel_n_chunks = 1,
+    working_directory = tempdir()
+  ))
+}
 }

@@ -16,6 +16,8 @@
 #' @param sex_variable something
 #' @param covariates something
 #' @param male_coded_zero something
+#' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
+#'  Default, `"auto"` will try from the more complex to the less complex if no success.
 #' @param parallel something
 #' @param parallel_n_chunks something
 #' @param working_directory something
@@ -24,6 +26,30 @@
 #' @import data.table
 #'
 #' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'   data("bmigrowth")
+#'   fwrite(
+#'     x = bmigrowth,
+#'     file = file.path(tempdir(), "bmigrowth.csv")
+#'   )
+#'   res <- try(run_eggla(
+#'     data = fread(file.path(tempdir(), "bmigrowth.csv")),
+#'     id_variable = "ID",
+#'     age_days_variable = NULL,
+#'     age_years_variable = "age",
+#'     weight_kilograms_variable = "weight",
+#'     height_centimetres_variable = "height",
+#'     sex_variable = "sex",
+#'     covariates = NULL,
+#'     male_coded_zero = FALSE,
+#'     random_complexity = 1,
+#'     parallel = FALSE,
+#'     parallel_n_chunks = 1,
+#'     working_directory = tempdir()
+#'   ))
+#' }
 run_eggla <- function(
   data,
   id_variable,
@@ -34,6 +60,7 @@ run_eggla <- function(
   sex_variable,
   covariates,
   male_coded_zero = FALSE,
+  random_complexity = "auto",
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd()
@@ -120,7 +147,8 @@ run_eggla <- function(
       results <- egg_model(
         formula = base_model,
         data = dt_clean[egg_sex %in% isex],
-        id_var = "egg_id"
+        id_var = "egg_id",
+        random_complexity = random_complexity
       )
 
       saveRDS(

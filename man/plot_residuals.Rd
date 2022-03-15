@@ -22,3 +22,22 @@ A \code{patchwork} \code{ggplot2} object.
 \description{
 Plot several residuals plots for diagnostics.
 }
+\examples{
+library(patchwork)
+data("bmigrowth")
+res <- egg_model(
+  formula = log(bmi) ~ age,
+  data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+  id_var = "ID",
+  random_complexity = 1
+)
+plot_residuals(
+  x = "age",
+  y = "log(bmi)",
+  fit = res
+) +
+  plot_annotation(
+    title = "Cubic Splines (Random Linear Splines) - BMI - Female",
+    tag_levels = "A"
+  )
+}

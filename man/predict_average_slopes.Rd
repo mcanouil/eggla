@@ -28,3 +28,23 @@ A \code{data.frame} with slopes for each individuals/samples.
 Comoute average slopes for "clubic slope", "linear splines" and "cubic splines"
 fitted using \code{time_model}.
 }
+\examples{
+data("bmigrowth")
+ls_mod <- time_model(
+  x = "age",
+  y = "log(bmi)",
+  cov = NULL,
+  data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+  method = "linear_splines"
+)
+head(predict_average_slopes(
+  fit = ls_mod,
+  method = "linear_splines",
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)#,
+  # knots = list(
+  #   "cubic_slope" = NULL,
+  #   "linear_splines" = c(5.5, 11),
+  #   "cubic_splines" = c(2, 8, 12)
+  # )[[method]]
+))
+}

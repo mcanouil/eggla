@@ -28,3 +28,15 @@ Fit a cubic splines mixed model regression
 with three splines parametrisation as random effect.
 This function a specific version of \code{time_model}.
 }
+\examples{
+data("bmigrowth")
+res <- egg_model(
+  formula = log(bmi) ~ age,
+  data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+  id_var = "ID",
+  random_complexity = 1
+)
+sres <- as.data.frame(summary(res)[["tTable"]])
+rownames(sres) <- sub("gsp\\\\(.*\\\\)\\\\)", "gsp(...)", rownames(sres))
+sres
+}

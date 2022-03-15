@@ -15,9 +15,22 @@
 #'
 #' @return An object of class "lme" representing
 #'   the linear mixed-effects model fit.
+#'
 #' @export
+#'
+#' @examples
+#' data("bmigrowth")
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age,
+#'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+#'   id_var = "ID",
+#'   random_complexity = 1
+#' )
+#' sres <- as.data.frame(summary(res)[["tTable"]])
+#' rownames(sres) <- sub("gsp\\(.*\\)\\)", "gsp(...)", rownames(sres))
+#' sres
 egg_model <- function(formula, data, id_var, random_complexity = "auto") {
-  random_complexity <- match.arg(random_complexity, c("auto", 1, 2, 3))
+  random_complexity <- match.arg(as.character(random_complexity), c("auto", 1, 2, 3))
   y <- as.character(formula)[[2]]
   x_cov <- strsplit(as.character(formula)[[3]], " \\+ ")[[1]]
 
@@ -38,17 +51,17 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
   )
 
   form_random <- c(
-    sprintf(
+    "3" = sprintf(
       "~ %s | %s",
       x_fmt[1],
       id_var
     ),
-    sprintf(
+    "2" = sprintf(
       "~ %s[,1:3] | %s",
       x_fmt[1],
       id_var
     ),
-    sprintf(
+    "1" = sprintf(
       "~ %s | %s",
       sub("degree = rep\\(3,", "degree = rep\\(1,", x_fmt[1]),
       id_var
@@ -146,7 +159,24 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
 #'   to be used as the individual identifier.
 #'
 #' @return A `data.frame` with slopes for each individuals/samples.
+#'
 #' @export
+#'
+#' @examples
+#' data("bmigrowth")
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age,
+#'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+#'   id_var = "ID",
+#'   random_complexity = 1
+#' )
+#' head(
+#'   egg_slopes(
+#'     fit = res,
+#'     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+#'     id_var = "ID"
+#'   )
+#' )
 egg_slopes <- function(
   fit,
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
@@ -231,7 +261,24 @@ egg_slopes <- function(
 #' to be used as the individual identifier.
 #'
 #' @return A `data.frame` with AUC for each individuals/samples.
+#'
 #' @export
+#'
+#' @examples
+#' data("bmigrowth")
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age,
+#'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+#'   id_var = "ID",
+#'   random_complexity = 1
+#' )
+#' head(
+#'   egg_auc(
+#'     fit = res,
+#'     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+#'     id_var = "ID"
+#'   )
+#' )
 egg_auc <- function(
   fit,
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),

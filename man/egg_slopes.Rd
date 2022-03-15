@@ -24,3 +24,19 @@ cubic splines mixed-effects model from \code{egg_model}.
 This function a specific version of \code{predict_average_slopes}
 designed to work specifically on \code{egg_model}.
 }
+\examples{
+data("bmigrowth")
+res <- egg_model(
+  formula = log(bmi) ~ age,
+  data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+  id_var = "ID",
+  random_complexity = 1
+)
+head(
+  egg_slopes(
+    fit = res,
+    period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+    id_var = "ID"
+  )
+)
+}

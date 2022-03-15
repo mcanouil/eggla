@@ -70,9 +70,8 @@ remotes::install_github("mcanouil/eggla@v0.4.4")
 
 ```{r}
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.4.4")
+# remotes::install_github(c("carriedaymont/growthcleanr@v2.0.0", "mcanouil/eggla"))
 library(eggla)
-# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
 library(data.table, quietly = TRUE)
@@ -80,8 +79,7 @@ library(data.table, quietly = TRUE)
 # Setup for plots
 library(ggplot2, quietly = TRUE)
 library(patchwork)
-# remotes::install_github("eclarke/ggbeeswarm")
-library(ggbeeswarm)
+library(ggbeeswarm) # remotes::install_github("eclarke/ggbeeswarm")
 library(ggdist)
 theme_set(theme_minimal())
 options(
@@ -184,7 +182,8 @@ pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
 res <- egg_model(
   formula = log(bmi) ~ age, # covariates can be added after the term used for the time component, e.g., `log(bmi) ~ age + covariate`
   data = pheno_dt_female,
-  id_var = "ID"
+  id_var = "ID",
+  random_complexity = 2 # "auto", 3, 2 or 1.
 )
 class(res)
 sres <- tidy(res)
@@ -231,7 +230,8 @@ plot_residuals(
 ```{r}
 res_pred_slopes <- egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+  id_var = "ID"
 )
 head(res_pred_slopes)
 ```
@@ -296,7 +296,8 @@ wrap_plots(
 ```{r}
 res_auc <- egg_auc(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+  id_var = "ID"
 )
 head(res_auc)
 ```

@@ -8,7 +8,27 @@
 #'   such as from a call `nlme::lme()` and `time_model()`.
 #'
 #' @return A `patchwork` `ggplot2` object.
+#'
 #' @export
+#'
+#' @examples
+#' library(patchwork)
+#' data("bmigrowth")
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age,
+#'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+#'   id_var = "ID",
+#'   random_complexity = 1
+#' )
+#' plot_residuals(
+#'   x = "age",
+#'   y = "log(bmi)",
+#'   fit = res
+#' ) +
+#'   plot_annotation(
+#'     title = "Cubic Splines (Random Linear Splines) - BMI - Female",
+#'     tag_levels = "A"
+#'   )
 plot_residuals <- function(x, y, fit) {
   .data <- ggplot2::.data
 
