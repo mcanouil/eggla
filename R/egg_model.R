@@ -1,4 +1,4 @@
-#' Fit a a cubic splines mixed model.
+#' Fit a cubic splines mixed model.
 #'
 #' Fit a cubic splines mixed model regression
 #' with three splines parametrisation as random effect.  
