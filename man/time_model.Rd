@@ -2,7 +2,7 @@
 % Please edit documentation in R/time_model.R
 \name{time_model}
 \alias{time_model}
-\title{time_model}
+\title{Fit one of three mixed model.}
 \usage{
 time_model(
   x,
@@ -25,13 +25,14 @@ time_model(
 
 \item{method}{The type of model, \emph{i.e.}, one of \code{"cubic_slope"}, \code{"linear_splines"} or \code{"cubic_splines"}.}
 
-\item{knots}{The knots defining the splines for \code{"linear_splines"} ànd \code{"cubic_splines"} methods.}
+\item{knots}{The knots defining the splines for \code{"linear_splines"} and \code{"cubic_splines"} methods.}
 }
 \value{
 An object of class "lme" representing the linear mixed-effects model fit.
 }
 \description{
-time_model
+Fit a mixed model regression with "cubic slope",
+"linear splines" or "cubic splines" as fixed and random effects.
 }
 \examples{
 data("bmigrowth")
