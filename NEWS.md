@@ -1,6 +1,12 @@
 # eggla (development version)
 
-- Improve documentation.
+- Improve documentation,
+  - Add title.
+  - Add description.
+  - Add code examples.
+
+- In `R/egg_*.R`,
+  - Add `random_complexity` parameter.
 
 # eggla 0.4.4
 
