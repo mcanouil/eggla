@@ -2,7 +2,7 @@
 % Please edit documentation in R/egg_model.R
 \name{egg_model}
 \alias{egg_model}
-\title{Fit a a cubic splines mixed model.}
+\title{Fit a cubic splines mixed model.}
 \usage{
 egg_model(formula, data, id_var, random_complexity = "auto")
 }
