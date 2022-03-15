@@ -8,6 +8,10 @@
 - In `R/egg_*.R`,
   - Add `random_complexity` parameter.
 
+- In `vignettes/articles`,
+  - Add `adiposity-peak-caracterisation.Rmd`, to identify/caracterise adiposity peak and adiposity rebound.
+  - Add `models-diagnostics-selection.Rmd`, models testing and selection based on results.
+
 # eggla 0.4.4
 
 - In `R/egg_model.R`,
