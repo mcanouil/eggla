@@ -1,11 +1,14 @@
-#' time_model
+#' Fit one of three mixed model.
+#'
+#' Fit a mixed model regression with "cubic slope",
+#' "linear splines" or "cubic splines" as fixed and random effects.
 #'
 #' @param x A length one character vector with the main covariate name (_i.e._, right-hand side).
 #' @param y A length one character vector with the variable name to be explained (_i.e._, left-hand side).
 #' @param cov A vector of addtional/optional covariates names to included in the fixed effect part of the linear mixed-effects models.
 #' @param data A data.frame containing the variables named in `x` and `y`.
 #' @param method The type of model, _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
-#' @param knots The knots defining the splines for `"linear_splines"` ànd `"cubic_splines"` methods.
+#' @param knots The knots defining the splines for `"linear_splines"` and `"cubic_splines"` methods.
 #'
 #' @return An object of class "lme" representing the linear mixed-effects model fit.
 #'
