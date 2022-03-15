@@ -56,9 +56,8 @@ remotes::install_github("mcanouil/eggla@v0.4.4")
 
 ``` r
 # install.packages("remotes")
-# remotes::install_github("mcanouil/eggla@v0.4.4")
+# remotes::install_github(c("carriedaymont/growthcleanr@v2.0.0", "mcanouil/eggla"))
 library(eggla)
-# remotes::install_github("carriedaymont/growthcleanr@v2.0.0")
 library(growthcleanr)
 library(broom.mixed)
 library(data.table, quietly = TRUE)
@@ -66,8 +65,7 @@ library(data.table, quietly = TRUE)
 # Setup for plots
 library(ggplot2, quietly = TRUE)
 library(patchwork)
-# remotes::install_github("eclarke/ggbeeswarm")
-library(ggbeeswarm)
+library(ggbeeswarm) # remotes::install_github("eclarke/ggbeeswarm")
 library(ggdist)
 theme_set(theme_minimal())
 options(
@@ -114,17 +112,26 @@ options(
     ```
 
     ``` r
-    ggplot(data = bmigrowth, mapping = aes(x = age, y = bmi, colour = factor(ID))) +
+    ggplot(data = bmigrowth) +
+      aes(x = age, y = bmi, colour = factor(ID)) +
       geom_path(na.rm = TRUE, alpha = 0.25) +
       geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
-      stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+      stat_smooth(
+        method = "loess",
+        formula = y ~ x,
+        linetype = 1,
+        colour = "firebrick",
+        se = FALSE
+      ) +
       theme(legend.position = "none") +
       labs(x = "AGE (years)", y = "BMI (kg/m²)") +
       facet_grid(
         cols = vars(sex),
         margins = TRUE,
         labeller = labeller(
-          .cols = function(x) c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+          .cols = function(x) {
+            c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+          }
         )
       )
     ```
@@ -187,15 +194,16 @@ pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
 
 ``` r
 res <- egg_model(
-  formula = log(bmi) ~ age, # covariates can be added after the term used for the time component, e.g., `log(bmi) ~ age + covariate`
+  formula = log(bmi) ~ age, # + covariates, e.g., `log(bmi) ~ age + covariates`
   data = pheno_dt_female,
-  id_var = "ID"
+  id_var = "ID",
+  random_complexity = 2 # "auto", 3, 2 or 1.
 )
 #> Fitting model:
 #>   nlme::lme(
 #>     fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),
 #>     data = data,
-#>     random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID,
+#>     random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[,1:3] | ID,
 #>     na.action = stats::na.omit,
 #>     method = "ML",
 #>     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
@@ -203,7 +211,7 @@ res <- egg_model(
 #> lme.formula
 #> log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))
 #> data
-#> ~gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID
+#> ~gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[, 1:3] | ID
 #> ML
 #> stats::na.omit
 #> nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
@@ -212,20 +220,27 @@ class(res)
 sres <- tidy(res)
 sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
 sres
-#> # A tibble: 36 x 8
-#>    effect   group term              estimate std.error    df statistic   p.value
-#>    <chr>    <chr> <chr>                <dbl>     <dbl> <dbl>     <dbl>     <dbl>
-#>  1 fixed    fixed (Intercept)         2.76     0.0212    409    131.    0       
-#>  2 fixed    fixed gsp(...)D1(0)       0.237    0.0394    409      6.01  4.05e- 9
-#>  3 fixed    fixed gsp(...)D2(0)      -0.298    0.0478    409     -6.24  1.13e- 9
-#>  4 fixed    fixed gsp(...)D3(0)       0.171    0.0257    409      6.65  9.24e-11
-#>  5 fixed    fixed gsp(...)C(2).3     -0.182    0.0267    409     -6.82  3.35e-11
-#>  6 fixed    fixed gsp(...)C(8).3      0.0225   0.00504   409      4.46  1.06e- 5
-#>  7 fixed    fixed gsp(...)C(12).3    -0.0427   0.0115    409     -3.71  2.38e- 4
-#>  8 ran_pars ID    sd_(Intercept)      0.106   NA          NA     NA    NA       
-#>  9 ran_pars ID    cor_gsp(...)D1(0~  -0.553   NA          NA     NA    NA       
-#> 10 ran_pars ID    cor_gsp(...)D2(0~   0.299   NA          NA     NA    NA       
-#> # ... with 26 more rows
+#> # A tibble: 18 x 8
+#>    effect   group    term           estimate std.error    df statistic   p.value
+#>    <chr>    <chr>    <chr>             <dbl>     <dbl> <dbl>     <dbl>     <dbl>
+#>  1 fixed    fixed    (Intercept)     2.76e+0   0.0217    409    127.    0       
+#>  2 fixed    fixed    gsp(...)D1(0)   2.45e-1   0.0433    409      5.67  2.75e- 8
+#>  3 fixed    fixed    gsp(...)D2(0)  -3.13e-1   0.0528    409     -5.92  6.72e- 9
+#>  4 fixed    fixed    gsp(...)D3(0)   1.80e-1   0.0286    409      6.31  7.37e-10
+#>  5 fixed    fixed    gsp(...)C(2).3 -1.91e-1   0.0297    409     -6.43  3.46e-10
+#>  6 fixed    fixed    gsp(...)C(8).3  1.98e-2   0.00441   409      4.49  9.41e- 6
+#>  7 fixed    fixed    gsp(...)C(12)~ -2.94e-2   0.0109    409     -2.69  7.45e- 3
+#>  8 ran_pars ID       sd_(Intercept)  9.13e-2  NA          NA     NA    NA       
+#>  9 ran_pars ID       cor_gsp(...)[~ -4.58e-1  NA          NA     NA    NA       
+#> 10 ran_pars ID       cor_gsp(...)[~  2.92e-1  NA          NA     NA    NA       
+#> 11 ran_pars ID       cor_gsp(...)[~  3.63e-3  NA          NA     NA    NA       
+#> 12 ran_pars ID       sd_gsp(...)[,~  3.43e-2  NA          NA     NA    NA       
+#> 13 ran_pars ID       cor_gsp(...)[~ -9.22e-1  NA          NA     NA    NA       
+#> 14 ran_pars ID       cor_gsp(...)[~ -4.18e-3  NA          NA     NA    NA       
+#> 15 ran_pars ID       sd_gsp(...)[,~  4.33e-3  NA          NA     NA    NA       
+#> 16 ran_pars ID       cor_gsp(...)[~  1.94e-4  NA          NA     NA    NA       
+#> 17 ran_pars ID       sd_gsp(...)[,~  2.76e-6  NA          NA     NA    NA       
+#> 18 ran_pars Residual sd_Observation  6.60e-2  NA          NA     NA    NA
 ```
 
 ### Predicted Values
@@ -239,7 +254,9 @@ ggplot() +
     method = "loess", formula = y ~ x, linetype = 2, se = FALSE
   ) +
   geom_path(
-    data = data.table(age = seq(min(pheno_dt_female[["age"]]), max(pheno_dt_female[["age"]]), 0.1))[
+    data = data.table(
+      age = seq(min(pheno_dt_female[["age"]]), max(pheno_dt_female[["age"]]), 0.1)
+    )[
       j = bmi := exp(predict(res, .SD, level = 0)),
       .SDcols = "age"
     ],
@@ -271,30 +288,31 @@ plot_residuals(
 ``` r
 res_pred_slopes <- egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+  id_var = "ID"
 )
 head(res_pred_slopes)
 #>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6
-#> 1 001      2.830262        2.954593        3.056354      3.209645      3.265056
-#> 2 004      2.731078        2.826844        2.881856      2.976368      3.034997
-#> 3 005      2.728717        2.807048        2.837548      2.996263      3.095257
-#> 4 006      2.564294        2.704655        2.780084      2.822716      2.880735
-#> 5 007      2.863814        2.942015        3.031412      3.287667      3.357286
-#> 6 009      2.790176        2.845252        2.811302      2.859965      2.962467
+#> 1 001      2.856292        2.961108        3.022253      3.181718      3.267542
+#> 2 004      2.749752        2.837953        2.868957      2.955361      3.029578
+#> 3 005      2.729462        2.820443        2.858218      2.981043      3.069301
+#> 4 006      2.627920        2.716995        2.750096      2.847498      2.925902
+#> 5 007      2.847711        2.962818        3.042947      3.252084      3.347309
+#> 6 009      2.748606        2.822970        2.830199      2.874348      2.948193
 #>   pred_period_10 pred_period_12 pred_period_17 slope_0--0.5 slope_1.5--5
-#> 1       3.447789       3.542716       3.360931    0.2486612   0.04379745
-#> 2       3.246087       3.377745       3.454336    0.1915324   0.02700367
-#> 3       3.382815       3.498699       3.623440    0.1566620   0.04534708
-#> 4       3.231716       3.390766       3.236967    0.2807226   0.01218036
-#> 5       3.438101       3.527315       3.597911    0.1564016   0.07321565
-#> 6       3.282805       3.385378       3.629244    0.1101509   0.01390381
+#> 1       3.509050       3.570135       3.460015    0.2096327   0.04556129
+#> 2       3.265848       3.349027       3.366223    0.1764019   0.02468692
+#> 3       3.377887       3.506917       3.667008    0.1819615   0.03509292
+#> 4       3.183563       3.280224       3.339250    0.1781508   0.02782906
+#> 5       3.605123       3.661583       3.502630    0.2302137   0.05975346
+#> 6       3.234982       3.374625       3.623991    0.1487270   0.01261390
 #>   slope_6--10 slope_12--17
-#> 1  0.04568318  -0.03635702
-#> 2  0.05277257   0.01531826
-#> 3  0.07188952   0.02494810
-#> 4  0.08774527  -0.03075987
-#> 5  0.02020367   0.01411908
-#> 6  0.08008440   0.04877325
+#> 1  0.06037706 -0.022024093
+#> 2  0.05906732  0.003439203
+#> 3  0.07714657  0.032018278
+#> 4  0.06441523  0.011805134
+#> 5  0.06445348 -0.031790604
+#> 6  0.07169729  0.049873220
 ```
 
 ``` r
@@ -359,16 +377,17 @@ wrap_plots(
 ``` r
 res_auc <- egg_auc(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+  id_var = "ID"
 )
 head(res_auc)
 #>    ID auc_0--0.5 auc_1.5--5 auc_6--10 auc_12--17
-#> 1 001   1.448937  10.938453  13.45367   17.94577
-#> 2 004   1.392064  10.183604  12.58859   17.69752
-#> 3 005   1.386418  10.083230  13.04979   18.32934
-#> 4 006   1.321069   9.728103  12.18476   17.00055
-#> 5 007   1.452732  11.039439  13.69363   18.78107
-#> 6 009   1.411747   9.727825  12.59621   17.77482
+#> 1 001   1.457194  10.761594  13.64073   17.99617
+#> 2 004   1.399728  10.082485  12.65643   17.16601
+#> 3 005   1.390261  10.102862  12.95134   18.29588
+#> 4 006   1.339025   9.684058  12.28203   16.92174
+#> 5 007   1.455499  10.928559  14.00377   18.35351
+#> 6 009   1.395641   9.854303  12.40419   17.82026
 ```
 
 ``` r
