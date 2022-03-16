@@ -38,10 +38,11 @@ library(performance)
 
 library(future)
 library(future.apply)
+library(future.callr)
 ```
 
 ```{r future-setup}
-plan("multicore", workers = min(40, availableCores()))
+plan("callr", workers = availableCores())
 message(sprintf("Number of workers: %d", nbrOfWorkers()))
 ```
 
@@ -218,15 +219,16 @@ all_models <- setDT(
 ```{r models-try}
 all_models[["lme"]] <- future_mapply(
   FUN = function(models, dataset, sex, correlation_structure, default) {
+    m <- sprintf(
+      "list(lme(%s, data = %s[sex_daymont == %s], correlation = %s, %s))",
+      models,
+      dataset,
+      sex,
+      correlation_structure,
+      default
+    )
     tryCatch(
-      expr = eval(parse(text = sprintf(
-        "list(lme(%s, data = %s[sex_daymont == %s], correlation = %s, %s))",
-        models,
-        dataset,
-        sex,
-        correlation_structure,
-        default
-      ))),
+      expr = eval(parse(text = m)),
       error = function(e) sprintf("Error: %s", e$message),
       warning = function(w) sprintf("Warning: %s", w$message)
     )
@@ -236,8 +238,8 @@ all_models[["lme"]] <- future_mapply(
   sex = all_models[["sex"]],
   correlation_structure = all_models[["correlation_structure"]],
   default = all_models[["default"]],
-  future.globals = TRUE,
-  future.packages = c("nlme"),
+  future.globals = c("visits_raw", "visits_clean"),
+  future.packages = c("eggla", "nlme", "data.table"),
   USE.NAMES = FALSE
 )
 
