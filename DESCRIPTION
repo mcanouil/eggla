@@ -32,6 +32,7 @@ Imports:
 Suggests:
     rmarkdown,
     ggtext,
+    scales,
     gt,
     performance,
     future,
