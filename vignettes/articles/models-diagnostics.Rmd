@@ -1,21 +1,23 @@
 ---
-title: "Models Diagnostics & Selection"
+title: "Models Diagnostics"
+author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
 params:
-  pheno_dt: !r setDT(get(data("bmigrowth", package = "eggla")))
+  working_directory: '`r tempdir()`'
+  pheno_file: "internal"
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = params[["pheno_file"]] != "internal"
 )
 ```
 
 # R setup
 
 ```{r setup}
-output_directory <- file.path(tempdir(), "models-diagnostics")
+output_directory <- file.path(params[["working_directory"]], "models-diagnostics")
 dir.create(output_directory, recursive = TRUE, showWarnings = FALSE, mode = "0775")
 
 library(eggla)
@@ -29,6 +31,7 @@ library(grDevices)
 library(ggplot2)
 library(ggtext)
 library(patchwork)
+library(scales)
 
 library(gt)
 library(performance)
@@ -66,7 +69,11 @@ theme_update(
 # Data
 
 ```{r input-data}
-pheno_dt <- params[["pheno_dt"]]
+if (params[["pheno_file"]] == "internal") {
+  pheno_dt <- setDT(get(data("bmigrowth", package = "eggla")))
+} else {
+  pheno_dt <- fread(params[["pheno_file"]])
+}
 ```
 
 ## Tidy data for Daymont's quality control 
@@ -198,10 +205,10 @@ all_models <- setDT(
   )
 )
 
-all_models <- all_models[# subset
-  sub(".*random = ", "", models) %in% random_effect[c(1, 3, 8)] &
-    correlation_structure %in% "NULL"
-]
+# all_models <- all_models[# subset
+#   sub(".*random = ", "", models) %in% random_effect[c(1, 3, 8)] &
+#     correlation_structure %in% "NULL"
+# ]
 ```
 
 ## Run all models
@@ -452,6 +459,15 @@ perf_tab
 ## Select the "best" model
 
 ```{r select-best-model}
+library(forcats)
+library(data.table)
+library(scales)
+library(ggplot2)
+library(ggtext)
+library(patchwork)
+library(ggbeeswarm)
+library(glue)
+
 files <- list.files(
   path = output_directory,
   pattern = ".*models-performance.csv$",
@@ -478,7 +494,20 @@ p <- ggplot(perfs_dt) +
   geom_beeswarm(shape = 1) +
   stat_summary(geom = "point", fun = mean, shape = 18, colour = "firebrick", size = 4) +
   scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
-  theme(legend.position = "none")
+  scale_colour_viridis_d(begin = 0.15, end = 0.85)
+  theme_minimal() +
+  theme(
+    plot.title.position = "plot",
+    plot.caption.position = "plot",
+    plot.title = element_markdown(),
+    plot.subtitle = element_markdown(face = "italic"),
+    plot.caption = element_markdown(face = "italic"),
+    axis.title.x = element_markdown(),
+    axis.text.x = element_markdown(),
+    axis.title.y = element_markdown(),
+    axis.text.y = element_markdown(),
+    legend.position = "none"
+  )
 
 wrap_plots(
   p +
