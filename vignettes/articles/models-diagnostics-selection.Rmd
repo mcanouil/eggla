@@ -1,5 +1,7 @@
 ---
 title: "Models Diagnostics & Selection"
+params:
+  pheno_dt: !r setDT(get(data("bmigrowth", package = "eggla")))
 ---
 
 ```{r, include = FALSE}
@@ -64,9 +66,7 @@ theme_update(
 # Data
 
 ```{r input-data}
-data("bmigrowth")
-pheno_dt <- setDT(bmigrowth)
-# pheno_dt <- fread(phenotype_csv)
+pheno_dt <- params[["pheno_dt"]]
 ```
 
 ## Tidy data for Daymont's quality control 
