@@ -10,7 +10,7 @@ params:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = params[["pheno_file"]] != "internal"
+  eval = TRUE # params[["pheno_file"]] != "internal"
 )
 ```
 
