@@ -375,7 +375,7 @@ fwrite(
 
 ### Models status
 
-```{r models-diagnostics-plot}
+```{r models-success-plot}
 ggplot(data = fmt_models) +
   aes(x = x, y = y, fill = fill) +
   facet_grid(cols = vars(sex)) +
@@ -393,7 +393,7 @@ ggplot(data = fmt_models) +
   theme(legend.position = "top")
 ```
 
-```{r models-diagnostics-table}
+```{r models-success-table}
 if (fmt_models[fill != "Good", .N > 0]) {
   diag_tab <- gt(
     data = fmt_models[
