@@ -2,7 +2,7 @@
 title: "Models Diagnostics"
 author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
 params:
-  working_directory: '`r tempdir()`'
+  working_directory: !r tempdir()
   pheno_file: "internal"
 ---
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   eval = TRUE, # params[["pheno_file"]] != "internal"
   fig.align = "center",
   fig.width = 11.5, # Default: 7
-  fig.height = 1.5 * 5.75,  # Default: 7
+  fig.height = 2 * 5.75,  # Default: 7
   dpi = 150, # Default: 72
   # dev = "ragg_png"
   dev = "svg"
