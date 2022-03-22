@@ -207,17 +207,12 @@ all_models <- setDT(
       collapse = ", "
     ),
     lme = list(NULL),
-    results = "Good",
+    results = list("Good"),
     perf_check_model = list(NULL),
     perf_model_performance = list(NULL),
     stringsAsFactors = FALSE
   )
 )
-
-# all_models <- all_models[# subset
-#   sub(".*random = ", "", models) %in% random_effect[c(1, 3, 8)] &
-#     correlation_structure %in% "NULL"
-# ]
 ```
 
 ## Run all models
@@ -261,7 +256,7 @@ all_models[["is_good"]] <- future_mapply(
 
 all_models[
   i = !(is_good),
-  j = results := lme
+  j = results := list(lme)
 ]
 
 all_models[
@@ -303,7 +298,14 @@ wrap_plots(
         dataset %in% "visits_clean",
       j = perf_check_model
     ],
-    FUN = function(.x) wrap_plots(plot(.x), nrow = 1, tag_level = "new")),
+    FUN = function(.x) {
+      if (is.null(.x)) {
+        wrap_plots(rep(list(ggplot() + geom_blank()), 3), nrow = 1, tag_level = "new")
+      } else {
+        wrap_plots(plot(.x), nrow = 1, tag_level = "new")
+      }
+    }
+  ),
   nrow = 2
 ) +
   plot_annotation(
