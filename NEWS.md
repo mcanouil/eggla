@@ -8,9 +8,13 @@
 - In `R/egg_*.R`,
   - Add `random_complexity` parameter.
 
+- In `R/compute_apar.R`,
+  - New function to compute adiposity peak and adiposity rebound from a `lme` model object, such as `egg_model`.
+
 - In `vignettes/articles`,
-  - Add `adiposity-peak-caracterisation.Rmd`, to identify/caracterise adiposity peak and adiposity rebound.
-  - Add `models-diagnostics-selection.Rmd`, models testing and selection based on results.
+  - Add `models-diagnostics.Rmd`, models testing and diagnosticsq.
+  - Add `adiposity-peak-rebound.Rmd`, to identify/caracterise adiposity peak and adiposity rebound from `models-diagnostics.Rmd`.
+  - Add `models-selection.Rmd`, models selection based on results from `models-diagnostics.Rmd`.
 
 # eggla 0.4.4
 
