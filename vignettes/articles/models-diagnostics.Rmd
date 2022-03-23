@@ -325,7 +325,7 @@ ggplot(
     j = rbindlist(list(
       (function(x) {
         data.table(age = seq(0, 16, 0.1))[
-          j = bmi := if (inherits(x[[1]], "lmeObject") {
+          j = bmi := if (inherits(x[[1]], "lme") {
             exp(predict(x[[1]], .SD, level = 0))
           } else NA_real_,
           .SDcols = "age"
