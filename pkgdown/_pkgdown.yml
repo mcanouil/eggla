@@ -7,3 +7,13 @@ development:
 authors:
   Mickaël Canouil:
     href: https://mickael.canouil.fr
+figures:
+  dev: ragg::agg_png
+  dpi: 96
+  dev.args: 
+    scaling: 0.75
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1
