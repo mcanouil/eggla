@@ -27,7 +27,7 @@
 #'
 #' head(res_apar[AP | AR])
 compute_apar <- function(fit, id_var, age_var) {
-  if (!inherits(lme, "lmeObject")) stop("\"fit\" must be a \"lmeObject\"!")
+  if (!inherits(fit, "lmeObject")) stop("\"fit\" must be a \"lmeObject\"!")
   bmi_pred <- egg_ageyears <- log_bmi_pred <- NULL
   out <- data.table::setnames(
     x = data.table::data.table(
