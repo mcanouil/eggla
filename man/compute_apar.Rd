@@ -36,5 +36,5 @@ res_apar <- compute_apar(
   age_var = "age"
 )
 
-head(res_apar)
+head(res_apar[AP | AR])
 }
