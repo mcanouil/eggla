@@ -2,31 +2,33 @@
 title: "Model Selection"
 author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
 params:
-  working_directory: '`r tempdir()`'
+  working_directory: !r tempdir()
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  eval = FALSE,
   collapse = TRUE,
-  comment = "#>",
-  eval = FALSE
+  comment = "#>"
 )
 ```
 
 # R setup
 
 ```{r setup}
-library(forcats)
 library(data.table)
 library(scales)
 library(ggplot2)
 library(ggtext)
 library(patchwork)
+
+library(forcats)
 library(ggbeeswarm)
-library(glue)
 ```
 
 # Select the "best" model
+
+**Note:** The following code assumes `models-performance.csv` from `vignette("models-diagnostics")` are located in `params[["working_directory"]]`.
 
 ```{r select-best-model}
 output_directory <- file.path(params[["working_directory"]], "models-diagnostics")
@@ -50,6 +52,14 @@ perfs_dt[
   by = "cohort",
   .SDcols = metrics
 ]
+s_collapse <- function(x) {
+  x <- sort(unique(x))
+  paste(
+    paste(x[-length(x)], collapse = ", "),
+    tail(x, 1),
+    sep = " and "
+  )
+}
 
 p <- ggplot(perfs_dt) +
   aes(colour = sub(" --.*", "", model)) +
@@ -98,8 +108,8 @@ wrap_plots(
     title = "Working Models for Male And Female",
     subtitle = sprintf(
       "Cohorts: %s<br>Datasets: %s",
-      glue_collapse(sort(unique(perfs_dt[["cohort"]])), sep = ", ", last = " and "),
-      glue_collapse(sort(unique(perfs_dt[["dataset"]])), sep = ", ", last = " and ")
+      s_collapse(perfs_dt[["cohort"]]),
+      s_collapse(perfs_dt[["dataset"]])
     ),
     tag_levels = "A"
   )
