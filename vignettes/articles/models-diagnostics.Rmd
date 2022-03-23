@@ -9,14 +9,7 @@ params:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  eval = TRUE, # params[["pheno_file"]] != "internal"
-  fig.align = "center",
-  fig.width = 11.5, # Default: 7
-  fig.height = 2 * 5.75,  # Default: 7
-  dpi = 150, # Default: 72
-  # dev = "ragg_png"
-  dev = "svg"
+  comment = "#>"
 )
 ```
 
@@ -289,15 +282,26 @@ saveRDS(
 
 ## Models results
 
+```{r best-model}
+best_models <- paste(
+  "fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),",
+  "random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID"
+)
+best_dataset <- "visits_clean"
+```
+
+```{r get-best-model-results}
+good_res_models <- readRDS(file.path(output_directory, "summary_models.rds"))[
+  correlation_structure == "NULL" &
+    models %in% best_models &
+    dataset %in% best_dataset
+]
+```
+
 ```{r models-diagnostics-plot}
 wrap_plots(
   lapply(
-    X = all_models[
-      i = sub(".*random = ", "", models) %in% random_effect[3] &
-        correlation_structure %in% "NULL" &
-        dataset %in% "visits_clean",
-      j = perf_check_model
-    ],
+    X = good_res_models[j = perf_check_model],
     FUN = function(.x) {
       if (is.null(.x)) {
         wrap_plots(rep(list(ggplot() + geom_blank()), 3), nrow = 1, tag_level = "new")
@@ -312,6 +316,34 @@ wrap_plots(
     title = "Cubic Splines (Fixed Effects = Random Effects)",
     subtitle = "With A) sex = 0, and with B) sex = 1",
     tag_levels = c("A", "1")
+  )
+```
+
+```{r model-predict-plot}
+ggplot(
+  data = good_res_models[
+    j = rbindlist(list(
+      (function(x) {
+        data.table(age = seq(0, 16, 0.1))[
+          j = bmi := exp(predict(x[[1]], .SD, level = 0)),
+          .SDcols = "age"
+        ]
+      })(lme)
+    )),
+    by = list(sex, dataset, models)
+  ]
+) +
+  aes(
+    x = age,
+    y = bmi,
+    colour = c("0" = "Male", "1" = "Female")[as.character(sex)]
+  ) +
+  geom_path() +
+  labs(
+    title = "Cubic Splines (Fixed Effects = Random Effects)",
+    x = "AGE (years)",
+    y = "BMI (kg/m²)",
+    colour = NULL
   )
 ```
 
