@@ -1,0 +1,255 @@
+---
+title: "Adiposity Peak & Adiposity Rebound Caracterisation"
+author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
+params:
+  working_directory: !r tempdir()
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# R setup
+
+```{r setup}
+output_directory <- file.path(params[["working_directory"]], "models-diagnostics")
+dir.create(output_directory, recursive = TRUE, showWarnings = FALSE, mode = "0775")
+
+library(eggla)
+
+library(stats)
+library(utils)
+
+library(data.table)
+library(ggplot2)
+library(ggtext)
+library(patchwork)
+```
+
+```{r ggplot-setup}
+options(
+  ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 0.15, end = 0.85),
+  ggplot2.discrete.fill = function(...) scale_fill_viridis_d(..., begin = 0.15, end = 0.85),
+  ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 0.15, end = 0.85),
+  ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 0.15, end = 0.85)
+)
+theme_set(theme_minimal())
+theme_update(
+  plot.title.position = "plot",
+  plot.caption.position = "plot",
+  plot.title = element_markdown(),
+  plot.subtitle = element_markdown(face = "italic"),
+  plot.caption = element_markdown(face = "italic"),
+  axis.title.x = element_markdown(),
+  axis.text.x = element_markdown(),
+  axis.title.y = element_markdown(),
+  axis.text.y = element_markdown()
+)
+```
+
+# Results from `vignette("models-diagnostics")`
+
+```{r best-model}
+best_models <- paste(
+  "fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),",
+  "random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID"
+)
+best_dataset <- "visits_clean"
+```
+
+```{r get-best-model-results}
+good_res_models <- readRDS(file.path(output_directory, "summary_models.rds"))[
+  correlation_structure == "NULL" &
+    models %in% best_models &
+    dataset %in% best_dataset
+]
+```
+
+## Compute adiposity peak (AP) and adiposity rebound (AR)
+
+```{r compute-ar-ap}
+predicted_data <- lapply(
+  X = good_res_models[["lme"]],
+  id_var = "ID",
+  age_var = "age",
+  FUN = function(lme_object, id_var, age_var) {
+    out <- setnames(
+      x = data.table(
+        egg_id = unique(lme_object[["groups"]][[id_var]]),
+        egg_ageyears = list(seq(from = 0.25, to = 10, by = 0.05))
+      ),
+      old = c("egg_id", "egg_ageyears"),
+      new = c(id_var, age_var)
+    )[
+      j = `names<-`(list(unlist(.SD)), age_var),
+      .SDcols = c(age_var),
+      by = c(id_var)
+    ][
+      j = log_bmi_pred := predict(
+        object = lme_object,
+        newdata = .SD,
+        interval = "prediction"
+      )
+    ][
+      j = bmi_pred := exp(log_bmi_pred)
+    ]
+    setnames(
+      x = out,
+      old = c(id_var, age_var),
+      new = c("egg_id", "egg_ageyears")
+    )[
+      j = `:=`(
+        AP = egg_ageyears %in% egg_ageyears[which(diff(sign(diff(bmi_pred))) == -2) + 1],
+        AR = egg_ageyears %in% egg_ageyears[which(diff(sign(diff(bmi_pred))) == +2) + 1]
+      ),
+      by = "egg_id"
+    ]
+  }
+)
+names(predicted_data) <- good_res_models[["sex"]]
+
+predicted_data_all <- rbindlist(
+  l = predicted_data,
+  idcol = "sex"
+)
+
+predicted_data_all[AP | AR]
+```
+
+## Plot AP/AR for one individual
+
+```{r plot-one-individual}
+one_individual_data <- predicted_data_all[egg_id %in% egg_id[1]]
+one_individual_apar <- melt(
+  data = one_individual_data[AP | AR],
+  id.vars = c("egg_id", "egg_ageyears"),
+  measure.vars = c("AP", "AR")
+)[
+  (value)
+][
+  j = labels := sprintf(
+    "<b style=\"color:%s;\">%s = %s</b>",
+    c("#b22222", "#22b222")[variable],
+    variable,
+    egg_ageyears
+  )
+]
+
+ggplot(data = one_individual_data) +
+  geom_line(mapping = aes(x = egg_ageyears, y = bmi_pred)) +
+  geom_vline(
+    data = one_individual_apar,
+    mapping = aes(
+      xintercept = egg_ageyears,
+      colour = variable,
+      linetype = variable
+    ),
+    size = 1,
+    show.legend = FALSE
+  ) +
+  scale_x_continuous(
+    sec.axis = dup_axis(
+      name = NULL,
+      breaks = one_individual_apar[["egg_ageyears"]],
+      labels = one_individual_apar[["labels"]]
+    )
+  ) +
+  scale_colour_manual(values = c("#b22222", "#22b222")) +
+  scale_linetype_manual(values = c(2, 4)) +
+  labs(
+    x = "AGE (years)",
+    y = "BMI (kg/m²)",
+    colour = NULL,
+    linetype = NULL
+  ) +
+  theme_minimal() +
+  theme(axis.text.x.top = element_markdown()) +
+  theme(panel.grid.minor.x = element_blank())
+```
+
+
+## Plot average AP/AR for all individuals
+
+```{r plot-all-individual}
+p_apar <- mapply(
+  data = predicted_data,
+  sex = names(predicted_data),
+  SIMPLIFY = FALSE,
+  FUN = function(data, sex) {
+    if (nrow(data) == 0) return(ggplot() + geom_blank())
+    predicted_dt_apar <- melt(
+      data = data[AP | AR],
+      id.vars = c("egg_id", "egg_ageyears"),
+      measure.vars = c("AP", "AR")
+    )[
+      (value)
+    ][
+      j = list(egg_ageyears = mean(egg_ageyears)),
+      by = "variable"
+    ][
+      j = labels := sprintf(
+        "<b style=\"color:%s;\">%s &#8771; %0.2f</b>",
+        c("#b22222", "#22b222")[variable],
+        variable,
+        egg_ageyears
+      )
+    ]
+    ggplot(data = data) +
+      aes(x = egg_ageyears, y = bmi_pred) +
+      geom_path(# Comment or remove this for big cohort
+        mapping = aes(group = factor(egg_id)),
+        colour = "#333333",
+        na.rm = TRUE,
+        alpha = 0.05,
+        show.legend = FALSE
+      ) +
+      stat_smooth(
+        method = "loess", # Comment for big cohort, i.e., to use default method which is "gam"
+        formula = y ~ x, # Comment this for big cohort, i.e., to use default "gam" formula
+        linetype = 2,
+        colour = "#2222b2",
+        se = FALSE
+      ) +
+      geom_vline(
+        data = predicted_dt_apar,
+        mapping = aes(
+          xintercept = egg_ageyears,
+          colour = variable,
+          linetype = variable
+        ),
+        size = 1,
+        show.legend = FALSE
+      ) +
+      scale_x_continuous(
+        sec.axis = dup_axis(
+          name = NULL,
+          breaks = predicted_dt_apar[["egg_ageyears"]],
+          labels = predicted_dt_apar[["labels"]]
+        )
+      ) +
+      scale_y_log10() +
+      scale_colour_manual(values = c("#b22222", "#22b222")) +
+      scale_linetype_manual(values = c(2, 4)) +
+      labs(
+        x = "AGE (years)",
+        y = "BMI (kg/m²)",
+        colour = NULL,
+        linetype = NULL
+      ) +
+      theme_minimal() +
+      theme(axis.text.x.top = element_markdown()) +
+      theme(panel.grid.minor.x = element_blank())
+  }
+)
+
+wrap_plots(p_apar, nrow = 2) +
+  plot_annotation(
+    title = "Mean Adiposity Peak & Rebound",
+    subtitle = "Cubic Splines (Fixed Effects = Random Effects)",
+    subtitle = "With A) sex = 0, and with B) sex = 1",
+    tag_levels = "A"
+  )
+```
