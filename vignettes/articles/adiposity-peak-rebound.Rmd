@@ -50,73 +50,42 @@ theme_update(
 )
 ```
 
-# Results from `vignette("models-diagnostics")`
-
-```{r best-model}
-best_models <- paste(
-  "fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),",
-  "random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID"
-)
-best_dataset <- "visits_clean"
-```
+# Results
 
 ```{r get-best-model-results}
-good_res_models <- readRDS(file.path(output_directory, "summary_models.rds"))[
-  correlation_structure == "NULL" &
-    models %in% best_models &
-    dataset %in% best_dataset
-]
+res_0 <- egg_model(
+  formula = log(bmi) ~ age,
+  data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+  id_var = "ID",
+  random_complexity = 1
+)
+
+res_1 <- egg_model(
+  formula = log(bmi) ~ age,
+  data = bmigrowth[bmigrowth[["sex"]] == 1, ],
+  id_var = "ID",
+  random_complexity = 1
+)
 ```
 
 ## Compute adiposity peak (AP) and adiposity rebound (AR)
 
 ```{r compute-ar-ap}
-predicted_data <- lapply(
-  X = good_res_models[["lme"]],
-  id_var = "ID",
-  age_var = "age",
-  FUN = function(lme_object, id_var, age_var) {
-    out <- setnames(
-      x = data.table(
-        egg_id = unique(lme_object[["groups"]][[id_var]]),
-        egg_ageyears = list(seq(from = 0.25, to = 10, by = 0.05))
-      ),
-      old = c("egg_id", "egg_ageyears"),
-      new = c(id_var, age_var)
-    )[
-      j = `names<-`(list(unlist(.SD)), age_var),
-      .SDcols = c(age_var),
-      by = c(id_var)
-    ][
-      j = log_bmi_pred := predict(
-        object = lme_object,
-        newdata = .SD,
-        interval = "prediction"
-      )
-    ][
-      j = bmi_pred := exp(log_bmi_pred)
-    ]
-    setnames(
-      x = out,
-      old = c(id_var, age_var),
-      new = c("egg_id", "egg_ageyears")
-    )[
-      j = `:=`(
-        AP = egg_ageyears %in% egg_ageyears[which(diff(sign(diff(bmi_pred))) == -2) + 1],
-        AR = egg_ageyears %in% egg_ageyears[which(diff(sign(diff(bmi_pred))) == +2) + 1]
-      ),
-      by = "egg_id"
-    ]
-  }
+predicted_data <- list(
+  compute_apar(
+    fit = res_0,
+    id_var = "ID",
+    age_var = "age"
+  ),
+  compute_apar(
+    fit = res_1,
+    id_var = "ID",
+    age_var = "age"
+  )
 )
-names(predicted_data) <- good_res_models[["sex"]]
+names(predicted_data) <- c("0", "1")
 
-predicted_data_all <- rbindlist(
-  l = predicted_data,
-  idcol = "sex"
-)
-
-predicted_data_all[AP | AR]
+predicted_data_all <- rbindlist(predicted_data, idcol = "sex")
 ```
 
 ## Plot AP/AR for one individual
@@ -248,7 +217,7 @@ p_apar <- mapply(
 wrap_plots(p_apar, nrow = 2) +
   plot_annotation(
     title = "Mean Adiposity Peak & Rebound",
-    subtitle = "Cubic Splines (Fixed Effects = Random Effects)",
+    caption = "Cubic Splines (Fixed Effects = Random Effects)",
     subtitle = "With A) sex = 0, and with B) sex = 1",
     tag_levels = "A"
   )
