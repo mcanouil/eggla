@@ -25,8 +25,9 @@
 #'   age_var = "age"
 #' )
 #'
-#' head(res_apar)
+#' head(res_apar[AP | AR])
 compute_apar <- function(fit, id_var, age_var) {
+    bmi_pred <- egg_ageyears <- log_bmi_pred <- NULL
     out <- data.table::setnames(
       x = data.table::data.table(
         egg_id = unique(fit[["groups"]][[id_var]]),
@@ -57,5 +58,5 @@ compute_apar <- function(fit, id_var, age_var) {
         AR = egg_ageyears %in% egg_ageyears[which(diff(sign(diff(bmi_pred))) == +2) + 1]
       ),
       by = "egg_id"
-    ][AP | AR]
+    ]
   }
