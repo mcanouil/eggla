@@ -2,7 +2,7 @@ test_that("Cubic slope", {
 
   x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "cubic_slope")
 
-  y1 <- compute_auc(
+  y1 <- compute_aucs(
     fit = x,
     method = "cubic_slope",
     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
@@ -44,7 +44,7 @@ test_that("Linear Splines", {
 
   x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "linear_splines")
 
-  y1 <- compute_auc(
+  y1 <- compute_aucs(
     fit = x,
     method = "linear_splines",
     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
@@ -100,7 +100,7 @@ test_that("Cubic Splines", {
 
   x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "cubic_splines")
 
-  y1 <- compute_auc(
+  y1 <- compute_aucs(
     fit = x,
     method = "cubic_splines",
     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
