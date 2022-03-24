@@ -12,8 +12,8 @@ tag](https://img.shields.io/github/tag/mcanouil/eggla.svg?label=latest%20tag&inc
 [![R-CMD-check](https://github.com/mcanouil/eggla/workflows/R-CMD-check/badge.svg)](https://github.com/mcanouil/eggla/actions)
 <!-- badges: end -->
 
-Tools for longitudinal analysis within the EGG (Early Growth Genetics)
-Consortium.
+Tools for longitudinal analysis within the [EGG (Early Growth Genetics)
+Consortium](http://egg-consortium.org/).
 
 ## Installation
 
