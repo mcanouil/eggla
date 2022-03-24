@@ -1,8 +1,8 @@
 # eggla (development version)
 
-- Improve documentation,
+- Improve/Polish documentation,
   - Add title.
-  - Add description.
+  - Add/tweak description.
   - Add code examples.
 
 - In `R/egg_*.R`,
@@ -26,9 +26,6 @@
 
 - In `R/plot_*.R`,
   - New functions to plot area under the curves and slopes.
-
-- In `R/*.R`,
-  - Polish documentation.
 
 **Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.4.4...v0.5.0
 
