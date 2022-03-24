@@ -19,9 +19,10 @@
   - Rename function for consistency, previously known as `predict_average_slopes`.
 
 - In `vignettes/articles`,
-  - Add `models-diagnostics.Rmd`, models testing and diagnosticsq.
+  - Add `models-diagnostics.Rmd`, to describe models testing and diagnostics.
   - Add `adiposity-peak-rebound.Rmd`, to identify/caracterise adiposity peak and adiposity rebound from `models-diagnostics.Rmd`.
-  - Add `models-selection.Rmd`, models selection based on results from `models-diagnostics.Rmd`.
+  - Add `models-selection.Rmd`, to show how to perform models selection based on results from `models-diagnostics.Rmd`.
+  - Add `run-eggla.Rmd`, to show how to run analysis interactively or not.
 
 - In `R/plot_*.R`,
   - New functions to plot area under the curves and slopes.
