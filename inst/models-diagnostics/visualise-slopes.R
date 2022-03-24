@@ -345,7 +345,14 @@ out <- melt(
   )
 ][
   j = as.data.table(matrix(
-    round(c(length(auc), min(auc), max(auc), mean(auc), sd(auc), quantile(auc, 0.25), quantile(auc, 0.5), quantile(auc, 0.75)), 2),
+    round(
+      x = c(
+        length(auc), min(auc), max(auc),
+        mean(auc), sd(auc),
+        quantile(auc, 0.25), quantile(auc, 0.5), quantile(auc, 0.75)
+      ),
+      digits = 2
+    ),
     nrow = 1,
     dimnames = list(NULL, c("N", "min", "max", "mean", "sd", "p25", "p50", "p75"))
   )),
