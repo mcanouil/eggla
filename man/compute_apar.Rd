@@ -4,17 +4,11 @@
 \alias{compute_apar}
 \title{Compute adiposity peak (AP) and adiposity rebound (AR).}
 \usage{
-compute_apar(fit, id_var, age_var)
+compute_apar(fit)
 }
 \arguments{
 \item{fit}{A model object from a statistical model
-such as from a call \code{nlme::lme()} and \code{time_model()}.}
-
-\item{id_var}{A length one character vector
-with the variable name definiing individuals.}
-
-\item{age_var}{A length one character vector
-with the variable name definiing the time variable, \emph{i.e.}, age).}
+such as from a call \code{nlme::lme()}, \code{time_model()} or \code{egg_model}.}
 }
 \value{
 A \code{data.table} object.
@@ -30,11 +24,6 @@ res <- egg_model(
   id_var = "ID",
   random_complexity = 1
 )
-res_apar <- compute_apar(
-  fit = res,
-  id_var = "ID",
-  age_var = "age"
-)
 
-head(res_apar[AP | AR])
+head(compute_apar(fit = res)[AP | AR])
 }

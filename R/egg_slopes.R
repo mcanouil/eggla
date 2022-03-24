@@ -6,7 +6,7 @@
 #' designed to work specifically on `egg_model`.
 #'
 #' @param fit A model object from a statistical model
-#'   such as from a call to `nlme::lme()` and `time_model()`.
+#'   such as from a call to `egg_model()`.
 #' @param period The intervals knots on which slopes are to be computed.
 #'
 #' @return A `data.frame` with slopes for each individuals/samples.

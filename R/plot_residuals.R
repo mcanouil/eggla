@@ -5,7 +5,7 @@
 #' @param y A length one character vector with the variable name to be explained
 #'   (_i.e._, left-hand side), as defined in `fit`.
 #' @param fit A model object from a statistical model
-#'   such as from a call `nlme::lme()` and `time_model()`.
+#'   such as from a call `time_model()` or `egg_model`.
 #'
 #' @return A `patchwork` `ggplot2` object.
 #'
@@ -30,6 +30,7 @@
 #'     tag_levels = "A"
 #'   )
 plot_residuals <- function(x, y, fit) {
+  stopifnot(inherits(fit, "lme"))
   .data <- ggplot2::.data
 
   revert_trans <- if (grepl("log", y)) exp else identity

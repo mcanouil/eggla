@@ -1,11 +1,7 @@
 #' Compute adiposity peak (AP) and adiposity rebound (AR).
 #'
 #' @param fit A model object from a statistical model
-#'   such as from a call `nlme::lme()` and `time_model()`.
-#' @param id_var A length one character vector 
-#'   with the variable name definiing individuals.
-#' @param age_var A length one character vector
-#'   with the variable name definiing the time variable, _i.e._, age).
+#'   such as from a call `nlme::lme()`, `time_model()` or `egg_model`.
 #'
 #' @return A `data.table` object.
 #'
@@ -21,8 +17,8 @@
 #' )
 #'
 #' head(compute_apar(fit = res)[AP | AR])
-compute_apar <- function(fit, id_var, age_var) {
-  if (!inherits(fit, "lme")) stop("\"fit\" must be a \"lme\"!")
+compute_apar <- function(fit) {
+  stopifnot(inherits(fit, "lme"))
   bmi_pred <- egg_ageyears <- log_bmi_pred <- NULL
 
   id_var <- names(fit[["groups"]])

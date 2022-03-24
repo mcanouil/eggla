@@ -5,7 +5,7 @@
 #' with linear splines as random effect,
 #' save model object, generates residuals figures fot model validity,
 #' derived area under the curve and slopes for male and femal.  
-#' This function is a wrapper around `egg_model`, `egg_slopes` and `egg_auc`.
+#' This function is a wrapper around `egg_model`, `egg_slopes` and `egg_aucs`.
 #'
 #' @param data something
 #' @param id_variable something
@@ -164,17 +164,15 @@ run_eggla <- function(
       data.table::fwrite(
         x = egg_slopes(
           fit = results,
-          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-          id_var = "egg_id"
+          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
         ),
         file = file.path(results_directory, "derived-slopes.csv")
       )
 
       data.table::fwrite(
-        x = egg_auc(
+        x = egg_aucs(
           fit = results,
-          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-          id_var = "egg_id"
+          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
         ),
         file = file.path(results_directory, "derived-auc.csv")
       )

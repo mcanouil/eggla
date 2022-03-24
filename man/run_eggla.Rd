@@ -57,7 +57,7 @@ fit a cubic splines mixed model regression
 with linear splines as random effect,
 save model object, generates residuals figures fot model validity,
 derived area under the curve and slopes for male and femal.
-This function is a wrapper around \code{egg_model}, \code{egg_slopes} and \code{egg_auc}.
+This function is a wrapper around \code{egg_model}, \code{egg_slopes} and \code{egg_aucs}.
 }
 \examples{
 if (interactive()) {
