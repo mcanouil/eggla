@@ -28,7 +28,9 @@
   - New functions to plot area under the curves and slopes.
 
 - In `R/*.R`,
-  - Polish documentation. 
+  - Polish documentation.
+
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.4.4...v0.5.0
 
 # eggla 0.4.4
 
