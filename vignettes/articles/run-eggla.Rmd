@@ -82,7 +82,7 @@ knitr::opts_chunk$set(
         lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
         lib = temp_library
       )' \
-      -e 'pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
+      -e 'pkg_install("mcanouil/eggla@v0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
     
     Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
