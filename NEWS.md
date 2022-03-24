@@ -7,14 +7,27 @@
 
 - In `R/egg_*.R`,
   - Add `random_complexity` parameter.
+  - Remove _var arguments.
 
 - In `R/compute_apar.R`,
   - New function to compute adiposity peak and adiposity rebound from a `lme` model object, such as `egg_model`.
+
+- In `R/compute_aucs.R`,
+  - Rename function for consistency, previously known as `compute_auc`.
+
+- In `R/compute_slopess.R`,
+  - Rename function for consistency, previously known as `predict_average_slopes`.
 
 - In `vignettes/articles`,
   - Add `models-diagnostics.Rmd`, models testing and diagnosticsq.
   - Add `adiposity-peak-rebound.Rmd`, to identify/caracterise adiposity peak and adiposity rebound from `models-diagnostics.Rmd`.
   - Add `models-selection.Rmd`, models selection based on results from `models-diagnostics.Rmd`.
+
+- In `R/plot_*.R`,
+  - New functions to plot area under the curves and slopes.
+
+- In `R/*.R`,
+  - Polish documentation. 
 
 # eggla 0.4.4
 
