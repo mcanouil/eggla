@@ -61,7 +61,6 @@ library(eggla)
 library(growthcleanr)
 library(broom.mixed)
 library(data.table, quietly = TRUE)
-#> data.table 1.14.2 using 2 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
 # Setup for plots
 library(ggplot2, quietly = TRUE)
@@ -209,13 +208,6 @@ res <- egg_model(
 #>     method = "ML",
 #>     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
 #>   )
-#> lme.formula
-#> log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))
-#> data
-#> ~gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[, 1:3] | ID
-#> ML
-#> stats::na.omit
-#> nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
 class(res)
 #> [1] "lme"
 sres <- tidy(res)
@@ -289,8 +281,7 @@ plot_residuals(
 ``` r
 res_pred_slopes <- egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-  id_var = "ID"
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
 head(res_pred_slopes)
 #>    ID pred_period_0 pred_period_0.5 pred_period_1.5 pred_period_5 pred_period_6
@@ -376,10 +367,9 @@ wrap_plots(
 ### Area Under The Curve
 
 ``` r
-res_auc <- egg_auc(
+res_auc <- egg_aucs(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-  id_var = "ID"
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
 head(res_auc)
 #>    ID auc_0--0.5 auc_1.5--5 auc_6--10 auc_12--17
