@@ -13,7 +13,8 @@ figures:
   dev.args: 
     scaling: 0.75
   fig.ext: png
-  fig.width: 7.2916667
+  fig.width: 7
   fig.height: ~
   fig.retina: 2
-  fig.asp: 1
+  fig.asp: 1.333333
+  bg: white
