@@ -304,7 +304,7 @@ wrap_plots(
 ### Area Under The Curve
 
 ```{r}
-res_auc <- egg_auc(
+res_auc <- egg_aucs(
   fit = res,
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
