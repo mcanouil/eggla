@@ -1,7 +1,7 @@
 #' Derived areas under the curve from a cubic splines mixed-effects model.
 #'
 #' Derived areas under the curve (AUCs) for differentintervals based
-#' on a fitted cubic splines mixed-effects model from `egg_model`.  
+#' on a fitted cubic splines mixed-effects model from `egg_model`. 
 #' This function is a specific version of `compute_aucs`
 #' designed to work specifically on `egg_model`.
 #'

@@ -174,7 +174,7 @@ p_slope <- ggplot(
   # ) +
   stat_smooth(
     method = "loess", # Comment for big cohort, i.e., to use default method which is "gam"
-    formula = y ~ x, # Commentthis for big cohort, i.e., to use default "gam" formula 
+    formula = y ~ x, # Commentthis for big cohort, i.e., to use default "gam" formula
     linetype = 2,
     colour = "firebrick",
     se = FALSE

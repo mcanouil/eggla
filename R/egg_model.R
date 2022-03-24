@@ -1,7 +1,7 @@
 #' Fit a cubic splines mixed model.
 #'
 #' Fit a cubic splines mixed model regression
-#' with three splines parametrisation as random effect.  
+#' with three splines parametrisation as random effect.
 #' This function a specific version of `time_model`.
 #'
 #' @param formula An object of class "formula":

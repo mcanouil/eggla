@@ -115,7 +115,7 @@ test_that("Cubic Splines", {
       auc_csplines <- function(fit, data, period) {
         fxef <- as.numeric(nlme::fixef(fit))
         for (j in 1:(length(period) / 2)) {
-          for (i in 1:nrow(data)) {
+          for (i in seq_len(nrow(data))) {
             coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]), rep(0, 3))
             x1 <- period[j * 2 - 1]
             x2 <- period[j * 2]
@@ -127,19 +127,38 @@ test_that("Cubic Splines", {
             } else {
               if ((x1 > k1 & x1 <= k2) & (x2 > k1 & x2 <= k2)) {
                 y <- function(x1) {
-                  coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6
+                  coeff[1] +
+                    coeff[2] * x1 +
+                    (coeff[3] * x1^2) / 2 +
+                    (coeff[4] * x1^3) / 6 +
+                    (coeff[5] * (x1 - k1)^3) / 6
                 }
-                pred_auc_csplines[i, j] <- stats::integrate(y, lower = x1, upper = x2)$value
+                pred_auc_csplines[i, j] <- stats::integrate(
+                  f = y,
+                  lower = x1,
+                  upper = x2
+                )$value
               } else {
                 if ((x1 > k2 & x1 <= k3) & (x2 > k2 & x2 <= k3)) {
                   y <- function(x1) {
-                    coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6 + (coeff[6] * (x1 - k2)^3) / 6
+                    coeff[1] +
+                      coeff[2] * x1 +
+                      (coeff[3] * x1^2) / 2 +
+                      (coeff[4] * x1^3) / 6 +
+                      (coeff[5] * (x1 - k1)^3) / 6 +
+                      (coeff[6] * (x1 - k2)^3) / 6
                   }
                   pred_auc_csplines[i, j] <- stats::integrate(y, lower = x1, upper = x2)$value
                 } else {
                   if ((x1 > k3 & x2 > k3)) {
                     y <- function(x1) {
-                      coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6 + (coeff[6] * (x1 - k2)^3) / 6 + (coeff[7] * (x1 - k3)^3) / 6
+                      coeff[1] +
+                        coeff[2] * x1 +
+                        (coeff[3] * x1^2) / 2 +
+                        (coeff[4] * x1^3) / 6 +
+                        (coeff[5] * (x1 - k1)^3) / 6 +
+                        (coeff[6] * (x1 - k2)^3) / 6 +
+                        (coeff[7] * (x1 - k3)^3) / 6
                     }
                     pred_auc_csplines[i, j] <- stats::integrate(y, lower = x1, upper = x2)$value
                   } else {
@@ -148,26 +167,65 @@ test_that("Cubic Splines", {
                         coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6
                       }
                       y2 <- function(x1) {
-                        coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6
+                        coeff[1] +
+                          coeff[2] * x1 +
+                          (coeff[3] * x1^2) / 2 +
+                          (coeff[4] * x1^3) / 6 +
+                          (coeff[5] * (x1 - k1)^3) / 6
                       }
-                      pred_auc_csplines[i, j] <- stats::integrate(y1, lower = x1, upper = k1)$value + stats::integrate(y2, lower = k1, upper = x2)$value
+                      pred_auc_csplines[i, j] <- stats::integrate(
+                        f = y1,
+                        lower = x1,
+                        upper = k1
+                      )$value +
+                        stats::integrate(y2, lower = k1, upper = x2)$value
                     } else {
                       if (x1 <= k2 & x2 > k2) {
                         y1 <- function(x1) {
-                          coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6
+                          coeff[1] +
+                            coeff[2] * x1 +
+                            (coeff[3] * x1^2) / 2 +
+                            (coeff[4] * x1^3) / 6 +
+                            (coeff[5] * (x1 - k1)^3) / 6
                         }
                         y2 <- function(x1) {
-                          coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6 + (coeff[6] * (x1 - k2)^3) / 6
+                          coeff[1] +
+                            coeff[2] * x1 +
+                            (coeff[3] * x1^2) / 2 +
+                            (coeff[4] * x1^3) / 6 +
+                            (coeff[5] * (x1 - k1)^3) / 6 +
+                            (coeff[6] * (x1 - k2)^3) / 6
                         }
-                        pred_auc_csplines[i, j] <- stats::integrate(y1, lower = x1, upper = k2)$value + stats::integrate(y2, lower = k2, upper = x2)$value
+                        pred_auc_csplines[i, j] <- stats::integrate(
+                          f = y1,
+                          lower = x1,
+                          upper = k2
+                        )$value +
+                          stats::integrate(y2, lower = k2, upper = x2)$value
                       } else {
                         y1 <- function(x1) {
-                          coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6 + (coeff[6] * (x1 - k2)^3) / 6
+                          coeff[1] +
+                            coeff[2] * x1 +
+                            (coeff[3] * x1^2) / 2 +
+                            (coeff[4] * x1^3) / 6 +
+                            (coeff[5] * (x1 - k1)^3) / 6 +
+                            (coeff[6] * (x1 - k2)^3) / 6
                         }
                         y2 <- function(x1) {
-                          coeff[1] + coeff[2] * x1 + (coeff[3] * x1^2) / 2 + (coeff[4] * x1^3) / 6 + (coeff[5] * (x1 - k1)^3) / 6 + (coeff[6] * (x1 - k2)^3) / 6 + (coeff[7] * (x1 - k3)^3) / 6
+                          coeff[1] +
+                            coeff[2] * x1 +
+                            (coeff[3] * x1^2) / 2 +
+                            (coeff[4] * x1^3) / 6 +
+                            (coeff[5] * (x1 - k1)^3) / 6 +
+                            (coeff[6] * (x1 - k2)^3) / 6 +
+                            (coeff[7] * (x1 - k3)^3) / 6
                         }
-                        pred_auc_csplines[i, j] <- stats::integrate(y1, lower = x1, upper = k3)$value + stats::integrate(y2, lower = k3, upper = x2)$value
+                        pred_auc_csplines[i, j] <- stats::integrate(
+                          f = y1,
+                          lower = x1,
+                          upper = k3
+                        )$value +
+                          stats::integrate(y2, lower = k3, upper = x2)$value
                       }
                     }
                   }
@@ -184,7 +242,9 @@ test_that("Cubic Splines", {
         unique(bmigrowth[bmigrowth$sex == 0, "ID", drop = FALSE]),
         c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
       )
-      names(auc_csplines_female) <- c("ID", "AUC_Infancy", "AUC_Childhood", "AUC_PrePubertal", "AUC_PostPubertal")
+      names(auc_csplines_female) <- c(
+        "ID", "AUC_Infancy", "AUC_Childhood", "AUC_PrePubertal", "AUC_PostPubertal"
+      )
       auc_csplines_female
     })
   })
