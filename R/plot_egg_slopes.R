@@ -1,11 +1,8 @@
-#' Plot derived slopes from a model fitted by `time_model`.
+#' Plot derived slopes from a model fitted by `egg_model`.
 #'
-#' @param fit A model object from a statistical model such as
-#'   from a call to `time_model()`.
-#' @param method The type of model provided in `fit`,
-#'   _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
+#' @param fit A model object from a statistical model
+#'   such as from a call to `egg_model`.
 #' @param period The intervals knots on which AUCs are to be computed.
-#' @param knots The knots as defined `fit` and according to `method`.
 #'
 #' @return A `patchwork` `ggplot2` object.
 #'
@@ -13,27 +10,17 @@
 #'
 #' @examples
 #' data("bmigrowth")
-#' ls_mod <- time_model(
-#'   x = "age",
-#'   y = "log(bmi)",
-#'   cov = NULL,
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age,
 #'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-#'   method = "linear_splines"
+#'   id_var = "ID",
+#'   random_complexity = 1
 #' )
-#' plot_slopes(
-#'   fit = ls_mod,
-#'   method = "linear_splines"
+#' plot_egg_slopes(
+#'   fit = res,
+#'   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 #' )
-plot_slopes <- function(
-  fit,
-  method,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-  knots = list(
-    "cubic_slope" = NULL,
-    "linear_splines" = c(5.5, 11),
-    "cubic_splines" = c(2, 8, 12)
-  )[[method]]
-) {
+plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
   params <- variable <- yend <- pred_period <- end <- NULL
   patterns <- slope <- age <- .data <- start <- NULL
   stopifnot(inherits(fit, "lme"))
@@ -42,11 +29,9 @@ plot_slopes <- function(
   bmi_var <- grep("bmi", all.vars(fit[["terms"]]), value = TRUE)
 
   pheno_dt <- data.table::as.data.table(fit[["data"]])
-  slopes_dt <- data.table::as.data.table(compute_slopes(
+  slopes_dt <- data.table::as.data.table(egg_slopes(
     fit = fit,
-    method = method,
-    period = period,
-    knots = knots
+    period = period
   ))
 
   slopes_long_dt <- data.table::melt(
