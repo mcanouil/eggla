@@ -42,6 +42,8 @@
   - Add message about which model is currently being computed.
 - Add `pkgdown` website.
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.4.3...v0.4.4
+
 # eggla 0.4.3
 
 - In `README.(R)md`,
@@ -57,10 +59,14 @@
 - In `R/run_eggla.R`,
   - Remove `ragg` dependency, uses `grDevices` instead.
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.4.2...v0.4.3
+
 # eggla 0.4.2
 
 - In `README.(R)md`,
   - Fix typo in `renv::init` calls.
+
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.4.1...v0.4.2
 
 # eggla 0.4.1
 
@@ -74,6 +80,8 @@
 
 - In `DESCRIPTION`,
   - Switch from `svglite` to `ragg` to avoid issues with high number of elements.
+
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.4.0...v0.4.1
 
 # eggla 0.4.0
 
@@ -113,6 +121,8 @@
 - In `LICENSE`,
   - Add Nicole Warrington.
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.3.0...v0.4.0
+
 # eggla 0.3.0
 
 - In `R/time_model.R`,
@@ -130,6 +140,8 @@
   - Decrease font size in Daymont's QC summary table .
   - Fix numbers in the summary table.
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.2.0...v0.3.0
+
 # eggla 0.2.0
 
 - In `R/time_model.R`,
@@ -138,6 +150,8 @@
 
 - In `inst/rmarkdown/templates/eggla/skeleton/skeleton.Rmd`,
   - Add `cov` to allow additional covariates.
+
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.1.0...v0.2.0
 
 # eggla 0.1.0
 
