@@ -72,16 +72,8 @@ res_1 <- egg_model(
 
 ```{r compute-ar-ap}
 predicted_data <- list(
-  compute_apar(
-    fit = res_0,
-    id_var = "ID",
-    age_var = "age"
-  ),
-  compute_apar(
-    fit = res_1,
-    id_var = "ID",
-    age_var = "age"
-  )
+  compute_apar(fit = res_0),
+  compute_apar(fit = res_1)
 )
 names(predicted_data) <- c("0", "1")
 
