@@ -19,16 +19,15 @@
 #'   id_var = "ID",
 #'   random_complexity = 1
 #' )
-#' res_apar <- compute_apar(
-#'   fit = res,
-#'   id_var = "ID",
-#'   age_var = "age"
-#' )
 #'
-#' head(res_apar[AP | AR])
+#' head(compute_apar(fit = res)[AP | AR])
 compute_apar <- function(fit, id_var, age_var) {
   if (!inherits(fit, "lme")) stop("\"fit\" must be a \"lme\"!")
   bmi_pred <- egg_ageyears <- log_bmi_pred <- NULL
+
+  id_var <- names(fit[["groups"]])
+  age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE)
+
   out <- data.table::setnames(
     x = data.table::data.table(
       egg_id = unique(fit[["groups"]][[id_var]]),

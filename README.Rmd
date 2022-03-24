@@ -241,8 +241,7 @@ plot_residuals(
 ```{r}
 res_pred_slopes <- egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-  id_var = "ID"
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
 head(res_pred_slopes)
 ```
@@ -307,8 +306,7 @@ wrap_plots(
 ```{r}
 res_auc <- egg_auc(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-  id_var = "ID"
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 )
 head(res_auc)
 ```

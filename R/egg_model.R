@@ -173,16 +173,15 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
 #' head(
 #'   egg_slopes(
 #'     fit = res,
-#'     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-#'     id_var = "ID"
+#'     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 #'   )
 #' )
 egg_slopes <- function(
   fit,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-  id_var = "ID"
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 ) {
   knots <- c(2, 8, 12)
+  id_var <- names(fit[["groups"]])
 
   slopes <- matrix(
     data = NA_real_,
@@ -275,16 +274,16 @@ egg_slopes <- function(
 #' head(
 #'   egg_auc(
 #'     fit = res,
-#'     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-#'     id_var = "ID"
+#'     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 #'   )
 #' )
 egg_auc <- function(
   fit,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
-  id_var = "ID"
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 ) {
   knots <- c(2, 8, 12)
+  id_var <- names(fit[["groups"]])
+
   pred_auc <- matrix(
     data = NA_real_,
     nrow = length(unique(fit$data[[id_var]])),
