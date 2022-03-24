@@ -30,24 +30,6 @@ knitr::opts_chunk$set(
 
 Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
 
----
-
-* [Installation](#installation)
-* [Run The Cubic Splines (Random Cubic/Linear Splines) Analysis](#run-the-cubic-splines-random-clubic-linear-splines-analysis)
-    + [Setup](#setup)
-    + [Data](#data)
-    + [Modelling Female](#modelling-female)
-    + [Predicted Values](#predicted-values)
-    + [Residuals](#residuals)
-    + [Predicted Average Slopes](#predicted-average-slopes)
-    + [Area Under The Curves](#area-under-the-curve)
-* [Run Non-Interactively](#run-non-interactively)
-* [Run Interactively](#run-interactively)
-* [License](#license)
-* [Code of Conduct](#code-of-conduct)
-
----
-
 ## Installation
 
 * Install the development version from GitHub:
