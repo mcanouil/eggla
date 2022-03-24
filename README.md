@@ -65,8 +65,6 @@ library(data.table, quietly = TRUE)
 # Setup for plots
 library(ggplot2, quietly = TRUE)
 library(patchwork)
-library(ggbeeswarm) # remotes::install_github("eclarke/ggbeeswarm")
-library(ggdist)
 theme_set(theme_minimal())
 options(
   ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 0.15, end = 0.85),
@@ -308,58 +306,11 @@ head(res_pred_slopes)
 ```
 
 ``` r
-wrap_plots(
-  ggplot(
-    data = melt(
-      data = setDT(res_pred_slopes),
-      id.vars = c("ID"),
-      measure.vars = patterns("^slope_"),
-      variable.name = "period_interval",
-      value.name = "slope"
-    )[
-      j = period_interval := factor(
-        x = gsub("slope_", "", period_interval),
-        levels = gsub("slope_", "", unique(period_interval))
-      )
-    ]
-  ) +
-    aes(x = slope, y = period_interval) +
-    stat_halfeye(
-      mapping = aes(fill = period_interval),
-      justification = -0.30,
-      .width = 0,
-      scale = 0.5
-    ) +
-    geom_boxplot(
-      mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA
-    ) +
-    geom_quasirandom(
-      mapping = aes(fill = period_interval, colour = period_interval),
-      shape = 21,
-      alpha = 0.25,
-      groupOnX = FALSE,
-      width = 0.15
-    ) +
-    labs(x = "Predicted Slope", y = "Period Interval (years)") +
-    theme(legend.position = "none"),
-  ggplot(
-    data = melt(
-      data = setDT(res_pred_slopes),
-      id.vars = c("ID"),
-      measure.vars = patterns("^pred_period_"),
-      variable.name = "period",
-      value.name = "pred"
-    )[
-      j = period := as.numeric(gsub("pred_period_", "", period))
-    ]
-  ) +
-    aes(x = period, y = pred, colour = factor(ID)) +
-    geom_path() +
-    labs(x = "Age (years)", y = "Predicted Values") +
-    theme(legend.position = "none"),
-    ncol = 2
-) +
-  plot_annotation(tag_levels = "A")
+plot_egg_slopes(
+  fit = res,
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+)
+#> Warning: Transformation introduced infinite values in continuous y-axis
 ```
 
 <img src="man/figures/README-unnamed-chunk-15.svg" width="100%" />
@@ -382,234 +333,17 @@ head(res_auc)
 ```
 
 ``` r
-ggplot(
-  data = melt(
-    data = setDT(res_auc),
-    id.vars = c("ID"),
-    measure.vars = patterns("^auc_"),
-    variable.name = "period_interval",
-    value.name = "auc"
-  )[
-    j = period_interval := factor(
-      x = gsub("auc_", "", period_interval),
-      levels = gsub("auc_", "", unique(period_interval))
-    )
-  ]
-) +
-  aes(x = auc, y = period_interval) +
-  stat_halfeye(
-    mapping = aes(fill = period_interval),
-    justification = -0.20,
-    .width = 0,
-    scale = 1
-  ) +
-  geom_boxplot(
-    mapping = aes(colour = period_interval), width = 0.25, outlier.colour = NA
-  ) +
-  geom_quasirandom(
-    mapping = aes(fill = period_interval, colour = period_interval),
-    shape = 21,
-    alpha = 0.25,
-    groupOnX = FALSE,
-    width = 0.15
-  ) +
-  labs(x = "Area Under The Curve (AUC)", y = "Period Interval (years)") +
-  theme(legend.position = "none")
+plot_egg_aucs(
+  fit = res,
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+)
 ```
 
 <img src="man/figures/README-unnamed-chunk-17.svg" width="100%" />
 
-## Run Non-Interactively
-
-1.  Copy and edit the following code to a new file (e.g.,
-    `run_eggla.sh`) on the server that will run the analysis with the
-    appropriate parameters.
-
--   `renv` (recommended):
-
-    ``` bash
-    #!/bin/bash
-
-    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
-
-    mkdir $home_analysis 
-
-    cd $home_analysis
-
-    Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'temp_library <- file.path(wd, "R")' \
-      -e 'dir.create(temp_library, recursive = TRUE)' \
-      -e '.libPaths(temp_library)' \
-      -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
-      -e 'library("renv")' \
-      -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
-      -e 'renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")' \
-      -e 'renv::install("mcanouil/eggla@v0.4.4")' \
-      -e 'unlink(temp_library, recursive = TRUE)'
-
-    Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'setwd(wd)' \
-      -e 'library(eggla)' \
-      -e 'library(data.table)' \
-      -e 'res <- try(run_eggla(
-        data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
-        id_variable = "ID",
-        age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-        age_years_variable = "age", 
-        weight_kilograms_variable = "weight",
-        height_centimetres_variable = "height",
-        sex_variable = "sex",
-        covariates = NULL,
-        male_coded_zero = FALSE,
-        parallel = FALSE, # to parallelise Daymont QC
-        parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = wd # or in that case "/tmp/egg_analysis"
-      ))' \
-      -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
-    ```
-
--   `pak` (faster):
-
-    ``` bash
-    #!/bin/bash
-
-    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
-
-    mkdir $home_analysis 
-
-    cd $home_analysis
-
-    Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'temp_library <- file.path(wd, "R")' \
-      -e 'dir.create(temp_library, recursive = TRUE)' \
-      -e '.libPaths(temp_library)' \
-      -e 'install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")' \
-      -e 'library(pak)' \
-      -e 'lockfile_install(
-        lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
-        lib = temp_library
-      )' \
-      -e 'pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
-
-    Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'setwd(wd)' \
-      -e 'library(eggla)' \
-      -e 'library(data.table)' \
-      -e 'res <- try(run_eggla(
-        data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
-        id_variable = "ID",
-        age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-        age_years_variable = "age", 
-        weight_kilograms_variable = "weight",
-        height_centimetres_variable = "height",
-        sex_variable = "sex",
-        covariates = NULL,
-        male_coded_zero = FALSE,
-        parallel = FALSE, # to parallelise Daymont QC
-        parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = wd # or in that case "/tmp/egg_analysis"
-      ))' \
-      -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
-    ```
-
-2.  Run the analysis in bash
-
-    ``` bash
-    bash run_eggla.sh
-    ```
-
-3.  Retrieve the two archives
-
-        /tmp/egg_analysis/
-        ├── 2021-11-23-female.zip
-        └── 2021-11-23-male.zip
-
-## Run Interactively
-
-1.  Create the working directory
-
-    ``` bash
-    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
-
-    mkdir $home_analysis 
-
-    cd $home_analysis
-    ```
-
-2.  Start R and setup working directory using `renv` (recommended) or
-    `pak` (faster) to restore predefined version of packages
-
--   `renv` (recommended):
-
-    ``` r
-    wd <- "/tmp/egg_analysis"
-    temp_library <- file.path(wd, "R")
-    dir.create(temp_library, recursive = TRUE)
-    .libPaths(temp_library)
-    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-    library("renv")
-    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-    renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")
-    renv::install("mcanouil/eggla@v0.4.4")
-    unlink(temp_library, recursive = TRUE)
-    ```
-
--   `pak` (faster):
-
-    ``` r
-    wd <- "/tmp/egg_analysis"
-    temp_library <- file.path(wd, "R")
-    dir.create(temp_library, recursive = TRUE)
-    .libPaths(temp_library)
-    install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")
-    library(pak)
-    lockfile_install(
-      lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
-      lib = temp_library
-    )
-    pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
-    ```
-
-3.  Restart R
-
-4.  Run the analysis
-
-    ``` r
-    setwd(wd)
-    library(eggla)
-    library(data.table)
-    res <- try(
-      run_eggla(
-        data = fread("/tmp/bmigrowth.csv"),
-        id_variable = "ID",
-        age_days_variable = NULL,
-        age_years_variable = "age",
-        weight_kilograms_variable = "weight",
-        height_centimetres_variable = "height",
-        sex_variable = "sex",
-        covariates = NULL,
-        male_coded_zero = FALSE,
-        parallel = FALSE,
-        parallel_n_chunks = 1,
-        working_directory = wd
-      )
-    )
-    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
-    ```
-
-5.  Retrieve the two archives
-
-        /tmp/egg_analysis/
-        ├── 2021-11-23-female.zip
-        └── 2021-11-23-male.zip
-
 ## License
 
-MIT © [Mickaël Canouil](https://github.com/mcanouil), Nicole Warrington
+MIT © [Mickaël Canouil](https://mickael.canouil.fr/), Nicole Warrington
 
 ## Code of Conduct
 
