@@ -1,0 +1,211 @@
+---
+title: "Run The Cubic Splines (Random Cubic/Linear Splines) Analysis"
+author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Setup
+
+```{r}
+library(eggla)
+library(growthcleanr)
+library(broom.mixed)
+library(data.table, quietly = TRUE)
+
+# Setup for plots
+library(ggplot2, quietly = TRUE)
+library(patchwork)
+theme_set(theme_minimal())
+options(
+  ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 0.15, end = 0.85),
+  ggplot2.discrete.fill = function(...) scale_fill_viridis_d(..., begin = 0.15, end = 0.85),
+  ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 0.15, end = 0.85),
+  ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 0.15, end = 0.85)
+)
+```
+
+# Data
+
+**eggla** includes a small dataset with 1050 rows and 6 variables.
+
+* `ID` (`character`): ID using three digits.
+* `age` (`numeric`): age in years.
+* `sex` (`integer`): sex with 1: male and 0: female.
+* `weight` (`numeric`): weight in kilograms.
+* `height` (`integer`): height in centimetres.
+* `bmi` (`numeric`): Body Mass Index in kilograms per quare metre.
+
+  ```{r}
+  data("bmigrowth")
+  bmigrowth <- as.data.table(bmigrowth)
+  ```
+  ```{r}
+  bmigrowth[bmigrowth[["ID"]] == "001"]
+  ```
+  ```{r}
+  ggplot(data = bmigrowth) +
+    aes(x = age, y = bmi, colour = factor(ID)) +
+    geom_path(na.rm = TRUE, alpha = 0.25) +
+    geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
+    stat_smooth(
+      method = "loess",
+      formula = y ~ x,
+      linetype = 1,
+      colour = "firebrick",
+      se = FALSE
+    ) +
+    theme(legend.position = "none") +
+    labs(x = "AGE (years)", y = "BMI (kg/m²)") +
+    facet_grid(
+      cols = vars(sex),
+      margins = TRUE,
+      labeller = labeller(
+        .cols = function(x) {
+          c("0" = "FEMALE", "1" = "MALE", "2" = "FEMALE", "(all)" = "ALL")[x]
+        }
+      )
+    )
+  ```
+
+## With Daymont's QC
+
+```{r}
+pheno_dt <- bmigrowth[
+  j = `:=`(
+    "agedays" = floor(age * 365.25), # convert to age in days and as integers ...
+    "WEIGHTKG" = as.numeric(weight),
+    "HEIGHTCM" = as.numeric(height)
+  )
+][
+  j = `:=`(# recode sex with Male = 0 and Female = 1...
+    "sex_daymont" = c("0" = "1", "1" = "0")[as.character(sex)]
+  )
+]
+
+pheno_dt_long <- melt(
+  data = pheno_dt,
+  id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
+  measure.vars = c("WEIGHTKG", "HEIGHTCM"),
+  variable.name = "param",
+  value.name = "measurement"
+)[
+  j = clean := cleangrowth(# Daymont's QC from 'growthcleanr'
+    subjid = ID,
+    param = param,
+    agedays = agedays,
+    sex = sex_daymont,
+    measurement = measurement,
+    quietly = TRUE
+  )
+]
+pheno_dt_clean <- dcast(
+  data = pheno_dt_long[clean %in% "Include"], # Exclude all flags
+  formula = ... ~ param,
+  value.var = "measurement"
+)[
+  j = "bmi" := WEIGHTKG / (HEIGHTCM / 100)^2 # recompute bmi based using QCed variables
+][
+  !is.na(bmi) # exclude missing BMI related to measurements exclusion
+]
+```
+
+## Without Daymont's QC
+
+```{r, eval = FALSE}
+pheno_dt_clean <- bmigrowth
+```
+
+# Modelling Female
+
+```{r}
+pheno_dt_female <- pheno_dt_clean[sex_daymont == 1]
+```
+
+```{r}
+res <- egg_model(
+  formula = log(bmi) ~ age, # + covariates, e.g., `log(bmi) ~ age + covariates`
+  data = pheno_dt_female,
+  id_var = "ID",
+  random_complexity = 2 # "auto", 3, 2 or 1.
+)
+class(res)
+sres <- tidy(res)
+sres[["term"]] <- sub("gsp\\(.*\\)\\)", "gsp(...)", sres[["term"]]) # simplify output
+sres
+```
+
+# Predicted Values
+
+```{r}
+ggplot() +
+  aes(x = age, y = bmi) +
+  stat_smooth(
+    data = pheno_dt_female,
+    mapping = aes(colour = "Loess"),
+    method = "loess", formula = y ~ x, linetype = 2, se = FALSE
+  ) +
+  geom_path(
+    data = data.table(
+      age = seq(min(pheno_dt_female[["age"]]), max(pheno_dt_female[["age"]]), 0.1)
+    )[
+      j = bmi := exp(predict(res, .SD, level = 0)),
+      .SDcols = "age"
+    ],
+    mapping = aes(colour = "Cubic Splines (Random Linear Splines)"),
+  ) +
+  labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
+```
+
+# Residuals
+
+```{r}
+plot_residuals(
+  x = "age",
+  y = "log(bmi)",
+  fit = res
+) +
+  plot_annotation(
+    title = "Cubic Splines (Random Linear Splines) - BMI - Female",
+    tag_levels = "A"
+  )
+```
+
+# Predicted Average Slopes
+
+```{r}
+res_pred_slopes <- egg_slopes(
+  fit = res,
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+)
+head(res_pred_slopes)
+```
+
+```{r}
+plot_egg_slopes(
+  fit = res,
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+)
+```
+
+# Area Under The Curve
+
+```{r}
+res_auc <- egg_aucs(
+  fit = res,
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+)
+head(res_auc)
+```
+
+```{r}
+plot_egg_aucs(
+  fit = res,
+  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+)
+```
