@@ -23,7 +23,7 @@
 #'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
 #'   method = "linear_splines"
 #' )
-#' head(compute_auc(
+#' head(compute_aucs(
 #'   fit = ls_mod,
 #'   method = "linear_splines",
 #'   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)#,
@@ -33,7 +33,7 @@
 #'   #   "cubic_splines" = c(2, 8, 12)
 #'   # )[[method]]
 #' ))
-compute_auc <- function(
+compute_aucs <- function(
   fit,
   method,
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
@@ -43,7 +43,9 @@ compute_auc <- function(
     "cubic_splines" = c(2, 8, 12)
   )[[method]]
 ) {
-  pred_auc <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period) / 2)
+  stopifnot(inherits(fit, "lme"))
+  id_var <- names(fit[["groups"]])
+  pred_auc <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period) / 2)
   colnames(pred_auc) <- paste0(
     "auc_",
     sapply(split(
@@ -60,7 +62,7 @@ compute_auc <- function(
   rnef <- nlme::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
-  switch(
+  out <- switch(
     EXPR = as.character(method),
     "cubic_slope" = {
       y <- function(x, coeff, knots) {
@@ -69,7 +71,7 @@ compute_auc <- function(
           FUN = function(x) sum(coeff * mapply("^", rep(x, length(coeff)), seq_along(coeff) - 1))
         )
       }
-      for (i in seq_along(unique(fit$data[["ID"]]))) {
+      for (i in seq_along(unique(fit$data[[id_var]]))) {
         coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           pred_auc[i, j] <- stats::integrate(
@@ -80,7 +82,7 @@ compute_auc <- function(
           )$value
         }
       }
-      cbind.data.frame(ID = unique(fit$data[["ID"]]), pred_auc)
+      cbind.data.frame(ID = unique(fit$data[[id_var]]), pred_auc)
     },
     "linear_splines" = {
       y <- function(x, coeff, knots) {
@@ -92,7 +94,7 @@ compute_auc <- function(
           }
         )
       }
-      for (i in seq_along(unique(fit$data[["ID"]]))) {
+      for (i in seq_along(unique(fit$data[[id_var]]))) {
         coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
            pred_auc[i, j] <- stats::integrate(
@@ -104,7 +106,7 @@ compute_auc <- function(
             )$value
         }
       }
-      cbind.data.frame(ID = unique(fit$data[["ID"]]), pred_auc)
+      cbind.data.frame(ID = unique(fit$data[[id_var]]), pred_auc)
     },
     "cubic_splines" = {
       y <- function(x, coeff, knots) {
@@ -116,7 +118,7 @@ compute_auc <- function(
           }
         )
       }
-      for (i in seq_along(unique(fit$data[["ID"]]))) {
+      for (i in seq_along(unique(fit$data[[id_var]]))) {
         coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
            pred_auc[i, j] <- stats::integrate(
@@ -128,7 +130,10 @@ compute_auc <- function(
             )$value
         }
       }
-      cbind.data.frame(ID = unique(fit$data[["ID"]]), pred_auc)
+      cbind.data.frame(ID = unique(fit$data[[id_var]]), pred_auc)
     }
   )
+
+  names(out)[1] <- id_var
+  out
 }
