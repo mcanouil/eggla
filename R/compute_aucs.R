@@ -4,7 +4,7 @@
 #' fitted using `time_model`.
 #'
 #' @param fit A model object from a statistical model such as
-#'   from a call to `nlme::lme()` and `time_model()`.
+#'   from a call to `time_model()`.
 #' @param method The type of model provided in `fit`,
 #'   _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
 #' @param period The intervals knots on which AUCs are to be computed.
