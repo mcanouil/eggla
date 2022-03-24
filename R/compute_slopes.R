@@ -21,7 +21,7 @@
 #'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
 #'   method = "linear_splines"
 #' )
-#' head(predict_average_slopes(
+#' head(compute_slopes(
 #'   fit = ls_mod,
 #'   method = "linear_splines",
 #'   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)#,
@@ -31,7 +31,7 @@
 #'   #   "cubic_splines" = c(2, 8, 12)
 #'   # )[[method]]
 #' ))
-predict_average_slopes <- function(
+compute_slopes <- function(
   fit,
   method,
   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
@@ -41,7 +41,9 @@ predict_average_slopes <- function(
     "cubic_splines" = c(2, 8, 12)
   )[[method]]
 ) {
-  slopes <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period) / 2)
+  stopifnot(inherits(fit, "lme"))
+  id_var <- names(fit[["groups"]])
+  slopes <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period) / 2)
   colnames(slopes) <- paste0(
     "slope_",
     sapply(split(
@@ -52,7 +54,7 @@ predict_average_slopes <- function(
       )
     ), paste, collapse = "--")
   )
-  pred <- matrix(data = NA_real_, nrow = length(unique(fit$data[["ID"]])), ncol = length(period))
+  pred <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period))
   colnames(pred) <- paste0("pred_period_", round(period, digits = 1))
 
   fxef <- nlme::fixef(fit)
@@ -60,10 +62,10 @@ predict_average_slopes <- function(
   rnef <- nlme::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
-  switch(
+  out <- switch(
     EXPR = as.character(method),
     "cubic_slope" = {
-      for (i in seq_along(unique(fit$data[["ID"]]))) {
+      for (i in seq_along(unique(fit$data[[id_var]]))) {
         coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           x1 <- period[j * 2 - 1]
@@ -77,10 +79,10 @@ predict_average_slopes <- function(
           slopes[i, j] <- (y2 - y1) / (x2 - x1)
         }
       }
-      cbind.data.frame(ID = unique(fit$data[["ID"]]), pred, slopes)
+      cbind.data.frame(ID = unique(fit$data[[id_var]]), pred, slopes)
     },
     "linear_splines" = {
-      for (i in seq_along(unique(fit$data[["ID"]]))) {
+      for (i in seq_along(unique(fit$data[[id_var]]))) {
         coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           x1 <- period[j * 2 - 1]
@@ -96,10 +98,10 @@ predict_average_slopes <- function(
           slopes[i, j] <- (y2 - y1) / (x2 - x1)
         }
       }
-      cbind.data.frame(ID = unique(fit$data[["ID"]]), pred, slopes)
+      cbind.data.frame(ID = unique(fit$data[[id_var]]), pred, slopes)
     },
     "cubic_splines" = {
-      for (i in seq_along(unique(fit$data[["ID"]]))) {
+      for (i in seq_along(unique(fit$data[[id_var]]))) {
         coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in 1:(length(period) / 2)) {
           x1 <- period[j * 2 - 1]
@@ -115,7 +117,10 @@ predict_average_slopes <- function(
           slopes[i, j] <- (y2 - y1) / (x2 - x1)
         }
       }
-      cbind.data.frame(ID = unique(fit$data[["ID"]]), pred, slopes)
+      cbind.data.frame(ID = unique(fit$data[[id_var]]), pred, slopes)
     }
   )
+
+  names(out)[1] <- id_var
+  out
 }
