@@ -1,7 +1,7 @@
 #' Derived slopes from a cubic splines mixed-effects model.
 #'
 #' Derived slopes for different intervals based on a fitted
-#' cubic splines mixed-effects model from `egg_model`.  
+#' cubic splines mixed-effects model from `egg_model`.
 #' This function a specific version of `compute_slopes`
 #' designed to work specifically on `egg_model`.
 #'
