@@ -1,4 +1,4 @@
-# eggla (development version)
+# eggla 0.5.0
 
 - Improve/Polish documentation,
   - Add title.
