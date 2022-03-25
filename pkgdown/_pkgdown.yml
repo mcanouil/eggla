@@ -7,14 +7,38 @@ development:
 authors:
   Mickaël Canouil:
     href: https://mickael.canouil.fr
+reference:
+  - title: General Functions
+    desc: General functions to work with linear splines, cubic splines, and cubic slopes mixed model.
+  - contents:
+    - time_model
+    - compute_apar
+    - plot_residuals
+    - compute_aucs
+    - plot_aucs
+    - compute_slopes
+    - plot_slopes
+    - gsp
+  - title: Cubic Splines (Random Cubic/Linear Splines) Functions
+    desc: Functions dedicated to work with cubic Splines mixed model.
+  - contents:
+    - egg_model
+    - egg_aucs
+    - egg_slopes
+    - plot_egg_aucs
+    - plot_egg_slopes
+    - run_eggla
+  - title: Datasets
+  - contents:
+    - bmigrowth
 figures:
   dev: ragg::agg_png
   dpi: 96
   dev.args: 
     scaling: 0.75
   fig.ext: png
-  fig.width: 7
+  fig.width: 7.2916667
   fig.height: ~
   fig.retina: 2
-  fig.asp: 1.333333
+  fig.asp: 0.5625
   bg: white
