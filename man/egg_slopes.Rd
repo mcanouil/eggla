@@ -2,7 +2,7 @@
 % Please edit documentation in R/egg_slopes.R
 \name{egg_slopes}
 \alias{egg_slopes}
-\title{Derived slopes from a cubic splines mixed-effects model.}
+\title{Derived slopes from a cubic splines mixed-effects model by \code{time_model}.}
 \usage{
 egg_slopes(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17))
 }
