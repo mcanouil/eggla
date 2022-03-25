@@ -1,5 +1,5 @@
 ---
-title: "Run `eggla`"
+title: "Run 'eggla' Workflow"
 author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
 ---
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 # Run Non-Interactively
 
-1. Copy and edit the following code to a new file (e.g., `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
+1. Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
   - `renv` (recommended):
 

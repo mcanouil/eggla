@@ -32,7 +32,7 @@ second derivative, etc. The value -1 allows a discontinuity at the knot.
 A scalar is recycled so its length equals the number of knots. Alternatively,
 a list of length equal to the number of knots. Each element of the list is a
 vector of the orders of derivatives which are required to be smooth. THis allows
-non-sequential constraints, e.g. to have the same first and second derivative
+non-sequential constraints, \emph{e.g.}, to have the same first and second derivative
 on either side of a knot but a possible discontinuity and change in
 higher-order derivatives, the vector would be c(1,2). Note that if a list is used,
 all elements must provide all desired constraints. That is the list argument corresponding
@@ -48,7 +48,7 @@ A constraint is generated so that the coefficients generate
 the same values to the right of max(knots) as they do to the right of 0.
 Note that all knots should be strictly positive.}
 
-\item{intercept}{value(s) of x at which the spline has value 0, i.e. the
+\item{intercept}{value(s) of x at which the spline has value 0, \emph{i.e.}, the
 value(s) of x for which yhat is estimated by the intercept term in the
 model. The default is 0. If NULL, the spline is not constrained to evaluate
 to 0 for any x.}
