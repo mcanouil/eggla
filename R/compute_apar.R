@@ -1,7 +1,7 @@
 #' Compute adiposity peak (AP) and adiposity rebound (AR).
 #'
 #' @param fit A model object from a statistical model
-#'   such as from a call `nlme::lme()`, `time_model()` or `egg_model`.
+#'   such as from a call `nlme::lme()`, `time_model()` or `egg_model()`.
 #'
 #' @return A `data.table` object.
 #'

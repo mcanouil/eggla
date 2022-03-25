@@ -1,7 +1,7 @@
-#' Plot derived area under the curves from a model fitted by `egg_model`.
+#' Plot derived area under the curves from a model fitted by `egg_model()`.
 #'
 #' @param fit A model object from a statistical model
-#'   such as from a call to `egg_model`.
+#'   such as from a call to `egg_model()`.
 #' @param period The intervals knots on which AUCs are to be computed.
 #'
 #' @return A `patchwork` `ggplot2` object.

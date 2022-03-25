@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_slopes.R
 \name{compute_slopes}
 \alias{compute_slopes}
-\title{Predict average slopes for several intervals using a model fitted by \code{time_model}.}
+\title{Predict average slopes for several intervals using a model fitted by \code{time_model()}.}
 \usage{
 compute_slopes(
   fit,
@@ -27,7 +27,7 @@ A \code{data.frame} with slopes for each individuals/samples.
 }
 \description{
 Comoute average slopes for "clubic slope", "linear splines" and "cubic splines"
-fitted using \code{time_model}.
+fitted using \code{time_model()}.
 }
 \examples{
 data("bmigrowth")

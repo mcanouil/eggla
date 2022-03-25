@@ -1,9 +1,9 @@
-#' Derived areas under the curve from a cubic splines mixed-effects model by `time_model`.
+#' Derived areas under the curve from a cubic splines mixed-effects model by `time_model()`.
 #'
 #' Derived areas under the curve (AUCs) for differentintervals based
-#' on a fitted cubic splines mixed-effects model from `egg_model`. 
+#' on a fitted cubic splines mixed-effects model from `egg_model()`. 
 #' This function is a specific version of `compute_aucs`
-#' designed to work specifically on `egg_model`.
+#' designed to work specifically on `egg_model()`.
 #'
 #' @param fit A model object from a statistical model
 #' such as from a call to `egg_model()`.

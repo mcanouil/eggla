@@ -5,7 +5,7 @@
 #' with linear splines as random effect,
 #' save model object, generates residuals figures fot model validity,
 #' derived area under the curve and slopes for male and femal.  
-#' This function is a wrapper around `egg_model`, `egg_slopes` and `egg_aucs`.
+#' This function is a wrapper around `egg_model()`, `egg_slopes()` and `egg_aucs()`.
 #'
 #' @param data something
 #' @param id_variable something

@@ -2,7 +2,7 @@
 % Please edit documentation in R/egg_aucs.R
 \name{egg_aucs}
 \alias{egg_aucs}
-\title{Derived areas under the curve from a cubic splines mixed-effects model by \code{time_model}.}
+\title{Derived areas under the curve from a cubic splines mixed-effects model by \code{time_model()}.}
 \usage{
 egg_aucs(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17))
 }
@@ -17,9 +17,9 @@ A \code{data.frame} with AUC for each individuals/samples.
 }
 \description{
 Derived areas under the curve (AUCs) for differentintervals based
-on a fitted cubic splines mixed-effects model from \code{egg_model}.
+on a fitted cubic splines mixed-effects model from \code{egg_model()}.
 This function is a specific version of \code{compute_aucs}
-designed to work specifically on \code{egg_model}.
+designed to work specifically on \code{egg_model()}.
 }
 \examples{
 data("bmigrowth")

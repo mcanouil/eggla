@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_aucs.R
 \name{plot_aucs}
 \alias{plot_aucs}
-\title{Plot derived area under the curves from a model fitted by \code{time_model}.}
+\title{Plot derived area under the curves from a model fitted by \code{time_model()}.}
 \usage{
 plot_aucs(
   fit,
@@ -27,7 +27,7 @@ from a call to \code{time_model()}.}
 A \code{patchwork} \code{ggplot2} object.
 }
 \description{
-Plot derived area under the curves from a model fitted by \code{time_model}.
+Plot derived area under the curves from a model fitted by \code{time_model()}.
 }
 \examples{
 data("bmigrowth")

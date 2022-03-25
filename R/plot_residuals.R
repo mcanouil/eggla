@@ -5,7 +5,7 @@
 #' @param y A length one character vector with the variable name to be explained
 #'   (_i.e._, left-hand side), as defined in `fit`.
 #' @param fit A model object from a statistical model
-#'   such as from a call `time_model()` or `egg_model`.
+#'   such as from a call `time_model()` or `egg_model()`.
 #'
 #' @return A `patchwork` `ggplot2` object.
 #'

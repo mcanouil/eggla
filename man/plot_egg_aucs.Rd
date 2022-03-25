@@ -2,13 +2,13 @@
 % Please edit documentation in R/plot_egg_aucs.R
 \name{plot_egg_aucs}
 \alias{plot_egg_aucs}
-\title{Plot derived area under the curves from a model fitted by \code{egg_model}.}
+\title{Plot derived area under the curves from a model fitted by \code{egg_model()}.}
 \usage{
 plot_egg_aucs(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17))
 }
 \arguments{
 \item{fit}{A model object from a statistical model
-such as from a call to \code{egg_model}.}
+such as from a call to \code{egg_model()}.}
 
 \item{period}{The intervals knots on which AUCs are to be computed.}
 }
@@ -16,7 +16,7 @@ such as from a call to \code{egg_model}.}
 A \code{patchwork} \code{ggplot2} object.
 }
 \description{
-Plot derived area under the curves from a model fitted by \code{egg_model}.
+Plot derived area under the curves from a model fitted by \code{egg_model()}.
 }
 \examples{
 data("bmigrowth")

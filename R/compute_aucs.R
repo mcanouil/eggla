@@ -1,7 +1,7 @@
-#' Compute area under the curves for several intervals using a model fitted by `time_model`.
+#' Compute area under the curves for several intervals using a model fitted by `time_model()`.
 #'
 #' Comoute area under the curves for "clubic slope", "linear splines" and "cubic splines"
-#' fitted using `time_model`.
+#' fitted using `time_model()`.
 #'
 #' @param fit A model object from a statistical model such as
 #'   from a call to `time_model()`.
