@@ -55,13 +55,10 @@ plot_aucs <- function(
       ),
       ggbeeswarm::geom_quasirandom(
         mapping = ggplot2::aes(fill = period_interval, colour = period_interval),
-        # colour = "white",
         shape = 21,
-        alpha = 0.05,
-        groupOnX = T,
-        width = 0.15#,
-        # side = -1,
-        # cex = 0.5
+        alpha = 0.10,
+        groupOnX = TRUE,
+        width = 0.15
       )
     )
   } else {
