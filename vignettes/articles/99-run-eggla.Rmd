@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
       -e 'library("renv")' \
       -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
       -e 'renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")' \
-      -e 'renv::install("mcanouil/eggla@v0.4.4")' \
+      -e 'renv::install("mcanouil/eggla@v0.5.0")' \
       -e 'unlink(temp_library, recursive = TRUE)'
 
     Rscript \
@@ -82,7 +82,7 @@ knitr::opts_chunk$set(
         lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
         lib = temp_library
       )' \
-      -e 'pkg_install("mcanouil/eggla@v0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
+      -e 'pkg_install("mcanouil/eggla@v0.5.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
     
     Rscript \
       -e 'wd <- "/tmp/egg_analysis"' \
@@ -145,7 +145,7 @@ knitr::opts_chunk$set(
     library("renv")
     renv::init(bare = TRUE, settings = list(use.cache = FALSE))
     renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")
-    renv::install("mcanouil/eggla@v0.4.4")
+    renv::install("mcanouil/eggla@v0.5.0")
     unlink(temp_library, recursive = TRUE)
     ```
 
@@ -162,7 +162,7 @@ knitr::opts_chunk$set(
       lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
       lib = temp_library
     )
-    pkg_install("mcanouil/eggla@0.4.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+    pkg_install("mcanouil/eggla@0.5.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
 3. Restart R
