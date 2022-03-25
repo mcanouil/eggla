@@ -1,4 +1,4 @@
-#' Plot derived area under the curves from a model fitted by `time_model`.
+#' Plot derived area under the curves from a model fitted by `time_model()`.
 #'
 #' @param fit A model object from a statistical model such as
 #'   from a call to `time_model()`.

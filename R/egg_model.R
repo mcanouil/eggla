@@ -2,7 +2,7 @@
 #'
 #' Fit a cubic splines mixed model regression
 #' with three splines parametrisation as random effect.
-#' This function a specific version of `time_model`.
+#' This function a specific version of `time_model()`.
 #'
 #' @param formula An object of class "formula":
 #'   a symbolic description of the model to be fitted with,

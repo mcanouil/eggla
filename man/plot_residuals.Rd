@@ -14,7 +14,7 @@ plot_residuals(x, y, fit)
 (\emph{i.e.}, left-hand side), as defined in \code{fit}.}
 
 \item{fit}{A model object from a statistical model
-such as from a call \code{time_model()} or \code{egg_model}.}
+such as from a call \code{time_model()} or \code{egg_model()}.}
 }
 \value{
 A \code{patchwork} \code{ggplot2} object.

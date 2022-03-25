@@ -1,9 +1,9 @@
-#' Derived slopes from a cubic splines mixed-effects model by `time_model`.
+#' Derived slopes from a cubic splines mixed-effects model by `time_model()`.
 #'
 #' Derived slopes for different intervals based on a fitted
-#' cubic splines mixed-effects model from `egg_model`.
+#' cubic splines mixed-effects model from `egg_model()`.
 #' This function a specific version of `compute_slopes`
-#' designed to work specifically on `egg_model`.
+#' designed to work specifically on `egg_model()`.
 #'
 #' @param fit A model object from a statistical model
 #'   such as from a call to `egg_model()`.

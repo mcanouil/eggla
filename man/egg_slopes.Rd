@@ -2,7 +2,7 @@
 % Please edit documentation in R/egg_slopes.R
 \name{egg_slopes}
 \alias{egg_slopes}
-\title{Derived slopes from a cubic splines mixed-effects model by \code{time_model}.}
+\title{Derived slopes from a cubic splines mixed-effects model by \code{time_model()}.}
 \usage{
 egg_slopes(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17))
 }
@@ -17,9 +17,9 @@ A \code{data.frame} with slopes for each individuals/samples.
 }
 \description{
 Derived slopes for different intervals based on a fitted
-cubic splines mixed-effects model from \code{egg_model}.
+cubic splines mixed-effects model from \code{egg_model()}.
 This function a specific version of \code{compute_slopes}
-designed to work specifically on \code{egg_model}.
+designed to work specifically on \code{egg_model()}.
 }
 \examples{
 data("bmigrowth")

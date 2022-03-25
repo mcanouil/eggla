@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_slopes.R
 \name{plot_slopes}
 \alias{plot_slopes}
-\title{Plot derived slopes from a model fitted by \code{time_model}.}
+\title{Plot derived slopes from a model fitted by \code{time_model()}.}
 \usage{
 plot_slopes(
   fit,
@@ -27,7 +27,7 @@ from a call to \code{time_model()}.}
 A \code{patchwork} \code{ggplot2} object.
 }
 \description{
-Plot derived slopes from a model fitted by \code{time_model}.
+Plot derived slopes from a model fitted by \code{time_model()}.
 }
 \examples{
 data("bmigrowth")
