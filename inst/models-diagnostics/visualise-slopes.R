@@ -198,7 +198,7 @@ p_slope <- ggplot(
   scale_fill_viridis_d(option = "plasma", end = 0.85) +
   labs(
     x = "AGE (years)",
-    y = "BMI (kg/m²)",
+    y = "BMI (kg/m\u00B2)",
     colour = "Intervals",
     fill = "Intervals"
   ) +
