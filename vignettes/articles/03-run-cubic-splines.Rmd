@@ -61,7 +61,7 @@ options(
       se = FALSE
     ) +
     theme(legend.position = "none") +
-    labs(x = "AGE (years)", y = "BMI (kg/m²)") +
+    labs(x = "AGE (years)", y = "BMI (kg/m\u00B2)") +
     facet_grid(
       cols = vars(sex),
       margins = TRUE,
@@ -159,7 +159,7 @@ ggplot() +
     ],
     mapping = aes(colour = "Cubic Splines (Random Linear Splines)"),
   ) +
-  labs(x = "AGE (years)", y = "BMI (kg/m²)", colour = "Model")
+  labs(x = "AGE (years)", y = "BMI (kg/m\u00B2)", colour = "Model")
 ```
 
 # Residuals
