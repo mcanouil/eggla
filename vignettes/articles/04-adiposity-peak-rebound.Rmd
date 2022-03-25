@@ -122,7 +122,7 @@ ggplot(data = one_individual_data) +
   scale_linetype_manual(values = c(2, 4)) +
   labs(
     x = "AGE (years)",
-    y = "BMI (kg/m²)",
+    y = "BMI (kg/m\u00B2)",
     colour = NULL,
     linetype = NULL
   ) +
@@ -134,7 +134,7 @@ ggplot(data = one_individual_data) +
 
 ## Plot average AP/AR for all individuals
 
-```{r plot-all-individual}
+```{r plot-all-individual, fig.asp = 1}
 p_apar <- mapply(
   data = predicted_data,
   sex = names(predicted_data),
@@ -196,7 +196,7 @@ p_apar <- mapply(
       scale_linetype_manual(values = c(2, 4)) +
       labs(
         x = "AGE (years)",
-        y = "BMI (kg/m²)",
+        y = "BMI (kg/m\u00B2)",
         colour = NULL,
         linetype = NULL
       ) +

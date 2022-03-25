@@ -9,7 +9,8 @@ params:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
@@ -298,7 +299,7 @@ good_res_models <- readRDS(file.path(output_directory, "summary_models.rds"))[
 ]
 ```
 
-```{r models-diagnostics-plot}
+```{r models-diagnostics-plot, dev.args = list(scaling = 0.50)}
 wrap_plots(
   lapply(
     X = good_res_models[j = perf_check_model],
@@ -344,7 +345,7 @@ ggplot(
   labs(
     title = "Cubic Splines (Fixed Effects = Random Effects)",
     x = "AGE (years)",
-    y = "BMI (kg/m²)",
+    y = "BMI (kg/m\u00B2)",
     colour = NULL
   )
 ```
@@ -415,9 +416,9 @@ fwrite(
 )
 ```
 
-### Models status
+## Models status
 
-```{r models-success-plot}
+```{r models-success-plot, fig.asp = 1}
 ggplot(data = fmt_models) +
   aes(x = x, y = y, fill = fill) +
   facet_grid(cols = vars(sex)) +
@@ -473,11 +474,12 @@ if (fmt_models[fill != "Good", .N > 0]) {
 }
 ```
 
-### Models performance
+## Models performance
 
 ```{r models-performances-table}
 perf_tab <- gt(
   data = fmt_models[
+    i = fill %in% "Good",
     j = list(
       Sex = sex,
       Model = gsub("<i [^>]*>|</i>", "", gsub("<br>", " -- ", gsub("8pt", "0.75em", as.character(y)))),
