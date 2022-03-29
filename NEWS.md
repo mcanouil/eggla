@@ -1,5 +1,7 @@
 # eggla (development version)
 
+- Switch from `nlme` to `lme4`.
+
 # eggla 0.5.0
 
 - Improve/Polish documentation,
