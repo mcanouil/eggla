@@ -194,8 +194,8 @@ all_models <- setDT(
     default = paste0(
       c(
         "na.action = na.omit",
-        "method = \"ML\"",
-        "control = lmeControl(opt = \"optim\", maxIter = 500, msMaxIter = 500)"
+        "REML = FALSE",
+        "control = lmeControl(optimizer = \"optim\", maxIter = 500, msMaxIter = 500)"
       ),
       collapse = ", "
     ),

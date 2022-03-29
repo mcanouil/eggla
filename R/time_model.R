@@ -55,7 +55,7 @@ time_model <- function(
     stop(paste0("'", method, "' not defined!"))
   )
   form_fixed <- paste0(y, " ~ ",  x_fmt)
-  form_random <- paste0("~ ", x_fmt, " | ID")
+  form_random <- paste0(x_fmt, " | ID")
 
   if (!is.null(cov)) {
     form_fixed <- paste(form_fixed, "+", paste(cov, collapse = " + "))
@@ -75,17 +75,12 @@ time_model <- function(
 
   f_model_call <- function(form_fixed, form_random, n_iteration) {
     c(
-      "nlme::lme(",
-      paste0("  fixed = ", form_fixed, ","),
+      "lme4::lmer(",
+      paste0("  formula = ", sprintf("%s + (%s)", form_fixed, form_random), ","),
       "  data = data,",
-      paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
-      "  method = \"ML\",",
-      "  correlation = nlme::corCAR1(form = ~ 1 | ID),",
-      paste0(
-        "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
-        n_iteration, ", msMaxIter = ", n_iteration, ")"
-      ),
+      "  REML = FALSE,",
+      "  control = lme4::lmerControl()",
       ")"
     )
   }

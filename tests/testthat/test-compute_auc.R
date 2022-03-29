@@ -12,10 +12,10 @@ test_that("Cubic slope", {
     suppressWarnings({
       pred_auc_lme <- data.frame()
       auc_lme <- function(fit, data, period) {
-        fxef <- as.numeric(nlme::fixef(fit))
+        fxef <- as.numeric(lme4::fixef(fit))
         for (j in 1:(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
-            coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]))
+            coeff <- fxef + c(as.numeric(lme4::ranef(fit)[i, ]))
             x1 <- period[j * 2 - 1]
             x2 <- period[j * 2]
             y <- function(x1) {
@@ -56,10 +56,10 @@ test_that("Linear Splines", {
       k2 <- 11
       pred_auc_lsplines <- data.frame()
       auc_lsplines <- function(fit, data, period) {
-        fxef <- as.numeric(nlme::fixef(fit))
+        fxef <- as.numeric(lme4::fixef(fit))
         for (j in seq_len(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
-            coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]))
+            coeff <- fxef + c(as.numeric(lme4::ranef(fit)[i, ]))
             x1 <- period[j * 2 - 1]
             x2 <- period[j * 2]
             if (x1 <= k1 & x2 <= k1) {
@@ -113,10 +113,10 @@ test_that("Cubic Splines", {
       k3 <- 12
       pred_auc_csplines <- data.frame()
       auc_csplines <- function(fit, data, period) {
-        fxef <- as.numeric(nlme::fixef(fit))
+        fxef <- as.numeric(lme4::fixef(fit))
         for (j in 1:(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
-            coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]), rep(0, 3))
+            coeff <- fxef + c(as.numeric(lme4::ranef(fit)[i, ]), rep(0, 3))
             x1 <- period[j * 2 - 1]
             x2 <- period[j * 2]
             if (x1 <= k1 & x2 <= k1) {

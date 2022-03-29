@@ -69,22 +69,22 @@ plot_residuals <- function(x, y, fit) {
       y = "Marginal Residuals"
     )
 
-  plotd <- ggplot2::ggplot(
-    data = (function(model) {
-      out <- nlme::ACF(model, resType = "normal")
-      out[["stdv"]] <- stats::qnorm(1 - 0.01 / 2) / sqrt(attr(out, "n.used"))
-      out
-    })(fit)
-  ) +
-    ggplot2::aes(x = .data[["lag"]], y = .data[["ACF"]], ymin = -.data[["stdv"]], ymax = .data[["stdv"]]) +
-    ggplot2::geom_line() +
-    ggplot2::geom_point() +
-    ggplot2::geom_ribbon(alpha = 0.10, fill = "dodgerblue") +
-    ggplot2::geom_line(y = 0, linetype = 2, colour = "dodgerblue") +
-    ggplot2::scale_y_continuous(labels = function(x) paste(format(x * 100, nsmall = 2, digits = 2), "%")) +
-    ggplot2::labs(x = "Lag", y = "Correlation")
+  # plotd <- ggplot2::ggplot(
+  #   data = (function(model) {
+  #     out <- lme4::ACF(model, resType = "normal")
+  #     out[["stdv"]] <- stats::qnorm(1 - 0.01 / 2) / sqrt(attr(out, "n.used"))
+  #     out
+  #   })(fit)
+  # ) +
+  #   ggplot2::aes(x = .data[["lag"]], y = .data[["ACF"]], ymin = -.data[["stdv"]], ymax = .data[["stdv"]]) +
+  #   ggplot2::geom_line() +
+  #   ggplot2::geom_point() +
+  #   ggplot2::geom_ribbon(alpha = 0.10, fill = "dodgerblue") +
+  #   ggplot2::geom_line(y = 0, linetype = 2, colour = "dodgerblue") +
+  #   ggplot2::scale_y_continuous(labels = function(x) paste(format(x * 100, nsmall = 2, digits = 2), "%")) +
+  #   ggplot2::labs(x = "Lag", y = "Correlation")
 
-  plote <- ggplot2::ggplot(data = data.frame(sample = revert_trans(nlme::random.effects(fit)[["(Intercept)"]]))) +
+  plote <- ggplot2::ggplot(data = data.frame(sample = revert_trans(lme4::ranef(fit)[["(Intercept)"]]))) +
     ggplot2::aes(sample = .data[["sample"]]) +
     ggplot2::stat_qq(size = 0.5, alpha = 0.25, shape = 1) +
     ggplot2::stat_qq_line(linetype = 2, colour = "dodgerblue") +
@@ -98,7 +98,7 @@ plot_residuals <- function(x, y, fit) {
 
   patchwork::wrap_plots(
     lapply(
-      X = list(plota, plotb, plotc, plotd, plote, plotf),
+      X = list(plota, plotb, plotc, plote, plotf),
       FUN = `+`,
       ggplot2::theme(
         axis.title = ggplot2::element_text(size = ggplot2::rel(0.65)),

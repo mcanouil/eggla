@@ -8,7 +8,7 @@ compute_apar(fit)
 }
 \arguments{
 \item{fit}{A model object from a statistical model
-such as from a call \code{nlme::lme()}, \code{time_model()} or \code{egg_model()}.}
+such as from a call \code{lme::lmer()}, \code{time_model()} or \code{egg_model()}.}
 }
 \value{
 A \code{data.table} object.

@@ -52,17 +52,17 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
 
   form_random <- c(
     "3" = sprintf(
-      "~ %s | %s",
+      "%s | %s",
       x_fmt[1],
       id_var
     ),
     "2" = sprintf(
-      "~ %s[,1:3] | %s",
+      "%s[,1:3] | %s",
       x_fmt[1],
       id_var
     ),
     "1" = sprintf(
-      "~ %s | %s",
+      "%s | %s",
       sub("degree = rep\\(3,", "degree = rep\\(1,", x_fmt[1]),
       id_var
     )
@@ -84,16 +84,12 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
 
   f_model_call <- function(form_fixed, form_random, n_iteration) {
     c(
-      "nlme::lme(",
-      paste0("  fixed = ", form_fixed, ","),
+      "lme4::lmer(",
+      paste0("  formula = ", sprintf("%s + (%s)", form_fixed, form_random), ","),
       "  data = data,",
-      paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
-      "  method = \"ML\",",
-      paste0(
-        "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
-        n_iteration, ", msMaxIter = ", n_iteration, ")"
-      ),
+      "  REML = FALSE,",
+      "  control = lme4::lmerControl()",
       ")"
     )
   }

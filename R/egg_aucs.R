@@ -51,11 +51,11 @@ egg_aucs <- function(
     ), paste, collapse = "--")
   )
 
-  fxef <- nlme::fixef(fit)
+  fxef <- lme4::fixef(fit)
   fxef <- unname(fxef[
     grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))
   ])
-  rnef <- nlme::ranef(fit)
+  rnef <- lme4::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
   rnef <- cbind(
