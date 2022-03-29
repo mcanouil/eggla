@@ -21,7 +21,8 @@ Depends:
     R (>= 4.0.0)
 Imports:
     stats,
-    nlme,
+    lme4,
+    lmerTest,
     utils,
     grDevices,
     data.table (>= 1.14.2),
@@ -37,7 +38,6 @@ Suggests:
     performance,
     see,
     qqplotr,
-    lme4,
     future,
     future.apply,
     future.callr,
