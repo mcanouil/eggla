@@ -33,7 +33,8 @@ remotes::install_github("mcanouil/eggla@v0.5.0")
 
 ## License
 
-MIT © [Mickaël Canouil](https://mickael.canouil.fr/), Nicole Warrington
+MIT © [Mickaël Canouil](https://mickael.canouil.fr/), Nicole Warrington,
+Kimberley Burrows, and Anni Heiskala.
 
 ## Code of Conduct
 
