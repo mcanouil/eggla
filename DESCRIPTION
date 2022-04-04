@@ -14,13 +14,13 @@ Authors@R:
            comment = c(ORCID = "0000-0003-4195-775X")),
       person(given = "Kimberley",
            family = "Burrows",
-           role = "ctb",
+           role = "aut",
            email = "Kimberley.Burrows@bristol.ac.uk",
            comment = c(ORCID = "0000-0002-3208-0389")),
       person(given = "Anni",
            family = "Heiskala",
-           role = "ctb",
-           email = "Anni.Heiskala@oulu.fi")
+           role = "aut",
+           email = "Anni.Heiskala@oulu.fi"))
 Description: Tools for longitudinal analysis within the EGG
     (Early Growth Genetics) Consortium.
 License: MIT + file LICENSE
