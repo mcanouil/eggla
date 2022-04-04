@@ -8,7 +8,7 @@ test_that("Cubic slope", {
     random = ~  stats::poly(age, 3) | ID,
     na.action = stats::na.omit,
     method = "ML",
-    correlation = nlme::corCAR1(form = ~ 1 | ID),
+    # correlation = nlme::corCAR1(form = ~ 1 | ID),
     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
   )
 
@@ -28,7 +28,7 @@ test_that("Linear Splines", {
     random = ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)) | ID,
     na.action = stats::na.omit,
     method = "ML",
-    correlation = nlme::corCAR1(form = ~ 1 | ID),
+    # correlation = nlme::corCAR1(form = ~ 1 | ID),
     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
   )
 
@@ -48,7 +48,7 @@ test_that("Cubic Splines", {
     random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
     na.action = stats::na.omit,
     method = "ML",
-    correlation = nlme::corCAR1(form = ~ 1 | ID),
+    # correlation = nlme::corCAR1(form = ~ 1 | ID),
     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
   )
 

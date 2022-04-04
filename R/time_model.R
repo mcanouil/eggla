@@ -81,7 +81,7 @@ time_model <- function(
       paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
       "  method = \"ML\",",
-      "  correlation = nlme::corCAR1(form = ~ 1 | ID),",
+      # "  correlation = nlme::corCAR1(form = ~ 1 | ID),",
       paste0(
         "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
         n_iteration, ", msMaxIter = ", n_iteration, ")"
