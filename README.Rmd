@@ -7,16 +7,7 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%",
-  dev = "svglite",
-  fig.process = function(path) {
-    new_path <- sub("-1\\.", ".", path)
-    file.copy(path, new_path, overwrite = TRUE)
-    on.exit(unlink(normalizePath(path)))
-    new_path
-  }
+  comment = "#>"
 )
 ```
 
@@ -48,7 +39,7 @@ remotes::install_github("mcanouil/eggla@v0.5.0")
 
 ## License
 
-MIT © [Mickaël Canouil](https://mickael.canouil.fr/), Nicole Warrington
+MIT © [Mickaël Canouil](https://mickael.canouil.fr/), Nicole Warrington, Kimberley Burrows, and Anni Heiskala.
 
 ## Code of Conduct
 
