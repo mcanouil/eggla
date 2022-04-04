@@ -1,6 +1,6 @@
 Package: eggla
 Title: Early Growth Genetics Longitudinal Analysis
-Version: 0.5.0
+Version: 0.5.1
 Authors@R:
     c(person(given = "Mickaël",
            family = "Canouil",
@@ -9,8 +9,18 @@ Authors@R:
            comment = c(ORCID = "0000-0002-3396-4549")),
       person(given = "Nicole",
            family = "Warrington",
-           role = c("aut"),
-           email = "n.warrington@uq.edu.au"))
+           role = "aut",
+           email = "n.warrington@uq.edu.au",
+           comment = c(ORCID = "0000-0003-4195-775X")),
+      person(given = "Kimberley",
+           family = "Burrows",
+           role = "ctb",
+           email = "Kimberley.Burrows@bristol.ac.uk",
+           comment = c(ORCID = "0000-0002-3208-0389")),
+      person(given = "Anni",
+           family = "Heiskala",
+           role = "ctb",
+           email = "Anni.Heiskala@oulu.fi")
 Description: Tools for longitudinal analysis within the EGG
     (Early Growth Genetics) Consortium.
 License: MIT + file LICENSE
