@@ -23,7 +23,7 @@
 plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
   params <- variable <- yend <- pred_period <- end <- NULL
   patterns <- slope <- age <- .data <- start <- NULL
-  stopifnot(inherits(fit, "lme4"))
+  stopifnot(inherits(fit, "lmerMod"))
   id_var <- names(fit[["groups"]])
   age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE)
   bmi_var <- grep("bmi", all.vars(fit[["terms"]]), value = TRUE)

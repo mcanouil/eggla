@@ -30,7 +30,7 @@
 #'     tag_levels = "A"
 #'   )
 plot_residuals <- function(x, y, fit) {
-  stopifnot(inherits(fit, "lme4"))
+  stopifnot(inherits(fit, "lmerMod"))
   .data <- ggplot2::.data
 
   revert_trans <- if (grepl("log", y)) exp else identity

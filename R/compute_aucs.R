@@ -43,7 +43,7 @@ compute_aucs <- function(
     "cubic_splines" = c(2, 8, 12)
   )[[method]]
 ) {
-  stopifnot(inherits(fit, "lme4"))
+  stopifnot(inherits(fit, "lmerMod"))
   id_var <- names(fit[["groups"]])
   pred_auc <- matrix(data = NA_real_, nrow = length(unique(fit$data[[id_var]])), ncol = length(period) / 2)
   colnames(pred_auc) <- paste0(
