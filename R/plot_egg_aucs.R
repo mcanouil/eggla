@@ -22,7 +22,7 @@
 #' )
 plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
   period_interval <- patterns <- auc <- NULL
-  stopifnot(inherits(fit, "lme"))
+  stopifnot(inherits(fit, "lme4"))
   id_var <- names(fit[["groups"]])
 
   auc_dt <- data.table::as.data.table(egg_aucs(

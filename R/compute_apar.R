@@ -18,7 +18,7 @@
 #'
 #' head(compute_apar(fit = res)[AP | AR])
 compute_apar <- function(fit) {
-  stopifnot(inherits(fit, "lme"))
+  stopifnot(inherits(fit, "lme4"))
   bmi_pred <- egg_ageyears <- log_bmi_pred <- NULL
 
   id_var <- names(fit[["groups"]])

@@ -35,7 +35,7 @@ plot_aucs <- function(
   )[[method]]
 ) {
   period_interval <- patterns <- auc <- NULL
-  stopifnot(inherits(fit, "lme"))
+  stopifnot(inherits(fit, "lme4"))
   id_var <- names(fit[["groups"]])
 
   auc_dt <- data.table::as.data.table(compute_aucs(
