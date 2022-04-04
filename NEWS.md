@@ -1,3 +1,6 @@
+# eggla 0.5.1
+
+- No longer uses `nlme::corCAR1(form = ~ 1 | ID)` in models.
 # eggla 0.5.0
 
 - Improve/Polish documentation,
