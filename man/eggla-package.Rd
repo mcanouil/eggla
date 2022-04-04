@@ -24,7 +24,9 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Nicole Warrington \email{n.warrington@uq.edu.au}
+  \item Nicole Warrington \email{n.warrington@uq.edu.au} (\href{https://orcid.org/0000-0003-4195-775X}{ORCID})
+  \item Kimberley Burrows \email{Kimberley.Burrows@bristol.ac.uk} (\href{https://orcid.org/0000-0002-3208-0389}{ORCID})
+  \item Anni Heiskala \email{Anni.Heiskala@oulu.fi}
 }
 
 }
