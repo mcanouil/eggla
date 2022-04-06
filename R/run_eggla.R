@@ -23,7 +23,6 @@
 #' @param working_directory something
 #'
 #' @return Path to zip archives.
-#' @import data.table
 #'
 #' @export
 #'
