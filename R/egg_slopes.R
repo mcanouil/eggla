@@ -64,8 +64,8 @@ egg_slopes <- function(
   rnef <- nlme::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
-  rnef <- cbind(
-    rnef,
+  rnef <- cbind.data.frame(
+    as.matrix(rnef),
     matrix(
       data = rep(0, (length(fxef) - ncol(rnef)) * nrow(rnef)),
       nrow = nrow(rnef),
