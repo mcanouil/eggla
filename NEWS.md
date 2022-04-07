@@ -1,3 +1,10 @@
+# eggla 0.5.2
+
+- Update `pak` install command.
+- Fix `renv::restore` issue with `renv.lock` from GitHub.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.1...v0.5.2>
+
 # eggla 0.5.1
 
 - No longer uses `nlme::corCAR1(form = ~ 1 | ID)` in models.
