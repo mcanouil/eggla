@@ -1,7 +1,8 @@
 # eggla 0.5.2
 
-- Update `pak` install command.
-- Fix `renv::restore` issue with `renv.lock` from GitHub.
+- Fix: `renv::restore` issue with `renv.lock` from GitHub.
+- Fix: Update `pak` install command.
+- Chore: Upgrade lock files.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.1...v0.5.2>
 
