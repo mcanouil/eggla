@@ -24,23 +24,24 @@ knitr::opts_chunk$set(
 
     mkdir $home_analysis 
 
-    cd $home_analysis
+    cd $home_analysis || exit
 
     Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'temp_library <- file.path(wd, "R")' \
+      -e 'temp_library <- file.path(getwd(), "R")' \
       -e 'dir.create(temp_library, recursive = TRUE)' \
       -e '.libPaths(temp_library)' \
       -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
       -e 'library("renv")' \
       -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
-      -e 'renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")' \
-      -e 'renv::install("mcanouil/eggla@v0.5.0")' \
+      -e 'utils::download.file(
+        url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock",
+        destfile = "renv.lock"
+      )' \
+      -e 'renv::restore(lockfile = "renv.lock")' \
+      -e 'renv::install("mcanouil/eggla@v0.5.2")' \
       -e 'unlink(temp_library, recursive = TRUE)'
 
     Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'setwd(wd)' \
       -e 'library(eggla)' \
       -e 'library(data.table)' \
       -e 'res <- try(run_eggla(
@@ -55,7 +56,7 @@ knitr::opts_chunk$set(
         male_coded_zero = FALSE,
         parallel = FALSE, # to parallelise Daymont QC
         parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = wd # or in that case "/tmp/egg_analysis"
+        working_directory = getwd() # or in that case "/tmp/egg_analysis"
       ))' \
       -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
     ```
@@ -69,24 +70,29 @@ knitr::opts_chunk$set(
 
     mkdir $home_analysis 
 
-    cd $home_analysis
+    cd $home_analysis || exit
 
     Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'temp_library <- file.path(wd, "R")' \
+      -e 'temp_library <- file.path(getwd(), "R")' \
       -e 'dir.create(temp_library, recursive = TRUE)' \
       -e '.libPaths(temp_library)' \
-      -e 'install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")' \
-      -e 'library(pak)' \
-      -e 'lockfile_install(
-        lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
-        lib = temp_library
+      -e 'utils::install.packages(
+        pkgs = "pak",
+        lib = temp_library,
+        repos = sprintf(
+          "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
+          .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
+        )
       )' \
-      -e 'pkg_install("mcanouil/eggla@v0.5.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
+      -e 'library(pak)' \
+      -e 'utils::download.file(
+        url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
+        destfile = "pkg.lock"
+      )' \
+      -e 'lockfile_install(lockfile = "pkg.lock", lib = temp_library)' \
+      -e 'pkg_install("mcanouil/eggla@v0.5.2", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
     
     Rscript \
-      -e 'wd <- "/tmp/egg_analysis"' \
-      -e 'setwd(wd)' \
       -e 'library(eggla)' \
       -e 'library(data.table)' \
       -e 'res <- try(run_eggla(
@@ -101,7 +107,7 @@ knitr::opts_chunk$set(
         male_coded_zero = FALSE,
         parallel = FALSE, # to parallelise Daymont QC
         parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = wd # or in that case "/tmp/egg_analysis"
+        working_directory = getwd() # or in that case "/tmp/egg_analysis"
       ))' \
       -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
     ```
@@ -129,7 +135,7 @@ knitr::opts_chunk$set(
     
     mkdir $home_analysis 
 
-    cd $home_analysis
+    cd $home_analysis || exit
     ```
 
 2. Start R and setup working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages
@@ -137,32 +143,42 @@ knitr::opts_chunk$set(
   - `renv` (recommended):
 
     ```{r, eval = FALSE}
-    wd <- "/tmp/egg_analysis"
-    temp_library <- file.path(wd, "R")
+    temp_library <- file.path(getwd(), "R")
     dir.create(temp_library, recursive = TRUE)
     .libPaths(temp_library)
     install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
     library("renv")
     renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-    renv::restore(lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock")
-    renv::install("mcanouil/eggla@v0.5.0")
+    utils::download.file(
+      url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock",
+      destfile = "renv.lock"
+    )
+    renv::restore(lockfile = "renv.lock")
+    renv::install("mcanouil/eggla@v0.5.2")
     unlink(temp_library, recursive = TRUE)
     ```
 
   - `pak` (faster):
 
     ```{r, eval = FALSE}
-    wd <- "/tmp/egg_analysis"
-    temp_library <- file.path(wd, "R")
+    temp_library <- file.path(getwd(), "R")
     dir.create(temp_library, recursive = TRUE)
     .libPaths(temp_library)
-    install.packages("pak", lib = temp_library, repos = "https://r-lib.github.io/p/pak/devel/")
-    library(pak)
-    lockfile_install(
-      lockfile = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
-      lib = temp_library
+    utils::install.packages(
+      pkgs = "pak",
+      lib = temp_library,
+      repos = sprintf(
+        "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
+        .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
+      )
     )
-    pkg_install("mcanouil/eggla@0.5.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+    library(pak)
+    utils::download.file(
+      url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
+      destfile = "pkg.lock"
+    )
+    lockfile_install(lockfile = "pkg.lock", lib = temp_library)
+    pkg_install("mcanouil/eggla@0.5.2", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
 3. Restart R
@@ -170,7 +186,6 @@ knitr::opts_chunk$set(
 4. Run the analysis
 
     ```{r, eval = FALSE}
-    setwd(wd)
     library(eggla)
     library(data.table)
     res <- try(
@@ -186,7 +201,7 @@ knitr::opts_chunk$set(
         male_coded_zero = FALSE,
         parallel = FALSE,
         parallel_n_chunks = 1,
-        working_directory = wd
+        working_directory = getwd()
       )
     )
     if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
