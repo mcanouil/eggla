@@ -43,7 +43,7 @@ do_gwas <- function(
   ),
   threads = 1
 ) {
-  INFO <- TEST <- P <- NULL # no visible binding for global variable from data.table 
+  INFO <- TEST <- P <- NULL # "no visible binding for global variable" from `data.table` syntax 
   dir.create(
     path = path,
     recursive = TRUE,
