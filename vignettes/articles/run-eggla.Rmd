@@ -26,25 +26,26 @@ knitr::opts_chunk$set(
 
     cd $home_analysis || exit
 
-    Rscript \
-      -e 'temp_library <- file.path(getwd(), "R")' \
-      -e 'dir.create(temp_library, recursive = TRUE)' \
-      -e '.libPaths(temp_library)' \
-      -e 'install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")' \
-      -e 'library("renv")' \
-      -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
-      -e 'utils::download.file(
+    R --no-save --no-restore --quiet <<EOF
+    temp_library <- file.path(".", "R")
+    dir.create(temp_library, recursive = TRUE)
+    .libPaths(temp_library)
+    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
+    library("renv")
+    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
+    utils::download.file(
         url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/renv.lock",
         destfile = "renv.lock"
-      )' \
-      -e 'renv::restore(lockfile = "renv.lock")' \
-      -e 'renv::install("mcanouil/eggla@v0.5.2")' \
-      -e 'unlink(temp_library, recursive = TRUE)'
+      )
+    renv::restore(lockfile = "renv.lock")
+    renv::install("mcanouil/eggla@v0.5.2")
+    unlink(temp_library, recursive = TRUE)
+    EOF
 
-    Rscript \
-      -e 'library(eggla)' \
-      -e 'library(data.table)' \
-      -e 'res <- try(run_eggla(
+    R --no-save --no-restore --quiet <<EOF
+    library(eggla)
+    library(data.table)
+    res <- try(run_eggla(
         data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
         id_variable = "ID",
         age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
@@ -56,9 +57,11 @@ knitr::opts_chunk$set(
         male_coded_zero = FALSE,
         parallel = FALSE, # to parallelise Daymont QC
         parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = getwd() # or in that case "/tmp/egg_analysis"
-      ))' \
-      -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
+        working_directory = "." # or in that case "/tmp/egg_analysis"
+      ))
+    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
+    EOF
+
     ```
 
   - `pak` (faster):
@@ -72,44 +75,47 @@ knitr::opts_chunk$set(
 
     cd $home_analysis || exit
 
-    Rscript \
-      -e 'temp_library <- file.path(getwd(), "R")' \
-      -e 'dir.create(temp_library, recursive = TRUE)' \
-      -e '.libPaths(temp_library)' \
-      -e 'utils::install.packages(
+    R --no-save --no-restore --quiet <<EOF
+    temp_library <- file.path(".", "R")
+    dir.create(temp_library, recursive = TRUE)
+    .libPaths(temp_library)
+    utils::install.packages(
         pkgs = "pak",
         lib = temp_library,
         repos = sprintf(
           "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
           .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
         )
-      )' \
-      -e 'library(pak)' \
-      -e 'utils::download.file(
+      )
+    library(pak)
+    utils::download.file(
         url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/pkg.lock",
         destfile = "pkg.lock"
-      )' \
-      -e 'lockfile_install(lockfile = "pkg.lock", lib = temp_library)' \
-      -e 'pkg_install("mcanouil/eggla@v0.5.2", lib = temp_library, upgrade = FALSE, dependencies = FALSE)'
+      )
+    lockfile_install(lockfile = "pkg.lock", lib = temp_library)
+    pkg_install("mcanouil/eggla@v0.5.2", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+    EOF
     
-    Rscript \
-      -e 'library(eggla)' \
-      -e 'library(data.table)' \
-      -e 'res <- try(run_eggla(
-        data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
-        id_variable = "ID",
-        age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-        age_years_variable = "age", 
-        weight_kilograms_variable = "weight",
-        height_centimetres_variable = "height",
-        sex_variable = "sex",
-        covariates = NULL,
-        male_coded_zero = FALSE,
-        parallel = FALSE, # to parallelise Daymont QC
-        parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = getwd() # or in that case "/tmp/egg_analysis"
-      ))' \
-      -e 'if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)'
+    R --no-save --no-restore --quiet <<EOF
+    library(eggla)
+    library(data.table)
+    res <- try(run_eggla(
+      data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+      id_variable = "ID",
+      age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+      age_years_variable = "age", 
+      weight_kilograms_variable = "weight",
+      height_centimetres_variable = "height",
+      sex_variable = "sex",
+      covariates = NULL,
+      male_coded_zero = FALSE,
+      parallel = FALSE, # to parallelise Daymont QC
+      parallel_n_chunks = 1, # to parallelise Daymont QC
+      working_directory = "." # or in that case "/tmp/egg_analysis"
+    ))
+    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
+    EOF
+
     ```
 
 2.  Run the analysis in bash
@@ -143,7 +149,7 @@ knitr::opts_chunk$set(
   - `renv` (recommended):
 
     ```{r, eval = FALSE}
-    temp_library <- file.path(getwd(), "R")
+    temp_library <- file.path(".", "R")
     dir.create(temp_library, recursive = TRUE)
     .libPaths(temp_library)
     install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
@@ -161,7 +167,7 @@ knitr::opts_chunk$set(
   - `pak` (faster):
 
     ```{r, eval = FALSE}
-    temp_library <- file.path(getwd(), "R")
+    temp_library <- file.path(".", "R")
     dir.create(temp_library, recursive = TRUE)
     .libPaths(temp_library)
     utils::install.packages(
@@ -201,7 +207,7 @@ knitr::opts_chunk$set(
         male_coded_zero = FALSE,
         parallel = FALSE,
         parallel_n_chunks = 1,
-        working_directory = getwd()
+        working_directory = "."
       )
     )
     if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
