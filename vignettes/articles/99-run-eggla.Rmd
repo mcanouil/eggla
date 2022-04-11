@@ -34,7 +34,7 @@ knitr::opts_chunk$set(
       -e 'library("renv")' \
       -e 'renv::init(bare = TRUE, settings = list(use.cache = FALSE))' \
       -e 'utils::download.file(
-        url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock",
+        url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/renv.lock",
         destfile = "renv.lock"
       )' \
       -e 'renv::restore(lockfile = "renv.lock")' \
@@ -86,7 +86,7 @@ knitr::opts_chunk$set(
       )' \
       -e 'library(pak)' \
       -e 'utils::download.file(
-        url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
+        url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/pkg.lock",
         destfile = "pkg.lock"
       )' \
       -e 'lockfile_install(lockfile = "pkg.lock", lib = temp_library)' \
@@ -150,7 +150,7 @@ knitr::opts_chunk$set(
     library("renv")
     renv::init(bare = TRUE, settings = list(use.cache = FALSE))
     utils::download.file(
-      url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/renv.lock",
+      url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/renv.lock",
       destfile = "renv.lock"
     )
     renv::restore(lockfile = "renv.lock")
@@ -174,7 +174,7 @@ knitr::opts_chunk$set(
     )
     library(pak)
     utils::download.file(
-      url = "https://raw.githubusercontent.com/mcanouil/eggla/main/inst/setup/pkg.lock",
+      url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/pkg.lock",
       destfile = "pkg.lock"
     )
     lockfile_install(lockfile = "pkg.lock", lib = temp_library)
