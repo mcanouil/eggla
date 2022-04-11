@@ -8,7 +8,7 @@
 #' This function is a wrapper around `egg_model()`, `egg_slopes()` and `egg_aucs()`.
 #'
 #' @param data Phenotypes data that inherits from `data.frame` class.
-#' @param id_variable Name of the column where sample/individual ids are stored.
+#' @param id_variable Name of the column where sample/individual IDs are stored.
 #' @param age_days_variable Name of the column where age in days is stored.
 #' @param age_years_variable Name of the column where age in years is stored.
 #' @param weight_kilograms_variable Name of the column where weight in kilograms is stored.
@@ -18,7 +18,7 @@
 #' @param male_coded_zero Is male coded "0" (and female coded "1")?
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
-#' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`. 
+#' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
 #' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
 #'   Only applies if parallel is set to TRUE.
 #' Defaults to the number of workers returned by the getDoParWorkers function in the foreach package.
