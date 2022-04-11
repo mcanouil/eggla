@@ -4,6 +4,9 @@
   - Fix: Rename (add "s") AUCs csv output file for consistency.
   - Docs: Add missing documentation for parameters.
 
+- In `R/do_gwas.R`:
+  - Feat: Function to run GWAS on `eggla` results using PLINK2 (and BCFtools).
+
 <!--**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.5.3>-->
 
 # eggla 0.5.2
