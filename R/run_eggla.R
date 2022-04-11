@@ -173,7 +173,7 @@ run_eggla <- function(
           fit = results,
           period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
         ),
-        file = file.path(results_directory, "derived-auc.csv")
+        file = file.path(results_directory, "derived-aucs.csv")
       )
 
       grDevices::png(
