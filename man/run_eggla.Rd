@@ -23,7 +23,7 @@ run_eggla(
 \arguments{
 \item{data}{Phenotypes data that inherits from \code{data.frame} class.}
 
-\item{id_variable}{Name of the column where sample/individual ids are stored.}
+\item{id_variable}{Name of the column where sample/individual IDs are stored.}
 
 \item{age_days_variable}{Name of the column where age in days is stored.}
 
