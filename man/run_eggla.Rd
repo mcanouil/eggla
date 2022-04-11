@@ -21,32 +21,34 @@ run_eggla(
 )
 }
 \arguments{
-\item{data}{something}
+\item{data}{Phenotypes data that inherits from \code{data.frame} class.}
 
-\item{id_variable}{something}
+\item{id_variable}{Name of the column where sample/individual ids are stored.}
 
-\item{age_days_variable}{something}
+\item{age_days_variable}{Name of the column where age in days is stored.}
 
-\item{age_years_variable}{something}
+\item{age_years_variable}{Name of the column where age in years is stored.}
 
-\item{weight_kilograms_variable}{something}
+\item{weight_kilograms_variable}{Name of the column where weight in kilograms is stored.}
 
-\item{height_centimetres_variable}{something}
+\item{height_centimetres_variable}{Name of the column where height in centimetres is stored.}
 
-\item{sex_variable}{something}
+\item{sex_variable}{Name of the column where sex is stored.}
 
-\item{covariates}{something}
+\item{covariates}{A vector of columns' names to be used as covariates.}
 
-\item{male_coded_zero}{something}
+\item{male_coded_zero}{Is male coded "0" (and female coded "1")?}
 
 \item{random_complexity}{A numeric (1-3) indicating the complexity of the random effect term.
 Default, \code{"auto"} will try from the more complex to the less complex if no success.}
 
-\item{parallel}{something}
+\item{parallel}{Determines if \code{growthcleanr::cleangrowth()} function shoud be run in parallel. Defaults to \code{FALSE}.}
 
-\item{parallel_n_chunks}{something}
+\item{parallel_n_chunks}{Specify the number of batches (in \code{growthcleanr::cleangrowth()}) to run in parallel.
+Only applies if parallel is set to TRUE.
+Defaults to the number of workers returned by the getDoParWorkers function in the foreach package.}
 
-\item{working_directory}{something}
+\item{working_directory}{Directory in which computation will occur and where output files will be saved.}
 }
 \value{
 Path to zip archives.

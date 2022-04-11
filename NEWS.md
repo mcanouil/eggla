@@ -2,6 +2,7 @@
 
 - In `R/run_eggla.R`:
   - Fix: Rename (add "s") AUCs csv output file for consistency.
+  - Docs: Add missing documentation for parameters.
 
 <!--**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.5.3>-->
 
