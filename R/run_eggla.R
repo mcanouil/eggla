@@ -35,7 +35,7 @@
 #'     x = bmigrowth,
 #'     file = file.path(tempdir(), "bmigrowth.csv")
 #'   )
-#'   res <- try(run_eggla(
+#'   res <- run_eggla(
 #'     data = fread(file.path(tempdir(), "bmigrowth.csv")),
 #'     id_variable = "ID",
 #'     age_days_variable = NULL,
@@ -49,7 +49,7 @@
 #'     parallel = FALSE,
 #'     parallel_n_chunks = 1,
 #'     working_directory = tempdir()
-#'   ))
+#'   )
 #' }
 run_eggla <- function(
   data,
