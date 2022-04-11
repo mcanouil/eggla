@@ -105,13 +105,13 @@ do_gwas <- function(
           on.exit(unlink(file.path(path, "derived-slopes.csv")))
           utils::unzip(
             zipfile = izip,
-            files = "derived-auc.csv",
+            files = "derived-aucs.csv",
             exdir = path
           )
-          on.exit(unlink(file.path(path, "derived-auc.csv")))
+          on.exit(unlink(file.path(path, "derived-aucs.csv")))
           data.table::merge.data.table(
             x = data.table::fread(file.path(path, "derived-slopes.csv")),
-            y = data.table::fread(file.path(path, "derived-auc.csv")),
+            y = data.table::fread(file.path(path, "derived-aucs.csv")),
             by = "egg_id"
           )
         }
