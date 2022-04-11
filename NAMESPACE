@@ -3,7 +3,7 @@
 export(compute_apar)
 export(compute_aucs)
 export(compute_slopes)
-export(do_gwas)
+export(do_eggla_gwas)
 export(egg_aucs)
 export(egg_model)
 export(egg_slopes)

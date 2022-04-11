@@ -29,7 +29,7 @@
 # @importFrom future.apply future_lapply
 #'
 #' @export
-do_gwas <- function(
+do_eggla_gwas <- function(
   data,
   results_zip,
   id_column,
