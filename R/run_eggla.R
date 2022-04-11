@@ -7,20 +7,22 @@
 #' derived area under the curve and slopes for male and femal.  
 #' This function is a wrapper around `egg_model()`, `egg_slopes()` and `egg_aucs()`.
 #'
-#' @param data something
-#' @param id_variable something
-#' @param age_days_variable something
-#' @param age_years_variable something
-#' @param weight_kilograms_variable something
-#' @param height_centimetres_variable something
-#' @param sex_variable something
-#' @param covariates something
-#' @param male_coded_zero something
+#' @param data Phenotypes data that inherits from `data.frame` class.
+#' @param id_variable Name of the column where sample/individual ids are stored.
+#' @param age_days_variable Name of the column where age in days is stored.
+#' @param age_years_variable Name of the column where age in years is stored.
+#' @param weight_kilograms_variable Name of the column where weight in kilograms is stored.
+#' @param height_centimetres_variable Name of the column where height in centimetres is stored.
+#' @param sex_variable Name of the column where sex is stored.
+#' @param covariates A vector of columns' names to be used as covariates.
+#' @param male_coded_zero Is male coded "0" (and female coded "1")?
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
-#' @param parallel something
-#' @param parallel_n_chunks something
-#' @param working_directory something
+#' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`. 
+#' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
+#'   Only applies if parallel is set to TRUE.
+#' Defaults to the number of workers returned by the getDoParWorkers function in the foreach package.
+#' @param working_directory Directory in which computation will occur and where output files will be saved.
 #'
 #' @return Path to zip archives.
 #'
