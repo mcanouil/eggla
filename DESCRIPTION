@@ -38,7 +38,8 @@ Imports:
     growthcleanr (>= 2.0.0),
     ggplot2 (>= 3.3.5),
     patchwork (>= 1.1.1),
-    broom.mixed (>= 0.2.7)
+    broom.mixed (>= 0.2.7),
+    rlang (>= 1.0.2)
 Suggests:
     rmarkdown,
     ggtext,
@@ -58,6 +59,9 @@ Suggests:
     testthat (>= 3.1.0)
 Remotes:
     github::carriedaymont/growthcleanr@v2.0.0
+SystemRequirements:
+    BCFtools (>= 1.15.0) (https://github.com/samtools/BCFtools),
+    PLINK2 (>= 2.0) (https://www.cog-genomics.org/plink/2.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
