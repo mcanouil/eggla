@@ -3,7 +3,8 @@
 - In `R/run_eggla.R`:
   - Fix: Rename (add "s") AUCs csv output file for consistency.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.1...v0.5.2>
+<!--**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.5.3>-->
+
 # eggla 0.5.2
 
 - Fix: `renv::restore` issue with `renv.lock` from GitHub.
