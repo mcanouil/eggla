@@ -7,6 +7,8 @@
 - In `R/do_gwas.R`:
   - Feat: Function to run GWAS on `eggla` results using PLINK2 (and BCFtools).
 
+- In `vignettes/articles/
+
 <!--**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.5.3>-->
 
 # eggla 0.5.2
