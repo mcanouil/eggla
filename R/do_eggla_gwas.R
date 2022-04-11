@@ -28,7 +28,51 @@
 #' @importFrom rlang hash
 # @importFrom future.apply future_lapply
 #'
+#' @return Path to results file.
+#' 
 #' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'   data("bmigrowth")
+#'   fwrite(
+#'     x = bmigrowth,
+#'     file = file.path(tempdir(), "bmigrowth.csv")
+#'   )
+#'   results_archives <- run_eggla(
+#'     data = fread(file.path(tempdir(), "bmigrowth.csv")),
+#'     id_variable = "ID",
+#'     age_days_variable = NULL,
+#'     age_years_variable = "age",
+#'     weight_kilograms_variable = "weight",
+#'     height_centimetres_variable = "height",
+#'     sex_variable = "sex",
+#'     covariates = NULL,
+#'     male_coded_zero = FALSE,
+#'     random_complexity = 1,
+#'     parallel = FALSE,
+#'     parallel_n_chunks = 1,
+#'     working_directory = tempdir()
+#'   )
+#'   do_eggla_gwas(
+#'     data = "/tmp/bmigrowth.csv",
+#'     results_zip = results_archives,
+#'     id_column = "ID",
+#'     formula = `slope_0--0.5` + `slope_1.5--5` + `auc_0--0.5` + `auc_1.5--5` ~ sex,
+#'     vcfs = list.files(
+#'       path = file.path(tempdir(), "vcf"),
+#'       pattern = "\\.vcf$|\\.vcf.gz$",
+#'       full.names = TRUE
+#'     ),
+#'     vep = NULL,
+#'     path = tempdir(),
+#'     bin_path = list(
+#'       bcftools = "/usr/bin/bcftools",
+#'       plink2 = "/usr/bin/plink2"
+#'     ),
+#'     threads = 1
+#'   )
+#' }
 do_eggla_gwas <- function(
   data,
   results_zip,
