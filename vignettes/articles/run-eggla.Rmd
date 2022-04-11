@@ -132,6 +132,43 @@ knitr::opts_chunk$set(
     └── 2021-11-23-male.zip
     ```
 
+4. Run the GWASs on slopes and AUCs for male and female
+
+    ```{bash, eval = FALSE}
+    #!/bin/bash
+
+    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+
+    mkdir $home_analysis
+
+    cd $home_analysis || exit
+
+    R --no-save --no-restore --quiet <<EOF
+    library(eggla)
+    chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
+    if (!isFALSE(chr_in_parallel)) {
+      renv::install("future.apply")
+      future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
+    }
+    do_eggla_gwas(
+      data = "/tmp/bmigrowth.csv",
+      results_zip = list.files(pattern = "\\.zip", full.names = TRUE),
+      id_column = "ID",
+      formula = `slope_0--0.5` + `slope_1.5--5` + `slope_6--10` + `slope_12--17` + `auc_0--0.5` + `auc_1.5--5` + `auc_6--10` + `auc_12--17` ~ sex,
+      vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\.vcf$|\\.vcf.gz$", full.names = TRUE),
+      vep = NULL,
+      path = ".",
+      bin_path = list(
+        bcftools = "/usr/bin/bcftools",
+        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"
+      ),
+      threads = 1
+    )
+    EOF
+
+    ```
+
+
 # Run Interactively
 
 1. Create the working directory
@@ -219,4 +256,29 @@ knitr::opts_chunk$set(
     /tmp/egg_analysis/
     ├── 2021-11-23-female.zip
     └── 2021-11-23-male.zip
+    ```
+
+6. Run the GWASs on slopes and AUCs for male and female
+
+    ```{r, eval = FALSE}
+    library(eggla)
+    chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
+    if (!isFALSE(chr_in_parallel)) {
+      renv::install("future.apply")
+      future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
+    }
+    do_eggla_gwas(
+      data = "/tmp/bmigrowth.csv",
+      results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
+      id_column = "ID",
+      formula = `slope_0--0.5` + `slope_1.5--5` + `slope_6--10` + `slope_12--17` + `auc_0--0.5` + `auc_1.5--5` + `auc_6--10` + `auc_12--17` ~ sex,
+      vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\.vcf$|\\.vcf.gz$", full.names = TRUE),
+      vep = NULL,
+      path = ".",
+      bin_path = list(
+        bcftools = "/usr/bin/bcftools",
+        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"
+      ),
+      threads = 1
+    )
     ```
