@@ -152,7 +152,7 @@ knitr::opts_chunk$set(
     }
     do_eggla_gwas(
       data = "/tmp/bmigrowth.csv",
-      results_zip = list.files(pattern = "\\.zip", full.names = TRUE),
+      list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
       id_column = "ID",
       formula = `slope_0--0.5` + `slope_1.5--5` + `slope_6--10` + `slope_12--17` + `auc_0--0.5` + `auc_1.5--5` + `auc_6--10` + `auc_12--17` ~ sex,
       vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\.vcf$|\\.vcf.gz$", full.names = TRUE),
