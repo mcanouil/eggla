@@ -46,19 +46,19 @@ knitr::opts_chunk$set(
     library(eggla)
     library(data.table)
     res <- try(run_eggla(
-        data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
-        id_variable = "ID",
-        age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-        age_years_variable = "age", 
-        weight_kilograms_variable = "weight",
-        height_centimetres_variable = "height",
-        sex_variable = "sex",
-        covariates = NULL,
-        male_coded_zero = FALSE,
-        parallel = FALSE, # to parallelise Daymont QC
-        parallel_n_chunks = 1, # to parallelise Daymont QC
-        working_directory = "." # or in that case "/tmp/egg_analysis"
-      ))
+      data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+      id_variable = "ID",
+      age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+      age_years_variable = "age", 
+      weight_kilograms_variable = "weight",
+      height_centimetres_variable = "height",
+      sex_variable = "sex",
+      covariates = NULL,
+      male_coded_zero = FALSE,
+      parallel = FALSE, # to parallelise Daymont QC
+      parallel_n_chunks = 1, # to parallelise Daymont QC
+      working_directory = "." # or in that case "/tmp/egg_analysis"
+    ))
     if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
     EOF
 
@@ -80,18 +80,18 @@ knitr::opts_chunk$set(
     dir.create(temp_library, recursive = TRUE)
     .libPaths(temp_library)
     utils::install.packages(
-        pkgs = "pak",
-        lib = temp_library,
-        repos = sprintf(
-          "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
-          .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
-        )
+      pkgs = "pak",
+      lib = temp_library,
+      repos = sprintf(
+        "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
+        .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
       )
+    )
     library(pak)
     utils::download.file(
-        url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/pkg.lock",
-        destfile = "pkg.lock"
-      )
+      url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.5.2/inst/setup/pkg.lock",
+      destfile = "pkg.lock"
+    )
     lockfile_install(lockfile = "pkg.lock", lib = temp_library)
     pkg_install("mcanouil/eggla@v0.5.2", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     EOF
