@@ -449,5 +449,10 @@ do_eggla_gwas <- function(
 
   message(sprintf('Writing results to "%s"!', results_file))
 
+  writeLines(
+    text = c(R.version.string, plink_version, bcftools_version),
+    con = file.path(path, "gwas_software.txt")
+  )
+
   invisible(results_file)
 }
