@@ -144,7 +144,6 @@ do_eggla_gwas <- function(
             files = "derived-slopes.csv",
             exdir = path
           )
-          on.exit(unlink(file.path(path, "derived-slopes.csv")))
           utils::unzip(
             zipfile = izip,
             files = "derived-aucs.csv",
