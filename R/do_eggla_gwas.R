@@ -173,12 +173,12 @@ do_eggla_gwas <- function(
   data.table::setnames(x = dt, old = id_column, new = "#IID")
 
   traits <- grep(
-    pattern = paste(sprintf("^%s$", unique(traits), collapse = "|")),
+    pattern = paste(sprintf("^%s$", unique(traits)), collapse = "|"),
     x = names(dt),
     value = TRUE
   )
   covariates <- grep(
-    pattern = paste(sprintf("^%s$", unique(covariates), collapse = "|")),
+    pattern = paste(sprintf("^%s$", unique(covariates)), collapse = "|"),
     x = names(dt),
     value = TRUE
   )
