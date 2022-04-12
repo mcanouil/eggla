@@ -183,8 +183,8 @@ do_eggla_gwas <- function(
     value = TRUE
   )
   formula <- stats::as.formula(sprintf(
-    fmt = "%s ~ %s",
-    paste(traits, collapse = " + "),
+    fmt = "`%s` ~ %s",
+    paste(traits, collapse = "` + `"),
     paste(covariates, collapse = " + ")
   ))
 
