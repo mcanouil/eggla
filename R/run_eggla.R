@@ -70,6 +70,8 @@ run_eggla <- function(
   egg_agedays <- egg_id <- egg_sex <- NULL
   measurement <- param <- NULL
 
+  working_directory <- normalizePath(working_directory)
+
   dt_long <- data.table::melt(
     data = data.table::as.data.table(data)[
       j = list(
