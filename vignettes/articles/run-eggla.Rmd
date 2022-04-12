@@ -147,7 +147,7 @@ knitr::opts_chunk$set(
     library(eggla)
     chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
     if (!isFALSE(chr_in_parallel)) {
-      renv::install("future.apply")
+      renv::install(c("future", "future.apply"))
       future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
     }
     do_eggla_gwas(
@@ -265,7 +265,7 @@ knitr::opts_chunk$set(
     library(eggla)
     chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
     if (!isFALSE(chr_in_parallel)) {
-      renv::install("future.apply")
+      renv::install(c("future", "future.apply"))
       future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
     }
     do_eggla_gwas(
