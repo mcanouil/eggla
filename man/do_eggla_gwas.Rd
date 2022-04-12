@@ -8,7 +8,8 @@ do_eggla_gwas(
   data,
   results_zip,
   id_column,
-  formula,
+  traits,
+  covariates,
   vcfs,
   vep = NULL,
   path,
@@ -24,10 +25,9 @@ do_eggla_gwas(
 
 \item{id_column}{Name of the column where sample/individual IDs are stored.}
 
-\item{formula}{Formula to be used for the analysis,
-with on the left hand side, one or multiple traits to be analysed separately,
-and on the right hand side, the covariates to be used,
-\emph{i.e.}, columns' names from \code{data}.}
+\item{traits}{One or multiple traits, \emph{i.e.}, columns' names from \code{data}, to be analysed separately.}
+
+\item{covariates}{One or several covariates, \emph{i.e.}, columns' names from \code{data}, to be used.}
 
 \item{vcfs}{Path to the "raw" VCF file(s) containing
 the genotypes of the individuals to be analysed.}
@@ -78,7 +78,8 @@ if (interactive()) {
     data = "/tmp/bmigrowth.csv",
     results_zip = results_archives,
     id_column = "ID",
-    formula = `slope_0--0.5` + `slope_1.5--5` + `auc_0--0.5` + `auc_1.5--5` ~ sex,
+    traits = c("slope_.*", "auc_.*"),
+    covariates = c("sex"),
     vcfs = list.files(
       path = file.path(tempdir(), "vcf"),
       pattern = "\\\\.vcf$|\\\\.vcf.gz$",
