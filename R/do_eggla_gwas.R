@@ -360,7 +360,7 @@ do_eggla_gwas <- function(
         skip = "#CHROM"
       )
 
-      if (grepl("INFO", names(annot))) {
+      if (any(grepl("^INFO$", names(annot)))) {
         annot <- annot[
           j = list(
             .SD,
