@@ -360,6 +360,8 @@ do_eggla_gwas <- function(
         x = data.table::fread(
           cmd = paste(bin_path[["bcftools"]], "view --drop-genotypes", vcf_file),
           skip = "#CHROM"
+        ),
+        old = function(x) sub("^#", "", x)
       )
 
       if (any(grepl("^INFO$", names(annot)))) {
