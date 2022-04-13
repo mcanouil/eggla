@@ -430,7 +430,7 @@ do_eggla_gwas <- function(
         ),
         file = sprintf("%s.results.gz", results_file)
       )
-
+      message(sprintf("Results written in '%.results.gz'", results_file))
       sprintf("%s.results.gz", results_file)
     }
   )
