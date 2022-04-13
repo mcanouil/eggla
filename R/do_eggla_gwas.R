@@ -398,7 +398,6 @@ do_eggla_gwas <- function(
         annot <- annot[j = .SD, .SDcols = !c(qual_filter_cols)]
       }
 
-
       data.table::setnames(
         x = annot,
         old = function(x) sub("^\\.SD\\.\\.*", "", x)
@@ -431,6 +430,7 @@ do_eggla_gwas <- function(
         file = sprintf("%s.results.gz", results_file)
       )
       message(sprintf("Results written in '%.results.gz'", results_file))
+
       sprintf("%s.results.gz", results_file)
     }
   )
