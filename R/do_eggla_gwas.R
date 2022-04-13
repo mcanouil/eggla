@@ -14,8 +14,8 @@
 #' @param covariates One or several covariates, *i.e.*, columns' names from `data`, to be used.
 #' @param vcfs Path to the "raw" VCF file(s) containing
 #'   the genotypes of the individuals to be analysed.
-#' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param path Directory in which computation will occur and where output files will be saved.
+#' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
 #' @param threads Number of threads to be used by BCFtools
@@ -63,8 +63,8 @@
 #'       pattern = "\\.vcf$|\\.vcf.gz$",
 #'       full.names = TRUE
 #'     ),
-#'     vep = NULL,
 #'     path = tempdir(),
+#'     vep = NULL,
 #'     bin_path = list(
 #'       bcftools = "/usr/bin/bcftools",
 #'       plink2 = "/usr/bin/plink2"
@@ -79,8 +79,8 @@ do_eggla_gwas <- function(
   traits,
   covariates,
   vcfs,
-  vep = NULL,
   path,
+  vep = NULL,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
     plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"
