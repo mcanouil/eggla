@@ -89,6 +89,7 @@ do_eggla_gwas <- function(
 ) {
   INFO <- TEST <- P <- NULL # "no visible binding for global variable" from `data.table` syntax
   path <- normalizePath(path)
+  results_zip <- normalizePath(results_zip)
   dir.create(
     path = path,
     recursive = TRUE,
