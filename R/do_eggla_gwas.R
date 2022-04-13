@@ -390,9 +390,14 @@ do_eggla_gwas <- function(
               })
             ]
           ),
-          .SDcols = !c("INFO", "QUAL", "FILTER")
+          .SDcols = !intersect(c("INFO", "QUAL", "FILTER"), names(annot))
         ]
       }
+
+      if (length(qual_filter_cols <- intersect(c("QUAL", "FILTER"), names(annot))) > 0) {
+        annot <- annot[j = .SD, .SDcols = !c(qual_filter_cols)]
+      }
+
 
       data.table::setnames(
         x = annot,
@@ -414,14 +419,15 @@ do_eggla_gwas <- function(
           idcol = "trait_model"
         ),
         old = function(x) sub("^#", "", x)
-      )
+      )[TEST %in% "ADD" & !is.na(P), -c("TEST")]
 
       data.table::fwrite(
         x = data.table::merge.data.table(
-          x = results[TEST %in% "ADD" & !is.na(P), -c("TEST")],
+          x = results,
           y = annot,
           by = c("CHROM", "POS", "ID", "REF", "ALT"), # intersect(names(results), names(annot))
-        )[j = .SD, .SDcols = !c("QUAL", "FILTER")],
+          all.x = TRUE
+        ),
         file = sprintf("%s.results.gz", results_file)
       )
 
