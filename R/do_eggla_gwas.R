@@ -194,7 +194,7 @@ do_eggla_gwas <- function(
 
   if (length(sex_covariate <- grep("^sex", covariates, value = TRUE)) > 1) {
     stop(sprintf(
-      'Only one column containing "sex" can exist in the model, not %s: "%s"',
+      "Only one column containing \"sex\" can exist in the model, not %s: \"%s\"",
       length(sex_covariate),
       paste(sex_covariate, collapse = '", "')
     ))
@@ -429,7 +429,7 @@ do_eggla_gwas <- function(
         ),
         file = sprintf("%s.results.gz", results_file)
       )
-      message(sprintf("Results written in '%.results.gz'", results_file))
+      message(sprintf("Results written in \"%s.results.gz\"", results_file))
 
       sprintf("%s.results.gz", results_file)
     }
@@ -457,7 +457,7 @@ do_eggla_gwas <- function(
     file = results_file
   )
 
-  message(sprintf('Writing results to "%s"!', results_file))
+  message(sprintf("Writing results to \"%s\"!", results_file))
 
   writeLines(
     text = c(R.version.string, plink_version, bcftools_version),
