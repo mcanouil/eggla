@@ -22,7 +22,7 @@ compute_apar <- function(fit) {
   bmi_pred <- egg_ageyears <- log_bmi_pred <- NULL
 
   id_var <- names(fit[["groups"]])
-  age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE)
+  age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
 
   out <- data.table::setnames(
     x = data.table::data.table(

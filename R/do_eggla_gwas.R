@@ -192,7 +192,7 @@ do_eggla_gwas <- function(
   dir.create(path = tmpdir, recursive = TRUE, mode = "0777")
   on.exit(unlink(tmpdir, recursive = TRUE))
 
-  if (length(sex_covariate <- grep("^sex", covariates, value = TRUE)) > 1) {
+  if (length(sex_covariate <- grep("^sex", covariates, value = TRUE, ignore.case = TRUE)) > 1) {
     stop(sprintf(
       "Only one column containing \"sex\" can exist in the model, not %s: \"%s\"",
       length(sex_covariate),
