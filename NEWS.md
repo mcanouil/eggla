@@ -1,5 +1,10 @@
 # eggla (development version)
 
+## Fixes
+
+- In `R/compute_apar.R`,
+  - Fix: returns only the first local maxima (adiposity peak) and minima (adiposity rebound).
+
 # eggla 0.6.0
 
 ## New Feature

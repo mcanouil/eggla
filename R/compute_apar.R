@@ -54,5 +54,15 @@ compute_apar <- function(fit) {
       AR = egg_ageyears %in% egg_ageyears[which(diff(sign(diff(bmi_pred))) == +2) + 1]
     ),
     by = "egg_id"
+  ][
+    order(egg_id, egg_ageyears)
+  ][
+    i = (AP),
+    j = AP := AP & !duplicated(AP),
+    by = "egg_id"
+  ][
+    i = (AR),
+    j = AR := AR & !duplicated(AR),
+    by = "egg_id"
   ]
 }
