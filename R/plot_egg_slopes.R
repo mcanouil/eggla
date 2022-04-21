@@ -25,8 +25,8 @@ plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
   patterns <- slope <- age <- .data <- start <- NULL
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])
-  age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE)
-  bmi_var <- grep("bmi", all.vars(fit[["terms"]]), value = TRUE)
+  age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
+  bmi_var <- grep("bmi", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
 
   pheno_dt <- data.table::as.data.table(fit[["data"]])
   slopes_dt <- data.table::as.data.table(egg_slopes(

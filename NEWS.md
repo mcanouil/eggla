@@ -6,13 +6,22 @@
 
 - In `R/do_eggla_gwas.R`:
   - Feat: Function to run GWAS on `eggla` results using PLINK2 (and BCFtools).
+  - Fix: ignore case in variable search.
 
 - In `vignettes/articles/run_eggla`,
   - Feat: Add "GWAS" step.
   - Refactor: use "R EOF" syntax.
 
-- In `R/plot_slopes.R` and `R/plot_egg_slopes.R`:
+- In `R/plot_slopes.R`:
   - Fix: hardcoded "age" variable.
+  - Fix: ignore case in variable search.
+
+- In `R/plot_egg_slopes.R`:
+  - Fix: hardcoded "age" variable.
+  - Fix: ignore case in variable search.
+
+- In `R/compute_apar.R`:
+  - Fix: ignore case in variable search.
 
 <!--**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.5.3>-->
 

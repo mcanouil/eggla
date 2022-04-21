@@ -38,8 +38,8 @@ plot_slopes <- function(
   patterns <- slope <- age <- .data <- start <- NULL
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])
-  age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE)
-  bmi_var <- grep("bmi", all.vars(fit[["terms"]]), value = TRUE)
+  age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
+  bmi_var <- grep("bmi", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
 
   pheno_dt <- data.table::as.data.table(fit[["data"]])
   slopes_dt <- data.table::as.data.table(compute_slopes(
