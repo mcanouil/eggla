@@ -1,16 +1,19 @@
-# eggla (development version)
+# eggla 0.6.0
 
-- In `R/run_eggla.R`:
-  - Fix: Rename (add "s") AUCs csv output file for consistency.
-  - Docs: Add missing documentation for parameters.
+## New Feature
 
 - In `R/do_eggla_gwas.R`:
   - Feat: Function to run GWAS on `eggla` results using PLINK2 (and BCFtools).
-  - Fix: ignore case in variable search.
 
 - In `vignettes/articles/run_eggla`,
   - Feat: Add "GWAS" step.
   - Refactor: use "R EOF" syntax.
+
+## Fixes
+
+- In `R/run_eggla.R`:
+  - Fix: Rename (add "s") AUCs csv output file for consistency.
+  - Docs: Add missing documentation for parameters.
 
 - In `R/plot_slopes.R`:
   - Fix: hardcoded "age" variable.
@@ -23,7 +26,7 @@
 - In `R/compute_apar.R`:
   - Fix: ignore case in variable search.
 
-<!--**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.5.3>-->
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.6.0>
 
 # eggla 0.5.2
 
