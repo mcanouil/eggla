@@ -89,11 +89,14 @@ plot_slopes <- function(
 
   ggplot2::ggplot(
     data = pheno_dt[
-      j = params := as.character(cut(
-        x = age,
-        breaks = unique(unlist(slopes_long_dt[j = c("start", "end")])),
-        include.lowest = TRUE
-      ))
+      j = params := lapply(.SD, function(x) {
+        as.character(cut(
+          x = x,
+          breaks = unique(unlist(slopes_long_dt[j = c("start", "end")])),
+          include.lowest = TRUE
+        ))
+      }),
+      .SDcols = c(age_var)
     ][
       j = params := sub(",", "--", gsub("\\(|\\)|\\[|\\]", "", params))
     ][

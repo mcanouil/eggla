@@ -74,11 +74,14 @@ plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
 
   ggplot2::ggplot(
     data = pheno_dt[
-      j = params := as.character(cut(
-        x = age,
-        breaks = unique(unlist(slopes_long_dt[j = c("start", "end")])),
-        include.lowest = TRUE
-      ))
+      j = params := lapply(.SD, function(x) {
+        as.character(cut(
+          x = x,
+          breaks = unique(unlist(slopes_long_dt[j = c("start", "end")])),
+          include.lowest = TRUE
+        ))
+      }),
+      .SDcols = c(age_var)
     ][
       j = params := sub(",", "--", gsub("\\(|\\)|\\[|\\]", "", params))
     ][
