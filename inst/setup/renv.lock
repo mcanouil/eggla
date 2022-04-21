@@ -244,6 +244,14 @@
       "Hash": "bb4341986bc8b914f0f0acf2e4a3f2f7",
       "Requirements": []
     },
+    "cpp11": {
+      "Package": "cpp11",
+      "Version": "0.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fa53ce256cd280f468c080a58ea5ba8c",
+      "Requirements": []
+    },
     "crayon": {
       "Package": "crayon",
       "Version": "1.5.1",
@@ -568,6 +576,7 @@
       "RemoteSha": "2.4.3",
       "Hash": "10bec8a8264f3eb59531e8c4c0303f96",
       "Requirements": [
+        "cpp11",
         "forcats",
         "hms",
         "readr",
@@ -848,6 +857,39 @@
         "Rcpp"
       ]
     },
+    "prettyunits": {
+      "Package": "prettyunits",
+      "Version": "1.1.1",
+      "Source": "CRAN",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "prettyunits",
+      "RemoteRef": "prettyunits",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
+      "RemoteSha": "1.1.1",
+      "Hash": "95ef9167b75dde9d2ccc3c7528393e7e",
+      "Requirements": []
+    },
+    "progress": {
+      "Package": "progress",
+      "Version": "1.2.2",
+      "Source": "CRAN",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "progress",
+      "RemoteRef": "progress",
+      "RemoteRepos": "https://cran.rstudio.com",
+      "RemotePkgPlatform": "windows",
+      "RemoteSha": "1.2.2",
+      "Hash": "14dc9f7a3c91ebb14ec5bb9208a07061",
+      "Requirements": [
+        "R6",
+        "crayon",
+        "hms",
+        "prettyunits"
+      ]
+    },
     "purrr": {
       "Package": "purrr",
       "Version": "0.3.4",
@@ -881,6 +923,7 @@
         "R6",
         "cli",
         "clipr",
+        "cpp11",
         "crayon",
         "hms",
         "lifecycle",
@@ -994,6 +1037,7 @@
       "RemoteSha": "1.2.0",
       "Hash": "d8b95b7fee945d7da6888cf7eb71a49c",
       "Requirements": [
+        "cpp11",
         "dplyr",
         "ellipsis",
         "glue",
@@ -1038,7 +1082,9 @@
       "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
       "RemoteSha": "0.3.0",
       "Hash": "b2e1cbce7c903eaf23ec05c58e59fb5e",
-      "Requirements": []
+      "Requirements": [
+        "cpp11"
+      ]
     },
     "utf8": {
       "Package": "utf8",
@@ -1101,10 +1147,12 @@
       "Requirements": [
         "bit64",
         "cli",
+        "cpp11",
         "crayon",
         "glue",
         "hms",
         "lifecycle",
+        "progress",
         "rlang",
         "tibble",
         "tidyselect",
