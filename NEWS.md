@@ -11,6 +11,9 @@
   - Feat: Add "GWAS" step.
   - Refactor: use "R EOF" syntax.
 
+- In `R/plot_slopes.R` and `R/plot_egg_slopes.R`:
+  - Fix: hardcoded "age" variable.
+
 <!--**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.5.3>-->
 
 # eggla 0.5.2
