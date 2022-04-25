@@ -292,7 +292,7 @@ best_dataset <- "visits_clean"
 
 ```{r get-best-model-results}
 good_res_models <- readRDS(file.path(output_directory, "summary_models.rds"))[
-  correlation_structure == "NULL" &
+  correlation_structure != "NULL" &
     models %in% best_models &
     dataset %in% best_dataset
 ]
