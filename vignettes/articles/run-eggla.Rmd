@@ -55,6 +55,8 @@ knitr::opts_chunk$set(
       sex_variable = "sex",
       covariates = NULL,
       male_coded_zero = FALSE,
+      random_complexity = "auto",
+      use_ar1 = FALSE,
       parallel = FALSE, # to parallelise Daymont QC
       parallel_n_chunks = 1, # to parallelise Daymont QC
       working_directory = "." # or in that case "/tmp/egg_analysis"
@@ -109,6 +111,8 @@ knitr::opts_chunk$set(
       sex_variable = "sex",
       covariates = NULL,
       male_coded_zero = FALSE,
+      random_complexity = "auto",
+      use_ar1 = FALSE,
       parallel = FALSE, # to parallelise Daymont QC
       parallel_n_chunks = 1, # to parallelise Daymont QC
       working_directory = "." # or in that case "/tmp/egg_analysis"
@@ -243,6 +247,8 @@ knitr::opts_chunk$set(
         sex_variable = "sex",
         covariates = NULL,
         male_coded_zero = FALSE,
+        random_complexity = "auto",
+        use_ar1 = FALSE,
         parallel = FALSE,
         parallel_n_chunks = 1,
         working_directory = "."

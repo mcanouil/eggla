@@ -15,6 +15,7 @@ run_eggla(
   covariates,
   male_coded_zero = FALSE,
   random_complexity = "auto",
+  use_ar1 = FALSE,
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd()
@@ -41,6 +42,8 @@ run_eggla(
 
 \item{random_complexity}{A numeric (1-3) indicating the complexity of the random effect term.
 Default, \code{"auto"} will try from the more complex to the less complex if no success.}
+
+\item{use_ar1}{A logical indicating whether to use AR(1) for autocorrelation.}
 
 \item{parallel}{Determines if \code{growthcleanr::cleangrowth()} function shoud be run in parallel. Defaults to \code{FALSE}.}
 
@@ -79,6 +82,7 @@ if (interactive()) {
     covariates = NULL,
     male_coded_zero = FALSE,
     random_complexity = 1,
+    use_ar1 = FALSE,
     parallel = FALSE,
     parallel_n_chunks = 1,
     working_directory = tempdir()

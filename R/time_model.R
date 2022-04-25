@@ -9,6 +9,7 @@
 #' @param data A data.frame containing the variables named in `x` and `y`.
 #' @param method The type of model, _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
 #' @param knots The knots defining the splines for `"linear_splines"` and `"cubic_splines"` methods.
+#' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
 #'
 #' @return An object of class "lme" representing the linear mixed-effects model fit.
 #'
@@ -36,7 +37,8 @@ time_model <- function(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
     "cubic_splines" = c(2, 8, 12)
-  )[[method]]
+  )[[method]],
+  use_ar1 = FALSE
 ) {
   knots_fmt <- as.character(enquote(knots)[2])
   x_fmt <- switch(
@@ -73,7 +75,7 @@ time_model <- function(
     ))
   }
 
-  f_model_call <- function(form_fixed, form_random, n_iteration) {
+  f_model_call <- function(form_fixed, form_random, n_iteration, use_ar1) {
     c(
       "nlme::lme(",
       paste0("  fixed = ", form_fixed, ","),
@@ -81,7 +83,7 @@ time_model <- function(
       paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
       "  method = \"ML\",",
-      # "  correlation = nlme::corCAR1(form = ~ 1 | ID),",
+      if (use_ar1) "  correlation = nlme::corCAR1(form = ~ 1 | ID)," else NULL,
       paste0(
         "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
         n_iteration, ", msMaxIter = ", n_iteration, ")"
@@ -93,7 +95,8 @@ time_model <- function(
   model_call <- f_model_call(
     form_fixed = form_fixed,
     form_random = form_random,
-    n_iteration = 500
+    n_iteration = 500,
+    use_ar1 = use_ar1
   )
   res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   if (inherits(res_model, "try-error")) {
@@ -101,7 +104,8 @@ time_model <- function(
     model_call <- f_model_call(
       form_fixed = form_fixed,
       form_random = form_random,
-      n_iteration = 1000
+      n_iteration = 1000,
+      use_ar1 = use_ar1
     )
     res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   }
@@ -112,7 +116,8 @@ time_model <- function(
         f_model_call(
           form_fixed = form_fixed,
           form_random = paste0("~ ", gsub("degree = 3", "degree = 1", x_fmt, fixed = TRUE), " | ID"),
-          n_iteration = 1000
+          n_iteration = 1000,
+          use_ar1 = use_ar1
         )
       },
       "cubic_splines" = {
@@ -120,7 +125,8 @@ time_model <- function(
         f_model_call(
           form_fixed = form_fixed,
           form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(1", x_fmt, fixed = TRUE), " | ID"),
-          n_iteration = 1000
+          n_iteration = 1000,
+          use_ar1 = use_ar1
         )
       }
     )
@@ -132,7 +138,8 @@ time_model <- function(
     model_call <- f_model_call(
       form_fixed = form_fixed,
       form_random = "~ 1 | ID",
-      n_iteration = 1000
+      n_iteration = 1000,
+      use_ar1 = use_ar1
     )
     res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   }

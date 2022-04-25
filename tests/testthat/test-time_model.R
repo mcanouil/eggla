@@ -1,62 +1,74 @@
 test_that("Cubic slope", {
+  for (use_ar1 in c(FALSE, TRUE)) {
+    x <- time_model(
+      x = "age",
+      y = "log(bmi)",
+      data = bmigrowth[bmigrowth$sex == 0, ],
+      method = "cubic_slope",
+      use_ar1 = use_ar1
+    )
 
-  x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "cubic_slope")
+    y <- nlme::lme(
+      log(bmi) ~ stats::poly(age, 3),
+      data = bmigrowth[bmigrowth$sex == 0, ],
+      random = ~  stats::poly(age, 3) | ID,
+      na.action = stats::na.omit,
+      method = "ML",
+      correlation = if (use_ar1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
+      control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+    )
 
-  y <- nlme::lme(
-    log(bmi) ~ stats::poly(age, 3),
-    data = bmigrowth[bmigrowth$sex == 0, ],
-    random = ~  stats::poly(age, 3) | ID,
-    na.action = stats::na.omit,
-    method = "ML",
-    # correlation = nlme::corCAR1(form = ~ 1 | ID),
-    control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-  )
-
-  x <- stats::coefficients(summary(x))
-  y <- stats::coefficients(summary(y))
-
-  expect_equivalent(x, y)
+    expect_equivalent(stats::coefficients(summary(x)), stats::coefficients(summary(y)))
+  }
 })
 
 test_that("Linear Splines", {
+  for (use_ar1 in c(FALSE, TRUE)) {
+    x <- time_model(
+      x = "age",
+      y = "log(bmi)",
+      data = bmigrowth[bmigrowth$sex == 0, ],
+      method = "linear_splines",
+      use_ar1 = use_ar1
+    )
 
-  x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "linear_splines")
+    y <- nlme::lme(
+      log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)),
+      data = bmigrowth[bmigrowth$sex == 0, ],
+      random = ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)) | ID,
+      na.action = stats::na.omit,
+      method = "ML",
+      correlation = if (use_ar1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
+      control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+    )
+
+    expect_equivalent(stats::coefficients(summary(x)), stats::coefficients(summary(y)))
+  }
+})
+
+test_that("Cubic Splines", {
+for (use_ar1 in c(FALSE, TRUE)[2]) {
+  x <- time_model(
+    x = "age",
+    y = "log(bmi)",
+    data = bmigrowth[bmigrowth$sex == 0, ],
+    method = "cubic_splines",
+      use_ar1 = use_ar1
+  )
 
   y <- nlme::lme(
-    log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)),
+    log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
     data = bmigrowth[bmigrowth$sex == 0, ],
-    random = ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)) | ID,
+    random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
     na.action = stats::na.omit,
     method = "ML",
-    # correlation = nlme::corCAR1(form = ~ 1 | ID),
+    correlation = if (use_ar1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
   )
 
-  x <- stats::coefficients(summary(x))
-  y <- stats::coefficients(summary(y))
-
-  expect_equivalent(x, y)
+  expect_equivalent(stats::coefficients(summary(x)), stats::coefficients(summary(y)))
+}
 })
-
-# test_that("Cubic Splines", {
-
-#   x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "cubic_splines")
-
-#   y <- nlme::lme(
-#     log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
-#     data = bmigrowth[bmigrowth$sex == 0, ],
-#     random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
-#     na.action = stats::na.omit,
-#     method = "ML",
-#     # correlation = nlme::corCAR1(form = ~ 1 | ID),
-#     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-#   )
-
-#   x <- stats::coefficients(summary(x))
-#   y <- stats::coefficients(summary(y))
-
-#   expect_equivalent(x, y)
-# })
 
 test_that("Test wrong covariates", {
   expect_error(
@@ -83,7 +95,7 @@ test_that("Test covariates", {
   )
 })
 
-test_that("Test covariates with trnasformation", {
+test_that("Test covariates with transformation", {
   expect_s3_class(
     object = time_model(
       x = "age",
