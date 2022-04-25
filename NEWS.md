@@ -1,3 +1,12 @@
+# eggla (development version)
+
+## Features
+
+- In `R/compute_apar.R`,
+  - Feat: Allows to define the range in which to compute adiposity peak and adiposity rebound.
+- In `R/egg_model.R`,
+  - Feat: Allows to use (or not) AR(1) auto-correlation in the model, if `TRUE` (default: `FALSE`), the function will try without if all models fail.
+
 # eggla 0.6.1
 
 ## Fixes
