@@ -12,6 +12,7 @@
 #'   to be used as the individual identifier.
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
+#' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
 #'
 #' @return An object of class "lme" representing
 #'   the linear mixed-effects model fit.
@@ -29,7 +30,7 @@
 #' sres <- as.data.frame(summary(res)[["tTable"]])
 #' rownames(sres) <- sub("gsp\\(.*\\)\\)", "gsp(...)", rownames(sres))
 #' sres
-egg_model <- function(formula, data, id_var, random_complexity = "auto") {
+egg_model <- function(formula, data, id_var, random_complexity = "auto", use_ar1 = FALSE) {
   random_complexity <- match.arg(as.character(random_complexity), c("auto", 1, 2, 3))
   y <- as.character(formula)[[2]]
   x_cov <- strsplit(as.character(formula)[[3]], " \\+ ")[[1]]
@@ -82,7 +83,7 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
     ))
   }
 
-  f_model_call <- function(form_fixed, form_random, n_iteration) {
+  f_model_call <- function(form_fixed, form_random, n_iteration, use_ar1) {
     c(
       "nlme::lme(",
       paste0("  fixed = ", form_fixed, ","),
@@ -90,6 +91,7 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
       paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
       "  method = \"ML\",",
+      if (use_ar1) "  correlation = nlme::corCAR1(form = ~ 1 | ID)," else NULL,
       paste0(
         "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
         n_iteration, ", msMaxIter = ", n_iteration, ")"
@@ -104,7 +106,8 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
     model_call <- f_model_call(
       form_fixed = form_fixed,
       form_random = form_random[[irandom]],
-      n_iteration = 500
+      n_iteration = 500,
+      use_ar1 = use_ar1
     )
     message(
       "Fitting model:\n",
@@ -125,7 +128,8 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
       model_call <- f_model_call(
         form_fixed = form_fixed,
         form_random = form_random[[irandom]],
-        n_iteration = 1000
+        n_iteration = 1000,
+        use_ar1 = use_ar1
       )
       res_model <- try(
         expr = eval(parse(text = paste(model_call, collapse = ""))),
@@ -134,6 +138,16 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto") {
     }
 
     irandom <- irandom + 1
+    if (inherits(res_model, "try-error") & irandom > length(form_random) & use_ar1) {
+      message(
+        "Model with AR(1) auto-correlation failed, now trying without it ...",
+        appendLF = TRUE
+      )
+      use_ar1 <- FALSE
+      irandom <- 1
+    } else {
+      break
+    }
   }
 
   if (inherits(res_model, "try-error")) {
