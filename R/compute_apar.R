@@ -2,6 +2,9 @@
 #'
 #' @param fit A model object from a statistical model
 #'   such as from a call `nlme::lme()`, `time_model()` or `egg_model()`.
+#' @param from The start of the time window to compute AP and AR.
+#' @param to The end of the time window to compute AP and AR.
+#' @param by The step to increment the sequence.
 #'
 #' @return A `data.table` object.
 #'
@@ -17,7 +20,7 @@
 #' )
 #'
 #' head(compute_apar(fit = res)[AP | AR])
-compute_apar <- function(fit) {
+compute_apar <- function(fit, from = 0.25, to = 10, by = 0.05) {
   stopifnot(inherits(fit, "lme"))
   bmi_pred <- egg_ageyears <- log_bmi_pred <- NULL
 
@@ -27,7 +30,7 @@ compute_apar <- function(fit) {
   out <- data.table::setnames(
     x = data.table::data.table(
       egg_id = unique(fit[["groups"]][[id_var]]),
-      egg_ageyears = list(seq(from = 0.25, to = 10, by = 0.05))
+      egg_ageyears = list(seq(from = from, to = to, by = by))
     ),
     old = c("egg_id", "egg_ageyears"),
     new = c(id_var, age_var)

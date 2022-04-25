@@ -4,11 +4,17 @@
 \alias{compute_apar}
 \title{Compute adiposity peak (AP) and adiposity rebound (AR).}
 \usage{
-compute_apar(fit)
+compute_apar(fit, from = 0.25, to = 10, by = 0.05)
 }
 \arguments{
 \item{fit}{A model object from a statistical model
 such as from a call \code{nlme::lme()}, \code{time_model()} or \code{egg_model()}.}
+
+\item{from}{The start of the time window to compute AP and AR.}
+
+\item{to}{The end of the time window to compute AP and AR.}
+
+\item{by}{The step to increment the sequence.}
 }
 \value{
 A \code{data.table} object.
