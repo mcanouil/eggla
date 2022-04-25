@@ -189,7 +189,7 @@ all_models <- setDT(
       "visits_clean",
       "visits_clean[between(age, 1, 18)]"
     ),
-    correlation_structure = c("NULL", "corCAR1(form = ~ 1 | ID)")[1],
+    correlation_structure = c("NULL", "corCAR1(form = ~ 1 | ID)")[2], # Use AR(1) correlation structure (default is without)
     models = sprintf("fixed = %s, random = %s", fixed_effect, random_effect),
     default = paste0(
       c(
