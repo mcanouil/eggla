@@ -11,7 +11,8 @@ time_model(
   data,
   method = c("cubic_slope", "linear_splines", "cubic_splines"),
   knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(2, 8,
-    12))[[method]]
+    12))[[method]],
+  use_ar1 = FALSE
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ time_model(
 \item{method}{The type of model, \emph{i.e.}, one of \code{"cubic_slope"}, \code{"linear_splines"} or \code{"cubic_splines"}.}
 
 \item{knots}{The knots defining the splines for \code{"linear_splines"} and \code{"cubic_splines"} methods.}
+
+\item{use_ar1}{A logical indicating whether to use AR(1) for autocorrelation.}
 }
 \value{
 An object of class "lme" representing the linear mixed-effects model fit.
