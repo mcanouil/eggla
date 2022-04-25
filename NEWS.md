@@ -4,13 +4,13 @@
 
 - In `R/compute_apar.R`,
   - Feat: Allows to define the range in which to compute adiposity peak and adiposity rebound.
-- In `R/egg_model.R`, `R/time_model.R`, `vignettes/articles/run-eggla.Rmd`,
+- In `R/egg_model.R`, `R/time_model.R`,
   - Feat: Allows to use (or not) AR(1) auto-correlation in the model, if `TRUE` (default: `FALSE`), the function will try without if all models fail.
 
 ## Fixes
 
-- In `vignettes/articles/run-eggla.Rmd`,
-  - Fix: Use AR1 by default in vignette, only to speed-up computation.
+- In `vignettes/articles/run-eggla.Rmd`, `vignettes/articles/models-diagnostics.Rmd`,
+  - Fix: Uses AR1 by default in vignettes, only to speed-up computation.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.6.1...v0.7.0>
 
