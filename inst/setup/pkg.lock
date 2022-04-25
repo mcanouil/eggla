@@ -7,7 +7,7 @@
     {
       "ref": "github::mcanouil/eggla",
       "package": "eggla",
-      "version": "0.6.1",
+      "version": "0.7.0",
       "type": "github",
       "direct": true,
       "binary": false,
@@ -21,14 +21,14 @@
         "RemoteUsername": "mcanouil",
         "RemotePkgRef": "github::mcanouil/eggla",
         "RemoteRef": "HEAD",
-        "RemoteSha": "f494c40c0959de6095682396aedbb7ad47f4325a",
+        "RemoteSha": "3c2d7c9c58208914d13ecef5683cdf5325be78ac",
         "GithubRepo": "eggla",
         "GithubUsername": "mcanouil",
         "GithubRef": "HEAD",
-        "GithubSHA1": "f494c40c0959de6095682396aedbb7ad47f4325a"
+        "GithubSHA1": "3c2d7c9c58208914d13ecef5683cdf5325be78ac"
       },
-      "sources": ["https://api.github.com/repos/mcanouil/eggla/zipball/f494c40c0959de6095682396aedbb7ad47f4325a"],
-      "target": "src/contrib/eggla_0.6.1_f494c40.tar.gz",
+      "sources": ["https://api.github.com/repos/mcanouil/eggla/zipball/3c2d7c9c58208914d13ecef5683cdf5325be78ac"],
+      "target": "src/contrib/eggla_0.7.0_3c2d7c9.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": true,
