@@ -7,12 +7,12 @@
 - In `R/egg_model.R`, `R/time_model.R`, `vignettes/articles/run-eggla.Rmd`,
   - Feat: Allows to use (or not) AR(1) auto-correlation in the model, if `TRUE` (default: `FALSE`), the function will try without if all models fail.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.6.1...v0.7.0>
-
 ## Fixes
 
 - In `vignettes/articles/run-eggla.Rmd`,
   - Fix: Use AR1 by default in vignette, only to speed-up computation.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.6.1...v0.7.0>
 
 # eggla 0.6.1
 
