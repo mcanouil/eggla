@@ -4,7 +4,7 @@
 \alias{egg_model}
 \title{Fit a cubic splines mixed model.}
 \usage{
-egg_model(formula, data, id_var, random_complexity = "auto")
+egg_model(formula, data, id_var, random_complexity = "auto", use_ar1 = FALSE)
 }
 \arguments{
 \item{formula}{An object of class "formula":
@@ -18,6 +18,8 @@ to be used as the individual identifier.}
 
 \item{random_complexity}{A numeric (1-3) indicating the complexity of the random effect term.
 Default, \code{"auto"} will try from the more complex to the less complex if no success.}
+
+\item{use_ar1}{A logical indicating whether to use AR(1) for autocorrelation.}
 }
 \value{
 An object of class "lme" representing
