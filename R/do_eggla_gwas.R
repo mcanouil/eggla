@@ -162,12 +162,14 @@ do_eggla_gwas <- function(
       new = id_column
     ),
     by = id_column
-  )[
+  )
+
+  dt <- dt[
     j = unique(na.exclude(.SD)),
-    .SDcols = patterns(paste(
+    .SDcols = grep(paste(
       c(id_column, sprintf("^%s$", unique(c(traits, covariates)))),
       collapse = "|"
-    ))
+    ), names(dt), value = TRUE)
   ]
 
   data.table::setnames(x = dt, old = id_column, new = "#IID")
