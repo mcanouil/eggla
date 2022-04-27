@@ -1,3 +1,15 @@
+# eggla 0.8.0
+
+## Features
+
+- In `R/compute_apar.R`,
+  - Feat: allow to compute adiposity peak and adiposity rebound on raw data from a `"lme"` model object.
+- In `tests`, `DESCRIPTION`,
+  - Feat: now uses the third edition of `testthat`.
+  
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.7.0...v0.8.0>
+
+
 # eggla 0.7.0
 
 ## Features
