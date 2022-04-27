@@ -28,7 +28,7 @@ remotes::install_github("mcanouil/eggla")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.7.0")
+remotes::install_github("mcanouil/eggla@v0.8.0")
 ```
 
 ## License
