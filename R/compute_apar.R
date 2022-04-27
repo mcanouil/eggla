@@ -2,10 +2,11 @@
 #'
 #' @param fit A model object from a statistical model
 #'   such as from a call `nlme::lme()`, `time_model()` or `egg_model()`.
-#' @param use_raw_data A logical indicating whether to use the raw data within the `"lme"` object.
-#' @param from The start of the time window to compute AP and AR.
-#' @param to The end of the time window to compute AP and AR.
-#' @param by The step to increment the sequence.
+#' @param from A string indicating the type of data to be used for the AP and AR
+#'   computation, either "predicted" or "observed". Default is "predicted".
+#' @param start The start of the time window to compute AP and AR.
+#' @param end The end of the time window to compute AP and AR.
+#' @param step The step to increment the sequence.
 #'
 #' @return A `data.table` object.
 #'
@@ -20,10 +21,11 @@
 #'   random_complexity = 1
 #' )
 #'
-#' head(compute_apar(fit = res, use_raw_data = FALSE)[AP | AR])
-compute_apar <- function(fit, use_raw_data = FALSE, from = 0.25, to = 10, by = 0.05) {
+#' head(compute_apar(fit = res, from = "predicted")[AP | AR])
+compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, end = 10, step = 0.05) {
   stopifnot(inherits(fit, "lme"))
-  # egg_ageyears <- egg_bmi <- NULL
+  match.arg(from, c("predicted", "observed"))
+  AP <- AR <- bmi <- egg_ageyears <- egg_bmi <- egg_id <- NULL # no visible binding for global variable from data.table
 
   id_var <- names(fit[["groups"]])
   age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
@@ -36,31 +38,34 @@ compute_apar <- function(fit, use_raw_data = FALSE, from = 0.25, to = 10, by = 0
     f <- identity
   }
 
-  if (use_raw_data) {
-    out <- data.table::as.data.table(fit[["data"]])[
-      j = .SD,
-      .SDcols = c(id_var, age_var, bmi_var)
-    ]
-  } else {
-    out <- data.table::setnames(
-      x = data.table::data.table(
-        egg_id = unique(fit[["groups"]][[id_var]]),
-        egg_ageyears = list(seq(from = from, to = to, by = by))
-      ),
-      old = c("egg_id", "egg_ageyears"),
-      new = c(id_var, age_var)
-    )[
-      j = `names<-`(list(unlist(.SD)), age_var),
-      .SDcols = c(age_var),
-      by = c(id_var)
-    ][
-      j = bmi := f(stats::predict(
-        object = fit,
-        newdata = .SD,
-        interval = "prediction"
-      ))
-    ]
-  }
+  out <- switch(EXPR = from,
+    "predicted" = {
+      data.table::as.data.table(fit[["data"]])[
+        j = .SD,
+        .SDcols = c(id_var, age_var, bmi_var)
+      ]
+    },
+    "observed" = {
+      data.table::setnames(
+        x = data.table::data.table(
+          egg_id = unique(fit[["groups"]][[id_var]]),
+          egg_ageyears = list(seq(from = start, to = end, by = step))
+        ),
+        old = c("egg_id", "egg_ageyears"),
+        new = c(id_var, age_var)
+      )[
+        j = `names<-`(list(unlist(.SD)), age_var),
+        .SDcols = c(age_var),
+        by = c(id_var)
+      ][
+        j = bmi := f(stats::predict(
+          object = fit,
+          newdata = .SD,
+          interval = "prediction"
+        ))
+      ]
+    }
+  )
 
   data.table::setnames(
     x = out,

@@ -72,8 +72,8 @@ res_1 <- egg_model(
 
 ```{r compute-ar-ap}
 predicted_data <- list(
-  compute_apar(fit = res_0),
-  compute_apar(fit = res_1)
+  compute_apar(fit = res_0, from = "predicted"),
+  compute_apar(fit = res_1, from = "predicted")
 )
 names(predicted_data) <- c("0", "1")
 
@@ -100,7 +100,7 @@ one_individual_apar <- melt(
 ]
 
 ggplot(data = one_individual_data) +
-  geom_line(mapping = aes(x = egg_ageyears, y = bmi_pred)) +
+  geom_line(mapping = aes(x = egg_ageyears, y = egg_bmi)) +
   geom_vline(
     data = one_individual_apar,
     mapping = aes(
@@ -159,7 +159,7 @@ p_apar <- mapply(
       )
     ]
     ggplot(data = data) +
-      aes(x = egg_ageyears, y = bmi_pred) +
+      aes(x = egg_ageyears, y = egg_bmi) +
       geom_path(# Comment or remove this for big cohort
         mapping = aes(group = factor(egg_id)),
         colour = "#333333",
