@@ -1,5 +1,5 @@
 test_that("Adiposity Peak & Rebound", {
-  for (i in c(FALSE, TRUE)) {
+  for (i in c("predicted", "observed")) {
     data("bmigrowth")
     res <- egg_model(
       formula = log(bmi) ~ age,
@@ -7,6 +7,6 @@ test_that("Adiposity Peak & Rebound", {
       id_var = "ID",
       random_complexity = 1
     )
-    expect_snapshot(compute_apar(fit = res, use_raw_data = i)[AP | AR])
+    expect_snapshot(compute_apar(fit = res, from = i)[AP | AR])
   }
 })
