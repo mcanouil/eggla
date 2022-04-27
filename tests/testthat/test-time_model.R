@@ -18,7 +18,7 @@ test_that("Cubic slope", {
       control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
     )
 
-    expect_equivalent(stats::coefficients(summary(x)), stats::coefficients(summary(y)))
+    expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
   }
 })
 
@@ -42,7 +42,7 @@ test_that("Linear Splines", {
       control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
     )
 
-    expect_equivalent(stats::coefficients(summary(x)), stats::coefficients(summary(y)))
+    expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
   }
 })
 
@@ -66,7 +66,7 @@ for (use_ar1 in c(FALSE, TRUE)[2]) {
     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
   )
 
-  expect_equivalent(stats::coefficients(summary(x)), stats::coefficients(summary(y)))
+  expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
 }
 })
 
