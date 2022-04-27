@@ -34,8 +34,8 @@ plot_slopes <- function(
     "cubic_splines" = c(2, 8, 12)
   )[[method]]
 ) {
-  params <- variable <- yend <- pred_period <- end <- NULL
-  patterns <- slope <- age <- .data <- start <- NULL
+  params <- variable <- yend <- pred_period <- end <- NULL # no visible binding for global variable from data.table
+  patterns <- slope <- .data <- start <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])
   age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)

@@ -34,7 +34,7 @@ plot_aucs <- function(
     "cubic_splines" = c(2, 8, 12)
   )[[method]]
 ) {
-  period_interval <- patterns <- auc <- NULL
+  period_interval <- patterns <- auc <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])
 

@@ -69,9 +69,9 @@ run_eggla <- function(
   parallel_n_chunks = 1,
   working_directory = getwd()
 ) {
-  HEIGHTCM <- WEIGHTKG <- bmi <- clean <- NULL
-  egg_agedays <- egg_id <- egg_sex <- NULL
-  measurement <- param <- NULL
+  HEIGHTCM <- WEIGHTKG <- bmi <- clean <- NULL # no visible binding for global variable from data.table
+  egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
+  measurement <- param <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
 
