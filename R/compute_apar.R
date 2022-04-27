@@ -82,13 +82,13 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
   }
 
   out <- switch(EXPR = from,
-    "predicted" = {
+    "observed" = {
       data.table::as.data.table(fit[["data"]])[
         j = .SD,
         .SDcols = c(id_var, age_var, bmi_var)
       ]
     },
-    "observed" = {
+    "predicted" = {
       data.table::setnames(
         x = data.table::data.table(
           egg_id = unique(fit[["groups"]][[id_var]]),
