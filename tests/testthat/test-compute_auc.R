@@ -37,7 +37,7 @@ test_that("Cubic slope", {
     })
   })
 
-  expect_equivalent(y1, y2)
+  expect_equal(y1, y2, ignore_attr = TRUE)
 })
 
 test_that("Linear Splines", {
@@ -93,19 +93,18 @@ test_that("Linear Splines", {
     })
   })
 
-  expect_equivalent(y1, y2)
+  expect_equal(y1, y2, ignore_attr = TRUE)
 })
 
 # test_that("Cubic Splines", {
-
 #   x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ], method = "cubic_splines")
-
+#
 #   y1 <- compute_aucs(
 #     fit = x,
 #     method = "cubic_splines",
 #     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
 #   )
-
+#
 #   y2 <- local({
 #     suppressWarnings({
 #       k1 <- 2
@@ -248,6 +247,6 @@ test_that("Linear Splines", {
 #       auc_csplines_female
 #     })
 #   })
-
-#   expect_equivalent(y1, y2, tolerance = 1e-5)
+#
+#   expect_equal(y1, y2, ignore_attr = TRUE, tolerance = 1e-5)
 # })
