@@ -4,11 +4,23 @@
 
 - In `R/compute_apar.R`,
   - Feat: allow to compute adiposity peak and adiposity rebound on raw data from a `"lme"` model object.
+  - Refactor: rename arguments.
 - In `tests`, `DESCRIPTION`,
   - Feat: now uses the third edition of `testthat`.
-  
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.7.0...v0.8.0>
 
+## Bug Fixes
+
+- In `R/do_eggla_gwas.R`,
+  - Fix: no visible global function definition for 'patterns'.
+
+## Build
+
+- In `inst/setup`,
+  - build: update lock files from `renv` and `pak` based on local package.
+- In `data-raw/lock.R`,
+  - build: update script to work on local version for both `renv` and `pak`.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.7.0...v0.8.0>
 
 # eggla 0.7.0
 
