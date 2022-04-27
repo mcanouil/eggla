@@ -22,6 +22,49 @@
 #' )
 #'
 #' head(compute_apar(fit = res, from = "predicted")[AP | AR])
+#'
+#' # Comparing observed and predicted values
+#' library(data.table)
+#' library(ggplot2)
+#' library(patchwork)
+#' list_gg <- melt(
+#'   data = rbindlist(
+#'     l = lapply(
+#'       X = (function(.x) `names<-`(.x, .x))(c("predicted", "observed")),
+#'       FUN = compute_apar,
+#'       fit = res
+#'     ),
+#'     idcol = "from"
+#'   )[
+#'     AP | AR
+#'   ][
+#'     j = what := fifelse(paste(AP, AR) %in% paste(FALSE, TRUE), "AR", "AP")
+#'   ],
+#'   id.vars = c("from", "egg_id", "what"),
+#'   measure.vars = c("egg_ageyears", "egg_bmi")
+#' )[
+#'   j = list(gg = list({
+#'     dt <- dcast(data = .SD, formula = egg_id + what ~ from)
+#'     range_xy <- range(dt[, c("observed", "predicted")], na.rm = TRUE)
+#'     ggplot(data = dt) +
+#'       aes(x = observed, y = predicted, colour = what) +
+#'       geom_abline(intercept = 0, slope = 1) +
+#'       geom_segment(aes(xend = observed, yend = observed), alpha = 0.5) +
+#'       geom_point() +
+#'       scale_colour_manual(values = c("#b22222", "#22b222")) +
+#'       theme_minimal() +
+#'       theme(plot.title.position = "plot") +
+#'       labs(
+#'         x = sprintf("Observed: %s", sub(".*_", "", toupper(variable))),
+#'         y = sprintf("Predicted: %s", sub(".*_", "", toupper(variable))),
+#'         colour = NULL,
+#'         title = sub(".*_", "", toupper(variable))
+#'       ) +
+#'       coord_cartesian(xlim = range_xy, ylim = range_xy)
+#'   })),
+#'   by = "variable"
+#' ]
+#' wrap_plots(list_gg[["gg"]], guides = "collect")
 compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, end = 10, step = 0.05) {
   stopifnot(inherits(fit, "lme"))
   match.arg(from, c("predicted", "observed"))
