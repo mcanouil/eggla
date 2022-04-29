@@ -44,7 +44,6 @@ jobs:
               --label "org.opencontainers.image.base.name=docker.io/mcanouil/r-ver:4.2.0" \
               --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
               --label "org.opencontainers.image.version=${TAG}" \
-              --label "org.opencontainers.image.version=latest" \
               .
           fi
         
