@@ -6,9 +6,7 @@ LABEL org.opencontainers.image.licenses="GPL-3.0" \
 
 COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
-RUN Rscript -e "pak::pkg_install('data.table', upgrade = FALSE)"
-RUN Rscript -e "pak::lockfile_install(lockfile = 'pkg.lock')"
-RUN Rscript -e "pak::pkg_install('eggla', upgrade = FALSE)"
+RUN Rscript -e "pak::pkg_install('mcanouil/eggla', upgrade = FALSE)"
 
 ENV BCFTOOLS_VERSION=0.15.1
 RUN apt-get update && \
