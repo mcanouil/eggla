@@ -19,9 +19,9 @@ jobs:
       - name: Build and push Docker images
         run: |
           if [[ ! "${{github.ref_name}}" =~ "main" ]]; then
-            docker_tag="devel"
+            TAG="devel"
           else
-            docker_tag="${{github.ref_name}}"
+            TAG="${{github.ref_name}}"
           fi
         
           docker buildx build \
@@ -31,7 +31,7 @@ jobs:
             --label "org.opencontainers.image.description": "Docker image for the 'eggla' R package.",
             --label "org.opencontainers.image.base.name": "docker.io/mcanouil/r-ver:4.2.0"
             --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
-            --label "org.opencontainers.image.version=${{docker_tag}}" \
-            --tag "docker.io/mcanouil/eggla:${{docker_tag}}" \
+            --label "org.opencontainers.image.version=${TAG}" \
+            --tag "docker.io/mcanouil/eggla:${TAG}" \
             --file "inst/setup/Dockerfile" \
             .
