@@ -28,8 +28,15 @@ remotes::install_github("mcanouil/eggla")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.8.0")
+remotes::install_github("mcanouil/eggla@v0.8.1")
 ```
+
+## Docker Images
+
+-   `ghcr.io/mcanouil/eggla:latest`
+-   `docker.io/mcanouil/eggla:latest`
+-   `docker.io/mcanouil/eggla:v0.8.1`
+-   `docker.io/mcanouil/eggla:devel`
 
 ## License
 
