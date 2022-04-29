@@ -31,7 +31,7 @@ jobs:
             --label "org.opencontainers.image.description": "Docker image for the 'eggla' R package.",
             --label "org.opencontainers.image.base.name": "docker.io/mcanouil/r-ver:4.2.0"
             --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
-            --label "org.opencontainers.image.version=${docker_tag}" \
-            --tag "docker.io/mcanouil/eggla:${docker_tag}" \
+            --label "org.opencontainers.image.version=${{docker_tag}}" \
+            --tag "docker.io/mcanouil/eggla:${{docker_tag}}" \
             --file "inst/setup/Dockerfile" \
             .
