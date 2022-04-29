@@ -31,9 +31,9 @@ jobs:
             --platform "linux/amd64" \
             TAGS_CMD \
             --file "inst/setup/Dockerfile" \
-            --label "org.opencontainers.image.title=eggla",
-            --label "org.opencontainers.image.description=Docker image for the 'eggla' R package.",
-            --label "org.opencontainers.image.base.name=docker.io/mcanouil/r-ver:4.2.0"
+            --label "org.opencontainers.image.title=eggla" \
+            --label "org.opencontainers.image.description=Docker image for the 'eggla' R package." \
+            --label "org.opencontainers.image.base.name=docker.io/mcanouil/r-ver:4.2.0" \
             --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
             --label "org.opencontainers.image.version=${TAG}" \
             .
