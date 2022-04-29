@@ -38,7 +38,6 @@ jobs:
               --platform "linux/amd64" \
               --tag "docker.io/mcanouil/eggla:${TAG}" \
               --tag "docker.io/mcanouil/eggla:latest" \
-              --tag "ghcr.io/mcanouil/eggla:latest" \
               --file "inst/setup/Dockerfile" \
               --label "org.opencontainers.image.title=eggla" \
               --label "org.opencontainers.image.description=Docker image for the 'eggla' R package." \
@@ -47,4 +46,13 @@ jobs:
               --label "org.opencontainers.image.version=${TAG}" \
               .
           fi
-        
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push Docker images to GitHub Container Registry
+        run: |
+          docker tag docker.io/mcanouil/eggla:latest ghcr.io/mcanouil/eggla:latest
+          docker push ghcr.io/mcanouil/eggla:latest
