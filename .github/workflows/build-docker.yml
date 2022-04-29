@@ -54,9 +54,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Push Docker images to GitHub Container Registry
         run: |
-        if [[ ! "${{github.ref_name}}" = "main" ]]; then
-          docker tag docker.io/mcanouil/eggla:latest ghcr.io/mcanouil/eggla:latest
-          docker tag docker.io/mcanouil/eggla:latest ghcr.io/mcanouil/eggla:${{github.ref_name}}
-          docker push ghcr.io/mcanouil/eggla:latest
-          docker push ghcr.io/mcanouil/eggla:${{github.ref_name}}
-        fi
+          if [[ ! "${{github.ref_name}}" = "main" ]]; then
+            docker tag docker.io/mcanouil/eggla:latest ghcr.io/mcanouil/eggla:latest
+            docker tag docker.io/mcanouil/eggla:latest ghcr.io/mcanouil/eggla:${{github.ref_name}}
+            docker push ghcr.io/mcanouil/eggla:latest
+            docker push ghcr.io/mcanouil/eggla:${{github.ref_name}}
+          fi
