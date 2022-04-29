@@ -12,7 +12,7 @@
   ],
   "target": {
     "eggla": {
-      "context": "../../",
+      "context": "./",
       "dockerfile": "inst/setup/Dockerfile",
       "labels": {
         "org.opencontainers.image.title": "eggla:devel",
