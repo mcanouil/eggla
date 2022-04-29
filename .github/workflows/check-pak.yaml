@@ -9,6 +9,8 @@ on:
     branches: [main, master]
     paths-ignore:
       - ".github/**"
+      - "inst/setup/Dockerfile"
+      - "inst/setup/docker-bake.json"
   pull_request:
     branches: [main, master]
 
