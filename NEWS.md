@@ -1,3 +1,10 @@
+# eggla 0.8.1
+
+## Features
+
+- In `inst/setup/Dockerfile`,
+  - Feat: Docker image built automatically "devel" from "main" and "tag" from "releases".
+
 # eggla 0.8.0
 
 ## Features
