@@ -2,9 +2,11 @@ name: Build Docker
 
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
-  build-docker-devel:
+  build-docker:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -16,7 +18,20 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push Docker images
         run: |
-          bake_json=inst/setup/docker-bake.json
-          for itarget in $(jq '.group[].default[].targets[]' -r ${bake_json});
-            do docker buildx bake --file ${bake_json} --set=*.labels.org.opencontainers.image.revision=${GITHUB_SHA} --push ${itarget};
-          done
+          if [[ ! "${{github.ref_name}}" =~ "main" ]]; then
+            docker_tag="devel"
+          else
+            docker_tag="${{github.ref_name}}"
+          fi
+        
+          docker buildx build \
+            --push \
+            --platform "linux/amd64" \
+            --label "org.opencontainers.image.title": "eggla",
+            --label "org.opencontainers.image.description": "Docker image for the 'eggla' R package.",
+            --label "org.opencontainers.image.base.name": "docker.io/mcanouil/r-ver:4.2.0"
+            --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
+            --label "org.opencontainers.image.version=${docker_tag}" \
+            --tag "docker.io/mcanouil/eggla:${docker_tag}" \
+            --file "inst/setup/Dockerfile" \
+            .
