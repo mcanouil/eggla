@@ -24,14 +24,4 @@ jobs:
             TAG="${{github.ref_name}}"
           fi
         
-          docker buildx build \
-            --push \
-            --platform "linux/amd64" \
-            --label "org.opencontainers.image.title": "eggla",
-            --label "org.opencontainers.image.description": "Docker image for the 'eggla' R package.",
-            --label "org.opencontainers.image.base.name": "docker.io/mcanouil/r-ver:4.2.0"
-            --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
-            --label "org.opencontainers.image.version=${TAG}" \
-            --tag=docker.io/mcanouil/eggla:${TAG} \
-            --file "inst/setup/Dockerfile" \
-            .
+          docker buildx build --push --platform "linux/amd64" --tag=docker.io/mcanouil/eggla:${TAG} --file=inst/setup/Dockerfile .
