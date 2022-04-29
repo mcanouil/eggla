@@ -38,6 +38,7 @@ jobs:
               --platform "linux/amd64" \
               --tag "docker.io/mcanouil/eggla:${TAG}" \
               --tag "docker.io/mcanouil/eggla:latest" \
+              --tag "ghcr.io/mcanouil/eggla:latest" \
               --file "inst/setup/Dockerfile" \
               --label "org.opencontainers.image.title=eggla" \
               --label "org.opencontainers.image.description=Docker image for the 'eggla' R package." \
