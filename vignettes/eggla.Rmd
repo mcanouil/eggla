@@ -1,6 +1,13 @@
 ---
 title: "Run 'eggla' Workflow"
+description: |
+  How-to run the 'eggla' workflow from quality-control to genome-wide association study.
 author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
