@@ -4,6 +4,8 @@ LABEL org.opencontainers.image.licenses="GPL-3.0" \
       org.opencontainers.image.source="https://github.com/mcanouil/eggla" \
       org.opencontainers.image.authors="Mickaël Canouil <https://mickael.canouil.fr/>"
 
+RUN apt-get update && apt-get install -y --no-install-recommends libxt6
+
 COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
 RUN Rscript -e "pak::pkg_install('mcanouil/eggla', upgrade = FALSE)"
