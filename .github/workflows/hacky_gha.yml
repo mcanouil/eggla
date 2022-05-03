@@ -17,6 +17,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Push Docker images to GitHub Container Registry
         run: |
-          docker pull ghcr.io/mcanouil/eggla:${{github.ref_name}}
-          docker tag ghcr.io/mcanouil/eggla:${{github.ref_name}} ghcr.io/mcanouil/eggla:latest
+          docker pull ghcr.io/mcanouil/eggla:v0.9.0
+          docker tag ghcr.io/mcanouil/eggla:v0.9.0 ghcr.io/mcanouil/eggla:latest
           docker push ghcr.io/mcanouil/eggla:latest
