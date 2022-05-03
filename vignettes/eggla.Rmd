@@ -3,9 +3,7 @@ title: "Get Started with 'eggla'"
 description: |
   How-to run the 'eggla' workflow from quality-control to genome-wide association study.
 author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
-output: 
-  rmarkdown::html_vignette:
-    number_sections: true
+output: rmarkdown::html_vignette:
 vignette: >
   %\VignetteIndexEntry{Get Started with 'eggla'}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,6 +18,98 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Run Using Docker
+
+1. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
+
+    ```{r, eval = FALSE}
+    library(eggla)
+    library(data.table)
+    res <- try(run_eggla(
+      data = fread("/home/mcanouil/eggla/bmigrowth.csv"), # to be changed with the path of the file containing the data
+      id_variable = "ID",
+      age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+      age_years_variable = "age",
+      weight_kilograms_variable = "weight",
+      height_centimetres_variable = "height",
+      sex_variable = "sex",
+      covariates = NULL,
+      male_coded_zero = FALSE,
+      random_complexity = "auto",
+      use_ar1 = FALSE,
+      parallel = FALSE, # to parallelise Daymont QC
+      parallel_n_chunks = 1, # to parallelise Daymont QC
+      working_directory = "."
+    ))
+    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
+    ```
+
+2. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
+
+    ```{bash, eval = FALSE}
+    docker run \
+      -it --rm \
+      --volume /home/mcanouil/eggla:/tmp/eggla \
+      ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla.R
+    ```
+
+    _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
+
+3. Retrieve the two archives
+
+    ```
+    /home/mcanouil/eggla/
+    ├── 2021-11-23-female.zip
+    └── 2021-11-23-male.zip
+    ```
+
+4. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
+
+    ```{r, eval = FALSE}
+    working_directory <- "/home/mcanouil/eggla"
+    setwd(working_directory)
+    library(eggla)
+    chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
+    if (!isFALSE(chr_in_parallel)) {
+      renv::install(c("future", "future.apply"))
+      future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
+    }
+    do_eggla_gwas(
+      data = "./bmigrowth.csv",
+      results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
+      id_column = "ID",
+      traits = c("slope_.*", "auc_.*"),
+      covariates = c("sex"),
+      vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\.vcf$|\\.vcf.gz$", full.names = TRUE),
+      vep = NULL,
+      path = ".",
+      bin_path = list(
+        bcftools = "/usr/bin/bcftools",
+        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
+      ),
+      threads = 1
+    )
+    ```
+
+5. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
+
+    ```{bash, eval = FALSE}
+    docker run \
+      -it --rm \
+      --volume /home/mcanouil/eggla:/tmp/eggla \
+      ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla_gwas.R
+    ```
+
+    _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
+
+6. Retrieve the results and software version information files.
+
+    ```
+    /home/mcanouil/eggla/
+    ├── gwas_software.txt
+    └── gwas.csv.gz
+    ```
+
 # Run Non-Interactively
 
 1. Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
@@ -29,7 +119,7 @@ knitr::opts_chunk$set(
     ```{bash, eval = FALSE}
     #!/bin/bash
 
-    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
     mkdir $home_analysis 
 
@@ -55,10 +145,10 @@ knitr::opts_chunk$set(
     library(eggla)
     library(data.table)
     res <- try(run_eggla(
-      data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+      data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
       id_variable = "ID",
       age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-      age_years_variable = "age", 
+      age_years_variable = "age",
       weight_kilograms_variable = "weight",
       height_centimetres_variable = "height",
       sex_variable = "sex",
@@ -68,11 +158,10 @@ knitr::opts_chunk$set(
       use_ar1 = FALSE,
       parallel = FALSE, # to parallelise Daymont QC
       parallel_n_chunks = 1, # to parallelise Daymont QC
-      working_directory = "." # or in that case "/tmp/egg_analysis"
+      working_directory = "."
     ))
     if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
     EOF
-
     ```
 
   - `pak` (faster):
@@ -80,7 +169,7 @@ knitr::opts_chunk$set(
     ```{bash, eval = FALSE}
     #!/bin/bash
 
-    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
     mkdir $home_analysis 
 
@@ -111,10 +200,10 @@ knitr::opts_chunk$set(
     library(eggla)
     library(data.table)
     res <- try(run_eggla(
-      data = fread("/tmp/bmigrowth.csv"), # to be changed with the path of the file containing the data
+      data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
       id_variable = "ID",
       age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-      age_years_variable = "age", 
+      age_years_variable = "age",
       weight_kilograms_variable = "weight",
       height_centimetres_variable = "height",
       sex_variable = "sex",
@@ -124,11 +213,10 @@ knitr::opts_chunk$set(
       use_ar1 = FALSE,
       parallel = FALSE, # to parallelise Daymont QC
       parallel_n_chunks = 1, # to parallelise Daymont QC
-      working_directory = "." # or in that case "/tmp/egg_analysis"
+      working_directory = "."
     ))
     if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
     EOF
-
     ```
 
 2.  Run the analysis in bash
@@ -140,7 +228,7 @@ knitr::opts_chunk$set(
 3. Retrieve the two archives
 
     ```
-    /tmp/egg_analysis/
+    /home/mcanouil/eggla/
     ├── 2021-11-23-female.zip
     └── 2021-11-23-male.zip
     ```
@@ -150,7 +238,7 @@ knitr::opts_chunk$set(
     ```{bash, eval = FALSE}
     #!/bin/bash
 
-    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
     mkdir $home_analysis
 
@@ -164,8 +252,8 @@ knitr::opts_chunk$set(
       future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
     }
     do_eggla_gwas(
-      data = "/tmp/bmigrowth.csv",
-      list.files(path = ".", pattern = "\\\\.zip", full.names = TRUE),
+      data = "bmigrowth.csv",
+      results_zip = list.files(path = ".", pattern = "\\\\.zip", full.names = TRUE),
       id_column = "ID",
       traits = c("slope_.*", "auc_.*"),
       covariates = c("sex"),
@@ -174,21 +262,27 @@ knitr::opts_chunk$set(
       path = ".",
       bin_path = list(
         bcftools = "/usr/bin/bcftools",
-        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"
+        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
       ),
       threads = 1
     )
     EOF
-
     ```
 
+5. Retrieve the results and software version information files.
+
+    ```
+    /home/mcanouil/eggla/
+    ├── gwas_software.txt
+    └── gwas.csv.gz
+    ```
 
 # Run Interactively
 
 1. Create the working directory
 
     ```{bash, eval = FALSE}
-    home_analysis="/tmp/egg_analysis" # to be changed to the folder in which "egg_analysis" is to be performed
+    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
     
     mkdir $home_analysis 
 
@@ -243,11 +337,12 @@ knitr::opts_chunk$set(
 4. Run the analysis
 
     ```{r, eval = FALSE}
+    # setwd("/home/mcanouil/eggla") # already set if step 1 was done
     library(eggla)
     library(data.table)
     res <- try(
       run_eggla(
-        data = fread("/tmp/bmigrowth.csv"),
+        data = fread("bmigrowth.csv"),
         id_variable = "ID",
         age_days_variable = NULL,
         age_years_variable = "age",
@@ -269,7 +364,7 @@ knitr::opts_chunk$set(
 5. Retrieve the two archives
 
     ```
-    /tmp/egg_analysis/
+    /home/mcanouil/eggla/
     ├── 2021-11-23-female.zip
     └── 2021-11-23-male.zip
     ```
@@ -277,6 +372,7 @@ knitr::opts_chunk$set(
 6. Run the GWASs on slopes and AUCs for male and female
 
     ```{r, eval = FALSE}
+    # setwd("/home/mcanouil/eggla") # already set if step 1 was done
     library(eggla)
     chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
     if (!isFALSE(chr_in_parallel)) {
@@ -284,7 +380,7 @@ knitr::opts_chunk$set(
       future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
     }
     do_eggla_gwas(
-      data = "/tmp/bmigrowth.csv",
+      data = "bmigrowth.csv",
       results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
       id_column = "ID",
       traits = c("slope_.*", "auc_.*"),
@@ -298,8 +394,16 @@ knitr::opts_chunk$set(
       path = ".",
       bin_path = list(
         bcftools = "/usr/bin/bcftools",
-        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"
+        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
       ),
       threads = 1
     )
+    ```
+
+7. Retrieve the results and software version information files.
+
+    ```
+    /home/mcanouil/eggla/
+    ├── gwas_software.txt
+    └── gwas.csv.gz
     ```
