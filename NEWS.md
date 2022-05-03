@@ -1,3 +1,21 @@
+# eggla 0.8.2
+
+## Features
+
+- In `inst/setup/Dockerfile`,
+  - Feat: Add script example (`inst\setup\eggla-example.R`) to run on dataset included in `eggla`.
+
+## Fixes
+
+- In `R/egg_model.R`,
+  - Fix: hardcoded "ID" for individual specification in random effect.
+- In `R/time_model.R`,
+  - Fix: hardcoded "ID" for individual specification in random effect by adding `id_var` arg.
+- In `vignettes/eggla.Rmd` (renamed/moved from `vignettes/articles/run-eggla.Rmd`),
+  - Fix: use `Rscript` instead of `R --no-save --no-restore --quiet`.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.8.1...v0.8.2>
+
 # eggla 0.8.1
 
 ## Features
