@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 # Run Using Docker
 
-1. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
+## 1. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
 
     ```{r, eval = FALSE}
     library(eggla)
@@ -44,7 +44,7 @@ knitr::opts_chunk$set(
     if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
     ```
 
-2. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
+## 2. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
     ```{bash, eval = FALSE}
     docker run \
@@ -55,7 +55,7 @@ knitr::opts_chunk$set(
 
     _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
 
-3. Retrieve the two archives
+## 3. Retrieve the two archives
 
     ```
     /home/mcanouil/eggla/
@@ -63,7 +63,7 @@ knitr::opts_chunk$set(
     └── 2021-11-23-male.zip
     ```
 
-4. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
+## 4. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
 
     ```{r, eval = FALSE}
     working_directory <- "/home/mcanouil/eggla"
@@ -91,7 +91,7 @@ knitr::opts_chunk$set(
     )
     ```
 
-5. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
+## 5. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
     ```{bash, eval = FALSE}
     docker run \
@@ -102,7 +102,7 @@ knitr::opts_chunk$set(
 
     _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
 
-6. Retrieve the results and software version information files.
+## 6. Retrieve the results and software version information files.
 
     ```
     /home/mcanouil/eggla/
@@ -112,7 +112,7 @@ knitr::opts_chunk$set(
 
 # Run Non-Interactively
 
-1. Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
+## 1. Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
   - `renv` (recommended):
 
@@ -219,13 +219,13 @@ knitr::opts_chunk$set(
     EOF
     ```
 
-2.  Run the analysis in bash
+## 2.  Run the analysis in bash
 
     ```{bash, eval = FALSE}
     bash run_eggla.sh
     ```
 
-3. Retrieve the two archives
+## 3. Retrieve the two archives
 
     ```
     /home/mcanouil/eggla/
@@ -233,7 +233,7 @@ knitr::opts_chunk$set(
     └── 2021-11-23-male.zip
     ```
 
-4. Run the GWASs on slopes and AUCs for male and female
+## 4. Run the GWASs on slopes and AUCs for male and female
 
     ```{bash, eval = FALSE}
     #!/bin/bash
@@ -269,7 +269,7 @@ knitr::opts_chunk$set(
     EOF
     ```
 
-5. Retrieve the results and software version information files.
+## 5. Retrieve the results and software version information files.
 
     ```
     /home/mcanouil/eggla/
@@ -279,7 +279,7 @@ knitr::opts_chunk$set(
 
 # Run Interactively
 
-1. Create the working directory
+## 1. Create the working directory
 
     ```{bash, eval = FALSE}
     home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
@@ -289,7 +289,7 @@ knitr::opts_chunk$set(
     cd $home_analysis || exit
     ```
 
-2. Start R and setup working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages
+## 2. Start R and setup working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages
 
   - `renv` (recommended):
 
@@ -332,9 +332,9 @@ knitr::opts_chunk$set(
     pkg_install("mcanouil/eggla@0.9.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     ```
 
-3. Restart R
+## 3. Restart R
 
-4. Run the analysis
+## 4. Run the analysis
 
     ```{r, eval = FALSE}
     # setwd("/home/mcanouil/eggla") # already set if step 1 was done
@@ -361,7 +361,7 @@ knitr::opts_chunk$set(
     if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
     ```
 
-5. Retrieve the two archives
+## 5. Retrieve the two archives
 
     ```
     /home/mcanouil/eggla/
@@ -369,7 +369,7 @@ knitr::opts_chunk$set(
     └── 2021-11-23-male.zip
     ```
 
-6. Run the GWASs on slopes and AUCs for male and female
+## 6. Run the GWASs on slopes and AUCs for male and female
 
     ```{r, eval = FALSE}
     # setwd("/home/mcanouil/eggla") # already set if step 1 was done
@@ -400,7 +400,7 @@ knitr::opts_chunk$set(
     )
     ```
 
-7. Retrieve the results and software version information files.
+## 7. Retrieve the results and software version information files.
 
     ```
     /home/mcanouil/eggla/
