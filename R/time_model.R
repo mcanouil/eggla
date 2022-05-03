@@ -10,6 +10,8 @@
 #' @param method The type of model, _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
 #' @param knots The knots defining the splines for `"linear_splines"` and `"cubic_splines"` methods.
 #' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
+#' @param id_var A string indicating the name of the variable
+#'   to be used as the individual identifier.
 #'
 #' @return An object of class "lme" representing the linear mixed-effects model fit.
 #'
@@ -38,7 +40,8 @@ time_model <- function(
     "linear_splines" = c(5.5, 11),
     "cubic_splines" = c(2, 8, 12)
   )[[method]],
-  use_ar1 = FALSE
+  use_ar1 = FALSE,
+  id_var = "ID"
 ) {
   knots_fmt <- as.character(enquote(knots)[2])
   x_fmt <- switch(
@@ -57,7 +60,7 @@ time_model <- function(
     stop(paste0("'", method, "' not defined!"))
   )
   form_fixed <- paste0(y, " ~ ",  x_fmt)
-  form_random <- paste0("~ ", x_fmt, " | ID")
+  form_random <- paste0("~ ", x_fmt, " | ", id_var)
 
   if (!is.null(cov)) {
     form_fixed <- paste(form_fixed, "+", paste(cov, collapse = " + "))
@@ -83,7 +86,7 @@ time_model <- function(
       paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
       "  method = \"ML\",",
-      if (use_ar1) "  correlation = nlme::corCAR1(form = ~ 1 | ID)," else NULL,
+      if (use_ar1) sprintf("  correlation = nlme::corCAR1(form = ~ 1 | %s),", id_var) else NULL,
       paste0(
         "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
         n_iteration, ", msMaxIter = ", n_iteration, ")"
@@ -115,7 +118,7 @@ time_model <- function(
         message("Polynom's degree was decreased from 3 to 1 in the random effect formula.", appendLF = TRUE)
         f_model_call(
           form_fixed = form_fixed,
-          form_random = paste0("~ ", gsub("degree = 3", "degree = 1", x_fmt, fixed = TRUE), " | ID"),
+          form_random = paste0("~ ", gsub("degree = 3", "degree = 1", x_fmt, fixed = TRUE), " | ", id_var),
           n_iteration = 1000,
           use_ar1 = use_ar1
         )
@@ -124,7 +127,7 @@ time_model <- function(
         message("Spline's degree was decreased from 3 to 1 in the random effect formula.", appendLF = TRUE)
         f_model_call(
           form_fixed = form_fixed,
-          form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(1", x_fmt, fixed = TRUE), " | ID"),
+          form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(1", x_fmt, fixed = TRUE), " | ", id_var),
           n_iteration = 1000,
           use_ar1 = use_ar1
         )
@@ -134,10 +137,10 @@ time_model <- function(
   }
 
   if (inherits(res_model, "try-error")) {
-    message('The random effect formula has been set to "~ 1 | ID".', appendLF = TRUE)
+    message(sprintf('The random effect formula has been set to "~ 1 | %s".', id_var), appendLF = TRUE)
     model_call <- f_model_call(
       form_fixed = form_fixed,
-      form_random = "~ 1 | ID",
+      form_random = paste0("~ 1 | ", id_var),
       n_iteration = 1000,
       use_ar1 = use_ar1
     )

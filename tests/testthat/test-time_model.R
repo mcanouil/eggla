@@ -5,7 +5,8 @@ test_that("Cubic slope", {
       y = "log(bmi)",
       data = bmigrowth[bmigrowth$sex == 0, ],
       method = "cubic_slope",
-      use_ar1 = use_ar1
+      use_ar1 = use_ar1,
+      id_var = "ID"
     )
 
     y <- nlme::lme(
@@ -29,7 +30,8 @@ test_that("Linear Splines", {
       y = "log(bmi)",
       data = bmigrowth[bmigrowth$sex == 0, ],
       method = "linear_splines",
-      use_ar1 = use_ar1
+      use_ar1 = use_ar1,
+      id_var = "ID"
     )
 
     y <- nlme::lme(
@@ -53,7 +55,8 @@ for (use_ar1 in c(FALSE, TRUE)[2]) {
     y = "log(bmi)",
     data = bmigrowth[bmigrowth$sex == 0, ],
     method = "cubic_splines",
-      use_ar1 = use_ar1
+    use_ar1 = use_ar1,
+    id_var = "ID"
   )
 
   y <- nlme::lme(
@@ -77,7 +80,8 @@ test_that("Test wrong covariates", {
       y = "log(bmi)",
       cov = c("nothing"),
       data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "linear_splines"
+      method = "linear_splines",
+      id_var = "ID"
     )
   )
 })
@@ -89,7 +93,8 @@ test_that("Test covariates", {
       y = "log(bmi)",
       cov = c("height"),
       data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "linear_splines"
+      method = "linear_splines",
+      id_var = "ID"
     ),
     class = "lme"
   )
@@ -102,7 +107,8 @@ test_that("Test covariates with transformation", {
       y = "log(bmi)",
       cov = c("log(height)"),
       data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "linear_splines"
+      method = "linear_splines",
+      id_var = "ID"
     ),
     class = "lme"
   )
