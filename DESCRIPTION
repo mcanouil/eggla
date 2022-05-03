@@ -41,6 +41,7 @@ Imports:
     broom.mixed (>= 0.2.7),
     rlang (>= 1.0.2)
 Suggests:
+    knitr,
     rmarkdown,
     ggtext,
     scales,
@@ -57,8 +58,7 @@ Suggests:
     ggdist,
     roxygen2 (>= 7.1.2),
     testthat (>= 3.1.0)
-Remotes:
-    github::carriedaymont/growthcleanr@v2.0.0
+Remotes: github::carriedaymont/growthcleanr@v2.0.0
 SystemRequirements:
     BCFtools (>= 1.15.0) (https://github.com/samtools/BCFtools),
     PLINK2 (>= 2.0) (https://www.cog-genomics.org/plink/2.0)
@@ -66,4 +66,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+VignetteBuilder: knitr
 Config/testthat/edition: 3
