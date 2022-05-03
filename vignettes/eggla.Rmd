@@ -3,8 +3,8 @@ title: "Get Started with 'eggla'"
 description: |
   How-to run the 'eggla' workflow from quality-control to genome-wide association study.
 author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
-output: rmarkdown::html_vignette:
-vignette: >
+output: rmarkdown::html_vignette
+vignette: |
   %\VignetteIndexEntry{Get Started with 'eggla'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
