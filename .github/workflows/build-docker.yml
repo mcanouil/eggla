@@ -60,3 +60,16 @@ jobs:
             docker push ghcr.io/mcanouil/eggla:latest
             docker push ghcr.io/mcanouil/eggla:${{github.ref_name}}
           fi
+  test-build:
+    needs: build-docker
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pull latest Docker image from GitHub Registry
+        run: |
+          docker pull ghcr.io/mcanouil/eggla:latest
+      - name: Pull latest Docker image from GitHub Registry
+        run: |
+          docker run -it --rm ghcr.io/mcanouil/eggla:latest Rscript eggla-example.R
