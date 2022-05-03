@@ -4,7 +4,14 @@
 \alias{egg_model}
 \title{Fit a cubic splines mixed model.}
 \usage{
-egg_model(formula, data, id_var, random_complexity = "auto", use_ar1 = FALSE)
+egg_model(
+  formula,
+  data,
+  id_var,
+  random_complexity = "auto",
+  use_ar1 = FALSE,
+  knots = c(2, 8, 12)
+)
 }
 \arguments{
 \item{formula}{An object of class "formula":
@@ -20,6 +27,8 @@ to be used as the individual identifier.}
 Default, \code{"auto"} will try from the more complex to the less complex if no success.}
 
 \item{use_ar1}{A logical indicating whether to use AR(1) for autocorrelation.}
+
+\item{knots}{The knots defining the splines.}
 }
 \value{
 An object of class "lme" representing

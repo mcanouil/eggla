@@ -13,6 +13,7 @@
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
 #' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
+#' @param knots The knots defining the splines.
 #'
 #' @return An object of class "lme" representing
 #'   the linear mixed-effects model fit.
@@ -30,12 +31,18 @@
 #' sres <- as.data.frame(summary(res)[["tTable"]])
 #' rownames(sres) <- sub("gsp\\(.*\\)\\)", "gsp(...)", rownames(sres))
 #' sres
-egg_model <- function(formula, data, id_var, random_complexity = "auto", use_ar1 = FALSE) {
+egg_model <- function(
+  formula,
+  data,
+  id_var,
+  random_complexity = "auto",
+  use_ar1 = FALSE,
+  knots = c(2, 8, 12)
+) {
   random_complexity <- match.arg(as.character(random_complexity), c("auto", 1, 2, 3))
   y <- as.character(formula)[[2]]
   x_cov <- strsplit(as.character(formula)[[3]], " \\+ ")[[1]]
 
-  knots <- c(2, 8, 12)
   knots_fmt <- as.character(enquote(knots)[2])
   x_fmt <- sub(
     x_cov[1],

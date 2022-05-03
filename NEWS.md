@@ -3,7 +3,9 @@
 ## Features
 
 - In `inst/setup/Dockerfile`,
-  - Feat: Add script example (`inst\setup\eggla-example.R`) to run on dataset included in `eggla`.
+  - Feat: add script example (`inst\setup\eggla-example.R`) to run on dataset included in `eggla`.
+- In `R/egg_model.R`,
+  - Feat: allow to specify the knots for the splines, i.e., no longer hardcoded.
 
 ## Fixes
 
