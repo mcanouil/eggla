@@ -1,7 +1,5 @@
 #!/usr/bin/env Rscript
 
-args <- commandArgs(trailingOnly = TRUE)
-
 library(eggla)
 
 data("bmigrowth")
