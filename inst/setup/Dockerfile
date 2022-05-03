@@ -8,6 +8,8 @@ COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
 RUN Rscript -e "pak::pkg_install('mcanouil/eggla', upgrade = FALSE)"
 
+COPY inst/setup/eggla-example.R eggla-example.R
+
 ENV BCFTOOLS_VERSION=1.15.1
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -37,7 +39,6 @@ RUN wget -q -P /tmp/ https://github.com/samtools/htslib/releases/download/${BCFT
   make && \
   make install && \
   rm -rf /tmp/htslib-${BCFTOOLS_VERSION}
-
 
 RUN apt-get autoremove -y
 RUN apt-get autoclean -y
