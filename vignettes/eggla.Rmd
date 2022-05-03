@@ -3,7 +3,11 @@ title: "Get Started with 'eggla'"
 description: |
   How-to run the 'eggla' workflow from quality-control to genome-wide association study.
 author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    number_sections: true
+    toc: true
+    toc_depth: 3
 vignette: |
   %\VignetteIndexEntry{Get Started with 'eggla'}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,7 +24,7 @@ knitr::opts_chunk$set(
 
 # Run Using Docker
 
-## 1. Create `run_eggla.R` script
+## Create `run_eggla.R` script
 
 Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
 
@@ -46,7 +50,7 @@ res <- try(run_eggla(
 if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
 ```
 
-## 2. Run the script using a Docker container
+## Run the script using a Docker container
 
 Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
@@ -59,7 +63,7 @@ docker run \
 
 _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
 
-## 3. Retrieve the outputs
+## Retrieve the outputs
 
 ```
 /home/mcanouil/eggla/
@@ -67,7 +71,7 @@ _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the dir
 └── 2021-11-23-male.zip
 ```
 
-## 4. Create `run_eggla_gwas.R` Script
+## Create `run_eggla_gwas.R` Script
 
 Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
 
@@ -97,7 +101,7 @@ do_eggla_gwas(
 )
 ```
 
-## 5. Run the script using a Docker container
+## Run the script using a Docker container
 
 Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
@@ -110,7 +114,7 @@ docker run \
 
 _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
 
-## 6. Retrieve the outputs
+## Retrieve the outputs
 
 ```
 /home/mcanouil/eggla/
@@ -120,7 +124,7 @@ _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the dir
 
 # Run Non-Interactively (In Bash/Shell)
 
-## 1. Create `run_eggla.sh` script
+## Create `run_eggla.sh` script
 
 Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
@@ -229,13 +233,13 @@ if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
 EOF
 ```
 
-## 2. Run the analysis
+## Run the analysis
 
 ```{bash, eval = FALSE}
 bash run_eggla.sh
 ```
 
-## 3. Retrieve the outputs
+## Retrieve the outputs
 
 ```
 /home/mcanouil/eggla/
@@ -243,7 +247,7 @@ bash run_eggla.sh
 └── 2021-11-23-male.zip
 ```
 
-## 4. Run the GWASs
+## Run the GWASs
 
 Run GWASs on slopes and AUCs for male and female.
 
@@ -281,7 +285,7 @@ do_eggla_gwas(
 EOF
 ```
 
-## 5. Retrieve the outputs
+## Retrieve the outputs
 
 ```
 /home/mcanouil/eggla/
@@ -291,7 +295,7 @@ EOF
 
 # Run Interactively In Bash/R
 
-## 1. Create the working directory
+## Create the working directory
 
 ```{bash, eval = FALSE}
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
@@ -301,7 +305,7 @@ mkdir $home_analysis
 cd $home_analysis || exit
 ```
 
-## 2. Start R and setup environement
+## Start R and setup environement
 
 Start R and setup the working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages.
 
@@ -347,7 +351,7 @@ pkg_install("mcanouil/eggla@0.9.0", lib = temp_library, upgrade = FALSE, depende
 ```
 
 
-## 3. Run the analysis
+## Run the analysis
 
 Restart R before running the analysis.
 
@@ -376,7 +380,7 @@ res <- try(
 if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
 ```
 
-## 4. Retrieve the outputs
+## Retrieve the outputs
 
 ```
 /home/mcanouil/eggla/
@@ -384,7 +388,7 @@ if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
 └── 2021-11-23-male.zip
 ```
 
-## 5. Run the GWASs
+## Run the GWASs
 
 Run the GWASs on slopes and AUCs for male and female.
 
@@ -417,7 +421,7 @@ do_eggla_gwas(
 )
 ```
 
-## 6. Retrieve the outputs
+## Retrieve the outputs
 
 ```
 /home/mcanouil/eggla/
