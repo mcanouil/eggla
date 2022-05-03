@@ -40,7 +40,6 @@ articles:
     - articles/model-selection
     - articles/run-cubic-splines
     - articles/adiposity-peak-rebound
-    - articles/run-eggla
 figures:
   dev: ragg::agg_png
   dpi: 96

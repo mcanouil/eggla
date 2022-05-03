@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
     cd $home_analysis || exit
 
-    R --no-save --no-restore --quiet <<EOF
+    Rscript <<EOF
     temp_library <- file.path(".", "R")
     dir.create(temp_library, recursive = TRUE)
     .libPaths(temp_library)
@@ -42,7 +42,7 @@ knitr::opts_chunk$set(
     unlink(temp_library, recursive = TRUE)
     EOF
 
-    R --no-save --no-restore --quiet <<EOF
+    Rscript <<EOF
     library(eggla)
     library(data.table)
     res <- try(run_eggla(
@@ -77,7 +77,7 @@ knitr::opts_chunk$set(
 
     cd $home_analysis || exit
 
-    R --no-save --no-restore --quiet <<EOF
+    Rscript <<EOF
     temp_library <- file.path(".", "R")
     dir.create(temp_library, recursive = TRUE)
     .libPaths(temp_library)
@@ -98,7 +98,7 @@ knitr::opts_chunk$set(
     pkg_install("mcanouil/eggla@v0.8.1", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
     EOF
     
-    R --no-save --no-restore --quiet <<EOF
+    Rscript <<EOF
     library(eggla)
     library(data.table)
     res <- try(run_eggla(
@@ -147,7 +147,7 @@ knitr::opts_chunk$set(
 
     cd $home_analysis || exit
 
-    R --no-save --no-restore --quiet <<EOF
+    Rscript <<EOF
     library(eggla)
     chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
     if (!isFALSE(chr_in_parallel)) {
