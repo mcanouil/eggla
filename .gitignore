@@ -3,3 +3,5 @@
 .RData
 .Rprofile
 docs
+/doc/
+/Meta/
