@@ -20,390 +20,407 @@ knitr::opts_chunk$set(
 
 # Run Using Docker
 
-## 1. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
+## 1. Create `run_eggla.R` script
 
-    ```{r, eval = FALSE}
-    library(eggla)
-    library(data.table)
-    res <- try(run_eggla(
-      data = fread("/home/mcanouil/eggla/bmigrowth.csv"), # to be changed with the path of the file containing the data
-      id_variable = "ID",
-      age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-      age_years_variable = "age",
-      weight_kilograms_variable = "weight",
-      height_centimetres_variable = "height",
-      sex_variable = "sex",
-      covariates = NULL,
-      male_coded_zero = FALSE,
-      random_complexity = "auto",
-      use_ar1 = FALSE,
-      parallel = FALSE, # to parallelise Daymont QC
-      parallel_n_chunks = 1, # to parallelise Daymont QC
-      working_directory = "."
-    ))
-    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
-    ```
+Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
 
-## 2. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
+```{r, eval = FALSE}
+library(eggla)
+library(data.table)
+res <- try(run_eggla(
+  data = fread("/home/mcanouil/eggla/bmigrowth.csv"), # to be changed with the path of the file containing the data
+  id_variable = "ID",
+  age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+  age_years_variable = "age",
+  weight_kilograms_variable = "weight",
+  height_centimetres_variable = "height",
+  sex_variable = "sex",
+  covariates = NULL,
+  male_coded_zero = FALSE,
+  random_complexity = "auto",
+  use_ar1 = FALSE,
+  parallel = FALSE, # to parallelise Daymont QC
+  parallel_n_chunks = 1, # to parallelise Daymont QC
+  working_directory = "."
+))
+if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
+```
 
-    ```{bash, eval = FALSE}
-    docker run \
-      -it --rm \
-      --volume /home/mcanouil/eggla:/tmp/eggla \
-      ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla.R
-    ```
+## 2. Run the script using a Docker container
 
-    _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
+Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
-## 3. Retrieve the two archives
+```{bash, eval = FALSE}
+docker run \
+  -it --rm \
+  --volume /home/mcanouil/eggla:/tmp/eggla \
+  ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla.R
+```
 
-    ```
-    /home/mcanouil/eggla/
-    ├── 2021-11-23-female.zip
-    └── 2021-11-23-male.zip
-    ```
+_Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
 
-## 4. Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
+## 3. Retrieve the outputs
 
-    ```{r, eval = FALSE}
-    working_directory <- "/home/mcanouil/eggla"
-    setwd(working_directory)
-    library(eggla)
-    chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
-    if (!isFALSE(chr_in_parallel)) {
-      renv::install(c("future", "future.apply"))
-      future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
-    }
-    do_eggla_gwas(
-      data = "./bmigrowth.csv",
-      results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
-      id_column = "ID",
-      traits = c("slope_.*", "auc_.*"),
-      covariates = c("sex"),
-      vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\.vcf$|\\.vcf.gz$", full.names = TRUE),
-      vep = NULL,
-      path = ".",
-      bin_path = list(
-        bcftools = "/usr/bin/bcftools",
-        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
-      ),
-      threads = 1
-    )
-    ```
+```
+/home/mcanouil/eggla/
+├── 2021-11-23-female.zip
+└── 2021-11-23-male.zip
+```
 
-## 5. Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
+## 4. Create `run_eggla_gwas.R` Script
 
-    ```{bash, eval = FALSE}
-    docker run \
-      -it --rm \
-      --volume /home/mcanouil/eggla:/tmp/eggla \
-      ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla_gwas.R
-    ```
+Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
 
-    _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
+```{r, eval = FALSE}
+working_directory <- "/home/mcanouil/eggla"
+setwd(working_directory)
+library(eggla)
+chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
+if (!isFALSE(chr_in_parallel)) {
+  renv::install(c("future", "future.apply"))
+  future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
+}
+do_eggla_gwas(
+  data = "./bmigrowth.csv",
+  results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
+  id_column = "ID",
+  traits = c("slope_.*", "auc_.*"),
+  covariates = c("sex"),
+  vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\.vcf$|\\.vcf.gz$", full.names = TRUE),
+  vep = NULL,
+  path = ".",
+  bin_path = list(
+    bcftools = "/usr/bin/bcftools",
+    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
+  ),
+  threads = 1
+)
+```
 
-## 6. Retrieve the results and software version information files.
+## 5. Run the script using a Docker container
 
-    ```
-    /home/mcanouil/eggla/
-    ├── gwas_software.txt
-    └── gwas.csv.gz
-    ```
+Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
-# Run Non-Interactively
+```{bash, eval = FALSE}
+docker run \
+  -it --rm \
+  --volume /home/mcanouil/eggla:/tmp/eggla \
+  ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla_gwas.R
+```
 
-## 1. Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
+_Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the directory on the server, the right-hand side is how LHS directory will appear within the Docker container.
 
-  - `renv` (recommended):
+## 6. Retrieve the outputs
 
-    ```{bash, eval = FALSE}
-    #!/bin/bash
+```
+/home/mcanouil/eggla/
+├── gwas_software.txt
+└── gwas.csv.gz
+```
 
-    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
+# Run Non-Interactively (In Bash/Shell)
 
-    mkdir $home_analysis 
+## 1. Create `run_eggla.sh` script
 
-    cd $home_analysis || exit
+Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
-    Rscript <<EOF
-    temp_library <- file.path(".", "R")
-    dir.create(temp_library, recursive = TRUE)
-    .libPaths(temp_library)
-    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-    library("renv")
-    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-    utils::download.file(
-        url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/renv.lock",
-        destfile = "renv.lock"
-      )
-    renv::restore(lockfile = "renv.lock")
-    renv::install("mcanouil/eggla@v0.9.0")
-    unlink(temp_library, recursive = TRUE)
-    EOF
+### `renv` (recommended)
 
-    Rscript <<EOF
-    library(eggla)
-    library(data.table)
-    res <- try(run_eggla(
-      data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
-      id_variable = "ID",
-      age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-      age_years_variable = "age",
-      weight_kilograms_variable = "weight",
-      height_centimetres_variable = "height",
-      sex_variable = "sex",
-      covariates = NULL,
-      male_coded_zero = FALSE,
-      random_complexity = "auto",
-      use_ar1 = FALSE,
-      parallel = FALSE, # to parallelise Daymont QC
-      parallel_n_chunks = 1, # to parallelise Daymont QC
-      working_directory = "."
-    ))
-    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
-    EOF
-    ```
+```{bash, eval = FALSE}
+#!/bin/bash
 
-  - `pak` (faster):
+home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
-    ```{bash, eval = FALSE}
-    #!/bin/bash
+mkdir $home_analysis 
 
-    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
+cd $home_analysis || exit
 
-    mkdir $home_analysis 
+Rscript <<EOF
+temp_library <- file.path(".", "R")
+dir.create(temp_library, recursive = TRUE)
+.libPaths(temp_library)
+install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
+library("renv")
+renv::init(bare = TRUE, settings = list(use.cache = FALSE))
+utils::download.file(
+    url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/renv.lock",
+    destfile = "renv.lock"
+  )
+renv::restore(lockfile = "renv.lock")
+renv::install("mcanouil/eggla@v0.9.0")
+unlink(temp_library, recursive = TRUE)
+EOF
 
-    cd $home_analysis || exit
+Rscript <<EOF
+library(eggla)
+library(data.table)
+res <- try(run_eggla(
+  data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
+  id_variable = "ID",
+  age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+  age_years_variable = "age",
+  weight_kilograms_variable = "weight",
+  height_centimetres_variable = "height",
+  sex_variable = "sex",
+  covariates = NULL,
+  male_coded_zero = FALSE,
+  random_complexity = "auto",
+  use_ar1 = FALSE,
+  parallel = FALSE, # to parallelise Daymont QC
+  parallel_n_chunks = 1, # to parallelise Daymont QC
+  working_directory = "."
+))
+if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
+EOF
+```
 
-    Rscript <<EOF
-    temp_library <- file.path(".", "R")
-    dir.create(temp_library, recursive = TRUE)
-    .libPaths(temp_library)
-    utils::install.packages(
-      pkgs = "pak",
-      lib = temp_library,
-      repos = sprintf(
-        "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
-        .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
-      )
-    )
-    library(pak)
-    utils::download.file(
-      url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/pkg.lock",
-      destfile = "pkg.lock"
-    )
-    lockfile_install(lockfile = "pkg.lock", lib = temp_library)
-    pkg_install("mcanouil/eggla@v0.9.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
-    EOF
-    
-    Rscript <<EOF
-    library(eggla)
-    library(data.table)
-    res <- try(run_eggla(
-      data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
-      id_variable = "ID",
-      age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-      age_years_variable = "age",
-      weight_kilograms_variable = "weight",
-      height_centimetres_variable = "height",
-      sex_variable = "sex",
-      covariates = NULL,
-      male_coded_zero = FALSE,
-      random_complexity = "auto",
-      use_ar1 = FALSE,
-      parallel = FALSE, # to parallelise Daymont QC
-      parallel_n_chunks = 1, # to parallelise Daymont QC
-      working_directory = "."
-    ))
-    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
-    EOF
-    ```
+### `pak` (faster)
 
-## 2.  Run the analysis in bash
+```{bash, eval = FALSE}
+#!/bin/bash
 
-    ```{bash, eval = FALSE}
-    bash run_eggla.sh
-    ```
+home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
-## 3. Retrieve the two archives
+mkdir $home_analysis 
 
-    ```
-    /home/mcanouil/eggla/
-    ├── 2021-11-23-female.zip
-    └── 2021-11-23-male.zip
-    ```
+cd $home_analysis || exit
 
-## 4. Run the GWASs on slopes and AUCs for male and female
+Rscript <<EOF
+temp_library <- file.path(".", "R")
+dir.create(temp_library, recursive = TRUE)
+.libPaths(temp_library)
+utils::install.packages(
+  pkgs = "pak",
+  lib = temp_library,
+  repos = sprintf(
+    "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
+    .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
+  )
+)
+library(pak)
+utils::download.file(
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/pkg.lock",
+  destfile = "pkg.lock"
+)
+lockfile_install(lockfile = "pkg.lock", lib = temp_library)
+pkg_install("mcanouil/eggla@v0.9.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+EOF
 
-    ```{bash, eval = FALSE}
-    #!/bin/bash
+Rscript <<EOF
+library(eggla)
+library(data.table)
+res <- try(run_eggla(
+  data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
+  id_variable = "ID",
+  age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
+  age_years_variable = "age",
+  weight_kilograms_variable = "weight",
+  height_centimetres_variable = "height",
+  sex_variable = "sex",
+  covariates = NULL,
+  male_coded_zero = FALSE,
+  random_complexity = "auto",
+  use_ar1 = FALSE,
+  parallel = FALSE, # to parallelise Daymont QC
+  parallel_n_chunks = 1, # to parallelise Daymont QC
+  working_directory = "."
+))
+if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
+EOF
+```
 
-    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
+## 2. Run the analysis
 
-    mkdir $home_analysis
+```{bash, eval = FALSE}
+bash run_eggla.sh
+```
 
-    cd $home_analysis || exit
+## 3. Retrieve the outputs
 
-    Rscript <<EOF
-    library(eggla)
-    chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
-    if (!isFALSE(chr_in_parallel)) {
-      renv::install(c("future", "future.apply"))
-      future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
-    }
-    do_eggla_gwas(
-      data = "bmigrowth.csv",
-      results_zip = list.files(path = ".", pattern = "\\\\.zip", full.names = TRUE),
-      id_column = "ID",
-      traits = c("slope_.*", "auc_.*"),
-      covariates = c("sex"),
-      vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\\\.vcf$|\\\\.vcf.gz$", full.names = TRUE),
-      vep = NULL,
-      path = ".",
-      bin_path = list(
-        bcftools = "/usr/bin/bcftools",
-        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
-      ),
-      threads = 1
-    )
-    EOF
-    ```
+```
+/home/mcanouil/eggla/
+├── 2021-11-23-female.zip
+└── 2021-11-23-male.zip
+```
 
-## 5. Retrieve the results and software version information files.
+## 4. Run the GWASs
 
-    ```
-    /home/mcanouil/eggla/
-    ├── gwas_software.txt
-    └── gwas.csv.gz
-    ```
+Run GWASs on slopes and AUCs for male and female.
 
-# Run Interactively
+```{bash, eval = FALSE}
+#!/bin/bash
+
+home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
+
+mkdir $home_analysis
+
+cd $home_analysis || exit
+
+Rscript <<EOF
+library(eggla)
+chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
+if (!isFALSE(chr_in_parallel)) {
+  renv::install(c("future", "future.apply"))
+  future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
+}
+do_eggla_gwas(
+  data = "bmigrowth.csv",
+  results_zip = list.files(path = ".", pattern = "\\\\.zip", full.names = TRUE),
+  id_column = "ID",
+  traits = c("slope_.*", "auc_.*"),
+  covariates = c("sex"),
+  vcfs = list.files(path = file.path(".", "vcf"), pattern = "\\\\.vcf$|\\\\.vcf.gz$", full.names = TRUE),
+  vep = NULL,
+  path = ".",
+  bin_path = list(
+    bcftools = "/usr/bin/bcftools",
+    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
+  ),
+  threads = 1
+)
+EOF
+```
+
+## 5. Retrieve the outputs
+
+```
+/home/mcanouil/eggla/
+├── gwas_software.txt
+└── gwas.csv.gz
+```
+
+# Run Interactively In Bash/R
 
 ## 1. Create the working directory
 
-    ```{bash, eval = FALSE}
-    home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
-    
-    mkdir $home_analysis 
+```{bash, eval = FALSE}
+home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
-    cd $home_analysis || exit
-    ```
+mkdir $home_analysis 
 
-## 2. Start R and setup working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages
+cd $home_analysis || exit
+```
 
-  - `renv` (recommended):
+## 2. Start R and setup environement
 
-    ```{r, eval = FALSE}
-    temp_library <- file.path(".", "R")
-    dir.create(temp_library, recursive = TRUE)
-    .libPaths(temp_library)
-    install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-    library("renv")
-    renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-    utils::download.file(
-      url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/renv.lock",
-      destfile = "renv.lock"
-    )
-    renv::restore(lockfile = "renv.lock")
-    renv::install("mcanouil/eggla@v0.9.0")
-    unlink(temp_library, recursive = TRUE)
-    ```
+Start R and setup the working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages.
 
-  - `pak` (faster):
+### `renv` (recommended)
 
-    ```{r, eval = FALSE}
-    temp_library <- file.path(".", "R")
-    dir.create(temp_library, recursive = TRUE)
-    .libPaths(temp_library)
-    utils::install.packages(
-      pkgs = "pak",
-      lib = temp_library,
-      repos = sprintf(
-        "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
-        .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
-      )
-    )
-    library(pak)
-    utils::download.file(
-      url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/pkg.lock",
-      destfile = "pkg.lock"
-    )
-    lockfile_install(lockfile = "pkg.lock", lib = temp_library)
-    pkg_install("mcanouil/eggla@0.9.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
-    ```
+```{r, eval = FALSE}
+temp_library <- file.path(".", "R")
+dir.create(temp_library, recursive = TRUE)
+.libPaths(temp_library)
+install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
+library("renv")
+renv::init(bare = TRUE, settings = list(use.cache = FALSE))
+utils::download.file(
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/renv.lock",
+  destfile = "renv.lock"
+)
+renv::restore(lockfile = "renv.lock")
+renv::install("mcanouil/eggla@v0.9.0")
+unlink(temp_library, recursive = TRUE)
+```
 
-## 3. Restart R
+### `pak` (faster)
 
-## 4. Run the analysis
+```{r, eval = FALSE}
+temp_library <- file.path(".", "R")
+dir.create(temp_library, recursive = TRUE)
+.libPaths(temp_library)
+utils::install.packages(
+  pkgs = "pak",
+  lib = temp_library,
+  repos = sprintf(
+    "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
+    .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
+  )
+)
+library(pak)
+utils::download.file(
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.9.0/inst/setup/pkg.lock",
+  destfile = "pkg.lock"
+)
+lockfile_install(lockfile = "pkg.lock", lib = temp_library)
+pkg_install("mcanouil/eggla@0.9.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+```
 
-    ```{r, eval = FALSE}
-    # setwd("/home/mcanouil/eggla") # already set if step 1 was done
-    library(eggla)
-    library(data.table)
-    res <- try(
-      run_eggla(
-        data = fread("bmigrowth.csv"),
-        id_variable = "ID",
-        age_days_variable = NULL,
-        age_years_variable = "age",
-        weight_kilograms_variable = "weight",
-        height_centimetres_variable = "height",
-        sex_variable = "sex",
-        covariates = NULL,
-        male_coded_zero = FALSE,
-        random_complexity = "auto",
-        use_ar1 = FALSE,
-        parallel = FALSE,
-        parallel_n_chunks = 1,
-        working_directory = "."
-      )
-    )
-    if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
-    ```
 
-## 5. Retrieve the two archives
+## 3. Run the analysis
 
-    ```
-    /home/mcanouil/eggla/
-    ├── 2021-11-23-female.zip
-    └── 2021-11-23-male.zip
-    ```
+Restart R before running the analysis.
 
-## 6. Run the GWASs on slopes and AUCs for male and female
+```{r, eval = FALSE}
+# setwd("/home/mcanouil/eggla") # already set if step 1 was done
+library(eggla)
+library(data.table)
+res <- try(
+  run_eggla(
+    data = fread("bmigrowth.csv"),
+    id_variable = "ID",
+    age_days_variable = NULL,
+    age_years_variable = "age",
+    weight_kilograms_variable = "weight",
+    height_centimetres_variable = "height",
+    sex_variable = "sex",
+    covariates = NULL,
+    male_coded_zero = FALSE,
+    random_complexity = "auto",
+    use_ar1 = FALSE,
+    parallel = FALSE,
+    parallel_n_chunks = 1,
+    working_directory = "."
+  )
+)
+if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
+```
 
-    ```{r, eval = FALSE}
-    # setwd("/home/mcanouil/eggla") # already set if step 1 was done
-    library(eggla)
-    chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
-    if (!isFALSE(chr_in_parallel)) {
-      renv::install(c("future", "future.apply"))
-      future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
-    }
-    do_eggla_gwas(
-      data = "bmigrowth.csv",
-      results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
-      id_column = "ID",
-      traits = c("slope_.*", "auc_.*"),
-      covariates = c("sex"),
-      vcfs = list.files(
-        path = file.path(".", "vcf"),
-        pattern = "\\.vcf$|\\.vcf.gz$",
-        full.names = TRUE
-      ),
-      vep = NULL,
-      path = ".",
-      bin_path = list(
-        bcftools = "/usr/bin/bcftools",
-        plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
-      ),
-      threads = 1
-    )
-    ```
+## 4. Retrieve the outputs
 
-## 7. Retrieve the results and software version information files.
+```
+/home/mcanouil/eggla/
+├── 2021-11-23-female.zip
+└── 2021-11-23-male.zip
+```
 
-    ```
-    /home/mcanouil/eggla/
-    ├── gwas_software.txt
-    └── gwas.csv.gz
-    ```
+## 5. Run the GWASs
+
+Run the GWASs on slopes and AUCs for male and female.
+
+```{r, eval = FALSE}
+# setwd("/home/mcanouil/eggla") # already set if step 1 was done
+library(eggla)
+chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
+if (!isFALSE(chr_in_parallel)) {
+  renv::install(c("future", "future.apply"))
+  future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
+}
+do_eggla_gwas(
+  data = "bmigrowth.csv",
+  results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
+  id_column = "ID",
+  traits = c("slope_.*", "auc_.*"),
+  covariates = c("sex"),
+  vcfs = list.files(
+    path = file.path(".", "vcf"),
+    pattern = "\\.vcf$|\\.vcf.gz$",
+    full.names = TRUE
+  ),
+  vep = NULL,
+  path = ".",
+  bin_path = list(
+    bcftools = "/usr/bin/bcftools",
+    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
+  ),
+  threads = 1
+)
+```
+
+## 6. Retrieve the outputs
+
+```
+/home/mcanouil/eggla/
+├── gwas_software.txt
+└── gwas.csv.gz
+```
