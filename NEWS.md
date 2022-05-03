@@ -1,4 +1,4 @@
-# eggla 0.8.2
+# eggla 0.9.0
 
 ## Features
 
@@ -16,7 +16,7 @@
 - In `vignettes/eggla.Rmd` (renamed/moved from `vignettes/articles/run-eggla.Rmd`),
   - Fix: use `Rscript` instead of `R --no-save --no-restore --quiet`.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.8.1...v0.8.2>
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.8.1...v0.9.0>
 
 # eggla 0.8.1
 
