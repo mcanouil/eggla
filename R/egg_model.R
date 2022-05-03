@@ -91,7 +91,7 @@ egg_model <- function(formula, data, id_var, random_complexity = "auto", use_ar1
       paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
       "  method = \"ML\",",
-      if (use_ar1) "  correlation = nlme::corCAR1(form = ~ 1 | ID)," else NULL,
+      if (use_ar1) sprintf("  correlation = nlme::corCAR1(form = ~ 1 | %s),", id_var) else NULL,
       paste0(
         "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
         n_iteration, ", msMaxIter = ", n_iteration, ")"
