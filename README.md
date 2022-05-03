@@ -34,10 +34,10 @@ remotes::install_github("mcanouil/eggla@v0.9.0")
 ## Docker Images
 
 -   From
-    <https://github.com/users/mcanouil/packages/container/package/eggla>,
+    <https://github.com/users/mcanouil/packages/container/package/eggla>,  
     *e.g.*, `ghcr.io/mcanouil/eggla:latest` or
     `ghcr.io/mcanouil/eggla:v0.9.0`.
--   From <https://hub.docker.com/repository/docker/mcanouil/eggla>,
+-   From <https://hub.docker.com/repository/docker/mcanouil/eggla>,  
     *e.g.*, `docker.io/mcanouil/eggla:latest` or
     `docker.io/mcanouil/eggla:v0.9.0`.
 
