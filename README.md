@@ -33,9 +33,7 @@ remotes::install_github("mcanouil/eggla@v0.9.0")
 
 ## Docker Images
 
--   From
-    <https://github.com/users/mcanouil/packages/container/package/eggla>,  
-    *e.g.*, `ghcr.io/mcanouil/eggla:v0.9.0`.
+-   *e.g.*, `ghcr.io/mcanouil/eggla:v0.9.0`.
 
 ## License
 
