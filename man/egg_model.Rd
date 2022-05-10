@@ -10,7 +10,8 @@ egg_model(
   id_var,
   random_complexity = "auto",
   use_ar1 = FALSE,
-  knots = c(2, 8, 12)
+  knots = c(2, 8, 12),
+  quiet = FALSE
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ Default, \code{"auto"} will try from the more complex to the less complex if no 
 \item{use_ar1}{A logical indicating whether to use AR(1) for autocorrelation.}
 
 \item{knots}{The knots defining the splines.}
+
+\item{quiet}{A logical indicating whether to suppress the output.}
 }
 \value{
 An object of class "lme" representing

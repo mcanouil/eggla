@@ -24,6 +24,7 @@
 #'   Only applies if parallel is set to TRUE.
 #' Defaults to the number of workers returned by the getDoParWorkers function in the foreach package.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
+#' @param quiet A logical indicating whether to suppress the output.
 #'
 #' @return Path to zip archives.
 #'
@@ -67,7 +68,8 @@ run_eggla <- function(
   use_ar1 = FALSE,
   parallel = FALSE,
   parallel_n_chunks = 1,
-  working_directory = getwd()
+  working_directory = getwd(),
+  quiet = FALSE
 ) {
   HEIGHTCM <- WEIGHTKG <- bmi <- clean <- NULL # no visible binding for global variable from data.table
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
@@ -221,7 +223,9 @@ run_eggla <- function(
     }
   )
 
-  message("Results available at:")
-  message(paste(sprintf("+ '%s'", archives), collapse = "\n"))
+  if (!quiet) {
+    message("Results available at:")
+    message(paste(sprintf("+ '%s'", archives), collapse = "\n"))
+  }
   archives
 }

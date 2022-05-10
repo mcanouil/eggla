@@ -15,7 +15,8 @@ do_eggla_gwas(
   vep = NULL,
   bin_path = list(bcftools = "/usr/bin/bcftools", plink2 =
     "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"),
-  threads = 1
+  threads = 1,
+  quiet = FALSE
 )
 }
 \arguments{
@@ -39,7 +40,9 @@ the genotypes of the individuals to be analysed.}
 \item{bin_path}{A named list containing the path to the PLINK2 and BCFtools binaries
 For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).}
 
-\item{threads}{Number of threads to be used by BCFtools}
+\item{threads}{Number of threads to be used by BCFtools.}
+
+\item{quiet}{A logical indicating whether to suppress the output.}
 }
 \value{
 Path to results file.

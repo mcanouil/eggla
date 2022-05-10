@@ -13,7 +13,8 @@ time_model(
   knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(2, 8,
     12))[[method]],
   use_ar1 = FALSE,
-  id_var = "ID"
+  id_var = "ID",
+  quiet = FALSE
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ time_model(
 
 \item{id_var}{A string indicating the name of the variable
 to be used as the individual identifier.}
+
+\item{quiet}{A logical indicating whether to suppress the output.}
 }
 \value{
 An object of class "lme" representing the linear mixed-effects model fit.

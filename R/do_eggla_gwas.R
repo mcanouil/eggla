@@ -18,7 +18,8 @@
 #' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
-#' @param threads Number of threads to be used by BCFtools
+#' @param threads Number of threads to be used by BCFtools.
+#' @param quiet A logical indicating whether to suppress the output.
 #'
 #' @import data.table
 #' @importFrom stats as.formula p.adjust
@@ -85,7 +86,8 @@ do_eggla_gwas <- function(
     bcftools = "/usr/bin/bcftools",
     plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"
   ),
-  threads = 1
+  threads = 1,
+  quiet = FALSE
 ) {
   INFO <- TEST <- P <- NULL # no visible binding for global variable from data.table
   path <- normalizePath(path)
@@ -264,7 +266,7 @@ do_eggla_gwas <- function(
     )
   }
 
-  message("Formatting VCFs and performing PLINK2 regression ...")
+  if (!quiet) message("Formatting VCFs and performing PLINK2 regression ...")
   if (nzchar(system.file(package = "future.apply"))) {
     eggla_lapply <- function(X, basename_file, vep_file, bin_path, FUN) {
       future.apply::future_lapply(
@@ -431,13 +433,13 @@ do_eggla_gwas <- function(
         ),
         file = sprintf("%s.results.gz", results_file)
       )
-      message(sprintf("Results written in \"%s.results.gz\"", results_file))
+      if (!quiet) message(sprintf("Results written in \"%s.results.gz\"", results_file))
 
       sprintf("%s.results.gz", results_file)
     }
   )
 
-  message("Aggregating PLINK2 results ...")
+  if (!quiet) message("Aggregating PLINK2 results ...")
 
   results_file <- file.path(path, "gwas.csv.gz")
 
@@ -459,7 +461,7 @@ do_eggla_gwas <- function(
     file = results_file
   )
 
-  message(sprintf("Writing results to \"%s\"!", results_file))
+  if (!quiet) message(sprintf("Writing results to \"%s\"!", results_file))
 
   writeLines(
     text = c(R.version.string, plink_version, bcftools_version),
