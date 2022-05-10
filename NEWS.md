@@ -1,3 +1,10 @@
+# eggla 0.9.1
+
+## Features
+
+- In `R/egg_model.R`, `R/egg_model.R`, `R/run_eggla.R`, and `R/do_eggla_gwas`,
+  - feat: add `quiet` to silent the messages.
+
 # eggla 0.9.0
 
 ## Features
