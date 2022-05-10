@@ -12,6 +12,7 @@
 #' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
 #' @param id_var A string indicating the name of the variable
 #'   to be used as the individual identifier.
+#' @param quiet A logical indicating whether to suppress the output.
 #'
 #' @return An object of class "lme" representing the linear mixed-effects model fit.
 #'
@@ -41,7 +42,8 @@ time_model <- function(
     "cubic_splines" = c(2, 8, 12)
   )[[method]],
   use_ar1 = FALSE,
-  id_var = "ID"
+  id_var = "ID",
+  quiet = FALSE
 ) {
   knots_fmt <- as.character(enquote(knots)[2])
   x_fmt <- switch(
@@ -103,7 +105,7 @@ time_model <- function(
   )
   res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   if (inherits(res_model, "try-error")) {
-    message("Number of iteration has been increased from 500 to 1,000.", appendLF = TRUE)
+    if (!quiet) message("Number of iteration has been increased from 500 to 1,000.")
     model_call <- f_model_call(
       form_fixed = form_fixed,
       form_random = form_random,
@@ -115,7 +117,7 @@ time_model <- function(
   if (inherits(res_model, "try-error")) {
     model_call <- switch(EXPR = method,
       "cubic_slope" = {
-        message("Polynom's degree was decreased from 3 to 1 in the random effect formula.", appendLF = TRUE)
+        if (!quiet) message("Polynom's degree was decreased from 3 to 1 in the random effect formula.")
         f_model_call(
           form_fixed = form_fixed,
           form_random = paste0("~ ", gsub("degree = 3", "degree = 1", x_fmt, fixed = TRUE), " | ", id_var),
@@ -124,7 +126,7 @@ time_model <- function(
         )
       },
       "cubic_splines" = {
-        message("Spline's degree was decreased from 3 to 1 in the random effect formula.", appendLF = TRUE)
+        if (!quiet) message("Spline's degree was decreased from 3 to 1 in the random effect formula.")
         f_model_call(
           form_fixed = form_fixed,
           form_random = paste0("~ ", gsub("degree = rep(3", "degree = rep(1", x_fmt, fixed = TRUE), " | ", id_var),
@@ -137,7 +139,7 @@ time_model <- function(
   }
 
   if (inherits(res_model, "try-error")) {
-    message(sprintf('The random effect formula has been set to "~ 1 | %s".', id_var), appendLF = TRUE)
+    if (!quiet) message(sprintf('The random effect formula has been set to "~ 1 | %s".', id_var))
     model_call <- f_model_call(
       form_fixed = form_fixed,
       form_random = paste0("~ 1 | ", id_var),
@@ -147,7 +149,7 @@ time_model <- function(
     res_model <- try(eval(parse(text = paste(model_call, collapse = ""))), silent = TRUE)
   }
 
-  message(paste(model_call, collapse = "\n"), appendLF = TRUE)
+  if (!quiet) message(paste(model_call, collapse = "\n"))
 
   if (inherits(res_model, "try-error")) {
     stop(gsub("Error in try\\([^:]*\\) : ", paste0('"', method, '": '), res_model))

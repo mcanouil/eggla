@@ -18,7 +18,8 @@ run_eggla(
   use_ar1 = FALSE,
   parallel = FALSE,
   parallel_n_chunks = 1,
-  working_directory = getwd()
+  working_directory = getwd(),
+  quiet = FALSE
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ Only applies if parallel is set to TRUE.
 Defaults to the number of workers returned by the getDoParWorkers function in the foreach package.}
 
 \item{working_directory}{Directory in which computation will occur and where output files will be saved.}
+
+\item{quiet}{A logical indicating whether to suppress the output.}
 }
 \value{
 Path to zip archives.

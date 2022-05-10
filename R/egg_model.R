@@ -14,6 +14,7 @@
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
 #' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
 #' @param knots The knots defining the splines.
+#' @param quiet A logical indicating whether to suppress the output.
 #'
 #' @return An object of class "lme" representing
 #'   the linear mixed-effects model fit.
@@ -37,7 +38,8 @@ egg_model <- function(
   id_var,
   random_complexity = "auto",
   use_ar1 = FALSE,
-  knots = c(2, 8, 12)
+  knots = c(2, 8, 12),
+  quiet = FALSE
 ) {
   random_complexity <- match.arg(as.character(random_complexity), c("auto", 1, 2, 3))
   y <- as.character(formula)[[2]]
@@ -116,22 +118,21 @@ egg_model <- function(
       n_iteration = 500,
       use_ar1 = use_ar1
     )
-    message(
-      "Fitting model:\n",
-      paste(
-        paste0("  ", model_call),
-        collapse = "\n"
+    if (!quiet) {
+      message(
+        "Fitting model:\n",
+        paste(
+          paste0("  ", model_call),
+          collapse = "\n"
+        )
       )
-    )
+    }
     res_model <- try(
       expr = eval(parse(text = paste(model_call, collapse = ""))),
       silent = TRUE
     )
     if (inherits(res_model, "try-error")) {
-      message(
-        "Number of iteration has been increased from 500 to 1,000.",
-        appendLF = TRUE
-      )
+      if (!quiet) message("Number of iteration has been increased from 500 to 1,000.")
       model_call <- f_model_call(
         form_fixed = form_fixed,
         form_random = form_random[[irandom]],
@@ -146,10 +147,7 @@ egg_model <- function(
 
     irandom <- irandom + 1
     if (inherits(res_model, "try-error") & irandom > length(form_random) & use_ar1) {
-      message(
-        "Model with AR(1) auto-correlation failed, now trying without it ...",
-        appendLF = TRUE
-      )
+      if (!quiet) message("Model with AR(1) auto-correlation failed, now trying without it ...")
       use_ar1 <- FALSE
       irandom <- 1
     } else {
