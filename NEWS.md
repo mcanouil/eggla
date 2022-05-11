@@ -1,6 +1,6 @@
 # eggla (development version)
 
-## Imrpovements/fixes
+## Imrpovements
 
 - Change default period to the following time windows for predicting 'linear' slopes from the model:
   - 0-0.5 years (Infancy – same as previously)
@@ -8,12 +8,17 @@
   - 6.5-10 years (Pre-pubertal – increased the lower bound from 6 years)
   - 12-17 years (adolescence – same as previously)
 
+## Fixes
+
+- In `R/compute_apar.R`, `R/plot_slopes.R`, and `R/plot_egg_slopes.R`,
+  - Fix: `grep` instead of `any`/`grepl`.
+
 # eggla 0.9.1
 
 ## Features
 
 - In `R/egg_model.R`, `R/egg_model.R`, `R/run_eggla.R`, and `R/do_eggla_gwas`,
-  - feat: add `quiet` to silent the messages.
+  - Feat: add `quiet` to silent the messages.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.9.0...v0.9.1>
 

@@ -79,7 +79,7 @@ plot_slopes <- function(
     j = yend := pred_period + end * slope
   ]
 
-  if (grep("log", all.names(fit[["terms"]][[2]]))) {
+  if (any(grepl("log", all.names(fit[["terms"]][[2]])))) {
     f <- exp
     yscale <- ggplot2::scale_y_log10
   } else {
