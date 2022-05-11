@@ -1,6 +1,6 @@
 # eggla (development version)
 
-## Imrpovements
+## Improvements
 
 - Change default period to the following time windows for predicting 'linear' slopes from the model:
   - 0-0.5 years (Infancy – same as previously)
