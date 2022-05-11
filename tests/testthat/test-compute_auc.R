@@ -5,7 +5,7 @@ test_that("Cubic slope", {
   y1 <- compute_aucs(
     fit = x,
     method = "cubic_slope",
-    period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
   )
 
   y2 <- local({
@@ -30,7 +30,7 @@ test_that("Cubic slope", {
       auc_lme_female <- auc_lme(
         x,
         unique(bmigrowth[bmigrowth$sex == 0, "ID", drop = FALSE]),
-        c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+        c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
       )
       names(auc_lme_female) <- c("ID", "AUC_Infancy", "AUC_Childhood", "AUC_PrePubertal", "AUC_PostPubertal")
       auc_lme_female
@@ -47,7 +47,7 @@ test_that("Linear Splines", {
   y1 <- compute_aucs(
     fit = x,
     method = "linear_splines",
-    period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
   )
 
   y2 <- local({
@@ -86,7 +86,7 @@ test_that("Linear Splines", {
       auc_lsplines_female <- auc_lsplines(
         x,
         unique(bmigrowth[bmigrowth$sex == 0, "ID", drop = FALSE]),
-        c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+        c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
       )
       names(auc_lsplines_female) <- c("ID", "AUC_Infancy", "AUC_Childhood", "AUC_PrePubertal", "AUC_PostPubertal")
       auc_lsplines_female
@@ -102,7 +102,7 @@ test_that("Linear Splines", {
 #   y1 <- compute_aucs(
 #     fit = x,
 #     method = "cubic_splines",
-#     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+#     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #   )
 #
 #   y2 <- local({
@@ -239,7 +239,7 @@ test_that("Linear Splines", {
 #       auc_csplines_female <- auc_csplines(
 #         x,
 #         unique(bmigrowth[bmigrowth$sex == 0, "ID", drop = FALSE]),
-#         c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+#         c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #       )
 #       names(auc_csplines_female) <- c(
 #         "ID", "AUC_Infancy", "AUC_Childhood", "AUC_PrePubertal", "AUC_PostPubertal"

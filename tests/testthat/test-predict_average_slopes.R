@@ -5,7 +5,7 @@ test_that("Cubic slope", {
   y1 <- compute_slopes(
     fit = x,
     method = "cubic_slope",
-    period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
   )
   y2 <- local({
     suppressWarnings({
@@ -31,7 +31,7 @@ test_that("Cubic slope", {
       slopes_lme_female <- ave_slope_lme(
         x,
         unique(bmigrowth[bmigrowth$sex == 0, "ID", drop = FALSE]),
-        c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+        c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
       )
       names(slopes_lme_female) <- c(
         "ID", "BMI_0", "BMI_0.5", "BMI_1.5", "BMI_5", "BMI_6", "BMI_10", "BMI_12", "BMI_17",
@@ -51,7 +51,7 @@ test_that("Linear Splines", {
   y1 <- compute_slopes(
     fit = x,
     method = "linear_splines",
-    period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
   )
 
   y2 <- local({
@@ -96,7 +96,7 @@ test_that("Linear Splines", {
       slopes_lsplines_female <- ave_slope_lsplines(
         x,
         unique(bmigrowth[bmigrowth$sex == 0, "ID", drop = FALSE]),
-        c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+        c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
       )
       names(slopes_lsplines_female) <- c(
         "ID", "BMI_0", "BMI_0.5", "BMI_1.5", "BMI_5", "BMI_6", "BMI_10", "BMI_12", "BMI_17",
@@ -116,7 +116,7 @@ test_that("Linear Splines", {
 #   y1 <- compute_slopes(
 #     fit = x,
 #     method = "cubic_splines",
-#     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+#     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #   )
 #
 #   y2 <- local({
@@ -176,7 +176,7 @@ test_that("Linear Splines", {
 #       slopes_csplines_female <- ave_slope_csplines(
 #         x,
 #         unique(bmigrowth[bmigrowth$sex == 0, "ID", drop = FALSE]),
-#         c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+#         c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #       )
 #       names(slopes_csplines_female) <- c(
 #         "ID", "BMI_0", "BMI_0.5", "BMI_1.5", "BMI_5", "BMI_6", "BMI_10", "BMI_12", "BMI_17",

@@ -24,12 +24,12 @@
 #' head(
 #'   egg_aucs(
 #'     fit = res,
-#'     period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+#'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #'   )
 #' )
 egg_aucs <- function(
   fit,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 ) {
   stopifnot(inherits(fit, "lme"))
   knots <- c(2, 8, 12)
