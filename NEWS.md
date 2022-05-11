@@ -1,3 +1,13 @@
+# eggla (development version)
+
+## Imrpovements/fixes
+
+- Change default period to the following time windows for predicting 'linear' slopes from the model:
+  - 0-0.5 years (Infancy – same as previously)
+  - 1.5-3.5 years (Childhood – reduced the upper bound from 5 years)
+  - 6.5-10 years (Pre-pubertal – increased the lower bound from 6 years)
+  - 12-17 years (adolescence – same as previously)
+
 # eggla 0.9.1
 
 ## Features

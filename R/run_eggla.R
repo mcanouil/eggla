@@ -173,7 +173,7 @@ run_eggla <- function(
       data.table::fwrite(
         x = egg_slopes(
           fit = results,
-          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+          period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
         ),
         file = file.path(results_directory, "derived-slopes.csv")
       )
@@ -181,7 +181,7 @@ run_eggla <- function(
       data.table::fwrite(
         x = egg_aucs(
           fit = results,
-          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+          period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
         ),
         file = file.path(results_directory, "derived-aucs.csv")
       )

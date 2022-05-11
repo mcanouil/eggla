@@ -182,7 +182,7 @@ plot_residuals(
 ```{r}
 res_pred_slopes <- egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 head(res_pred_slopes)
 ```
@@ -190,7 +190,7 @@ head(res_pred_slopes)
 ```{r}
 plot_egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 ```
 
@@ -199,7 +199,7 @@ plot_egg_slopes(
 ```{r}
 res_auc <- egg_aucs(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 head(res_auc)
 ```
@@ -207,6 +207,6 @@ head(res_auc)
 ```{r}
 plot_egg_aucs(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 ```
