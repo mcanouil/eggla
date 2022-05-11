@@ -75,7 +75,7 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
   bmi_var_pos <- grep("bmi", all.vars(fit[["terms"]]), ignore.case = TRUE)
   bmi_var <- all.vars(fit[["terms"]])[bmi_var_pos]
 
-  if (grep("log", all.names(fit[["terms"]][[bmi_var_pos + 1]]))) {
+  if (any(grepl("log", all.names(fit[["terms"]][[bmi_var_pos + 1]])))) {
     f <- exp
   } else {
     f <- identity
