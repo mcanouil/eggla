@@ -56,7 +56,8 @@ Donwload the (latest) Docker image or a specific version from the [GitHub Regist
 
 ```{bash, eval = FALSE}
 docker run \
-  -it --rm \
+  --detach \
+  --rm \
   --volume /home/mcanouil/eggla:/tmp/eggla \
   ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla.R
 ```
@@ -107,7 +108,8 @@ Donwload the (latest) Docker image or a specific version from the [GitHub Regist
 
 ```{bash, eval = FALSE}
 docker run \
-  -it --rm \
+  --detach \
+  --rm \
   --volume /home/mcanouil/eggla:/tmp/eggla \
   ghcr.io/mcanouil/eggla:latest Rscript /tmp/eggla/run_eggla_gwas.R
 ```
