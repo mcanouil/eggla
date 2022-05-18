@@ -213,6 +213,8 @@ all_models <- setDT(
 *In parallel using `future`.*
 
 ```{r models-try}
+#| warning: false
+#| message: false
 all_models[["lme"]] <- future_mapply(
   FUN = function(models, dataset, sex, correlation_structure, default) {
     m <- sprintf(
