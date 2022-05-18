@@ -116,7 +116,7 @@ plot_slopes <- function(
            ggplot2::stat_smooth(
             method = "gam",
             linetype = 2,
-            colour = "firebrick",
+            colour = "#b22222",
             se = FALSE
           )
         )
@@ -133,7 +133,7 @@ plot_slopes <- function(
             method = "gam",
             formula = y ~ s(x, bs = "cr"),
             linetype = 2,
-            colour = "firebrick",
+            colour = "#b22222",
             se = FALSE
           )
         )
