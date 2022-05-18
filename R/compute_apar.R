@@ -3,9 +3,6 @@
 #' @inheritParams predict_bmi
 #' @param from A string indicating the type of data to be used for the AP and AR
 #'   computation, either "predicted" or "observed". Default is "predicted".
-#' @param start The start of the time window to compute AP and AR.
-#' @param end The end of the time window to compute AP and AR.
-#' @param step The step to increment the sequence.
 #'
 #' @return A `data.table` object.
 #'
