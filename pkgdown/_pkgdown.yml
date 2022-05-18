@@ -12,6 +12,7 @@ reference:
     desc: General functions to work with linear splines, cubic splines, and cubic slopes mixed model.
     contents:
     - time_model
+    - predict_bmi
     - compute_apar
     - plot_residuals
     - compute_aucs
