@@ -40,7 +40,7 @@ the linear mixed-effects model fit.
 \description{
 Fit a cubic splines mixed model regression
 with three splines parametrisation as random effect.
-This function a specific version of \code{time_model()}.
+This function is a specific version of \code{time_model()}.
 }
 \examples{
 data("bmigrowth")

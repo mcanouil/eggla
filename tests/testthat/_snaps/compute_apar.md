@@ -4,106 +4,106 @@
       compute_apar(fit = res, from = i)[AP | AR]
     Output
            egg_id egg_ageyears  egg_bmi    AP    AR
-        1:    001         1.30 20.92187  TRUE FALSE
-        2:    001         2.80 20.05870 FALSE  TRUE
-        3:    004         1.30 17.90733  TRUE FALSE
-        4:    004         2.70 17.26782 FALSE  TRUE
-        5:    005         1.35 18.30973  TRUE FALSE
-        6:    005         2.65 17.74558 FALSE  TRUE
-        7:    006         1.25 16.37425  TRUE FALSE
-        8:    006         2.90 15.55547 FALSE  TRUE
-        9:    007         1.65 19.35374  TRUE FALSE
-       10:    007         2.00 19.32831 FALSE  TRUE
-       11:    009         1.20 17.81520  TRUE FALSE
-       12:    009         3.00 16.78165 FALSE  TRUE
-       13:    010         1.35 18.31161  TRUE FALSE
-       14:    010         2.55 17.84918 FALSE  TRUE
-       15:    011         1.30 18.55054  TRUE FALSE
-       16:    011         2.80 17.76223 FALSE  TRUE
-       17:    012         1.20 20.36177  TRUE FALSE
-       18:    012         3.20 18.93355 FALSE  TRUE
-       19:    013         1.35 18.67278  TRUE FALSE
-       20:    013         2.55 18.19023 FALSE  TRUE
-       21:    016         1.25 17.94011  TRUE FALSE
-       22:    016         2.85 17.10430 FALSE  TRUE
-       23:    019         1.35 17.94841  TRUE FALSE
-       24:    019         2.60 17.45165 FALSE  TRUE
-       25:    022         1.30 19.19374  TRUE FALSE
-       26:    022         2.75 18.47593 FALSE  TRUE
-       27:    025         1.20 18.57068  TRUE FALSE
-       28:    025         3.15 17.29673 FALSE  TRUE
-       29:    031         1.25 18.34296  TRUE FALSE
-       30:    031         3.00 17.29781 FALSE  TRUE
-       31:    032         1.25 17.59678  TRUE FALSE
-       32:    032         3.00 16.61462 FALSE  TRUE
-       33:    033         1.30 21.05203  TRUE FALSE
-       34:    033         2.65 20.37925 FALSE  TRUE
-       35:    034         1.35 18.89289  TRUE FALSE
-       36:    034         2.55 18.44274 FALSE  TRUE
-       37:    035         1.30 18.65241  TRUE FALSE
-       38:    035         2.75 17.94888 FALSE  TRUE
-       39:    039         1.10 20.02657  TRUE FALSE
-       40:    039         3.60 17.94830 FALSE  TRUE
-       41:    041         1.25 18.32340  TRUE FALSE
-       42:    041         2.85 17.52561 FALSE  TRUE
-       43:    044         1.25 21.82504  TRUE FALSE
-       44:    044         2.85 20.84624 FALSE  TRUE
-       45:    045         1.20 18.15357  TRUE FALSE
-       46:    045         3.05 17.04232 FALSE  TRUE
-       47:    046         1.25 18.75077  TRUE FALSE
-       48:    046         2.95 17.77794 FALSE  TRUE
-       49:    048         1.25 18.70215  TRUE FALSE
-       50:    048         3.00 17.64682 FALSE  TRUE
-       51:    049         1.40 18.67195  TRUE FALSE
-       52:    049         2.40 18.34513 FALSE  TRUE
-       53:    054         1.20 19.40804  TRUE FALSE
-       54:    054         3.25 17.95477 FALSE  TRUE
-       55:    057         1.25 18.03860  TRUE FALSE
-       56:    057         3.00 17.02740 FALSE  TRUE
-       57:    059         1.30 18.22322  TRUE FALSE
-       58:    059         2.75 17.54417 FALSE  TRUE
-       59:    061         1.25 17.95799  TRUE FALSE
-       60:    061         3.00 16.93004 FALSE  TRUE
-       61:    063         1.25 18.05077  TRUE FALSE
-       62:    063         3.00 17.06279 FALSE  TRUE
-       63:    064         1.40 16.02333  TRUE FALSE
-       64:    064         2.50 15.68233 FALSE  TRUE
-       65:    065         1.40 16.77208  TRUE FALSE
-       66:    065         2.45 16.43294 FALSE  TRUE
-       67:    068         1.35 18.56908  TRUE FALSE
-       68:    068         2.55 18.08901 FALSE  TRUE
-       69:    069         1.25 17.32842  TRUE FALSE
-       70:    069         2.90 16.46348 FALSE  TRUE
-       71:    072         1.20 19.56021  TRUE FALSE
-       72:    072         3.10 18.33658 FALSE  TRUE
-       73:    075         1.30 16.90369  TRUE FALSE
-       74:    075         2.70 16.33069 FALSE  TRUE
-       75:    076         1.30 18.82215  TRUE FALSE
-       76:    076         2.65 18.21029 FALSE  TRUE
-       77:    080         1.40 18.03374  TRUE FALSE
-       78:    080         2.50 17.64332 FALSE  TRUE
-       79:    081         1.10 17.17839  TRUE FALSE
-       80:    081         3.70 15.20858 FALSE  TRUE
-       81:    082         1.30 18.37956  TRUE FALSE
-       82:    082         2.80 17.60223 FALSE  TRUE
-       83:    083         1.20 17.18753  TRUE FALSE
-       84:    083         3.25 15.90091 FALSE  TRUE
-       85:    085         1.25 16.26785  TRUE FALSE
-       86:    085         2.90 15.48245 FALSE  TRUE
-       87:    086         1.25 18.07475  TRUE FALSE
-       88:    086         3.00 17.03043 FALSE  TRUE
-       89:    088         1.25 19.07186  TRUE FALSE
-       90:    088         2.95 18.08576 FALSE  TRUE
-       91:    089         1.25 17.62079  TRUE FALSE
-       92:    089         2.85 16.84817 FALSE  TRUE
-       93:    092         1.20 19.32823  TRUE FALSE
-       94:    092         3.05 18.18292 FALSE  TRUE
-       95:    093         1.65 18.89128  TRUE FALSE
-       96:    093         2.00 18.87098 FALSE  TRUE
-       97:    095         1.35 17.60877  TRUE FALSE
-       98:    095         2.55 17.15794 FALSE  TRUE
-       99:    099         1.40 19.06953  TRUE FALSE
-      100:    099         2.40 18.72683 FALSE  TRUE
+        1:    001         1.35 19.14348  TRUE FALSE
+        2:    001         2.70 18.56972 FALSE  TRUE
+        3:    004         1.35 18.24414  TRUE FALSE
+        4:    004         2.75 17.63306 FALSE  TRUE
+        5:    005         1.35 18.57345  TRUE FALSE
+        6:    005         2.65 18.08016 FALSE  TRUE
+        7:    006         1.30 17.72611  TRUE FALSE
+        8:    006         3.00 16.85654 FALSE  TRUE
+        9:    007         1.45 18.92720  TRUE FALSE
+       10:    007         2.40 18.66142 FALSE  TRUE
+       11:    009         1.30 18.23983  TRUE FALSE
+       12:    009         2.85 17.52267 FALSE  TRUE
+       13:    010         1.40 18.66062  TRUE FALSE
+       14:    010         2.50 18.27368 FALSE  TRUE
+       15:    011         1.35 18.54129  TRUE FALSE
+       16:    011         2.75 17.91046 FALSE  TRUE
+       17:    012         1.30 18.93838  TRUE FALSE
+       18:    012         2.85 18.18404 FALSE  TRUE
+       19:    013         1.40 18.87964  TRUE FALSE
+       20:    013         2.50 18.48814 FALSE  TRUE
+       21:    016         1.30 18.17512  TRUE FALSE
+       22:    016         2.85 17.45785 FALSE  TRUE
+       23:    019         1.35 18.51276  TRUE FALSE
+       24:    019         2.65 18.00413 FALSE  TRUE
+       25:    022         1.35 18.74773  TRUE FALSE
+       26:    022         2.70 18.18557 FALSE  TRUE
+       27:    025         1.30 18.28952  TRUE FALSE
+       28:    025         2.90 17.46855 FALSE  TRUE
+       29:    031         1.30 18.30042  TRUE FALSE
+       30:    031         2.90 17.49976 FALSE  TRUE
+       31:    032         1.30 18.14175  TRUE FALSE
+       32:    032         2.95 17.27980 FALSE  TRUE
+       33:    033         1.40 19.23263  TRUE FALSE
+       34:    033         2.60 18.77207 FALSE  TRUE
+       35:    034         1.35 18.67371  TRUE FALSE
+       36:    034         2.60 18.18115 FALSE  TRUE
+       37:    035         1.35 18.57172  TRUE FALSE
+       38:    035         2.65 18.07412 FALSE  TRUE
+       39:    039         1.25 18.40668  TRUE FALSE
+       40:    039         3.20 17.21829 FALSE  TRUE
+       41:    041         1.30 18.44859  TRUE FALSE
+       42:    041         2.80 17.75584 FALSE  TRUE
+       43:    044         1.40 19.59162  TRUE FALSE
+       44:    044         2.55 19.14135 FALSE  TRUE
+       45:    045         1.30 18.25270  TRUE FALSE
+       46:    045         2.95 17.37372 FALSE  TRUE
+       47:    046         1.30 18.44357  TRUE FALSE
+       48:    046         2.85 17.71208 FALSE  TRUE
+       49:    048         1.30 18.37269  TRUE FALSE
+       50:    048         2.85 17.62396 FALSE  TRUE
+       51:    049         1.40 18.79827  TRUE FALSE
+       52:    049         2.60 18.32169 FALSE  TRUE
+       53:    054         1.30 18.45926  TRUE FALSE
+       54:    054         3.00 17.51728 FALSE  TRUE
+       55:    057         1.30 18.23656  TRUE FALSE
+       56:    057         2.90 17.43064 FALSE  TRUE
+       57:    059         1.35 18.39598  TRUE FALSE
+       58:    059         2.75 17.74932 FALSE  TRUE
+       59:    061         1.30 18.07717  TRUE FALSE
+       60:    061         2.95 17.23973 FALSE  TRUE
+       61:    063         1.35 18.44728  TRUE FALSE
+       62:    063         2.75 17.83033 FALSE  TRUE
+       63:    064         1.35 17.88300  TRUE FALSE
+       64:    064         2.70 17.31475 FALSE  TRUE
+       65:    065         1.35 18.12595  TRUE FALSE
+       66:    065         2.65 17.62558 FALSE  TRUE
+       67:    068         1.35 18.59519  TRUE FALSE
+       68:    068         2.70 18.02235 FALSE  TRUE
+       69:    069         1.30 18.04597  TRUE FALSE
+       70:    069         2.90 17.25580 FALSE  TRUE
+       71:    072         1.30 18.60264  TRUE FALSE
+       72:    072         2.85 17.82834 FALSE  TRUE
+       73:    075         1.30 17.99132  TRUE FALSE
+       74:    075         2.85 17.27050 FALSE  TRUE
+       75:    076         1.40 18.78452  TRUE FALSE
+       76:    076         2.60 18.31317 FALSE  TRUE
+       77:    080         1.40 18.56493  TRUE FALSE
+       78:    080         2.60 18.11685 FALSE  TRUE
+       79:    081         1.20 17.60487  TRUE FALSE
+       80:    081         3.30 16.33509 FALSE  TRUE
+       81:    082         1.35 18.54630  TRUE FALSE
+       82:    082         2.70 17.97934 FALSE  TRUE
+       83:    083         1.25 17.75899  TRUE FALSE
+       84:    083         3.20 16.62091 FALSE  TRUE
+       85:    085         1.30 17.78173  TRUE FALSE
+       86:    085         3.00 16.91058 FALSE  TRUE
+       87:    086         1.30 18.21552  TRUE FALSE
+       88:    086         2.90 17.41084 FALSE  TRUE
+       89:    088         1.30 18.57847  TRUE FALSE
+       90:    088         2.80 17.86210 FALSE  TRUE
+       91:    089         1.30 18.11834  TRUE FALSE
+       92:    089         2.80 17.43654 FALSE  TRUE
+       93:    092         1.30 18.52710  TRUE FALSE
+       94:    092         2.85 17.77197 FALSE  TRUE
+       95:    093         1.45 19.15325  TRUE FALSE
+       96:    093         2.35 18.90999 FALSE  TRUE
+       97:    095         1.35 18.40417  TRUE FALSE
+       98:    095         2.65 17.90366 FALSE  TRUE
+       99:    099         1.40 18.78684  TRUE FALSE
+      100:    099         2.55 18.34631 FALSE  TRUE
            egg_id egg_ageyears  egg_bmi    AP    AR
 
 ---
@@ -207,4 +207,40 @@
       93:    099         0.50 18.80661  TRUE FALSE
       94:    099         2.00 17.97986 FALSE  TRUE
           egg_id egg_ageyears  egg_bmi    AP    AR
+
+---
+
+    Code
+      compute_apar(fit = res_cov, from = i)[AP | AR]
+    Output
+           egg_id egg_sex egg_ageyears  egg_bmi    AP    AR
+        1:    001       0         1.40 19.97607  TRUE FALSE
+        2:    001       0         2.70 19.37951 FALSE  TRUE
+        3:    002       1         1.45 19.53166  TRUE FALSE
+        4:    002       1         2.50 19.18448 FALSE  TRUE
+        5:    003       1         1.40 19.46674  TRUE FALSE
+       ---                                                 
+      196:    098       1         3.00 17.34626 FALSE  TRUE
+      197:    099       0         1.40 19.16842  TRUE FALSE
+      198:    099       0         2.60 18.69496 FALSE  TRUE
+      199:    100       1         1.30 18.15354  TRUE FALSE
+      200:    100       1         3.10 17.16602 FALSE  TRUE
+
+---
+
+    Code
+      compute_apar(fit = res_cov, from = i)[AP | AR]
+    Output
+           egg_id egg_ageyears  egg_bmi    AP    AR
+        1:    001         0.25 18.29230  TRUE FALSE
+        2:    001         0.50 17.67517 FALSE  TRUE
+        3:    003         1.00 19.81758  TRUE FALSE
+        4:    003         2.00 18.05900 FALSE  TRUE
+        5:    004         0.75 19.63785  TRUE FALSE
+       ---                                         
+      185:    098         1.00 19.58888  TRUE FALSE
+      186:    099         0.50 18.80661  TRUE FALSE
+      187:    099         2.00 17.97986 FALSE  TRUE
+      188:    100         0.50 18.27037  TRUE FALSE
+      189:    100         0.75 17.64910 FALSE  TRUE
 

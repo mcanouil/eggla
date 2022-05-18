@@ -1,9 +1,37 @@
+# eggla 0.10.0
+
+## Features
+
+- In `R/predict_bmi.R` ([#14](https://github.com/mcanouil/eggla/issues/14)),
+  - feat: new function to predict BMI from a `lme` model object, from `egg_model()` or `time_model()`.
+
+## Improvements
+
+- Change default period to the following time windows for predicting 'linear' slopes from the model:
+  - 0-0.5 years (Infancy – same as previously)
+  - 1.5-3.5 years (Childhood – reduced the upper bound from 5 years)
+  - 6.5-10 years (Pre-pubertal – increased the lower bound from 6 years)
+  - 12-17 years (adolescence – same as previously)
+
+## Fixes
+
+- In `R/compute_apar.R` ([#14](https://github.com/mcanouil/eggla/issues/14)),
+  - Fix: `grep` instead of `any`/`grepl`.
+  - Refactor: inherits params from `predict_bmi()`.
+  - Fix: uses `predict_bmi()` internally.
+- In `R/plot_slopes.R`, and `R/plot_egg_slopes.R`,
+  - Fix: `grep` instead of `any`/`grepl`.
+- In `vignettes/articles/models-diagnostics.Rmd` and `run-cubic-splines.Rmd` ([#14](https://github.com/mcanouil/eggla/issues/14), [#15](https://github.com/mcanouil/eggla/issues/15)),
+  - Fix: uses GAM 'y ~ s(x, bs = "cr")' and `predict_bmi()`.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.9.1...v0.10.0>
+
 # eggla 0.9.1
 
 ## Features
 
 - In `R/egg_model.R`, `R/egg_model.R`, `R/run_eggla.R`, and `R/do_eggla_gwas`,
-  - feat: add `quiet` to silent the messages.
+  - Feat: add `quiet` to silent the messages.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.9.0...v0.9.1>
 

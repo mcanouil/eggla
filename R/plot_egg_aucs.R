@@ -18,9 +18,9 @@
 #' )
 #' plot_egg_aucs(
 #'   fit = res,
-#'   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+#'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #' )
-plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
+plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)) {
   period_interval <- patterns <- auc <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])
