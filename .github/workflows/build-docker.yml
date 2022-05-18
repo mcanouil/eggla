@@ -47,4 +47,9 @@ jobs:
               .
           fi
       - name: Run eggla-example.R
-        run: docker run --rm ghcr.io/mcanouil/eggla:latest Rscript eggla-example.R
+        run: |
+          if [[ "${{github.ref_name}}" = "main" ]]; then
+            docker run --rm ghcr.io/mcanouil/eggla:devel Rscript eggla-example.R
+          else
+            docker run --rm ghcr.io/mcanouil/eggla:latest Rscript eggla-example.R
+          fi
