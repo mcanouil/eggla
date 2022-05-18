@@ -33,5 +33,5 @@ res <- egg_model(
   random_complexity = 1
 )
 
-predict_bmi(res)
+predict_bmi(res)[]
 }
