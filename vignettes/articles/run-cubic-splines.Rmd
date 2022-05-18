@@ -57,7 +57,7 @@ options(
       method = "gam",
       formula = y ~ s(x, bs = "cr"),
       linetype = 1,
-      colour = "firebrick",
+      colour = "#b22222",
       se = FALSE
     ) +
     theme(legend.position = "none") +

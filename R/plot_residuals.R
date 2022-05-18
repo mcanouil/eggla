@@ -43,7 +43,7 @@ plot_residuals <- function(x, y, fit) {
   plota <- ggplot2::ggplot(data = model_data) +
     ggplot2::aes(x = revert_trans(.data[["fitted"]]), y = .data[[y]]) +
     ggplot2::geom_point(size = 0.5, alpha = 0.25, shape = 1) +
-    ggplot2::stat_smooth(method = "lm", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+    ggplot2::stat_smooth(method = "lm", formula = y ~ x, linetype = 1, colour = "#b22222", se = FALSE) +
     ggplot2::labs(
       x = paste0("Fitted ", toupper(y), " Values"),
       y = paste0("Observed ", toupper(y), " Values")
@@ -52,7 +52,7 @@ plot_residuals <- function(x, y, fit) {
   plotb <- ggplot2::ggplot(data = model_data) +
     ggplot2::aes(x = .data[["fitted"]], y = .data[["resid"]]) +
     ggplot2::geom_point(size = 0.5, alpha = 0.25, shape = 1) +
-    ggplot2::stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+    ggplot2::stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "#b22222", se = FALSE) +
     ggplot2::geom_hline(yintercept = 0, linetype = 2, colour = "dodgerblue") +
     ggplot2::labs(
       x = paste0("Fitted ", toupper(y), " Values"),
@@ -62,7 +62,7 @@ plot_residuals <- function(x, y, fit) {
   plotc <- ggplot2::ggplot(data = model_data) +
     ggplot2::aes(x = .data[[x]], y = .data[["resid"]]) +
     ggplot2::geom_point(size = 0.5, alpha = 0.25, shape = 1) +
-    ggplot2::stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "firebrick", se = FALSE) +
+    ggplot2::stat_smooth(method = "loess", formula = y ~ x, linetype = 1, colour = "#b22222", se = FALSE) +
     ggplot2::geom_hline(yintercept = 0, linetype = 2, colour = "dodgerblue") +
     ggplot2::labs(
       x = paste0("Fitted ", toupper(x), " Values"),

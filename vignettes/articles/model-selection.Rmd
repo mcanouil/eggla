@@ -65,7 +65,7 @@ p <- ggplot(perfs_dt) +
   aes(colour = sub(" --.*", "", model)) +
   geom_boxplot(outlier.shape = NA) +
   geom_beeswarm(shape = 1) +
-  stat_summary(geom = "point", fun = mean, shape = 18, colour = "firebrick", size = 4) +
+  stat_summary(geom = "point", fun = mean, shape = 18, colour = "#b22222", size = 4) +
   scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
   scale_colour_viridis_d(begin = 0.15, end = 0.85)
   theme_minimal() +
