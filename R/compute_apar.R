@@ -121,7 +121,8 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
   data.table::setnames(
     x = out,
     old = c(id_var, age_var, bmi_var, covariates),
-    new = c("egg_id", "egg_ageyears", "egg_bmi", sprintf("egg_%s", covariates))
+    new = c("egg_id", "egg_ageyears", "egg_bmi", sprintf("egg_%s", covariates)),
+    skip_absent = TRUE
   )[
     j = `:=`(
       AP = egg_ageyears %in% egg_ageyears[which(diff(sign(diff(egg_bmi))) == -2) + 1],
