@@ -23,7 +23,7 @@
 #'   random_complexity = 1
 #' )
 #'
-#' predict_bmi(res)
+#' predict_bmi(res)[]
 predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.05) {
   stopifnot(inherits(fit, "lme"))
   bmi <- egg_ageyears <- egg_bmi <- egg_id <- NULL # no visible binding for global variable from data.table
