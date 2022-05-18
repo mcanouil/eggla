@@ -2,7 +2,7 @@
 
 ## Features
 
-- In `R/predict_bmi.R`,
+- In `R/predict_bmi.R` ([#14](https://github.com/mcanouil/eggla/issues/14)),
   - feat: new function to predict BMI from a `lme` model object, from `egg_model()` or `time_model()`.
 
 ## Improvements
@@ -15,13 +15,14 @@
 
 ## Fixes
 
-- In `R/compute_apar.R`,
+- In `R/compute_apar.R` ([#14](https://github.com/mcanouil/eggla/issues/14)),
   - Fix: `grep` instead of `any`/`grepl`.
   - Refactor: inherits params from `predict_bmi()`.
   - Fix: uses `predict_bmi()` internally.
-
 - In `R/plot_slopes.R`, and `R/plot_egg_slopes.R`,
   - Fix: `grep` instead of `any`/`grepl`.
+- In `vignettes/articles/models-diagnostics.Rmd` and `run-cubic-splines.Rmd` ([#14](https://github.com/mcanouil/eggla/issues/14), [#15](https://github.com/mcanouil/eggla/issues/15)),
+  - Fix: uses GAM 'y ~ s(x, bs = "cr")' and `predict_bmi()`.
 
 # eggla 0.9.1
 
