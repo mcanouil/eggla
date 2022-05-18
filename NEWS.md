@@ -21,7 +21,8 @@
   - Fix: uses `predict_bmi()` internally.
 - In `R/plot_slopes.R`, and `R/plot_egg_slopes.R`,
   - Fix: `grep` instead of `any`/`grepl`.
-- In `vignettes/articles/models-diagnostics.Rmd` and `run-cubic-splines.Rmd` ([#14](https://github.com/mcanouil/eggla/issues/14), [#15](https://github.com/mcanouil/eggla/issues/15)),
+  - Fix: uses GAM 'y ~ s(x, bs = "cr")'.
+- In , `vignettes/articles/adiposity-peak-rebound.Rmd`; `vignettes/articles/models-diagnostics.Rmd`, and `vignettes/articles/run-cubic-splines.Rmd` ([#14](https://github.com/mcanouil/eggla/issues/14), [#15](https://github.com/mcanouil/eggla/issues/15)),
   - Fix: uses GAM 'y ~ s(x, bs = "cr")' and `predict_bmi()`.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.9.1...v0.10.0>
