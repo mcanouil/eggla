@@ -1,5 +1,10 @@
 # eggla (development version)
 
+## Features
+
+- In `R/predict_bmi.R`,
+  - feat: new function to predict BMI from a `lme` model object, from `egg_model()` or `time_model()`.
+
 ## Improvements
 
 - Change default period to the following time windows for predicting 'linear' slopes from the model:
@@ -10,7 +15,12 @@
 
 ## Fixes
 
-- In `R/compute_apar.R`, `R/plot_slopes.R`, and `R/plot_egg_slopes.R`,
+- In `R/compute_apar.R`,
+  - Fix: `grep` instead of `any`/`grepl`.
+  - Refactor: inherits params from `predict_bmi()`.
+  - Fix: uses `predict_bmi()` internally.
+
+- In `R/plot_slopes.R`, and `R/plot_egg_slopes.R`,
   - Fix: `grep` instead of `any`/`grepl`.
 
 # eggla 0.9.1
