@@ -116,7 +116,7 @@ run_eggla <- function(
         agedays = egg_agedays,
         sex = egg_sex,
         measurement = measurement,
-        quietly = TRUE,
+        quietly = quiet,
         parallel = parallel,
         num.batches = parallel_n_chunks
       )
@@ -157,7 +157,8 @@ run_eggla <- function(
         data = dt_clean[egg_sex %in% isex],
         id_var = "egg_id",
         random_complexity = random_complexity,
-        use_ar1 = use_ar1
+        use_ar1 = use_ar1,
+        quiet = quiet
       )
 
       saveRDS(
