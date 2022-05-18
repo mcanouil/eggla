@@ -13,7 +13,7 @@ run_eggla(
   sex_variable = "sex",
   covariates = NULL,
   male_coded_zero = FALSE,
-  random_complexity = 3,
+  random_complexity = 1, # simple to speed-up test
   use_ar1 = TRUE,
   parallel = FALSE, # to parallelise Daymont QC
   parallel_n_chunks = 1, # to parallelise Daymont QC
