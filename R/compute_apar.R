@@ -90,30 +90,7 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
       ]
     },
     "predicted" = {
-      data.table::setnames(
-        x = data.table::data.table(
-          egg_id = unique(fit[["groups"]][[id_var]]),
-          egg_ageyears = list(seq(from = start, to = end, by = step))
-        ),
-        old = c("egg_id", "egg_ageyears"),
-        new = c(id_var, age_var)
-      )[
-        data.table::as.data.table(fit[["data"]])[
-          j = unique(.SD),
-          .SDcols = c(id_var, covariates)
-        ],
-        on = id_var
-      ][
-        j = `names<-`(list(unlist(.SD)), age_var),
-        .SDcols = c(age_var),
-        by = c(id_var, covariates)
-      ][
-        j = bmi := f(stats::predict(
-          object = fit,
-          newdata = .SD,
-          interval = "prediction"
-        ))
-      ]
+      predict_bmi(fit = fit, start = start, end = end, step = step)
     }
   )
 
