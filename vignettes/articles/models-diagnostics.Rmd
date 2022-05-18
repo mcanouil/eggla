@@ -326,7 +326,11 @@ ggplot(
   data = good_res_models[
     j = rbindlist(lapply(
       X = lme,
-      FUN = function(.lme) .lme[["data"]][j = .SD, .SDcols = !"sex"]
+      FUN = function(.lme) {
+        if (inherits(.lme, "lme")) {
+          .lme[["data"]][j = .SD, .SDcols = !"sex"]
+        }
+      }
     )),
     by = list(sex, dataset, models)
   ]
@@ -353,11 +357,13 @@ ggplot(
         j = rbindlist(lapply(
           X = lme,
           FUN = function(.lme) {
-            predict_bmi(
-              fit = .lme,
-              start = min(.lme[["data"]][["age"]]),
-              end = max(.lme[["data"]][["age"]])
-            )
+            if (inherits(.lme, "lme")) {
+              predict_bmi(
+                fit = .lme,
+                start = min(.lme[["data"]][["age"]]),
+                end = max(.lme[["data"]][["age"]])
+              )
+            }
           }
         )),
         by = list(sex, dataset, models)
