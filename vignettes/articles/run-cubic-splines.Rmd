@@ -54,8 +54,8 @@ options(
     geom_path(na.rm = TRUE, alpha = 0.25) +
     geom_point(size = 0.5, na.rm = TRUE, alpha = 0.25) +
     stat_smooth(
-      method = "loess",
-      formula = y ~ x,
+      method = "gam",
+      formula = y ~ s(x, bs = "cr"),
       linetype = 1,
       colour = "firebrick",
       se = FALSE

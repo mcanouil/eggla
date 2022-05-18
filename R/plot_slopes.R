@@ -130,8 +130,8 @@ plot_slopes <- function(
             show.legend = FALSE
           ),
           ggplot2::stat_smooth(
-            method = "loess",
-            formula = y ~ x,
+            method = "gam",
+            formula = y ~ s(x, bs = "cr"),
             linetype = 2,
             colour = "firebrick",
             se = FALSE

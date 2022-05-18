@@ -168,8 +168,8 @@ p_apar <- mapply(
         show.legend = FALSE
       ) +
       stat_smooth(
-        method = "loess", # Comment for big cohort, i.e., to use default method which is "gam"
-        formula = y ~ x, # Comment this for big cohort, i.e., to use default "gam" formula
+        method = "gam", # Comment for big cohort
+        formula = y ~ s(x, bs = "cr"), # Comment this for big cohort
         linetype = 2,
         colour = "#2222b2",
         se = FALSE
