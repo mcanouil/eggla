@@ -4,7 +4,7 @@
 \alias{egg_aucs}
 \title{Derived areas under the curve from a cubic splines mixed-effects model by \code{time_model()}.}
 \usage{
-egg_aucs(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17))
+egg_aucs(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17))
 }
 \arguments{
 \item{fit}{A model object from a statistical model
@@ -32,7 +32,7 @@ res <- egg_model(
 head(
   egg_aucs(
     fit = res,
-    period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
   )
 )
 }

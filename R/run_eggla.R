@@ -116,7 +116,7 @@ run_eggla <- function(
         agedays = egg_agedays,
         sex = egg_sex,
         measurement = measurement,
-        quietly = TRUE,
+        quietly = quiet,
         parallel = parallel,
         num.batches = parallel_n_chunks
       )
@@ -157,7 +157,8 @@ run_eggla <- function(
         data = dt_clean[egg_sex %in% isex],
         id_var = "egg_id",
         random_complexity = random_complexity,
-        use_ar1 = use_ar1
+        use_ar1 = use_ar1,
+        quiet = quiet
       )
 
       saveRDS(
@@ -173,7 +174,7 @@ run_eggla <- function(
       data.table::fwrite(
         x = egg_slopes(
           fit = results,
-          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+          period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
         ),
         file = file.path(results_directory, "derived-slopes.csv")
       )
@@ -181,7 +182,7 @@ run_eggla <- function(
       data.table::fwrite(
         x = egg_aucs(
           fit = results,
-          period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+          period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
         ),
         file = file.path(results_directory, "derived-aucs.csv")
       )

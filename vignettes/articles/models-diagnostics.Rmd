@@ -213,6 +213,8 @@ all_models <- setDT(
 *In parallel using `future`.*
 
 ```{r models-try}
+#| warning: false
+#| message: false
 all_models[["lme"]] <- future_mapply(
   FUN = function(models, dataset, sex, correlation_structure, default) {
     m <- sprintf(
@@ -322,15 +324,9 @@ wrap_plots(
 ```{r model-predict-plot}
 ggplot(
   data = good_res_models[
-    j = rbindlist(list(
-      (function(x) {
-        data.table(age = seq(0, 16, 0.1))[
-          j = bmi := if (inherits(x[[1]], "lme")) {
-            exp(predict(x[[1]], .SD, level = 0))
-          } else NA_real_,
-          .SDcols = "age"
-        ]
-      })(lme)
+    j = rbindlist(lapply(
+      X = lme,
+      FUN = function(.lme) .lme[["data"]][j = .SD, .SDcols = !"sex"]
     )),
     by = list(sex, dataset, models)
   ]
@@ -338,14 +334,61 @@ ggplot(
   aes(
     x = age,
     y = bmi,
-    colour = c("0" = "Male", "1" = "Female")[as.character(sex)]
+    linetype = c("0" = "Male", "1" = "Female")[as.character(sex)]
   ) +
-  geom_path() +
+  geom_path( # comment/remove to not draw individual trajectories
+    mapping = aes(group = ID),
+    alpha = 0.10,
+    show.legend = FALSE
+  ) +
+  stat_smooth(
+    mapping = aes(colour = "On observed values"),
+    se = FALSE,
+    method = "gam",
+    formula = y ~ s(x, bs = "cr")
+  ) +
+  stat_smooth(
+    data = setnames(
+      x = good_res_models[
+        j = rbindlist(lapply(
+          X = lme,
+          FUN = function(.lme) {
+            predict_bmi(
+              fit = .lme,
+              start = min(.lme[["data"]][["age"]]),
+              end = max(.lme[["data"]][["age"]])
+            )
+          }
+        )),
+        by = list(sex, dataset, models)
+      ],
+      old = c("egg_ageyears", "egg_bmi"),
+      new = c("age", "bmi")
+    ),
+    mapping = aes(colour = "On predicted values"),
+    se = FALSE,
+    method = "gam",
+    formula = y ~ s(x, bs = "cr")
+  ) +
+  scale_x_sqrt(
+    expand = c(0, 0),
+    breaks = c(0, 0.5, 1, 1.5, 2, 5, 10, 15),
+    limits = c(0, NA)
+  ) +
+  scale_colour_manual(values = c("#b22222", "#2222b2")) +
   labs(
     title = "Cubic Splines (Fixed Effects = Random Effects)",
     x = "AGE (years)",
     y = "BMI (kg/m\u00B2)",
-    colour = NULL
+    colour = "GAM: y ~ s(x, bs = \"cr\")",
+    linetype = "Sex"
+  ) +
+  theme(
+    legend.position = c(0.01, 0.99),
+    legend.justification = c("left", "top"),
+    legend.background = element_rect(fill = "white", size = 0.10),
+    panel.grid = element_blank(),
+    axis.line = element_line(size = 0.10)
   )
 ```
 

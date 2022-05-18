@@ -4,7 +4,7 @@
 \alias{plot_egg_slopes}
 \title{Plot derived slopes from a model fitted by \code{egg_model()}.}
 \usage{
-plot_egg_slopes(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17))
+plot_egg_slopes(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17))
 }
 \arguments{
 \item{fit}{A model object from a statistical model
@@ -28,6 +28,6 @@ res <- egg_model(
 )
 plot_egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 }

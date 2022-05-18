@@ -146,21 +146,48 @@ sres
 ```{r}
 ggplot() +
   aes(x = age, y = bmi) +
+  geom_path(
+    data = pheno_dt_female,
+    mapping = aes(group = ID),
+    alpha = 0.10,
+    show.legend = FALSE
+  ) +
   stat_smooth(
     data = pheno_dt_female,
-    mapping = aes(colour = "Loess"),
-    method = "loess", formula = y ~ x, linetype = 2, se = FALSE
+    mapping = aes(colour = "On observed values"),
+    se = FALSE,
+    method = "gam",
+    formula = y ~ s(x, bs = "cr")
   ) +
-  geom_path(
-    data = data.table(
-      age = seq(min(pheno_dt_female[["age"]]), max(pheno_dt_female[["age"]]), 0.1)
-    )[
-      j = bmi := exp(predict(res, .SD, level = 0)),
-      .SDcols = "age"
-    ],
-    mapping = aes(colour = "Cubic Splines (Random Linear Splines)"),
+  stat_smooth(
+    data = setnames(
+      x = predict_bmi(res, start = min(pheno_dt_female[["age"]]), end = max(pheno_dt_female[["age"]])),
+      old = c("egg_ageyears", "egg_bmi"),
+      new = c("age", "bmi")
+    ),
+    mapping = aes(colour = "On predicted values"),
+    se = FALSE,
+    method = "gam",
+    formula = y ~ s(x, bs = "cr")
   ) +
-  labs(x = "AGE (years)", y = "BMI (kg/m\u00B2)", colour = "Model")
+  scale_x_sqrt(
+    expand = c(0, 0),
+    breaks = c(0, 0.5, 1, 1.5, 2, 5, 10, 15),
+    limits = c(0, NA)
+  ) +
+  scale_colour_manual(values = c("#b22222", "#2222b2")) +
+  labs(
+    x = "AGE (years)",
+    y = "BMI (kg/m\u00B2)",
+    colour = "GAM: y ~ s(x, bs = \"cr\")"
+  ) +
+  theme(
+    legend.position = c(0.01, 0.99),
+    legend.justification = c("left", "top"),
+    legend.background = element_rect(fill = "white", size = 0.10),
+    panel.grid = element_blank(),
+    axis.line = element_line(size = 0.10)
+  )
 ```
 
 # Residuals
@@ -182,7 +209,7 @@ plot_residuals(
 ```{r}
 res_pred_slopes <- egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 head(res_pred_slopes)
 ```
@@ -190,7 +217,7 @@ head(res_pred_slopes)
 ```{r}
 plot_egg_slopes(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 ```
 
@@ -199,7 +226,7 @@ plot_egg_slopes(
 ```{r}
 res_auc <- egg_aucs(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 head(res_auc)
 ```
@@ -207,6 +234,6 @@ head(res_auc)
 ```{r}
 plot_egg_aucs(
   fit = res,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 )
 ```

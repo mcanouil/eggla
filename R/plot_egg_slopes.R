@@ -18,9 +18,9 @@
 #' )
 #' plot_egg_slopes(
 #'   fit = res,
-#'   period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)
+#'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #' )
-plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
+plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)) {
   params <- variable <- yend <- pred_period <- end <- NULL # no visible binding for global variable from data.table
   patterns <- slope <- .data <- start <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))
@@ -64,7 +64,7 @@ plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17)) {
     j = yend := pred_period + end * slope
   ]
 
-  if (grep("log", all.names(fit[["terms"]][[2]]))) {
+  if (any(grepl("log", all.names(fit[["terms"]][[2]])))) {
     f <- exp
     yscale <- ggplot2::scale_y_log10
   } else {

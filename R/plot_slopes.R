@@ -27,7 +27,7 @@
 plot_slopes <- function(
   fit,
   method,
-  period = c(0, 0.5, 1.5, 5, 6, 10, 12, 17),
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   knots = list(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
@@ -79,7 +79,7 @@ plot_slopes <- function(
     j = yend := pred_period + end * slope
   ]
 
-  if (grep("log", all.names(fit[["terms"]][[2]]))) {
+  if (any(grepl("log", all.names(fit[["terms"]][[2]])))) {
     f <- exp
     yscale <- ggplot2::scale_y_log10
   } else {
