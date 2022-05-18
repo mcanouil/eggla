@@ -1,7 +1,6 @@
 #' Compute adiposity peak (AP) and adiposity rebound (AR).
 #'
-#' @param fit A model object from a statistical model
-#'   such as from a call `nlme::lme()`, `time_model()` or `egg_model()`.
+#' @inheritParams predict_bmi
 #' @param from A string indicating the type of data to be used for the AP and AR
 #'   computation, either "predicted" or "observed". Default is "predicted".
 #' @param start The start of the time window to compute AP and AR.
