@@ -4,13 +4,19 @@
 \alias{plot_egg_slopes}
 \title{Plot derived slopes from a model fitted by \code{egg_model()}.}
 \usage{
-plot_egg_slopes(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17))
+plot_egg_slopes(
+  fit,
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+  knots = c(2, 8, 12)
+)
 }
 \arguments{
 \item{fit}{A model object from a statistical model
 such as from a call to \code{egg_model()}.}
 
-\item{period}{The intervals knots on which AUCs are to be computed.}
+\item{period}{The intervals knots on which slopes are to be computed.}
+
+\item{knots}{The knots as defined \code{fit} and according to \code{method}.}
 }
 \value{
 A \code{patchwork} \code{ggplot2} object.
