@@ -4,13 +4,19 @@
 \alias{plot_egg_aucs}
 \title{Plot derived area under the curves from a model fitted by \code{egg_model()}.}
 \usage{
-plot_egg_aucs(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17))
+plot_egg_aucs(
+  fit,
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+  knots = c(2, 8, 12)
+)
 }
 \arguments{
 \item{fit}{A model object from a statistical model
 such as from a call to \code{egg_model()}.}
 
 \item{period}{The intervals knots on which AUCs are to be computed.}
+
+\item{knots}{The knots as defined \code{fit} and according to \code{method}.}
 }
 \value{
 A \code{patchwork} \code{ggplot2} object.
