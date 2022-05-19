@@ -1,9 +1,19 @@
+# eggla 0.10.1
+
+## Fixes
+
+- In `R/egg_slopes.R`, `R/plot_egg_slopes.R`, `R/egg_aucs.R`, and `R/plot_egg_aucs.R`,
+  - Fix: hardcoded knots, now as an argument.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.0...v0.10.1>
+
+
 # eggla 0.10.0
 
 ## Features
 
 - In `R/predict_bmi.R` ([#14](https://github.com/mcanouil/eggla/issues/14)),
-  - feat: new function to predict BMI from a `lme` model object, from `egg_model()` or `time_model()`.
+  - Feat: new function to predict BMI from a `lme` model object, from `egg_model()` or `time_model()`.
 
 ## Improvements
 
