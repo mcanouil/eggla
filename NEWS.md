@@ -7,7 +7,6 @@
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.0...v0.10.1>
 
-
 # eggla 0.10.0
 
 ## Features
