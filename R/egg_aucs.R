@@ -8,6 +8,7 @@
 #' @param fit A model object from a statistical model
 #' such as from a call to `egg_model()`.
 #' @param period The intervals knots on which AUCs are to be computed.
+#' @param knots The knots as defined `fit` and according to `method`.
 #'
 #' @return A `data.frame` with AUC for each individuals/samples.
 #'
@@ -24,15 +25,16 @@
 #' head(
 #'   egg_aucs(
 #'     fit = res,
-#'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+#'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+#'     knots = c(2, 8, 12)
 #'   )
 #' )
 egg_aucs <- function(
   fit,
-  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+  knots = c(2, 8, 12)
 ) {
   stopifnot(inherits(fit, "lme"))
-  knots <- c(2, 8, 12)
   id_var <- names(fit[["groups"]])
 
   pred_auc <- matrix(
