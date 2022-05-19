@@ -4,13 +4,19 @@
 \alias{egg_aucs}
 \title{Derived areas under the curve from a cubic splines mixed-effects model by \code{time_model()}.}
 \usage{
-egg_aucs(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17))
+egg_aucs(
+  fit,
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+  knots = c(2, 8, 12)
+)
 }
 \arguments{
 \item{fit}{A model object from a statistical model
 such as from a call to \code{egg_model()}.}
 
 \item{period}{The intervals knots on which AUCs are to be computed.}
+
+\item{knots}{The knots as defined \code{fit} and according to \code{method}.}
 }
 \value{
 A \code{data.frame} with AUC for each individuals/samples.
@@ -32,7 +38,8 @@ res <- egg_model(
 head(
   egg_aucs(
     fit = res,
-    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+    knots = c(2, 8, 12)
   )
 )
 }
