@@ -34,7 +34,7 @@ remotes::install_github("mcanouil/eggla@v0.10.1")
 ## Docker Images
 
 -   `docker pull ghcr.io/mcanouil/eggla:devel`.
--   `docker pull ghcr.io/mcanouil/eggla:v0.10.1`.
+-   `docker pull ghcr.io/mcanouil/eggla:0.10.1`.
 
 ## License
 
