@@ -3,7 +3,7 @@
 ## Fixes
 
 - In `R/egg_slopes.R`, `R/plot_egg_slopes.R`, `R/egg_aucs.R`, and `R/plot_egg_aucs.R`,
-  - Fix: hardcoded knots, now as an argument.
+  - Fix: hardcoded knots, now as an argument. (#16, #17)
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.0...v0.10.1>
 
