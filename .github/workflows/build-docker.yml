@@ -33,10 +33,11 @@ jobs:
               --label "org.opencontainers.image.version=${TAG}" \
               .
           else
+            TAG=${{github.ref_name}}
             docker buildx build \
               --push \
               --platform "linux/amd64" \
-              --tag "ghcr.io/mcanouil/eggla:${{github.ref_name}}" \
+              --tag "ghcr.io/mcanouil/eggla:${TAG//v}" \
               --tag "ghcr.io/mcanouil/eggla:latest" \
               --file "inst/setup/Dockerfile" \
               --label "org.opencontainers.image.title=eggla" \
