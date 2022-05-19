@@ -1,8 +1,6 @@
 #' Plot derived area under the curves from a model fitted by `egg_model()`.
 #'
-#' @param fit A model object from a statistical model
-#'   such as from a call to `egg_model()`.
-#' @param period The intervals knots on which AUCs are to be computed.
+#' @inheritParams egg_aucs
 #'
 #' @return A `patchwork` `ggplot2` object.
 #'
@@ -20,14 +18,15 @@
 #'   fit = res,
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #' )
-plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)) {
+plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12)) {
   period_interval <- patterns <- auc <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])
 
   auc_dt <- data.table::as.data.table(egg_aucs(
     fit = fit,
-    period = period
+    period = period,
+    knots = knots
   ))
 
   if (nzchar(system.file(package = "ggdist")) & nzchar(system.file(package = "ggbeeswarm"))) {

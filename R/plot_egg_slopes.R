@@ -1,8 +1,6 @@
 #' Plot derived slopes from a model fitted by `egg_model()`.
 #'
-#' @param fit A model object from a statistical model
-#'   such as from a call to `egg_model()`.
-#' @param period The intervals knots on which AUCs are to be computed.
+#' @inheritParams egg_slopes
 #'
 #' @return A `patchwork` `ggplot2` object.
 #'
@@ -20,7 +18,7 @@
 #'   fit = res,
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #' )
-plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)) {
+plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12)) {
   params <- variable <- yend <- pred_period <- end <- NULL # no visible binding for global variable from data.table
   patterns <- slope <- .data <- start <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))
@@ -31,7 +29,8 @@ plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)) 
   pheno_dt <- data.table::as.data.table(fit[["data"]])
   slopes_dt <- data.table::as.data.table(egg_slopes(
     fit = fit,
-    period = period
+    period = period,
+    knots = knots
   ))
 
   slopes_long_dt <- data.table::melt(
