@@ -56,8 +56,8 @@ Suggests:
     forcats,
     ggbeeswarm,
     ggdist,
-    roxygen2 (>= 7.1.2),
-    testthat (>= 3.1.0)
+    roxygen2 (>= 7.2.0),
+    testthat (>= 3.1.4)
 Remotes: github::carriedaymont/growthcleanr@v2.0.0
 SystemRequirements:
     BCFtools (>= 1.15.0) (https://github.com/samtools/BCFtools),
@@ -65,6 +65,6 @@ SystemRequirements:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 VignetteBuilder: knitr
 Config/testthat/edition: 3
