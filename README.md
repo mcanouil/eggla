@@ -9,7 +9,9 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![GitHub
 tag](https://img.shields.io/github/tag/mcanouil/eggla.svg?label=latest%20tag&include_prereleases)](https://github.com/mcanouil/eggla)
-[![R-CMD-check](https://github.com/mcanouil/eggla/workflows/R-CMD-check/badge.svg)](https://github.com/mcanouil/eggla/actions)
+[![R-CMD-check](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yaml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yaml)
+[![Build
+Docker](https://github.com/mcanouil/eggla/actions/workflows/build-docker.yml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/build-docker.yml)
 <!-- badges: end -->
 
 Tools for longitudinal analysis within the [EGG (Early Growth Genetics)
