@@ -6,7 +6,7 @@
 \alias{eggla-package}
 \title{eggla: Early Growth Genetics Longitudinal Analysis}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
 }
