@@ -127,10 +127,12 @@ egg_model <- function(
         )
       )
     }
+
     res_model <- try(
       expr = eval(parse(text = paste(model_call, collapse = ""))),
       silent = TRUE
     )
+
     if (inherits(res_model, "try-error")) {
       if (!quiet) message("Number of iteration has been increased from 500 to 1,000.")
       model_call <- f_model_call(
@@ -145,14 +147,21 @@ egg_model <- function(
       )
     }
 
-    irandom <- irandom + 1
-    if (inherits(res_model, "try-error") & irandom > length(form_random) & use_ar1) {
+    if (inherits(res_model, "try-error") & use_ar1) {
       if (!quiet) message("Model with AR(1) auto-correlation failed, now trying without it ...")
-      use_ar1 <- FALSE
-      irandom <- 1
-    } else {
-      break
+      model_call <- f_model_call(
+        form_fixed = form_fixed,
+        form_random = form_random[[irandom]],
+        n_iteration = 1000,
+        use_ar1 = FALSE
+      )
+      res_model <- try(
+        expr = eval(parse(text = paste(model_call, collapse = ""))),
+        silent = TRUE
+      )
     }
+
+    irandom <- irandom + 1
   }
 
   if (inherits(res_model, "try-error")) {
