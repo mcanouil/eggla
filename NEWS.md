@@ -1,3 +1,12 @@
+# eggla 0.10.2
+
+## Fixes
+
+- In `R/egg_model.R`,
+  - Fix: try without AR1 before reducing random effect. (#18)
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.1...v0.10.2>
+
 # eggla 0.10.1
 
 ## Fixes
