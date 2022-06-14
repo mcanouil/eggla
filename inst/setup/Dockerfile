@@ -4,7 +4,18 @@ LABEL org.opencontainers.image.licenses="GPL-3.0" \
       org.opencontainers.image.source="https://github.com/mcanouil/eggla" \
       org.opencontainers.image.authors="Mickaël Canouil <https://mickael.canouil.fr/>"
 
-RUN apt-get update && apt-get install -y --no-install-recommends libxt6
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+    libxt6 \
+    ca-certificates \
+    bzip2 \
+    libbz2-dev \
+    liblzma-dev \
+    libjpeg-dev \
+    wget \
+    autoconf \
+    automake \
+    make
 
 COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
@@ -14,16 +25,7 @@ COPY inst/setup/eggla-example.R eggla-example.R
 RUN chmod +x eggla-example.R
 
 ENV BCFTOOLS_VERSION=1.15.1
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-    ca-certificates \
-    bzip2 \
-    libbz2-dev \
-    liblzma-dev \
-    wget \
-    autoconf \
-    automake \
-    make
+ENV PLINK2_VERSION=20220603
 
 RUN wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
   tar -C /tmp/ -xjf /tmp/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
@@ -43,11 +45,10 @@ RUN wget -q -P /tmp/ https://github.com/samtools/htslib/releases/download/${BCFT
   make install && \
   rm -rf /tmp/htslib-${BCFTOOLS_VERSION}
 
-RUN wget -q -P /tmp/ https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_20220603.zip && \
-  unzip -d /tmp /tmp/plink2_linux_x86_64_20220603.zip && \
+RUN wget -q -P /tmp/ https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_${PLINK2_VERSION}.zip && \
+  unzip -d /tmp /tmp/plink2_linux_x86_64_${PLINK2_VERSION}.zip && \
   mv /tmp/plink2 /usr/bin/plink2 && \
-  chmod +x /usr/bin/plink2 && \
-  rm -rf /tmp/
+  chmod +x /usr/bin/plink2
 
 RUN apt-get autoremove -y
 RUN apt-get autoclean -y
