@@ -12,7 +12,7 @@ pak::lockfile_create(
   lockfile = lock_file,
   lib = NULL,
   upgrade = FALSE,
-  dependencies = NA
+  dependencies = TRUE
 )
 lock_file_json <- jsonlite::fromJSON(readLines(lock_file))
 lock_file_json[["packages"]] <- lock_file_json[["packages"]][!lock_file_json[["packages"]][["ref"]] %in% "local::.", ]
