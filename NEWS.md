@@ -1,3 +1,18 @@
+# eggla 0.10.3
+
+## Fixes
+
+- In `inst/Dockerfile`,
+  - Build: add PLINK2 and install all eggla's dependencies, including `suggests`.
+- In `R/do_eggla_gwas.R`,
+  - Fix: no longer relies on URL for PLINK2 since only `alpha` dynamic URL remains.
+- In `vignettes/eggla.Rmd`:
+  - Chore: remove unused `eval = FALSE` chunk option.
+  - Fix: remove `renv` code in the Docker section.
+  - Fix: set properly the working directory.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.1...v0.10.2>
+
 # eggla 0.10.2
 
 ## Fixes
