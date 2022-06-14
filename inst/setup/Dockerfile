@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libxt6
 
 COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
-RUN Rscript -e "pak::pkg_install('mcanouil/eggla', upgrade = FALSE)"
+RUN Rscript -e "pak::pkg_install('mcanouil/eggla', upgrade = FALSE, dependencies = TRUE)"
 
 COPY inst/setup/eggla-example.R eggla-example.R
 RUN chmod +x eggla-example.R
@@ -42,6 +42,12 @@ RUN wget -q -P /tmp/ https://github.com/samtools/htslib/releases/download/${BCFT
   make && \
   make install && \
   rm -rf /tmp/htslib-${BCFTOOLS_VERSION}
+
+RUN wget -q -P /tmp/ https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_20220603.zip && \
+  unzip -d /tmp /tmp/plink2_linux_x86_64_20220603.zip && \
+  mv /tmp/plink2 /usr/bin/plink2 && \
+  chmod +x /usr/bin/plink2 && \
+  rm -rf /tmp/
 
 RUN apt-get autoremove -y
 RUN apt-get autoclean -y
