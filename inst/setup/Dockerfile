@@ -9,13 +9,14 @@ RUN apt-get update && \
     libxt6 \
     ca-certificates \
     bzip2 \
-    libbz2-dev \
-    liblzma-dev \
-    libjpeg-dev \
     wget \
     autoconf \
     automake \
-    make
+    make \
+    libbz2-dev \
+    liblzma-dev \
+    libjpeg-dev \
+    libxml2-dev
 
 COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
