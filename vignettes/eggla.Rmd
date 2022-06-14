@@ -28,9 +28,10 @@ knitr::opts_chunk$set(
 
 Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
 
-```{r, eval = FALSE}
+```{r}
 library(eggla)
 library(data.table)
+working_directory <- tempdir() # To be modified by user
 res <- try(run_eggla(
   data = fread("/home/mcanouil/eggla/bmigrowth.csv"), # to be changed with the path of the file containing the data
   id_variable = "ID",
@@ -45,17 +46,17 @@ res <- try(run_eggla(
   use_ar1 = FALSE,
   parallel = FALSE, # to parallelise Daymont QC
   parallel_n_chunks = 1, # to parallelise Daymont QC
-  working_directory = "."
+  working_directory = working_directory
 ))
-if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
 ```
 
 ## Run the script using a Docker container
 
 Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
-```{bash, eval = FALSE}
+```{bash}
 docker run \
+  --name eggla-docker-analysis \
   --detach \
   --rm \
   --volume /home/mcanouil/eggla:/tmp/eggla \
@@ -76,13 +77,12 @@ _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the dir
 
 Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
 
-```{r, eval = FALSE}
+```{r}
 working_directory <- "/home/mcanouil/eggla"
 setwd(working_directory)
 library(eggla)
 chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
 if (!isFALSE(chr_in_parallel)) {
-  renv::install(c("future", "future.apply"))
   future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
 }
 do_eggla_gwas(
@@ -96,7 +96,7 @@ do_eggla_gwas(
   path = ".",
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
-    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
+    plink2 = "/usr/bin/plink2"
   ),
   threads = 1
 )
@@ -106,8 +106,9 @@ do_eggla_gwas(
 
 Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
-```{bash, eval = FALSE}
+```{bash}
 docker run \
+  --name eggla-docker-analysis \
   --detach \
   --rm \
   --volume /home/mcanouil/eggla:/tmp/eggla \
@@ -132,7 +133,7 @@ Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the s
 
 ### `renv` (recommended)
 
-```{bash, eval = FALSE}
+```{bash}
 #!/bin/bash
 
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
@@ -182,7 +183,7 @@ EOF
 
 ### `pak` (faster)
 
-```{bash, eval = FALSE}
+```{bash}
 #!/bin/bash
 
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
@@ -237,7 +238,7 @@ EOF
 
 ## Run the analysis
 
-```{bash, eval = FALSE}
+```{bash}
 bash run_eggla.sh
 ```
 
@@ -253,7 +254,7 @@ bash run_eggla.sh
 
 Run GWASs on slopes and AUCs for male and female.
 
-```{bash, eval = FALSE}
+```{bash}
 #!/bin/bash
 
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
@@ -280,7 +281,8 @@ do_eggla_gwas(
   path = ".",
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
-    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
+    plink2 = "https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_20220603.zip"
+    # check before using: https://www.cog-genomics.org/plink/2.0/
   ),
   threads = 1
 )
@@ -299,7 +301,7 @@ EOF
 
 ## Create the working directory
 
-```{bash, eval = FALSE}
+```{bash}
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
 mkdir $home_analysis 
@@ -313,7 +315,7 @@ Start R and setup the working directory using `renv` (recommended) or `pak` (fas
 
 ### `renv` (recommended)
 
-```{r, eval = FALSE}
+```{r}
 temp_library <- file.path(".", "R")
 dir.create(temp_library, recursive = TRUE)
 .libPaths(temp_library)
@@ -331,7 +333,7 @@ unlink(temp_library, recursive = TRUE)
 
 ### `pak` (faster)
 
-```{r, eval = FALSE}
+```{r}
 temp_library <- file.path(".", "R")
 dir.create(temp_library, recursive = TRUE)
 .libPaths(temp_library)
@@ -357,7 +359,7 @@ pkg_install("mcanouil/eggla@0.10.2", lib = temp_library, upgrade = FALSE, depend
 
 Restart R before running the analysis.
 
-```{r, eval = FALSE}
+```{r}
 # setwd("/home/mcanouil/eggla") # already set if step 1 was done
 library(eggla)
 library(data.table)
@@ -394,7 +396,7 @@ if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
 
 Run the GWASs on slopes and AUCs for male and female.
 
-```{r, eval = FALSE}
+```{r}
 # setwd("/home/mcanouil/eggla") # already set if step 1 was done
 library(eggla)
 chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
@@ -417,7 +419,8 @@ do_eggla_gwas(
   path = ".",
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
-    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip" # check URL before using
+    plink2 = "https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_20220603.zip"
+    # check before using: https://www.cog-genomics.org/plink/2.0/
   ),
   threads = 1
 )
