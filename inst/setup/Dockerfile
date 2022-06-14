@@ -13,6 +13,7 @@ RUN apt-get update && \
     autoconf \
     automake \
     make \
+    cmake \
     libbz2-dev \
     liblzma-dev \
     libjpeg-dev \
