@@ -13,8 +13,9 @@ jobs:
   build-docker:
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'workflow_dispatch' || github.event_name == 'release' \
-      || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+      github.event_name == 'workflow_dispatch' || 
+        github.event_name == 'release' || 
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     strategy:
       fail-fast: false
     steps:
