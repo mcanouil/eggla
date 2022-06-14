@@ -84,7 +84,7 @@ do_eggla_gwas <- function(
   vep = NULL,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
-    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20220410.zip"
+    plink2 = "/usr/bin/plink2"
   ),
   threads = 1,
   quiet = FALSE
