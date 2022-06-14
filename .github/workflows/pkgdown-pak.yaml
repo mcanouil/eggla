@@ -10,7 +10,7 @@ name: pkgdown
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
