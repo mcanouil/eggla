@@ -37,6 +37,7 @@ articles:
 - title: Articles
   navbar: ~
   contents:
+    - eggla
     - articles/models-diagnostics
     - articles/model-selection
     - articles/run-cubic-splines
