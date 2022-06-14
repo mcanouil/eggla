@@ -11,7 +11,7 @@
   - Fix: remove `renv` code in the Docker section.
   - Fix: set properly the working directory.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.1...v0.10.2>
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.2...v0.10.3>
 
 # eggla 0.10.2
 
