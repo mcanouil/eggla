@@ -113,6 +113,7 @@ do_eggla_gwas <- function(
       },
       silent = TRUE
     )
+    bin_path[["plink2"]] <- sprintf("%s/plink2", path)
     if (inherits(is_plink_downloaded, "try-error") & !file.exists(sprintf("%s/plink2", path))) {
       stop(
         "Error downloading PLINK2 binary. ",
@@ -120,8 +121,6 @@ do_eggla_gwas <- function(
       )
     }
   }
-
-  bin_path[["plink2"]] <- sprintf("%s/plink2", path)
 
   plink_version <- try(
     expr = system(sprintf("%s --version", bin_path[["plink2"]]), intern = TRUE),
