@@ -4,6 +4,7 @@
 
 - In `R/do_eggla_gwas.R`,
   - Fix: plink2 binary path modified outside download if statement.
+  - Fix: check if `R.utils` is available for gzipped outputs.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.3...v0.10.4>
 

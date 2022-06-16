@@ -423,6 +423,12 @@ do_eggla_gwas <- function(
         old = function(x) sub("^#", "", x)
       )[TEST %in% "ADD" & !is.na(P), -c("TEST")]
 
+      if (nzchar(system.file(package = "R.utils"))) {
+        output_results_file <- sprintf("%s.results.gz", results_file)
+      } else {
+        output_results_file <- sprintf("%s.results", results_file)
+      }
+
       data.table::fwrite(
         x = data.table::merge.data.table(
           x = results,
@@ -430,17 +436,21 @@ do_eggla_gwas <- function(
           by = c("CHROM", "POS", "ID", "REF", "ALT"), # intersect(names(results), names(annot))
           all.x = TRUE
         ),
-        file = sprintf("%s.results.gz", results_file)
+        file = output_results_file
       )
-      if (!quiet) message(sprintf("Results written in \"%s.results.gz\"", results_file))
+      if (!quiet) message(sprintf("Results written in \"%s\"", output_results_file))
 
-      sprintf("%s.results.gz", results_file)
+      output_results_file
     }
   )
 
   if (!quiet) message("Aggregating PLINK2 results ...")
 
-  results_file <- file.path(path, "gwas.csv.gz")
+  if (nzchar(system.file(package = "R.utils"))) {
+    results_file <- file.path(path, "gwas.csv.gz")
+  } else {
+    results_file <- file.path(path, "gwas.csv")
+  }
 
   data.table::fwrite(
     x = data.table::setcolorder(
