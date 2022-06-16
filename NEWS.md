@@ -1,3 +1,12 @@
+# eggla 0.10.4
+
+## Fixes
+
+- In `R/do_eggla_gwas.R`,
+  - Fix: plink2 binary path modified outside download if statement.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.3...v0.10.4>
+
 # eggla 0.10.3
 
 ## Fixes
