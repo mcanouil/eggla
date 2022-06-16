@@ -150,11 +150,11 @@ install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org
 library("renv")
 renv::init(bare = TRUE, settings = list(use.cache = FALSE))
 utils::download.file(
-    url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.3/inst/setup/renv.lock",
+    url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.4/inst/setup/renv.lock",
     destfile = "renv.lock"
   )
 renv::restore(lockfile = "renv.lock")
-renv::install("mcanouil/eggla@v0.10.3")
+renv::install("mcanouil/eggla@v0.10.4")
 unlink(temp_library, recursive = TRUE)
 EOF
 
@@ -206,11 +206,11 @@ utils::install.packages(
 )
 library(pak)
 utils::download.file(
-  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.3/inst/setup/pkg.lock",
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.4/inst/setup/pkg.lock",
   destfile = "pkg.lock"
 )
 lockfile_install(lockfile = "pkg.lock", lib = temp_library)
-pkg_install("mcanouil/eggla@v0.10.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+pkg_install("mcanouil/eggla@v0.10.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
 EOF
 
 Rscript <<EOF
@@ -323,11 +323,11 @@ install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org
 library("renv")
 renv::init(bare = TRUE, settings = list(use.cache = FALSE))
 utils::download.file(
-  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.3/inst/setup/renv.lock",
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.4/inst/setup/renv.lock",
   destfile = "renv.lock"
 )
 renv::restore(lockfile = "renv.lock")
-renv::install("mcanouil/eggla@v0.10.3")
+renv::install("mcanouil/eggla@v0.10.4")
 unlink(temp_library, recursive = TRUE)
 ```
 
@@ -347,11 +347,11 @@ utils::install.packages(
 )
 library(pak)
 utils::download.file(
-  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.3/inst/setup/pkg.lock",
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.4/inst/setup/pkg.lock",
   destfile = "pkg.lock"
 )
 lockfile_install(lockfile = "pkg.lock", lib = temp_library)
-pkg_install("mcanouil/eggla@0.10.3", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+pkg_install("mcanouil/eggla@0.10.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
 ```
 
 
