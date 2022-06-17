@@ -1,6 +1,6 @@
 renv::snapshot(
   lockfile = "inst/setup/renv.lock",
-  packages = ".",
+  packages = c(".", "data.table"),
   library = .libPaths(),
   force = TRUE,
   prompt = FALSE
@@ -8,7 +8,7 @@ renv::snapshot(
 
 lock_file <- "inst/setup/pkg.lock"
 pak::lockfile_create(
-  pkg = ".",
+  pkg = c(".", "data.table"),
   lockfile = lock_file,
   lib = NULL,
   upgrade = FALSE,

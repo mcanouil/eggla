@@ -423,11 +423,7 @@ do_eggla_gwas <- function(
         old = function(x) sub("^#", "", x)
       )[TEST %in% "ADD" & !is.na(P), -c("TEST")]
 
-      if (nzchar(system.file(package = "R.utils"))) {
-        output_results_file <- sprintf("%s.results.gz", results_file)
-      } else {
-        output_results_file <- sprintf("%s.results", results_file)
-      }
+      output_results_file <- sprintf("%s.results.gz", results_file)
 
       data.table::fwrite(
         x = data.table::merge.data.table(
@@ -446,11 +442,7 @@ do_eggla_gwas <- function(
 
   if (!quiet) message("Aggregating PLINK2 results ...")
 
-  if (nzchar(system.file(package = "R.utils"))) {
-    results_file <- file.path(path, "gwas.csv.gz")
-  } else {
-    results_file <- file.path(path, "gwas.csv")
-  }
+  results_file <- file.path(path, "gwas.csv.gz")
 
   data.table::fwrite(
     x = data.table::setcolorder(
