@@ -56,7 +56,6 @@ Suggests:
     future.apply,
     future.callr,
     forcats,
-    R.utils,
     roxygen2 (>= 7.2.0),
     testthat (>= 3.1.4)
 Remotes: github::carriedaymont/growthcleanr@v2.0.0

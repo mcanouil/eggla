@@ -17,7 +17,8 @@ RUN apt-get update && \
     libbz2-dev \
     liblzma-dev \
     libjpeg-dev \
-    libxml2-dev
+    libxml2-dev \
+    zlib1g-dev
 
 COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
