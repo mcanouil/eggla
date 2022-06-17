@@ -22,7 +22,7 @@ RUN apt-get update && \
 
 COPY inst/setup/pkg.lock pkg.lock
 RUN Rscript -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
-RUN Rscript -e "pak::pkg_install('mcanouil/eggla', upgrade = FALSE, dependencies = TRUE)"
+RUN Rscript -e "pak::pkg_install(c('data.table', 'mcanouil/eggla'), upgrade = FALSE, dependencies = TRUE)"
 
 COPY inst/setup/eggla-example.R eggla-example.R
 RUN chmod +x eggla-example.R
