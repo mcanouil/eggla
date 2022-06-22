@@ -18,7 +18,7 @@
 #' @param male_coded_zero Is male coded "0" (and female coded "1")?
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
-#' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
+#' @param use_car1 A logical indicating whether to use AR(1) for autocorrelation.
 #' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
 #' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
 #'   Only applies if parallel is set to TRUE.
@@ -48,7 +48,7 @@
 #'     covariates = NULL,
 #'     male_coded_zero = FALSE,
 #'     random_complexity = 1,
-#'     use_ar1 = FALSE,
+#'     use_car1 = FALSE,
 #'     parallel = FALSE,
 #'     parallel_n_chunks = 1,
 #'     working_directory = tempdir()
@@ -65,7 +65,7 @@ run_eggla <- function(
   covariates,
   male_coded_zero = FALSE,
   random_complexity = "auto",
-  use_ar1 = FALSE,
+  use_car1 = FALSE,
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -157,7 +157,7 @@ run_eggla <- function(
         data = dt_clean[egg_sex %in% isex],
         id_var = "egg_id",
         random_complexity = random_complexity,
-        use_ar1 = use_ar1,
+        use_car1 = use_car1,
         quiet = quiet
       )
 

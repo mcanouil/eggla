@@ -6,6 +6,8 @@
   - Fix: plink2 binary path modified outside download if statement.
 - In `inst/setup/Dockerfile`, `inst/setup/pkg.lock`, `inst/setup/renv.lock`, and`data-raw/lock.R`,
   - Fix: add all `data.table` dependencies.
+- In `R/`, `tests/`, and `vignettes/`,
+  - fix: documentation conssitency with code, i.e., replaced "AR1" with "CAR1".
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.3...v0.10.4>
 
@@ -29,7 +31,7 @@
 ## Fixes
 
 - In `R/egg_model.R`,
-  - Fix: try without AR1 before reducing random effect. (#18)
+  - Fix: try without CAR1 before reducing random effect. (#18)
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.1...v0.10.2>
 
@@ -153,7 +155,7 @@
 ## Fixes
 
 - In `vignettes/articles/run-eggla.Rmd`, `vignettes/articles/models-diagnostics.Rmd`,
-  - Fix: Uses AR1 by default in vignettes, only to speed-up computation.
+  - Fix: Uses CAR1 by default in vignettes, only to speed-up computation.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.6.1...v0.7.0>
 

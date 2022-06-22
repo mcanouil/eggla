@@ -12,7 +12,7 @@
 #'   to be used as the individual identifier.
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
-#' @param use_ar1 A logical indicating whether to use AR(1) for autocorrelation.
+#' @param use_car1 A logical indicating whether to use AR(1) for autocorrelation.
 #' @param knots The knots defining the splines.
 #' @param quiet A logical indicating whether to suppress the output.
 #'
@@ -37,7 +37,7 @@ egg_model <- function(
   data,
   id_var,
   random_complexity = "auto",
-  use_ar1 = FALSE,
+  use_car1 = FALSE,
   knots = c(2, 8, 12),
   quiet = FALSE
 ) {
@@ -92,7 +92,7 @@ egg_model <- function(
     ))
   }
 
-  f_model_call <- function(form_fixed, form_random, n_iteration, use_ar1) {
+  f_model_call <- function(form_fixed, form_random, n_iteration, use_car1) {
     c(
       "nlme::lme(",
       paste0("  fixed = ", form_fixed, ","),
@@ -100,7 +100,7 @@ egg_model <- function(
       paste0("  random = ", form_random, ","),
       "  na.action = stats::na.omit,",
       "  method = \"ML\",",
-      if (use_ar1) sprintf("  correlation = nlme::corCAR1(form = ~ 1 | %s),", id_var) else NULL,
+      if (use_car1) sprintf("  correlation = nlme::corCAR1(form = ~ 1 | %s),", id_var) else NULL,
       paste0(
         "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
         n_iteration, ", msMaxIter = ", n_iteration, ")"
@@ -116,7 +116,7 @@ egg_model <- function(
       form_fixed = form_fixed,
       form_random = form_random[[irandom]],
       n_iteration = 500,
-      use_ar1 = use_ar1
+      use_car1 = use_car1
     )
     if (!quiet) {
       message(
@@ -139,7 +139,7 @@ egg_model <- function(
         form_fixed = form_fixed,
         form_random = form_random[[irandom]],
         n_iteration = 1000,
-        use_ar1 = use_ar1
+        use_car1 = use_car1
       )
       res_model <- try(
         expr = eval(parse(text = paste(model_call, collapse = ""))),
@@ -147,13 +147,13 @@ egg_model <- function(
       )
     }
 
-    if (inherits(res_model, "try-error") & use_ar1) {
+    if (inherits(res_model, "try-error") & use_car1) {
       if (!quiet) message("Model with AR(1) auto-correlation failed, now trying without it ...")
       model_call <- f_model_call(
         form_fixed = form_fixed,
         form_random = form_random[[irandom]],
         n_iteration = 1000,
-        use_ar1 = FALSE
+        use_car1 = FALSE
       )
       res_model <- try(
         expr = eval(parse(text = paste(model_call, collapse = ""))),

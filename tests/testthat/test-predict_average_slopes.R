@@ -5,7 +5,7 @@ test_that("Cubic slope", {
     y = "log(bmi)",
     data = bmigrowth[bmigrowth$sex == 0, ],
     method = "cubic_slope",
-    use_ar1 = TRUE,
+    use_car1 = TRUE,
     quiet = TRUE
   )
 
@@ -58,7 +58,7 @@ test_that("Linear Splines", {
     y = "log(bmi)",
     data = bmigrowth[bmigrowth$sex == 0, ],
     method = "linear_splines",
-    use_ar1 = TRUE,
+    use_car1 = TRUE,
     quiet = TRUE
   )
 
@@ -130,7 +130,7 @@ test_that("Cubic Splines", {
     y = "log(bmi)",
     data = bmigrowth[bmigrowth$sex == 0, ],
     method = "cubic_splines",
-    use_ar1 = TRUE,
+    use_car1 = TRUE,
     quiet = TRUE
   )
 
