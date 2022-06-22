@@ -135,7 +135,7 @@ do_eggla_gwas <- function(
   if (inherits(bcftools_version, "try-error")) stop("Please check BCFTools binary path!")
 
   dt <- data.table::merge.data.table(
-    x = data.table::fread(data),
+    x = data.table::fread(data)[j = data.table::first(.SD), by = c(id_column)],
     y = data.table::setnames(
       x = data.table::rbindlist(lapply(
         X = results_zip,
