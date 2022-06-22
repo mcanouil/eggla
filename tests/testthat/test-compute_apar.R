@@ -5,7 +5,7 @@ test_that("Adiposity Peak & Rebound", {
     data = bmigrowth[bmigrowth[["sex"]] == 0, ],
     id_var = "ID",
     random_complexity = 1,
-    use_ar1 = TRUE,
+    use_car1 = TRUE,
     quiet = TRUE
   )
   for (i in c("predicted", "observed")) {
@@ -17,7 +17,7 @@ test_that("Adiposity Peak & Rebound", {
     data = bmigrowth,
     id_var = "ID",
     random_complexity = 1,
-    use_ar1 = TRUE, 
+    use_car1 = TRUE, 
     quiet = TRUE
   )
   for (i in c("predicted", "observed")) {

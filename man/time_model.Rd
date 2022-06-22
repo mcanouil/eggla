@@ -12,7 +12,7 @@ time_model(
   method = c("cubic_slope", "linear_splines", "cubic_splines"),
   knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(2, 8,
     12))[[method]],
-  use_ar1 = FALSE,
+  use_car1 = FALSE,
   id_var = "ID",
   quiet = FALSE
 )
@@ -30,7 +30,7 @@ time_model(
 
 \item{knots}{The knots defining the splines for \code{"linear_splines"} and \code{"cubic_splines"} methods.}
 
-\item{use_ar1}{A logical indicating whether to use AR(1) for autocorrelation.}
+\item{use_car1}{A logical indicating whether to use AR(1) for autocorrelation.}
 
 \item{id_var}{A string indicating the name of the variable
 to be used as the individual identifier.}

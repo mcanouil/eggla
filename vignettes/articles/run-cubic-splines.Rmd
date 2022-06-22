@@ -133,7 +133,7 @@ res <- egg_model(
   data = pheno_dt_female,
   id_var = "ID",
   random_complexity = 2, # "auto", 3, 2 or 1.
-  use_ar1 = TRUE # default is FALSE
+  use_car1 = TRUE # default is FALSE
 )
 class(res)
 sres <- tidy(res)

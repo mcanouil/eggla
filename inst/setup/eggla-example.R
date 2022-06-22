@@ -14,7 +14,7 @@ run_eggla(
   covariates = NULL,
   male_coded_zero = FALSE,
   random_complexity = 1, # simple to speed-up test
-  use_ar1 = TRUE,
+  use_car1 = TRUE,
   parallel = FALSE, # to parallelise Daymont QC
   parallel_n_chunks = 1, # to parallelise Daymont QC
   working_directory = tempdir()
