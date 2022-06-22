@@ -4,10 +4,11 @@
 
 - In `R/do_eggla_gwas.R`,
   - Fix: plink2 binary path modified outside download if statement.
+  - Fix: merge not cartesian by keeping only first measures of each individuals (#20).
 - In `inst/setup/Dockerfile`, `inst/setup/pkg.lock`, `inst/setup/renv.lock`, and`data-raw/lock.R`,
   - Fix: add all `data.table` dependencies.
 - In `R/`, `tests/`, and `vignettes/`,
-  - fix: documentation conssitency with code, i.e., replaced "AR1" with "CAR1".
+  - fix: documentation conssitency with code, i.e., replaced "AR1" with "CAR1" (#21).
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.3...v0.10.4>
 
