@@ -134,34 +134,36 @@ do_eggla_gwas <- function(
   )
   if (inherits(bcftools_version, "try-error")) stop("Please check BCFTools binary path!")
 
+  derived_parameters_dt <- data.table::setnames(
+    x = data.table::rbindlist(lapply(
+      X = results_zip,
+      path = path,
+      FUN = function(izip, path) {
+        utils::unzip(
+          zipfile = izip,
+          files = "derived-slopes.csv",
+          exdir = path
+        )
+        utils::unzip(
+          zipfile = izip,
+          files = "derived-aucs.csv",
+          exdir = path
+        )
+        on.exit(unlink(file.path(path, c("derived-slopes.csv", "derived-aucs.csv"))))
+        data.table::merge.data.table(
+          x = data.table::fread(file.path(path, "derived-slopes.csv")),
+          y = data.table::fread(file.path(path, "derived-aucs.csv")),
+          by = "egg_id"
+        )
+      }
+    )),
+    old = "egg_id",
+    new = id_column
+  )
+
   dt <- data.table::merge.data.table(
     x = data.table::fread(data)[j = data.table::first(.SD), by = c(id_column)],
-    y = data.table::setnames(
-      x = data.table::rbindlist(lapply(
-        X = results_zip,
-        path = path,
-        FUN = function(izip, path) {
-          utils::unzip(
-            zipfile = izip,
-            files = "derived-slopes.csv",
-            exdir = path
-          )
-          utils::unzip(
-            zipfile = izip,
-            files = "derived-aucs.csv",
-            exdir = path
-          )
-          on.exit(unlink(file.path(path, c("derived-slopes.csv", "derived-aucs.csv"))))
-          data.table::merge.data.table(
-            x = data.table::fread(file.path(path, "derived-slopes.csv")),
-            y = data.table::fread(file.path(path, "derived-aucs.csv")),
-            by = "egg_id"
-          )
-        }
-      )),
-      old = "egg_id",
-      new = id_column
-    ),
+    y = derived_parameters_dt,
     by = id_column
   )
 
@@ -442,32 +444,37 @@ do_eggla_gwas <- function(
 
   if (!quiet) message("Aggregating PLINK2 results ...")
 
-  results_file <- file.path(path, "gwas.csv.gz")
+  if (!quiet) message("Writing results ...")
 
-  data.table::fwrite(
-    x = data.table::setcolorder(
-      x = data.table::rbindlist(
-        l = lapply(list_results, data.table::fread),
-        use.names = TRUE
-      )[
-        j = `:=`(
-          FDR = stats::p.adjust(P, method = "BH"),
-          Bonferroni = stats::p.adjust(P, method = "bonferroni"),
-          covariates = covariates
-        ),
-        by = "trait_model"
-      ][order(P)],
-      neworder = c("trait_model", "covariates")
-    ),
-    file = results_file
-  )
-
-  if (!quiet) message(sprintf("Writing results to \"%s\"!", results_file))
+  results_files <- data.table::setcolorder(
+    x = data.table::rbindlist(
+      l = lapply(list_results, data.table::fread),
+      use.names = TRUE
+    )[
+      j = `:=`(
+        FDR = stats::p.adjust(P, method = "BH"),
+        Bonferroni = stats::p.adjust(P, method = "bonferroni"),
+        covariates = covariates
+      ),
+      by = "trait_model"
+    ][order(P)],
+    neworder = c("trait_model", "covariates")
+  )[
+    j = (function(dt, tm) {
+      results_file <- sprintf(file.path(path, "%s_gwas.csv.gz"), tm)
+      data.table::fwrite(x = .SD, file = results_file)
+      results_file
+    })(.SD, trait_model),
+    by = "trait_model"
+  ]
 
   writeLines(
     text = c(R.version.string, plink_version, bcftools_version),
     con = file.path(path, "gwas_software.txt")
   )
 
-  invisible(results_file)
+  dp_file <- file.path(path, "derived_parameters.csv")
+  data.table::fwrite(x = derived_parameters_dt, file = dp_file)
+
+  invisible(c(results_files, dp_file, file.path(path, "gwas_software.txt")))
 }
