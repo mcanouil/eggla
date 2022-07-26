@@ -29,7 +29,6 @@ COPY inst/setup/eggla-example.R eggla-example.R
 RUN chmod +x eggla-example.R
 
 ENV BCFTOOLS_VERSION=1.15.1
-ENV PLINK2_VERSION=20220603
 
 RUN wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
   tar -C /tmp/ -xjf /tmp/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
@@ -49,10 +48,8 @@ RUN wget -q -P /tmp/ https://github.com/samtools/htslib/releases/download/${BCFT
   make install && \
   rm -rf /tmp/htslib-${BCFTOOLS_VERSION}
 
-RUN wget -q -P /tmp/ https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_${PLINK2_VERSION}.zip && \
-  unzip -d /tmp /tmp/plink2_linux_x86_64_${PLINK2_VERSION}.zip && \
-  mv /tmp/plink2 /usr/bin/plink2 && \
-  chmod +x /usr/bin/plink2
+COPY inst/bin/plink2 /usr/bin/plink2
+RUN chmod +x /usr/bin/plink2
 
 RUN apt-get autoremove -y
 RUN apt-get autoclean -y
