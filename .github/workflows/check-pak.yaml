@@ -67,8 +67,9 @@ jobs:
           extra-packages: any::rcmdcheck
 
       - uses: r-lib/actions/check-r-package@v2
-        args: 'c("--no-manual")'
-        error-on: '"error"'
+        with:
+          args: 'c("--no-manual")'
+          error-on: '"error"'
 
       - name: Show testthat output
         if: always()
