@@ -89,7 +89,7 @@ do_eggla_gwas <- function(
   threads = 1,
   quiet = FALSE
 ) {
-  INFO <- TEST <- P <- NULL # no visible binding for global variable from data.table
+  INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
   path <- normalizePath(path)
   results_zip <- normalizePath(results_zip)
   dir.create(
