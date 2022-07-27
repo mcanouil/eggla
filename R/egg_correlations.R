@@ -1,15 +1,14 @@
-#' Compute correlations between AUCs/Slopes derived parameters.
+
+#' Compute correlations the derived parameters from a cubic splines mixed-effects model by `egg_model()`.
 #'
-#' Based on computed area under the curves (_i.e._, `compute_aucs()`)
-#' and slopes (_i.e._, `compute_slopes()`) for several intervals using
-#' a model fitted by `time_model()`, compute the correlations between
+#' Based on computed area under the curves (_i.e._, `egg_aucs()`)
+#' and slopes (_i.e._, `egg_slopes()`) for several intervals using
+#' a model fitted by `egg_model()`, compute the correlations between
 #' each intervals derived parameters.
 #'
-#' @param fit A model object from a statistical model such as
-#'   from a call to `time_model()`.
-#' @param method The type of model provided in `fit`,
-#'   _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
-#' @param period The intervals knots on which AUCs are to be computed.
+#' @param fit A model object from a statistical model
+#'   such as from a call to `egg_model()`.
+#' @param period The intervals knots on which slopes are to be computed.
 #' @param knots The knots as defined `fit` and according to `method`.
 #'
 #' @return A `ggplot2` object with correlations between each intervals derived parameters.
@@ -18,37 +17,26 @@
 #'
 #' @examples
 #' data("bmigrowth")
-#' ls_mod <- time_model(
-#'   x = "age",
-#'   y = "log(bmi)",
-#'   cov = NULL,
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age,
 #'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-#'   method = "linear_splines"
+#'   id_var = "ID",
+#'   random_complexity = 1
 #' )
-#' compute_correlations(
-#'   fit = ls_mod,
-#'   method = "linear_splines",
-#'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
-#'   # knots = list(
-#'   #   "cubic_slope" = NULL,
-#'   #   "linear_splines" = c(5.5, 11),
-#'   #   "cubic_splines" = c(2, 8, 12)
-#'   # )[[method]]
+#' egg_correlations(
+#'   fit = res,
+#'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+#'   knots = c(2, 8, 12)
 #' )
-compute_correlations <- function(
+egg_correlations <- function(
   fit,
-  method,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = list(
-    "cubic_slope" = NULL,
-    "linear_splines" = c(5.5, 11),
-    "cubic_splines" = c(2, 8, 12)
-  )[[method]]
+  knots = c(2, 8, 12)
 ) {
-  pl <- lapply(
+pl <- lapply(
     X = list(
-      compute_aucs(fit, method, period, knots),
-      compute_slopes(fit, method, period, knots)
+      egg_aucs(fit, period, knots),
+      egg_slopes(fit, period, knots)
     ),
     FUN = function(data) {
       data_corrr_fmt <- data_corrr <- corrr::correlate(data[grep("^auc_|^slope_", names(data))])
