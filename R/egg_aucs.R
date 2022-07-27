@@ -1,4 +1,4 @@
-#' Derived areas under the curve from a cubic splines mixed-effects model by `time_model()`.
+#' Derived areas under the curve from a cubic splines mixed-effects model by `egg_model()`.
 #'
 #' Derived areas under the curve (AUCs) for differentintervals based
 #' on a fitted cubic splines mixed-effects model from `egg_model()`. 

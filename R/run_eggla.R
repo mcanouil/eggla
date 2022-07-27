@@ -76,6 +76,9 @@ run_eggla <- function(
   measurement <- param <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
+  
+  period <- c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+  knots <- c(2, 8, 12)
 
   dt_long <- data.table::melt(
     data = data.table::as.data.table(data)[
@@ -158,12 +161,21 @@ run_eggla <- function(
         id_var = "egg_id",
         random_complexity = random_complexity,
         use_car1 = use_car1,
+        knots = knots,
         quiet = quiet
       )
 
       saveRDS(
         object = results,
-        file = file.path(results_directory, "model-object.rds")
+        file = file.path(
+          working_directory,
+          sprintf("%s-%s-model-object.rds", Sys.Date(), sex_literal)
+        )
+      )
+
+      writeLines(
+        text = deparse1(results$call),
+        con = file.path(results_directory, "model-call.txt")
       )
 
       data.table::fwrite(
@@ -171,27 +183,12 @@ run_eggla <- function(
         file = file.path(results_directory, "model-coefficients.csv")
       )
 
-      data.table::fwrite(
-        x = egg_slopes(
-          fit = results,
-          period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
-        ),
-        file = file.path(results_directory, "derived-slopes.csv")
-      )
-
-      data.table::fwrite(
-        x = egg_aucs(
-          fit = results,
-          period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
-        ),
-        file = file.path(results_directory, "derived-aucs.csv")
-      )
-
       grDevices::png(
         filename = file.path(results_directory, "model-residuals.png"),
-        width = 600,
-        height = 480,
-        res = 72
+        width = 4 * 2.5,
+        height = 3 * 2.5,
+        units = "in",
+        res = 120
       )
       print(
         plot_residuals(
@@ -207,6 +204,47 @@ run_eggla <- function(
             tag_levels = "A"
           )
       )
+      invisible(grDevices::dev.off())
+
+      data.table::fwrite(
+        x = egg_slopes(
+          fit = results,
+          period = period,
+          knots = knots
+        ),
+        file = file.path(results_directory, "derived-slopes.csv")
+      )
+
+      data.table::fwrite(
+        x = egg_aucs(
+          fit = results,
+          period = period,
+          knots = knots
+        ),
+        file = file.path(results_directory, "derived-aucs.csv")
+      )
+
+      data.table::fwrite(
+        x = egg_outliers(
+          fit = results,
+          period = period,
+          knots = knots
+        ),
+        file = file.path(results_directory, "derived-outliers.csv")
+      )
+
+      grDevices::png(
+        filename = file.path(results_directory, "derived-correlations.png"),
+        width = 4 * 2.5,
+        height = 3 * 2.5,
+        units = "in",
+        res = 120
+      )
+      print(egg_correlations(
+        fit = results,
+        period = period,
+        knots = knots
+      ))
       invisible(grDevices::dev.off())
 
       owd <- getwd()
