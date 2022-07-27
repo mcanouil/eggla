@@ -169,6 +169,11 @@ run_eggla <- function(
         )
       )
 
+      writeLines(
+        text = deparse1(res$call),
+        con = file.path(results_directory, "model-call.txt")
+      )
+
       data.table::fwrite(
         x = broom.mixed::tidy(results),
         file = file.path(results_directory, "model-coefficients.csv")
