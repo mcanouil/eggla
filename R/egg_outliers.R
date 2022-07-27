@@ -1,8 +1,8 @@
-#' Compute outliers detection in derived parameters from a cubic splines mixed-effects model by `time_model()`.
+#' Compute outliers detection in AUCs/Slopes derived parameters from a cubic splines mixed-effects model by `egg_model()`.
 #'
-#' Based on computed area under the curves (_i.e._, `compute_aucs()`)
-#' and slopes (_i.e._, `compute_slopes()`) for several intervals using
-#' a model fitted by `time_model()`, compute an outlier detection.
+#' Based on computed area under the curves (_i.e._, `egg_aucs()`)
+#' and slopes (_i.e._, `egg_slopes()`) for several intervals using
+#' a model fitted by `egg_model()`, compute an outlier detection.
 #'
 #' @param fit A model object from a statistical model
 #'   such as from a call to `egg_model()`.
@@ -15,38 +15,27 @@
 #'
 #' @examples
 #' data("bmigrowth")
-#' ls_mod <- time_model(
-#'   x = "age",
-#'   y = "log(bmi)",
-#'   cov = NULL,
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age,
 #'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-#'   method = "linear_splines"
+#'   id_var = "ID",
+#'   random_complexity = 1
 #' )
-#' head(compute_outliers(
-#'   fit = ls_mod,
-#'   method = "linear_splines",
+#' head(egg_outliers(
+#'   fit = res,
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
-#'   # knots = list(
-#'   #   "cubic_slope" = NULL,
-#'   #   "linear_splines" = c(5.5, 11),
-#'   #   "cubic_splines" = c(2, 8, 12)
-#'   # )[[method]]
+#'   knots = c(2, 8, 12)
 #' )[Outlier != 0])
-compute_outliers <- function(
+egg_outliers <- function(
   fit,
-  method,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = list(
-    "cubic_slope" = NULL,
-    "linear_splines" = c(5.5, 11),
-    "cubic_splines" = c(2, 8, 12)
-  )[[method]]
+  knots = c(2, 8, 12)
 ) {
   data.table::rbindlist(
     l = lapply(
       X = list(
-        AUC = compute_aucs(fit, method, period, knots),
-        SLOPE = compute_slopes(fit, method, period, knots)
+        AUC = egg_aucs(fit, method, period, knots),
+        SLOPE = egg_slopes(fit, method, period, knots)
       ),
       FUN = function(data) {
         cbind.data.frame(

@@ -1,5 +1,5 @@
 
-#' Compute correlations the derived parameters from a cubic splines mixed-effects model by `egg_model()`.
+#' Compute the derived parameters correlations from a cubic splines mixed-effects model by `egg_model()`.
 #'
 #' Based on computed area under the curves (_i.e._, `egg_aucs()`)
 #' and slopes (_i.e._, `egg_slopes()`) for several intervals using

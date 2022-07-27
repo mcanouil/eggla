@@ -41,7 +41,8 @@ Imports:
     broom.mixed,
     rlang,
     corrr,
-    gridExtra
+    gridExtra,
+    performance
 Suggests:
     knitr,
     rmarkdown,
@@ -51,7 +52,6 @@ Suggests:
     ggtext,
     gt,
     lme4,
-    performance,
     see,
     qqplotr,
     future,
