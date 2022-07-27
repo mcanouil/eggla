@@ -174,7 +174,7 @@ run_eggla <- function(
       )
 
       writeLines(
-        text = deparse1(res$call),
+        text = deparse1(results$call),
         con = file.path(results_directory, "model-call.txt")
       )
 
