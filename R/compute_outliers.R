@@ -4,9 +4,11 @@
 #' and slopes (_i.e._, `compute_slopes()`) for several intervals using
 #' a model fitted by `time_model()`, compute an outlier detection.
 #'
-#' @param fit A model object from a statistical model
-#'   such as from a call to `egg_model()`.
-#' @param period The intervals knots on which slopes are to be computed.
+#' @param fit A model object from a statistical model such as
+#'   from a call to `time_model()`.
+#' @param method The type of model provided in `fit`,
+#'   _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
+#' @param period The intervals knots on which AUCs are to be computed.
 #' @param knots The knots as defined `fit` and according to `method`.
 #'
 #' @return A `data.frame` listing the individuals which are not outliers based on several criteria.
