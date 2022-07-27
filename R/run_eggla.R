@@ -224,8 +224,17 @@ run_eggla <- function(
         file = file.path(results_directory, "derived-aucs.csv")
       )
 
+      data.table::fwrite(
+        x = egg_outliers(
+          fit = results,
+          period = period,
+          knots = knots
+        ),
+        file = file.path(results_directory, "derived-outliers.csv")
+      )
+
       grDevices::png(
-        filename = file.path(results_directory, "model-correlations.png"),
+        filename = file.path(results_directory, "derived-correlations.png"),
         width = 4 * 2.5,
         height = 3 * 2.5,
         units = "in",

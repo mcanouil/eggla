@@ -1,4 +1,4 @@
-#' Compute correlations between AUCs/Slopes derived parameters.
+#' Compute the derived parameters correlations from a cubic splines mixed-effects model by `time_model()`.
 #'
 #' Based on computed area under the curves (_i.e._, `compute_aucs()`)
 #' and slopes (_i.e._, `compute_slopes()`) for several intervals using
