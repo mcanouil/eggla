@@ -23,7 +23,7 @@
 #' )
 #' head(egg_outliers(
 #'   fit = res,
-#'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
+#'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
 #'   knots = c(2, 8, 12)
 #' )[Outlier != 0])
 egg_outliers <- function(
@@ -34,8 +34,8 @@ egg_outliers <- function(
   data.table::rbindlist(
     l = lapply(
       X = list(
-        AUC = egg_aucs(fit, method, period, knots),
-        SLOPE = egg_slopes(fit, method, period, knots)
+        AUC = egg_aucs(fit, period, knots),
+        SLOPE = egg_slopes(fit, period, knots)
       ),
       FUN = function(data) {
         cbind.data.frame(
