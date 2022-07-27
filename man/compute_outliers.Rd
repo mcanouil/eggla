@@ -2,21 +2,31 @@
 % Please edit documentation in R/compute_outliers.R
 \name{compute_outliers}
 \alias{compute_outliers}
-\title{Compute outliers detection in AUCs/Slopes derived parameters.}
+\title{Compute outliers detection in derived parameters from a cubic splines mixed-effects model by \code{time_model()}.}
 \usage{
-compute_outliers(data)
+compute_outliers(
+  fit,
+  method,
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+  knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(2, 8,
+    12))[[method]]
+)
 }
 \arguments{
-\item{dt}{A \code{data.frame} with AUC or slopes for each individuals/samples.}
+\item{fit}{A model object from a statistical model
+such as from a call to \code{egg_model()}.}
+
+\item{period}{The intervals knots on which slopes are to be computed.}
+
+\item{knots}{The knots as defined \code{fit} and according to \code{method}.}
 }
 \value{
-A \code{data.frame} with the individuals and measures flagged as outliers.
+A \code{data.frame} listing the individuals which are not outliers based on several criteria.
 }
 \description{
 Based on computed area under the curves (\emph{i.e.}, \code{compute_aucs()})
 and slopes (\emph{i.e.}, \code{compute_slopes()}) for several intervals using
-a model fitted by \code{time_model()}, compute an outlier detection for
-each intervals derived parameters.
+a model fitted by \code{time_model()}, compute an outlier detection.
 }
 \examples{
 data("bmigrowth")
@@ -27,7 +37,7 @@ ls_mod <- time_model(
   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
   method = "linear_splines"
 )
-aucs <- compute_aucs(
+head(compute_outliers(
   fit = ls_mod,
   method = "linear_splines",
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
@@ -36,6 +46,5 @@ aucs <- compute_aucs(
   #   "linear_splines" = c(5.5, 11),
   #   "cubic_splines" = c(2, 8, 12)
   # )[[method]]
-)
-compute_outliers(aucs)
+)[Outlier != 0])
 }

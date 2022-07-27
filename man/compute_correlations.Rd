@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_correlations.R
 \name{compute_correlations}
 \alias{compute_correlations}
-\title{Compute correlations between AUCs/Slopes derived parameters.}
+\title{Compute the derived parameters correlations from a cubic splines mixed-effects model by \code{time_model()}.}
 \usage{
 compute_correlations(
   fit,
