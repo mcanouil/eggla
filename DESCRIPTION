@@ -40,7 +40,8 @@ Imports:
     patchwork,
     broom.mixed,
     rlang,
-    corrr
+    corrr,
+    gridExtra
 Suggests:
     knitr,
     rmarkdown,
