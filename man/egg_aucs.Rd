@@ -2,7 +2,7 @@
 % Please edit documentation in R/egg_aucs.R
 \name{egg_aucs}
 \alias{egg_aucs}
-\title{Derived areas under the curve from a cubic splines mixed-effects model by \code{time_model()}.}
+\title{Derived areas under the curve from a cubic splines mixed-effects model by \code{egg_model()}.}
 \usage{
 egg_aucs(
   fit,
