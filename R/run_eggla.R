@@ -163,7 +163,10 @@ run_eggla <- function(
 
       saveRDS(
         object = results,
-        file = file.path(results_directory, "model-object.rds")
+        file = file.path(
+          working_directory,
+          sprintf("%s-%s-model-object.rds", Sys.Date(), sex_literal)
+        )
       )
 
       data.table::fwrite(
