@@ -34,12 +34,15 @@ Imports:
     nlme,
     utils,
     grDevices,
-    data.table (>= 1.14.2),
+    data.table,
     growthcleanr (>= 2.0.0),
-    ggplot2 (>= 3.3.5),
-    patchwork (>= 1.1.1),
-    broom.mixed (>= 0.2.7),
-    rlang (>= 1.0.2)
+    ggplot2,
+    patchwork,
+    broom.mixed,
+    rlang,
+    corrr,
+    gridExtra,
+    performance
 Suggests:
     knitr,
     rmarkdown,
@@ -49,15 +52,14 @@ Suggests:
     ggtext,
     gt,
     lme4,
-    performance,
     see,
     qqplotr,
     future,
     future.apply,
     future.callr,
     forcats,
-    roxygen2 (>= 7.2.0),
-    testthat (>= 3.1.4)
+    roxygen2,
+    testthat
 Remotes: github::carriedaymont/growthcleanr@v2.0.0
 SystemRequirements:
     BCFtools (>= 1.15.0) (https://github.com/samtools/BCFtools),
