@@ -13,10 +13,13 @@ compute_outliers(
 )
 }
 \arguments{
-\item{fit}{A model object from a statistical model
-such as from a call to \code{egg_model()}.}
+\item{fit}{A model object from a statistical model such as
+from a call to \code{time_model()}.}
 
-\item{period}{The intervals knots on which slopes are to be computed.}
+\item{method}{The type of model provided in \code{fit},
+\emph{i.e.}, one of \code{"cubic_slope"}, \code{"linear_splines"} or \code{"cubic_splines"}.}
+
+\item{period}{The intervals knots on which AUCs are to be computed.}
 
 \item{knots}{The knots as defined \code{fit} and according to \code{method}.}
 }
