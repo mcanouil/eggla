@@ -1,4 +1,4 @@
-#' Derived slopes from a cubic splines mixed-effects model by `time_model()`.
+#' Derived slopes from a cubic splines mixed-effects model by `egg_model()`.
 #'
 #' Derived slopes for different intervals based on a fitted
 #' cubic splines mixed-effects model from `egg_model()`.
