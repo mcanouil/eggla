@@ -36,7 +36,7 @@ res <- egg_model(
 )
 head(egg_outliers(
   fit = res,
-  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   knots = c(2, 8, 12)
 )[Outlier != 0])
 }
