@@ -177,8 +177,9 @@ do_eggla_gwas <- function(
     new = id_column
   )
 
+  if (!inherits(data, "data.frame")) data <- data.table::fread(data)
   dt <- data.table::merge.data.table(
-    x = data.table::fread(data)[j = data.table::first(.SD), by = c(id_column)],
+    x = data[j = data.table::first(.SD), by = c(id_column)],
     y = derived_parameters_dt,
     by = id_column
   )
