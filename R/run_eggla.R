@@ -233,19 +233,20 @@ run_eggla <- function(
         file = file.path(results_directory, "derived-outliers.csv")
       )
 
-      grDevices::png(
-        filename = file.path(results_directory, "derived-correlations.png"),
-        width = 4 * 2.5,
-        height = 3 * 2.5,
-        units = "in",
-        res = 120
-      )
-      print(egg_correlations(
+      eggc <- egg_correlations(
         fit = results,
         period = period,
         knots = knots
-      ))
-      invisible(grDevices::dev.off())
+      )
+
+      data.table::fwrite(
+        x = eggc[["AUC"]],
+        file = file.path(results_directory, "derived-aucs-outliers.csv")
+      )
+      data.table::fwrite(
+        x = eggc[["SLOPE"]],
+        file = file.path(results_directory, "derived-slopes-outliers.csv")
+      )
 
       owd <- getwd()
       on.exit(setwd(owd), add = TRUE)

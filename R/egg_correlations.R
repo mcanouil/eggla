@@ -33,33 +33,13 @@ egg_correlations <- function(
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   knots = c(2, 8, 12)
 ) {
-pl <- lapply(
+  lapply(
     X = list(
-      egg_aucs(fit, period, knots),
-      egg_slopes(fit, period, knots)
+      AUC = egg_aucs(fit, period, knots),
+      SLOPE = egg_slopes(fit, period, knots)
     ),
     FUN = function(data) {
-      data_corrr_fmt <- data_corrr <- corrr::correlate(data[grep("^auc_|^slope_", names(data))])
-      data_corrr_fmt[, -1] <- round(data_corrr_fmt[, -1], digits = 3)
-      patchwork::wrap_plots(
-        gridExtra::tableGrob(data_corrr_fmt),
-        corrr::network_plot(
-          rdf = data_corrr,
-          min_cor = 0,
-          colors = c("#b22222", "#22b222")
-        ) +
-        ggplot2::theme(legend.position = "top") +
-        ggplot2::guides(
-          color = ggplot2::guide_colourbar(
-            barwidth = ggplot2::unit(0.25, "npc"),
-            barheight = ggplot2::unit(0.05, "npc")
-          )
-        ) +
-        ggplot2::theme(plot.margin = ggplot2::unit(c(0.5, 0.5, 0.5, 0.5), "lines")),
-        ncol = 1,
-        heights = c(0.3, 0.70)
-      )
+      corrr::correlate(data[grep("^auc_|^slope_", names(data))])
     }
   )
-  patchwork::wrap_plots(pl, ncol = 2, nrow = 1)
 }
