@@ -104,10 +104,11 @@ do_eggla_gwas <- function(
       bin_path[["plink2"]] != sprintf("%s/plink2", path)
   ) {
     file.copy(
-      to = bin_path[["plink2"]],
-      from = file.exists(sprintf("%s/plink2", path)),
+      from = bin_path[["plink2"]],
+      to = sprintf("%s/plink2", path),
       overwrite = TRUE
     )
+    on.exit(unlink(sprintf("%s/plink2", path)))
   }
   
   if (
