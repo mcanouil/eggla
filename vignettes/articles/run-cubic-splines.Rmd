@@ -256,7 +256,7 @@ egg_outliers(
   knots = c(2, 8, 12)
 )[
   i = Outlier != 0,
-  j = head(.SD), 
+  j = head(.SD),
   by = "parameter"
 ]
 ```
