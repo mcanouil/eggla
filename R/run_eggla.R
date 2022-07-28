@@ -241,11 +241,11 @@ run_eggla <- function(
 
       data.table::fwrite(
         x = eggc[["AUC"]],
-        file = file.path(results_directory, "derived-aucs-outliers.csv")
+        file = file.path(results_directory, "derived-aucs-correlations.csv")
       )
       data.table::fwrite(
         x = eggc[["SLOPE"]],
-        file = file.path(results_directory, "derived-slopes-outliers.csv")
+        file = file.path(results_directory, "derived-slopes-correlations.csv")
       )
 
       owd <- getwd()
