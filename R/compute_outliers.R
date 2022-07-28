@@ -52,9 +52,9 @@ compute_outliers <- function(
       ),
       FUN = function(data) {
         cbind.data.frame(
-          ID = data[, grep("ID", colnames(data))],
+          ID = data[, 1],
           as.data.frame(performance::check_outliers(
-            x = data[, -grep("ID", colnames(data))],
+            x = data[, -1],
             method = c("iqr", "zscore")
           ))
         )

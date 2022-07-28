@@ -76,7 +76,7 @@ run_eggla <- function(
   measurement <- param <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
-  
+
   period <- c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
   knots <- c(2, 8, 12)
 
