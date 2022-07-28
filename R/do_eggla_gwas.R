@@ -98,9 +98,19 @@ do_eggla_gwas <- function(
     mode = "0775",
     showWarnings = FALSE
   )
+
+  if (
+    !grepl("not found", system(paste(bin_path[["plink2"]], "--version"), intern = TRUE)) &
+      bin_path[["plink2"]] != sprintf("%s/plink2", path)
+  ) {
+    file.copy(
+      to = bin_path[["plink2"]],
+      from = file.exists(sprintf("%s/plink2", path)),
+      overwrite = TRUE
+    )
+  }
   
   if (
-    grepl("not found", system(paste(bin_path[["plink2"]], "--version"), intern = TRUE)) &&
     grepl("^http.*\\.zip$", bin_path[["plink2"]]) & !file.exists(sprintf("%s/plink2", path))
   ) {
     zip_file <- sprintf("%s/plink2.zip", path)
@@ -113,7 +123,6 @@ do_eggla_gwas <- function(
           files = "plink2"
         )
         unlink(zip_file)
-        Sys.chmod(sprintf("%s/plink2", path), "0777")
       },
       silent = TRUE
     )
@@ -125,6 +134,8 @@ do_eggla_gwas <- function(
       )
     }
   }
+
+  Sys.chmod(sprintf("%s/plink2", path), "0777")
 
   plink_version <- try(
     expr = system(sprintf("%s --version", bin_path[["plink2"]]), intern = TRUE),
