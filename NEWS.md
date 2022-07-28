@@ -1,5 +1,21 @@
 # eggla (development version)
 
+## Fixes
+
+- In `R/run_eggla.R`,
+  - fix: exclude rds from being included in archive.
+
+## Features
+
+- In `R/run_eggla.R`,
+  - feat: eggla model call is now written in a file.
+- In `R/egg_correlations()` and `R/compute_correlations()`,
+  - feat: add correlation figure/table. (#22)
+- In `R/egg_outliers()` and `R/compute_outliers()`,
+  - feat: add function to check. (#22)
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.4...v0.11.0>
+
 # eggla 0.10.4
 
 ## Fixes
@@ -10,7 +26,7 @@
 - In `inst/setup/Dockerfile`, `inst/setup/pkg.lock`, `inst/setup/renv.lock`, and`data-raw/lock.R`,
   - Fix: add all `data.table` dependencies.
 - In `R/`, `tests/`, and `vignettes/`,
-  - fix: documentation conssitency with code, i.e., replaced "AR1" with "CAR1" (#21).
+  - fix: documentation consistency with code, i.e., replaced "AR1" with "CAR1" (#21).
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.3...v0.10.4>
 
