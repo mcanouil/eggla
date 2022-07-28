@@ -41,7 +41,6 @@ Imports:
     broom.mixed,
     rlang,
     corrr,
-    gridExtra,
     performance
 Suggests:
     knitr,
