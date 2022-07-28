@@ -461,7 +461,7 @@ do_eggla_gwas <- function(
     neworder = c("trait_model", "covariates")
   )[
     j = (function(dt, tm) {
-      results_file <- sprintf(file.path(path, "%s_gwas.csv.gz"), tm)
+      results_file <- sprintf(file.path(path, "%s-gwas.csv.gz"), tm)
       data.table::fwrite(x = .SD, file = results_file)
       results_file
     })(.SD, trait_model),
@@ -470,11 +470,8 @@ do_eggla_gwas <- function(
 
   writeLines(
     text = c(R.version.string, plink_version, bcftools_version),
-    con = file.path(path, "gwas_software.txt")
+    con = file.path(path, "gwas-software.txt")
   )
 
-  dp_file <- file.path(path, "derived_parameters.csv")
-  data.table::fwrite(x = derived_parameters_dt, file = dp_file)
-
-  invisible(c(results_files, dp_file, file.path(path, "gwas_software.txt")))
+  invisible(c(results_files, results_zip, file.path(path, "gwas-software.txt")))
 }
