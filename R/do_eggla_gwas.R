@@ -98,7 +98,11 @@ do_eggla_gwas <- function(
     mode = "0775",
     showWarnings = FALSE
   )
-  if (grepl("^http.*\\.zip$", bin_path[["plink2"]]) & !file.exists(sprintf("%s/plink2", path))) {
+  
+  if (
+    grepl("not found", system(paste(bin_path[["plink2"]], "--version"), intern = TRUE)) &&
+    grepl("^http.*\\.zip$", bin_path[["plink2"]]) & !file.exists(sprintf("%s/plink2", path))
+  ) {
     zip_file <- sprintf("%s/plink2.zip", path)
     is_plink_downloaded <- try(
       expr = {
