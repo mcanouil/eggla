@@ -284,7 +284,7 @@ do_eggla_gwas <- function(
     )
   }
 
-  if (!quiet) message("Formatting VCFs and performing PLINK2 regression ...")
+  if (!quiet) message("Formatting VCFs ...")
   if (nzchar(system.file(package = "future.apply"))) {
     eggla_lapply <- function(X, basename_file, vep_file, bin_path, FUN) {
       future.apply::future_lapply(
@@ -363,6 +363,7 @@ do_eggla_gwas <- function(
 
       system(cmd)
 
+      if (!quiet) message(sprintf("[%s] Performing PLINK2 regression ...", basename(vcf)))
       system(paste(c(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
@@ -378,6 +379,7 @@ do_eggla_gwas <- function(
         "--out", results_file
       ), collapse = " "))
 
+      if (!quiet) message(sprintf("[%s] Extracting INFO ...", basename(vcf)))
       annot <- data.table::setnames(
         x = data.table::fread(
           cmd = paste(bin_path[["bcftools"]], "view --drop-genotypes", vcf_file),
@@ -425,6 +427,7 @@ do_eggla_gwas <- function(
         old = function(x) sub("^\\.SD\\.\\.*", "", x)
       )
 
+      if (!quiet) message(sprintf("[%s] Combining results files ...", basename(vcf)))
       results <- data.table::setnames(
         x = data.table::rbindlist(
           l = lapply(
@@ -444,6 +447,7 @@ do_eggla_gwas <- function(
 
       output_results_file <- sprintf("%s.results.gz", results_file)
 
+      if (!quiet) message(sprintf("[%s] Writing annotated results file ...", basename(vcf)))
       data.table::fwrite(
         x = data.table::merge.data.table(
           x = results,
@@ -453,16 +457,13 @@ do_eggla_gwas <- function(
         ),
         file = output_results_file
       )
-      if (!quiet) message(sprintf("Results written in \"%s\"", output_results_file))
+      if (!quiet) message(sprintf("[%s] Results written in \"%s\"", basename(vcf), output_results_file))
 
       output_results_file
     }
   )
 
-  if (!quiet) message("Aggregating PLINK2 results ...")
-
-  if (!quiet) message("Writing results ...")
-
+  if (!quiet) message("Writing trait results ...")
   results_files <- data.table::setcolorder(
     x = data.table::rbindlist(
       l = lapply(list_results, data.table::fread),
@@ -485,6 +486,7 @@ do_eggla_gwas <- function(
     by = "trait_model"
   ]
 
+  if (!quiet) message("Writing software versions ...")
   writeLines(
     text = c(R.version.string, plink_version, bcftools_version),
     con = file.path(path, "gwas-software.txt")
