@@ -474,7 +474,7 @@ do_eggla_gwas <- function(
       j = `:=`(
         FDR = stats::p.adjust(P, method = "BH"),
         Bonferroni = stats::p.adjust(P, method = "bonferroni"),
-        covariates = covariates
+        covariates = paste(covariates, collapse = "+")
       ),
       by = "trait_model"
     ][order(P)],
