@@ -24,7 +24,7 @@ from a call to \code{time_model()}.}
 \item{knots}{The knots as defined \code{fit} and according to \code{method}.}
 }
 \value{
-A \code{ggplot2} object with correlations between each intervals derived parameters.
+A \code{list} object with correlations between each intervals derived parameters.
 }
 \description{
 Based on computed area under the curves (\emph{i.e.}, \code{compute_aucs()})
