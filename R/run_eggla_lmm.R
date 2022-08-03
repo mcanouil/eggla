@@ -37,7 +37,7 @@
 #'     x = bmigrowth,
 #'     file = file.path(tempdir(), "bmigrowth.csv")
 #'   )
-#'   res <- run_eggla(
+#'   res <- run_eggla_lmm(
 #'     data = fread(file.path(tempdir(), "bmigrowth.csv")),
 #'     id_variable = "ID",
 #'     age_days_variable = NULL,
