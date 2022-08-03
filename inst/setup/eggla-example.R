@@ -3,7 +3,7 @@
 library(eggla)
 
 data("bmigrowth")
-run_eggla(
+run_eggla_lmm(
   data = bmigrowth,
   id_variable = "ID",
   age_days_variable = NULL,
