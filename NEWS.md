@@ -4,9 +4,17 @@
 
 - In `R/run_eggla.R`,
   - fix: exclude rds from being included in archive.
+- In `R/do_eggla_gwas.R`,
+  - fix: improve and add messages.
+  - fix: ensure "data" is a data.frame or a path read in a data.frame.
+  - fix: allows binary path to be an actual binary path.
+  - fix: now returns results files path, input parameters zip file, and text file with software versions.
+  - fix: collapse vector of covariates into an atomic string to be added in the results files.
 
 ## Features
 
+- In `inst/bin`,
+  - feat: add PLINK2 binary internally.
 - In `R/run_eggla.R`,
   - feat: eggla model call is now written in a file.
 - In `R/egg_correlations()` and `R/compute_correlations()`,
