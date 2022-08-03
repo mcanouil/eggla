@@ -30,8 +30,8 @@ reference:
     - egg_correlations
     - plot_egg_aucs
     - plot_egg_slopes
-    - run_eggla
-    - do_eggla_gwas
+    - run_eggla_lmm
+    - run_eggla_gwas
   - title: Datasets
     contents:
     - bmigrowth

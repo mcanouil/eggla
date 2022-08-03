@@ -32,7 +32,7 @@ Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/ru
 library(eggla)
 library(data.table)
 working_directory <- tempdir() # To be modified by user
-res <- try(run_eggla(
+res <- try(run_eggla_lmm(
   data = fread("/home/mcanouil/eggla/bmigrowth.csv"), # to be changed with the path of the file containing the data
   id_variable = "ID",
   age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
@@ -85,7 +85,7 @@ chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
 if (!isFALSE(chr_in_parallel)) {
   future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
 }
-do_eggla_gwas(
+run_eggla_gwas(
   data = "./bmigrowth.csv",
   results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
   id_column = "ID",
@@ -161,7 +161,7 @@ EOF
 Rscript <<EOF
 library(eggla)
 library(data.table)
-res <- try(run_eggla(
+res <- try(run_eggla_lmm(
   data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
   id_variable = "ID",
   age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
@@ -216,7 +216,7 @@ EOF
 Rscript <<EOF
 library(eggla)
 library(data.table)
-res <- try(run_eggla(
+res <- try(run_eggla_lmm(
   data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
   id_variable = "ID",
   age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
@@ -270,7 +270,7 @@ if (!isFALSE(chr_in_parallel)) {
   renv::install(c("future", "future.apply"))
   future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
 }
-do_eggla_gwas(
+run_eggla_gwas(
   data = "bmigrowth.csv",
   results_zip = list.files(path = ".", pattern = "\\\\.zip", full.names = TRUE),
   id_column = "ID",
@@ -364,7 +364,7 @@ Restart R before running the analysis.
 library(eggla)
 library(data.table)
 res <- try(
-  run_eggla(
+  run_eggla_lmm(
     data = fread("bmigrowth.csv"),
     id_variable = "ID",
     age_days_variable = NULL,
@@ -404,7 +404,7 @@ if (!isFALSE(chr_in_parallel)) {
   renv::install(c("future", "future.apply"))
   future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
 }
-do_eggla_gwas(
+run_eggla_gwas(
   data = "bmigrowth.csv",
   results_zip = list.files(path = ".", pattern = "\\.zip", full.names = TRUE),
   id_column = "ID",
