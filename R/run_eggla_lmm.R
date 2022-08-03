@@ -54,7 +54,7 @@
 #'     working_directory = tempdir()
 #'   )
 #' }
-run_eggla <- function(
+run_eggla_lmm <- function(
   data,
   id_variable,
   age_days_variable,
