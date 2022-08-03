@@ -494,5 +494,9 @@ do_eggla_gwas <- function(
     con = file.path(path, "gwas-software.txt")
   )
 
-  invisible(c(results_files, results_zip, file.path(path, "gwas-software.txt")))
+  invisible(unlist(
+    X = c(results_files, results_zip, file.path(path, "gwas-software.txt")),
+    recursive = TRUE,
+    use.names = FALSE
+  ))
 }
