@@ -13,6 +13,8 @@ body:
         This helps you know what to check for opening a good issue report.
         It also helps know that you've have done the common steps that can solve your potential issue.
         At last, if you have posted the same issue elsewhere, please mention it here, with a link to the other issue.
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Bug description
@@ -25,6 +27,8 @@ body:
         print("Hello 'eggla'!")
         ```
         ````
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: "`eggla` version output"
@@ -35,6 +39,8 @@ body:
         ```r
         <insert pasted output here>
         ```
+    validations:
+      required: true
   - type: checkboxes
     attributes:
       label: Checklist
@@ -42,6 +48,10 @@ body:
         When filing a _bug report_, please check the boxes below to confirm that you have provided us with the information we need. Have you:
       options:
         - label: "[formatted your issue](https://yihui.org/issue/#please-format-your-issue-correctly) so it is easier for us to read?"
+          required: true
         - label: included a minimal, fully reproducible example in a single .qmd file? Please provide the whole file rather than the snippet you believe is causing the issue.
+          required: true
         - label: documented the version of `eggla` you're running, by pasting the output from running `packageVersion('eggla')` in the "`eggla` version output" text area?
+          required: true
         - label: documented which operating system you're running? If on Linux, please provide the specific distribution as well.
+          required: true
