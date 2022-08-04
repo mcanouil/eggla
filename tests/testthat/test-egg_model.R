@@ -1,3 +1,5 @@
+set.seed(2705)
+
 data("bmigrowth")
 
 test_that("egg_model", {

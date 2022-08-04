@@ -1,3 +1,5 @@
+set.seed(2705)
+
 test_that("Cubic slope", {
 
   x <- time_model(
