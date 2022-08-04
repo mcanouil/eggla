@@ -44,7 +44,8 @@ run_eggla_lmm(
 \item{random_complexity}{A numeric (1-3) indicating the complexity of the random effect term.
 Default, \code{"auto"} will try from the more complex to the less complex if no success.}
 
-\item{use_car1}{A logical indicating whether to use AR(1) for autocorrelation.}
+\item{use_car1}{A logical indicating whether to use continuous auto-correlation,
+i.e., CAR(1) as correlation structure.}
 
 \item{parallel}{Determines if \code{growthcleanr::cleangrowth()} function shoud be run in parallel. Defaults to \code{FALSE}.}
 

@@ -254,7 +254,7 @@ run_eggla_lmm <- function(
       setwd(results_directory)
       archive_filename <- file.path(
         working_directory,
-        sprintf("%s-%s.zip", Sys.Date(), sex_literal)
+        sprintf("%s.zip", sex_literal)
       )
       utils::zip(
         zipfile = archive_filename,

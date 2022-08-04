@@ -129,13 +129,13 @@ test_that("Test covariates with transformation", {
 
 data("bmigrowth")
 
-test_that("Compare time_model and egg_model", {
+test_that("time_model", {
   expect_snapshot(
     res1 <- time_model(
-      formula = log(bmi) ~ age,
+      y = "log(bmi)",
+      x = "age",
       data = bmigrowth[bmigrowth[["sex"]] == 0, ],
       method = "cubic_slope",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(2, 8, 12),
       id_var = "ID",
       use_car1 = TRUE,
