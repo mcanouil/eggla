@@ -1,3 +1,5 @@
+set.seed(2705)
+
 test_that("Cubic slope", {
   for (use_car1 in c(FALSE, TRUE)) {
     expect_snapshot(
@@ -130,17 +132,15 @@ test_that("Test covariates with transformation", {
 data("bmigrowth")
 
 test_that("time_model", {
-  expect_snapshot(
-    res1 <- time_model(
-      y = "log(bmi)",
-      x = "age",
-      data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-      method = "cubic_slope",
-      knots = c(2, 8, 12),
-      id_var = "ID",
-      use_car1 = TRUE,
-      quiet = TRUE
-    )
+  res1 <- time_model(
+    y = "log(bmi)",
+    x = "age",
+    data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+    method = "cubic_slope",
+    knots = c(2, 8, 12),
+    id_var = "ID",
+    use_car1 = TRUE,
+    quiet = TRUE
   )
 
   expect_snapshot(

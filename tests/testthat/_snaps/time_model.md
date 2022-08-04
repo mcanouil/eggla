@@ -147,13 +147,6 @@
 # time_model
 
     Code
-      res1 <- time_model(y = "log(bmi)", x = "age", data = bmigrowth[bmigrowth[[
-        "sex"]] == 0, ], method = "cubic_slope", knots = c(2, 8, 12), id_var = "ID",
-      use_car1 = TRUE, quiet = TRUE)
-
----
-
-    Code
       cor1 <- compute_correlations(fit = res1, method = "cubic_slope", period = c(0,
         0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12))
     Message
