@@ -9,7 +9,8 @@
 #' @param data A data.frame containing the variables named in `x` and `y`.
 #' @param method The type of model, _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
 #' @param knots The knots defining the splines for `"linear_splines"` and `"cubic_splines"` methods.
-#' @param use_car1 A logical indicating whether to use AR(1) for autocorrelation.
+#' @param use_car1 A logical indicating whether to use continuous auto-correlation,
+#'   i.e., CAR(1) as correlation structure.
 #' @param id_var A string indicating the name of the variable
 #'   to be used as the individual identifier.
 #' @param quiet A logical indicating whether to suppress the output.

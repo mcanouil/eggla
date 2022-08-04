@@ -12,7 +12,8 @@
 #'   to be used as the individual identifier.
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
-#' @param use_car1 A logical indicating whether to use AR(1) for autocorrelation.
+#' @param use_car1 A logical indicating whether to use continuous auto-correlation,
+#'   i.e., CAR(1) as correlation structure.
 #' @param knots The knots defining the splines.
 #' @param quiet A logical indicating whether to suppress the output.
 #'
