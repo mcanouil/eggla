@@ -107,7 +107,7 @@ test_that("Test covariates", {
       cov = c("height"),
       data = bmigrowth[bmigrowth$sex == 0, ],
       method = "linear_splines",
-      id_var = "ID", 
+      id_var = "ID",
       use_car1 = TRUE,
       quiet = TRUE
     )
