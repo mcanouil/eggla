@@ -9,10 +9,13 @@ test_that("Cubic slope", {
     quiet = TRUE
   )
 
-  y1 <- compute_aucs(
-    fit = x,
-    method = "cubic_slope",
-    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+
+  expect_snapshot(
+    y1 <- compute_aucs(
+      fit = x,
+      method = "cubic_slope",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+    )
   )
 
   y2 <- local({
@@ -58,10 +61,12 @@ test_that("Linear Splines", {
     quiet = TRUE
   )
 
-  y1 <- compute_aucs(
-    fit = x,
-    method = "linear_splines",
-    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+  expect_snapshot(
+    y1 <- compute_aucs(
+      fit = x,
+      method = "linear_splines",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+    )
   )
 
   y2 <- local({
@@ -120,10 +125,12 @@ test_that("Cubic Splines", {
     quiet = TRUE
   )
 
-  y1 <- compute_aucs(
-    fit = x,
-    method = "cubic_splines",
-    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+  expect_snapshot(
+    y1 <- compute_aucs(
+      fit = x,
+      method = "cubic_splines",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+    )
   )
 
   y2 <- local({
