@@ -1,13 +1,15 @@
 test_that("Cubic slope", {
   for (use_car1 in c(FALSE, TRUE)) {
-    x <- time_model(
-      x = "age",
-      y = "log(bmi)",
-      data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "cubic_slope",
-      use_car1 = use_car1,
-      id_var = "ID",
-      quiet = TRUE
+    expect_snapshot(
+      x <- time_model(
+        x = "age",
+        y = "log(bmi)",
+        data = bmigrowth[bmigrowth$sex == 0, ],
+        method = "cubic_slope",
+        use_car1 = use_car1,
+        id_var = "ID",
+        quiet = TRUE
+      )
     )
 
     y <- nlme::lme(
@@ -26,14 +28,16 @@ test_that("Cubic slope", {
 
 test_that("Linear Splines", {
   for (use_car1 in c(FALSE, TRUE)) {
-    x <- time_model(
-      x = "age",
-      y = "log(bmi)",
-      data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "linear_splines",
-      use_car1 = use_car1,
-      id_var = "ID",
-      quiet = TRUE
+    expect_snapshot(
+      x <- time_model(
+        x = "age",
+        y = "log(bmi)",
+        data = bmigrowth[bmigrowth$sex == 0, ],
+        method = "linear_splines",
+        use_car1 = use_car1,
+        id_var = "ID",
+        quiet = TRUE
+      )
     )
 
     y <- nlme::lme(
@@ -52,14 +56,16 @@ test_that("Linear Splines", {
 
 test_that("Cubic Splines", {
 for (use_car1 in c(FALSE, TRUE)[2]) {
-  x <- time_model(
-    x = "age",
-    y = "log(bmi)",
-    data = bmigrowth[bmigrowth$sex == 0, ],
-    method = "cubic_splines",
-    use_car1 = use_car1,
-    id_var = "ID",
-    quiet = TRUE
+  expect_snapshot(
+    x <- time_model(
+      x = "age",
+      y = "log(bmi)",
+      data = bmigrowth[bmigrowth$sex == 0, ],
+      method = "cubic_splines",
+      use_car1 = use_car1,
+      id_var = "ID",
+      quiet = TRUE
+    )
   )
 
   y <- nlme::lme(
@@ -92,8 +98,8 @@ test_that("Test wrong covariates", {
 })
 
 test_that("Test covariates", {
-  expect_s3_class(
-    object = time_model(
+  expect_snapshot(
+    time_model(
       x = "age",
       y = "log(bmi)",
       cov = c("height"),
@@ -102,14 +108,13 @@ test_that("Test covariates", {
       id_var = "ID", 
       use_car1 = TRUE,
       quiet = TRUE
-    ),
-    class = "lme"
+    )
   )
 })
 
 test_that("Test covariates with transformation", {
-  expect_s3_class(
-    object = time_model(
+  expect_snapshot(
+    time_model(
       x = "age",
       y = "log(bmi)",
       cov = c("log(height)"),
@@ -118,7 +123,63 @@ test_that("Test covariates with transformation", {
       id_var = "ID",
       use_car1 = TRUE,
       quiet = TRUE
-    ),
-    class = "lme"
+    )
+  )
+})
+
+data("bmigrowth")
+
+test_that("Compare time_model and egg_model", {
+  expect_snapshot(
+    res1 <- time_model(
+      formula = log(bmi) ~ age,
+      data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+      method = "cubic_slope",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+      knots = c(2, 8, 12),
+      id_var = "ID",
+      use_car1 = TRUE,
+      quiet = TRUE
+    )
+  )
+
+  expect_snapshot(
+    cor1 <- compute_correlations(
+      fit = res1,
+      method = "cubic_slope",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+      knots = c(2, 8, 12)
+    )
+  )
+
+  expect_snapshot(
+    auc1 <- compute_aucs(
+      fit = res1,
+      method = "cubic_slope",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+      knots = c(2, 8, 12)
+    )
+  )
+
+  expect_snapshot(
+    slopes1 <- compute_slopes(
+      fit = res1,
+      method = "cubic_slope",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+      knots = c(2, 8, 12)
+    )
+  )
+
+  for (s in c("predicted", "observed")) {
+    expect_snapshot(compute_apar(fit = res1, from = s)[AP | AR])
+  }
+
+  expect_snapshot(
+    outliers1 <- compute_outliers(
+      fit = res1,
+      method = "cubic_slope",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+      knots = c(2, 8, 12)
+    )
   )
 })
