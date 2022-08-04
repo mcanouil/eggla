@@ -48,8 +48,8 @@ test_that("egg_model", {
     )
   )
 
-  expect_snapshot(
-    run_eggla_lmm(
+  expect_equal(
+    sort(basename(run_eggla_lmm(
       data = bmigrowth,
       id_variable = "ID",
       age_days_variable = NULL,
@@ -64,6 +64,7 @@ test_that("egg_model", {
       parallel = FALSE, # to parallelise Daymont QC
       parallel_n_chunks = 1, # to parallelise Daymont QC
       working_directory = tempdir()
-    )
+    ))),
+    sort(c("female.zip", "male.zip"))
   )
 })

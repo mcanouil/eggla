@@ -30,7 +30,8 @@ time_model(
 
 \item{knots}{The knots defining the splines for \code{"linear_splines"} and \code{"cubic_splines"} methods.}
 
-\item{use_car1}{A logical indicating whether to use AR(1) for autocorrelation.}
+\item{use_car1}{A logical indicating whether to use continuous auto-correlation,
+i.e., CAR(1) as correlation structure.}
 
 \item{id_var}{A string indicating the name of the variable
 to be used as the individual identifier.}
