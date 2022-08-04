@@ -112,7 +112,7 @@ run_eggla_gwas <- function(
     )
     on.exit(unlink(sprintf("%s/plink2", path)))
   }
-  
+
   if (
     grepl("^http.*\\.zip$", bin_path[["plink2"]]) & !file.exists(sprintf("%s/plink2", path))
   ) {
@@ -480,11 +480,11 @@ run_eggla_gwas <- function(
     ][order(P)],
     neworder = c("trait_model", "covariates")
   )[
-    j = (function(dt, tm) {
-      results_file <- sprintf(file.path(path, "%s-gwas.csv.gz"), tm)
-      data.table::fwrite(x = .SD, file = results_file)
-      results_file
-    })(.SD, trait_model),
+    j = list(file = (function(dt, tm) {
+      rf <- sprintf(file.path(path, "%s-gwas.csv.gz"), tm)
+      data.table::fwrite(x = .SD, file = rf)
+      rf
+    })(.SD, trait_model)),
     by = "trait_model"
   ]
 
@@ -494,9 +494,5 @@ run_eggla_gwas <- function(
     con = file.path(path, "gwas-software.txt")
   )
 
-  invisible(unlist(
-    x = c(results_files, results_zip, file.path(path, "gwas-software.txt")),
-    recursive = TRUE,
-    use.names = FALSE
-  ))
+  c(results_files[["file"]], results_zip, file.path(path, "gwas-software.txt"))
 }
