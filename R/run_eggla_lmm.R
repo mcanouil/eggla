@@ -18,7 +18,8 @@
 #' @param male_coded_zero Is male coded "0" (and female coded "1")?
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
-#' @param use_car1 A logical indicating whether to use AR(1) for autocorrelation.
+#' @param use_car1 A logical indicating whether to use continuous auto-correlation,
+#'   i.e., CAR(1) as correlation structure.
 #' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
 #' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
 #'   Only applies if parallel is set to TRUE.
