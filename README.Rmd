@@ -16,8 +16,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![GitHub tag](https://img.shields.io/github/tag/mcanouil/eggla.svg?label=latest tag&include_prereleases)](https://github.com/mcanouil/eggla)
-[![R-CMD-check](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yml)
 [![codecov](https://codecov.io/gh/mcanouil/eggla/branch/main/graph/badge.svg?token=D0R3SAZTWA)](https://codecov.io/gh/mcanouil/eggla)
+[![R-CMD-check](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yml)
 [![Build Docker](https://github.com/mcanouil/eggla/actions/workflows/build-docker.yml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/build-docker.yml)
 <!-- badges: end -->
 
