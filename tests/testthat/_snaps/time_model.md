@@ -86,64 +86,6 @@
       Number of Observations: 534
       Number of Groups: 50 
 
-# Test covariates with transformation
-
-    Code
-      time_model(x = "age", y = "log(bmi)", cov = c("log(height)"), data = bmigrowth[
-        bmigrowth$sex == 0, ], method = "linear_splines", id_var = "ID", use_car1 = TRUE,
-      quiet = TRUE)
-    Output
-      Linear mixed-effects model fit by maximum likelihood
-        Data: data 
-        Log-likelihood: 466.4923
-        Fixed: log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0,      2)) + log(height) 
-                                                                       (Intercept) 
-                                                                       0.768959726 
-         gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0) 
-                                                                      -0.015581627 
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 
-                                                                       0.061930245 
-       gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1 
-                                                                      -0.003480598 
-                                                                       log(height) 
-                                                                       0.484255351 
-      
-      Random effects:
-       Formula: ~gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0,      2)) | ID
-       Structure: General positive-definite, Log-Cholesky parametrization
-                                                                                   StdDev    
-      (Intercept)                                                                  0.04455077
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    0.02091494
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 0.03053103
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  0.03729899
-      Residual                                                                     0.10717076
-                                                                                   Corr  
-      (Intercept)                                                                  (Intr)
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -0.297
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1  0.157
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.142
-      Residual                                                                           
-                                                                                                                     
-      (Intercept)                                                                  g(,k=c(5.5,11),d=r(1,3),s=r(0,2))D
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                      
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 -0.985                            
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1   0.982                            
-      Residual                                                                                                       
-                                                                                                                     
-      (Intercept)                                                                  g(,k=c(5.5,11),d=r(1,3),s=r(0,2))C
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                      
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                   
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.998                            
-      Residual                                                                                                       
-      
-      Correlation Structure: Continuous AR(1)
-       Formula: ~1 | ID 
-       Parameter estimate(s):
-            Phi 
-      0.4898987 
-      Number of Observations: 534
-      Number of Groups: 50 
-
 # time_model
 
     Code
