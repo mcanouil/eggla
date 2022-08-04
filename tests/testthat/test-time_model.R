@@ -107,21 +107,6 @@ test_that("Test covariates", {
       cov = c("height"),
       data = bmigrowth[bmigrowth$sex == 0, ],
       method = "linear_splines",
-      id_var = "ID", 
-      use_car1 = TRUE,
-      quiet = TRUE
-    )
-  )
-})
-
-test_that("Test covariates with transformation", {
-  expect_snapshot(
-    time_model(
-      x = "age",
-      y = "log(bmi)",
-      cov = c("log(height)"),
-      data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "linear_splines",
       id_var = "ID",
       use_car1 = TRUE,
       quiet = TRUE
