@@ -89,24 +89,14 @@
 # Test covariates with transformation
 
     Code
-      time_model(x = "age", y = "log(bmi)", cov = c("log(height)"), data = bmigrowth[
+      summary(time_model(x = "age", y = "log(bmi)", cov = c("log(height)"), data = bmigrowth[
         bmigrowth$sex == 0, ], method = "linear_splines", id_var = "ID", use_car1 = TRUE,
-      quiet = TRUE)
+      quiet = TRUE))
     Output
       Linear mixed-effects model fit by maximum likelihood
         Data: data 
-        Log-likelihood: 466.4923
-        Fixed: log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0,      2)) + log(height) 
-                                                                       (Intercept) 
-                                                                       0.768959726 
-         gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0) 
-                                                                      -0.015581627 
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 
-                                                                       0.061930245 
-       gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1 
-                                                                      -0.003480598 
-                                                                       log(height) 
-                                                                       0.484255351 
+              AIC       BIC   logLik
+        -898.9846 -826.2179 466.4923
       
       Random effects:
        Formula: ~gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0,      2)) | ID
@@ -141,6 +131,63 @@
        Parameter estimate(s):
             Phi 
       0.4898987 
+      Fixed effects:  log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0,      2)) + log(height) 
+                                                                                        Value
+      (Intercept)                                                                   0.7689597
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -0.0155816
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1  0.0619302
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.0034806
+      log(height)                                                                   0.4842554
+                                                                                    Std.Error
+      (Intercept)                                                                  0.22364937
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    0.00869058
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 0.00988217
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  0.01305340
+      log(height)                                                                  0.05476123
+                                                                                    DF
+      (Intercept)                                                                  480
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    480
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 480
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  480
+      log(height)                                                                  480
+                                                                                     t-value
+      (Intercept)                                                                   3.438238
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -1.792932
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1  6.266867
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.266643
+      log(height)                                                                   8.843032
+                                                                                   p-value
+      (Intercept)                                                                   0.0006
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)     0.0736
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1  0.0000
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1   0.7899
+      log(height)                                                                   0.0000
+       Correlation: 
+                                                                                   (Intr)
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)     0.828
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 -0.521
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.051
+      log(height)                                                                  -0.998
+                                                                                   g(,k=c(5.5,11),d=r(1,3),s=r(0,2))D
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                      
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 -0.850                            
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1   0.190                            
+      log(height)                                                                  -0.846                            
+                                                                                   g(,k=c(5.5,11),d=r(1,3),s=r(0,2))C(5
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                        
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                     
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.535                              
+      log(height)                                                                   0.538                              
+                                                                                   g(,k=c(5.5,11),d=r(1,3),s=r(0,2))C(1
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)                                        
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1                                     
+      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1                                      
+      log(height)                                                                   0.047                              
+      
+      Standardized Within-Group Residuals:
+              Min          Q1         Med          Q3         Max 
+      -3.00574258 -0.54607739  0.03008452  0.55689409  2.69426280 
+      
       Number of Observations: 534
       Number of Groups: 50 
 
