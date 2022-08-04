@@ -115,7 +115,7 @@ test_that("Test covariates", {
 })
 
 test_that("Test covariates with transformation", {
-  expect_snapshot_value(
+  expect_snapshot(
     stats::coefficients(summary(time_model(
       x = "age",
       y = "log(bmi)",
