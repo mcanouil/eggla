@@ -86,44 +86,6 @@
       Number of Observations: 534
       Number of Groups: 50 
 
-# Test covariates with transformation
-
-    Code
-      stats::coefficients(summary(time_model(x = "age", y = "log(bmi)", cov = c(
-        "log(height)"), data = bmigrowth[bmigrowth$sex == 0, ], method = "linear_splines",
-      id_var = "ID", use_car1 = TRUE, quiet = TRUE)))
-    Output
-                                                                                          Value
-      (Intercept)                                                                   0.768959726
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -0.015581627
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1  0.061930245
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.003480598
-      log(height)                                                                   0.484255351
-                                                                                     Std.Error
-      (Intercept)                                                                  0.223649370
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    0.008690582
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 0.009882170
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  0.013053402
-      log(height)                                                                  0.054761233
-                                                                                    DF
-      (Intercept)                                                                  480
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    480
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 480
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  480
-      log(height)                                                                  480
-                                                                                     t-value
-      (Intercept)                                                                   3.438238
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    -1.792932
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1  6.266867
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  -0.266643
-      log(height)                                                                   8.843032
-                                                                                        p-value
-      (Intercept)                                                                  6.364854e-04
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))D1(0)    7.361321e-02
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(5.5).1 8.206230e-10
-      gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))C(11).1  7.898586e-01
-      log(height)                                                                  1.782397e-17
-
 # time_model
 
     Code
