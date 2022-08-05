@@ -9,11 +9,12 @@ ls_mod <- time_model(
 )
 
 test_that("plot_aucs", {
-  expect_doppelganger("plot_aucs",
+  expect_s3_class("plot_aucs",
     plot_aucs(
       fit = ls_mod,
       method = "linear_splines"
-    )
+    ),
+    "ggplot"
   )
 })
 
@@ -43,11 +44,12 @@ res <- egg_model(
   random_complexity = 1
 )
 test_that("plot_egg_aucs", {
-  expect_doppelganger("plot_egg_aucs",
+  expect_s3_class("plot_egg_aucs",
     plot_egg_aucs(
       fit = res,
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
-    )
+    ),
+    "ggplot"
   )
 })
 
@@ -69,11 +71,12 @@ test_that("plot_egg_slopes", {
 })
 
 test_that("plot_residuals", {
-  expect_doppelganger("plot_residuals",
+  expect_s3_class("plot_residuals",
     plot_residuals(
       x = "age",
       y = "log(bmi)",
       fit = res
-    )
+    ),
+    "ggplot"
   )
 })

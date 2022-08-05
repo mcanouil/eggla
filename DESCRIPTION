@@ -58,8 +58,7 @@ Suggests:
     future.callr (>= 0.8.0),
     forcats (>= 0.5.1),
     roxygen2 (>= 7.2.1),
-    testthat (>= 3.1.4),
-    vdiffr (>= 1.0.4)
+    testthat (>= 3.1.4)
 Remotes: github::carriedaymont/growthcleanr@v2.0.0
 SystemRequirements:
     BCFtools (>= 1.15.0) (https://github.com/samtools/BCFtools),
