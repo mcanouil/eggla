@@ -53,3 +53,13 @@ test_that("plot_egg_slopes", {
     scale_y_continuous(trans = "identity")
   )
 })
+
+test_that("plot_residuals", {
+  expect_doppelganger("plot_residuals",
+    plot_residuals(
+      x = "age",
+      y = "log(bmi)",
+      fit = res
+    )
+  )
+})
