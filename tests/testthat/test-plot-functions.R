@@ -30,7 +30,7 @@ test_that("plot_slopes", {
       fit = ls_mod,
       method = "linear_splines"
     ),
-    "ggplot2"
+    "ggplot"
   )
 })
 
@@ -64,7 +64,7 @@ test_that("plot_egg_slopes", {
       fit = res,
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
     ),
-    "ggplot2"
+    "ggplot"
   )
 })
 
