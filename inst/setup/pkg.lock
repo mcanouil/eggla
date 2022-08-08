@@ -5,6 +5,39 @@
   "platform": "x86_64-w64-mingw32",
   "packages": [
     {
+      "ref": "github::carriedaymont/growthcleanr@v2.0.0",
+      "package": "growthcleanr",
+      "version": "2.0.0",
+      "type": "github",
+      "direct": false,
+      "binary": false,
+      "dependencies": ["data.table", "tidyr", "plyr", "dplyr", "foreach", "doParallel", "labelled", "magrittr"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "github::carriedaymont/growthcleanr@v2.0.0",
+        "RemoteType": "github",
+        "RemoteHost": "api.github.com",
+        "RemoteRepo": "growthcleanr",
+        "RemoteUsername": "carriedaymont",
+        "RemoteRef": "v2.0.0",
+        "RemoteSha": "4c6b05f2cd60b3b0f2c99718d76c4fbb438023e4",
+        "GithubRepo": "growthcleanr",
+        "GithubUsername": "carriedaymont",
+        "GithubRef": "v2.0.0",
+        "GithubSHA1": "4c6b05f2cd60b3b0f2c99718d76c4fbb438023e4"
+      },
+      "sources": "https://api.github.com/repos/carriedaymont/growthcleanr/zipball/4c6b05f2cd60b3b0f2c99718d76c4fbb438023e4",
+      "target": "src/contrib/growthcleanr_2.0.0_4c6b05f.tar.gz",
+      "platform": "source",
+      "rversion": "*",
+      "directpkg": false,
+      "license": "MIT + file LICENSE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "--no-multiarch",
+      "needscompilation": true
+    },
+    {
       "ref": "R.methodsS3",
       "package": "R.methodsS3",
       "version": "1.8.2",
@@ -17,9 +50,9 @@
         "RemotePkgRef": "R.methodsS3",
         "RemoteType": "standard",
         "RemoteRef": "R.methodsS3",
+        "RemoteSha": "1.8.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.8.2"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/R.methodsS3_1.8.2.zip",
       "target": "bin/windows/contrib/4.2/R.methodsS3_1.8.2.zip",
@@ -49,9 +82,9 @@
         "RemotePkgRef": "R.oo",
         "RemoteType": "standard",
         "RemoteRef": "R.oo",
+        "RemoteSha": "1.25.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.25.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/R.oo_1.25.0.zip",
       "target": "bin/windows/contrib/4.2/R.oo_1.25.0.zip",
@@ -81,9 +114,9 @@
         "RemotePkgRef": "R.utils",
         "RemoteType": "standard",
         "RemoteRef": "R.utils",
+        "RemoteSha": "2.12.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.12.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/R.utils_2.12.0.zip",
       "target": "bin/windows/contrib/4.2/R.utils_2.12.0.zip",
@@ -95,9 +128,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:32:16 UTC; windows",
-      "sha256": "16a3e0f6eaf6325052d7e6e8fd4c1d2680ee3d06c2139916b41786ba203dd9e9",
-      "filesize": 1411269,
+      "built": "R 4.2.1; ; 2022-08-04 00:19:27 UTC; windows",
+      "sha256": "4968507802166d9096a1c450b2a1fc62536b4d75fef4e0e1dda6296a7d4e0e00",
+      "filesize": 1411476,
       "repotype": "cran"
     },
     {
@@ -113,9 +146,9 @@
         "RemotePkgRef": "R6",
         "RemoteType": "standard",
         "RemoteRef": "R6",
+        "RemoteSha": "2.5.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.5.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/R6_2.5.1.zip",
       "target": "bin/windows/contrib/4.2/R6_2.5.1.zip",
@@ -127,15 +160,15 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:24 UTC; windows",
-      "sha256": "740f0f2c444a310ff9b2ef9224b1de274a98ec93234656cf6b2521e82c0dfadb",
-      "filesize": 84294,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:40 UTC; windows",
+      "sha256": "229bcdddb34efe2b42783173d35c1ec7728b919f7fc8626b9d5d1171f26f2f40",
+      "filesize": 84251,
       "repotype": "cran"
     },
     {
       "ref": "RcppCCTZ",
       "package": "RcppCCTZ",
-      "version": "0.2.10",
+      "version": "0.2.11",
       "type": "standard",
       "direct": false,
       "binary": true,
@@ -145,12 +178,12 @@
         "RemotePkgRef": "RcppCCTZ",
         "RemoteType": "standard",
         "RemoteRef": "RcppCCTZ",
+        "RemoteSha": "0.2.11",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.2.10"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/RcppCCTZ_0.2.10.zip",
-      "target": "bin/windows/contrib/4.2/RcppCCTZ_0.2.10.zip",
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/RcppCCTZ_0.2.11.zip",
+      "target": "bin/windows/contrib/4.2/RcppCCTZ_0.2.11.zip",
       "platform": "x86_64-w64-mingw32",
       "rversion": "4.2",
       "directpkg": false,
@@ -159,9 +192,7 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:41:47 UTC; windows",
-      "sha256": "df985a2b5f93ee637d329297f5d17ed3714197ec9c2d5f63bda662adae3efbf1",
-      "filesize": 487953,
+      "filesize": 487962,
       "repotype": "cran"
     },
     {
@@ -177,9 +208,9 @@
         "RemotePkgRef": "Rcpp",
         "RemoteType": "standard",
         "RemoteRef": "Rcpp",
+        "RemoteSha": "1.0.9",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.0.9"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/Rcpp_1.0.9.zip",
       "target": "bin/windows/contrib/4.2/Rcpp_1.0.9.zip",
@@ -191,9 +222,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-21 00:44:08 UTC; windows",
-      "sha256": "a8f0230e071c0814c40db6c734ba41570cd4f181362907e1ffb4a9df7115dafc",
-      "filesize": 2842827,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-31 00:29:37 UTC; windows",
+      "sha256": "9e15eb3d9e97fef541e7994393006d184e07dafeab2341544eb2b6fecd54123e",
+      "filesize": 2842372,
       "repotype": "cran"
     },
     {
@@ -209,9 +240,9 @@
         "RemotePkgRef": "base64enc",
         "RemoteType": "standard",
         "RemoteRef": "base64enc",
+        "RemoteSha": "0.1-3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.1-3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/base64enc_0.1-3.zip",
       "target": "bin/windows/contrib/4.2/base64enc_0.1-3.zip",
@@ -241,9 +272,9 @@
         "RemotePkgRef": "bit64",
         "RemoteType": "standard",
         "RemoteRef": "bit64",
+        "RemoteSha": "4.0.5",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "4.0.5"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/bit64_4.0.5.zip",
       "target": "bin/windows/contrib/4.2/bit64_4.0.5.zip",
@@ -255,9 +286,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:28 UTC; windows",
-      "sha256": "a6fc314e46cb063818fb2db4316e934cfd6316bb9f0464a9ad6bdf02bf78ef45",
-      "filesize": 494177,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:11:25 UTC; windows",
+      "sha256": "76099c3846ab7ee9b378078247bf1d495853accb06a1d29ead4ca455608a49f8",
+      "filesize": 494258,
       "repotype": "cran"
     },
     {
@@ -273,9 +304,9 @@
         "RemotePkgRef": "bit",
         "RemoteType": "standard",
         "RemoteRef": "bit",
+        "RemoteSha": "4.0.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "4.0.4"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/bit_4.0.4.zip",
       "target": "bin/windows/contrib/4.2/bit_4.0.4.zip",
@@ -287,9 +318,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:30:07 UTC; windows",
-      "sha256": "fa50cf95816fafd8367f42395511eb8d7581396cf69ab5fa0db3c4060ee85d1d",
-      "filesize": 584320,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:20:46 UTC; windows",
+      "sha256": "d48d9ca93f1f4cdabc6f7819e86988aee99fc0e78b10e17df6079a459db52e1f",
+      "filesize": 584820,
       "repotype": "cran"
     },
     {
@@ -305,9 +336,9 @@
         "RemotePkgRef": "bslib",
         "RemoteType": "standard",
         "RemoteRef": "bslib",
+        "RemoteSha": "0.4.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.4.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/bslib_0.4.0.zip",
       "target": "bin/windows/contrib/4.2/bslib_0.4.0.zip",
@@ -319,9 +350,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:32:09 UTC; windows",
-      "sha256": "1a0f620c2e283a893de8f16a8044328153435bb1b3a8c3e00b86688b3c532ea3",
-      "filesize": 5011751,
+      "built": "R 4.2.1; ; 2022-08-04 02:15:21 UTC; windows",
+      "sha256": "727de79edc2eb5ae63947f7994f4f99378b29986b2166129dc09e2b184c271fd",
+      "filesize": 5012088,
       "repotype": "cran"
     },
     {
@@ -337,9 +368,9 @@
         "RemotePkgRef": "cachem",
         "RemoteType": "standard",
         "RemoteRef": "cachem",
+        "RemoteSha": "1.0.6",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.0.6"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/cachem_1.0.6.zip",
       "target": "bin/windows/contrib/4.2/cachem_1.0.6.zip",
@@ -351,9 +382,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:17 UTC; windows",
-      "sha256": "8ef9095694a7a194f2e16e6a5e568bbb5f02b368c6668ec6476c7ad09ddc6fc9",
-      "filesize": 71224,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:11:11 UTC; windows",
+      "sha256": "d3661b305b1a8678c87459ff86a0134d98f2f455c149e5110f87f5591689df2a",
+      "filesize": 71152,
       "repotype": "cran"
     },
     {
@@ -369,9 +400,9 @@
         "RemotePkgRef": "curl",
         "RemoteType": "standard",
         "RemoteRef": "curl",
+        "RemoteSha": "4.3.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "4.3.2"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/curl_4.3.2.zip",
       "target": "bin/windows/contrib/4.2/curl_4.3.2.zip",
@@ -383,9 +414,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:27 UTC; windows",
-      "sha256": "a9756cecbfd37c533c3310990b4e63c4a7a9f18a1f94af8643b3b9fdd7146d0c",
-      "filesize": 2616992,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:44 UTC; windows",
+      "sha256": "c895f1ce8dcbab62653b13b9989233f3c23419519e099ed9548f8c5b1c937436",
+      "filesize": 2616836,
       "repotype": "cran"
     },
     {
@@ -401,9 +432,9 @@
         "RemotePkgRef": "data.table",
         "RemoteType": "standard",
         "RemoteRef": "data.table",
+        "RemoteSha": "1.14.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.14.2"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/data.table_1.14.2.zip",
       "target": "bin/windows/contrib/4.2/data.table_1.14.2.zip",
@@ -415,9 +446,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-21 00:32:48 UTC; windows",
-      "sha256": "7310e4ceefce8e21ddc2cd3691a3e6fb1635c78627344b96ad01848009b61525",
-      "filesize": 2243103,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:19:57 UTC; windows",
+      "sha256": "ea91c19e9abf15c80ac6553cb463af40414dfeb9bd61f1e1d2415d417d7be8f6",
+      "filesize": 2242817,
       "repotype": "cran"
     },
     {
@@ -433,9 +464,9 @@
         "RemotePkgRef": "digest",
         "RemoteType": "standard",
         "RemoteRef": "digest",
+        "RemoteSha": "0.6.29",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.6.29"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/digest_0.6.29.zip",
       "target": "bin/windows/contrib/4.2/digest_0.6.29.zip",
@@ -447,9 +478,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:29 UTC; windows",
-      "sha256": "24d1ff8453ee1f7cf593ac1780845009f30841a3004a19afb7eafc5c317ec2d4",
-      "filesize": 194477,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:42 UTC; windows",
+      "sha256": "1466739df4981d3551aabebeee4e9f08e23a5671fd522bfeac10b3524bba362f",
+      "filesize": 194462,
       "repotype": "cran"
     },
     {
@@ -465,9 +496,9 @@
         "RemotePkgRef": "evaluate",
         "RemoteType": "standard",
         "RemoteRef": "evaluate",
+        "RemoteSha": "0.15",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.15"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/evaluate_0.15.zip",
       "target": "bin/windows/contrib/4.2/evaluate_0.15.zip",
@@ -479,9 +510,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:36 UTC; windows",
-      "sha256": "c94562aa96903c325b9cb08f10f76f9c72869fa68d0ad75a4e258f51894d949a",
-      "filesize": 79555,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:48 UTC; windows",
+      "sha256": "d57c278a8d742ced6c53eabffa3282b58c338ae27477057a61f5db69ac6b3425",
+      "filesize": 79653,
       "repotype": "cran"
     },
     {
@@ -497,9 +528,9 @@
         "RemotePkgRef": "fastmap",
         "RemoteType": "standard",
         "RemoteRef": "fastmap",
+        "RemoteSha": "1.1.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.1.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/fastmap_1.1.0.zip",
       "target": "bin/windows/contrib/4.2/fastmap_1.1.0.zip",
@@ -511,9 +542,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:46 UTC; windows",
-      "sha256": "f9c510ee78aa1749311845ea86edf0f489e36860d5261ddc2a59b66537d7fa09",
-      "filesize": 126565,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:38 UTC; windows",
+      "sha256": "e817aaca19b1a17f9fdc534012d5e2794fea57b4f7eb57c414bf814431eb3d21",
+      "filesize": 126573,
       "repotype": "cran"
     },
     {
@@ -529,9 +560,9 @@
         "RemotePkgRef": "fs",
         "RemoteType": "standard",
         "RemoteRef": "fs",
+        "RemoteSha": "1.5.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.5.2"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/fs_1.5.2.zip",
       "target": "bin/windows/contrib/4.2/fs_1.5.2.zip",
@@ -543,9 +574,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:30:12 UTC; windows",
-      "sha256": "21a0ad4525ae3d650de6e42103ba97da92bb019e72279bcf5dce5300d4faa96c",
-      "filesize": 389128,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:19:09 UTC; windows",
+      "sha256": "a5bbd45d475a31a46633857c0d943c41a8d6aa2097e434d4e6018afc35de17c3",
+      "filesize": 389778,
       "repotype": "cran"
     },
     {
@@ -561,9 +592,9 @@
         "RemotePkgRef": "glue",
         "RemoteType": "standard",
         "RemoteRef": "glue",
+        "RemoteSha": "1.6.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.6.2"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/glue_1.6.2.zip",
       "target": "bin/windows/contrib/4.2/glue_1.6.2.zip",
@@ -575,9 +606,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:24 UTC; windows",
-      "sha256": "375f53d08725c489bbd069f0a2033edc630ffee62393c132076d64e5826e9a7e",
-      "filesize": 161998,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:37 UTC; windows",
+      "sha256": "1400da50d9d39f66a35c1033b05373ca3698d9f1369a284d3a3c0a38fa8a49b9",
+      "filesize": 162000,
       "repotype": "cran"
     },
     {
@@ -593,9 +624,9 @@
         "RemotePkgRef": "highr",
         "RemoteType": "standard",
         "RemoteRef": "highr",
+        "RemoteSha": "0.9",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.9"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/highr_0.9.zip",
       "target": "bin/windows/contrib/4.2/highr_0.9.zip",
@@ -607,9 +638,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:02 UTC; windows",
-      "sha256": "884021c4c5f39441c0d731727e261239da561ff3625e649a961e9c77e4a6be65",
-      "filesize": 46728,
+      "built": "R 4.2.1; ; 2022-08-04 01:10:11 UTC; windows",
+      "sha256": "9c5bd17c47008b26d77a2ddc4b27f9933b8d78b919a368dc5d770dc711efc919",
+      "filesize": 46733,
       "repotype": "cran"
     },
     {
@@ -625,9 +656,9 @@
         "RemotePkgRef": "htmltools",
         "RemoteType": "standard",
         "RemoteRef": "htmltools",
+        "RemoteSha": "0.5.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.5.3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/htmltools_0.5.3.zip",
       "target": "bin/windows/contrib/4.2/htmltools_0.5.3.zip",
@@ -639,9 +670,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:27 UTC; windows",
-      "sha256": "dd7bbc8e18ccb217cf4d071ed0d1eecd7dcc146128f3e6c418bb0c6123c93283",
-      "filesize": 343680,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:32 UTC; windows",
+      "sha256": "cd9de67b8f005b5678198492274cc318ed5871b5311079634d70244e43c5adc6",
+      "filesize": 343502,
       "repotype": "cran"
     },
     {
@@ -657,9 +688,9 @@
         "RemotePkgRef": "jquerylib",
         "RemoteType": "standard",
         "RemoteRef": "jquerylib",
+        "RemoteSha": "0.1.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.1.4"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/jquerylib_0.1.4.zip",
       "target": "bin/windows/contrib/4.2/jquerylib_0.1.4.zip",
@@ -671,9 +702,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:51:51 UTC; windows",
-      "sha256": "24c0feda9b91281ddc0965e4c71fd84d13d47f9b5e9247e21341c191b132c335",
-      "filesize": 525944,
+      "built": "R 4.2.1; ; 2022-08-04 01:39:13 UTC; windows",
+      "sha256": "dd4e49477ae372e6c23b7def535727fe1d7e6adb8ee9903ee109f8113b4e5ae8",
+      "filesize": 525949,
       "repotype": "cran"
     },
     {
@@ -689,9 +720,9 @@
         "RemotePkgRef": "jsonlite",
         "RemoteType": "standard",
         "RemoteRef": "jsonlite",
+        "RemoteSha": "1.8.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.8.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/jsonlite_1.8.0.zip",
       "target": "bin/windows/contrib/4.2/jsonlite_1.8.0.zip",
@@ -703,9 +734,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:30:07 UTC; windows",
-      "sha256": "a41ce3d3ba4aaeb621cef2495ecd554509d3c5a1c6b43abd67714900c9addf26",
-      "filesize": 1098970,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:19:13 UTC; windows",
+      "sha256": "f7c54cc16dbfd2b0227230389841e51b9c5879ecab8aab8ef4551bf0fba33694",
+      "filesize": 1099022,
       "repotype": "cran"
     },
     {
@@ -721,9 +752,9 @@
         "RemotePkgRef": "knitr",
         "RemoteType": "standard",
         "RemoteRef": "knitr",
+        "RemoteSha": "1.39",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.39"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/knitr_1.39.zip",
       "target": "bin/windows/contrib/4.2/knitr_1.39.zip",
@@ -735,9 +766,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:52:21 UTC; windows",
-      "sha256": "baf566774324fe8154b2c3a3dbff2059a19b41d666661ed15e38d85e6d62f6fd",
-      "filesize": 1484775,
+      "built": "R 4.2.1; ; 2022-08-04 01:38:50 UTC; windows",
+      "sha256": "dffb2304ec8cd280642087ac2734a2c172316bb081578641f747b8e769cdc137",
+      "filesize": 1485296,
       "repotype": "cran"
     },
     {
@@ -753,9 +784,9 @@
         "RemotePkgRef": "magrittr",
         "RemoteType": "standard",
         "RemoteRef": "magrittr",
+        "RemoteSha": "2.0.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.0.3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/magrittr_2.0.3.zip",
       "target": "bin/windows/contrib/4.2/magrittr_2.0.3.zip",
@@ -767,9 +798,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:35 UTC; windows",
-      "sha256": "cf7c533f08c67c437a9e363a47ebf39623989bf8782ae9c7b77fcd3a631ce562",
-      "filesize": 227204,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:49 UTC; windows",
+      "sha256": "0e2fbdf3c61aaa9db88a8a9d7c5a987d6bd119a11003ad76d500bd1282ec6d03",
+      "filesize": 227195,
       "repotype": "cran"
     },
     {
@@ -785,9 +816,9 @@
         "RemotePkgRef": "memoise",
         "RemoteType": "standard",
         "RemoteRef": "memoise",
+        "RemoteSha": "2.0.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.0.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/memoise_2.0.1.zip",
       "target": "bin/windows/contrib/4.2/memoise_2.0.1.zip",
@@ -799,9 +830,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:51:51 UTC; windows",
-      "sha256": "f4701b7288d85b7234150b899c82db2395c23115f0f1ab71ac41acbf23f21a2f",
-      "filesize": 50273,
+      "built": "R 4.2.1; ; 2022-08-04 01:39:11 UTC; windows",
+      "sha256": "50c3cd220d682c288fb609441db28ef88dc3329e88494e7f3652f8884cf23f98",
+      "filesize": 50181,
       "repotype": "cran"
     },
     {
@@ -817,9 +848,9 @@
         "RemotePkgRef": "nanotime",
         "RemoteType": "standard",
         "RemoteRef": "nanotime",
+        "RemoteSha": "0.3.6",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.3.6"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/nanotime_0.3.6.zip",
       "target": "bin/windows/contrib/4.2/nanotime_0.3.6.zip",
@@ -831,9 +862,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:28:58 UTC; windows",
-      "sha256": "d7157d9d5c0ac21d006d8b5ad291c388a226e7414e8daade5d64690b781c543f",
-      "filesize": 997438,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:21:32 UTC; windows",
+      "sha256": "c6616e4a57cf8f657cd41499ec70128fcaeda0dd7856c1f5556f8eaa0d46c5a9",
+      "filesize": 997652,
       "repotype": "cran"
     },
     {
@@ -849,9 +880,9 @@
         "RemotePkgRef": "rappdirs",
         "RemoteType": "standard",
         "RemoteRef": "rappdirs",
+        "RemoteSha": "0.3.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.3.3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/rappdirs_0.3.3.zip",
       "target": "bin/windows/contrib/4.2/rappdirs_0.3.3.zip",
@@ -863,9 +894,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:23 UTC; windows",
-      "sha256": "59544286a9820a6afba31db461712a144d2ec8e5f5aa7ea0957097e7b33277b6",
-      "filesize": 51248,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:19:17 UTC; windows",
+      "sha256": "cdfccac29fb56d71e4a8e25e1661a4cc22f89772e59bb7cbcdffba48daba2d4d",
+      "filesize": 51293,
       "repotype": "cran"
     },
     {
@@ -881,9 +912,9 @@
         "RemotePkgRef": "rlang",
         "RemoteType": "standard",
         "RemoteRef": "rlang",
+        "RemoteSha": "1.0.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.0.4"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/rlang_1.0.4.zip",
       "target": "bin/windows/contrib/4.2/rlang_1.0.4.zip",
@@ -895,9 +926,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:30:56 UTC; windows",
-      "sha256": "d8fc7239a3e20c50394198ed6456780b6e11455c9c639f4080d7c32f9b7c0a44",
-      "filesize": 1571207,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:20:03 UTC; windows",
+      "sha256": "06b9357f49a01ecbbab5485a2ba04e42ff29cb5aadaf6c469a55aa9ffb61ff52",
+      "filesize": 1577126,
       "repotype": "cran"
     },
     {
@@ -913,9 +944,9 @@
         "RemotePkgRef": "rmarkdown",
         "RemoteType": "standard",
         "RemoteRef": "rmarkdown",
+        "RemoteSha": "2.14",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.14"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/rmarkdown_2.14.zip",
       "target": "bin/windows/contrib/4.2/rmarkdown_2.14.zip",
@@ -927,9 +958,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:56:13 UTC; windows",
-      "sha256": "085457239cc3bd5ce6d91055ea97f69f6273defdee65a1c6a6deb41c6a1e0641",
-      "filesize": 3715427,
+      "built": "R 4.2.1; ; 2022-08-04 02:42:57 UTC; windows",
+      "sha256": "94ef41b21c26a6d5002943def364e28f2fc8e04b79b84f908aca269177abc6ad",
+      "filesize": 3714981,
       "repotype": "cran"
     },
     {
@@ -945,9 +976,9 @@
         "RemotePkgRef": "sass",
         "RemoteType": "standard",
         "RemoteRef": "sass",
+        "RemoteSha": "0.4.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.4.2"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/sass_0.4.2.zip",
       "target": "bin/windows/contrib/4.2/sass_0.4.2.zip",
@@ -959,9 +990,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:53:09 UTC; windows",
-      "sha256": "72fb1206fda355f166cc51c03a3c9260c553cba933322ce1cfd194da64e8dd4a",
-      "filesize": 2569497,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:39:56 UTC; windows",
+      "sha256": "188d9af557613a63640cb8dd86464687f058e88b9eb7293eb3982f9d16de39b1",
+      "filesize": 2569876,
       "repotype": "cran"
     },
     {
@@ -977,9 +1008,9 @@
         "RemotePkgRef": "stringi",
         "RemoteType": "standard",
         "RemoteRef": "stringi",
+        "RemoteSha": "1.7.8",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.7.8"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/stringi_1.7.8.zip",
       "target": "bin/windows/contrib/4.2/stringi_1.7.8.zip",
@@ -1009,9 +1040,9 @@
         "RemotePkgRef": "stringr",
         "RemoteType": "standard",
         "RemoteRef": "stringr",
+        "RemoteSha": "1.4.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.4.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/stringr_1.4.0.zip",
       "target": "bin/windows/contrib/4.2/stringr_1.4.0.zip",
@@ -1023,9 +1054,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:10 UTC; windows",
-      "sha256": "5dcd58ea016c2c7db07bdac5f969183406da769d8f656d7327ff3d86470ca5ed",
-      "filesize": 216691,
+      "built": "R 4.2.1; ; 2022-08-04 01:10:17 UTC; windows",
+      "sha256": "668b23b375d8868cfb0cb665b94f09e9badb5590b8aa52bab5cd43026ae7cb65",
+      "filesize": 216178,
       "repotype": "cran"
     },
     {
@@ -1041,9 +1072,9 @@
         "RemotePkgRef": "tinytex",
         "RemoteType": "standard",
         "RemoteRef": "tinytex",
+        "RemoteSha": "0.40",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.40"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/tinytex_0.40.zip",
       "target": "bin/windows/contrib/4.2/tinytex_0.40.zip",
@@ -1055,9 +1086,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:18 UTC; windows",
-      "sha256": "075862824f94b50d56b2d23e90ebd9aca453577ad7de1402c5b21c9711d40a2f",
-      "filesize": 134657,
+      "built": "R 4.2.1; ; 2022-08-04 00:20:03 UTC; windows",
+      "sha256": "db095931793e68492c3e5f6f1d1e1408e4d79bdb608beaa74eea2b4efec5b3d7",
+      "filesize": 134717,
       "repotype": "cran"
     },
     {
@@ -1073,9 +1104,9 @@
         "RemotePkgRef": "xfun",
         "RemoteType": "standard",
         "RemoteRef": "xfun",
+        "RemoteSha": "0.31",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.31"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/xfun_0.31.zip",
       "target": "bin/windows/contrib/4.2/xfun_0.31.zip",
@@ -1087,9 +1118,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:28 UTC; windows",
-      "sha256": "6afe7661011c79625ddae4a38caf43e01f1dcb6da9cef5747d897640b1583d02",
-      "filesize": 397014,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:44 UTC; windows",
+      "sha256": "c7d10978b2606c5beb86ccc170e76d9e8f91199c1cb2db7c8fc813c4c4be1709",
+      "filesize": 394852,
       "repotype": "cran"
     },
     {
@@ -1105,9 +1136,9 @@
         "RemotePkgRef": "xts",
         "RemoteType": "standard",
         "RemoteRef": "xts",
+        "RemoteSha": "0.12.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.12.1"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/xts_0.12.1.zip",
       "target": "bin/windows/contrib/4.2/xts_0.12.1.zip",
@@ -1119,9 +1150,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:51:47 UTC; windows",
-      "sha256": "6430dc5cb89126000dcf1d5b8efbafd4fa4ce918aa84ef35d5bf4ea1aa07362f",
-      "filesize": 897129,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:38:30 UTC; windows",
+      "sha256": "ac589fe1ca40d0be1795047444147fbf884ac597defae0e78f41bb493f4e6a60",
+      "filesize": 897367,
       "repotype": "cran"
     },
     {
@@ -1137,9 +1168,9 @@
         "RemotePkgRef": "yaml",
         "RemoteType": "standard",
         "RemoteRef": "yaml",
+        "RemoteSha": "2.3.5",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.3.5"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/yaml_2.3.5.zip",
       "target": "bin/windows/contrib/4.2/yaml_2.3.5.zip",
@@ -1151,9 +1182,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.0; x86_64-w64-mingw32; 2022-06-12 00:44:52 UTC; windows",
-      "sha256": "a002575935ec282055a1a7f40f3cc48785a39d1786073eaa436089407542a644",
-      "filesize": 116423,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-31 00:24:06 UTC; windows",
+      "sha256": "f6ad228ca711230a08e8f4e000d9deea7f0e699be5ca24c39cdfc0d95ffe501e",
+      "filesize": 116457,
       "repotype": "cran"
     },
     {
@@ -1169,9 +1200,9 @@
         "RemotePkgRef": "zoo",
         "RemoteType": "standard",
         "RemoteRef": "zoo",
+        "RemoteSha": "1.8-10",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.8-10"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/zoo_1.8-10.zip",
       "target": "bin/windows/contrib/4.2/zoo_1.8-10.zip",
@@ -1183,9 +1214,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:06 UTC; windows",
-      "sha256": "1935b47c1c682ce1dce5091c80c22c855dfd51f8e32ab5e36f339b58dfebd658",
-      "filesize": 1045502,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:21 UTC; windows",
+      "sha256": "7f3741a7f38fed51f69feca5fbb253739241f45b393021feb6d7de8fc16bcc2a",
+      "filesize": 1045445,
       "repotype": "cran"
     },
     {
@@ -1201,9 +1232,9 @@
         "RemotePkgRef": "DEoptimR",
         "RemoteType": "standard",
         "RemoteRef": "DEoptimR",
+        "RemoteSha": "1.0-11",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.0-11"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/DEoptimR_1.0-11.zip",
       "target": "bin/windows/contrib/4.2/DEoptimR_1.0-11.zip",
@@ -1233,9 +1264,9 @@
         "RemotePkgRef": "HDInterval",
         "RemoteType": "standard",
         "RemoteRef": "HDInterval",
+        "RemoteSha": "0.2.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.2.2"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/HDInterval_0.2.2.zip",
       "target": "bin/windows/contrib/4.2/HDInterval_0.2.2.zip",
@@ -1247,9 +1278,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:33:59 UTC; windows",
-      "sha256": "744abf3429eed9c2188b6034cf032cf78b4d60a3d3f14ff37c77877371b6bc63",
-      "filesize": 55044,
+      "built": "R 4.2.1; ; 2022-08-04 00:23:28 UTC; windows",
+      "sha256": "2ce1a5572c5571a71e52e459b7bd61b0f269f08ce6dc6d9007fcbc0d0eaf4725",
+      "filesize": 55047,
       "repotype": "cran"
     },
     {
@@ -1265,9 +1296,9 @@
         "RemotePkgRef": "RColorBrewer",
         "RemoteType": "standard",
         "RemoteRef": "RColorBrewer",
+        "RemoteSha": "1.1-3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.1-3"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/RColorBrewer_1.1-3.zip",
       "target": "bin/windows/contrib/4.2/RColorBrewer_1.1-3.zip",
@@ -1287,7 +1318,7 @@
     {
       "ref": "RCurl",
       "package": "RCurl",
-      "version": "1.98-1.7",
+      "version": "1.98-1.8",
       "type": "standard",
       "direct": false,
       "binary": true,
@@ -1297,12 +1328,12 @@
         "RemotePkgRef": "RCurl",
         "RemoteType": "standard",
         "RemoteRef": "RCurl",
+        "RemoteSha": "1.98-1.8",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.98-1.7"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/RCurl_1.98-1.7.zip",
-      "target": "bin/windows/contrib/4.2/RCurl_1.98-1.7.zip",
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/RCurl_1.98-1.8.zip",
+      "target": "bin/windows/contrib/4.2/RCurl_1.98-1.8.zip",
       "platform": "x86_64-w64-mingw32",
       "rversion": "4.2",
       "directpkg": false,
@@ -1311,41 +1342,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.0; x86_64-w64-mingw32; 2022-06-11 23:51:44 UTC; windows",
-      "sha256": "c4ec3e130b44ffe6c2b49af6444b18745e73be4373dacaf9492fbf2d5f26662d",
-      "filesize": 4285251,
-      "repotype": "cran"
-    },
-    {
-      "ref": "TSP",
-      "package": "TSP",
-      "version": "1.2-1",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": "foreach",
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "TSP",
-        "RemoteType": "standard",
-        "RemoteRef": "TSP",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.2-1"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/TSP_1.2-1.zip",
-      "target": "bin/windows/contrib/4.2/TSP_1.2-1.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-3",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:22:17 UTC; windows",
-      "sha256": "960818c541d1404a6774615163d0b6e01ed27da6591b2b67b819680c457e0083",
-      "filesize": 946457,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-30 23:50:18 UTC; windows",
+      "sha256": "cdf9f94259679d9a0b94a9c14db19523a91da88b214235fa2a14189e056d646a",
+      "filesize": 4284628,
       "repotype": "cran"
     },
     {
@@ -1361,9 +1360,9 @@
         "RemotePkgRef": "backports",
         "RemoteType": "standard",
         "RemoteRef": "backports",
+        "RemoteSha": "1.4.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.4.1"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/backports_1.4.1.zip",
       "target": "bin/windows/contrib/4.2/backports_1.4.1.zip",
@@ -1393,9 +1392,9 @@
         "RemotePkgRef": "bayestestR",
         "RemoteType": "standard",
         "RemoteRef": "bayestestR",
+        "RemoteSha": "0.12.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.12.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/bayestestR_0.12.1.zip",
       "target": "bin/windows/contrib/4.2/bayestestR_0.12.1.zip",
@@ -1407,9 +1406,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:54:06 UTC; windows",
-      "sha256": "b558aeaf5bc574734f622d61d69909dfe3dca4be7e98f33970997ee830947716",
-      "filesize": 937182,
+      "built": "R 4.2.1; ; 2022-08-04 01:40:36 UTC; windows",
+      "sha256": "97c70af16dac77aa959ed104e1c4affccfd99dc3d8871aafb3499a97cf3d2ef2",
+      "filesize": 938724,
       "repotype": "cran"
     },
     {
@@ -1425,9 +1424,9 @@
         "RemotePkgRef": "beeswarm",
         "RemoteType": "standard",
         "RemoteRef": "beeswarm",
+        "RemoteSha": "0.4.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.4.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/beeswarm_0.4.0.zip",
       "target": "bin/windows/contrib/4.2/beeswarm_0.4.0.zip",
@@ -1457,9 +1456,9 @@
         "RemotePkgRef": "bitops",
         "RemoteType": "standard",
         "RemoteRef": "bitops",
+        "RemoteSha": "1.0-7",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.0-7"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/bitops_1.0-7.zip",
       "target": "bin/windows/contrib/4.2/bitops_1.0-7.zip",
@@ -1489,9 +1488,9 @@
         "RemotePkgRef": "brew",
         "RemoteType": "standard",
         "RemoteRef": "brew",
+        "RemoteSha": "1.0-7",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.0-7"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/brew_1.0-7.zip",
       "target": "bin/windows/contrib/4.2/brew_1.0-7.zip",
@@ -1503,9 +1502,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:31:40 UTC; windows",
-      "sha256": "e09e2560cd0a8d776171360fa75208e49f48272b481ad60c151de056f956e6dd",
-      "filesize": 78200,
+      "built": "R 4.2.1; ; 2022-08-04 00:20:46 UTC; windows",
+      "sha256": "b55bd029c2ccc7b68112d1d305bccdcc01eed2e4877959838589a4809bf348f0",
+      "filesize": 78194,
       "repotype": "cran"
     },
     {
@@ -1521,9 +1520,9 @@
         "RemotePkgRef": "brio",
         "RemoteType": "standard",
         "RemoteRef": "brio",
+        "RemoteSha": "1.1.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.1.3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/brio_1.1.3.zip",
       "target": "bin/windows/contrib/4.2/brio_1.1.3.zip",
@@ -1535,9 +1534,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:25 UTC; windows",
-      "sha256": "58b6f96df3e5dc4120695b1875e260f6ff9601cf73da8703a577d324a65841da",
-      "filesize": 38341,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:40 UTC; windows",
+      "sha256": "3a0bee9229978aeecd0db8da78344933ceab07c142dfd91687c0e7964f20739d",
+      "filesize": 38356,
       "repotype": "cran"
     },
     {
@@ -1553,9 +1552,9 @@
         "RemotePkgRef": "broom.mixed",
         "RemoteType": "standard",
         "RemoteRef": "broom.mixed",
+        "RemoteSha": "0.2.9.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.2.9.4"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/broom.mixed_0.2.9.4.zip",
       "target": "bin/windows/contrib/4.2/broom.mixed_0.2.9.4.zip",
@@ -1567,9 +1566,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 04:55:51 UTC; windows",
-      "sha256": "811b7dbf8a33dd24421312019c943660361e873c524d5fc0d0f87eab35ec8b08",
-      "filesize": 4146573,
+      "built": "R 4.2.1; ; 2022-08-04 04:15:21 UTC; windows",
+      "sha256": "4ecf561aff4a15acf830f305a95a4ca3e4608f0b0a0503b3c938db02e9541b8d",
+      "filesize": 4146290,
       "repotype": "cran"
     },
     {
@@ -1585,9 +1584,9 @@
         "RemotePkgRef": "broom",
         "RemoteType": "standard",
         "RemoteRef": "broom",
+        "RemoteSha": "1.0.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.0.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/broom_1.0.0.zip",
       "target": "bin/windows/contrib/4.2/broom_1.0.0.zip",
@@ -1599,9 +1598,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 04:28:47 UTC; windows",
-      "sha256": "df3893107883c26e7986846a20698eac0cdd058dc1cea0ad193b3a312e9c3e41",
-      "filesize": 1867925,
+      "built": "R 4.2.1; ; 2022-08-04 04:13:14 UTC; windows",
+      "sha256": "01f04477f5a0ff2b9350eee5be97fc8e33a634b18771066aa87590018c4662bb",
+      "filesize": 1867730,
       "repotype": "cran"
     },
     {
@@ -1617,9 +1616,9 @@
         "RemotePkgRef": "callr",
         "RemoteType": "standard",
         "RemoteRef": "callr",
+        "RemoteSha": "3.7.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "3.7.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/callr_3.7.1.zip",
       "target": "bin/windows/contrib/4.2/callr_3.7.1.zip",
@@ -1631,9 +1630,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:51:41 UTC; windows",
-      "sha256": "7dda1df5c0ae9ac45bc5ecb810d26aee936580f23a24099311c3a8a2b3ae2763",
-      "filesize": 424885,
+      "built": "R 4.2.1; ; 2022-08-04 01:38:14 UTC; windows",
+      "sha256": "c81562afea946df7cb5c14bc08dc5cc0e02ecf1d16c01b549aedd30c8a3f7588",
+      "filesize": 424701,
       "repotype": "cran"
     },
     {
@@ -1649,9 +1648,9 @@
         "RemotePkgRef": "checkmate",
         "RemoteType": "standard",
         "RemoteRef": "checkmate",
+        "RemoteSha": "2.1.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.1.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/checkmate_2.1.0.zip",
       "target": "bin/windows/contrib/4.2/checkmate_2.1.0.zip",
@@ -1663,9 +1662,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:30:48 UTC; windows",
-      "sha256": "ecaeddc67fee264b78abaa8d1bbea49a5719ed906dd650b9cd935ee33f1652f0",
-      "filesize": 660214,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:19:06 UTC; windows",
+      "sha256": "bf6aa9fc71b6cac359d9ed0a2e6fcc75fcacc44a9ae38c9087f3d576e42b5525",
+      "filesize": 659558,
       "repotype": "cran"
     },
     {
@@ -1681,9 +1680,9 @@
         "RemotePkgRef": "cli",
         "RemoteType": "standard",
         "RemoteRef": "cli",
+        "RemoteSha": "3.3.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "3.3.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/cli_3.3.0.zip",
       "target": "bin/windows/contrib/4.2/cli_3.3.0.zip",
@@ -1695,9 +1694,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:20:14 UTC; windows",
-      "sha256": "75142a16ce1a06acdaa6553016b5e09b9669b212375fed1182a9cdebb867a53e",
-      "filesize": 1218861,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:11:17 UTC; windows",
+      "sha256": "584d9d78981671033743aff802d153d1c87c01f0f4f8c3981f22f1783f4d59e5",
+      "filesize": 1219501,
       "repotype": "cran"
     },
     {
@@ -1713,9 +1712,9 @@
         "RemotePkgRef": "coda",
         "RemoteType": "standard",
         "RemoteRef": "coda",
+        "RemoteSha": "0.19-4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.19-4"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/coda_0.19-4.zip",
       "target": "bin/windows/contrib/4.2/coda_0.19-4.zip",
@@ -1727,9 +1726,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:26 UTC; windows",
-      "sha256": "c3a46839100de3481e22749ec8428804faae3cd1d537ba2ae9b36e35998ba3d0",
-      "filesize": 322542,
+      "built": "R 4.2.1; ; 2022-08-04 01:10:55 UTC; windows",
+      "sha256": "e31297ac2e97d3948a8bec1d47745062f7f081409b7ed27b43509ec6257686f3",
+      "filesize": 322519,
       "repotype": "cran"
     },
     {
@@ -1745,9 +1744,9 @@
         "RemotePkgRef": "colorspace",
         "RemoteType": "standard",
         "RemoteRef": "colorspace",
+        "RemoteSha": "2.0-3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.0-3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/colorspace_2.0-3.zip",
       "target": "bin/windows/contrib/4.2/colorspace_2.0-3.zip",
@@ -1759,9 +1758,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:32:35 UTC; windows",
-      "sha256": "05ee85cba9528c13c18c80bbcc3832e95b58bc28a74efb30b7dbdb4cd8c32f02",
-      "filesize": 2630827,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:20:25 UTC; windows",
+      "sha256": "3549fbeb8c6a9106dc75e0fd6e5e519975d63154b00c632563a29d15e02f14a6",
+      "filesize": 2630747,
       "repotype": "cran"
     },
     {
@@ -1777,9 +1776,9 @@
         "RemotePkgRef": "commonmark",
         "RemoteType": "standard",
         "RemoteRef": "commonmark",
+        "RemoteSha": "1.8.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.8.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/commonmark_1.8.0.zip",
       "target": "bin/windows/contrib/4.2/commonmark_1.8.0.zip",
@@ -1791,41 +1790,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:58 UTC; windows",
-      "sha256": "8e54861e8fa9b678228c189b9846bd928c091ce9bbc78b790342b2a998ba5d14",
-      "filesize": 138661,
-      "repotype": "cran"
-    },
-    {
-      "ref": "corrr",
-      "package": "corrr",
-      "version": "0.4.3",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["dplyr", "ggplot2", "seriation", "purrr", "tibble", "ggrepel", "rlang"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "corrr",
-        "RemoteType": "standard",
-        "RemoteRef": "corrr",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.4.3"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/corrr_0.4.3.zip",
-      "target": "bin/windows/contrib/4.2/corrr_0.4.3.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:42:26 UTC; windows",
-      "sha256": "6c9b167d412319a357b586ca09514304ebffc206ead1c5dbce12e72cfb09c342",
-      "filesize": 473728,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:20:55 UTC; windows",
+      "sha256": "aa085fea8d9be6c78e075515683f86a937ea5882f51cbf44e24ee2269792037f",
+      "filesize": 138654,
       "repotype": "cran"
     },
     {
@@ -1841,9 +1808,9 @@
         "RemotePkgRef": "crayon",
         "RemoteType": "standard",
         "RemoteRef": "crayon",
+        "RemoteSha": "1.5.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.5.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/crayon_1.5.1.zip",
       "target": "bin/windows/contrib/4.2/crayon_1.5.1.zip",
@@ -1855,9 +1822,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:24 UTC; windows",
-      "sha256": "388a19333f906add9d3daa6b51104c775a0d6c6bd1f262b2d471bf8f8bfef001",
-      "filesize": 159867,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:37 UTC; windows",
+      "sha256": "ed3dc66484be6843f71ac093397363cc71a374ccc3c2166dff52b0241fd91695",
+      "filesize": 160151,
       "repotype": "cran"
     },
     {
@@ -1873,9 +1840,9 @@
         "RemotePkgRef": "datawizard",
         "RemoteType": "standard",
         "RemoteRef": "datawizard",
+        "RemoteSha": "0.4.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.4.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/datawizard_0.4.1.zip",
       "target": "bin/windows/contrib/4.2/datawizard_0.4.1.zip",
@@ -1887,9 +1854,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:22:12 UTC; windows",
-      "sha256": "46685f546616788f50015b1979264d57e3060ec0f4b3dc9a9f816b573b216a87",
-      "filesize": 1008629,
+      "built": "R 4.2.1; ; 2022-08-04 01:12:25 UTC; windows",
+      "sha256": "df912b4bb2bd8ee32f9585b632718dde19d84301caa1275fe171e34f39626252",
+      "filesize": 1008604,
       "repotype": "cran"
     },
     {
@@ -1905,9 +1872,9 @@
         "RemotePkgRef": "desc",
         "RemoteType": "standard",
         "RemoteRef": "desc",
+        "RemoteSha": "1.4.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.4.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/desc_1.4.1.zip",
       "target": "bin/windows/contrib/4.2/desc_1.4.1.zip",
@@ -1919,9 +1886,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:51:39 UTC; windows",
-      "sha256": "a428021289df94f9ea6de6c0e0cd8e83be3a19a36fcc50b49fcd72dc058beb0c",
-      "filesize": 325407,
+      "built": "R 4.2.1; ; 2022-08-04 01:38:10 UTC; windows",
+      "sha256": "18d509688a48e8aae3b2ec90ae2f48d5849ad51ebf2239547becd0d0e55de495",
+      "filesize": 326109,
       "repotype": "cran"
     },
     {
@@ -1937,9 +1904,9 @@
         "RemotePkgRef": "diffobj",
         "RemoteType": "standard",
         "RemoteRef": "diffobj",
+        "RemoteSha": "0.3.5",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.3.5"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/diffobj_0.3.5.zip",
       "target": "bin/windows/contrib/4.2/diffobj_0.3.5.zip",
@@ -1951,9 +1918,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:56 UTC; windows",
-      "sha256": "f93b3ff42af4d2a9927cf7069f9dac8c72ff124851770516ab9728d18802f135",
-      "filesize": 990411,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:54 UTC; windows",
+      "sha256": "6e97414cfa039151809ad901d390301672455bc6d02ac09f6f9753c4e6af4ba5",
+      "filesize": 990119,
       "repotype": "cran"
     },
     {
@@ -1969,9 +1936,9 @@
         "RemotePkgRef": "distributional",
         "RemoteType": "standard",
         "RemoteRef": "distributional",
+        "RemoteSha": "0.3.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.3.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/distributional_0.3.0.zip",
       "target": "bin/windows/contrib/4.2/distributional_0.3.0.zip",
@@ -1983,9 +1950,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:41:10 UTC; windows",
-      "sha256": "4e9113bcff170cc926c0ba08898ec5556386a9b612a9e1878686695431b4c201",
-      "filesize": 539312,
+      "built": "R 4.2.1; ; 2022-08-04 03:32:53 UTC; windows",
+      "sha256": "d89590b8a9ce77c571802ca0ef7b735e022fa0c589bfd269522f202d6428bf9b",
+      "filesize": 539410,
       "repotype": "cran"
     },
     {
@@ -2001,9 +1968,9 @@
         "RemotePkgRef": "dplyr",
         "RemoteType": "standard",
         "RemoteRef": "dplyr",
+        "RemoteSha": "1.0.9",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.0.9"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/dplyr_1.0.9.zip",
       "target": "bin/windows/contrib/4.2/dplyr_1.0.9.zip",
@@ -2015,9 +1982,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 03:09:31 UTC; windows",
-      "sha256": "62341019d0015f136e24be53c3e90940c9234a8815d4703111e389cab542c9a1",
-      "filesize": 1301178,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 02:56:36 UTC; windows",
+      "sha256": "0651018f9551a4cdb748d1ad53f5edae4b5e6138a79baa1a223a8c3309de3f88",
+      "filesize": 1299240,
       "repotype": "cran"
     },
     {
@@ -2033,9 +2000,9 @@
         "RemotePkgRef": "effectsize",
         "RemoteType": "standard",
         "RemoteRef": "effectsize",
+        "RemoteSha": "0.7.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.7.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/effectsize_0.7.0.zip",
       "target": "bin/windows/contrib/4.2/effectsize_0.7.0.zip",
@@ -2047,9 +2014,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:53:41 UTC; windows",
-      "sha256": "111b9e8e56f259bbc49789af6f3109e45d6194fcca18d665fb8d169eb2bafc75",
-      "filesize": 600534,
+      "built": "R 4.2.1; ; 2022-08-04 02:39:46 UTC; windows",
+      "sha256": "bd52b52795e63d48b25e60279c36131c8dc87f586742fbb8489879be1ea091c3",
+      "filesize": 600948,
       "repotype": "cran"
     },
     {
@@ -2065,9 +2032,9 @@
         "RemotePkgRef": "ellipsis",
         "RemoteType": "standard",
         "RemoteRef": "ellipsis",
+        "RemoteSha": "0.3.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.3.2"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/ellipsis_0.3.2.zip",
       "target": "bin/windows/contrib/4.2/ellipsis_0.3.2.zip",
@@ -2079,9 +2046,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:00 UTC; windows",
-      "sha256": "b4a637e948255fa1b562c95ffc99bd61bbe68d25ae28f8481705f4a3e71bf779",
-      "filesize": 40442,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:08 UTC; windows",
+      "sha256": "70c36e0f59f595bfa9a1c0f396659abf19f06cc01cad0866d7e846d245566004",
+      "filesize": 40420,
       "repotype": "cran"
     },
     {
@@ -2097,9 +2064,9 @@
         "RemotePkgRef": "fansi",
         "RemoteType": "standard",
         "RemoteRef": "fansi",
+        "RemoteSha": "1.0.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.0.3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/fansi_1.0.3.zip",
       "target": "bin/windows/contrib/4.2/fansi_1.0.3.zip",
@@ -2111,9 +2078,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:39 UTC; windows",
-      "sha256": "738e0c4e86a91b7f15a37772f531dbf29a7f996d66ba901146bed212a487b8fb",
-      "filesize": 310488,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:53 UTC; windows",
+      "sha256": "7c783476a3b564128559af1e30e8de4195fd9f7248f15d80f431beaa79ef5fb5",
+      "filesize": 312599,
       "repotype": "cran"
     },
     {
@@ -2129,9 +2096,9 @@
         "RemotePkgRef": "farver",
         "RemoteType": "standard",
         "RemoteRef": "farver",
+        "RemoteSha": "2.1.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.1.1"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/farver_2.1.1.zip",
       "target": "bin/windows/contrib/4.2/farver_2.1.1.zip",
@@ -2143,9 +2110,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:31 UTC; windows",
-      "sha256": "d4e6537215d5f763c343d270efce49324c462c4b1f2418e0d13613591b1094ca",
-      "filesize": 1512802,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:51 UTC; windows",
+      "sha256": "8b810fb635874c5250748897b75d2ea86adec695ec34feb88e2358116b0596dd",
+      "filesize": 1512643,
       "repotype": "cran"
     },
     {
@@ -2161,9 +2128,9 @@
         "RemotePkgRef": "forcats",
         "RemoteType": "standard",
         "RemoteRef": "forcats",
+        "RemoteSha": "0.5.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.5.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/forcats_0.5.1.zip",
       "target": "bin/windows/contrib/4.2/forcats_0.5.1.zip",
@@ -2175,41 +2142,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:09:03 UTC; windows",
-      "sha256": "64a1f3626577b58c3303f9788fcb97254b7d4545212496b15317529e200eebea",
-      "filesize": 357484,
-      "repotype": "cran"
-    },
-    {
-      "ref": "foreach",
-      "package": "foreach",
-      "version": "1.5.2",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["codetools", "iterators"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "foreach",
-        "RemoteType": "standard",
-        "RemoteRef": "foreach",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.5.2"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/foreach_1.5.2.zip",
-      "target": "bin/windows/contrib/4.2/foreach_1.5.2.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "Apache License (== 2.0)",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:08 UTC; windows",
-      "sha256": "ebc9c63face5f9347f94e2d26b01444e06ae28c65aa9b09de140b252e52150e9",
-      "filesize": 148021,
+      "built": "R 4.2.1; ; 2022-08-04 02:56:13 UTC; windows",
+      "sha256": "21823d6b3045162e938abdd6a1fe568cf0350d7ea7a0e8c1c703b3a9496f2c9b",
+      "filesize": 358039,
       "repotype": "cran"
     },
     {
@@ -2225,9 +2160,9 @@
         "RemotePkgRef": "furrr",
         "RemoteType": "standard",
         "RemoteRef": "furrr",
+        "RemoteSha": "0.3.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.3.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/furrr_0.3.0.zip",
       "target": "bin/windows/contrib/4.2/furrr_0.3.0.zip",
@@ -2239,9 +2174,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:26:04 UTC; windows",
-      "sha256": "f4e9c3eb8acc2e7b614b957c2a06b546469a9259f9bf06da8349f96f8da1cbf0",
-      "filesize": 1023984,
+      "built": "R 4.2.1; ; 2022-08-04 01:42:05 UTC; windows",
+      "sha256": "e94a096db9195babef340a116bc03b6f73d916abe692bdec2f417d5e9ef1df41",
+      "filesize": 1024074,
       "repotype": "cran"
     },
     {
@@ -2257,9 +2192,9 @@
         "RemotePkgRef": "future.apply",
         "RemoteType": "standard",
         "RemoteRef": "future.apply",
+        "RemoteSha": "1.9.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.9.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/future.apply_1.9.0.zip",
       "target": "bin/windows/contrib/4.2/future.apply_1.9.0.zip",
@@ -2271,9 +2206,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:51:44 UTC; windows",
-      "sha256": "01183675b0f731aedbc7b945c9503e00b6d6e6afce8a358cdafb797fa1184b11",
-      "filesize": 156346,
+      "built": "R 4.2.1; ; 2022-08-04 01:38:30 UTC; windows",
+      "sha256": "587bcf4bc7032b89d2a148a2c97f517d6a0b18ccdaf4a97dc34f8e4f2d579894",
+      "filesize": 156300,
       "repotype": "cran"
     },
     {
@@ -2289,9 +2224,9 @@
         "RemotePkgRef": "future.callr",
         "RemoteType": "standard",
         "RemoteRef": "future.callr",
+        "RemoteSha": "0.8.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.8.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/future.callr_0.8.0.zip",
       "target": "bin/windows/contrib/4.2/future.callr_0.8.0.zip",
@@ -2303,9 +2238,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:22:10 UTC; windows",
-      "sha256": "c8e1abc3c8e5f7f2ab09ba39b7bd1bcfa12b53de388486d2040942f43b15b54a",
-      "filesize": 67826,
+      "built": "R 4.2.1; ; 2022-08-04 02:09:38 UTC; windows",
+      "sha256": "e994250e2d498977c7f28c95fc6fd9015a2d26249628a8fd7d7f5f198bd67b77",
+      "filesize": 67897,
       "repotype": "cran"
     },
     {
@@ -2321,9 +2256,9 @@
         "RemotePkgRef": "future",
         "RemoteType": "standard",
         "RemoteRef": "future",
+        "RemoteSha": "1.27.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.27.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/future_1.27.0.zip",
       "target": "bin/windows/contrib/4.2/future_1.27.0.zip",
@@ -2335,41 +2270,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:40 UTC; windows",
-      "sha256": "c8f9273fea14ff477643fee3054397c9a21a30daabd7dead9bded33e3b060c03",
-      "filesize": 698637,
-      "repotype": "cran"
-    },
-    {
-      "ref": "gclus",
-      "package": "gclus",
-      "version": "1.3.2",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": "cluster",
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "gclus",
-        "RemoteType": "standard",
-        "RemoteRef": "gclus",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.3.2"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/gclus_1.3.2.zip",
-      "target": "bin/windows/contrib/4.2/gclus_1.3.2.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL (>= 2)",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:32:36 UTC; windows",
-      "sha256": "69bc40785c38084bd601cb3bc0c3967da5665a272397f41c65da69c20fa8d176",
-      "filesize": 416307,
+      "built": "R 4.2.1; ; 2022-08-04 01:10:28 UTC; windows",
+      "sha256": "7b242f8966826f50fa6c6b3d930457350278d10ae4449edb50c52e2da4756aae",
+      "filesize": 699646,
       "repotype": "cran"
     },
     {
@@ -2385,9 +2288,9 @@
         "RemotePkgRef": "generics",
         "RemoteType": "standard",
         "RemoteRef": "generics",
+        "RemoteSha": "0.1.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.1.3"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/generics_0.1.3.zip",
       "target": "bin/windows/contrib/4.2/generics_0.1.3.zip",
@@ -2399,9 +2302,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:31:02 UTC; windows",
-      "sha256": "1458a79a073d6998963068c908cac65d2740bcf2ba42067953a210df31ff135f",
-      "filesize": 79693,
+      "built": "R 4.2.1; ; 2022-08-04 00:19:13 UTC; windows",
+      "sha256": "17481580fd11ee1fc77600823e82f130c1777e7c45a7dcba10c0a5c366b078dc",
+      "filesize": 80018,
       "repotype": "cran"
     },
     {
@@ -2417,9 +2320,9 @@
         "RemotePkgRef": "ggbeeswarm",
         "RemoteType": "standard",
         "RemoteRef": "ggbeeswarm",
+        "RemoteSha": "0.6.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.6.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/ggbeeswarm_0.6.0.zip",
       "target": "bin/windows/contrib/4.2/ggbeeswarm_0.6.0.zip",
@@ -2431,9 +2334,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:48:58 UTC; windows",
-      "sha256": "80ca312c64a3e49531a5957b6c15dd5c58cf59d3f73c58554c0c3765c2524140",
-      "filesize": 1528467,
+      "built": "R 4.2.1; ; 2022-08-04 03:05:59 UTC; windows",
+      "sha256": "2cda976fa8fe0e515017335bca9351302aa6961f11b1b1a9327d8e07d46dadbc",
+      "filesize": 1528466,
       "repotype": "cran"
     },
     {
@@ -2449,9 +2352,9 @@
         "RemotePkgRef": "ggdist",
         "RemoteType": "standard",
         "RemoteRef": "ggdist",
+        "RemoteSha": "3.2.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "3.2.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/ggdist_3.2.0.zip",
       "target": "bin/windows/contrib/4.2/ggdist_3.2.0.zip",
@@ -2463,9 +2366,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 04:38:18 UTC; windows",
-      "sha256": "adb3ad3a9dfaba69b2a890339918fbe9cb0c703b477d4dccfd5d489b0c05bef8",
-      "filesize": 3170558,
+      "built": "R 4.2.1; ; 2022-08-04 03:38:32 UTC; windows",
+      "sha256": "e292197a464234c6d5ff0bf39c8d4f28a98ef8b08a2e7a312cfd8add17bbfe44",
+      "filesize": 3170401,
       "repotype": "cran"
     },
     {
@@ -2481,9 +2384,9 @@
         "RemotePkgRef": "ggplot2",
         "RemoteType": "standard",
         "RemoteRef": "ggplot2",
+        "RemoteSha": "3.3.6",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "3.3.6"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/ggplot2_3.3.6.zip",
       "target": "bin/windows/contrib/4.2/ggplot2_3.3.6.zip",
@@ -2495,41 +2398,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:15:27 UTC; windows",
-      "sha256": "fc67e70d1c1115da5fc7e306e2182020cf1677478aabd88ee4693abe649b98ce",
-      "filesize": 4123512,
-      "repotype": "cran"
-    },
-    {
-      "ref": "ggrepel",
-      "package": "ggrepel",
-      "version": "0.9.1",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["ggplot2", "Rcpp", "rlang", "scales"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "ggrepel",
-        "RemoteType": "standard",
-        "RemoteRef": "ggrepel",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.9.1"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/ggrepel_0.9.1.zip",
-      "target": "bin/windows/contrib/4.2/ggrepel_0.9.1.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-3 | file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 03:40:30 UTC; windows",
-      "sha256": "f9abab3e6fec984610a098f7dec7e94959e5f1dad4623a5ec1f7ec6d327dd4ec",
-      "filesize": 729648,
+      "built": "R 4.2.1; ; 2022-08-04 02:59:03 UTC; windows",
+      "sha256": "34b145cd892b814c0814ed42e98aa8aac308eb4e27ea27b0e0f256d099aba211",
+      "filesize": 4123579,
       "repotype": "cran"
     },
     {
@@ -2545,9 +2416,9 @@
         "RemotePkgRef": "ggtext",
         "RemoteType": "standard",
         "RemoteRef": "ggtext",
+        "RemoteSha": "0.1.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.1.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/ggtext_0.1.1.zip",
       "target": "bin/windows/contrib/4.2/ggtext_0.1.1.zip",
@@ -2559,15 +2430,15 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:40:36 UTC; windows",
-      "sha256": "00f95f53103ca945eebbc8e9b6fa0c53ae5b45bbe3e549f2e5b63df3bf1e3a9d",
-      "filesize": 1259051,
+      "built": "R 4.2.1; ; 2022-08-04 03:31:36 UTC; windows",
+      "sha256": "2e227c90929194ba2074264a907639a06476583d4d19a8808eb31612c10d38a8",
+      "filesize": 1259078,
       "repotype": "cran"
     },
     {
       "ref": "globals",
       "package": "globals",
-      "version": "0.15.1",
+      "version": "0.16.0",
       "type": "standard",
       "direct": false,
       "binary": true,
@@ -2577,12 +2448,12 @@
         "RemotePkgRef": "globals",
         "RemoteType": "standard",
         "RemoteRef": "globals",
+        "RemoteSha": "0.16.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.15.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/globals_0.15.1.zip",
-      "target": "bin/windows/contrib/4.2/globals_0.15.1.zip",
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/globals_0.16.0.zip",
+      "target": "bin/windows/contrib/4.2/globals_0.16.0.zip",
       "platform": "i386+x86_64-w64-mingw32",
       "rversion": "4.2",
       "directpkg": false,
@@ -2591,8 +2462,6 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-06-29 23:52:16 UTC; windows",
-      "sha256": "1f7c5cab68b9c4de2903e922c566454486eed8e1065266c47c6cd684bf584c05",
       "filesize": 104300,
       "repotype": "cran"
     },
@@ -2609,9 +2478,9 @@
         "RemotePkgRef": "gridtext",
         "RemoteType": "standard",
         "RemoteRef": "gridtext",
+        "RemoteSha": "0.1.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.1.4"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/gridtext_0.1.4.zip",
       "target": "bin/windows/contrib/4.2/gridtext_0.1.4.zip",
@@ -2623,9 +2492,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:20:25 UTC; windows",
-      "sha256": "cb4a09cf663628c609153041a52ea11dad5a0f31c89d21bc2fb145e340d91532",
-      "filesize": 678050,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:13:41 UTC; windows",
+      "sha256": "a1a92a5d668545be996a903af08b04fd817be68396c496f3897c76d59255d352",
+      "filesize": 677977,
       "repotype": "cran"
     },
     {
@@ -2641,9 +2510,9 @@
         "RemotePkgRef": "gt",
         "RemoteType": "standard",
         "RemoteRef": "gt",
+        "RemoteSha": "0.6.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.6.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/gt_0.6.0.zip",
       "target": "bin/windows/contrib/4.2/gt_0.6.0.zip",
@@ -2655,9 +2524,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:41:35 UTC; windows",
-      "sha256": "82d66d7b209a45b4a98892a6c816ce3807762421387cbe1468cd77f5e7be4566",
-      "filesize": 2191906,
+      "built": "R 4.2.1; ; 2022-08-04 03:38:25 UTC; windows",
+      "sha256": "375b2662aa7fd9fb952565fd6e562af50379b7aa4aa0eef34097b9ebecfc5c32",
+      "filesize": 2197955,
       "repotype": "cran"
     },
     {
@@ -2673,9 +2542,9 @@
         "RemotePkgRef": "gtable",
         "RemoteType": "standard",
         "RemoteRef": "gtable",
+        "RemoteSha": "0.3.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.3.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/gtable_0.3.0.zip",
       "target": "bin/windows/contrib/4.2/gtable_0.3.0.zip",
@@ -2687,9 +2556,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:31 UTC; windows",
-      "sha256": "7b53789d2bc291728710ee5f81adb9bb3c4c65bdfed424b9f541f1a4d977b4ec",
-      "filesize": 434222,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:45 UTC; windows",
+      "sha256": "24665456c2a9051ee73c256f70bbd7ad82f727e99f2247abca7194cd4eaea526",
+      "filesize": 434332,
       "repotype": "cran"
     },
     {
@@ -2705,9 +2574,9 @@
         "RemotePkgRef": "insight",
         "RemoteType": "standard",
         "RemoteRef": "insight",
+        "RemoteSha": "0.18.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.18.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/insight_0.18.0.zip",
       "target": "bin/windows/contrib/4.2/insight_0.18.0.zip",
@@ -2737,9 +2606,9 @@
         "RemotePkgRef": "isoband",
         "RemoteType": "standard",
         "RemoteRef": "isoband",
+        "RemoteSha": "0.2.5",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.2.5"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/isoband_0.2.5.zip",
       "target": "bin/windows/contrib/4.2/isoband_0.2.5.zip",
@@ -2751,41 +2620,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:36 UTC; windows",
-      "sha256": "eba734da1c9ed9a311080cf6def24331d823dc942ab0afcf315522357588c94e",
-      "filesize": 2179239,
-      "repotype": "cran"
-    },
-    {
-      "ref": "iterators",
-      "package": "iterators",
-      "version": "1.0.14",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": [],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "iterators",
-        "RemoteType": "standard",
-        "RemoteRef": "iterators",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.0.14"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/iterators_1.0.14.zip",
-      "target": "bin/windows/contrib/4.2/iterators_1.0.14.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "Apache License (== 2.0)",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:31 UTC; windows",
-      "sha256": "2318f501055a314793c3514729fb60f510aeab3c69744d9052fd58db220a254f",
-      "filesize": 353327,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:45 UTC; windows",
+      "sha256": "9232e0c675f8207fbdcd238af84a55bd66479a7d4b18ce413d828658de7bf008",
+      "filesize": 2179116,
       "repotype": "cran"
     },
     {
@@ -2801,9 +2638,9 @@
         "RemotePkgRef": "jpeg",
         "RemoteType": "standard",
         "RemoteRef": "jpeg",
+        "RemoteSha": "0.1-9",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.1-9"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/jpeg_0.1-9.zip",
       "target": "bin/windows/contrib/4.2/jpeg_0.1-9.zip",
@@ -2833,9 +2670,9 @@
         "RemotePkgRef": "labeling",
         "RemoteType": "standard",
         "RemoteRef": "labeling",
+        "RemoteSha": "0.4.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.4.2"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/labeling_0.4.2.zip",
       "target": "bin/windows/contrib/4.2/labeling_0.4.2.zip",
@@ -2865,9 +2702,9 @@
         "RemotePkgRef": "lifecycle",
         "RemoteType": "standard",
         "RemoteRef": "lifecycle",
+        "RemoteSha": "1.0.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.0.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/lifecycle_1.0.1.zip",
       "target": "bin/windows/contrib/4.2/lifecycle_1.0.1.zip",
@@ -2879,9 +2716,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:21 UTC; windows",
-      "sha256": "fca430390e70474dc9e6d3c1afd563ac0af1c32357aa4abe42ecf7a67b46979b",
-      "filesize": 122928,
+      "built": "R 4.2.1; ; 2022-08-04 01:10:24 UTC; windows",
+      "sha256": "2cf12bd55c3de7b8c7aab72fb2bce1fad8d00dcec27b89c5f3daf6549f162a0a",
+      "filesize": 122954,
       "repotype": "cran"
     },
     {
@@ -2897,9 +2734,9 @@
         "RemotePkgRef": "listenv",
         "RemoteType": "standard",
         "RemoteRef": "listenv",
+        "RemoteSha": "0.8.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.8.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/listenv_0.8.0.zip",
       "target": "bin/windows/contrib/4.2/listenv_0.8.0.zip",
@@ -2911,9 +2748,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:30 UTC; windows",
-      "sha256": "6211a2ffe2ade9e2097f8e71d88e79cb1e5d3eac337dae71267ee164f61531f4",
-      "filesize": 106616,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:40 UTC; windows",
+      "sha256": "51b55e3ce970c40aa5f7da05c2d80c3520f3464780a2fd8a674a76c4a362b20f",
+      "filesize": 106762,
       "repotype": "cran"
     },
     {
@@ -2929,9 +2766,9 @@
         "RemotePkgRef": "lme4",
         "RemoteType": "standard",
         "RemoteRef": "lme4",
+        "RemoteSha": "1.1-30",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.1-30"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/lme4_1.1-30.zip",
       "target": "bin/windows/contrib/4.2/lme4_1.1-30.zip",
@@ -2943,9 +2780,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 05:09:56 UTC; windows",
-      "sha256": "537d61a6c284f46c7c083f21e6c3889231c2778bbe91ba20e275ae7147c0335b",
-      "filesize": 4875525,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 04:50:48 UTC; windows",
+      "sha256": "866c124aa1f54773e201e188797de852a54f49992e0f0c671c3e965a5041f6fb",
+      "filesize": 4883752,
       "repotype": "cran"
     },
     {
@@ -2961,9 +2798,9 @@
         "RemotePkgRef": "markdown",
         "RemoteType": "standard",
         "RemoteRef": "markdown",
+        "RemoteSha": "1.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.1"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/markdown_1.1.zip",
       "target": "bin/windows/contrib/4.2/markdown_1.1.zip",
@@ -2975,9 +2812,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:30:42 UTC; windows",
-      "sha256": "48d7ceb5d39e853c26d54c35abda9db3bf73db7d683d3940f8b87f5c62b6352a",
-      "filesize": 150530,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:21:35 UTC; windows",
+      "sha256": "9a104fafa51b98982969bf09f28a58ad8eaf40d8f371ec4bb37ac04806f59496",
+      "filesize": 150475,
       "repotype": "cran"
     },
     {
@@ -2993,9 +2830,9 @@
         "RemotePkgRef": "mime",
         "RemoteType": "standard",
         "RemoteRef": "mime",
+        "RemoteSha": "0.12",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.12"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/mime_0.12.zip",
       "target": "bin/windows/contrib/4.2/mime_0.12.zip",
@@ -3025,9 +2862,9 @@
         "RemotePkgRef": "minqa",
         "RemoteType": "standard",
         "RemoteRef": "minqa",
+        "RemoteSha": "1.2.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.2.4"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/minqa_1.2.4.zip",
       "target": "bin/windows/contrib/4.2/minqa_1.2.4.zip",
@@ -3039,9 +2876,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:18:59 UTC; windows",
-      "sha256": "c2a93a810c34bd4ba9b7137e31a11a8bcc301d0afd3b065bed9fa2388c74c5e2",
-      "filesize": 449657,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:05 UTC; windows",
+      "sha256": "605d75ea30bd3f6a7aa6c952afccc251efb89ecd17a39771ba036ad858d6666c",
+      "filesize": 449648,
       "repotype": "cran"
     },
     {
@@ -3057,9 +2894,9 @@
         "RemotePkgRef": "munsell",
         "RemoteType": "standard",
         "RemoteRef": "munsell",
+        "RemoteSha": "0.5.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.5.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/munsell_0.5.0.zip",
       "target": "bin/windows/contrib/4.2/munsell_0.5.0.zip",
@@ -3071,8 +2908,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:03 UTC; windows",
-      "sha256": "a486296dd8b694352e3bad0b5db7038eded435c90c27e7874bd8cbb4944cbd76",
+      "built": "R 4.2.1; ; 2022-08-04 01:10:12 UTC; windows",
+      "sha256": "5b717fb3e2f77621a2ba48c28114fa6001f55ca9e1099bf8d57587eb6787fe25",
       "filesize": 245094,
       "repotype": "cran"
     },
@@ -3089,9 +2926,9 @@
         "RemotePkgRef": "nloptr",
         "RemoteType": "standard",
         "RemoteRef": "nloptr",
+        "RemoteSha": "2.0.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.0.3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/nloptr_2.0.3.zip",
       "target": "bin/windows/contrib/4.2/nloptr_2.0.3.zip",
@@ -3103,9 +2940,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 04:55:09 UTC; windows",
-      "sha256": "6c503d4618e6633fc71993e8938a612cd0ea61b5a5547aa547d14b69ca50bd31",
-      "filesize": 1000989,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 04:35:11 UTC; windows",
+      "sha256": "384d628ff4176f94f70351a595ec927b3fc268b88259724e12490b874a832734",
+      "filesize": 1000836,
       "repotype": "cran"
     },
     {
@@ -3121,9 +2958,9 @@
         "RemotePkgRef": "numDeriv",
         "RemoteType": "standard",
         "RemoteRef": "numDeriv",
+        "RemoteSha": "2016.8-1.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2016.8-1.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/numDeriv_2016.8-1.1.zip",
       "target": "bin/windows/contrib/4.2/numDeriv_2016.8-1.1.zip",
@@ -3153,9 +2990,9 @@
         "RemotePkgRef": "parallelly",
         "RemoteType": "standard",
         "RemoteRef": "parallelly",
+        "RemoteSha": "1.32.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.32.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/parallelly_1.32.1.zip",
       "target": "bin/windows/contrib/4.2/parallelly_1.32.1.zip",
@@ -3185,9 +3022,9 @@
         "RemotePkgRef": "parameters",
         "RemoteType": "standard",
         "RemoteRef": "parameters",
+        "RemoteSha": "0.18.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.18.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/parameters_0.18.1.zip",
       "target": "bin/windows/contrib/4.2/parameters_0.18.1.zip",
@@ -3199,9 +3036,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:27:32 UTC; windows",
-      "sha256": "fb311ed72b98c5fd27b8d829a077fdfb9e427d94971f04cf2abd06635afe86bb",
-      "filesize": 1808443,
+      "built": "R 4.2.1; ; 2022-08-04 02:11:52 UTC; windows",
+      "sha256": "3b69b15b4f0033105f1c9091b119cdbfd0dbd237cbb042e19d7c703ecd4b2b53",
+      "filesize": 1808171,
       "repotype": "cran"
     },
     {
@@ -3217,9 +3054,9 @@
         "RemotePkgRef": "patchwork",
         "RemoteType": "standard",
         "RemoteRef": "patchwork",
+        "RemoteSha": "1.1.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.1.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/patchwork_1.1.1.zip",
       "target": "bin/windows/contrib/4.2/patchwork_1.1.1.zip",
@@ -3231,9 +3068,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:42:16 UTC; windows",
-      "sha256": "9b70ba1d81738790e33a30780dfe329603a91531069fe808f92f3b3a25d94471",
-      "filesize": 3241051,
+      "built": "R 4.2.1; ; 2022-08-04 03:31:18 UTC; windows",
+      "sha256": "0b0acd736c55663fd4b6084b5d40f135c1149e42b18403c563ae86e31cf92330",
+      "filesize": 3241039,
       "repotype": "cran"
     },
     {
@@ -3249,9 +3086,9 @@
         "RemotePkgRef": "performance",
         "RemoteType": "standard",
         "RemoteRef": "performance",
+        "RemoteSha": "0.9.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.9.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/performance_0.9.1.zip",
       "target": "bin/windows/contrib/4.2/performance_0.9.1.zip",
@@ -3263,9 +3100,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:27:26 UTC; windows",
-      "sha256": "773bc1d5dafe9f7dae951f7404ff48897122d9676b0aa6a781d6f82df02c5c49",
-      "filesize": 2947294,
+      "built": "R 4.2.1; ; 2022-08-04 02:11:37 UTC; windows",
+      "sha256": "ca7edb8c3b38b862769499ed3e75132c26db16e2d31f5fc7d4fc99ef6d025d7b",
+      "filesize": 2947316,
       "repotype": "cran"
     },
     {
@@ -3281,9 +3118,9 @@
         "RemotePkgRef": "pillar",
         "RemoteType": "standard",
         "RemoteRef": "pillar",
+        "RemoteSha": "1.8.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.8.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/pillar_1.8.0.zip",
       "target": "bin/windows/contrib/4.2/pillar_1.8.0.zip",
@@ -3295,9 +3132,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:26:23 UTC; windows",
-      "sha256": "c6a385be7aa43253fdb666b2edc8b30b3ccc30e68a592f4674a4c198337f8ad0",
-      "filesize": 688181,
+      "built": "R 4.2.1; ; 2022-08-04 02:10:33 UTC; windows",
+      "sha256": "80e2f9e74f6669ae19defacb5b26ef9e872f2eeac76863624ebc2697250517ee",
+      "filesize": 688035,
       "repotype": "cran"
     },
     {
@@ -3313,9 +3150,9 @@
         "RemotePkgRef": "pkgconfig",
         "RemoteType": "standard",
         "RemoteRef": "pkgconfig",
+        "RemoteSha": "2.0.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.0.3"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/pkgconfig_2.0.3.zip",
       "target": "bin/windows/contrib/4.2/pkgconfig_2.0.3.zip",
@@ -3327,9 +3164,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:26 UTC; windows",
-      "sha256": "03ca309e90d00389d05e8830b81ceaccf39947976c4ea9749ff50f0fab6aed85",
-      "filesize": 22421,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:40 UTC; windows",
+      "sha256": "e0d0dee9206ec3b8345a2d159944883fb0f33edef0f3256391d1ee3204e859b7",
+      "filesize": 22407,
       "repotype": "cran"
     },
     {
@@ -3345,9 +3182,9 @@
         "RemotePkgRef": "pkgload",
         "RemoteType": "standard",
         "RemoteRef": "pkgload",
+        "RemoteSha": "1.3.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.3.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/pkgload_1.3.0.zip",
       "target": "bin/windows/contrib/4.2/pkgload_1.3.0.zip",
@@ -3359,9 +3196,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:26:50 UTC; windows",
-      "sha256": "903229d7c3ffff7b79735d3e57f1f912a05899152327f11c1fcefeb3e8427cff",
-      "filesize": 175619,
+      "built": "R 4.2.1; ; 2022-08-04 02:10:49 UTC; windows",
+      "sha256": "2a73588c9f24e3bea2207210d5bb9d25f9953769cfd24994205274c77f051d2f",
+      "filesize": 175441,
       "repotype": "cran"
     },
     {
@@ -3377,9 +3214,9 @@
         "RemotePkgRef": "png",
         "RemoteType": "standard",
         "RemoteRef": "png",
+        "RemoteSha": "0.1-7",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.1-7"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/png_0.1-7.zip",
       "target": "bin/windows/contrib/4.2/png_0.1-7.zip",
@@ -3409,9 +3246,9 @@
         "RemotePkgRef": "praise",
         "RemoteType": "standard",
         "RemoteRef": "praise",
+        "RemoteSha": "1.0.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.0.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/praise_1.0.0.zip",
       "target": "bin/windows/contrib/4.2/praise_1.0.0.zip",
@@ -3423,9 +3260,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:19 UTC; windows",
-      "sha256": "4a89674c62c77573ed4d7c5ea139c99b5db3d0819199d9e7da2638b4b438d502",
-      "filesize": 19841,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:32 UTC; windows",
+      "sha256": "ef2c35f88168ea324f93ba65651359dc6f0ff5cb84cfb9af2d9c7270ce66e42c",
+      "filesize": 19837,
       "repotype": "cran"
     },
     {
@@ -3441,9 +3278,9 @@
         "RemotePkgRef": "processx",
         "RemoteType": "standard",
         "RemoteRef": "processx",
+        "RemoteSha": "3.7.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "3.7.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/processx_3.7.0.zip",
       "target": "bin/windows/contrib/4.2/processx_3.7.0.zip",
@@ -3455,9 +3292,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:26 UTC; windows",
-      "sha256": "ed74988bfd7c84d60ff4c8dd48deea586f97ab42b1ad1a6e506e9cec27d20ea1",
-      "filesize": 845450,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:19 UTC; windows",
+      "sha256": "9b50c37b32118da88b6c66ca431a796dfd62c090346a56b0f3069a7802090a1c",
+      "filesize": 845490,
       "repotype": "cran"
     },
     {
@@ -3473,9 +3310,9 @@
         "RemotePkgRef": "ps",
         "RemoteType": "standard",
         "RemoteRef": "ps",
+        "RemoteSha": "1.7.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.7.1"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/ps_1.7.1.zip",
       "target": "bin/windows/contrib/4.2/ps_1.7.1.zip",
@@ -3487,9 +3324,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:31 UTC; windows",
-      "sha256": "0d7e5cd97bc5afb3dd4fb072b8c5116a82bab105f8778f862076cfe31477356a",
-      "filesize": 548979,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:45 UTC; windows",
+      "sha256": "d7f766bcec5dab729e9ade82c237d582cfe3c32613b0371dcf2630252f2ba5a2",
+      "filesize": 549505,
       "repotype": "cran"
     },
     {
@@ -3505,9 +3342,9 @@
         "RemotePkgRef": "purrr",
         "RemoteType": "standard",
         "RemoteRef": "purrr",
+        "RemoteSha": "0.3.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.3.4"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/purrr_0.3.4.zip",
       "target": "bin/windows/contrib/4.2/purrr_0.3.4.zip",
@@ -3519,41 +3356,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:21 UTC; windows",
-      "sha256": "ba5238629f82e161f4d8b6f71bc2c025c13c0d8889df2c2e90dcdd4d926b18b1",
-      "filesize": 409352,
-      "repotype": "cran"
-    },
-    {
-      "ref": "qap",
-      "package": "qap",
-      "version": "0.1-2",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": [],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "qap",
-        "RemoteType": "standard",
-        "RemoteRef": "qap",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.1-2"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/qap_0.1-2.zip",
-      "target": "bin/windows/contrib/4.2/qap_0.1-2.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-3",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:33:22 UTC; windows",
-      "sha256": "0de6988a42c753946446e65972d1cd126d8905b92aefced3aa30696cbc46d689",
-      "filesize": 529596,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:29 UTC; windows",
+      "sha256": "8b8cbaa7a99883ba154a3798b93274401a9204fb0c6366fcf12f56da7f28ea64",
+      "filesize": 409509,
       "repotype": "cran"
     },
     {
@@ -3569,9 +3374,9 @@
         "RemotePkgRef": "qqplotr",
         "RemoteType": "standard",
         "RemoteRef": "qqplotr",
+        "RemoteSha": "0.0.5",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.0.5"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/qqplotr_0.0.5.zip",
       "target": "bin/windows/contrib/4.2/qqplotr_0.0.5.zip",
@@ -3583,41 +3388,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:58:19 UTC; windows",
-      "sha256": "fb53bdcd08468cdb79d2e682c8e4dbe70c9d1a91c1c56e0da64ad0e5894e7c12",
-      "filesize": 1120103,
-      "repotype": "cran"
-    },
-    {
-      "ref": "registry",
-      "package": "registry",
-      "version": "0.5-1",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": [],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "registry",
-        "RemoteType": "standard",
-        "RemoteRef": "registry",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.5-1"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/registry_0.5-1.zip",
-      "target": "bin/windows/contrib/4.2/registry_0.5-1.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-2",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.0; ; 2022-04-24 01:20:57 UTC; windows",
-      "sha256": "18b170867e567aeb7e4e22fe4fd6e0209a40a49ab294621c1228ee9524f331bf",
-      "filesize": 197294,
+      "built": "R 4.2.1; ; 2022-08-04 03:36:51 UTC; windows",
+      "sha256": "26ad5ff0d0b002f1b9cc6f9c3525b861aa4a88ebd84303590a5efa7e2320727d",
+      "filesize": 1120133,
       "repotype": "cran"
     },
     {
@@ -3633,9 +3406,9 @@
         "RemotePkgRef": "rematch2",
         "RemoteType": "standard",
         "RemoteRef": "rematch2",
+        "RemoteSha": "2.1.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.1.2"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/rematch2_2.1.2.zip",
       "target": "bin/windows/contrib/4.2/rematch2_2.1.2.zip",
@@ -3647,9 +3420,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:08:51 UTC; windows",
-      "sha256": "62d1456754082669ed12e86ba3632266e57a19fad2012fe7cb70fa2715dd6ff4",
-      "filesize": 47479,
+      "built": "R 4.2.1; ; 2022-08-04 02:55:59 UTC; windows",
+      "sha256": "eb87480f0ef7def9e48a72ef6374ea896096e4420fbf721c9373db0bbe2c845b",
+      "filesize": 47496,
       "repotype": "cran"
     },
     {
@@ -3665,9 +3438,9 @@
         "RemotePkgRef": "robustbase",
         "RemoteType": "standard",
         "RemoteRef": "robustbase",
+        "RemoteSha": "0.95-0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.95-0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/robustbase_0.95-0.zip",
       "target": "bin/windows/contrib/4.2/robustbase_0.95-0.zip",
@@ -3679,9 +3452,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:31:16 UTC; windows",
-      "sha256": "601cf60c71ac12c2f20803fe015927347781fdb2e34946456a9bad39fc3c5bfc",
-      "filesize": 3078152,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:20:08 UTC; windows",
+      "sha256": "06c46d935b3704a7ea047cd47b364d2d596a7c760c43ae256543fe6918ae4815",
+      "filesize": 3078023,
       "repotype": "cran"
     },
     {
@@ -3697,9 +3470,9 @@
         "RemotePkgRef": "roxygen2",
         "RemoteType": "standard",
         "RemoteRef": "roxygen2",
+        "RemoteSha": "7.2.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "7.2.1"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/roxygen2_7.2.1.zip",
       "target": "bin/windows/contrib/4.2/roxygen2_7.2.1.zip",
@@ -3711,9 +3484,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 02:53:58 UTC; windows",
-      "sha256": "8e096fafd3f549b596afdaf456a9b3398bb611d90b82f573a72d26c2bde041a0",
-      "filesize": 1056331,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 02:16:42 UTC; windows",
+      "sha256": "3baf9423d55c094d1977f8ce4572a493ef750247c3c3c1ddca5e90eb245f02bd",
+      "filesize": 1056039,
       "repotype": "cran"
     },
     {
@@ -3729,9 +3502,9 @@
         "RemotePkgRef": "rprojroot",
         "RemoteType": "standard",
         "RemoteRef": "rprojroot",
+        "RemoteSha": "2.0.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.0.3"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/rprojroot_2.0.3.zip",
       "target": "bin/windows/contrib/4.2/rprojroot_2.0.3.zip",
@@ -3743,9 +3516,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:41 UTC; windows",
-      "sha256": "3c7d06b0240ee0653891f2cca7722f7f9e2eb4ddfe258b3a130c1df812f6c8a9",
-      "filesize": 109318,
+      "built": "R 4.2.1; ; 2022-08-04 00:19:00 UTC; windows",
+      "sha256": "744b2ebb20d68e6c4fc014acf1adeea46abb736a32d4fb405fc1dae0bdca78d4",
+      "filesize": 109373,
       "repotype": "cran"
     },
     {
@@ -3761,9 +3534,9 @@
         "RemotePkgRef": "scales",
         "RemoteType": "standard",
         "RemoteRef": "scales",
+        "RemoteSha": "1.2.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.2.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/scales_1.2.0.zip",
       "target": "bin/windows/contrib/4.2/scales_1.2.0.zip",
@@ -3775,9 +3548,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:51:47 UTC; windows",
-      "sha256": "f86bd0afac61a127235be23f8d68b4a0f92910c96771fe75ebe719e5e3ef5d7e",
-      "filesize": 614784,
+      "built": "R 4.2.1; ; 2022-08-04 01:38:25 UTC; windows",
+      "sha256": "3f9e4f5ba5ac760ff1765c03532f055aa2f9c0d94947b94bb684fa0d070f3242",
+      "filesize": 615294,
       "repotype": "cran"
     },
     {
@@ -3793,9 +3566,9 @@
         "RemotePkgRef": "see",
         "RemoteType": "standard",
         "RemoteRef": "see",
+        "RemoteSha": "0.7.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.7.1"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/see_0.7.1.zip",
       "target": "bin/windows/contrib/4.2/see_0.7.1.zip",
@@ -3807,41 +3580,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:46:37 UTC; windows",
-      "sha256": "796e446b1d33b660298dc3ce3138e747da167aebac72991b9b1863cf34ecb0f1",
-      "filesize": 520045,
-      "repotype": "cran"
-    },
-    {
-      "ref": "seriation",
-      "package": "seriation",
-      "version": "1.3.6",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["TSP", "qap", "cluster", "gclus", "colorspace", "MASS", "registry"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "seriation",
-        "RemoteType": "standard",
-        "RemoteRef": "seriation",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.3.6"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/seriation_1.3.6.zip",
-      "target": "bin/windows/contrib/4.2/seriation_1.3.6.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-3",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:54:14 UTC; windows",
-      "sha256": "532f4971d5c44d1246946810ed890f726fb21b0f38b623b9f393b1c156ec7d74",
-      "filesize": 1152055,
+      "built": "R 4.2.1; ; 2022-08-04 03:35:25 UTC; windows",
+      "sha256": "10ad386f73e6bcc1810afab8f5c1c1c89520db562727aae29e1b55f8cce13231",
+      "filesize": 520061,
       "repotype": "cran"
     },
     {
@@ -3857,9 +3598,9 @@
         "RemotePkgRef": "testthat",
         "RemoteType": "standard",
         "RemoteRef": "testthat",
+        "RemoteSha": "3.1.4",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "3.1.4"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/testthat_3.1.4.zip",
       "target": "bin/windows/contrib/4.2/testthat_3.1.4.zip",
@@ -3871,9 +3612,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 04:28:47 UTC; windows",
-      "sha256": "f4dfc8e9fc89d89e9bd3a0be8eb6f04c79fd4b8d069fb09073caa378bc42735a",
-      "filesize": 2085662,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 04:14:25 UTC; windows",
+      "sha256": "7dcff3fe4a07650c6e543442976dd972d65c33120f916159d9a4d7bac3998906",
+      "filesize": 2083824,
       "repotype": "cran"
     },
     {
@@ -3889,9 +3630,9 @@
         "RemotePkgRef": "tibble",
         "RemoteType": "standard",
         "RemoteRef": "tibble",
+        "RemoteSha": "3.1.8",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "3.1.8"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/tibble_3.1.8.zip",
       "target": "bin/windows/contrib/4.2/tibble_3.1.8.zip",
@@ -3903,9 +3644,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 02:53:06 UTC; windows",
-      "sha256": "68579eab0d57630d1c700074699d3560c4fdac81d93f23e31e6050a1b65da40c",
-      "filesize": 733030,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 02:39:43 UTC; windows",
+      "sha256": "12b6ca53b607a04494b67dffd6a45fcc89afdad8679a5cc289302aecd1523208",
+      "filesize": 733058,
       "repotype": "cran"
     },
     {
@@ -3921,9 +3662,9 @@
         "RemotePkgRef": "tidyr",
         "RemoteType": "standard",
         "RemoteRef": "tidyr",
+        "RemoteSha": "1.2.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.2.0"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/tidyr_1.2.0.zip",
       "target": "bin/windows/contrib/4.2/tidyr_1.2.0.zip",
@@ -3935,9 +3676,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 03:39:54 UTC; windows",
-      "sha256": "905384a5ea99912e420668b9e59f4ee5114ac6b6dc4abc5d9b2adc3bdb310723",
-      "filesize": 968153,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 03:30:24 UTC; windows",
+      "sha256": "785bd1e5732da9305fe96ac936eac31e5b89ba864cf270cd9c01c3aeb1cdf7c5",
+      "filesize": 968073,
       "repotype": "cran"
     },
     {
@@ -3953,9 +3694,9 @@
         "RemotePkgRef": "tidyselect",
         "RemoteType": "standard",
         "RemoteRef": "tidyselect",
+        "RemoteSha": "1.1.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.1.2"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/tidyselect_1.1.2.zip",
       "target": "bin/windows/contrib/4.2/tidyselect_1.1.2.zip",
@@ -3967,9 +3708,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:25:50 UTC; windows",
-      "sha256": "de6fdcbf454cc2e87633eb76e50c9ba4566b7174edb0a493386c9bd500b28151",
-      "filesize": 206490,
+      "built": "R 4.2.1; ; 2022-08-04 02:10:00 UTC; windows",
+      "sha256": "9a9654e41cb3d4db2cb61160f9bd71d97b40098d3f371c1e16d446a31d53ca3f",
+      "filesize": 206478,
       "repotype": "cran"
     },
     {
@@ -3985,9 +3726,9 @@
         "RemotePkgRef": "utf8",
         "RemoteType": "standard",
         "RemoteRef": "utf8",
+        "RemoteSha": "1.2.2",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.2.2"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/utf8_1.2.2.zip",
       "target": "bin/windows/contrib/4.2/utf8_1.2.2.zip",
@@ -3999,9 +3740,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:40 UTC; windows",
-      "sha256": "aa96901e24979e868b88c42634d624188cd97c35e85a6600f0fccb46c40b1a98",
-      "filesize": 150119,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:51 UTC; windows",
+      "sha256": "13aac715cf3f7c235649cf1d2a8ec512ed69cf34e9285f143d80b25c088b0a6f",
+      "filesize": 149997,
       "repotype": "cran"
     },
     {
@@ -4017,9 +3758,9 @@
         "RemotePkgRef": "vctrs",
         "RemoteType": "standard",
         "RemoteRef": "vctrs",
+        "RemoteSha": "0.4.1",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.4.1"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/vctrs_0.4.1.zip",
       "target": "bin/windows/contrib/4.2/vctrs_0.4.1.zip",
@@ -4031,9 +3772,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:52:34 UTC; windows",
-      "sha256": "f8a202a430cc17d6f1e7f767883ef0481567b4dfe238557522d5b36c170ba9ef",
-      "filesize": 1298669,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:39:01 UTC; windows",
+      "sha256": "1d18f6702541b8cb4a7966a7f2236c173007e2dfc157d99b5fb8e04cadd3e398",
+      "filesize": 1298313,
       "repotype": "cran"
     },
     {
@@ -4049,9 +3790,9 @@
         "RemotePkgRef": "vipor",
         "RemoteType": "standard",
         "RemoteRef": "vipor",
+        "RemoteSha": "0.4.5",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.4.5"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/vipor_0.4.5.zip",
       "target": "bin/windows/contrib/4.2/vipor_0.4.5.zip",
@@ -4063,9 +3804,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:36:11 UTC; windows",
-      "sha256": "c81656055971d08439dfd8686bea89c50f5fec184e1231bec6b13e99b7e695c2",
-      "filesize": 4409574,
+      "built": "R 4.2.1; ; 2022-08-04 00:28:41 UTC; windows",
+      "sha256": "3524b0df30ffb9c2c2fcdbd2204de6bc8b5604d7b6705419317e0d4074506d1b",
+      "filesize": 4409777,
       "repotype": "cran"
     },
     {
@@ -4081,9 +3822,9 @@
         "RemotePkgRef": "viridisLite",
         "RemoteType": "standard",
         "RemoteRef": "viridisLite",
+        "RemoteSha": "0.4.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.4.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/viridisLite_0.4.0.zip",
       "target": "bin/windows/contrib/4.2/viridisLite_0.4.0.zip",
@@ -4095,9 +3836,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:24 UTC; windows",
-      "sha256": "47b14d7eb9369c91915eb4c4398a23b92dcf5d2ed60ec2c677f3141dee528aab",
-      "filesize": 1299482,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:42 UTC; windows",
+      "sha256": "9a0bb5e782def175a4c7d3ef9ba7086118e1b13049817e927532e93ba3f74377",
+      "filesize": 1299484,
       "repotype": "cran"
     },
     {
@@ -4113,9 +3854,9 @@
         "RemotePkgRef": "waldo",
         "RemoteType": "standard",
         "RemoteRef": "waldo",
+        "RemoteSha": "0.4.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.4.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/waldo_0.4.0.zip",
       "target": "bin/windows/contrib/4.2/waldo_0.4.0.zip",
@@ -4127,9 +3868,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 03:39:47 UTC; windows",
-      "sha256": "3800150cd50a12c290b608458dd71d03986ae243f54e5c8139bc29915e378e0e",
-      "filesize": 102135,
+      "built": "R 4.2.1; ; 2022-07-31 03:27:53 UTC; windows",
+      "sha256": "f5d971247c1fb38071dd26267a00454150cfa2ccc414cc5f6d7715bc3ffacb50",
+      "filesize": 102211,
       "repotype": "cran"
     },
     {
@@ -4145,9 +3886,9 @@
         "RemotePkgRef": "withr",
         "RemoteType": "standard",
         "RemoteRef": "withr",
+        "RemoteSha": "2.5.0",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.5.0"
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/withr_2.5.0.zip",
       "target": "bin/windows/contrib/4.2/withr_2.5.0.zip",
@@ -4159,9 +3900,9 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:29:50 UTC; windows",
-      "sha256": "660d2ceb9cf67f9cd7eafc06fa94af716389df1599982900227184249ae9523f",
-      "filesize": 231777,
+      "built": "R 4.2.1; ; 2022-08-04 00:18:47 UTC; windows",
+      "sha256": "ce63bc17284abe5eaa7c7dce63aa19e2c0f1201438904b108a3525c13a30d433",
+      "filesize": 231899,
       "repotype": "cran"
     },
     {
@@ -4177,9 +3918,9 @@
         "RemotePkgRef": "xml2",
         "RemoteType": "standard",
         "RemoteRef": "xml2",
+        "RemoteSha": "1.3.3",
         "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.3.3"
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/xml2_1.3.3.zip",
       "target": "bin/windows/contrib/4.2/xml2_1.3.3.zip",
@@ -4191,9 +3932,361 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:29:38 UTC; windows",
-      "sha256": "b468b1189bb7ebcb9d4bbd11891a0907aa7364e3378c1d0b1a3a4277babae254",
-      "filesize": 1574869,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:18:52 UTC; windows",
+      "sha256": "b31092c80c30f5da35563eaf203856801929b6d5e937ed493eb93c66a26593d5",
+      "filesize": 1573560,
+      "repotype": "cran"
+    },
+    {
+      "ref": "clipr",
+      "package": "clipr",
+      "version": "0.8.0",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": [],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "clipr",
+        "RemoteType": "standard",
+        "RemoteRef": "clipr",
+        "RemoteSha": "0.8.0",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/clipr_0.8.0.zip",
+      "target": "bin/windows/contrib/4.2/clipr_0.8.0.zip",
+      "platform": "i386+x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "GPL-3",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; ; 2022-08-04 00:20:31 UTC; windows",
+      "sha256": "e2a32724a30169e3a705e5c5bfd94c81329a2b760f54a33a137f20c111e36245",
+      "filesize": 54759,
+      "repotype": "cran"
+    },
+    {
+      "ref": "doParallel",
+      "package": "doParallel",
+      "version": "1.0.17",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": ["foreach", "iterators"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "doParallel",
+        "RemoteType": "standard",
+        "RemoteRef": "doParallel",
+        "RemoteSha": "1.0.17",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/doParallel_1.0.17.zip",
+      "target": "bin/windows/contrib/4.2/doParallel_1.0.17.zip",
+      "platform": "i386+x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "GPL-2",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; ; 2022-08-04 01:38:51 UTC; windows",
+      "sha256": "3c5ce5e3a7163e9df37399b66d3292b714c16ad158093e196f4c8d8de418271f",
+      "filesize": 191866,
+      "repotype": "cran"
+    },
+    {
+      "ref": "foreach",
+      "package": "foreach",
+      "version": "1.5.2",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": ["codetools", "iterators"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "foreach",
+        "RemoteType": "standard",
+        "RemoteRef": "foreach",
+        "RemoteSha": "1.5.2",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/foreach_1.5.2.zip",
+      "target": "bin/windows/contrib/4.2/foreach_1.5.2.zip",
+      "platform": "i386+x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "Apache License (== 2.0)",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; ; 2022-08-04 01:10:33 UTC; windows",
+      "sha256": "b15d2fcc698acfccee03dcb8210c9427723553463afb413bff334eecb55a0270",
+      "filesize": 148040,
+      "repotype": "cran"
+    },
+    {
+      "ref": "haven",
+      "package": "haven",
+      "version": "2.5.0",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": ["cli", "forcats", "hms", "lifecycle", "readr", "rlang", "tibble", "tidyselect", "vctrs"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "haven",
+        "RemoteType": "standard",
+        "RemoteRef": "haven",
+        "RemoteSha": "2.5.0",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/haven_2.5.0.zip",
+      "target": "bin/windows/contrib/4.2/haven_2.5.0.zip",
+      "platform": "x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "MIT + file LICENSE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 04:13:03 UTC; windows",
+      "sha256": "57454f123676d5c40fe22aaec8d1c433532558fc23161a83997ec1119c761b7b",
+      "filesize": 754535,
+      "repotype": "cran"
+    },
+    {
+      "ref": "hms",
+      "package": "hms",
+      "version": "1.1.1",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": ["ellipsis", "lifecycle", "pkgconfig", "rlang", "vctrs"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "hms",
+        "RemoteType": "standard",
+        "RemoteRef": "hms",
+        "RemoteSha": "1.1.1",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/hms_1.1.1.zip",
+      "target": "bin/windows/contrib/4.2/hms_1.1.1.zip",
+      "platform": "i386+x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "MIT + file LICENSE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; ; 2022-08-04 02:10:06 UTC; windows",
+      "sha256": "41573b165da9ab3e0341518f47223c6d893149cfbca1ea3ba0cf4f5640c28e24",
+      "filesize": 103520,
+      "repotype": "cran"
+    },
+    {
+      "ref": "iterators",
+      "package": "iterators",
+      "version": "1.0.14",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": [],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "iterators",
+        "RemoteType": "standard",
+        "RemoteRef": "iterators",
+        "RemoteSha": "1.0.14",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/iterators_1.0.14.zip",
+      "target": "bin/windows/contrib/4.2/iterators_1.0.14.zip",
+      "platform": "i386+x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "Apache License (== 2.0)",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; ; 2022-08-04 00:19:02 UTC; windows",
+      "sha256": "385be035b189d927899fdb59cda860dfce77e61cf7611aff9187788c8d014a0e",
+      "filesize": 353523,
+      "repotype": "cran"
+    },
+    {
+      "ref": "labelled",
+      "package": "labelled",
+      "version": "2.9.1",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": ["haven", "dplyr", "lifecycle", "rlang", "vctrs", "stringr", "tidyr"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "labelled",
+        "RemoteType": "standard",
+        "RemoteRef": "labelled",
+        "RemoteSha": "2.9.1",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "i386+x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/labelled_2.9.1.zip",
+      "target": "bin/windows/contrib/4.2/labelled_2.9.1.zip",
+      "platform": "i386+x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "GPL-3",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; ; 2022-08-04 04:35:24 UTC; windows",
+      "sha256": "db5d561d0236a3975366862518a24783f5eb1e716e6937d9328ce5a547b818f9",
+      "filesize": 300763,
+      "repotype": "cran"
+    },
+    {
+      "ref": "plyr",
+      "package": "plyr",
+      "version": "1.8.7",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": "Rcpp",
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "plyr",
+        "RemoteType": "standard",
+        "RemoteRef": "plyr",
+        "RemoteSha": "1.8.7",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/plyr_1.8.7.zip",
+      "target": "bin/windows/contrib/4.2/plyr_1.8.7.zip",
+      "platform": "x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "MIT + file LICENSE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 01:10:31 UTC; windows",
+      "sha256": "743777796fa731a722133ede2e8838edea9f85415844673e66c37d30f58d0c04",
+      "filesize": 1151512,
+      "repotype": "cran"
+    },
+    {
+      "ref": "readr",
+      "package": "readr",
+      "version": "2.1.2",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": ["cli", "clipr", "crayon", "hms", "lifecycle", "R6", "rlang", "tibble", "vroom"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "readr",
+        "RemoteType": "standard",
+        "RemoteRef": "readr",
+        "RemoteSha": "2.1.2",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/readr_2.1.2.zip",
+      "target": "bin/windows/contrib/4.2/readr_2.1.2.zip",
+      "platform": "x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "MIT + file LICENSE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 03:30:41 UTC; windows",
+      "sha256": "8c01a4a1a0da073a85bef7bd2a3f8b6e95934c94f75bf389a0fa7dcf0934b40b",
+      "filesize": 1208450,
+      "repotype": "cran"
+    },
+    {
+      "ref": "tzdb",
+      "package": "tzdb",
+      "version": "0.3.0",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": [],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "tzdb",
+        "RemoteType": "standard",
+        "RemoteRef": "tzdb",
+        "RemoteSha": "0.3.0",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/tzdb_0.3.0.zip",
+      "target": "bin/windows/contrib/4.2/tzdb_0.3.0.zip",
+      "platform": "x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "MIT + file LICENSE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 00:20:50 UTC; windows",
+      "sha256": "dfc045e85deaf3cae4ea275bbc9b36f11bcdb02e2ef5acdcec67887af5f277c8",
+      "filesize": 1011341,
+      "repotype": "cran"
+    },
+    {
+      "ref": "vroom",
+      "package": "vroom",
+      "version": "1.5.7",
+      "type": "standard",
+      "direct": false,
+      "binary": true,
+      "dependencies": ["bit64", "crayon", "cli", "glue", "hms", "lifecycle", "rlang", "tibble", "tzdb", "vctrs", "tidyselect", "withr"],
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "vroom",
+        "RemoteType": "standard",
+        "RemoteRef": "vroom",
+        "RemoteSha": "1.5.7",
+        "RemoteRepos": "https://cran.r-project.org/",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
+      },
+      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/vroom_1.5.7.zip",
+      "target": "bin/windows/contrib/4.2/vroom_1.5.7.zip",
+      "platform": "x86_64-w64-mingw32",
+      "rversion": "4.2",
+      "directpkg": false,
+      "license": "MIT + file LICENSE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": false,
+      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-08-04 02:56:51 UTC; windows",
+      "sha256": "bf75481866f76f99d4968c6e357e442b52ea167b9145eaf0bcb809789a46cba3",
+      "filesize": 1334012,
       "repotype": "cran"
     },
     {
@@ -4208,8 +4301,8 @@
       "metadata": {
         "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/lattice",
         "RemoteType": "installed",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.20-45"
+        "RemoteSha": "0.20-45",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": [],
       "target": "src/contrib/lattice_0.20-45.tar.gz",
@@ -4236,8 +4329,8 @@
       "metadata": {
         "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/boot",
         "RemoteType": "installed",
-        "RemotePkgPlatform": "*",
-        "RemoteSha": "1.3-28"
+        "RemoteSha": "1.3-28",
+        "RemotePkgPlatform": "*"
       },
       "sources": [],
       "target": "src/contrib/boot_1.3-28.tar.gz",
@@ -4253,34 +4346,6 @@
       "repotype": "cran"
     },
     {
-      "ref": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/cluster",
-      "package": "cluster",
-      "version": "2.1.3",
-      "type": "installed",
-      "direct": false,
-      "binary": true,
-      "dependencies": [],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/cluster",
-        "RemoteType": "installed",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.1.3"
-      },
-      "sources": [],
-      "target": "src/contrib/cluster_2.1.3.tar.gz",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "R 4.2.0",
-      "directpkg": false,
-      "license": "GPL (>= 2)",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": true,
-      "built": "R 4.2.0; x86_64-w64-mingw32; 2022-04-22 12:25:11 UTC; windows",
-      "repotype": "cran"
-    },
-    {
       "ref": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/codetools",
       "package": "codetools",
       "version": "0.2-18",
@@ -4292,8 +4357,8 @@
       "metadata": {
         "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/codetools",
         "RemoteType": "installed",
-        "RemotePkgPlatform": "*",
-        "RemoteSha": "0.2-18"
+        "RemoteSha": "0.2-18",
+        "RemotePkgPlatform": "*"
       },
       "sources": [],
       "target": "src/contrib/codetools_0.2-18.tar.gz",
@@ -4320,8 +4385,8 @@
       "metadata": {
         "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/MASS",
         "RemoteType": "installed",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "7.3-58"
+        "RemoteSha": "7.3-58",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": [],
       "target": "src/contrib/MASS_7.3-58.tar.gz",
@@ -4348,8 +4413,8 @@
       "metadata": {
         "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/Matrix",
         "RemoteType": "installed",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.4-1"
+        "RemoteSha": "1.4-1",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": [],
       "target": "src/contrib/Matrix_1.4-1.tar.gz",
@@ -4376,8 +4441,8 @@
       "metadata": {
         "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/mgcv",
         "RemoteType": "installed",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.8-40"
+        "RemoteSha": "1.8-40",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": [],
       "target": "src/contrib/mgcv_1.8-40.tar.gz",
@@ -4404,8 +4469,8 @@
       "metadata": {
         "RemotePkgRef": "installed::D:/Profils/mcanouil/AppData/Local/Programs/R/R-4.2.0/library/nlme",
         "RemoteType": "installed",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "3.1-158"
+        "RemoteSha": "3.1-158",
+        "RemotePkgPlatform": "x86_64-w64-mingw32"
       },
       "sources": [],
       "target": "src/contrib/nlme_3.1-158.tar.gz",
@@ -4418,327 +4483,6 @@
       "install_args": "",
       "needscompilation": true,
       "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:28 UTC; windows",
-      "repotype": "cran"
-    },
-    {
-      "ref": "github::carriedaymont/growthcleanr@v2.0.0",
-      "package": "growthcleanr",
-      "version": "2.0.0",
-      "type": "github",
-      "direct": false,
-      "binary": false,
-      "dependencies": ["data.table", "tidyr", "plyr", "dplyr", "foreach", "doParallel", "labelled", "magrittr"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "github::carriedaymont/growthcleanr@v2.0.0",
-        "RemoteType": "github",
-        "RemoteRef": "v2.0.0",
-        "RemoteSha": "4c6b05f2cd60b3b0f2c99718d76c4fbb438023e4",
-        "RemoteHost": "api.github.com",
-        "RemoteRepo": "growthcleanr",
-        "RemoteUsername": "carriedaymont",
-        "GithubRepo": "growthcleanr",
-        "GithubUsername": "carriedaymont",
-        "GithubRef": "v2.0.0",
-        "GithubSHA1": "4c6b05f2cd60b3b0f2c99718d76c4fbb438023e4"
-      },
-      "sources": "https://api.github.com/repos/carriedaymont/growthcleanr/zipball/4c6b05f2cd60b3b0f2c99718d76c4fbb438023e4",
-      "target": "src/contrib/growthcleanr_2.0.0_4c6b05f.tar.gz",
-      "platform": "source",
-      "rversion": "*",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "--no-multiarch",
-      "needscompilation": true
-    },
-    {
-      "ref": "clipr",
-      "package": "clipr",
-      "version": "0.8.0",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": [],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "clipr",
-        "RemoteType": "standard",
-        "RemoteRef": "clipr",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "0.8.0"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/clipr_0.8.0.zip",
-      "target": "bin/windows/contrib/4.2/clipr_0.8.0.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-3",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 00:30:06 UTC; windows",
-      "sha256": "fc4c4f113e2f5066cdf0787ad6a2d28a618faf6259c5d68899e5375d133f44f8",
-      "filesize": 54753,
-      "repotype": "cran"
-    },
-    {
-      "ref": "doParallel",
-      "package": "doParallel",
-      "version": "1.0.17",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["foreach", "iterators"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "doParallel",
-        "RemoteType": "standard",
-        "RemoteRef": "doParallel",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.0.17"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/doParallel_1.0.17.zip",
-      "target": "bin/windows/contrib/4.2/doParallel_1.0.17.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-2",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 01:19:51 UTC; windows",
-      "sha256": "bd7a704e31fb908e69cf336fe75e01602c8b30990c62a95a9d3755590b6c423f",
-      "filesize": 191851,
-      "repotype": "cran"
-    },
-    {
-      "ref": "haven",
-      "package": "haven",
-      "version": "2.5.0",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["cli", "forcats", "hms", "lifecycle", "readr", "rlang", "tibble", "tidyselect", "vctrs"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "haven",
-        "RemoteType": "standard",
-        "RemoteRef": "haven",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.5.0"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/haven_2.5.0.zip",
-      "target": "bin/windows/contrib/4.2/haven_2.5.0.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 04:28:48 UTC; windows",
-      "sha256": "b857c24799c84c9fc635bc4e4c9fd012fceefc09fbf87afd4a1253caf0c08963",
-      "filesize": 754962,
-      "repotype": "cran"
-    },
-    {
-      "ref": "hms",
-      "package": "hms",
-      "version": "1.1.1",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["ellipsis", "lifecycle", "pkgconfig", "rlang", "vctrs"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "hms",
-        "RemoteType": "standard",
-        "RemoteRef": "hms",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "1.1.1"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/hms_1.1.1.zip",
-      "target": "bin/windows/contrib/4.2/hms_1.1.1.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 02:25:58 UTC; windows",
-      "sha256": "cf62742e70dd604d484e9b6b771906ff9544e50413919f6341dbf712b96585cf",
-      "filesize": 103572,
-      "repotype": "cran"
-    },
-    {
-      "ref": "labelled",
-      "package": "labelled",
-      "version": "2.9.1",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["haven", "dplyr", "lifecycle", "rlang", "vctrs", "stringr", "tidyr"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "labelled",
-        "RemoteType": "standard",
-        "RemoteRef": "labelled",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-        "RemoteSha": "2.9.1"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/labelled_2.9.1.zip",
-      "target": "bin/windows/contrib/4.2/labelled_2.9.1.zip",
-      "platform": "i386+x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "GPL-3",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; ; 2022-07-26 04:55:54 UTC; windows",
-      "sha256": "19f44bb2c828a7a95733cb3aedd73e23988c624747c57e38c81559bc8223bad3",
-      "filesize": 300759,
-      "repotype": "cran"
-    },
-    {
-      "ref": "plyr",
-      "package": "plyr",
-      "version": "1.8.7",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": "Rcpp",
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "plyr",
-        "RemoteType": "standard",
-        "RemoteRef": "plyr",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.8.7"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/plyr_1.8.7.zip",
-      "target": "bin/windows/contrib/4.2/plyr_1.8.7.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 01:19:20 UTC; windows",
-      "sha256": "5eb3b4eb416d32bfd110dd93843bcc9caa39fc12ac6a5316a30869c9261231f4",
-      "filesize": 1152497,
-      "repotype": "cran"
-    },
-    {
-      "ref": "readr",
-      "package": "readr",
-      "version": "2.1.2",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["cli", "clipr", "crayon", "hms", "lifecycle", "R6", "rlang", "tibble", "vroom"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "readr",
-        "RemoteType": "standard",
-        "RemoteRef": "readr",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "2.1.2"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/readr_2.1.2.zip",
-      "target": "bin/windows/contrib/4.2/readr_2.1.2.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 03:40:13 UTC; windows",
-      "sha256": "466fbea099a5776230aeb86d6c3e92a6a3c79ba6385a44c59b8e0987c667df50",
-      "filesize": 1208497,
-      "repotype": "cran"
-    },
-    {
-      "ref": "tzdb",
-      "package": "tzdb",
-      "version": "0.3.0",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": [],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "tzdb",
-        "RemoteType": "standard",
-        "RemoteRef": "tzdb",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "0.3.0"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/tzdb_0.3.0.zip",
-      "target": "bin/windows/contrib/4.2/tzdb_0.3.0.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 00:30:18 UTC; windows",
-      "sha256": "29dcbd2ca69a32e619bc75428f62377a51fd024a3e2c68b054f45f2fb7e2deda",
-      "filesize": 1011338,
-      "repotype": "cran"
-    },
-    {
-      "ref": "vroom",
-      "package": "vroom",
-      "version": "1.5.7",
-      "type": "standard",
-      "direct": false,
-      "binary": true,
-      "dependencies": ["bit64", "crayon", "cli", "glue", "hms", "lifecycle", "rlang", "tibble", "tzdb", "vctrs", "tidyselect", "withr"],
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "vroom",
-        "RemoteType": "standard",
-        "RemoteRef": "vroom",
-        "RemoteRepos": "https://cran.r-project.org/",
-        "RemotePkgPlatform": "x86_64-w64-mingw32",
-        "RemoteSha": "1.5.7"
-      },
-      "sources": "https://cran.r-project.org//bin/windows/contrib/4.2/vroom_1.5.7.zip",
-      "target": "bin/windows/contrib/4.2/vroom_1.5.7.zip",
-      "platform": "x86_64-w64-mingw32",
-      "rversion": "4.2",
-      "directpkg": false,
-      "license": "MIT + file LICENSE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": false,
-      "built": "R 4.2.1; x86_64-w64-mingw32; 2022-07-26 03:09:34 UTC; windows",
-      "sha256": "2da39200fcd8ea78ad7c11d856f4308099cbd16f9640f634bc3b6881b9283225",
-      "filesize": 1334105,
       "repotype": "cran"
     }
   ]
