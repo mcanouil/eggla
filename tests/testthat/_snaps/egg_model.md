@@ -9,15 +9,6 @@
     Code
       cor2 <- egg_correlations(fit = res2, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12,
         17), knots = c(2, 8, 12))
-    Message
-      
-      Correlation method: 'pearson'
-      Missing treated using: 'pairwise.complete.obs'
-      
-      
-      Correlation method: 'pearson'
-      Missing treated using: 'pairwise.complete.obs'
-      
 
 ---
 

@@ -51,7 +51,10 @@ compute_correlations <- function(
       SLOPE = compute_slopes(fit, method, period, knots)
     ),
     FUN = function(data) {
-      corrr::correlate(data[grep("^auc_|^slope_", names(data))])
+      data.table::as.data.table(
+        x = stats::cor(data[grep("^auc_|^slope_", names(data))]),
+        keep.rownames = "term"
+      )
     }
   )
 }
