@@ -1,4 +1,9 @@
-# eggla (development version)
+# eggla 0.11.0
+
+## Breaking changes
+
+- `run_eggla()` has been renamed to `run_eggla_lmm()`.
+- `do_eggla_gwas()` has been renamed to `run_eggla_gwas()`.
 
 ## Fixes
 
@@ -21,6 +26,13 @@
   - feat: add correlation figure/table. (#22)
 - In `R/egg_outliers()` and `R/compute_outliers()`,
   - feat: add function to check. (#22)
+
+## Tests
+
+- In `tests/testhat`:
+  - test: add tests for plot functions.
+  - test: add more tests for `time_model()` and `egg_model()`.
+  - test: add tests for `*_correlations()` and `*_outliers()` functions.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.4...v0.11.0>
 
