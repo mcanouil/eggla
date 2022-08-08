@@ -20,6 +20,7 @@ reference:
     - compute_slopes
     - plot_slopes
     - compute_correlations
+    - compute_outliers
     - gsp
   - title: Cubic Splines (Random Cubic/Linear Splines) Functions
     desc: Functions dedicated to work with cubic Splines mixed model.
@@ -28,6 +29,7 @@ reference:
     - egg_aucs
     - egg_slopes
     - egg_correlations
+    - egg_outliers
     - plot_egg_aucs
     - plot_egg_slopes
     - run_eggla_lmm
