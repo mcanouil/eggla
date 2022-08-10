@@ -1,3 +1,11 @@
+# eggla 0.11.2
+
+## Fixes
+
+- fix: uses general Zenodo DOI.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.11.1...v0.11.2>
+
 # eggla 0.11.1
 
 ## Chores

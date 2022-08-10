@@ -10,15 +10,8 @@ license: MIT
 title: 'eggla: Early Growth Genetics Longitudinal Analysis'
 version: 0.11.0
 date-released: "2022-08-10"
-doi: 10.5281/zenodo.6979434
+doi: 10.5281/zenodo.6979433
 abstract: Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
-identifiers:
-  - description: This is the collection of archived snapshots of all versions of the eggla R package.
-    type: doi
-    value: "10.5281/zenodo.6979434"
-  - description: This is the archived snapshot of version 0.11.0 of the eggla R package.
-    type: doi
-    value: "10.5281/zenodo.123457"
 authors:
 - family-names: Canouil
   given-names: Mickaël
@@ -38,7 +31,7 @@ authors:
 preferred-citation:
   type: manual
   title: 'eggla: Early Growth Genetics Longitudinal Analysis'
-  doi: 10.5281/zenodo.6979434
+  doi: 10.5281/zenodo.6979433
   authors:
   - family-names: Canouil
     given-names: Mickaël
