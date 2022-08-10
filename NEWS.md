@@ -1,3 +1,16 @@
+# eggla 0.11.1
+
+## Chores
+
+- chore: add DOI and citation files.
+
+## Fixes
+
+- In `vinettes/eggla.Rmd`,
+  - fix: uses `latest` moving tag.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.11.0...v0.11.1>
+
 # eggla 0.11.0
 
 ## Breaking changes
