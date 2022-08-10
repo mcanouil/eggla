@@ -130,7 +130,7 @@ run_eggla_lmm <- function(
       j = .SD,
       .SDcols = c(required_id_variables, "WEIGHTKG", "HEIGHTCM")
     ],
-    id.vars = required_id_variables
+    id.vars = required_id_variables,
     measure.vars = c("WEIGHTKG", "HEIGHTCM"),
     variable.name = "param",
     value.name = "measurement",
