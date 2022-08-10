@@ -53,6 +53,7 @@
 #'     random_complexity = 1,
 #'     use_car1 = FALSE,
 #'     knots = c(2, 8, 12),
+#'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
 #'     parallel = FALSE,
 #'     parallel_n_chunks = 1,
 #'     working_directory = tempdir()
@@ -79,35 +80,60 @@ run_eggla_lmm <- function(
 ) {
   HEIGHTCM <- WEIGHTKG <- bmi <- clean <- NULL # no visible binding for global variable from data.table
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
-  measurement <- param <- NULL # no visible binding for global variable from data.table
+  measurement <- param <- egg_ageyears <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
 
+  data <- data.table::setnames(
+    x = data.table::as.data.table(data),
+    old = c(
+      id_variable, age_years_variable, sex_variable,
+      weight_kilograms_variable, height_centimetres_variable
+    ),
+    new = c("egg_id", "egg_ageyears", "egg_sex", "WEIGHTKG", "HEIGHTCM")
+  )
+  if (is.null(age_days_variable)) {
+    data[
+      j = egg_agedays := floor(egg_ageyears * 365.25)
+    ]
+  } else {
+    data.table::setnames(
+      x = data,
+      old = age_days_variable,
+      new = "egg_agedays"
+    )
+  }
+  if (male_coded_zero) {
+    data[
+      j = egg_sex := as.integer(egg_sex)
+    ]
+  } else {
+    # recode sex with Male = 0 and Female = 1 ...
+    data[
+      j = egg_sex := c("0" = 1L, "1" = 0L)[as.character(egg_sex)]
+    ]
+  }
+
+  required_id_variables <- c(
+    sprintf("egg_%s", c("id", "ageyears", "agedays", "sex")),
+    intersect(covariates, names(data))
+  )
+
   dt_long <- data.table::melt(
     data = data.table::as.data.table(data)[
-      j = list(
-        "egg_id" = as.character(get(id_variable)),
-        "egg_ageyears" = get(age_years_variable),
-        "egg_agedays" = if (is.null(age_days_variable)) {
-          # convert age in years to age in days and as integers ...
-          floor(get(age_years_variable) * 365.25)
-        } else {
-          get(age_days_variable)
-        },
-        "WEIGHTKG" = as.numeric(get(weight_kilograms_variable)),
-        "HEIGHTCM" = as.numeric(get(height_centimetres_variable)),
-        "egg_sex" = if (male_coded_zero) {
-          as.integer(get(sex_variable))
-        } else {
-          # recode sex with Male = 0 and Female = 1 ...
-          c("0" = 1L, "1" = 0L)[as.character(get(sex_variable))]
-        }
+      j = `:=`(
+        "egg_id" = as.character(egg_id),
+        "egg_ageyears" = egg_ageyears,
+        "egg_agedays" = egg_agedays,
+        "WEIGHTKG" = as.numeric(WEIGHTKG),
+        "HEIGHTCM" = as.numeric(HEIGHTCM),
+        "egg_sex" = as.integer(egg_sex)
       )
+    ][
+      j = .SD,
+      .SDcols = c(required_id_variables, "WEIGHTKG", "HEIGHTCM")
     ],
-    id.vars = c(
-      sprintf("egg_%s", c("id", "ageyears", "agedays", "sex")),
-      covariates
-    ),
+    id.vars = required_id_variables,
     measure.vars = c("WEIGHTKG", "HEIGHTCM"),
     variable.name = "param",
     value.name = "measurement",
