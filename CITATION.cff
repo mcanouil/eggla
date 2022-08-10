@@ -8,7 +8,6 @@ message: 'To cite package "eggla" in publications use:'
 type: software
 license: MIT
 title: 'eggla: Early Growth Genetics Longitudinal Analysis'
-version: 0.11.0
 date-released: "2022-08-10"
 doi: 10.5281/zenodo.6979433
 abstract: Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
@@ -48,7 +47,6 @@ preferred-citation:
   - family-names: Heiskala
     given-names: Anni
     email: Anni.Heiskala@oulu.fi
-  version: 0.11.0
   abstract: Tools for longitudinal analysis within the EGG (Early Growth Genetics)
     Consortium.
   repository-code: https://github.com/mcanouil/eggla
