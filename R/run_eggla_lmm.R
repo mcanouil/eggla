@@ -53,6 +53,7 @@
 #'     random_complexity = 1,
 #'     use_car1 = FALSE,
 #'     knots = c(2, 8, 12),
+#'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
 #'     parallel = FALSE,
 #'     parallel_n_chunks = 1,
 #'     working_directory = tempdir()
@@ -117,13 +118,13 @@ run_eggla_lmm <- function(
     sprintf("egg_%s", c("id", "ageyears", "agedays", "sex")),
     intersect(covariates, names(data))
   )
-  
+
   dt_long <- data.table::melt(
     data = data.table::as.data.table(data)[
       j = `:=`(
         "egg_id" = as.character(egg_id),
         "egg_ageyears" = egg_ageyears,
-        "egg_agedays" = egg_ageyears,
+        "egg_agedays" = egg_agedays,
         "WEIGHTKG" = as.numeric(WEIGHTKG),
         "HEIGHTCM" = as.numeric(HEIGHTCM),
         "egg_sex" = as.integer(egg_sex)
