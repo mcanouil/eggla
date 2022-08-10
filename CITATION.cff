@@ -38,6 +38,7 @@ authors:
 preferred-citation:
   type: manual
   title: 'eggla: Early Growth Genetics Longitudinal Analysis'
+  doi: 10.5281/zenodo.6979434
   authors:
   - family-names: Canouil
     given-names: Mickaël
