@@ -1,3 +1,13 @@
+# eggla (development version)
+
+## Chores
+
+- chore: remove version from CFF file.
+
+## Style
+
+- style: remove breakline in badges section.
+
 # eggla 0.11.2
 
 ## Fixes
