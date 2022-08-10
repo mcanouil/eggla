@@ -16,6 +16,8 @@ run_eggla_lmm(
   male_coded_zero = FALSE,
   random_complexity = "auto",
   use_car1 = FALSE,
+  knots = c(2, 8, 12),
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -46,6 +48,10 @@ Default, \code{"auto"} will try from the more complex to the less complex if no 
 
 \item{use_car1}{A logical indicating whether to use continuous auto-correlation,
 i.e., CAR(1) as correlation structure.}
+
+\item{knots}{The knots defining the splines.}
+
+\item{period}{The intervals knots on which slopes are to be computed.}
 
 \item{parallel}{Determines if \code{growthcleanr::cleangrowth()} function shoud be run in parallel. Defaults to \code{FALSE}.}
 
@@ -87,6 +93,7 @@ if (interactive()) {
     male_coded_zero = FALSE,
     random_complexity = 1,
     use_car1 = FALSE,
+    knots = c(2, 8, 12),
     parallel = FALSE,
     parallel_n_chunks = 1,
     working_directory = tempdir()
