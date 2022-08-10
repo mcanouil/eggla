@@ -94,6 +94,7 @@ if (interactive()) {
     random_complexity = 1,
     use_car1 = FALSE,
     knots = c(2, 8, 12),
+    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
     parallel = FALSE,
     parallel_n_chunks = 1,
     working_directory = tempdir()
