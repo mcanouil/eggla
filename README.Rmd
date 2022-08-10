@@ -29,16 +29,20 @@ Tools for longitudinal analysis within the [EGG (Early Growth Genetics) Consorti
 
 * Install the development version from GitHub:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # install.packages("remotes")
 remotes::install_github("mcanouil/eggla")
 ```
 
 * Install a particular version:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.10.4")
+remotes::install_github("mcanouil/eggla@0.11.1")
+# or the latest stable version
+remotes::install_github("mcanouil/eggla@latest")
 ```
 
 ## Docker Images

@@ -31,7 +31,9 @@ remotes::install_github("mcanouil/eggla")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.10.4")
+remotes::install_github("mcanouil/eggla@0.11.1")
+# or the latest stable version
+remotes::install_github("mcanouil/eggla@latest")
 ```
 
 ## Docker Images

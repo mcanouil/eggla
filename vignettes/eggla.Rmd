@@ -154,7 +154,7 @@ utils::download.file(
     destfile = "renv.lock"
   )
 renv::restore(lockfile = "renv.lock")
-renv::install("mcanouil/eggla@v0.10.4")
+renv::install("mcanouil/eggla@latest")
 unlink(temp_library, recursive = TRUE)
 EOF
 
@@ -210,7 +210,7 @@ utils::download.file(
   destfile = "pkg.lock"
 )
 lockfile_install(lockfile = "pkg.lock", lib = temp_library)
-pkg_install("mcanouil/eggla@v0.10.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+pkg_install("mcanouil/eggla@latest", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
 EOF
 
 Rscript <<EOF
@@ -327,7 +327,7 @@ utils::download.file(
   destfile = "renv.lock"
 )
 renv::restore(lockfile = "renv.lock")
-renv::install("mcanouil/eggla@v0.10.4")
+renv::install("mcanouil/eggla@latest")
 unlink(temp_library, recursive = TRUE)
 ```
 
