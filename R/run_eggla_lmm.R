@@ -20,6 +20,8 @@
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
 #' @param use_car1 A logical indicating whether to use continuous auto-correlation,
 #'   i.e., CAR(1) as correlation structure.
+#' @param knots The knots defining the splines.
+#' @param period The intervals knots on which slopes are to be computed.
 #' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
 #' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
 #'   Only applies if parallel is set to TRUE.
@@ -50,6 +52,7 @@
 #'     male_coded_zero = FALSE,
 #'     random_complexity = 1,
 #'     use_car1 = FALSE,
+#'     knots = c(2, 8, 12),
 #'     parallel = FALSE,
 #'     parallel_n_chunks = 1,
 #'     working_directory = tempdir()
@@ -67,6 +70,8 @@ run_eggla_lmm <- function(
   male_coded_zero = FALSE,
   random_complexity = "auto",
   use_car1 = FALSE,
+  knots = c(2, 8, 12),
+  period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -77,9 +82,6 @@ run_eggla_lmm <- function(
   measurement <- param <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
-
-  period <- c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
-  knots <- c(2, 8, 12)
 
   dt_long <- data.table::melt(
     data = data.table::as.data.table(data)[
