@@ -109,7 +109,7 @@ run_eggla_lmm <- function(
   } else {
     # recode sex with Male = 0 and Female = 1 ...
     data[
-      j = egg_sex := c("0" = 1L, "1" = 0L)[as.character(gegg_sex)]
+      j = egg_sex := c("0" = 1L, "1" = 0L)[as.character(egg_sex)]
     ]
   }
 
@@ -126,7 +126,7 @@ run_eggla_lmm <- function(
         "egg_agedays" = egg_ageyears,
         "WEIGHTKG" = as.numeric(WEIGHTKG),
         "HEIGHTCM" = as.numeric(HEIGHTCM),
-        "egg_sex" = as.integer(iegg_sex)
+        "egg_sex" = as.integer(egg_sex)
       )
     ][
       j = .SD,
