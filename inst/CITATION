@@ -17,10 +17,10 @@ citEntry(
   url = "https://m.canouil.fr/eggla/",
   keywords = "genetics, growth-curves, infancy, longitudinal-analysis, mixed-effects-models, r, r-package, r-stats, spline-regression",
   abstract = "Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.",
-  doi = "10.5281/zenodo.6979434",
+  doi = "10.5281/zenodo.6979433",
   textVersion = paste(
     "Canouil M, Warrington N, Burrows K, Heiskala A (2022).",
     "_eggla: Early Growth Genetics Longitudinal Analysis_.",
-    "doi: 10.5281/zenodo.6979434"
+    "doi: 10.5281/zenodo.6979433"
   )
 )
