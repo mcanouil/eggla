@@ -4,11 +4,18 @@
 
 - In `R/run_eggla_lmm.R`,
   - fix: improve data transformation/cleaning (#38).
+  - fix: allow to output directories path and no zip archives when `zip` is not available (#41).
+  - fix: remove dates from model object filename.
+
+- In `R/run_eggla_gwas.R`,
+  - fix: allow to use directories path or zip archives as results (#41).
+  - fix: rename `results_zip` argument to `results`.
 
 ## Features
 
 - In `R/run_eggla_lmm.R`,
   - feat: add knots and period parameters (#37).
+  - feat: add clean parameter to clean directories when archives are successfully created (#41).
 
 ## Chores
 
