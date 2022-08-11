@@ -292,7 +292,7 @@ run_eggla_lmm <- function(
     }
   )
 
-  if (!quiet) {
+  if (!quiet && all(file.exists(archives))) {
     message("Results available at:")
     message(paste(sprintf("+ '%s'", archives), collapse = "\n"))
   }
