@@ -180,11 +180,8 @@ run_eggla_lmm <- function(
     X = c(0, 1),
     FUN = function(isex) {
       sex_literal <- c("0" = "male", "1" = "female")[as.character(isex)]
-      archive_filename <- file.path(
-        working_directory,
-        sprintf("%s.zip", sex_literal)
-      )
       results_directory <- file.path(working_directory, sex_literal)
+      archive_filename <- sprintf("%s.zip", results_directory)
       try(unlink(results_directory, recursive = TRUE), silent = TRUE)
       dir.create(results_directory, recursive = TRUE)
 
@@ -293,9 +290,17 @@ run_eggla_lmm <- function(
     }
   )
 
-  if (!quiet && all(file.exists(archives))) {
-    message("Results available at:")
+  if (!all(file.exists(archives))) {
+    archives <- sub("\\.zip$", "", archives)
+  }
+
+  if (!quiet) {
+    message(sprintf(
+      "Results%savailable at:",
+      if (grepl("\\.zip$", archives)) " (zip archives) " else " "
+    ))
     message(paste(sprintf("+ '%s'", archives), collapse = "\n"))
   }
+
   archives
 }
