@@ -77,7 +77,7 @@ run_eggla_lmm <- function(
   quiet = FALSE,
   clean = TRUE
 ) {
-  HEIGHTCM <- WEIGHTKG <- bmi <- clean <- NULL # no visible binding for global variable from data.table
+  HEIGHTCM <- WEIGHTKG <- bmi <- NULL # no visible binding for global variable from data.table
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
   measurement <- param <- egg_ageyears <- NULL # no visible binding for global variable from data.table
 
@@ -185,6 +185,7 @@ run_eggla_lmm <- function(
         sprintf("%s.zip", sex_literal)
       )
       results_directory <- file.path(working_directory, sex_literal)
+      try(unlink(results_directory, recursive = TRUE), silent = TRUE)
       dir.create(results_directory, recursive = TRUE)
 
       results <- egg_model(
