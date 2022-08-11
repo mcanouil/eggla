@@ -181,9 +181,13 @@ run_eggla_lmm <- function(
     X = c(0, 1),
     FUN = function(isex) {
       sex_literal <- c("0" = "male", "1" = "female")[as.character(isex)]
+      archive_filename <- file.path(
+        working_directory,
+        sprintf("%s.zip", sex_literal)
+      )
       results_directory <- file.path(working_directory, sex_literal)
       dir.create(results_directory, recursive = TRUE)
-      on.exit(unlink(results_directory, recursive = TRUE))
+      on.exit(if (file.exists(archive_filename)) unlink(results_directory, recursive = TRUE))
       results <- egg_model(
         formula = base_model,
         data = dt_clean[egg_sex %in% isex],
@@ -277,16 +281,10 @@ run_eggla_lmm <- function(
         file = file.path(results_directory, "derived-slopes-correlations.csv")
       )
 
-      owd <- getwd()
-      on.exit(setwd(owd), add = TRUE)
-      setwd(results_directory)
-      archive_filename <- file.path(
-        working_directory,
-        sprintf("%s.zip", sex_literal)
-      )
       utils::zip(
         zipfile = archive_filename,
-        files = list.files()
+        files = list.files(results_directory, full.names = TRUE),
+        flags = "-r9Xj"
       )
       archive_filename
     }
