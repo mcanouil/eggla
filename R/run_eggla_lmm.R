@@ -10,11 +10,14 @@
 #' @param data Phenotypes data that inherits from `data.frame` class.
 #' @param id_variable Name of the column where sample/individual IDs are stored.
 #' @param age_days_variable Name of the column where age in days is stored.
+#'   `NULL` if age in days is not available.
 #' @param age_years_variable Name of the column where age in years is stored.
+#'   `NULL` if age in years is not available.
 #' @param weight_kilograms_variable Name of the column where weight in kilograms is stored.
 #' @param height_centimetres_variable Name of the column where height in centimetres is stored.
 #' @param sex_variable Name of the column where sex is stored.
 #' @param covariates A vector of columns' names to be used as covariates.
+#'   `NULL` if there are no covariates to add.
 #' @param male_coded_zero Is male coded "0" (and female coded "1")?
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
@@ -28,6 +31,7 @@
 #' Defaults to the number of workers returned by the getDoParWorkers function in the foreach package.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
 #' @param quiet A logical indicating whether to suppress the output.
+#' @param clean A logical indicating whether to clean `working_directory` once the archives are created.
 #'
 #' @return Path to zip archives.
 #'
@@ -49,13 +53,7 @@
 #'     height_centimetres_variable = "height",
 #'     sex_variable = "sex",
 #'     covariates = NULL,
-#'     male_coded_zero = FALSE,
 #'     random_complexity = 1,
-#'     use_car1 = FALSE,
-#'     knots = c(2, 8, 12),
-#'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-#'     parallel = FALSE,
-#'     parallel_n_chunks = 1,
 #'     working_directory = tempdir()
 #'   )
 #' }
@@ -76,9 +74,10 @@ run_eggla_lmm <- function(
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
-  quiet = FALSE
+  quiet = FALSE,
+  clean = TRUE
 ) {
-  HEIGHTCM <- WEIGHTKG <- bmi <- clean <- NULL # no visible binding for global variable from data.table
+  HEIGHTCM <- WEIGHTKG <- bmi <- NULL # no visible binding for global variable from data.table
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
   measurement <- param <- egg_ageyears <- NULL # no visible binding for global variable from data.table
 
@@ -182,8 +181,10 @@ run_eggla_lmm <- function(
     FUN = function(isex) {
       sex_literal <- c("0" = "male", "1" = "female")[as.character(isex)]
       results_directory <- file.path(working_directory, sex_literal)
+      archive_filename <- sprintf("%s.zip", results_directory)
+      try(unlink(results_directory, recursive = TRUE), silent = TRUE)
       dir.create(results_directory, recursive = TRUE)
-      on.exit(unlink(results_directory, recursive = TRUE))
+
       results <- egg_model(
         formula = base_model,
         data = dt_clean[egg_sex %in% isex],
@@ -198,7 +199,7 @@ run_eggla_lmm <- function(
         object = results,
         file = file.path(
           working_directory,
-          sprintf("%s-%s-model-object.rds", Sys.Date(), sex_literal)
+          sprintf("%s-model-object.rds", sex_literal)
         )
       )
 
@@ -277,24 +278,29 @@ run_eggla_lmm <- function(
         file = file.path(results_directory, "derived-slopes-correlations.csv")
       )
 
-      owd <- getwd()
-      on.exit(setwd(owd), add = TRUE)
-      setwd(results_directory)
-      archive_filename <- file.path(
-        working_directory,
-        sprintf("%s.zip", sex_literal)
-      )
       utils::zip(
         zipfile = archive_filename,
-        files = list.files()
+        files = list.files(results_directory, full.names = TRUE),
+        flags = "-r9Xj"
       )
+      if (clean & file.exists(archive_filename)) {
+        unlink(results_directory, recursive = TRUE)
+      }
       archive_filename
     }
   )
 
+  if (!all(file.exists(archives))) {
+    archives <- sub("\\.zip$", "", archives)
+  }
+
   if (!quiet) {
-    message("Results available at:")
+    message(sprintf(
+      "Results%savailable at:",
+      if (any(grepl("\\.zip$", archives))) " (zip archives) " else " "
+    ))
     message(paste(sprintf("+ '%s'", archives), collapse = "\n"))
   }
+
   archives
 }

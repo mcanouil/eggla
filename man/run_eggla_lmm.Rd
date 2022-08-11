@@ -21,7 +21,8 @@ run_eggla_lmm(
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
-  quiet = FALSE
+  quiet = FALSE,
+  clean = TRUE
 )
 }
 \arguments{
@@ -29,9 +30,11 @@ run_eggla_lmm(
 
 \item{id_variable}{Name of the column where sample/individual IDs are stored.}
 
-\item{age_days_variable}{Name of the column where age in days is stored.}
+\item{age_days_variable}{Name of the column where age in days is stored.
+\code{NULL} if age in days is not available.}
 
-\item{age_years_variable}{Name of the column where age in years is stored.}
+\item{age_years_variable}{Name of the column where age in years is stored.
+\code{NULL} if age in years is not available.}
 
 \item{weight_kilograms_variable}{Name of the column where weight in kilograms is stored.}
 
@@ -39,7 +42,8 @@ run_eggla_lmm(
 
 \item{sex_variable}{Name of the column where sex is stored.}
 
-\item{covariates}{A vector of columns' names to be used as covariates.}
+\item{covariates}{A vector of columns' names to be used as covariates.
+\code{NULL} if there are no covariates to add.}
 
 \item{male_coded_zero}{Is male coded "0" (and female coded "1")?}
 
@@ -62,6 +66,8 @@ Defaults to the number of workers returned by the getDoParWorkers function in th
 \item{working_directory}{Directory in which computation will occur and where output files will be saved.}
 
 \item{quiet}{A logical indicating whether to suppress the output.}
+
+\item{clean}{A logical indicating whether to clean \code{working_directory} once the archives are created.}
 }
 \value{
 Path to zip archives.
@@ -90,13 +96,7 @@ if (interactive()) {
     height_centimetres_variable = "height",
     sex_variable = "sex",
     covariates = NULL,
-    male_coded_zero = FALSE,
     random_complexity = 1,
-    use_car1 = FALSE,
-    knots = c(2, 8, 12),
-    period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-    parallel = FALSE,
-    parallel_n_chunks = 1,
     working_directory = tempdir()
   )
 }
