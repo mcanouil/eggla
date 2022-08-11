@@ -10,11 +10,14 @@
 #' @param data Phenotypes data that inherits from `data.frame` class.
 #' @param id_variable Name of the column where sample/individual IDs are stored.
 #' @param age_days_variable Name of the column where age in days is stored.
+#'   `NULL` if age in days is not available.
 #' @param age_years_variable Name of the column where age in years is stored.
+#'   `NULL` if age in years is not available.
 #' @param weight_kilograms_variable Name of the column where weight in kilograms is stored.
 #' @param height_centimetres_variable Name of the column where height in centimetres is stored.
 #' @param sex_variable Name of the column where sex is stored.
 #' @param covariates A vector of columns' names to be used as covariates.
+#'   `NULL` if there are no covariates to add.
 #' @param male_coded_zero Is male coded "0" (and female coded "1")?
 #' @param random_complexity A numeric (1-3) indicating the complexity of the random effect term.
 #'  Default, `"auto"` will try from the more complex to the less complex if no success.
@@ -50,13 +53,7 @@
 #'     height_centimetres_variable = "height",
 #'     sex_variable = "sex",
 #'     covariates = NULL,
-#'     male_coded_zero = FALSE,
 #'     random_complexity = 1,
-#'     use_car1 = FALSE,
-#'     knots = c(2, 8, 12),
-#'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-#'     parallel = FALSE,
-#'     parallel_n_chunks = 1,
 #'     working_directory = tempdir()
 #'   )
 #' }
