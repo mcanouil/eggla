@@ -28,6 +28,7 @@
 #' Defaults to the number of workers returned by the getDoParWorkers function in the foreach package.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
 #' @param quiet A logical indicating whether to suppress the output.
+#' @param clean A logical indicating whether to clean `working_directory` once the archives are created.
 #'
 #' @return Path to zip archives.
 #'
@@ -76,7 +77,8 @@ run_eggla_lmm <- function(
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
-  quiet = FALSE
+  quiet = FALSE,
+  clean = TRUE
 ) {
   HEIGHTCM <- WEIGHTKG <- bmi <- clean <- NULL # no visible binding for global variable from data.table
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
@@ -187,7 +189,9 @@ run_eggla_lmm <- function(
       )
       results_directory <- file.path(working_directory, sex_literal)
       dir.create(results_directory, recursive = TRUE)
-      on.exit(if (file.exists(archive_filename)) unlink(results_directory, recursive = TRUE))
+      if (clean) {
+        on.exit(if (file.exists(archive_filename)) unlink(results_directory, recursive = TRUE))
+      }
       results <- egg_model(
         formula = base_model,
         data = dt_clean[egg_sex %in% isex],
