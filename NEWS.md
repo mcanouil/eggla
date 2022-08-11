@@ -1,12 +1,24 @@
 # eggla (development version)
 
+## Fixes
+
+- In `R/run_eggla_lmm.R`,
+  - fix: improve data transformation/cleaning (#38).
+
+## Features
+
+- In `R/run_eggla_lmm.R`,
+  - feat: add knots and period parameters (#37).
+
 ## Chores
 
 - chore: remove version from CFF file.
 
 ## Style
 
-- style: remove breakline in badges section.
+- style: remove break line in badges section.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.11.2...v0.12.0>
 
 # eggla 0.11.2
 
