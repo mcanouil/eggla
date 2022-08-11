@@ -297,7 +297,7 @@ run_eggla_lmm <- function(
   if (!quiet) {
     message(sprintf(
       "Results%savailable at:",
-      if (grepl("\\.zip$", archives)) " (zip archives) " else " "
+      if (any(grepl("\\.zip$", archives))) " (zip archives) " else " "
     ))
     message(paste(sprintf("+ '%s'", archives), collapse = "\n"))
   }
