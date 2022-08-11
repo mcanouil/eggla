@@ -202,7 +202,7 @@ run_eggla_lmm <- function(
         object = results,
         file = file.path(
           working_directory,
-          sprintf("%s-%s-model-object.rds", Sys.Date(), sex_literal)
+          sprintf("%s-model-object.rds", sex_literal)
         )
       )
 
