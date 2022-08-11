@@ -186,9 +186,7 @@ run_eggla_lmm <- function(
       )
       results_directory <- file.path(working_directory, sex_literal)
       dir.create(results_directory, recursive = TRUE)
-      if (clean) {
-        on.exit(if (file.exists(archive_filename)) unlink(results_directory, recursive = TRUE))
-      }
+
       results <- egg_model(
         formula = base_model,
         data = dt_clean[egg_sex %in% isex],
@@ -287,6 +285,9 @@ run_eggla_lmm <- function(
         files = list.files(results_directory, full.names = TRUE),
         flags = "-r9Xj"
       )
+      if (clean & file.exists(archive_filename)) {
+        unlink(results_directory, recursive = TRUE)
+      }
       archive_filename
     }
   )
