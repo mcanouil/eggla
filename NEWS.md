@@ -1,3 +1,12 @@
+# eggla 0.12.2
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: the condition has length > 1.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.1...v0.12.2>
+
 # eggla 0.12.1
 
 ## Fixes
