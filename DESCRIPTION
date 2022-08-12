@@ -1,6 +1,6 @@
 Package: eggla
 Title: Early Growth Genetics Longitudinal Analysis
-Version: 0.12.1
+Version: 0.12.2
 Authors@R:
     c(person(given = "Mickaël",
            family = "Canouil",
