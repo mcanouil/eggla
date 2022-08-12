@@ -1,3 +1,12 @@
+# eggla 0.12.1
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: wrong variable in "results" input check condition.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.0...v0.12.1>
+
 # eggla 0.12.0
 
 ## Fixes

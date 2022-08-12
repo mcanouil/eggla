@@ -156,7 +156,7 @@ run_eggla_gwas <- function(
   )
   if (inherits(bcftools_version, "try-error")) stop("Please check BCFTools binary path!")
 
-  if (grepl("\\.zip$", archives)) {
+  if (grepl("\\.zip$", results)) {
     derived_parameters_dt <- data.table::setnames(
       x = data.table::rbindlist(lapply(
         X = results,
