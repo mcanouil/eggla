@@ -21,7 +21,10 @@
 #' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
-#' @param threads Number of threads to be used by BCFtools.
+#' @param bcftools_view_options A string or a vector of strings (which will be pass to `paste()`)
+#'   containing BCFtools view parameters, _e.g._, `"--min-af 0.05"`, `"--exclude 'INFO/INFO < 0.8'"`,
+#'   and/or `"--min-alleles 2 --max-alleles 2 --types snps"`.
+#' @param bcftools_threads Number of threads to be used by some BCFtools commands.
 #' @param quiet A logical indicating whether to suppress the output.
 #'
 #' @import data.table
@@ -73,7 +76,7 @@
 #'       bcftools = "/usr/bin/bcftools",
 #'       plink2 = "/usr/bin/plink2"
 #'     ),
-#'     threads = 1
+#'     bcftools_threads = 1
 #'   )
 #' }
 run_eggla_gwas <- function(
@@ -89,7 +92,8 @@ run_eggla_gwas <- function(
     bcftools = "/usr/bin/bcftools",
     plink2 = "/usr/bin/plink2"
   ),
-  threads = 1,
+  bcftools_view_options = NULL,
+  bcftools_threads = 1,
   quiet = FALSE
 ) {
   INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
@@ -337,19 +341,18 @@ run_eggla_gwas <- function(
     basename_file = basename_file,
     vep_file = vep,
     bin_path = bin_path,
-    FUN = function(vcf, basename_file, vep_file, bin_path) {
+    bcftools_view_options,
+    FUN = function(vcf, basename_file, vep_file, bin_path, bcf_opt) {
       vcf_file <- sprintf("%s__%s", basename_file, basename(vcf))
       results_file <- sub("\\.vcf.gz", "", vcf_file)
-
+      if (is.null(bcf_opt)) bcf_opt <- ""
       cmd <- paste(
         bin_path[["bcftools"]],
           "+fill-tags", vcf,
        "|",
         bin_path[["bcftools"]],
           "view",
-          # "--min-af 0.05",
-          # "--exclude 'INFO/INFO < 0.8'",
-          "--min-alleles 2 --max-alleles 2 --types snps",
+          bcf_opt,
           "--force-samples",
           "--samples-file", sprintf("%s.samples", basename_file)
       )
@@ -391,7 +394,7 @@ run_eggla_gwas <- function(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
         "--mach-r2-filter",
-        "--threads", threads,
+        "--threads", bcftools_threads,
         "--glm sex",
         if (file.exists(sprintf("%s.cov", basename_file))) c("--covar", sprintf("%s.cov", basename_file)) else "allow-no-covars",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
