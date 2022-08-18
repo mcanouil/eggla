@@ -9,6 +9,7 @@
 
 - In `R/run_eggla_gwas.R`,
   - fix: BCFtools filters as parameter with non by default.
+  - fix: ensure 'id_column' is of type character.
 
 ## Chores
 
