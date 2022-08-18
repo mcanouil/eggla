@@ -350,7 +350,7 @@ run_eggla_gwas <- function(
     basename_file = basename_file,
     vep_file = vep,
     bin_path = bin_path,
-    bcftools_view_options,
+    bcf_opt = bcftools_view_options,
     FUN = function(vcf, basename_file, vep_file, bin_path, bcf_opt) {
       vcf_file <- sprintf("%s__%s", basename_file, basename(vcf))
       results_file <- sub("\\.vcf.gz", "", vcf_file)
