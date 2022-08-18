@@ -30,7 +30,7 @@ test_that("run_eggla", {
     dir.create(output_path, showWarnings = FALSE)
 
     result_gwas <- run_eggla_gwas(
-      data = bmigrowth[
+      data = data.table::as.data.table(bmigrowth)[
         j = sex := c("0" = "f", "1" = "m")[as.character(sex)],
       ],
       results = result_lmm,
