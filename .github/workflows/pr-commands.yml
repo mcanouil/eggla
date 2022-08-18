@@ -105,6 +105,7 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
       - name: Install BCFtools
+        if: runner.os == 'Linux'
         run: |
           apt-get update && \
           apt-get install -y --no-install-recommends \
