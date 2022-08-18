@@ -1,6 +1,9 @@
 set.seed(2705)
 
 data("bmigrowth")
+library(future)
+library(futre.apply)
+plan(sequential)
 
 test_that("run_eggla", {
   result_lmm <- run_eggla_lmm(
