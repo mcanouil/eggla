@@ -56,8 +56,7 @@ jobs:
             sudo autoreconf -i && \
             sudo ./configure --prefix=/usr && \
             sudo make && \
-            sudo make install && \
-            rm -rf /tmp/bcftools-${BCFTOOLS_VERSION}
+            sudo make install
 
       - name: Test coverage
         run: covr::codecov(quiet = FALSE)
