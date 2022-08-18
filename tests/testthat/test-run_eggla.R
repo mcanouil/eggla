@@ -2,7 +2,7 @@ set.seed(2705)
 
 data("bmigrowth")
 library(future)
-library(futre.apply)
+library(future.apply)
 plan(sequential)
 
 test_that("run_eggla", {
