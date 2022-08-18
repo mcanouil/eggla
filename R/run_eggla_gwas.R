@@ -24,7 +24,7 @@
 #' @param bcftools_view_options A string or a vector of strings (which will be pass to `paste()`)
 #'   containing BCFtools view parameters, _e.g._, `"--min-af 0.05"`, `"--exclude 'INFO/INFO < 0.8'"`,
 #'   and/or `"--min-alleles 2 --max-alleles 2 --types snps"`.
-#' @param bcftools_threads Number of threads to be used by some BCFtools commands.
+#' @param threads Number of threads to be used by some BCFtools and PLINK2 commands.
 #' @param quiet A logical indicating whether to suppress the output.
 #'
 #' @import data.table
@@ -76,7 +76,7 @@
 #'       bcftools = "/usr/bin/bcftools",
 #'       plink2 = "/usr/bin/plink2"
 #'     ),
-#'     bcftools_threads = 1
+#'     threads = 1
 #'   )
 #' }
 run_eggla_gwas <- function(
@@ -93,7 +93,7 @@ run_eggla_gwas <- function(
     plink2 = "/usr/bin/plink2"
   ),
   bcftools_view_options = NULL,
-  bcftools_threads = 1,
+  threads = 1,
   quiet = FALSE
 ) {
   INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
@@ -394,7 +394,7 @@ run_eggla_gwas <- function(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
         "--mach-r2-filter",
-        "--threads", bcftools_threads,
+        "--threads", threads,
         "--glm sex",
         if (file.exists(sprintf("%s.cov", basename_file))) c("--covar", sprintf("%s.cov", basename_file)) else "allow-no-covars",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
