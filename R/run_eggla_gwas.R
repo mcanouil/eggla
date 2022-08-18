@@ -109,6 +109,8 @@ run_eggla_gwas <- function(
     showWarnings = FALSE
   )
 
+  if (is.null(bcftools_view_options)) bcftools_view_options <- ""
+
   if (
     !grepl("not found", system(paste(bin_path[["plink2"]], "--version"), intern = TRUE)) &&
       bin_path[["plink2"]] != sprintf("%s/plink2", path)
@@ -350,18 +352,17 @@ run_eggla_gwas <- function(
     basename_file = basename_file,
     vep_file = vep,
     bin_path = bin_path,
-    bcf_opt = bcftools_view_options,
-    FUN = function(vcf, basename_file, vep_file, bin_path, bcf_opt) {
+    bcftools_view_options = bcftools_view_options,
+    FUN = function(vcf, basename_file, vep_file, bin_path, bcftools_view_options) {
       vcf_file <- sprintf("%s__%s", basename_file, basename(vcf))
       results_file <- sub("\\.vcf.gz", "", vcf_file)
-      if (is.null(bcf_opt)) bcf_opt <- ""
       cmd <- paste(
         bin_path[["bcftools"]],
           "+fill-tags", vcf,
        "|",
         bin_path[["bcftools"]],
           "view",
-          bcf_opt,
+          bcftools_view_options,
           "--force-samples",
           "--samples-file", sprintf("%s.samples", basename_file)
       )
