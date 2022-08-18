@@ -1,5 +1,10 @@
 # eggla (development version)
 
+## Breaking changes
+
+- In `DESCRIPTION`,
+  - fix: depends on R >= 4.2.0.
+
 ## Fixes
 
 - In `R/run_eggla_gwas.R`,
