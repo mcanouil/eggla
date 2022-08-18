@@ -86,8 +86,7 @@ jobs:
             sudo autoreconf -i && \
             sudo ./configure --prefix=/usr && \
             sudo make && \
-            sudo make install && \
-            rm -rf /tmp/bcftools-${BCFTOOLS_VERSION}
+            sudo make install
 
       - uses: r-lib/actions/check-r-package@v2
         with:
