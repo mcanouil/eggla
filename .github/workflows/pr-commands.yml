@@ -87,6 +87,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      BCFTOOLS_VERSION: 1.15.1
     steps:
       - uses: actions/checkout@v3
       - uses: r-lib/actions/setup-pandoc@v2
@@ -103,6 +104,32 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
+      - name: Install BCFtools
+        run: |
+          apt-get update && \
+          apt-get install -y --no-install-recommends \
+            libxt6 \
+            ca-certificates \
+            bzip2 \
+            wget \
+            autoconf \
+            automake \
+            make \
+            cmake \
+            libbz2-dev \
+            liblzma-dev \
+            libjpeg-dev \
+            libxml2-dev \
+            zlib1g-dev \
+            libgdal-dev
+          wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
+            tar -C /tmp/ -xjf /tmp/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
+            cd /tmp/bcftools-${BCFTOOLS_VERSION} && \
+            autoreconf -i && \
+            ./configure --prefix=/usr && \
+            make && \
+            make install && \
+            rm -rf /tmp/bcftools-${BCFTOOLS_VERSION}
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--no-manual")'
