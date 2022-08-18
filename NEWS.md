@@ -1,5 +1,15 @@
 # eggla (development version)
 
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: BCFtools filters as parameter with non by default.
+
+## Chores
+
+- In `insta/vcf` and `data-raw/bmigrowth.R`,
+  - chore: add VCF files to test `run_eggla_gwas()`.
+
 # eggla 0.12.2
 
 ## Fixes
