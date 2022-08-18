@@ -10,6 +10,13 @@
 - In `insta/vcf` and `data-raw/bmigrowth.R`,
   - chore: add VCF files to test `run_eggla_gwas()`.
 
+## Tests
+
+- In `inst/setup/eggla-example.R`,
+  - test: add run_eggla_gwas in docker build test example.
+- In `tests/testthat/test-run_eggla.R`,
+  - test: new tests for run_eggla functions. 
+
 # eggla 0.12.2
 
 ## Fixes
