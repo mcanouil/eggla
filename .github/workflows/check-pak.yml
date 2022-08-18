@@ -64,8 +64,8 @@ jobs:
       - name: Install BCFtools
         if: runner.os == 'Linux'
         run: |
-          apt-get update && \
-          apt-get install -y --no-install-recommends \
+          sudo apt-get update && \
+          sudo apt-get install -y --no-install-recommends \
             libxt6 \
             ca-certificates \
             bzip2 \
@@ -83,10 +83,10 @@ jobs:
           wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
             tar -C /tmp/ -xjf /tmp/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
             cd /tmp/bcftools-${BCFTOOLS_VERSION} && \
-            autoreconf -i && \
-            ./configure --prefix=/usr && \
-            make && \
-            make install && \
+            sudo autoreconf -i && \
+            sudo ./configure --prefix=/usr && \
+            sudo make && \
+            sudo make install && \
             rm -rf /tmp/bcftools-${BCFTOOLS_VERSION}
 
       - uses: r-lib/actions/check-r-package@v2
