@@ -32,6 +32,7 @@ jobs:
           needs: coverage
 
       - name: Install BCFtools
+        if: runner.os == 'Linux'
         run: |
           apt-get update && \
           apt-get install -y --no-install-recommends \

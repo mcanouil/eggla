@@ -25,39 +25,41 @@ test_that("run_eggla", {
     sort(c("female.zip", "male.zip"))
   )
 
-  output_path <- file.path(tempdir(), "eggla")
-  dir.create(output_path, showWarnings = FALSE)
+  if (Sys.info()[["sysname"]] == "Linux") {
+    output_path <- file.path(tempdir(), "eggla")
+    dir.create(output_path, showWarnings = FALSE)
 
-  result_gwas <- run_eggla_gwas(
-    data = bmigrowth[
-      j = sex := c("0" = "f", "1" = "m")[as.character(sex)],
-    ],
-    results = result_lmm,
-    id_column = "ID",
-    traits = c("slope_.*", "auc_.*"),
-    covariates = c("sex", sprintf("PC%02d", 1:5)),
-    vcfs = list.files(
-      path = system.file("vcf", package = "eggla"),
-      pattern = "\\.vcf$|\\.vcf.gz$",
-      full.names = TRUE
-    ),
-    vep = NULL,
-    path = output_path,
-    bin_path = list(
-      bcftools = "/usr/bin/bcftools",
-      plink2 = system.file("bin", "plink2", package = "eggla")
-    ),
-    threads = 4
-  )
-  unlink(output_path, recursive = TRUE)
-  expect_equal(
-    sort(basename(result_gwas)),
-    sort(c(
-      "slope_12--17.glm.linear-gwas.csv.gz", "auc_0--0.5.glm.linear-gwas.csv.gz",
-      "auc_1.5--3.5.glm.linear-gwas.csv.gz", "slope_1.5--3.5.glm.linear-gwas.csv.gz",
-      "auc_6.5--10.glm.linear-gwas.csv.gz", "auc_12--17.glm.linear-gwas.csv.gz",
-      "slope_0--0.5.glm.linear-gwas.csv.gz", "slope_6.5--10.glm.linear-gwas.csv.gz",
-      "male.zip", "female.zip", "gwas-software.txt"
-    ))
-  )
+    result_gwas <- run_eggla_gwas(
+      data = bmigrowth[
+        j = sex := c("0" = "f", "1" = "m")[as.character(sex)],
+      ],
+      results = result_lmm,
+      id_column = "ID",
+      traits = c("slope_.*", "auc_.*"),
+      covariates = c("sex", sprintf("PC%02d", 1:5)),
+      vcfs = list.files(
+        path = system.file("vcf", package = "eggla"),
+        pattern = "\\.vcf$|\\.vcf.gz$",
+        full.names = TRUE
+      ),
+      vep = NULL,
+      path = output_path,
+      bin_path = list(
+        bcftools = "/usr/bin/bcftools",
+        plink2 = system.file("bin", "plink2", package = "eggla")
+      ),
+      threads = 4
+    )
+    unlink(output_path, recursive = TRUE)
+    expect_equal(
+      sort(basename(result_gwas)),
+      sort(c(
+        "slope_12--17.glm.linear-gwas.csv.gz", "auc_0--0.5.glm.linear-gwas.csv.gz",
+        "auc_1.5--3.5.glm.linear-gwas.csv.gz", "slope_1.5--3.5.glm.linear-gwas.csv.gz",
+        "auc_6.5--10.glm.linear-gwas.csv.gz", "auc_12--17.glm.linear-gwas.csv.gz",
+        "slope_0--0.5.glm.linear-gwas.csv.gz", "slope_6.5--10.glm.linear-gwas.csv.gz",
+        "male.zip", "female.zip", "gwas-software.txt"
+      ))
+    )
+  }
 })
