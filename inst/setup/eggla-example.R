@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 
 library(eggla)
+library(data.table)
 
 data("bmigrowth")
 result_lmm <- run_eggla_lmm(
