@@ -69,19 +69,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release'}
-
-          - {os: windows-latest, r: 'release'}
-          # Use 3.6 to trigger usage of RTools35
-          # - {os: windows-latest, r: '3.6'}
-
-          # Use older ubuntu to maximise backward compatibility
-          - {os: ubuntu-20.04,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-20.04,   r: 'release'}
-          - {os: ubuntu-20.04,   r: 'oldrel-1'}
-          # - {os: ubuntu-20.04,   r: 'oldrel-2'}
-          # - {os: ubuntu-20.04,   r: 'oldrel-3'}
-          # - {os: ubuntu-20.04,   r: 'oldrel-4'}
+          - {os: ubuntu-20.04,    r: '4.2.0'}
+          - {os: ubuntu-22.04,    r: '4.2.0'}
+          - {os: ubuntu-latest,   r: '4.2.0'}
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     env:
