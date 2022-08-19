@@ -16,7 +16,7 @@ test_that("run_eggla", {
     sex_variable = "sex",
     covariates = NULL,
     male_coded_zero = FALSE,
-    random_complexity = "auto", # simple to speed-up test
+    random_complexity = "1", # simple to speed-up test
     use_car1 = TRUE,
     parallel = FALSE, # to parallelise Daymont QC
     parallel_n_chunks = 1, # to parallelise Daymont QC
@@ -32,7 +32,6 @@ test_that("run_eggla", {
   if (Sys.info()[["sysname"]] == "Linux") {
     output_path <- file.path(tempdir(), "eggla")
     dir.create(output_path, showWarnings = FALSE)
-
     result_gwas <- run_eggla_gwas(
       data = data.table::as.data.table(bmigrowth)[
         j = sex := c("0" = "f", "1" = "m")[as.character(sex)],
@@ -66,7 +65,9 @@ test_that("run_eggla", {
       ))
     )
 
-     expect_error(run_eggla_gwas(
+    output_path <- file.path(tempdir(), "eggla")
+    dir.create(output_path, showWarnings = FALSE)
+    expect_error(run_eggla_gwas(
       data = data.table::as.data.table(bmigrowth)[
         j = sex := c("0" = "f", "1" = "m")[as.character(sex)],
       ],
@@ -87,7 +88,10 @@ test_that("run_eggla", {
       ),
       threads = 4
     ))
+    unlink(output_path, recursive = TRUE)
 
+    output_path <- file.path(tempdir(), "eggla")
+    dir.create(output_path, showWarnings = FALSE)
     expect_error(run_eggla_gwas(
       data = data.table::as.data.table(bmigrowth)[
         j = sex := c("0" = "f", "1" = "m")[as.character(sex)],
@@ -109,7 +113,10 @@ test_that("run_eggla", {
       ),
       threads = 4
     ))
+    unlink(output_path, recursive = TRUE)
 
+    output_path <- file.path(tempdir(), "eggla")
+    dir.create(output_path, showWarnings = FALSE)
     result_gwas <- run_eggla_gwas(
       data = as.data.frame(
         data.table::as.data.table(bmigrowth)[
