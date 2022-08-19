@@ -154,13 +154,17 @@ run_eggla_gwas <- function(
     expr = system(sprintf("%s --version", bin_path[["plink2"]]), intern = TRUE),
     silent = TRUE
   )
-  if (inherits(plink_version, "try-error")) stop("Please check PLINK binary path!")
+  if (inherits(plink_version, "try-error") || !file.exists(bin_path[["plink2"]])) {
+    stop("Please check PLINK binary path!")
+  }
 
   bcftools_version <- try(
     expr = system(sprintf("%s --version", bin_path[["bcftools"]]), intern = TRUE)[1],
     silent = TRUE
   )
-  if (inherits(bcftools_version, "try-error")) stop("Please check BCFTools binary path!")
+  if (inherits(bcftools_version, "try-error") || !file.exists(bin_path[["bcftools"]])) {
+    stop("Please check BCFTools binary path!")
+  }
 
   if (sum(grepl("\\.zip$", results)) == 2) {
     derived_parameters_dt <- data.table::setnames(
