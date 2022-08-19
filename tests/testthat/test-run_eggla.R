@@ -20,7 +20,8 @@ test_that("run_eggla", {
     use_car1 = TRUE,
     parallel = FALSE, # to parallelise Daymont QC
     parallel_n_chunks = 1, # to parallelise Daymont QC
-    working_directory = tempdir()
+    working_directory = tempdir(),
+    quiet = TRUE
   )
 
   expect_equal(
@@ -39,7 +40,7 @@ test_that("run_eggla", {
       results = result_lmm,
       id_column = "ID",
       traits = c("slope_.*", "auc_.*"),
-      covariates = c("sex", sprintf("PC%02d", 1:5)),
+      covariates = c("sex"),
       vcfs = list.files(
         path = system.file("vcf", package = "eggla"),
         pattern = "\\.vcf$|\\.vcf.gz$",
