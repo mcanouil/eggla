@@ -3,7 +3,7 @@
 library(eggla)
 
 data("bmigrowth")
-results_lmm <- run_eggla_lmm(
+result_lmm <- run_eggla_lmm(
   data = bmigrowth,
   id_variable = "ID",
   age_days_variable = NULL,
