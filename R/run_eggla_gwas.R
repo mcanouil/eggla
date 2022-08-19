@@ -180,8 +180,14 @@ run_eggla_gwas <- function(
           )
           on.exit(unlink(file.path(path, c("derived-slopes.csv", "derived-aucs.csv"))))
           data.table::merge.data.table(
-            x = data.table::fread(file.path(path, "derived-slopes.csv")),
-            y = data.table::fread(file.path(path, "derived-aucs.csv")),
+            x = data.table::fread(
+              file = file.path(path, "derived-slopes.csv"),
+              colClasses = list("character" = 1)
+            ),
+            y = data.table::fread(
+              file = file.path(path, "derived-aucs.csv"),
+              colClasses = list("character" = 1)
+            ),
             by = "egg_id"
           )
         }
@@ -195,8 +201,14 @@ run_eggla_gwas <- function(
         X = results,
         FUN = function(idir) {
           data.table::merge.data.table(
-            x = data.table::fread(list.files(idir, pattern = "derived-slopes.csv", full.names = TRUE)),
-            y = data.table::fread(list.files(idir, pattern = "derived-aucs.csv", full.names = TRUE)),
+            x = data.table::fread(
+              file = list.files(idir, pattern = "derived-slopes.csv", full.names = TRUE),
+              colClasses = list("character" = 1)
+            ),
+            y = data.table::fread(
+              file = list.files(idir, pattern = "derived-aucs.csv", full.names = TRUE),
+              colClasses = list("character" = 1)
+            ),
             by = "egg_id"
           )
         }
@@ -209,14 +221,14 @@ run_eggla_gwas <- function(
   if (!inherits(data, "data.frame")) data <- data.table::fread(data)
   dt <- data.table::merge.data.table(
     x = data[
-      j = (id_column) := as.character(.SD),
+      j = (id_column) := lapply(.SD, as.character),
       .SDcols = c(id_column)
     ][
       j = data.table::first(.SD),
       by = c(id_column)
     ],
     y = derived_parameters_dt[
-      j = (id_column) := as.character(.SD),
+      j = (id_column) := lapply(.SD, as.character),
       .SDcols = c(id_column)
     ],
     by = id_column
