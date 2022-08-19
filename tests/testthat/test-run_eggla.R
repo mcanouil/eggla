@@ -165,7 +165,7 @@ test_that("run_eggla", {
         "auc_1.5--3.5.glm.linear-gwas.csv.gz", "slope_1.5--3.5.glm.linear-gwas.csv.gz",
         "auc_6.5--10.glm.linear-gwas.csv.gz", "auc_12--17.glm.linear-gwas.csv.gz",
         "slope_0--0.5.glm.linear-gwas.csv.gz", "slope_6.5--10.glm.linear-gwas.csv.gz",
-        "male", "female", "male.zip", "female.zip", "gwas-software.txt"
+        "male", "female", "gwas-software.txt"
       ))
     )
   }
