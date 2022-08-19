@@ -220,14 +220,14 @@ run_eggla_gwas <- function(
 
   if (!inherits(data, "data.frame")) data <- data.table::fread(data)
   dt <- data.table::merge.data.table(
-    x = data[
+    x =  data.table::data.table(data)[
       j = (id_column) := lapply(.SD, as.character),
       .SDcols = c(id_column)
     ][
       j = data.table::first(.SD),
       by = c(id_column)
     ],
-    y = derived_parameters_dt[
+    y =  data.table::data.table(derived_parameters_dt)[
       j = (id_column) := lapply(.SD, as.character),
       .SDcols = c(id_column)
     ],
