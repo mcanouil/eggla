@@ -21,7 +21,10 @@
 #' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
-#' @param threads Number of threads to be used by BCFtools.
+#' @param bcftools_view_options A string or a vector of strings (which will be pass to `paste()`)
+#'   containing BCFtools view parameters, _e.g._, `"--min-af 0.05"`, `"--exclude 'INFO/INFO < 0.8'"`,
+#'   and/or `"--min-alleles 2 --max-alleles 2 --types snps"`.
+#' @param threads Number of threads to be used by some BCFtools and PLINK2 commands.
 #' @param quiet A logical indicating whether to suppress the output.
 #'
 #' @import data.table
@@ -89,6 +92,7 @@ run_eggla_gwas <- function(
     bcftools = "/usr/bin/bcftools",
     plink2 = "/usr/bin/plink2"
   ),
+  bcftools_view_options = NULL,
   threads = 1,
   quiet = FALSE
 ) {
@@ -104,6 +108,8 @@ run_eggla_gwas <- function(
     mode = "0775",
     showWarnings = FALSE
   )
+
+  if (is.null(bcftools_view_options)) bcftools_view_options <- ""
 
   if (
     !grepl("not found", system(paste(bin_path[["plink2"]], "--version"), intern = TRUE)) &&
@@ -148,13 +154,17 @@ run_eggla_gwas <- function(
     expr = system(sprintf("%s --version", bin_path[["plink2"]]), intern = TRUE),
     silent = TRUE
   )
-  if (inherits(plink_version, "try-error")) stop("Please check PLINK binary path!")
+  if (inherits(plink_version, "try-error") || !file.exists(bin_path[["plink2"]])) {
+    stop("Please check PLINK binary path!")
+  }
 
   bcftools_version <- try(
     expr = system(sprintf("%s --version", bin_path[["bcftools"]]), intern = TRUE)[1],
     silent = TRUE
   )
-  if (inherits(bcftools_version, "try-error")) stop("Please check BCFTools binary path!")
+  if (inherits(bcftools_version, "try-error") || !file.exists(bin_path[["bcftools"]])) {
+    stop("Please check BCFTools binary path!")
+  }
 
   if (sum(grepl("\\.zip$", results)) == 2) {
     derived_parameters_dt <- data.table::setnames(
@@ -174,8 +184,14 @@ run_eggla_gwas <- function(
           )
           on.exit(unlink(file.path(path, c("derived-slopes.csv", "derived-aucs.csv"))))
           data.table::merge.data.table(
-            x = data.table::fread(file.path(path, "derived-slopes.csv")),
-            y = data.table::fread(file.path(path, "derived-aucs.csv")),
+            x = data.table::fread(
+              file = file.path(path, "derived-slopes.csv"),
+              colClasses = list("character" = 1)
+            ),
+            y = data.table::fread(
+              file = file.path(path, "derived-aucs.csv"),
+              colClasses = list("character" = 1)
+            ),
             by = "egg_id"
           )
         }
@@ -189,8 +205,14 @@ run_eggla_gwas <- function(
         X = results,
         FUN = function(idir) {
           data.table::merge.data.table(
-            x = data.table::fread(list.files(idir, pattern = "derived-slopes.csv", full.names = TRUE)),
-            y = data.table::fread(list.files(idir, pattern = "derived-aucs.csv", full.names = TRUE)),
+            x = data.table::fread(
+              file = list.files(idir, pattern = "derived-slopes.csv", full.names = TRUE),
+              colClasses = list("character" = 1)
+            ),
+            y = data.table::fread(
+              file = list.files(idir, pattern = "derived-aucs.csv", full.names = TRUE),
+              colClasses = list("character" = 1)
+            ),
             by = "egg_id"
           )
         }
@@ -202,8 +224,17 @@ run_eggla_gwas <- function(
 
   if (!inherits(data, "data.frame")) data <- data.table::fread(data)
   dt <- data.table::merge.data.table(
-    x = data[j = data.table::first(.SD), by = c(id_column)],
-    y = derived_parameters_dt,
+    x =  data.table::data.table(data)[
+      j = (id_column) := lapply(.SD, as.character),
+      .SDcols = c(id_column)
+    ][
+      j = data.table::first(.SD),
+      by = c(id_column)
+    ],
+    y =  data.table::data.table(derived_parameters_dt)[
+      j = (id_column) := lapply(.SD, as.character),
+      .SDcols = c(id_column)
+    ],
     by = id_column
   )
 
@@ -309,24 +340,26 @@ run_eggla_gwas <- function(
 
   if (!quiet) message("Formatting VCFs ...")
   if (nzchar(system.file(package = "future.apply"))) {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, FUN) {
+    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, FUN) {
       future.apply::future_lapply(
         X = X,
         basename_file = basename_file,
         vep_file = vep_file,
         bin_path = bin_path,
+        bcftools_view_options = bcftools_view_options,
         future.globals = FALSE,
         future.packages = "data.table",
         FUN = FUN
       )
     }
   } else {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, FUN) {
+    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, FUN) {
       lapply(
         X = X,
         basename_file = basename_file,
         vep_file = vep_file,
         bin_path = bin_path,
+        bcftools_view_options = bcftools_view_options,
         FUN = FUN
       )
     }
@@ -337,19 +370,17 @@ run_eggla_gwas <- function(
     basename_file = basename_file,
     vep_file = vep,
     bin_path = bin_path,
-    FUN = function(vcf, basename_file, vep_file, bin_path) {
+    bcftools_view_options = bcftools_view_options,
+    FUN = function(vcf, basename_file, vep_file, bin_path, bcftools_view_options) {
       vcf_file <- sprintf("%s__%s", basename_file, basename(vcf))
       results_file <- sub("\\.vcf.gz", "", vcf_file)
-
       cmd <- paste(
         bin_path[["bcftools"]],
           "+fill-tags", vcf,
        "|",
         bin_path[["bcftools"]],
           "view",
-          # "--min-af 0.05",
-          # "--exclude 'INFO/INFO < 0.8'",
-          "--min-alleles 2 --max-alleles 2 --types snps",
+          bcftools_view_options,
           "--force-samples",
           "--samples-file", sprintf("%s.samples", basename_file)
       )

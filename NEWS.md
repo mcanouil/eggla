@@ -1,5 +1,28 @@
 # eggla (development version)
 
+## Breaking changes
+
+- In `DESCRIPTION`,
+  - fix: depends on R >= 4.2.0.
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: BCFtools filters as parameter with non by default.
+  - fix: ensure 'id_column' is of type character.
+
+## Chores
+
+- In `insta/vcf` and `data-raw/bmigrowth.R`,
+  - chore: add VCF files to test `run_eggla_gwas()`.
+
+## Tests
+
+- In `inst/setup/eggla-example.R`,
+  - test: add run_eggla_gwas in docker build test example.
+- In `tests/testthat/test-run_eggla.R`,
+  - test: new tests for run_eggla functions. 
+
 # eggla 0.12.2
 
 ## Fixes

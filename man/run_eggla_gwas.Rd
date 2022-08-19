@@ -14,6 +14,7 @@ run_eggla_gwas(
   path,
   vep = NULL,
   bin_path = list(bcftools = "/usr/bin/bcftools", plink2 = "/usr/bin/plink2"),
+  bcftools_view_options = NULL,
   threads = 1,
   quiet = FALSE
 )
@@ -42,7 +43,11 @@ the genotypes of the individuals to be analysed.}
 \item{bin_path}{A named list containing the path to the PLINK2 and BCFtools binaries
 For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).}
 
-\item{threads}{Number of threads to be used by BCFtools.}
+\item{bcftools_view_options}{A string or a vector of strings (which will be pass to \code{paste()})
+containing BCFtools view parameters, \emph{e.g.}, \code{"--min-af 0.05"}, \code{"--exclude 'INFO/INFO < 0.8'"},
+and/or \code{"--min-alleles 2 --max-alleles 2 --types snps"}.}
+
+\item{threads}{Number of threads to be used by some BCFtools and PLINK2 commands.}
 
 \item{quiet}{A logical indicating whether to suppress the output.}
 }
