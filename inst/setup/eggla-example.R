@@ -4,6 +4,7 @@ library(eggla)
 library(data.table)
 
 data("bmigrowth")
+
 result_lmm <- run_eggla_lmm(
   data = bmigrowth,
   id_variable = "ID",
@@ -25,7 +26,7 @@ output_path <- file.path(tempdir(), "eggla")
 dir.create(output_path, showWarnings = FALSE)
 
 result_gwas <- run_eggla_gwas(
-  data = bmigrowth[
+  data = as.data.table(bmigrowth)[
     j = sex := c("0" = "f", "1" = "m")[as.character(sex)],
   ],
   results = result_lmm,
