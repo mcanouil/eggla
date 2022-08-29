@@ -16,3 +16,4 @@
 ^doc$
 ^Meta$
 ^CITATION\.cff$
+^inst/article$
