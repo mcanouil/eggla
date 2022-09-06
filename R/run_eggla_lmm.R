@@ -118,6 +118,18 @@ run_eggla_lmm <- function(
     intersect(covariates, names(data))
   )
 
+  if (anyDuplicated(
+    data[
+      j = list(id_not_unique = anyDuplicated(egg_agedays)),
+      by = c("egg_id", "egg_sex")
+    ][["id_unique"]]
+  )) {
+    stop(sprintf(
+      "It appears IDs provided by '%s' are not unique. 'id_variable' must be unique!",
+      id_variable
+    ))
+  }
+
   dt_long <- data.table::melt(
     data = data.table::as.data.table(data)[
       j = `:=`(
