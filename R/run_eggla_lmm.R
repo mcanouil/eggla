@@ -118,14 +118,14 @@ run_eggla_lmm <- function(
     intersect(covariates, names(data))
   )
 
-  if (anyDuplicated(
+  if (sum(
     data[
       j = list(id_not_unique = anyDuplicated(egg_agedays)),
       by = c("egg_id", "egg_sex")
-    ][["id_unique"]]
-  )) {
+    ][["id_not_unique"]]
+  ) > 0) {
     stop(sprintf(
-      "It appears IDs provided by '%s' are not unique. 'id_variable' must be unique!",
+      "It appears IDs provided by column '%s' are not unique. 'id_variable' must be a column providing unique IDs!",
       id_variable
     ))
   }
