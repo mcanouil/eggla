@@ -18,7 +18,7 @@
 #'   fit = res,
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
 #' )
-plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12)) {
+plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(1, 8, 12)) {
   params <- variable <- yend <- pred_period <- end <- NULL # no visible binding for global variable from data.table
   patterns <- slope <- .data <- start <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))

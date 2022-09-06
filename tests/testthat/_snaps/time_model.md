@@ -90,19 +90,19 @@
 
     Code
       cor1 <- compute_correlations(fit = res1, method = "cubic_slope", period = c(0,
-        0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12))
+        0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(1, 8, 12))
 
 ---
 
     Code
       auc1 <- compute_aucs(fit = res1, method = "cubic_slope", period = c(0, 0.5, 1.5,
-        3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12))
+        3.5, 6.5, 10, 12, 17), knots = c(1, 8, 12))
 
 ---
 
     Code
       slopes1 <- compute_slopes(fit = res1, method = "cubic_slope", period = c(0, 0.5,
-        1.5, 3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12))
+        1.5, 3.5, 6.5, 10, 12, 17), knots = c(1, 8, 12))
 
 ---
 
@@ -217,5 +217,4 @@
 
     Code
       outliers1 <- compute_outliers(fit = res1, method = "cubic_slope", period = c(0,
-        0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(2, 8, 12))
-
+        0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(1, 8, 12))

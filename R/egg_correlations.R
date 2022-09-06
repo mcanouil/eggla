@@ -26,12 +26,12 @@
 #' egg_correlations(
 #'   fit = res,
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-#'   knots = c(2, 8, 12)
+#'   knots = c(1, 8, 12)
 #' )
 egg_correlations <- function(
   fit,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = c(2, 8, 12)
+  knots = c(1, 8, 12)
 ) {
   lapply(
     X = list(

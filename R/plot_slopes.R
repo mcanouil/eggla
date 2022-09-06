@@ -31,7 +31,7 @@ plot_slopes <- function(
   knots = list(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
-    "cubic_splines" = c(2, 8, 12)
+    "cubic_splines" = c(1, 8, 12)
   )[[method]]
 ) {
   params <- variable <- yend <- pred_period <- end <- NULL # no visible binding for global variable from data.table
