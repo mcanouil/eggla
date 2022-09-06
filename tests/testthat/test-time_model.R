@@ -71,9 +71,9 @@ for (use_car1 in c(FALSE, TRUE)[2]) {
   )
 
   y <- nlme::lme(
-    log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
+    log(bmi) ~ gsp(age, knots = c(1, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
     data = bmigrowth[bmigrowth$sex == 0, ],
-    random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
+    random = ~ gsp(age, knots = c(1, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
     na.action = stats::na.omit,
     method = "ML",
     correlation = if (use_car1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
@@ -122,7 +122,7 @@ test_that("time_model", {
     x = "age",
     data = bmigrowth[bmigrowth[["sex"]] == 0, ],
     method = "cubic_slope",
-    knots = c(2, 8, 12),
+    knots = c(1, 8, 12),
     id_var = "ID",
     use_car1 = TRUE,
     quiet = TRUE
@@ -133,7 +133,7 @@ test_that("time_model", {
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(2, 8, 12)
+      knots = c(1, 8, 12)
     )
   )
 
@@ -142,7 +142,7 @@ test_that("time_model", {
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(2, 8, 12)
+      knots = c(1, 8, 12)
     )
   )
 
@@ -151,7 +151,7 @@ test_that("time_model", {
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(2, 8, 12)
+      knots = c(1, 8, 12)
     )
   )
 
@@ -164,7 +164,7 @@ test_that("time_model", {
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(2, 8, 12)
+      knots = c(1, 8, 12)
     )
   )
 })

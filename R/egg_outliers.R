@@ -24,12 +24,12 @@
 #' head(egg_outliers(
 #'   fit = res,
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-#'   knots = c(2, 8, 12)
+#'   knots = c(1, 8, 12)
 #' )[Outlier != 0])
 egg_outliers <- function(
   fit,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = c(2, 8, 12)
+  knots = c(1, 8, 12)
 ) {
   data.table::rbindlist(
     l = lapply(

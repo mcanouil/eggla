@@ -31,7 +31,7 @@ plot_aucs <- function(
   knots = list(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
-    "cubic_splines" = c(2, 8, 12)
+    "cubic_splines" = c(1, 8, 12)
   )[[method]]
 ) {
   period_interval <- patterns <- auc <- NULL # no visible binding for global variable from data.table
