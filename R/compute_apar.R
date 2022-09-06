@@ -79,20 +79,18 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
     f <- identity
   }
 
-  out <- switch(EXPR = from,
-    "observed" = {
-      data.table::as.data.table(fit[["data"]])[
-        j = .SD,
-        .SDcols = c(id_var, age_var, bmi_var)
-      ]
-    },
-    "predicted" = {
-      predict_bmi(fit = fit, start = start, end = end, step = step)
-    }
-  )
-
   data.table::setnames(
-    x = out,
+    x = switch(EXPR = from,
+      "observed" = {
+        data.table::as.data.table(fit[["data"]])[
+          j = .SD,
+          .SDcols = c(id_var, age_var, bmi_var)
+        ]
+      },
+      "predicted" = {
+        predict_bmi(fit = fit, start = start, end = end, step = step)
+      }
+    ),
     old = c(id_var, age_var, bmi_var, covariates),
     new = c("egg_id", "egg_ageyears", "egg_bmi", sprintf("egg_%s", covariates)),
     skip_absent = TRUE
