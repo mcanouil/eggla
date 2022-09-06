@@ -293,6 +293,26 @@ run_eggla_gwas <- function(
     )
   }
 
+  if (
+    length(intersect(
+      dt[j = unique(.SD), .SDcols = "#IID"],
+      unique(unlist(
+        x = lapply(
+          X = paste(bin_path[["bcftools"]], "query", "--list-samples", vcfs),
+          FUN = function(x) data.table::fread(cmd = x)
+        ),
+        use.names = FALSE
+      ))
+    )) != 0
+  ) {
+    stop(paste0(
+      "None of the IDs provided in 'id_column' matches VCFs IDs.\n",
+      "Please check your VCF with 'bcftools query --list-samples file.vcf'.\n",
+      "To rename your samples, use 'bcftools reheader --samples oldid_newid_space_separated_columns.txt'.\n",
+      "See <https://samtools.github.io/bcftools/bcftools.html#reheader> for more details."
+    ))
+  }
+
   basename_file <- file.path(tmpdir, rlang::hash(formula))
 
   data.table::fwrite(
@@ -317,7 +337,7 @@ run_eggla_gwas <- function(
   }
 
   if (length(sex_covariate) > 0) {
-    if (length(sex_levels <- unique(dt[[sex_covariate]])) == 2 & 0 %in% sex_levels) {
+    if (length(sex_levels <- unique(dt[[sex_covariate]])) == 2 && 0 %in% sex_levels) {
       warning(
         "Sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = missing! ",
         "'0' have been recoded as '2', i.e., female."
