@@ -63,7 +63,7 @@
 #'     data = "/tmp/bmigrowth.csv",
 #'     results = results_archives,
 #'     id_column = "ID",
-#'     traits = c("slope_.*", "auc_.*"),
+#'     traits = c("slope_.*", "auc_.*", "^AP$", "^AR$"),
 #'     covariates = c("sex"),
 #'     vcfs = list.files(
 #'       path = file.path(tempdir(), "vcf"),
@@ -166,33 +166,43 @@ run_eggla_gwas <- function(
     stop("Please check BCFTools binary path!")
   }
 
+  derived_files <- sprintf(
+    "derived-%s.csv",
+    c("slopes", "aucs", "apar")
+  )
+
   if (sum(grepl("\\.zip$", results)) == 2) {
     derived_parameters_dt <- data.table::setnames(
       x = data.table::rbindlist(lapply(
         X = results,
         path = path,
-        FUN = function(izip, path) {
-          utils::unzip(
-            zipfile = izip,
-            files = "derived-slopes.csv",
-            exdir = path
-          )
-          utils::unzip(
-            zipfile = izip,
-            files = "derived-aucs.csv",
-            exdir = path
-          )
-          on.exit(unlink(file.path(path, c("derived-slopes.csv", "derived-aucs.csv"))))
-          data.table::merge.data.table(
-            x = data.table::fread(
-              file = file.path(path, "derived-slopes.csv"),
-              colClasses = list("character" = 1)
-            ),
-            y = data.table::fread(
-              file = file.path(path, "derived-aucs.csv"),
-              colClasses = list("character" = 1)
-            ),
-            by = "egg_id"
+        derived_files = derived_files,
+        FUN = function(izip, path, derived_files) {
+          on.exit(unlink(file.path(path, derived_files)))
+          Reduce(
+            f = function(x, y) {
+              data.table::merge.data.table(
+                x = x,
+                y = y,
+                by = "egg_id"
+              )
+            },
+            x = lapply(
+              X = derived_files,
+              izip = izip,
+              path = path,
+              FUN = function(dfile, izip, path) {
+                utils::unzip(
+                  zipfile = izip,
+                  files = dfile,
+                  exdir = path
+                )
+                data.table::fread(
+                  file = file.path(path, dfile),
+                  colClasses = list("character" = 1)
+                )
+              }
+            )
           )
         }
       )),
@@ -203,17 +213,25 @@ run_eggla_gwas <- function(
     derived_parameters_dt <- data.table::setnames(
       x = data.table::rbindlist(lapply(
         X = results,
-        FUN = function(idir) {
-          data.table::merge.data.table(
-            x = data.table::fread(
-              file = list.files(idir, pattern = "derived-slopes.csv", full.names = TRUE),
+        derived_files = derived_files,
+        FUN = function(idir, derived_files) {
+          Reduce(
+            f = function(x, y) {
+              data.table::merge.data.table(
+                x = x,
+                y = y,
+                by = "egg_id"
+              )
+            },
+            x = lapply(
+              X = list.files(
+                path = idir,
+                pattern = paste(derived_files, collapse = "|"),
+                full.names = TRUE
+              ),
+              FUN = data.table::fread,
               colClasses = list("character" = 1)
-            ),
-            y = data.table::fread(
-              file = list.files(idir, pattern = "derived-aucs.csv", full.names = TRUE),
-              colClasses = list("character" = 1)
-            ),
-            by = "egg_id"
+            )
           )
         }
       )),
