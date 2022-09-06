@@ -32,7 +32,7 @@
 #'   # knots = list(
 #'   #   "cubic_slope" = NULL,
 #'   #   "linear_splines" = c(5.5, 11),
-#'   #   "cubic_splines" = c(2, 8, 12)
+#'   #   "cubic_splines" = c(1, 8, 12)
 #'   # )[[method]]
 #' )
 compute_correlations <- function(
@@ -42,7 +42,7 @@ compute_correlations <- function(
   knots = list(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
-    "cubic_splines" = c(2, 8, 12)
+    "cubic_splines" = c(1, 8, 12)
   )[[method]]
 ) {
   lapply(

@@ -26,13 +26,13 @@
 #'   egg_slopes(
 #'     fit = res,
 #'     period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-#'     knots = c(2, 8, 12)
+#'     knots = c(1, 8, 12)
 #'   )
 #' )
 egg_slopes <- function(
   fit,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = c(2, 8, 12)
+  knots = c(1, 8, 12)
 ) {
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])

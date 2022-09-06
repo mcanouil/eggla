@@ -69,7 +69,7 @@ run_eggla_lmm <- function(
   male_coded_zero = FALSE,
   random_complexity = "auto",
   use_car1 = FALSE,
-  knots = c(2, 8, 12),
+  knots = c(1, 8, 12),
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   parallel = FALSE,
   parallel_n_chunks = 1,
