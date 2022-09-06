@@ -39,7 +39,7 @@ egg_model <- function(
   id_var,
   random_complexity = "auto",
   use_car1 = FALSE,
-  knots = c(2, 8, 12),
+  knots = c(1, 8, 12),
   quiet = FALSE
 ) {
   random_complexity <- match.arg(as.character(random_complexity), c("auto", 1, 2, 3))

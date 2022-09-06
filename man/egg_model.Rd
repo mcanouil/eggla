@@ -10,7 +10,7 @@ egg_model(
   id_var,
   random_complexity = "auto",
   use_car1 = FALSE,
-  knots = c(2, 8, 12),
+  knots = c(1, 8, 12),
   quiet = FALSE
 )
 }

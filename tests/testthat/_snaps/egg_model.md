@@ -8,19 +8,19 @@
 
     Code
       cor2 <- egg_correlations(fit = res2, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12,
-        17), knots = c(2, 8, 12))
+        17), knots = c(1, 8, 12))
 
 ---
 
     Code
       auc2 <- egg_aucs(fit = res2, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(2, 8, 12))
+      knots = c(1, 8, 12))
 
 ---
 
     Code
       slopes2 <- egg_slopes(fit = res2, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(2, 8, 12))
+      knots = c(1, 8, 12))
 
 ---
 
@@ -236,5 +236,4 @@
 
     Code
       outliers2 <- egg_outliers(fit = res2, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12,
-        17), knots = c(2, 8, 12))
-
+        17), knots = c(1, 8, 12))
