@@ -306,7 +306,7 @@ run_eggla_lmm <- function(
           formula = egg_id ~ what,
           value.var = "egg_ageyears"
         ),
-        file = file.path(results_directory, "derived-ap-ar.csv")
+        file = file.path(results_directory, "derived-apar.csv")
       )
 
       utils::zip(
