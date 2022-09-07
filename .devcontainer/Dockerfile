@@ -1,5 +1,5 @@
 ARG VARIANT="bullseye"
-FROM buildpack-deps:${VARIANT}-curl
+FROM --platform=linux/amd64 buildpack-deps:${VARIANT}-curl
 
 LABEL org.opencontainers.image.title="eggla"
 LABEL org.opencontainers.image.description="Docker image for the 'eggla' R package."
