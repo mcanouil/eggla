@@ -11,12 +11,13 @@ run_eggla_gwas(
   traits,
   covariates,
   vcfs,
-  path,
+  working_directory,
   vep = NULL,
   bin_path = list(bcftools = "/usr/bin/bcftools", plink2 = "/usr/bin/plink2"),
   bcftools_view_options = NULL,
   threads = 1,
-  quiet = FALSE
+  quiet = FALSE,
+  clean = TRUE
 )
 }
 \arguments{
@@ -36,7 +37,7 @@ where sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = mi
 \item{vcfs}{Path to the "raw" VCF file(s) containing
 the genotypes of the individuals to be analysed.}
 
-\item{path}{Directory in which computation will occur and where output files will be saved.}
+\item{working_directory}{Directory in which computation will occur and where output files will be saved.}
 
 \item{vep}{Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.}
 
@@ -50,6 +51,8 @@ and/or \code{"--min-alleles 2 --max-alleles 2 --types snps"}.}
 \item{threads}{Number of threads to be used by some BCFtools and PLINK2 commands.}
 
 \item{quiet}{A logical indicating whether to suppress the output.}
+
+\item{clean}{A logical indicating whether to clean intermediary files or not.}
 }
 \value{
 Path to results file.
@@ -95,7 +98,7 @@ if (interactive()) {
       pattern = "\\\\.vcf$|\\\\.vcf.gz$",
       full.names = TRUE
     ),
-    path = tempdir(),
+    working_directory = tempdir(),
     vep = NULL,
     bin_path = list(
       bcftools = "/usr/bin/bcftools",
