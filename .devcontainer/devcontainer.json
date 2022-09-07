@@ -3,10 +3,10 @@
 	"build": {
 		"dockerfile": "Dockerfile", 
 		"args": {
-			"TAG": "dev"
+			"TAG": "devel"
 		}
 	},
-	"remoteUser": "eggla",
+	// "remoteUser": "eggla",
 	"customizations": {
 		"vscode": {
 			"settings": {
