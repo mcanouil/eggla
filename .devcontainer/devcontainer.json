@@ -1,6 +1,6 @@
 {
 	"name": "eggla",
-	"build": {"dockerfile": "Dockerfile"},
+	"build": {"dockerfile": "Dockerfile", "TAG": "dev"},
 	"remoteUser": "eggla",
 	"customizations": {
 		"vscode": {
