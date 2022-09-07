@@ -64,6 +64,7 @@ for (use_car1 in c(FALSE, TRUE)[2]) {
       y = "log(bmi)",
       data = bmigrowth[bmigrowth$sex == 0, ],
       method = "cubic_splines",
+      knots = c(2, 8, 12),
       use_car1 = use_car1,
       id_var = "ID",
       quiet = TRUE
@@ -71,9 +72,9 @@ for (use_car1 in c(FALSE, TRUE)[2]) {
   )
 
   y <- nlme::lme(
-    log(bmi) ~ gsp(age, knots = c(1, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
+    log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
     data = bmigrowth[bmigrowth$sex == 0, ],
-    random = ~ gsp(age, knots = c(1, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
+    random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
     na.action = stats::na.omit,
     method = "ML",
     correlation = if (use_car1) nlme::corCAR1(form = ~ 1 | ID) else NULL,

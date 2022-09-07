@@ -1,15 +1,35 @@
 {
 	"name": "eggla",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			"VARIANT": "bullseye",
-			"BCFTOOLS_VERSION": "1.15.1",
-			"RIG_VERSION": "latest",
-			"R_VERSION": "4.2.0"
+	"build": {"dockerfile": "Dockerfile", "TAG": "dev"},
+	"remoteUser": "eggla",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.tabSize": 2,
+				"files.trimFinalNewlines": true,
+				"files.insertFinalNewline": true,
+				"files.watcherExclude": {
+						"**.Rproj": true,
+						"**/.cache/**": true,
+						"**/.local/**": true,
+						"**/.Rproj.user/**": true,
+						"**/.vscode/**": true
+				},
+				"files.exclude": {
+						"**.Rproj": true,
+						"**/.Rproj.user": true
+				},
+				"files.eol": "\n",
+				"r.plot.useHttpgd": true,
+				"r.rterm.option": [
+					"--no-save",
+					"--no-restore-data",
+					"--quiet"
+				]
+			},
+			"extensions": [
+				"REditorSupport.r"
+			]
 		}
-	},
-
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	}
 }

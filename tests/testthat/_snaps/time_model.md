@@ -26,7 +26,8 @@
 
     Code
       x <- time_model(x = "age", y = "log(bmi)", data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "cubic_splines", use_car1 = use_car1, id_var = "ID", quiet = TRUE)
+      method = "cubic_splines", knots = c(2, 8, 12), use_car1 = use_car1, id_var = "ID",
+      quiet = TRUE)
 
 # Test covariates
 
@@ -218,3 +219,4 @@
     Code
       outliers1 <- compute_outliers(fit = res1, method = "cubic_slope", period = c(0,
         0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(1, 8, 12))
+
