@@ -9,7 +9,41 @@
 			"R_VERSION": "4.2.0"
 		}
 	},
-
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "eggla",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.tabSize": 2,
+				"files.trimFinalNewlines": true,
+				"files.insertFinalNewline": true,
+				"files.watcherExclude": {
+						"**.Rproj": true,
+						"**/.cache/**": true,
+						"**/.local/**": true,
+						"**/.Rproj.user/**": true,
+						"**/.vscode/**": true
+				},
+				"files.exclude": {
+						"**.Rproj": true,
+						"**/.Rproj.user": true
+				},
+				"files.eol": "\n",
+				"r.plot.useHttpgd": true,
+				"r.rterm.option": [
+					"--no-save",
+					"--no-restore-data",
+					"--quiet"
+				],
+				"r.rmarkdown.knit.defaults.knitWorkingDirectory": "workspace root",
+				"r.plot.defaults.fullWindowMode": true,
+				"r.libPaths": [
+					"/usr/local/lib/R/site-library",
+					"/usr/local/lib/R/library"
+				]
+			},
+			"extensions": [
+				"REditorSupport.r"
+			]
+		}
+	}
 }
