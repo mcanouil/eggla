@@ -1,14 +1,6 @@
 {
 	"name": "eggla",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			"VARIANT": "bullseye",
-			"BCFTOOLS_VERSION": "1.15.1",
-			"RIG_VERSION": "latest",
-			"R_VERSION": "4.2.0"
-		}
-	},
+	"build": {"dockerfile": "Dockerfile"},
 	"remoteUser": "eggla",
 	"customizations": {
 		"vscode": {
@@ -33,12 +25,6 @@
 					"--no-save",
 					"--no-restore-data",
 					"--quiet"
-				],
-				"r.rmarkdown.knit.defaults.knitWorkingDirectory": "workspace root",
-				"r.plot.defaults.fullWindowMode": true,
-				"r.libPaths": [
-					"/usr/local/lib/R/site-library",
-					"/usr/local/lib/R/library"
 				]
 			},
 			"extensions": [
