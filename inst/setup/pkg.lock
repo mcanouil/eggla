@@ -2053,7 +2053,7 @@
     {
       "ref": "future.apply",
       "package": "future.apply",
-      "version": "1.9.0",
+      "version": "1.9.1",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -2065,10 +2065,10 @@
         "RemoteRef": "future.apply",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "1.9.0"
+        "RemoteSha": "1.9.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/future.apply_1.9.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future.apply_1.9.0.tar.gz"],
-      "target": "src/contrib/future.apply_1.9.0.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/future.apply_1.9.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future.apply_1.9.1.tar.gz"],
+      "target": "src/contrib/future.apply_1.9.1.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -2077,7 +2077,6 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "6166c1c5ce30b9745059c3d30c8110f7c1d51871e58aa414f195cb1f91c467f5",
       "filesize": 64200,
       "repotype": "cran"
     },
@@ -3939,34 +3938,6 @@
       "built": "R 4.2.0; x86_64-pc-linux-gnu; 2022-09-02 17:48:58 UTC; unix"
     },
     {
-      "ref": "installed::/opt/R/4.2.0/lib/R/library/Matrix",
-      "package": "Matrix",
-      "version": "1.4-1",
-      "type": "installed",
-      "direct": false,
-      "binary": true,
-      "dependencies": "lattice",
-      "vignettes": false,
-      "metadata": {
-        "RemotePkgRef": "installed::/opt/R/4.2.0/lib/R/library/Matrix",
-        "RemoteType": "installed",
-        "RemotePkgPlatform": "x86_64-pc-linux-gnu",
-        "RemoteSha": "1.4-1"
-      },
-      "sources": [],
-      "target": "src/contrib/Matrix_1.4-1.tar.gz",
-      "platform": "x86_64-pc-linux-gnu",
-      "rversion": "R 4.2.0",
-      "directpkg": false,
-      "license": "GPL (>= 2) | file LICENCE",
-      "dep_types": ["Depends", "Imports", "LinkingTo"],
-      "params": [],
-      "install_args": "",
-      "needscompilation": true,
-      "repotype": "cran",
-      "built": "R 4.2.0; x86_64-pc-linux-gnu; 2022-09-02 17:49:07 UTC; unix"
-    },
-    {
       "ref": "installed::/opt/R/4.2.0/lib/R/library/boot",
       "package": "boot",
       "version": "1.3-28",
@@ -4021,6 +3992,34 @@
       "needscompilation": false,
       "repotype": "cran",
       "built": "R 4.2.0; ; 2022-09-02 17:51:25 UTC; unix"
+    },
+    {
+      "ref": "installed::/opt/R/4.2.0/lib/R/library/Matrix",
+      "package": "Matrix",
+      "version": "1.4-1",
+      "type": "installed",
+      "direct": false,
+      "binary": true,
+      "dependencies": "lattice",
+      "vignettes": false,
+      "metadata": {
+        "RemotePkgRef": "installed::/opt/R/4.2.0/lib/R/library/Matrix",
+        "RemoteType": "installed",
+        "RemotePkgPlatform": "x86_64-pc-linux-gnu",
+        "RemoteSha": "1.4-1"
+      },
+      "sources": [],
+      "target": "src/contrib/Matrix_1.4-1.tar.gz",
+      "platform": "x86_64-pc-linux-gnu",
+      "rversion": "R 4.2.0",
+      "directpkg": false,
+      "license": "GPL (>= 2) | file LICENCE",
+      "dep_types": ["Depends", "Imports", "LinkingTo"],
+      "params": [],
+      "install_args": "",
+      "needscompilation": true,
+      "repotype": "cran",
+      "built": "R 4.2.0; x86_64-pc-linux-gnu; 2022-09-02 17:49:07 UTC; unix"
     },
     {
       "ref": "installed::/opt/R/4.2.0/lib/R/library/mgcv",
