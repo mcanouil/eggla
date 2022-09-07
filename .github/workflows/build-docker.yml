@@ -37,7 +37,7 @@ jobs:
               --push \
               --platform "linux/amd64" \
               --tag "ghcr.io/mcanouil/eggla:${TAG}" \
-              --file ".devcontainer/base.Dockerfile" \
+              --file "inst/setup/Dockerfile" \
               --label "org.opencontainers.image.version=${TAG}" \
               .
           else
@@ -47,7 +47,7 @@ jobs:
               --platform "linux/amd64" \
               --tag "ghcr.io/mcanouil/eggla:${TAG//v}" \
               --tag "ghcr.io/mcanouil/eggla:latest" \
-              --file ".devcontainer/base.Dockerfile" \
+              --file "inst/setup/base.Dockerfile" \
               --label "org.opencontainers.image.version=${{github.ref_name}}" \
               .
           fi
