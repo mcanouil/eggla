@@ -136,6 +136,7 @@ test_that("Cubic Splines", {
     y = "log(bmi)",
     data = bmigrowth[bmigrowth$sex == 0, ],
     method = "cubic_splines",
+    knots = c(2, 8, 12),
     use_car1 = TRUE,
     quiet = TRUE
   )
@@ -144,7 +145,8 @@ test_that("Cubic Splines", {
     y1 <- compute_slopes(
       fit = x,
       method = "cubic_splines",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+      knots = c(2, 8, 12)
     )
   )
 
