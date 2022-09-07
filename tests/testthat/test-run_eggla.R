@@ -46,7 +46,7 @@ test_that("run_eggla", {
         full.names = TRUE
       ),
       vep = NULL,
-      path = output_path,
+      working_directory = output_path,
       bin_path = list(
         bcftools = "/usr/bin/bcftools",
         plink2 = system.file("bin", "plink2", package = "eggla")
@@ -81,7 +81,7 @@ test_that("run_eggla", {
         full.names = TRUE
       ),
       vep = NULL,
-      path = output_path,
+      working_directory = output_path,
       bin_path = list(
         bcftools = "/fake/path/bcftools",
         plink2 = system.file("bin", "plink2", package = "eggla")
@@ -106,7 +106,7 @@ test_that("run_eggla", {
         full.names = TRUE
       ),
       vep = NULL,
-      path = output_path,
+      working_directory = output_path,
       bin_path = list(
         bcftools = "/usr/bin/bcftools",
         plink2 = "/fake/path/plink2"
@@ -150,7 +150,7 @@ test_that("run_eggla", {
         full.names = TRUE
       ),
       vep = NULL,
-      path = output_path,
+      working_directory = output_path,
       bin_path = list(
         bcftools = "/usr/bin/bcftools",
         plink2 = system.file("bin", "plink2", package = "eggla")
