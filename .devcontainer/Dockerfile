@@ -1,12 +1,19 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/main/containers/debian/.devcontainer/base.Dockerfile
-
 ARG VARIANT="bullseye"
-FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
+FROM buildpack-deps:${VARIANT}-curl
 
 LABEL org.opencontainers.image.title="eggla"
 LABEL org.opencontainers.image.description="Docker image for the 'eggla' R package."
 LABEL org.opencontainers.image.source="https://github.com/mcanouil/eggla"
 LABEL org.opencontainers.image.base.name="mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}"
+
+ARG INSTALL_ZSH="true"
+ARG UPGRADE_PACKAGES="true"
+ARG USERNAME=eggla
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+COPY common-debian.sh /tmp/library-scripts/
+RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # ** [Optional] Uncomment this section to install additional packages. **
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -47,12 +54,12 @@ RUN wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BC
     && make install \
     && rm -rf /tmp/bcftools-${BCFTOOLS_VERSION}
 
-COPY inst/bin/plink2 /usr/bin/plink2
+COPY bin/plink2 /usr/bin/plink2
 RUN chmod +x /usr/bin/plink2
 
 ARG RIG_VERSION=latest
 ARG R_VERSION="4.2.0"
-COPY inst/setup/pkg.lock pkg.lock
+COPY setup/pkg.lock pkg.lock
 RUN wget -q -P /tmp/ "https://github.com/r-lib/rig/releases/download/${RIG_VERSION}/rig-linux-${RIG_VERSION#v}.tar.gz" \
     && tar -C /usr/local -zxvf /tmp/rig-linux-${RIG_VERSION#v}.tar.gz \
     && yes | rig add ${R_VERSION} \
@@ -60,7 +67,7 @@ RUN wget -q -P /tmp/ "https://github.com/r-lib/rig/releases/download/${RIG_VERSI
     && Rscript -e "pak::pkg_install(c('renv', 'data.table', 'mcanouil/eggla'), upgrade = FALSE, dependencies = TRUE)" \
     && Rscript -e "pak::cache_clean()"
 
-COPY inst/setup/eggla-example.R eggla-example.R
+COPY setup/eggla-example.R eggla-example.R
 RUN chmod +x eggla-example.R
 
 RUN apt-get autoremove -y \
