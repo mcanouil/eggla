@@ -83,7 +83,7 @@ run_eggla_gwas <- function(
   data,
   results,
   id_column,
-  traits,
+  traits = c("slope_.*", "auc_.*", "^AP$", "^AR$"),
   covariates,
   vcfs,
   path,
