@@ -291,20 +291,27 @@ run_eggla_lmm <- function(
       )
 
       data.table::fwrite(
-        x = dcast(
-          data = compute_apar(
-            fit = results,
-            from = "predicted",
-            start = 0.25,
-            end = 10,
-            step = 0.05
-          )[
-            AP | AR
-          ][
-            j = what := fifelse(paste(AP, AR) %in% paste(FALSE, TRUE), "AR", "AP")
-          ],
-          formula = egg_id ~ what,
-          value.var = "egg_ageyears"
+        x = data.table::setnames(
+          x = data.table::dcast(
+            data = compute_apar(
+              fit = results,
+              from = "predicted",
+              start = 0.25,
+              end = 10,
+              step = 0.05
+            )[
+              AP | AR
+            ][
+              j = what := data.table::fifelse(paste(AP, AR) %in% paste(FALSE, TRUE), "AR", "AP")
+            ],
+            formula = egg_id ~ what,
+            value.var = c("egg_ageyears", "egg_bmi")
+          ),
+          old = function(x) {
+            sapply(strsplit(sub("^egg_", "", x), "_"), function(.x) {
+              paste(rev(.x), collapse = "_")
+            })
+          }
         ),
         file = file.path(results_directory, "derived-apar.csv")
       )
