@@ -19,6 +19,7 @@
 #'   the genotypes of the individuals to be analysed.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
 #' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
+#' @param use_info A logical indicating whether to extract all informations stored in the "INFO" field.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
 #' @param bcftools_view_options A string or a vector of strings (which will be pass to `paste()`)
@@ -89,6 +90,7 @@ run_eggla_gwas <- function(
   vcfs,
   working_directory,
   vep = NULL,
+  use_info = FALSE,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
     plink2 = "/usr/bin/plink2"
@@ -481,53 +483,55 @@ run_eggla_gwas <- function(
         "--out", results_file
       ), collapse = " "))
 
-      if (!quiet) message(sprintf("[%s] Extracting INFO ...", basename(vcf)))
-      annot <- data.table::setnames(
-        x = data.table::fread(
-          cmd = paste(bin_path[["bcftools"]], "view --drop-genotypes", vcf_file),
-          skip = "#CHROM"
-        ),
-        old = function(x) sub("^#", "", x)
-      )
-
-      if (any(grepl("^INFO$", names(annot)))) {
-        annot <- annot[
-          j = list(
-            .SD,
-            data.table::rbindlist(
-              l = lapply(
-                X = strsplit(INFO, ";"),
-                FUN = function(x) {
-                  all_fields <- strsplit(x, "=")
-                  out <- data.table::transpose(all_fields[sapply(all_fields, length) > 1])
-                  data.table::setnames(x = data.table::setDT(do.call("rbind.data.frame", out[-1])), old = out[[1]])
-                }
-              ),
-              use.names = TRUE,
-              fill = TRUE
-            )[
-              j = lapply(.SD, function(x) {
-                xout <- as.character(x)
-                data.table::fifelse(
-                  test = xout %in% c(".", "-"),
-                  yes = NA_character_,
-                  no = xout
-                )
-              })
-            ]
+      if (use_info) {
+        if (!quiet) message(sprintf("[%s] Extracting INFO ...", basename(vcf)))
+        annot <- data.table::setnames(
+          x = data.table::fread(
+            cmd = paste(bin_path[["bcftools"]], "view --drop-genotypes", vcf_file),
+            skip = "#CHROM"
           ),
-          .SDcols = !intersect(c("INFO", "QUAL", "FILTER"), names(annot))
-        ]
-      }
+          old = function(x) sub("^#", "", x)
+        )
 
-      if (length(qual_filter_cols <- intersect(c("QUAL", "FILTER"), names(annot))) > 0) {
-        annot <- annot[j = .SD, .SDcols = !c(qual_filter_cols)]
-      }
+        if (any(grepl("^INFO$", names(annot)))) {
+          annot <- annot[
+            j = list(
+              .SD,
+              data.table::rbindlist(
+                l = lapply(
+                  X = strsplit(INFO, ";"),
+                  FUN = function(x) {
+                    all_fields <- strsplit(x, "=")
+                    out <- data.table::transpose(all_fields[sapply(all_fields, length) > 1])
+                    data.table::setnames(x = data.table::setDT(do.call("rbind.data.frame", out[-1])), old = out[[1]])
+                  }
+                ),
+                use.names = TRUE,
+                fill = TRUE
+              )[
+                j = lapply(.SD, function(x) {
+                  xout <- as.character(x)
+                  data.table::fifelse(
+                    test = xout %in% c(".", "-"),
+                    yes = NA_character_,
+                    no = xout
+                  )
+                })
+              ]
+            ),
+            .SDcols = !intersect(c("INFO", "QUAL", "FILTER"), names(annot))
+          ]
+        }
 
-      data.table::setnames(
-        x = annot,
-        old = function(x) sub("^\\.SD\\.\\.*", "", x)
-      )
+        if (length(qual_filter_cols <- intersect(c("QUAL", "FILTER"), names(annot))) > 0) {
+          annot <- annot[j = .SD, .SDcols = !c(qual_filter_cols)]
+        }
+
+        data.table::setnames(
+          x = annot,
+          old = function(x) sub("^\\.SD\\.\\.*", "", x)
+        )
+      }
 
       if (!quiet) message(sprintf("[%s] Combining results files ...", basename(vcf)))
       results <- data.table::setnames(
@@ -550,15 +554,17 @@ run_eggla_gwas <- function(
       output_results_file <- sprintf("%s.results.gz", results_file)
 
       if (!quiet) message(sprintf("[%s] Writing annotated results file ...", basename(vcf)))
-      data.table::fwrite(
-        x = data.table::merge.data.table(
+      if (use_info) {
+        output_dt <- data.table::merge.data.table(
           x = results,
           y = annot,
           by = c("CHROM", "POS", "ID", "REF", "ALT"), # intersect(names(results), names(annot))
           all.x = TRUE
-        ),
-        file = output_results_file
-      )
+        )
+      } else {
+        output_dt <- results
+      }
+      data.table::fwrite(x = output_dt, file = output_results_file)
       if (!quiet) message(sprintf("[%s] Results written in \"%s\"", basename(vcf), output_results_file))
 
       output_results_file
