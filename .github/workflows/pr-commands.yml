@@ -77,7 +77,7 @@ jobs:
           - {os: ubuntu-22.04,    r: '4.2.0'}
           - {os: ubuntu-latest,   r: '4.2.0'}
     runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: R-CMD-check ${{ matrix.config.os }} (${{ matrix.config.r }})
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes

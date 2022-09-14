@@ -8,7 +8,7 @@ run_eggla_gwas(
   data,
   results,
   id_column,
-  traits,
+  traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
   covariates,
   vcfs,
   working_directory,
@@ -32,7 +32,7 @@ run_eggla_gwas(
 
 \item{covariates}{One or several covariates, \emph{i.e.}, columns' names from \code{data}, to be used.
 Binary trait should be coded as '1' and '2',
-where sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = missing.}
+where sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing.}
 
 \item{vcfs}{Path to the "raw" VCF file(s) containing
 the genotypes of the individuals to be analysed.}
@@ -91,7 +91,7 @@ if (interactive()) {
     data = "/tmp/bmigrowth.csv",
     results = results_archives,
     id_column = "ID",
-    traits = c("slope_.*", "auc_.*"),
+    traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
     covariates = c("sex"),
     vcfs = list.files(
       path = file.path(tempdir(), "vcf"),

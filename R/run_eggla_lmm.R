@@ -290,6 +290,34 @@ run_eggla_lmm <- function(
         file = file.path(results_directory, "derived-slopes-correlations.csv")
       )
 
+      data.table::fwrite(
+        x = data.table::setnames(
+          x = data.table::dcast(
+            data = compute_apar(
+              fit = results,
+              from = "predicted",
+              start = 0.25,
+              end = 10,
+              step = 0.05
+            )[
+              AP | AR
+            ][
+              j = what := data.table::fifelse(paste(AP, AR) %in% paste(FALSE, TRUE), "AR", "AP")
+            ],
+            formula = egg_id ~ what,
+            value.var = c("egg_ageyears", "egg_bmi")
+          ),
+          old = function(x) {
+            out <- sapply(strsplit(sub("^egg_", "", x), "_"), function(.x) {
+              paste(rev(.x), collapse = "_")
+            })
+            out[grepl("^egg_id$", x)] <- "egg_id"
+            out
+          }
+        ),
+        file = file.path(results_directory, "derived-apar.csv")
+      )
+
       utils::zip(
         zipfile = archive_filename,
         files = list.files(results_directory, full.names = TRUE),
