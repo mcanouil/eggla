@@ -122,7 +122,7 @@ run_eggla_gwas <- function(
       to = sprintf("%s/plink2", working_directory),
       overwrite = TRUE
     )
-    on.exit(unlink(sprintf("%s/plink2", working_directory)))
+    if (clean) on.exit(unlink(sprintf("%s/plink2", working_directory)))
   }
 
   if (
