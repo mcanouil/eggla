@@ -63,7 +63,7 @@
 #'     data = "/tmp/bmigrowth.csv",
 #'     results = results_archives,
 #'     id_column = "ID",
-#'     traits = c("slope_.*", "auc_.*", "^AP$", "^AR$"),
+#'     traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
 #'     covariates = c("sex"),
 #'     vcfs = list.files(
 #'       path = file.path(tempdir(), "vcf"),
@@ -83,7 +83,7 @@ run_eggla_gwas <- function(
   data,
   results,
   id_column,
-  traits = c("slope_.*", "auc_.*", "^AP$", "^AR$"),
+  traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
   covariates,
   vcfs,
   path,
