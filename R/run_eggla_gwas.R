@@ -17,7 +17,7 @@
 #'   where sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = missing.
 #' @param vcfs Path to the "raw" VCF file(s) containing
 #'   the genotypes of the individuals to be analysed.
-#' @param path Directory in which computation will occur and where output files will be saved.
+#' @param working_directory Directory in which computation will occur and where output files will be saved.
 #' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
@@ -26,6 +26,7 @@
 #'   and/or `"--min-alleles 2 --max-alleles 2 --types snps"`.
 #' @param threads Number of threads to be used by some BCFtools and PLINK2 commands.
 #' @param quiet A logical indicating whether to suppress the output.
+#' @param clean A logical indicating whether to clean intermediary files or not.
 #'
 #' @import data.table
 #' @importFrom stats as.formula p.adjust
@@ -70,7 +71,7 @@
 #'       pattern = "\\.vcf$|\\.vcf.gz$",
 #'       full.names = TRUE
 #'     ),
-#'     path = tempdir(),
+#'     working_directory = tempdir(),
 #'     vep = NULL,
 #'     bin_path = list(
 #'       bcftools = "/usr/bin/bcftools",
@@ -86,7 +87,7 @@ run_eggla_gwas <- function(
   traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
   covariates,
   vcfs,
-  path,
+  working_directory,
   vep = NULL,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
@@ -94,16 +95,17 @@ run_eggla_gwas <- function(
   ),
   bcftools_view_options = NULL,
   threads = 1,
-  quiet = FALSE
+  quiet = FALSE,
+  clean = TRUE
 ) {
   INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
-  path <- normalizePath(path)
+  working_directory <- normalizePath(working_directory)
   results <- normalizePath(results)
   if (length(results) != 2) {
     stop("'results' must be a vector of length 2, i.e., a path for female and a path for mmale.")
   }
   dir.create(
-    path = path,
+    path = working_directory,
     recursive = TRUE,
     mode = "0775",
     showWarnings = FALSE
@@ -113,34 +115,34 @@ run_eggla_gwas <- function(
 
   if (
     !grepl("not found", system(paste(bin_path[["plink2"]], "--version"), intern = TRUE)) &&
-      bin_path[["plink2"]] != sprintf("%s/plink2", path)
+      bin_path[["plink2"]] != sprintf("%s/plink2", working_directory)
   ) {
     file.copy(
       from = bin_path[["plink2"]],
-      to = sprintf("%s/plink2", path),
+      to = sprintf("%s/plink2", working_directory),
       overwrite = TRUE
     )
-    on.exit(unlink(sprintf("%s/plink2", path)))
+    on.exit(unlink(sprintf("%s/plink2", working_directory)))
   }
 
   if (
-    grepl("^http.*\\.zip$", bin_path[["plink2"]]) && !file.exists(sprintf("%s/plink2", path))
+    grepl("^http.*\\.zip$", bin_path[["plink2"]]) && !file.exists(sprintf("%s/plink2", working_directory))
   ) {
-    zip_file <- sprintf("%s/plink2.zip", path)
+    zip_file <- sprintf("%s/plink2.zip", working_directory)
     is_plink_downloaded <- try(
       expr = {
         utils::download.file(url = bin_path[["plink2"]], destfile = zip_file)
         utils::unzip(
           zipfile = zip_file,
-          exdir = path,
+          exdir = working_directory,
           files = "plink2"
         )
         unlink(zip_file)
       },
       silent = TRUE
     )
-    bin_path[["plink2"]] <- sprintf("%s/plink2", path)
-    if (inherits(is_plink_downloaded, "try-error") && !file.exists(sprintf("%s/plink2", path))) {
+    bin_path[["plink2"]] <- sprintf("%s/plink2", working_directory)
+    if (inherits(is_plink_downloaded, "try-error") && !file.exists(sprintf("%s/plink2", working_directory))) {
       stop(
         "Error downloading PLINK2 binary. ",
         "Please check the download URL at https://www.cog-genomics.org/plink/2.0."
@@ -148,7 +150,7 @@ run_eggla_gwas <- function(
     }
   }
 
-  Sys.chmod(sprintf("%s/plink2", path), "0777")
+  Sys.chmod(sprintf("%s/plink2", working_directory), "0777")
 
   plink_version <- try(
     expr = system(sprintf("%s --version", bin_path[["plink2"]]), intern = TRUE),
@@ -282,9 +284,9 @@ run_eggla_gwas <- function(
     paste(covariates, collapse = " + ")
   ))
 
-  tmpdir <- file.path(tempdir(), "gwas_plink2")
+  tmpdir <- file.path(working_directory, "gwas_plink2")
   dir.create(path = tmpdir, recursive = TRUE, mode = "0777")
-  on.exit(unlink(tmpdir, recursive = TRUE))
+  if (clean) on.exit(unlink(tmpdir, recursive = TRUE))
 
   if (length(sex_covariate <- grep("^sex", covariates, value = TRUE, ignore.case = TRUE)) > 1) {
     stop(sprintf(
@@ -357,7 +359,7 @@ run_eggla_gwas <- function(
   if (length(sex_covariate) > 0) {
     if (length(sex_levels <- unique(dt[[sex_covariate]])) == 2 && 0 %in% sex_levels) {
       warning(
-        "Sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = missing! ",
+        "Sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing! ",
         "'0' have been recoded as '2', i.e., female."
       )
       dt[
@@ -365,6 +367,14 @@ run_eggla_gwas <- function(
         .SDcols = sex_covariate
       ]
     }
+    coding_frequencies <- sort(table(dt[[sex_covariate]]))
+    if (length(coding_frequencies) == 3 && "O" %in% head(names(coding_frequencies), -1)) {
+      warning(
+        "Too many '0' have been detected!",
+        "Sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing! "
+      )
+    }
+
     data.table::fwrite(
       x = data.table::setnames(
         x = data.table::copy(dt)[j = unique(.SD), .SDcols = c("#IID", sex_covariate)],
@@ -571,7 +581,7 @@ run_eggla_gwas <- function(
     neworder = c("trait_model", "covariates")
   )[
     j = list(file = (function(dt, tm) {
-      rf <- sprintf(file.path(path, "%s-gwas.csv.gz"), tm)
+      rf <- sprintf(file.path(working_directory, "%s-gwas.csv.gz"), tm)
       data.table::fwrite(x = .SD, file = rf)
       rf
     })(.SD, trait_model)),
@@ -581,8 +591,8 @@ run_eggla_gwas <- function(
   if (!quiet) message("Writing software versions ...")
   writeLines(
     text = c(R.version.string, plink_version, bcftools_version),
-    con = file.path(path, "gwas-software.txt")
+    con = file.path(working_directory, "gwas-software.txt")
   )
 
-  c(results_files[["file"]], results, file.path(path, "gwas-software.txt"))
+  c(results_files[["file"]], results, file.path(working_directory, "gwas-software.txt"))
 }

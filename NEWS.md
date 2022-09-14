@@ -1,3 +1,24 @@
+# eggla (development)
+
+## Breaking changes
+
+- In `R/run_eggla_gwas.R`,
+  - refactor: `path` argument has been renamed `working_directory` for consistency with `run_eggla_lmm()`.
+- In `R/*.R`,
+  - fix: `knots` default value is now `c(1, 8, 12)`.
+
+## Fixes
+
+- In `R/run_eggla_lmm.R`,
+  - fix: now checks if IDs are unique.
+- In `R/run_eggla_gwas.R`,
+  - fix: now check for individuals in common between phenotypes and genotypes before processing the VCF files.
+
+## Chores
+
+- In `.devcontainer` and `inst/setup`,
+  - refactor: improve Docker build process and add `devcontainer` ability.
+
 # eggla 0.12.3
 
 ## Breaking changes

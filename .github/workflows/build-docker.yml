@@ -38,10 +38,6 @@ jobs:
               --platform "linux/amd64" \
               --tag "ghcr.io/mcanouil/eggla:${TAG}" \
               --file "inst/setup/Dockerfile" \
-              --label "org.opencontainers.image.title=eggla" \
-              --label "org.opencontainers.image.description=Docker image for the 'eggla' R package." \
-              --label "org.opencontainers.image.base.name=docker.io/mcanouil/r-ver:4.2.0" \
-              --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
               --label "org.opencontainers.image.version=${TAG}" \
               .
           else
@@ -51,18 +47,14 @@ jobs:
               --platform "linux/amd64" \
               --tag "ghcr.io/mcanouil/eggla:${TAG//v}" \
               --tag "ghcr.io/mcanouil/eggla:latest" \
-              --file "inst/setup/Dockerfile" \
-              --label "org.opencontainers.image.title=eggla" \
-              --label "org.opencontainers.image.description=Docker image for the 'eggla' R package." \
-              --label "org.opencontainers.image.base.name=docker.io/mcanouil/r-ver:4.2.0" \
-              --label "org.opencontainers.image.source=https://github.com/mcanouil/eggla" \
+              --file "inst/setup/base.Dockerfile" \
               --label "org.opencontainers.image.version=${{github.ref_name}}" \
               .
           fi
       - name: Run eggla-example.R
         run: |
           if [[ "${{github.ref_name}}" = "main" ]]; then
-            docker run --rm ghcr.io/mcanouil/eggla:devel Rscript eggla-example.R
+            docker container run --rm ghcr.io/mcanouil/eggla:devel Rscript eggla-example.R
           else
-            docker run --rm ghcr.io/mcanouil/eggla:latest Rscript eggla-example.R
+            docker container run --rm ghcr.io/mcanouil/eggla:latest Rscript eggla-example.R
           fi
