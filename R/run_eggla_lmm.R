@@ -308,9 +308,11 @@ run_eggla_lmm <- function(
             value.var = c("egg_ageyears", "egg_bmi")
           ),
           old = function(x) {
-            sapply(strsplit(sub("^egg_", "", x), "_"), function(.x) {
+            out <- sapply(strsplit(sub("^egg_", "", x), "_"), function(.x) {
               paste(rev(.x), collapse = "_")
             })
+            out[grepl("^egg_id$", x)] <- "egg_id"
+            out
           }
         ),
         file = file.path(results_directory, "derived-apar.csv")
