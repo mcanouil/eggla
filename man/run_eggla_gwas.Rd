@@ -32,7 +32,7 @@ run_eggla_gwas(
 
 \item{covariates}{One or several covariates, \emph{i.e.}, columns' names from \code{data}, to be used.
 Binary trait should be coded as '1' and '2',
-where sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = missing.}
+where sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing.}
 
 \item{vcfs}{Path to the "raw" VCF file(s) containing
 the genotypes of the individuals to be analysed.}
