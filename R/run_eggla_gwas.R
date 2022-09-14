@@ -341,7 +341,7 @@ run_eggla_gwas <- function(
   if (length(sex_covariate) > 0) {
     if (length(sex_levels <- unique(dt[[sex_covariate]])) == 2 && 0 %in% sex_levels) {
       warning(
-        "Sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = missing! ",
+        "Sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing! ",
         "'0' have been recoded as '2', i.e., female."
       )
       dt[
@@ -349,6 +349,14 @@ run_eggla_gwas <- function(
         .SDcols = sex_covariate
       ]
     }
+    coding_frequencies <- sort(table(dt[[sex_covariate]]))
+    if (length(coding_frequencies) == 3 && "O" %in% head(names(coding_frequencies), -1)) {
+      warning(
+        "Too many '0' have been detected!",
+        "Sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing! "
+      )
+    }
+
     data.table::fwrite(
       x = data.table::setnames(
         x = data.table::copy(dt)[j = unique(.SD), .SDcols = c("#IID", sex_covariate)],
