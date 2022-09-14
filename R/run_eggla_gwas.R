@@ -14,7 +14,7 @@
 #' @param traits One or multiple traits, *i.e.*, columns' names from `data`, to be analysed separately.
 #' @param covariates One or several covariates, *i.e.*, columns' names from `data`, to be used.
 #'   Binary trait should be coded as '1' and '2',
-#'   where sex must be coded: '1'/'M'/'m' = male, '2'/'F'/'f' = female, 'NA'/'0' = missing.
+#'   where sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing.
 #' @param vcfs Path to the "raw" VCF file(s) containing
 #'   the genotypes of the individuals to be analysed.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
