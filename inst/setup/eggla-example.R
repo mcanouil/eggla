@@ -39,7 +39,7 @@ result_gwas <- run_eggla_gwas(
     full.names = TRUE
   ),
   vep = NULL,
-  path = output_path,
+  working_directory = output_path,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
     plink2 = system.file("bin", "plink2", package = "eggla")
