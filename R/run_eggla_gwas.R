@@ -179,7 +179,7 @@ run_eggla_gwas <- function(
     derived_parameters_dt <- data.table::setnames(
       x = data.table::rbindlist(lapply(
         X = results,
-        path = path,
+        path = working_directory,
         derived_files = derived_files,
         FUN = function(izip, path, derived_files) {
           on.exit(unlink(file.path(path, derived_files)))
