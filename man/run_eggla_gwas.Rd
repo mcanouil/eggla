@@ -8,7 +8,7 @@ run_eggla_gwas(
   data,
   results,
   id_column,
-  traits,
+  traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
   covariates,
   vcfs,
   path,
@@ -88,7 +88,7 @@ if (interactive()) {
     data = "/tmp/bmigrowth.csv",
     results = results_archives,
     id_column = "ID",
-    traits = c("slope_.*", "auc_.*"),
+    traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
     covariates = c("sex"),
     vcfs = list.files(
       path = file.path(tempdir(), "vcf"),
