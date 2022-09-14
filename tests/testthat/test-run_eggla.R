@@ -38,7 +38,7 @@ test_that("run_eggla", {
       ],
       results = result_lmm,
       id_column = "ID",
-      traits = c("slope_.*", "auc_.*"),
+      traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
       covariates = c("sex"),
       vcfs = list.files(
         path = system.file("vcf", package = "eggla"),
@@ -73,7 +73,7 @@ test_that("run_eggla", {
       ],
       results = result_lmm,
       id_column = "ID",
-      traits = c("slope_.*", "auc_.*"),
+      traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
       covariates = c("sex"),
       vcfs = list.files(
         path = system.file("vcf", package = "eggla"),
@@ -98,7 +98,7 @@ test_that("run_eggla", {
       ],
       results = result_lmm,
       id_column = "ID",
-      traits = c("slope_.*", "auc_.*"),
+      traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
       covariates = c("sex"),
       vcfs = list.files(
         path = system.file("vcf", package = "eggla"),
@@ -142,7 +142,7 @@ test_that("run_eggla", {
         clean = FALSE
       )),
       id_column = "ID",
-      traits = c("slope_.*", "auc_.*"),
+      traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
       covariates = c("sex"),
       vcfs = list.files(
         path = system.file("vcf", package = "eggla"),
