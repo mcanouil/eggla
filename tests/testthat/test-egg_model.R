@@ -49,4 +49,18 @@ test_that("egg_model", {
       knots = c(1, 8, 12)
     )
   )
+
+  set.seed(1234)
+  dta <- bmigrowth[bmigrowth[["sex"]] == 0, ]
+  dta[["source"]] <- c("A", "B")[rbinom(n = nrow(dta), size = 1, prob = 0.65) + 1]
+  res <- egg_model(
+    formula = log(bmi) ~ age + source,
+    data = dta,
+    id_var = "ID",
+    random_complexity = 1
+  )
+
+  expect_snapshot(predict_bmi(res)[order(egg_id, egg_ageyears)])
+
+  expect_snapshot(predict_bmi(res, filter = "source == 'A'")[order(egg_id, egg_ageyears)])
 })

@@ -61,7 +61,7 @@
 #'   by = "variable"
 #' ]
 #' wrap_plots(list_gg[["gg"]], guides = "collect")
-compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, end = 10, step = 0.05) {
+compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, end = 10, step = 0.05, filter = NULL) {
   stopifnot(inherits(fit, "lme"))
   match.arg(from, c("predicted", "observed"))
   AP <- AR <- bmi <- egg_ageyears <- egg_bmi <- egg_id <- NULL # no visible binding for global variable from data.table
@@ -88,7 +88,7 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
         ]
       },
       "predicted" = {
-        predict_bmi(fit = fit, start = start, end = end, step = step)
+        predict_bmi(fit = fit, start = start, end = end, step = step, filter = filter)
       }
     ),
     old = c(id_var, age_var, bmi_var, covariates),
