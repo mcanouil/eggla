@@ -59,7 +59,6 @@ Suggests:
     forcats (>= 0.5.2),
     roxygen2 (>= 7.2.1),
     testthat (>= 3.1.4)
-Remotes: github::carriedaymont/growthcleanr@v2.0.2
 SystemRequirements:
     BCFtools (>= 1.15.0) (https://github.com/samtools/BCFtools),
     PLINK2 (>= 2.0) (https://www.cog-genomics.org/plink/2.0)
