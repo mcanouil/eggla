@@ -25,6 +25,10 @@
 #'   i.e., CAR(1) as correlation structure.
 #' @param knots The knots defining the splines.
 #' @param period The intervals knots on which slopes are to be computed.
+#' @param filter_apar A string following `data.table` syntax for filtering on `"i"`
+#'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
+#'   Argument pass through `compute_apar()` (see `predict_bmi()`).
+#'   Default is `NULL`.
 #' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
 #' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
 #'   Only applies if parallel is set to TRUE.
@@ -71,6 +75,7 @@ run_eggla_lmm <- function(
   use_car1 = FALSE,
   knots = c(1, 8, 12),
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+  filter_apar = NULL,
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -298,7 +303,8 @@ run_eggla_lmm <- function(
               from = "predicted",
               start = 0.25,
               end = 10,
-              step = 0.05
+              step = 0.05,
+              filter = filter_apar
             )[
               AP | AR
             ][
