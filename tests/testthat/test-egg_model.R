@@ -60,7 +60,15 @@ test_that("egg_model", {
     random_complexity = 1
   )
 
-  expect_snapshot(predict_bmi(res)[order(egg_id, egg_ageyears)])
+  expect_snapshot_warning(predict_bmi(res)[order(egg_id, egg_ageyears)])
 
-  expect_snapshot(predict_bmi(res, filter = "source == 'A'")[order(egg_id, egg_ageyears)])
+  expect_snapshot(
+    predict_bmi(
+      fit = res,
+      filter = "source == 'A'"
+    )[
+      order(egg_id, egg_ageyears),
+      egg_bmi := round(egg_bmi, digits = 2)
+    ]
+  )
 })
