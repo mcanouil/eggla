@@ -1,14 +1,11 @@
 # eggla 0.13.0
 
-# eggla (development)
-
 ## Breaking changes
 
 - In `R/*.R`,
   - fix: `knots` default value is now `c(1, 8, 12)`.
 - In `R/run_eggla_gwas.R`,
   - refactor: `path` argument has been renamed `working_directory` for consistency with `run_eggla_lmm()`.
-
 
 ## Features
 
@@ -20,6 +17,7 @@
   - feat: now performs GWAS of BMI and age at adiposity peak and rebound in addition to slopes and AUCs.
   - feat: now has a `clean` argument which clean intermediary files stored in `working_directory`.
   - feat: new `use_info` argument to indicate if INFO field should be extracted (default is `FALSE`).
+
 ## Fixes
 
 - In `R/run_eggla_lmm.R`,
