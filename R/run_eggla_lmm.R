@@ -85,6 +85,7 @@ run_eggla_lmm <- function(
   HEIGHTCM <- WEIGHTKG <- bmi <- NULL # no visible binding for global variable from data.table
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
   measurement <- param <- egg_ageyears <- NULL # no visible binding for global variable from data.table
+  AP <- AR <- what <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
 
