@@ -240,41 +240,25 @@
 
 ---
 
-    Code
-      predict_bmi(res)[order(egg_id, egg_ageyears)]
-    Condition
-      Warning in `predict_bmi()`:
-      Multiple BMI measures (for the same age) have been detected and are aggregated using geometric mean!
-      Use "filter" (or "filter_apar" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = "source == 'clinic'".
-    Output
-            egg_id egg_ageyears  egg_bmi
-         1:    001         0.25 18.42096
-         2:    001         0.30 18.82627
-         3:    001         0.35 19.17792
-         4:    001         0.40 19.47726
-         5:    001         0.45 19.72642
-        ---                             
-      9796:    099         9.80 33.31745
-      9797:    099         9.85 33.44629
-      9798:    099         9.90 33.57549
-      9799:    099         9.95 33.70508
-      9800:    099        10.00 33.83508
+    Multiple BMI measures (for the same age) have been detected and are aggregated using geometric mean!
+    Use "filter" (or "filter_apar" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = "source == 'clinic'".
 
 ---
 
     Code
-      predict_bmi(res, filter = "source == 'A'")[order(egg_id, egg_ageyears)]
+      predict_bmi(fit = res, filter = "source == 'A'")[order(egg_id, egg_ageyears),
+      egg_bmi := round(egg_bmi, digits = 2)]
     Output
-            egg_id egg_source egg_ageyears  egg_bmi
-         1:    001          A         0.25 18.39947
-         2:    001          A         0.30 18.80430
-         3:    001          A         0.35 19.15554
-         4:    001          A         0.40 19.45454
-         5:    001          A         0.45 19.70340
-        ---                                        
-      9796:    099          A         9.80 33.27858
-      9797:    099          A         9.85 33.40727
-      9798:    099          A         9.90 33.53632
-      9799:    099          A         9.95 33.66576
-      9800:    099          A        10.00 33.79560
+            egg_id egg_source egg_ageyears egg_bmi
+         1:    082          A         0.25   16.18
+         2:    082          A         0.30   16.54
+         3:    082          A         0.35   16.85
+         4:    082          A         0.40   17.11
+         5:    082          A         0.45   17.33
+        ---                                       
+      9796:    068          A         9.80   30.44
+      9797:    068          A         9.85   30.55
+      9798:    068          A         9.90   30.66
+      9799:    068          A         9.95   30.76
+      9800:    068          A        10.00   30.87
 
