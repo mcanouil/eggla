@@ -37,6 +37,8 @@
 - In `pkgdown/_pkgdown.yml`,
   - refactor: reorder sections to focus on the main functions first.
 
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.3...v0.13.0>
+
 # eggla 0.12.3
 
 ## Breaking changes
@@ -60,7 +62,9 @@
 - In `inst/setup/eggla-example.R`,
   - test: add run_eggla_gwas in docker build test example.
 - In `tests/testthat/test-run_eggla.R`,
-  - test: new tests for run_eggla functions. 
+  - test: new tests for run_eggla functions.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.2...v0.12.3>
 
 # eggla 0.12.2
 
