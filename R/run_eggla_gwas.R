@@ -377,7 +377,7 @@ run_eggla_gwas <- function(
       ]
     }
     coding_frequencies <- sort(table(dt[[sex_covariate]]))
-    if (length(coding_frequencies) == 3 && "O" %in% head(names(coding_frequencies), -1)) {
+    if (length(coding_frequencies) == 3 && "O" %in% utils::head(names(coding_frequencies), -1)) {
       warning(
         "Too many '0' have been detected!",
         "Sex must be coded: '1' = male, '2' = female, 'NA'/'0' = missing! "
