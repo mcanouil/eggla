@@ -35,8 +35,12 @@ Imports:
     utils,
     grDevices,
     data.table (>= 1.14.2),
-    growthcleanr (>= 2.0.0),
+    growthcleanr (>= 2.0.2),
     ggplot2 (>= 3.3.6),
+    ggtext (>= 0.1.1),
+    ggdist (>= 3.2.0),
+    ggbeeswarm (>= 0.6.0),
+    scales (>= 1.2.1),
     patchwork (>= 1.1.2),
     broom.mixed (>= 0.2.9.4),
     rlang (>= 1.0.5),
@@ -45,10 +49,6 @@ Suggests:
     knitr (>= 1.40),
     rmarkdown (>= 2.16),
     R.utils (>= 2.12.0),
-    scales (>= 1.2.1),
-    ggbeeswarm (>= 0.6.0),
-    ggdist (>= 3.2.0),
-    ggtext (>= 0.1.1),
     gt (>= 0.7.0),
     lme4 (>= 1.1.30),
     see (>= 0.7.2),
@@ -59,7 +59,7 @@ Suggests:
     forcats (>= 0.5.2),
     roxygen2 (>= 7.2.1),
     testthat (>= 3.1.4)
-Remotes: github::carriedaymont/growthcleanr@v2.0.0
+Remotes: github::carriedaymont/growthcleanr@v2.0.2
 SystemRequirements:
     BCFtools (>= 1.15.0) (https://github.com/samtools/BCFtools),
     PLINK2 (>= 2.0) (https://www.cog-genomics.org/plink/2.0)
