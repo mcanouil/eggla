@@ -31,7 +31,7 @@
 #'
 #' @import data.table
 #' @importFrom stats as.formula p.adjust
-#' @importFrom utils download.file unzip
+#' @importFrom utils download.file unzip head
 #' @importFrom rlang hash
 # @importFrom future.apply future_lapply
 #'
