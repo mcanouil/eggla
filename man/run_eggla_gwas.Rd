@@ -13,6 +13,7 @@ run_eggla_gwas(
   vcfs,
   working_directory,
   vep = NULL,
+  use_info = FALSE,
   bin_path = list(bcftools = "/usr/bin/bcftools", plink2 = "/usr/bin/plink2"),
   bcftools_view_options = NULL,
   threads = 1,
@@ -40,6 +41,8 @@ the genotypes of the individuals to be analysed.}
 \item{working_directory}{Directory in which computation will occur and where output files will be saved.}
 
 \item{vep}{Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.}
+
+\item{use_info}{A logical indicating whether to extract all informations stored in the "INFO" field.}
 
 \item{bin_path}{A named list containing the path to the PLINK2 and BCFtools binaries
 For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).}
