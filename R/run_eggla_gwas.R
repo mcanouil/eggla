@@ -115,10 +115,7 @@ run_eggla_gwas <- function(
 
   if (is.null(bcftools_view_options)) bcftools_view_options <- ""
 
-  if (
-    !grepl("not found", system(paste(bin_path[["plink2"]], "--version"), intern = TRUE)) &&
-      bin_path[["plink2"]] != sprintf("%s/plink2", working_directory)
-  ) {
+  if (bin_path[["plink2"]] != sprintf("%s/plink2", working_directory) && file.exists(bin_path[["plink2"]])) {
     file.copy(
       from = bin_path[["plink2"]],
       to = sprintf("%s/plink2", working_directory),
