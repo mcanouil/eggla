@@ -16,5 +16,6 @@
 ^doc$
 ^Meta$
 ^CITATION\.cff$
-^inst/article$
 ^.devcontainer$
+^README.html$
+^inst/article$
