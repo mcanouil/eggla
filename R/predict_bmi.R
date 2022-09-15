@@ -115,7 +115,7 @@ predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.05, filter = NULL)
   ) {
     warning(paste(
       "Multiple BMI measures (for the same age) have been detected and are aggregated using geometric mean!",
-      "Use \"filter\" parameter to apply some filtering, e.g., filter = \"source == 'clinic'\".",
+      "Use \"filter\" (or \"filter_apar\" in `run_eggla_lmm()`)") parameter to apply some filtering, e.g., filter = \"source == 'clinic'\".",
       sep = "\n"
     ))
     out <- out[
