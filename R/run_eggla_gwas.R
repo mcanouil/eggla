@@ -161,7 +161,7 @@ run_eggla_gwas <- function(
     silent = TRUE
   )
   if (inherits(plink_version, "try-error") || !file.exists(bin_path[["plink2"]])) {
-    stop("Please check PLINK binary path!")
+    stop("Please check PLINK2 binary path!")
   }
 
   bcftools_version <- try(
