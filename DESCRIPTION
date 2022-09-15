@@ -22,7 +22,7 @@ Authors@R:
            role = "aut",
            email = "Anni.Heiskala@oulu.fi"))
 Description: Tools for longitudinal analysis within the EGG
-    (Early Growth Genetics) Consortium.
+    (Early Growth Genetics) Consortium (<http://egg-consortium.org/>).
 License: MIT + file LICENSE
 URL: https://github.com/mcanouil/eggla,
     https://m.canouil.fr/eggla/
