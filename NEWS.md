@@ -2,22 +2,40 @@
 
 ## Breaking changes
 
-- In `R/run_eggla_gwas.R`,
-  - refactor: `path` argument has been renamed `working_directory` for consistency with `run_eggla_lmm()`.
 - In `R/*.R`,
   - fix: `knots` default value is now `c(1, 8, 12)`.
+- In `R/run_eggla_gwas.R`,
+  - refactor: `path` argument has been renamed `working_directory` for consistency with `run_eggla_lmm()`.
 
+
+## Features
+
+- In `R/compute_apar.R` and `R/predict_bmi.R`,
+  - feat: `filter` argument filter predicted values table in case of multiple measurements.
+- In `R/run_eggla_lmm.R`,
+  - feat: `filter_apar` argument to be passed to `compute_apar()` and `predict_bmi()`.
+- In `R/run_eggla_gwas.R`,
+  - feat: now performs GWAS of BMI and age at adiposity peak and rebound in addition to slopes and AUCs.
+  - feat: now has a `clean` argument which clean intermediary files stored in `working_directory`.
+  - feat: new `use_info` argument to indicate if INFO field should be extracted (default is `FALSE`).
 ## Fixes
 
 - In `R/run_eggla_lmm.R`,
   - fix: now checks if IDs are unique.
+  - fix: properly export BMI and age at adiposity peak and rebound.
+  - fix: PLINK2 and BCFTools binary path checks.
 - In `R/run_eggla_gwas.R`,
   - fix: now check for individuals in common between phenotypes and genotypes before processing the VCF files.
+- In `DESCRIPTION`,
+  - fix: move some packages from `suggests` to `imports` (_e.g._, `ggtext`, `ggdist`, _etc._)
+  - fix: now uses `growthcleaner` from CRAN.
 
 ## Chores
 
 - In `.devcontainer` and `inst/setup`,
   - refactor: improve Docker build process and add `devcontainer` ability.
+- In `pkgdown/_pkgdown.yml`,
+  - refactor: reorder sections to focus on the main functions first.
 
 # eggla 0.12.3
 
