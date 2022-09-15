@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.
+Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium (\url{http://egg-consortium.org/}).
 }
 \seealso{
 Useful links:
