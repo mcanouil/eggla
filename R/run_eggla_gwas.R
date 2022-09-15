@@ -155,7 +155,12 @@ run_eggla_gwas <- function(
   Sys.chmod(sprintf("%s/plink2", working_directory), "0777")
 
   plink_version <- try(
-    expr = system(sprintf("%s --version", bin_path[["plink2"]]), intern = TRUE),
+    expr = system(
+      command = sprintf("%s --version", bin_path[["plink2"]]),
+      intern = TRUE,
+      ignore.stdout = TRUE,
+      ignore.stderr = TRUE
+    ),
     silent = TRUE
   )
   if (inherits(plink_version, "try-error") || !file.exists(bin_path[["plink2"]])) {
@@ -163,7 +168,12 @@ run_eggla_gwas <- function(
   }
 
   bcftools_version <- try(
-    expr = system(sprintf("%s --version", bin_path[["bcftools"]]), intern = TRUE)[1],
+    expr = system(
+      command = sprintf("%s --version", bin_path[["bcftools"]]),
+      intern = TRUE,
+      ignore.stdout = TRUE,
+      ignore.stderr = TRUE
+    ),
     silent = TRUE
   )
   if (inherits(bcftools_version, "try-error") || !file.exists(bin_path[["bcftools"]])) {
