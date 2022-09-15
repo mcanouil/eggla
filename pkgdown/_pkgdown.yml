@@ -8,20 +8,6 @@ authors:
   Mickaël Canouil:
     href: https://mickael.canouil.fr
 reference:
-  - title: General Functions
-    desc: General functions to work with linear splines, cubic splines, and cubic slopes mixed model.
-    contents:
-    - time_model
-    - predict_bmi
-    - compute_apar
-    - plot_residuals
-    - compute_aucs
-    - plot_aucs
-    - compute_slopes
-    - plot_slopes
-    - compute_correlations
-    - compute_outliers
-    - gsp
   - title: Cubic Splines (Random Cubic/Linear Splines) Functions
     desc: Functions dedicated to work with cubic Splines mixed model.
     contents:
@@ -37,6 +23,20 @@ reference:
   - title: Datasets
     contents:
     - bmigrowth
+  - title: General Functions
+    desc: General functions to work with linear splines, cubic splines, and cubic slopes mixed model.
+    contents:
+    - time_model
+    - predict_bmi
+    - compute_apar
+    - plot_residuals
+    - compute_aucs
+    - plot_aucs
+    - compute_slopes
+    - plot_slopes
+    - compute_correlations
+    - compute_outliers
+    - gsp
 articles:
 - title: Articles
   navbar: ~
