@@ -31,7 +31,7 @@
 #' ## For multiple sources of measures or multiple measures at one age
 #' set.seed(1234)
 #' dta <- bmigrowth[bmigrowth[["sex"]] == 0, ]
-#' dta[["source"]] <- c("A", "B")[rbinom(n = nrow(dta), size = 1, prob = 0
+#' dta[["source"]] <- c("A", "B")[rbinom(n = nrow(dta), size = 1, prob = 0.65) + 1]
 #'
 #' res <- egg_model(
 #'   formula = log(bmi) ~ age + source,
