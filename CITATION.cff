@@ -179,7 +179,7 @@ references:
     given-names: Campos
     email: camposd@email.chop.edu
   year: '2022'
-  version: '>= 2.0.0'
+  version: '>= 2.0.2'
 - type: software
   title: ggplot2
   abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
@@ -216,6 +216,56 @@ references:
   url: https://CRAN.R-project.org/package=ggplot2
   version: '>= 3.3.6'
 - type: software
+  title: ggtext
+  abstract: 'ggtext: Improved Text Rendering Support for ''ggplot2'''
+  notes: Imports
+  authors:
+  - family-names: Wilke
+    given-names: Claus O.
+    email: wilke@austin.utexas.edu
+    orcid: https://orcid.org/0000-0002-7470-9261
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ggtext
+  version: '>= 0.1.1'
+- type: software
+  title: ggdist
+  abstract: 'ggdist: Visualizations of Distributions and Uncertainty'
+  notes: Imports
+  authors:
+  - family-names: Kay
+    given-names: Matthew
+    email: mjskay@northwestern.edu
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ggdist
+  version: '>= 3.2.0'
+- type: software
+  title: ggbeeswarm
+  abstract: 'ggbeeswarm: Categorical Scatter (Violin Point) Plots'
+  notes: Imports
+  authors:
+  - family-names: Clarke
+    given-names: Erik
+    email: erikclarke@gmail.com
+  - family-names: Sherrill-Mix
+    given-names: Scott
+    email: sherrillmix@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ggbeeswarm
+  version: '>= 0.6.0'
+- type: software
+  title: scales
+  abstract: 'scales: Scale Functions for Visualization'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  - family-names: Seidel
+    given-names: Dana
+  year: '2022'
+  url: https://CRAN.R-project.org/package=scales
+  version: '>= 1.2.1'
+- type: software
   title: patchwork
   abstract: 'patchwork: The Composer of Plots'
   notes: Imports
@@ -226,7 +276,7 @@ references:
     orcid: https://orcid.org/0000-0002-5147-4711
   year: '2022'
   url: https://CRAN.R-project.org/package=patchwork
-  version: '>= 1.1.1'
+  version: '>= 1.1.2'
 - type: software
   title: broom.mixed
   abstract: 'broom.mixed: Tidying Methods for Mixed Models'
@@ -255,7 +305,7 @@ references:
     email: hadley@rstudio.com
   year: '2022'
   url: https://CRAN.R-project.org/package=rlang
-  version: '>= 1.0.4'
+  version: '>= 1.0.5'
 - type: software
   title: performance
   abstract: 'performance: Assessment of Regression Models Performance'
@@ -287,7 +337,7 @@ references:
     orcid: https://orcid.org/0000-0001-9560-6336
   year: '2022'
   url: https://CRAN.R-project.org/package=performance
-  version: '>= 0.9.1'
+  version: '>= 0.9.2'
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -299,7 +349,7 @@ references:
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2022'
   url: https://CRAN.R-project.org/package=knitr
-  version: '>= 1.39'
+  version: '>= 1.40'
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -339,57 +389,7 @@ references:
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2022'
   url: https://CRAN.R-project.org/package=rmarkdown
-  version: '>= 2.14'
-- type: software
-  title: scales
-  abstract: 'scales: Scale Functions for Visualization'
-  notes: Suggests
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  - family-names: Seidel
-    given-names: Dana
-  year: '2022'
-  url: https://CRAN.R-project.org/package=scales
-  version: '>= 1.2.0'
-- type: software
-  title: ggbeeswarm
-  abstract: 'ggbeeswarm: Categorical Scatter (Violin Point) Plots'
-  notes: Suggests
-  authors:
-  - family-names: Clarke
-    given-names: Erik
-    email: erikclarke@gmail.com
-  - family-names: Sherrill-Mix
-    given-names: Scott
-    email: sherrillmix@gmail.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=ggbeeswarm
-  version: '>= 0.6.0'
-- type: software
-  title: ggdist
-  abstract: 'ggdist: Visualizations of Distributions and Uncertainty'
-  notes: Suggests
-  authors:
-  - family-names: Kay
-    given-names: Matthew
-    email: mjskay@northwestern.edu
-  year: '2022'
-  url: https://CRAN.R-project.org/package=ggdist
-  version: '>= 3.2.0'
-- type: software
-  title: ggtext
-  abstract: 'ggtext: Improved Text Rendering Support for ''ggplot2'''
-  notes: Suggests
-  authors:
-  - family-names: Wilke
-    given-names: Claus O.
-    email: wilke@austin.utexas.edu
-    orcid: https://orcid.org/0000-0002-7470-9261
-  year: '2022'
-  url: https://CRAN.R-project.org/package=ggtext
-  version: '>= 0.1.1'
+  version: '>= 2.16'
 - type: software
   title: gt
   abstract: 'gt: Easily Create Presentation-Ready Display Tables'
@@ -408,7 +408,7 @@ references:
     orcid: https://orcid.org/0000-0001-9986-114X
   year: '2022'
   url: https://CRAN.R-project.org/package=gt
-  version: '>= 0.6.0'
+  version: '>= 0.7.0'
 - type: software
   title: lme4
   abstract: 'lme4: Linear Mixed-Effects Models using ''Eigen'' and S4'
@@ -461,7 +461,7 @@ references:
     orcid: https://orcid.org/0000-0002-7825-7573
   year: '2022'
   url: https://CRAN.R-project.org/package=see
-  version: '>= 0.7.1'
+  version: '>= 0.7.2'
 - type: software
   title: qqplotr
   abstract: 'qqplotr: Quantile-Quantile Plot Extensions for ''ggplot2'''
@@ -488,7 +488,7 @@ references:
     email: henrikb@braju.com
   year: '2022'
   url: https://CRAN.R-project.org/package=future
-  version: '>= 1.27.0'
+  version: '>= 1.28.0'
 - type: software
   title: future.apply
   abstract: 'future.apply: Apply Function to Elements in Parallel using Futures'
@@ -499,7 +499,7 @@ references:
     email: henrikb@braju.com
   year: '2022'
   url: https://CRAN.R-project.org/package=future.apply
-  version: '>= 1.9.0'
+  version: '>= 1.9.1'
 - type: software
   title: future.callr
   abstract: 'future.callr: A Future API for Parallel Processing using ''callr'''
@@ -521,7 +521,7 @@ references:
     email: hadley@rstudio.com
   year: '2022'
   url: https://CRAN.R-project.org/package=forcats
-  version: '>= 0.5.1'
+  version: '>= 0.5.2'
 - type: software
   title: roxygen2
   abstract: 'roxygen2: In-Line Documentation for R'
