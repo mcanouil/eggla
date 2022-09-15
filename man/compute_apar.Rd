@@ -9,7 +9,8 @@ compute_apar(
   from = c("predicted", "observed"),
   start = 0.25,
   end = 10,
-  step = 0.05
+  step = 0.05,
+  filter = NULL
 )
 }
 \arguments{
@@ -24,6 +25,10 @@ computation, either "predicted" or "observed". Default is "predicted".}
 \item{end}{The end of the time window to compute AP and AR.}
 
 \item{step}{The step to increment the sequence.}
+
+\item{filter}{A string following \code{data.table} syntax for filtering on \code{"i"}
+(\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
+Default is \code{NULL}.}
 }
 \value{
 A \code{data.table} object.

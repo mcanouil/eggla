@@ -9,6 +9,9 @@
 #' @param start The start of the time window to compute AP and AR.
 #' @param end The end of the time window to compute AP and AR.
 #' @param step The step to increment the sequence.
+#' @param filter A string following `data.table` syntax for filtering on `"i"`
+#'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
+#'   Default is `NULL`.
 #'
 #' @return A `data.table` object.
 #'
@@ -24,7 +27,23 @@
 #' )
 #'
 #' predict_bmi(res)[]
-predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.05) {
+#'
+#' ## For multiple sources of measures or multiple measures at one age
+#' set.seed(1234)
+#' dta <- bmigrowth[bmigrowth[["sex"]] == 0, ]
+#' dta[["source"]] <- c("A", "B")[rbinom(n = nrow(dta), size = 1, prob = 0.65) + 1]
+#'
+#' res <- egg_model(
+#'   formula = log(bmi) ~ age + source,
+#'   data = dta,
+#'   id_var = "ID",
+#'   random_complexity = 1
+#' )
+#'
+#' predict_bmi(res)[order(egg_id, egg_ageyears)]
+#'
+#' predict_bmi(res, filter = "source == 'A'")[order(egg_id, egg_ageyears)]
+predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.05, filter = NULL) {
   stopifnot(inherits(fit, "lme"))
   bmi <- egg_ageyears <- egg_bmi <- egg_id <- NULL # no visible binding for global variable from data.table
 
@@ -69,10 +88,41 @@ predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.05) {
     ))
   ]
 
+  if (!is.null(filter) && is.character(filter)) {
+    out <- try(
+      expr = eval(parse(text = sprintf("out[i = %s, j = .SD]", filter))),
+      silent = TRUE
+    )
+    if (inherits(out, "try-error")) {
+      stop("\"filter\" argument malformed! Please ensure, it follows `data.table` syntax for \"i\" (i.e., row elements).")
+    }
+  }
+
   data.table::setnames(
     x = out,
     old = c(id_var, age_var, bmi_var, covariates),
     new = c("egg_id", "egg_ageyears", "egg_bmi", sprintf("egg_%s", covariates)),
     skip_absent = TRUE
   )
+
+  if (
+    sum(
+      out[
+        j = list(id_not_unique = anyDuplicated(egg_ageyears)),
+        by = c("egg_id")
+      ][["id_not_unique"]]
+    ) > 0
+  ) {
+    warning(paste(
+      "Multiple BMI measures (for the same age) have been detected and are aggregated using geometric mean!",
+      "Use \"filter\" (or \"filter_apar\" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = \"source == 'clinic'\".",
+      sep = "\n"
+    ))
+    out <- out[
+      j = list(egg_bmi = exp(mean(log(egg_bmi)))),
+      by = c("egg_id", "egg_ageyears")
+    ]
+  }
+
+  out
 }

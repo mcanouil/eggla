@@ -18,6 +18,7 @@ run_eggla_lmm(
   use_car1 = FALSE,
   knots = c(1, 8, 12),
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+  filter_apar = NULL,
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -56,6 +57,11 @@ i.e., CAR(1) as correlation structure.}
 \item{knots}{The knots defining the splines.}
 
 \item{period}{The intervals knots on which slopes are to be computed.}
+
+\item{filter_apar}{A string following \code{data.table} syntax for filtering on \code{"i"}
+(\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
+Argument pass through \code{compute_apar()} (see \code{predict_bmi()}).
+Default is \code{NULL}.}
 
 \item{parallel}{Determines if \code{growthcleanr::cleangrowth()} function shoud be run in parallel. Defaults to \code{FALSE}.}
 
