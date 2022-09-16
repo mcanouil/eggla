@@ -5,6 +5,8 @@
 - In `pkgdown/_pkgdown.yml`,
   - chore: update template to "minty".
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.13.0...v0.13.1
+
 # eggla 0.13.0
 
 ## Breaking changes
