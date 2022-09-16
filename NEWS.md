@@ -1,4 +1,9 @@
-# eggla (development version)
+# eggla 0.13.1
+
+## Chores
+
+- In `pkgdown/_pkgdown.yml`,
+  - chore: update template to "minty".
 
 # eggla 0.13.0
 
