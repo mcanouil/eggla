@@ -59,7 +59,7 @@ RUN wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BC
 COPY inst/bin/plink2 /usr/bin/plink2
 RUN chmod +x /usr/bin/plink2
 
-ARG RIG_VERSION="0.5.2"
+ARG RIG_VERSION="v0.5.2"
 ARG R_VERSION="4.2.0"
 COPY inst/setup/pkg.lock pkg.lock
 RUN wget -q -P /tmp/ "https://github.com/r-lib/rig/releases/download/${RIG_VERSION}/rig-linux-${RIG_VERSION#v}.tar.gz" \
