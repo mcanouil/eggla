@@ -42,7 +42,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
        libgdal-dev \
        libfontconfig1-dev \
        libharfbuzz-dev \
-       libfribidi-dev
+       libfribidi-dev \
+       libv8-dev \
+       libudunits2-dev
 
 ARG BCFTOOLS_VERSION=1.15.1
 RUN wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 \
