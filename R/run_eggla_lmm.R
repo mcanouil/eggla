@@ -325,6 +325,20 @@ run_eggla_lmm <- function(
         file = file.path(results_directory, "derived-apar.csv")
       )
 
+      archive_tosend <- file.path(working_directory, "to-send")
+      dir.create(archive_tosend, recursive = TRUE, showWarnings = FALSE)
+      utils::zip(
+        zipfile = sprintf("%s/%s_to-send.zip", archive_tosend, sex_literal),
+        files = c(
+          file.path(results_directory, "model-call.txt"),
+          file.path(results_directory, "model-coefficients.csv"),
+          file.path(results_directory, "model-residuals.png"),
+          file.path(results_directory, "derived-aucs-correlations.csv"),
+          file.path(results_directory, "derived-slopes-correlations.csv")
+        ),
+        flags = "-r9Xj"
+      )
+
       utils::zip(
         zipfile = archive_filename,
         files = list.files(results_directory, full.names = TRUE),
