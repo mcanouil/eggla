@@ -38,13 +38,20 @@ result_gwas <- run_eggla_gwas(
     pattern = "\\.vcf$|\\.vcf.gz$",
     full.names = TRUE
   ),
-  vep = NULL,
   working_directory = output_path,
+  vep = NULL,
+  use_info = TRUE,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
     plink2 = system.file("bin", "plink2", package = "eggla")
   ),
-  threads = 4
+  bcftools_view_options = NULL,
+  build = "38",
+  strand = "+",
+  info_type = "IMPUTE2 info score via 'bcftools +impute-info'",
+  threads = 1,
+  quiet = FALSE,
+  clean = TRUE
 )
 
 unlink(output_path, recursive = TRUE)
