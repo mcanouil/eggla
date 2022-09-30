@@ -1,5 +1,14 @@
 # eggla (development version)
 
+## Features/Fixes
+
+- In `R/run_eggla_lmm.R`,
+  - feat: add diagnostics output to a "to-send" folder to avoid mistakenly send individual-level data.
+- In `R/run_eggla_gwas.R`,
+  - fix: now uses the filled INFO field of VCF and compute required columns for meta-analysis.
+
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.13.1...v0.14.0
+
 # eggla 0.13.1
 
 ## Chores
