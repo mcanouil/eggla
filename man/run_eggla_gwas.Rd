@@ -13,9 +13,12 @@ run_eggla_gwas(
   vcfs,
   working_directory,
   vep = NULL,
-  use_info = FALSE,
+  use_info = TRUE,
   bin_path = list(bcftools = "/usr/bin/bcftools", plink2 = "/usr/bin/plink2"),
   bcftools_view_options = NULL,
+  build = "38",
+  strand = "+",
+  info_type = "IMPUTE2 info score via 'bcftools +impute-info'",
   threads = 1,
   quiet = FALSE,
   clean = TRUE
@@ -50,6 +53,12 @@ For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.o
 \item{bcftools_view_options}{A string or a vector of strings (which will be pass to \code{paste()})
 containing BCFtools view parameters, \emph{e.g.}, \code{"--min-af 0.05"}, \code{"--exclude 'INFO/INFO < 0.8'"},
 and/or \code{"--min-alleles 2 --max-alleles 2 --types snps"}.}
+
+\item{build}{Build of the genome on which the SNP is orientated. Default is "38".}
+
+\item{strand}{Orientation of the site to the human genome strand used. Should be "+" (default).}
+
+\item{info_type}{Type of information provided in the INFO column, \emph{e.g.}, "IMPUTE2 info score via 'bcftools +impute-info'",}
 
 \item{threads}{Number of threads to be used by some BCFtools and PLINK2 commands.}
 
