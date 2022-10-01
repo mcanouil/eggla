@@ -19,26 +19,26 @@ Consortium](http://egg-consortium.org/).
 
 ## Installation
 
--   Install the development version from GitHub:
+- Install the development version from GitHub:
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("mcanouil/eggla")
 ```
 
--   Install a particular version:
+- Install a particular version:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@0.13.0")
+remotes::install_github("mcanouil/eggla@0.14.0")
 # or the latest stable version
 remotes::install_github("mcanouil/eggla@latest")
 ```
 
 ## Docker Images
 
--   `docker pull ghcr.io/mcanouil/eggla:devel`.
--   `docker pull ghcr.io/mcanouil/eggla:latest`.
+- `docker pull ghcr.io/mcanouil/eggla:devel`.
+- `docker pull ghcr.io/mcanouil/eggla:latest`.
 
 ## License
 
