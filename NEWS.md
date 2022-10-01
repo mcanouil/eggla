@@ -1,5 +1,9 @@
 # eggla (development version)
 
+## Breaking changes
+
+- refactor!: no longer rely on `renv`.
+
 ## Features/Fixes
 
 - In `R/run_eggla_lmm.R`,

@@ -1,18 +1,9 @@
-renv::snapshot(
-  lockfile = "inst/setup/renv.lock",
-  packages = c(".", "data.table", "devtools", "languageserver", "httpgd", "svglite", "ragg"),
-  library = .libPaths(),
-  force = TRUE,
-  prompt = FALSE,
-  update = FALSE
-)
-
 lock_file <- "inst/setup/pkg.lock"
 pak::lockfile_create(
   pkg = c(".", "data.table", "devtools", "languageserver", "httpgd", "svglite", "ragg"),
   lockfile = lock_file,
   lib = NULL,
-  upgrade = FALSE,
+  upgrade = TRUE,
   dependencies = TRUE
 )
 lock_file_json <- jsonlite::fromJSON(readLines(lock_file))

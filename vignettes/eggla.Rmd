@@ -131,58 +131,6 @@ _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the dir
 
 Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
-### `renv` (recommended)
-
-```{bash}
-#!/bin/bash
-
-home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
-
-mkdir $home_analysis 
-
-cd $home_analysis || exit
-
-Rscript <<EOF
-temp_library <- file.path(".", "R")
-dir.create(temp_library, recursive = TRUE)
-.libPaths(temp_library)
-install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-library("renv")
-renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-utils::download.file(
-    url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.4/inst/setup/renv.lock",
-    destfile = "renv.lock"
-  )
-renv::restore(lockfile = "renv.lock")
-renv::install("mcanouil/eggla@latest")
-unlink(temp_library, recursive = TRUE)
-EOF
-
-Rscript <<EOF
-library(eggla)
-library(data.table)
-res <- try(run_eggla_lmm(
-  data = fread("bmigrowth.csv"), # to be changed with the path of the file containing the data
-  id_variable = "ID",
-  age_days_variable = NULL, # computed based on "age_years_variable" if not provided. Only used for QC.
-  age_years_variable = "age",
-  weight_kilograms_variable = "weight",
-  height_centimetres_variable = "height",
-  sex_variable = "sex",
-  covariates = NULL,
-  male_coded_zero = FALSE,
-  random_complexity = "auto",
-  use_car1 = FALSE,
-  parallel = FALSE, # to parallelise Daymont QC
-  parallel_n_chunks = 1, # to parallelise Daymont QC
-  working_directory = "."
-))
-if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
-EOF
-```
-
-### `pak` (faster)
-
 ```{bash}
 #!/bin/bash
 
@@ -267,7 +215,11 @@ Rscript <<EOF
 library(eggla)
 chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
 if (!isFALSE(chr_in_parallel)) {
-  renv::install(c("future", "future.apply"))
+  if (nzchar(system.file(package = "pak"))) {
+    pak::pkg_install(c("future", "future.apply"))
+  } else {
+    install.packages(c("future", "future.apply"))
+  }
   future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
 }
 run_eggla_gwas(
@@ -311,27 +263,7 @@ cd $home_analysis || exit
 
 ## Start R and setup environement
 
-Start R and setup the working directory using `renv` (recommended) or `pak` (faster) to restore predefined version of packages.
-
-### `renv` (recommended)
-
-```{r}
-temp_library <- file.path(".", "R")
-dir.create(temp_library, recursive = TRUE)
-.libPaths(temp_library)
-install.packages("renv", lib = temp_library, repos = "http://cloud.r-project.org")
-library("renv")
-renv::init(bare = TRUE, settings = list(use.cache = FALSE))
-utils::download.file(
-  url = "https://raw.githubusercontent.com/mcanouil/eggla/v0.10.4/inst/setup/renv.lock",
-  destfile = "renv.lock"
-)
-renv::restore(lockfile = "renv.lock")
-renv::install("mcanouil/eggla@latest")
-unlink(temp_library, recursive = TRUE)
-```
-
-### `pak` (faster)
+Start R and setup the working directory using `pak` to restore predefined version of packages.
 
 ```{r}
 temp_library <- file.path(".", "R")
@@ -401,7 +333,11 @@ Run the GWASs on slopes and AUCs for male and female.
 library(eggla)
 chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
 if (!isFALSE(chr_in_parallel)) {
-  renv::install(c("future", "future.apply"))
+  if (nzchar(system.file(package = "pak"))) {
+    pak::pkg_install(c("future", "future.apply"))
+  } else {
+    install.packages(c("future", "future.apply"))
+  }
   future::plan("multicore", workers = min(chr_in_parallel, future::availableCores()))
 }
 run_eggla_gwas(
