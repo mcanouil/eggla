@@ -38,7 +38,7 @@ jobs:
               --platform "linux/amd64" \
               --tag "ghcr.io/mcanouil/eggla:${TAG}" \
               --file "inst/setup/Dockerfile" \
-              --label "org.opencontainers.image.version=${TAG}" \
+              --label "org.opencontainers.image.version=" \
               .
           else
             TAG=${{github.ref_name}}
@@ -51,10 +51,4 @@ jobs:
               --label "org.opencontainers.image.version=${TAG}" \
               .
           fi
-      - name: Run eggla-example.R
-        run: |
-          if [[ "${{github.ref_name}}" = "main" ]]; then
-            docker container run --rm ghcr.io/mcanouil/eggla:devel Rscript eggla-example.R
-          else
-            docker container run --rm ghcr.io/mcanouil/eggla:latest Rscript eggla-example.R
-          fi
+          docker container run --rm ghcr.io/mcanouil/eggla:${TAG} Rscript eggla-example.R
