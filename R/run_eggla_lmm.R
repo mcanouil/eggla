@@ -327,8 +327,9 @@ run_eggla_lmm <- function(
 
       archive_tosend <- file.path(working_directory, "to-send")
       dir.create(archive_tosend, recursive = TRUE, showWarnings = FALSE)
+      archive_tosend_zip <- sprintf("%s/%s_to-send.zip", archive_tosend, sex_literal)
       utils::zip(
-        zipfile = sprintf("%s/%s_to-send.zip", archive_tosend, sex_literal),
+        zipfile = archive_tosend_zip,
         files = c(
           file.path(results_directory, "model-call.txt"),
           file.path(results_directory, "model-coefficients.csv"),
@@ -338,6 +339,12 @@ run_eggla_lmm <- function(
         ),
         flags = "-r9Xj"
       )
+      if (!quiet) {
+        message(sprintf(
+          "Diagnostics to send available at: '%s'",
+          archive_tosend_zip
+        ))
+      }
 
       utils::zip(
         zipfile = archive_filename,
