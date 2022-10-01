@@ -66,7 +66,7 @@ RUN wget -q -P /tmp/ "https://github.com/r-lib/rig/releases/download/${RIG_VERSI
     && tar -C /usr/local -zxvf /tmp/rig-linux-${RIG_VERSION#v}.tar.gz \
     && rig add ${R_VERSION} \
     && Rscript -e "pak::lockfile_install(update = FALSE)" \
-    && Rscript -e "pak::pkg_install(c('data.table', 'mcanouil/eggla'), upgrade = FALSE, dependencies = TRUE)" \
+    && Rscript -e "pak::pkg_install('mcanouil/eggla', upgrade = FALSE, dependencies = TRUE)" \
     && Rscript -e "pak::cache_clean()"
 
 COPY inst/setup/eggla-example.R eggla-example.R
