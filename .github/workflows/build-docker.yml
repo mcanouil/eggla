@@ -45,10 +45,10 @@ jobs:
             docker buildx build \
               --push \
               --platform "linux/amd64" \
-              --tag "ghcr.io/mcanouil/eggla:${TAG//v}" \
+              --tag "ghcr.io/mcanouil/eggla:${TAG#v}" \
               --tag "ghcr.io/mcanouil/eggla:latest" \
               --file "inst/setup/Dockerfile" \
               --label "org.opencontainers.image.version=${TAG}" \
               .
           fi
-          docker container run --rm ghcr.io/mcanouil/eggla:${TAG//v} Rscript eggla-example.R
+          docker container run --rm ghcr.io/mcanouil/eggla:${TAG#v} Rscript eggla-example.R
