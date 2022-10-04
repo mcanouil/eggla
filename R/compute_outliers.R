@@ -10,7 +10,9 @@
 #'   _i.e._, one of `"cubic_slope"`, `"linear_splines"` or `"cubic_splines"`.
 #' @param period The intervals knots on which AUCs are to be computed.
 #' @param knots The knots as defined `fit` and according to `method`.
-#'
+#' @inheritParams predict_bmi
+#' @param from A string indicating the type of data to be used for the AP and AR
+#'   computation, either "predicted" or "observed". Default is "predicted".
 #' @return A `data.frame` listing the individuals which are not outliers based on several criteria.
 #'
 #' @export
@@ -22,11 +24,11 @@
 #'   y = "log(bmi)",
 #'   cov = NULL,
 #'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-#'   method = "linear_splines"
+#'   method = "cubic_splines"
 #' )
 #' head(compute_outliers(
 #'   fit = ls_mod,
-#'   method = "linear_splines",
+#'   method = "cubic_splines",
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
 #'   # knots = list(
 #'   #   "cubic_slope" = NULL,
@@ -42,13 +44,61 @@ compute_outliers <- function(
     "cubic_slope" = NULL,
     "linear_splines" = c(5.5, 11),
     "cubic_splines" = c(1, 8, 12)
-  )[[method]]
+  )[[method]],
+  from = c("predicted", "observed"),
+  start = 0.25,
+  end = 10,
+  step = 0.05,
+  filter = NULL
 ) {
+  value <- what <- AP <- AR <- NULL # no visible binding for global variable from data.table
+  from <- match.arg(from, c("predicted", "observed"))
+  apar_dt <- data.table::setnames(
+    x = data.table::dcast(
+      data = compute_apar(
+        fit = fit,
+        from = from,
+        start = start,
+        end = end,
+        step = step,
+        filter = filter
+      )[
+        AP | AR
+      ][
+        j = what := data.table::fifelse(paste(AP, AR) %in% paste(FALSE, TRUE), "AR", "AP")
+      ],
+      formula = egg_id ~ what,
+      value.var = c("egg_ageyears", "egg_bmi")
+    ),
+    old = function(x) {
+      out <- sapply(strsplit(sub("^egg_", "", x), "_"), function(.x) {
+        paste(rev(.x), collapse = "_")
+      })
+      out[grepl("^egg_id$", x)] <- names(fit[["groups"]])
+      out
+    }
+  )
+  long_dt <- data.table::melt.data.table(
+    data = data.table::as.data.table(Reduce(
+      f = function(x, y) merge(x, y, all = TRUE),
+      x = list(
+        compute_aucs(fit, method, period, knots),
+        compute_slopes(fit, method, period, knots),
+        apar_dt
+      )
+    )),
+    id.vars = names(fit[["groups"]])
+  )[!is.na(value)]
   data.table::rbindlist(
     l = lapply(
-      X = list(
-        AUC = compute_aucs(fit, method, period, knots),
-        SLOPE = compute_slopes(fit, method, period, knots)
+      X = c(
+        list(AUC_global = compute_aucs(fit, method, period, knots)),
+        list(SLOPE_global = compute_slopes(fit, method, period, knots)),
+        list(APAR_global = apar_dt),
+        split(
+          x = long_dt[j = .SD, .SDcols = -"variable"],
+          f = long_dt[["variable"]]
+        )
       ),
       FUN = function(data) {
         cbind.data.frame(
