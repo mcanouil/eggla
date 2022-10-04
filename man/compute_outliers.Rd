@@ -9,7 +9,12 @@ compute_outliers(
   method,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(1, 8,
-    12))[[method]]
+    12))[[method]],
+  from = c("predicted", "observed"),
+  start = 0.25,
+  end = 10,
+  step = 0.05,
+  filter = NULL
 )
 }
 \arguments{
@@ -22,6 +27,19 @@ from a call to \code{time_model()}.}
 \item{period}{The intervals knots on which AUCs are to be computed.}
 
 \item{knots}{The knots as defined \code{fit} and according to \code{method}.}
+
+\item{from}{A string indicating the type of data to be used for the AP and AR
+computation, either "predicted" or "observed". Default is "predicted".}
+
+\item{start}{The start of the time window to compute AP and AR.}
+
+\item{end}{The end of the time window to compute AP and AR.}
+
+\item{step}{The step to increment the sequence.}
+
+\item{filter}{A string following \code{data.table} syntax for filtering on \code{"i"}
+(\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
+Default is \code{NULL}.}
 }
 \value{
 A \code{data.frame} listing the individuals which are not outliers based on several criteria.
@@ -38,11 +56,11 @@ ls_mod <- time_model(
   y = "log(bmi)",
   cov = NULL,
   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-  method = "linear_splines"
+  method = "cubic_splines"
 )
 head(compute_outliers(
   fit = ls_mod,
-  method = "linear_splines",
+  method = "cubic_splines",
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
   # knots = list(
   #   "cubic_slope" = NULL,
