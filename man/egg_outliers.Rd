@@ -7,7 +7,12 @@
 egg_outliers(
   fit,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = c(1, 8, 12)
+  knots = c(1, 8, 12),
+  from = c("predicted", "observed"),
+  start = 0.25,
+  end = 10,
+  step = 0.05,
+  filter = NULL
 )
 }
 \arguments{
@@ -17,6 +22,19 @@ such as from a call to \code{egg_model()}.}
 \item{period}{The intervals knots on which slopes are to be computed.}
 
 \item{knots}{The knots as defined \code{fit} and according to \code{method}.}
+
+\item{from}{A string indicating the type of data to be used for the AP and AR
+computation, either "predicted" or "observed". Default is "predicted".}
+
+\item{start}{The start of the time window to compute AP and AR.}
+
+\item{end}{The end of the time window to compute AP and AR.}
+
+\item{step}{The step to increment the sequence.}
+
+\item{filter}{A string following \code{data.table} syntax for filtering on \code{"i"}
+(\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
+Default is \code{NULL}.}
 }
 \value{
 A \code{data.frame} listing the individuals which are not outliers based on several criteria.
