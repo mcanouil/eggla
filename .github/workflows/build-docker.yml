@@ -38,7 +38,7 @@ jobs:
               --platform "linux/amd64" \
               --tag "ghcr.io/mcanouil/eggla:${TAG}" \
               --file "inst/setup/Dockerfile" \
-              --label "org.opencontainers.image.version=" \
+              --label "org.opencontainers.image.version=${TAG}" \
               .
           else
             TAG=${{github.ref_name}}
