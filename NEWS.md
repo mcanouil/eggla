@@ -1,11 +1,11 @@
-# eggla (development version)
+# eggla 0.15.0
 
 ## Features
 
 - In `R/compute_outliers.R` and `R/egg_outliers.R`,
   - feat: now detects outliers for all slopes together, all AUCs together and for individual slopes, AUCs, AP (BMI and age), and AR (BMI and age).
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.14.0...v0.14.1
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.14.0...v0.15.0
 
 # eggla 0.14.0
 
