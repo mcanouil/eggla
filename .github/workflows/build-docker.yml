@@ -51,4 +51,4 @@ jobs:
               --label "org.opencontainers.image.version=${TAG}" \
               .
           fi
-          docker container run --rm ghcr.io/mcanouil/eggla:${TAG#v} Rscript eggla-example.R
+          docker container run --platform "linux/amd64" --rm "ghcr.io/mcanouil/eggla:${TAG#v}" Rscript eggla-example.R
