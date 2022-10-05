@@ -1,0 +1,36 @@
+name: Test Docker
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: "Build Docker"
+    branches: main
+    types: completed
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test Docker images
+        run: |
+          if [[ "${{github.ref_name}}" = "main" ]]; then
+            docker container run --platform "linux/amd64" --rm "ghcr.io/mcanouil/eggla:devel" Rscript eggla-example.R
+          else
+            docker container run --platform "linux/amd64" --rm "ghcr.io/mcanouil/eggla:latest" Rscript eggla-example.R
+          fi
+          
