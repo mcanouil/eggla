@@ -1,5 +1,7 @@
 #!/usr/bin/env Rscript
 
+set.seed(2705)
+
 library(eggla)
 library(data.table)
 
