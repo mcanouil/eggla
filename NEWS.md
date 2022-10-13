@@ -1,5 +1,15 @@
 # eggla (development version)
 
+## Features
+
+- In `R/run_eggla_lmm.R`,
+  - feat: draw outlier figure for all derived parameters.
+
+## Fixes
+
+- In `R/compute_outliers.R` and `R/egg_outliers.R`,
+  - fix: id column matching across parameters now properly works.
+
 # eggla 0.15.0
 
 ## Features
