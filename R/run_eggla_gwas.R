@@ -108,6 +108,7 @@ run_eggla_gwas <- function(
 ) {
   INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
   CALL_RATE <- N <- N1 <- N2 <- NULL # no visible binding for global variable from data.table
+  IMPUTED <- A1 <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
   results <- normalizePath(results)
