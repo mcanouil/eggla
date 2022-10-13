@@ -2,7 +2,8 @@
 #'
 #' Based on computed area under the curves (_i.e._, `egg_aucs()`)
 #' and slopes (_i.e._, `egg_slopes()`) for several intervals using
-#' a model fitted by `egg_model()`, compute an outlier detection.
+#' a model fitted by `egg_model()`, compute an outlier detection.  
+#' For details, see methods `iqr` and `zscore` of `performance::check_outliers()`.
 #'
 #' @param fit A model object from a statistical model
 #'   such as from a call to `egg_model()`.
@@ -90,9 +91,9 @@ egg_outliers <- function(
       ),
       FUN = function(data) {
         cbind.data.frame(
-          ID = data[, 1],
+          ID = data[["egg_id"]],
           as.data.frame(performance::check_outliers(
-            x = data[, -1],
+            x = data.table::setDT(data)[j = .SD, .SDcols = -"egg_id"],
             method = c("iqr", "zscore")
           ))
         )
