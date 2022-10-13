@@ -9,6 +9,8 @@
 
 - In `R/compute_outliers.R` and `R/egg_outliers.R`,
   - fix: id column matching across parameters now properly works.
+- In `R/run_eggla_gwas.R`,
+  - fix: CRAN checks notes.
 
 # eggla 0.15.0
 
