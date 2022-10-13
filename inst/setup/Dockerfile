@@ -21,30 +21,30 @@ RUN bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "$
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
-       curl \
-       build-essential \
-       libcurl4-openssl-dev \
-       ca-certificates \
-       bash-completion \
-       gzip \
-       libxt6 \
-       bzip2 \
-       wget \
-       autoconf \
-       automake \
-       make \
-       cmake \
-       libbz2-dev \
-       liblzma-dev \
-       libjpeg-dev \
-       libxml2-dev \
-       zlib1g-dev \
-       libgdal-dev \
-       libfontconfig1-dev \
-       libharfbuzz-dev \
-       libfribidi-dev \
-       libv8-dev \
-       libudunits2-dev
+        curl \
+        build-essential \
+        libcurl4-openssl-dev \
+        ca-certificates \
+        bash-completion \
+        gzip \
+        libxt6 \
+        bzip2 \
+        wget \
+        autoconf \
+        automake \
+        make \
+        cmake \
+        libbz2-dev \
+        liblzma-dev \
+        libjpeg-dev \
+        libxml2-dev \
+        zlib1g-dev \
+        libgdal-dev \
+        libfontconfig1-dev \
+        libharfbuzz-dev \
+        libfribidi-dev \
+        libv8-dev \
+        libudunits2-dev
 
 ARG BCFTOOLS_VERSION=1.15.1
 RUN wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 \
