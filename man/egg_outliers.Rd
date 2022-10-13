@@ -43,6 +43,7 @@ A \code{data.frame} listing the individuals which are not outliers based on seve
 Based on computed area under the curves (\emph{i.e.}, \code{egg_aucs()})
 and slopes (\emph{i.e.}, \code{egg_slopes()}) for several intervals using
 a model fitted by \code{egg_model()}, compute an outlier detection.
+For details, see methods \code{iqr} and \code{zscore} of \code{performance::check_outliers()}.
 }
 \examples{
 data("bmigrowth")
