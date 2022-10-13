@@ -376,6 +376,7 @@ run_eggla_lmm <- function(
         j = `:=`(
           Outlier_Zscore = data.table::fifelse(is.na(Outlier_Zscore), 0, Outlier_Zscore),
           Outlier_IQR = data.table::fifelse(is.na(Outlier_IQR), 0, Outlier_IQR)
+        )
       ][
         j = outlier_colour := mapply(
           FUN = function(iqr, zs, pc) {
