@@ -21,7 +21,9 @@ result_lmm <- run_eggla_lmm(
   use_car1 = TRUE,
   parallel = FALSE, # to parallelise Daymont QC
   parallel_n_chunks = 1, # to parallelise Daymont QC
-  working_directory = tempdir()
+  working_directory = tempdir(),
+  quiet = FALSE,
+  clean = TRUE
 )
 
 output_path <- file.path(tempdir(), "eggla")
