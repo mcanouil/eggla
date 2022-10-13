@@ -2,7 +2,8 @@
 #'
 #' Based on computed area under the curves (_i.e._, `compute_aucs()`)
 #' and slopes (_i.e._, `compute_slopes()`) for several intervals using
-#' a model fitted by `time_model()`, compute an outlier detection.
+#' a model fitted by `time_model()`, compute an outlier detection.  
+#' For details, see methods `iqr` and `zscore` of `performance::check_outliers()`.
 #'
 #' @param fit A model object from a statistical model such as
 #'   from a call to `time_model()`.
@@ -125,9 +126,9 @@ compute_outliers <- function(
       X = params,
       FUN = function(data) {
         cbind.data.frame(
-          ID = data[, 1],
+          ID = data[[names(fit[["groups"]])]],
           as.data.frame(performance::check_outliers(
-            x = data[, -1],
+            x = data.table::setDT(data)[j = .SD, .SDcols = -c(names(fit[["groups"]]))],
             method = c("iqr", "zscore")
           ))
         )

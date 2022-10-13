@@ -91,9 +91,9 @@ egg_outliers <- function(
       ),
       FUN = function(data) {
         cbind.data.frame(
-          ID = data[["egg_id"]],
+          ID = data[[names(fit[["groups"]])]],
           as.data.frame(performance::check_outliers(
-            x = data.table::setDT(data)[j = .SD, .SDcols = -"egg_id"],
+            x = data.table::setDT(data)[j = .SD, .SDcols = -c(names(fit[["groups"]]))],
             method = c("iqr", "zscore")
           ))
         )
