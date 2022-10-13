@@ -86,6 +86,7 @@ run_eggla_lmm <- function(
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
   measurement <- param <- egg_ageyears <- NULL # no visible binding for global variable from data.table
   AP <- AR <- what <- NULL # no visible binding for global variable from data.table
+  Outlier <- outlier_colour <- Outlier_Zscore <- Outlier_IQR <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
 
@@ -131,7 +132,10 @@ run_eggla_lmm <- function(
     ][["id_not_unique"]]
   ) > 0) {
     stop(sprintf(
-      "It appears IDs provided by column '%s' are not unique. 'id_variable' must be a column providing unique IDs!",
+      paste(
+        "It appears IDs provided by column '%s' are not unique.",
+        "'id_variable' must be a column providing unique IDs!"
+      ),
       id_variable
     ))
   }
@@ -254,31 +258,24 @@ run_eggla_lmm <- function(
       )
       invisible(grDevices::dev.off())
 
+      slopes_dt <- egg_slopes(
+        fit = results,
+        period = period,
+        knots = knots
+      )
       data.table::fwrite(
-        x = egg_slopes(
-          fit = results,
-          period = period,
-          knots = knots
-        ),
+        x = slopes_dt,
         file = file.path(results_directory, "derived-slopes.csv")
       )
 
-      data.table::fwrite(
-        x = egg_aucs(
-          fit = results,
-          period = period,
-          knots = knots
-        ),
-        file = file.path(results_directory, "derived-aucs.csv")
+      aucs_dt <- egg_aucs(
+        fit = results,
+        period = period,
+        knots = knots
       )
-
       data.table::fwrite(
-        x = egg_outliers(
-          fit = results,
-          period = period,
-          knots = knots
-        ),
-        file = file.path(results_directory, "derived-outliers.csv")
+        x = aucs_dt,
+        file = file.path(results_directory, "derived-aucs.csv")
       )
 
       eggc <- egg_correlations(
@@ -296,38 +293,173 @@ run_eggla_lmm <- function(
         file = file.path(results_directory, "derived-slopes-correlations.csv")
       )
 
-      data.table::fwrite(
-        x = data.table::setnames(
-          x = data.table::dcast(
-            data = compute_apar(
-              fit = results,
-              from = "predicted",
-              start = 0.25,
-              end = 10,
-              step = 0.05,
-              filter = filter_apar
-            )[
-              AP | AR
-            ][
-              j = what := data.table::fifelse(paste(AP, AR) %in% paste(FALSE, TRUE), "AR", "AP")
-            ],
-            formula = egg_id ~ what,
-            value.var = c("egg_ageyears", "egg_bmi")
-          ),
-          old = function(x) {
-            out <- sapply(strsplit(sub("^egg_", "", x), "_"), function(.x) {
-              paste(rev(.x), collapse = "_")
-            })
-            out[grepl("^egg_id$", x)] <- "egg_id"
-            out
-          }
+      apar_dt <- data.table::setnames(
+        x = data.table::dcast(
+          data = compute_apar(
+            fit = results,
+            from = "predicted",
+            start = 0.25,
+            end = 10,
+            step = 0.05,
+            filter = filter_apar
+          )[
+            AP | AR
+          ][
+            j = what := data.table::fifelse(
+              test = paste(AP, AR) %in% paste(FALSE, TRUE),
+              yes = "AR",
+              no = "AP"
+            )
+          ],
+          formula = egg_id ~ what,
+          value.var = c("egg_ageyears", "egg_bmi")
         ),
+        old = function(x) {
+          out <- sapply(strsplit(sub("^egg_", "", x), "_"), function(.x) {
+            paste(rev(.x), collapse = "_")
+          })
+          out[grepl("^egg_id$", x)] <- "egg_id"
+          out
+        }
+      )
+      data.table::fwrite(
+        x = apar_dt,
         file = file.path(results_directory, "derived-apar.csv")
       )
 
+      outliers_dt <- egg_outliers(
+        fit = results,
+        period = period,
+        knots = knots
+      )
+      data.table::fwrite(
+        x = outliers_dt,
+        file = file.path(results_directory, "derived-outliers.csv")
+      )
+
+      dt <- data.table::merge.data.table(
+        x = data.table::rbindlist(
+          l = lapply(
+            X = list(
+              apar_dt,
+              aucs_dt,
+              slopes_dt
+            ),
+            FUN = function(dt) {
+              out <- data.table::setDT(dt)[
+                j = .SD,
+                .SDcols = patterns(paste(
+                  c("^egg_id$", "slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
+                  collapse = "|"
+                ))
+              ]
+              data.table::melt(data = out, id.vars = "egg_id", variable.name = "parameter")
+            }
+          ),
+          use.names = TRUE
+        ),
+        y = outliers_dt,
+        by.x = c("parameter", "egg_id"),
+        by.y = c("parameter", id_variable),
+        all.x = TRUE
+      )
+      palette_okabe_ito <- c(
+        "#e69f00", "#56B4E9", "#009E73", "#F0E442",
+        "#0072B2", "#D55E00", "#CC79A7", "#999999"
+      )
+      dt <- dt[
+        j = outlier_colour := mapply(
+          FUN = function(iqr, zs, pc) {
+            if (iqr == 1 && zs == 1) {
+              return(sprintf("<b style = 'color:%s;'>IQR & Z-score</b>", pc[1]))
+            }
+            if (iqr == 0 && zs == 1) {
+              return(sprintf("<b style = 'color:%s;'>Z-score</b>", pc[2]))
+            }
+            if (iqr == 1 && zs == 0) {
+              return(sprintf("<b style = 'color:%s;'>IQR</b>", pc[3]))
+            }
+            if (iqr == 0 && zs == 0) {
+              return(NA_character_)
+            }
+          },
+          iqr = Outlier_Zscore,
+          zs = Outlier_IQR,
+          MoreArgs = list(pc = palette_okabe_ito)
+        )
+      ][
+        i = order(Outlier, Outlier_IQR)
+      ][
+        j = outlier_colour := factor(outlier_colour, levels = unique(outlier_colour))
+      ]
+
+      if (nzchar(system.file(package = "ggdist")) & nzchar(system.file(package = "ggbeeswarm"))) {
+        gpl <- list(
+          ggdist::stat_halfeye(
+            mapping = ggplot2::aes(group = .data[["parameter"]]),
+            justification = -0.20,
+            .width = 0,
+            scale = 1
+          ),
+          ggbeeswarm::geom_quasirandom(
+            data = function(dt) dt[Outlier != 0],
+            mapping = ggplot2::aes(group = .data[["parameter"]], colour = .data[["outlier_colour"]]),
+            shape = 21,
+            groupOnX = TRUE,
+            width = 0.15
+          )
+        )
+      } else {
+        gpl <- list(
+          ggplot2::geom_point(
+            data = function(dt) dt[Outlier != 0],
+            mapping = ggplot2::aes(group = .data[["parameter"]], colour = .data[["outlier_colour"]]),
+            position = ggplot2::position_jitter(width = 0.15),
+            shape = 21
+          )
+        )
+      }
+      grDevices::png(
+        filename = file.path(results_directory, "derived-outliers.png"),
+        width = 4 * 2.5,
+        height = 3 * 2.5,
+        units = "in",
+        res = 120
+      )
+      ggplot2::ggplot(data = dt) +
+        ggplot2::aes(x = .data[["parameter"]], y = .data[["value"]]) +
+        ggplot2::geom_boxplot(
+          mapping = ggplot2::aes(group = .data[["parameter"]]),
+          width = 0.25,
+          outlier.colour = NA
+        ) +
+        ggplot2::labs(
+          x = "Parameter",
+          y = "Values",
+          colour = "Outlier Metrics"
+        ) +
+        ggplot2::facet_wrap(
+          facets = ggplot2::vars(.data[["parameter"]]),
+          scales = "free",
+          ncol = 4
+        ) +
+        ggplot2::scale_colour_manual(values = palette_okabe_ito[c(3, 2, 1)]) +
+        ggplot2::theme(
+          axis.text.x = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank(),
+          panel.grid.major.x = ggplot2::element_blank(),
+          panel.grid.minor.x = ggplot2::element_blank(),
+          legend.text = ggtext::element_markdown()
+        ) +
+        gpl
+      invisible(grDevices::dev.off())
+
       archive_tosend <- file.path(working_directory, "to-send")
       dir.create(archive_tosend, recursive = TRUE, showWarnings = FALSE)
-      archive_tosend_zip <- sprintf("%s/%s_to-send.zip", archive_tosend, sex_literal)
+      archive_tosend_zip <- sprintf(
+        "%s/%s_to-send.zip",
+        archive_tosend, sex_literal
+      )
       utils::zip(
         zipfile = archive_tosend_zip,
         files = c(
