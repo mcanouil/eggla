@@ -346,11 +346,16 @@ run_eggla_lmm <- function(
               slopes_dt
             ),
             FUN = function(dt) {
-              out <- data.table::setDT(dt)[
+              out <- data.table::setDT(dt)
+              out <- out[
                 j = .SD,
-                .SDcols = patterns(paste(
-                  c("^egg_id$", "slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
-                  collapse = "|"
+                .SDcols = c(grep(
+                  pattern = paste(
+                    c("^egg_id$", "slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
+                    collapse = "|"
+                  ),
+                  x = colnames(dt),
+                  value = TRUE
                 ))
               ]
               data.table::melt(data = out, id.vars = "egg_id", variable.name = "parameter")
@@ -368,6 +373,10 @@ run_eggla_lmm <- function(
         "#0072B2", "#D55E00", "#CC79A7", "#999999"
       )
       dt <- dt[
+        j = `:=`(
+          Outlier_Zscore = data.table::fifelse(is.na(Outlier_Zscore), 0, Outlier_Zscore),
+          Outlier_IQR = data.table::fifelse(is.na(Outlier_IQR), 0, Outlier_IQR)
+      ][
         j = outlier_colour := mapply(
           FUN = function(iqr, zs, pc) {
             if (iqr == 1 && zs == 1) {
