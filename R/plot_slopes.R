@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @examples
+#' library(ggplot2)
 #' data("bmigrowth")
 #' ls_mod <- time_model(
 #'   x = "age",

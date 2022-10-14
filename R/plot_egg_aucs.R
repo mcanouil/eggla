@@ -7,6 +7,7 @@
 #' @export
 #'
 #' @examples
+#' library(ggplot2)
 #' data("bmigrowth")
 #' res <- egg_model(
 #'   formula = log(bmi) ~ age,

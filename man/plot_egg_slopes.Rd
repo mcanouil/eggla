@@ -25,6 +25,7 @@ A \code{patchwork} \code{ggplot2} object.
 Plot derived slopes from a model fitted by \code{egg_model()}.
 }
 \examples{
+library(ggplot2)
 data("bmigrowth")
 res <- egg_model(
   formula = log(bmi) ~ age,
