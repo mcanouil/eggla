@@ -612,7 +612,32 @@ run_eggla_gwas <- function(
           )
         )
       } else {
-        output_dt <- results
+        output_dt <- data.table::setnames(
+          x = results[j = A1 := NULL][
+            j = `:=`(
+              STRAND = strand,
+              BUILD = build
+            )
+          ],
+          old = c("ID", "CHROM", "POS", "ALT", "REF"),
+          new = c("SNPID", "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE")
+        )
+        data.table::setcolorder(
+          x = output_dt,
+          neworder = intersect(
+            x = c(
+              "trait_model",
+              "SNPID", "STRAND", "BUILD",
+              "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE",
+              "N", "N0", "N1", "N2", "EAF",
+              "BETA", "SE", "P",
+              "HWE_P", "CALL_RATE",
+              "IMPUTED", "INFO_TYPE", "INFO",
+              "T_STAT", "OBS_CT", "ERRCODE"
+            ),
+            y = colnames(output_dt)
+          )
+        )
       }
       data.table::fwrite(x = output_dt, file = output_results_file)
       if (!quiet) message(sprintf("[%s] Results written in \"%s\"", basename(vcf), output_results_file))
