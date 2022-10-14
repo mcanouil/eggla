@@ -162,7 +162,7 @@
     {
       "ref": "curl",
       "package": "curl",
-      "version": "4.3.2",
+      "version": "4.3.3",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -174,10 +174,10 @@
         "RemoteRef": "curl",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "4.3.2"
+        "RemoteSha": "4.3.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/curl_4.3.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/curl_4.3.2.tar.gz"],
-      "target": "src/contrib/curl_4.3.2.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/curl_4.3.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/curl_4.3.3.tar.gz"],
+      "target": "src/contrib/curl_4.3.3.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -186,8 +186,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": true,
-      "sha256": "90b1facb4be8b6315bb3d272ba2dd90b88973f6ea1ab7f439550230f8500a568",
-      "filesize": 793345,
+      "sha256": "3567b6acad40dad68acfe07511c853824839d451a50219a96dd6d125ed617c9e",
+      "filesize": 670416,
       "repotype": "cran"
     },
     {
@@ -255,7 +255,7 @@
     {
       "ref": "evaluate",
       "package": "evaluate",
-      "version": "0.16",
+      "version": "0.17",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -267,10 +267,10 @@
         "RemoteRef": "evaluate",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.16"
+        "RemoteSha": "0.17"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/evaluate_0.16.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/evaluate_0.16.tar.gz"],
-      "target": "src/contrib/evaluate_0.16.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/evaluate_0.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/evaluate_0.17.tar.gz"],
+      "target": "src/contrib/evaluate_0.17.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -279,8 +279,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "10fc0a260aa708bac9f953da17a3e66289864bf5fe82cf4060e4178068302801",
-      "filesize": 26117,
+      "sha256": "49c743c94cb967911af0e5555861a3762cd840b98578882671b583cff86ba963",
+      "filesize": 26202,
       "repotype": "cran"
     },
     {
@@ -906,7 +906,7 @@
     {
       "ref": "rmarkdown",
       "package": "rmarkdown",
-      "version": "2.16",
+      "version": "2.17",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -918,10 +918,10 @@
         "RemoteRef": "rmarkdown",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "2.16"
+        "RemoteSha": "2.17"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rmarkdown_2.16.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rmarkdown_2.16.tar.gz"],
-      "target": "src/contrib/rmarkdown_2.16.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/rmarkdown_2.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rmarkdown_2.17.tar.gz"],
+      "target": "src/contrib/rmarkdown_2.17.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -930,8 +930,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "d3d34e0419c419d3ab20eb60952a0f0f4c391d202277af55dcd673d25561fa71",
-      "filesize": 3243854,
+      "sha256": "aa576c458ec4c2e8468aaa4e3f60202d8d9c7ef54fa01d6b2d243bffee08c4be",
+      "filesize": 3244027,
       "repotype": "cran"
     },
     {
@@ -1557,7 +1557,7 @@
     {
       "ref": "cpp11",
       "package": "cpp11",
-      "version": "0.4.2",
+      "version": "0.4.3",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -1569,10 +1569,10 @@
         "RemoteRef": "cpp11",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.4.2"
+        "RemoteSha": "0.4.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/cpp11_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cpp11_0.4.2.tar.gz"],
-      "target": "src/contrib/cpp11_0.4.2.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/cpp11_0.4.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cpp11_0.4.3.tar.gz"],
+      "target": "src/contrib/cpp11_0.4.3.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -1581,8 +1581,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "403ce0bf82358d237176053b0fb1e958cb6bfa4d0fb3555bf5801db6a6939b99",
-      "filesize": 317708,
+      "sha256": "f1a60e4971a86dbbcf6a16bbd739b59bb66d9c45d93cfd8dedc2a87e302598f1",
+      "filesize": 304530,
       "repotype": "cran"
     },
     {
@@ -1743,7 +1743,7 @@
     {
       "ref": "devtools",
       "package": "devtools",
-      "version": "2.4.4",
+      "version": "2.4.5",
       "type": "standard",
       "direct": true,
       "binary": false,
@@ -1755,10 +1755,10 @@
         "RemoteRef": "devtools",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "2.4.4"
+        "RemoteSha": "2.4.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/devtools_2.4.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/devtools_2.4.4.tar.gz"],
-      "target": "src/contrib/devtools_2.4.4.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/devtools_2.4.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/devtools_2.4.5.tar.gz"],
+      "target": "src/contrib/devtools_2.4.5.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": true,
@@ -1767,8 +1767,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "acd6759d269f30893eda173a738b1ce6537a11313c8e8e12e116452c4296934d",
-      "filesize": 374492,
+      "sha256": "38160ebd839acdec7ebf0699a085b4ab1ebd5500d3c57a9fa7ae484f1909904b",
+      "filesize": 374718,
       "repotype": "cran"
     },
     {
@@ -2022,7 +2022,7 @@
     {
       "ref": "gert",
       "package": "gert",
-      "version": "1.9.0",
+      "version": "1.9.1",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -2034,10 +2034,10 @@
         "RemoteRef": "gert",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "1.9.0"
+        "RemoteSha": "1.9.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gert_1.9.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gert_1.9.0.tar.gz"],
-      "target": "src/contrib/gert_1.9.0.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/gert_1.9.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gert_1.9.1.tar.gz"],
+      "target": "src/contrib/gert_1.9.1.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -2046,8 +2046,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": true,
-      "sha256": "6b42f560e813c0d4255f4406d02a5be41c8c3a429df99a2865e846c488cb69d1",
-      "filesize": 121010,
+      "sha256": "751d18760a08ae00b8de73dc3e564cf4e76b1f47c7179101320e1b70152e1fdd",
+      "filesize": 121017,
       "repotype": "cran"
     },
     {
@@ -2363,11 +2363,11 @@
     {
       "ref": "lifecycle",
       "package": "lifecycle",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "type": "standard",
       "direct": false,
       "binary": false,
-      "dependencies": ["glue", "rlang"],
+      "dependencies": ["cli", "glue", "rlang"],
       "vignettes": false,
       "metadata": {
         "RemotePkgRef": "lifecycle",
@@ -2375,10 +2375,10 @@
         "RemoteRef": "lifecycle",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "1.0.2"
+        "RemoteSha": "1.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/lifecycle_1.0.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lifecycle_1.0.2.tar.gz"],
-      "target": "src/contrib/lifecycle_1.0.2.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/lifecycle_1.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lifecycle_1.0.3.tar.gz"],
+      "target": "src/contrib/lifecycle_1.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -2387,8 +2387,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "7b3f3c8ef9c068c5db396b353d62185d9ed02a69b787c7769d24595769a25a63",
-      "filesize": 102178,
+      "sha256": "6459fdc3211585c0cdf120427579c12149b02161efe273a64b825c05e9aa69c2",
+      "filesize": 106854,
       "repotype": "cran"
     },
     {
@@ -2983,7 +2983,7 @@
     {
       "ref": "purrr",
       "package": "purrr",
-      "version": "0.3.4",
+      "version": "0.3.5",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -2995,10 +2995,10 @@
         "RemoteRef": "purrr",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.3.4"
+        "RemoteSha": "0.3.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/purrr_0.3.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/purrr_0.3.4.tar.gz"],
-      "target": "src/contrib/purrr_0.3.4.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/purrr_0.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/purrr_0.3.5.tar.gz"],
+      "target": "src/contrib/purrr_0.3.5.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -3007,8 +3007,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": true,
-      "sha256": "23ebc93bc9aed9e7575e8eb9683ff4acc0270ef7d6436cc2ef4236a9734840b2",
-      "filesize": 375062,
+      "sha256": "a2386cd7e78a043cb9c14703023fff15ab1c879bf648816879d2c0c4a554fcef",
+      "filesize": 397009,
       "repotype": "cran"
     },
     {
@@ -3572,11 +3572,11 @@
     {
       "ref": "testthat",
       "package": "testthat",
-      "version": "3.1.4",
+      "version": "3.1.5",
       "type": "standard",
       "direct": false,
       "binary": false,
-      "dependencies": ["brio", "callr", "cli", "crayon", "desc", "digest", "ellipsis", "evaluate", "jsonlite", "lifecycle", "magrittr", "pkgload", "praise", "processx", "ps", "R6", "rlang", "waldo", "withr"],
+      "dependencies": ["brio", "callr", "cli", "desc", "digest", "ellipsis", "evaluate", "jsonlite", "lifecycle", "magrittr", "pkgload", "praise", "processx", "ps", "R6", "rlang", "waldo", "withr"],
       "vignettes": false,
       "metadata": {
         "RemotePkgRef": "testthat",
@@ -3584,10 +3584,10 @@
         "RemoteRef": "testthat",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "3.1.4"
+        "RemoteSha": "3.1.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/testthat_3.1.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/testthat_3.1.4.tar.gz"],
-      "target": "src/contrib/testthat_3.1.4.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/testthat_3.1.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/testthat_3.1.5.tar.gz"],
+      "target": "src/contrib/testthat_3.1.5.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -3596,8 +3596,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": true,
-      "sha256": "a47eec031b4e186a8bd331031371b2347063a283050eca2adbfaa37d7a6c9c09",
-      "filesize": 700919,
+      "sha256": "a8f56b9426206ddfc30b550c82ff2f042ebe1c2f5bfd4184aec8facac8f5b7fc",
+      "filesize": 708287,
       "repotype": "cran"
     },
     {
@@ -4657,7 +4657,7 @@
     {
       "ref": "datawizard",
       "package": "datawizard",
-      "version": "0.6.1",
+      "version": "0.6.2",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -4669,10 +4669,10 @@
         "RemoteRef": "datawizard",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.6.1"
+        "RemoteSha": "0.6.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/datawizard_0.6.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/datawizard_0.6.1.tar.gz"],
-      "target": "src/contrib/datawizard_0.6.1.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/datawizard_0.6.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/datawizard_0.6.2.tar.gz"],
+      "target": "src/contrib/datawizard_0.6.2.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -4681,8 +4681,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "f30b42e0b35fc6669d5a8077679a560ba3453a62ab098ab4d4b4bc6642c51467",
-      "filesize": 679013,
+      "sha256": "8d97fca35502dd94e2e47aaeb0cb9b0ed4450985b42d3f57a80a6602aba45e90",
+      "filesize": 682237,
       "repotype": "cran"
     },
     {
@@ -4812,7 +4812,7 @@
     {
       "ref": "effectsize",
       "package": "effectsize",
-      "version": "0.7.0.5",
+      "version": "0.8.0",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -4824,10 +4824,10 @@
         "RemoteRef": "effectsize",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.7.0.5"
+        "RemoteSha": "0.8.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/effectsize_0.7.0.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/effectsize_0.7.0.5.tar.gz"],
-      "target": "src/contrib/effectsize_0.7.0.5.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/effectsize_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/effectsize_0.8.0.tar.gz"],
+      "target": "src/contrib/effectsize_0.8.0.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -4836,8 +4836,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "21e5ce324d9932e052d2be40e87ba9af95bdf24935fbca45c745e8aa39791679",
-      "filesize": 293120,
+      "sha256": "b70de82ee6c5e8342aad778209e9703d5abc3bbea13c3ebe31dfdd0ca82cea75",
+      "filesize": 327684,
       "repotype": "cran"
     },
     {
@@ -5463,7 +5463,7 @@
     {
       "ref": "insight",
       "package": "insight",
-      "version": "0.18.4",
+      "version": "0.18.5",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -5475,10 +5475,10 @@
         "RemoteRef": "insight",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.18.4"
+        "RemoteSha": "0.18.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/insight_0.18.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/insight_0.18.4.tar.gz"],
-      "target": "src/contrib/insight_0.18.4.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/insight_0.18.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/insight_0.18.5.tar.gz"],
+      "target": "src/contrib/insight_0.18.5.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -5487,14 +5487,14 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "6e3f378bc2eb30c0300103bdd8a3e74371199b36867b45978ec9690a6fda0c5f",
-      "filesize": 889094,
+      "sha256": "653a51b1c32de06e4649ffdd209e51c9cd82986ad6f8d5a3bcdedb6911456652",
+      "filesize": 904928,
       "repotype": "cran"
     },
     {
       "ref": "isoband",
       "package": "isoband",
-      "version": "0.2.5",
+      "version": "0.2.6",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -5506,10 +5506,10 @@
         "RemoteRef": "isoband",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.2.5"
+        "RemoteSha": "0.2.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/isoband_0.2.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/isoband_0.2.5.tar.gz"],
-      "target": "src/contrib/isoband_0.2.5.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/isoband_0.2.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/isoband_0.2.6.tar.gz"],
+      "target": "src/contrib/isoband_0.2.6.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -5518,8 +5518,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": true,
-      "sha256": "46f53fa066f0966f02cb2bf050190c0d5e950dab2cdf565feb63fc092c886ba5",
-      "filesize": 1671911,
+      "sha256": "27e460945753f6710649563dc817e2f314392ef6d1f8b6af2b1bf9447fab43a3",
+      "filesize": 1672253,
       "repotype": "cran"
     },
     {
@@ -5835,7 +5835,7 @@
     {
       "ref": "nlme",
       "package": "nlme",
-      "version": "3.1-159",
+      "version": "3.1-160",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -5847,10 +5847,10 @@
         "RemoteRef": "nlme",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "3.1-159"
+        "RemoteSha": "3.1-160"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/nlme_3.1-159.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nlme_3.1-159.tar.gz"],
-      "target": "src/contrib/nlme_3.1-159.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/nlme_3.1-160.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nlme_3.1-160.tar.gz"],
+      "target": "src/contrib/nlme_3.1-160.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -5859,8 +5859,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": true,
-      "sha256": "9bb05f5c3146e2d75078e668821485a3e9ca246fd5d7db2ef1963d3735d919bf",
-      "filesize": 846864,
+      "sha256": "d4454623194876b083774c662fd223bc3b9e8325824cb758b8adecd5dc0d8a08",
+      "filesize": 845714,
       "repotype": "cran"
     },
     {
@@ -5959,7 +5959,7 @@
     {
       "ref": "parameters",
       "package": "parameters",
-      "version": "0.18.2",
+      "version": "0.19.0",
       "type": "standard",
       "direct": false,
       "binary": false,
@@ -5971,10 +5971,10 @@
         "RemoteRef": "parameters",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "0.18.2"
+        "RemoteSha": "0.19.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/parameters_0.18.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parameters_0.18.2.tar.gz"],
-      "target": "src/contrib/parameters_0.18.2.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/parameters_0.19.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parameters_0.19.0.tar.gz"],
+      "target": "src/contrib/parameters_0.19.0.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -5983,8 +5983,8 @@
       "params": [],
       "install_args": "",
       "needscompilation": false,
-      "sha256": "e92b504adaf9a907a993233d1c9b58144fed53d82439caaa1d9e8cf553785c13",
-      "filesize": 585506,
+      "sha256": "ae0a36dcbafc9e977ac418731890edfd5904bd0f24cf898dcf9659c9de469481",
+      "filesize": 588440,
       "repotype": "cran"
     },
     {
@@ -6393,11 +6393,11 @@
     {
       "ref": "tidyselect",
       "package": "tidyselect",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "type": "standard",
       "direct": false,
       "binary": false,
-      "dependencies": ["ellipsis", "glue", "purrr", "rlang", "vctrs"],
+      "dependencies": ["cli", "glue", "lifecycle", "rlang", "vctrs", "withr"],
       "vignettes": false,
       "metadata": {
         "RemotePkgRef": "tidyselect",
@@ -6405,10 +6405,10 @@
         "RemoteRef": "tidyselect",
         "RemoteRepos": "https://cloud.r-project.org",
         "RemotePkgPlatform": "source",
-        "RemoteSha": "1.1.2"
+        "RemoteSha": "1.2.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/tidyselect_1.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tidyselect_1.1.2.tar.gz"],
-      "target": "src/contrib/tidyselect_1.1.2.tar.gz",
+      "sources": ["https://cloud.r-project.org/src/contrib/tidyselect_1.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tidyselect_1.2.0.tar.gz"],
+      "target": "src/contrib/tidyselect_1.2.0.tar.gz",
       "platform": "source",
       "rversion": "*",
       "directpkg": false,
@@ -6416,9 +6416,9 @@
       "dep_types": ["Depends", "Imports", "LinkingTo"],
       "params": [],
       "install_args": "",
-      "needscompilation": true,
-      "sha256": "0389a3b15417954a30d6d692f6ebdd3d0f318cb94a5c9b05365df2f4ea1d8270",
-      "filesize": 92085,
+      "needscompilation": false,
+      "sha256": "538d26b727e37d618e2efd3b00836048f103112a03e6994bf07a02392e269e3b",
+      "filesize": 101498,
       "repotype": "cran"
     },
     {
