@@ -5,6 +5,19 @@ set.seed(2705)
 library(eggla)
 library(data.table)
 
+# Set and tweak default ggplot2 theme
+# library(ggplot2)
+# theme_set(
+#   theme_minimal() +
+#   theme(
+#     axis.line = element_line(colour = "grey20", size = rel(1)),
+#     axis.ticks = element_line(colour = "grey20"),
+#     panel.grid.minor.x = element_blank(),
+#     panel.grid.minor.y = element_blank(),
+#     panel.grid.major.x = element_blank()
+#   )
+# )
+
 data("bmigrowth")
 
 result_lmm <- run_eggla_lmm(
@@ -23,7 +36,7 @@ result_lmm <- run_eggla_lmm(
   parallel_n_chunks = 1, # to parallelise Daymont QC
   working_directory = tempdir(),
   quiet = FALSE,
-  clean = TRUE
+  clean = FALSE
 )
 
 output_path <- file.path(tempdir(), "eggla")
