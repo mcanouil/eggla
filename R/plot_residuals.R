@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @examples
+#' library(ggplot2)
 #' library(patchwork)
 #' data("bmigrowth")
 #' res <- egg_model(

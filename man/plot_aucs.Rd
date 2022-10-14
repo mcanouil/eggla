@@ -30,6 +30,7 @@ A \code{patchwork} \code{ggplot2} object.
 Plot derived area under the curves from a model fitted by \code{time_model()}.
 }
 \examples{
+library(ggplot2)
 data("bmigrowth")
 ls_mod <- time_model(
   x = "age",

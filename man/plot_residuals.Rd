@@ -23,6 +23,7 @@ A \code{patchwork} \code{ggplot2} object.
 Plot several residuals plots for diagnostics.
 }
 \examples{
+library(ggplot2)
 library(patchwork)
 data("bmigrowth")
 res <- egg_model(
