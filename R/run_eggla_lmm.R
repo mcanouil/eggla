@@ -436,32 +436,34 @@ run_eggla_lmm <- function(
         units = "in",
         res = 120
       )
-      ggplot2::ggplot(data = dt) +
-        ggplot2::aes(x = .data[["parameter"]], y = .data[["value"]]) +
-        ggplot2::geom_boxplot(
-          mapping = ggplot2::aes(group = .data[["parameter"]]),
-          width = 0.25,
-          outlier.colour = NA
-        ) +
-        ggplot2::labs(
-          x = "Parameter",
-          y = "Values",
-          colour = "Outlier Metrics"
-        ) +
-        ggplot2::facet_wrap(
-          facets = ggplot2::vars(.data[["parameter"]]),
-          scales = "free",
-          ncol = 4
-        ) +
-        ggplot2::scale_colour_manual(values = palette_okabe_ito[c(3, 2, 1)]) +
-        ggplot2::theme(
-          axis.text.x = ggplot2::element_blank(),
-          axis.ticks.x = ggplot2::element_blank(),
-          panel.grid.major.x = ggplot2::element_blank(),
-          panel.grid.minor.x = ggplot2::element_blank(),
-          legend.text = ggtext::element_markdown()
-        ) +
-        gpl
+      print(
+        ggplot2::ggplot(data = dt) +
+          ggplot2::aes(x = .data[["parameter"]], y = .data[["value"]]) +
+          ggplot2::geom_boxplot(
+            mapping = ggplot2::aes(group = .data[["parameter"]]),
+            width = 0.25,
+            outlier.colour = NA
+          ) +
+          ggplot2::labs(
+            x = "Parameter",
+            y = "Values",
+            colour = "Outlier Metrics"
+          ) +
+          ggplot2::facet_wrap(
+            facets = ggplot2::vars(.data[["parameter"]]),
+            scales = "free",
+            ncol = 4
+          ) +
+          ggplot2::scale_colour_manual(values = palette_okabe_ito[c(3, 2, 1)]) +
+          ggplot2::theme(
+            axis.text.x = ggplot2::element_blank(),
+            axis.ticks.x = ggplot2::element_blank(),
+            panel.grid.major.x = ggplot2::element_blank(),
+            panel.grid.minor.x = ggplot2::element_blank(),
+            legend.text = ggtext::element_markdown()
+          ) +
+          gpl
+      )
       invisible(grDevices::dev.off())
 
       archive_tosend <- file.path(working_directory, "to-send")
