@@ -17,7 +17,15 @@
 #' plot_egg_aucs(
 #'   fit = res,
 #'   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
-#' )
+#' ) +
+#'   theme_minimal() +
+#'   theme(
+#'     axis.line = element_line(colour = "grey20", size = rel(1)),
+#'     axis.ticks = element_line(colour = "grey20"),
+#'     panel.grid.minor.x = element_blank(),
+#'     panel.grid.minor.y = element_blank(),
+#'     panel.grid.major.x = element_blank()
+#'   )
 plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), knots = c(1, 8, 12)) {
   period_interval <- patterns <- auc <- NULL # no visible binding for global variable from data.table
   stopifnot(inherits(fit, "lme"))

@@ -46,7 +46,12 @@ theme_update(
   axis.title.x = element_markdown(),
   axis.text.x = element_markdown(),
   axis.title.y = element_markdown(),
-  axis.text.y = element_markdown()
+  axis.text.y = element_markdown(),
+  axis.line = element_line(colour = "grey20", size = rel(1)),
+  axis.ticks = element_line(colour = "grey20"),
+  panel.grid.minor.x = element_blank(),
+  panel.grid.minor.y = element_blank(),
+  panel.grid.major.x = element_blank()
 )
 ```
 
@@ -127,8 +132,14 @@ ggplot(data = one_individual_data) +
     linetype = NULL
   ) +
   theme_minimal() +
-  theme(axis.text.x.top = element_markdown()) +
-  theme(panel.grid.minor.x = element_blank())
+  theme(
+    axis.line = element_line(colour = "grey20", size = rel(1)),
+    axis.ticks = element_line(colour = "grey20"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  theme(axis.text.x.top = element_markdown())
 ```
 
 
@@ -201,8 +212,14 @@ p_apar <- mapply(
         linetype = NULL
       ) +
       theme_minimal() +
-      theme(axis.text.x.top = element_markdown()) +
-      theme(panel.grid.minor.x = element_blank())
+      theme(
+        axis.line = element_line(colour = "grey20", size = rel(1)),
+        axis.ticks = element_line(colour = "grey20"),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.x = element_blank()
+      ) +
+      theme(axis.text.x.top = element_markdown())
   }
 )
 

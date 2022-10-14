@@ -49,7 +49,14 @@
 #'       geom_point() +
 #'       scale_colour_manual(values = c("#b22222", "#22b222")) +
 #'       theme_minimal() +
-#'       theme(plot.title.position = "plot") +
+#'       theme(
+#'         axis.line = element_line(colour = "grey20", size = rel(1)),
+#'         axis.ticks = element_line(colour = "grey20"),
+#'         panel.grid.minor.x = element_blank(),
+#'         panel.grid.minor.y = element_blank(),
+#'         panel.grid.major.x = element_blank(),
+#'         plot.title.position = "plot"
+#'       ) +
 #'       labs(
 #'         x = sprintf("Observed: %s", sub(".*_", "", toupper(variable))),
 #'         y = sprintf("Predicted: %s", sub(".*_", "", toupper(variable))),

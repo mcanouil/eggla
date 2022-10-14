@@ -64,7 +64,12 @@ theme_update(
   axis.title.x = element_markdown(),
   axis.text.x = element_markdown(),
   axis.title.y = element_markdown(),
-  axis.text.y = element_markdown()
+  axis.text.y = element_markdown(),
+  axis.line = element_line(colour = "grey20", size = rel(1)),
+  axis.ticks = element_line(colour = "grey20"),
+  panel.grid.minor.x = element_blank(),
+  panel.grid.minor.y = element_blank(),
+  panel.grid.major.x = element_blank()
 )
 ```
 
@@ -537,7 +542,7 @@ perf_tab <- gt(
   ],
   groupname_col = c("Sex", "Dataset")
 ) %>%
-  fmt(columns = everything(), fns = identity) %>%
+  fmt(columns = c("Model", "Sex", "Dataset"), fns = identity) %>%
   fmt_number(
     columns = c("AIC", "BIC"),
     decimals = 1,
