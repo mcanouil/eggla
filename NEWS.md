@@ -11,6 +11,10 @@
   - fix: id column matching across parameters now properly works.
 - In `R/run_eggla_gwas.R`,
   - fix: CRAN checks notes.
+- In `R/compute_apar.R`, `R/plot_aucs.R`, `R/plot_egg_aucs.R`, `R/plot_egg_slopes.R`, `R/plot_residuals.R`, `R/plot_slopes.R`,
+  `vignettes/articles/adiposity-peak-rebound.Rmd`, `vignettes/articles/model-selection.Rmd`,
+  `vignettes/articles/models-diagnostics.Rmd`, and `vignettes/articles/run-cubic-splines.Rmd`,
+  - fix: standardise `ggplot` default theme and fix `gt` tables.
 
 # eggla 0.15.0
 
