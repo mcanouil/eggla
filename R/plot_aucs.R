@@ -23,7 +23,15 @@
 #' plot_aucs(
 #'   fit = ls_mod,
 #'   method = "linear_splines"
-#' )
+#' ) +
+#'   theme_minimal() +
+#'   theme(
+#'     axis.line = element_line(colour = "grey20", size = rel(1)),
+#'     axis.ticks = element_line(colour = "grey20"),
+#'     panel.grid.minor.x = element_blank(),
+#'     panel.grid.minor.y = element_blank(),
+#'     panel.grid.major.x = element_blank()
+#'   )
 plot_aucs <- function(
   fit,
   method,
