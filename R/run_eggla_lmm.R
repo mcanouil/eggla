@@ -479,7 +479,8 @@ run_eggla_lmm <- function(
           file.path(results_directory, "model-coefficients.csv"),
           file.path(results_directory, "model-residuals.png"),
           file.path(results_directory, "derived-aucs-correlations.csv"),
-          file.path(results_directory, "derived-slopes-correlations.csv")
+          file.path(results_directory, "derived-slopes-correlations.csv"),
+          file.path(results_directory, "derived-outliers.png")
         ),
         flags = "-r9Xj"
       )
