@@ -16,6 +16,8 @@
   `vignettes/articles/models-diagnostics.Rmd`, and `vignettes/articles/run-cubic-splines.Rmd`,
   - fix: standardise `ggplot` default theme and fix `gt` tables.
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.15.0...v0.16.0
+
 # eggla 0.15.0
 
 ## Features
