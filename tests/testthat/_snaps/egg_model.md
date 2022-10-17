@@ -7,7 +7,7 @@
     Output
       Linear mixed-effects model fit by maximum likelihood
         Data: data 
-        Log-likelihood: 519.8242
+        Log-likelihood: 519.8
         Fixed: log(bmi) ~ gsp(age, knots = c(1, 8, 12), degree = rep(3, 4),      smooth = rep(2, 3)) 
                                                                        (Intercept) 
                                                                            2.61298 
@@ -27,10 +27,10 @@
       Random effects:
        Formula: ~gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2,      3)) | ID
        Structure: General positive-definite, Log-Cholesky parametrization
-                                                                            StdDev    
-      (Intercept)                                                           0.04242084
-      gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) 0.01195053
-      Residual                                                              0.09915893
+                                                                            StdDev 
+      (Intercept)                                                           0.04242
+      gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) 0.01195
+      Residual                                                              0.09916
                                                                             Corr  
       (Intercept)                                                           (Intr)
       gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) -0.183
