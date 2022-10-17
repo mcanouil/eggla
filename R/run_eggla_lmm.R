@@ -409,14 +409,16 @@ run_eggla_lmm <- function(
             mapping = ggplot2::aes(group = .data[["parameter"]]),
             justification = -0.20,
             .width = 0,
-            scale = 1
+            scale = 1,
+            na.rm = TRUE
           ),
           ggbeeswarm::geom_quasirandom(
             data = function(dt) dt[Outlier != 0],
             mapping = ggplot2::aes(group = .data[["parameter"]], colour = .data[["outlier_colour"]]),
             shape = 21,
             groupOnX = TRUE,
-            width = 0.15
+            width = 0.15,
+            na.rm = TRUE
           )
         )
       } else {
@@ -425,7 +427,8 @@ run_eggla_lmm <- function(
             data = function(dt) dt[Outlier != 0],
             mapping = ggplot2::aes(group = .data[["parameter"]], colour = .data[["outlier_colour"]]),
             position = ggplot2::position_jitter(width = 0.15),
-            shape = 21
+            shape = 21,
+            na.rm = TRUE
           )
         )
       }
@@ -442,7 +445,8 @@ run_eggla_lmm <- function(
           ggplot2::geom_boxplot(
             mapping = ggplot2::aes(group = .data[["parameter"]]),
             width = 0.25,
-            outlier.colour = NA
+            outlier.colour = NA,
+            na.rm = TRUE
           ) +
           ggplot2::labs(
             x = "Parameter",
