@@ -2,8 +2,9 @@
 
 ## Features
 
-- In `R/compute_outliers.R` and `R/egg_outliers.R`,
+- In `R/run_eggla_lmm.R`, `R/compute_outliers.R`, and `R/egg_outliers.R`,
   - feat: new arg to pass on the outlier method.
+  - feat: new arg to pass on the outlier method threshold.
 
 ## Tests
 
