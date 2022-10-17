@@ -11,7 +11,7 @@ test_that("Cubic slope", {
     quiet = TRUE
   )
 
-  expect_snapshot(
+  expect_no_condition(
     y1 <- compute_aucs(
       fit = x,
       method = "cubic_slope",
@@ -62,7 +62,7 @@ test_that("Linear Splines", {
     quiet = TRUE
   )
 
-  expect_snapshot(
+  expect_no_condition(
     y1 <- compute_aucs(
       fit = x,
       method = "linear_splines",
@@ -127,7 +127,7 @@ test_that("Cubic Splines", {
     quiet = TRUE
   )
 
-  expect_snapshot(
+  expect_no_condition(
     y1 <- compute_aucs(
       fit = x,
       method = "cubic_splines",
