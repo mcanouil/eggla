@@ -2,7 +2,7 @@ set.seed(2705)
 
 test_that("Cubic slope", {
   for (use_car1 in c(FALSE, TRUE)) {
-    expect_snapshot(
+    expect_no_condition(
       x <- time_model(
         x = "age",
         y = "log(bmi)",
@@ -30,7 +30,7 @@ test_that("Cubic slope", {
 
 test_that("Linear Splines", {
   for (use_car1 in c(FALSE, TRUE)) {
-    expect_snapshot(
+    expect_no_condition(
       x <- time_model(
         x = "age",
         y = "log(bmi)",
@@ -57,32 +57,41 @@ test_that("Linear Splines", {
 })
 
 test_that("Cubic Splines", {
-for (use_car1 in c(FALSE, TRUE)[2]) {
-  expect_snapshot(
-    x <- time_model(
-      x = "age",
-      y = "log(bmi)",
-      data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "cubic_splines",
-      knots = c(2, 8, 12),
-      use_car1 = use_car1,
-      id_var = "ID",
-      quiet = TRUE
+  for (use_car1 in c(FALSE, TRUE)[2]) {
+    expect_no_condition(
+      x <- time_model(
+        x = "age",
+        y = "log(bmi)",
+        data = bmigrowth[bmigrowth$sex == 0, ],
+        method = "cubic_splines",
+        knots = c(2, 8, 12),
+        use_car1 = use_car1,
+        id_var = "ID",
+        quiet = TRUE
+      )
     )
-  )
 
-  y <- nlme::lme(
-    log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
-    data = bmigrowth[bmigrowth$sex == 0, ],
-    random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
-    na.action = stats::na.omit,
-    method = "ML",
-    correlation = if (use_car1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
-    control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-  )
+    y <- nlme::lme(
+      log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
+      data = bmigrowth[bmigrowth$sex == 0, ],
+      random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
+      na.action = stats::na.omit,
+      method = "ML",
+      correlation = if (use_car1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
+      control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
+    )
 
-  expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
-}
+    expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
+
+    expect_no_condition(
+      compute_outliers(
+        fit = x,
+        method = "cubic_splines",
+        period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+        knots = c(1, 8, 12)
+      )
+    )
+  }
 })
 
 test_that("Test wrong covariates", {
@@ -101,7 +110,7 @@ test_that("Test wrong covariates", {
 })
 
 test_that("Test covariates", {
-  expect_snapshot(
+  expect_no_condition(
     time_model(
       x = "age",
       y = "log(bmi)",
@@ -129,8 +138,8 @@ test_that("time_model", {
     quiet = TRUE
   )
 
-  expect_snapshot(
-    cor1 <- compute_correlations(
+  expect_no_condition(
+    compute_correlations(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
@@ -138,8 +147,8 @@ test_that("time_model", {
     )
   )
 
-  expect_snapshot(
-    auc1 <- compute_aucs(
+  expect_no_condition(
+     compute_aucs(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
@@ -147,8 +156,8 @@ test_that("time_model", {
     )
   )
 
-  expect_snapshot(
-    slopes1 <- compute_slopes(
+  expect_no_condition(
+    compute_slopes(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
@@ -157,15 +166,6 @@ test_that("time_model", {
   )
 
   for (s in c("predicted", "observed")) {
-    expect_snapshot(compute_apar(fit = res1, from = s)[AP | AR])
+    expect_no_condition(compute_apar(fit = res1, from = s)[AP | AR])
   }
-
-  expect_snapshot(
-    outliers1 <- compute_outliers(
-      fit = res1,
-      method = "cubic_slope",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(1, 8, 12)
-    )
-  )
 })

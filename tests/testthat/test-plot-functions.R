@@ -1,4 +1,5 @@
 set.seed(2705)
+
 data("bmigrowth")
 ls_mod <- time_model(
   x = "age",
