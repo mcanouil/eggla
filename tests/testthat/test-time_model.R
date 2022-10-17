@@ -82,6 +82,15 @@ for (use_car1 in c(FALSE, TRUE)[2]) {
   )
 
   expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
+
+  expect_snapshot(
+    compute_outliers(
+      fit = x,
+      method = "cubic_splines",
+      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+      knots = c(1, 8, 12)
+    )
+  )
 }
 })
 
@@ -130,7 +139,7 @@ test_that("time_model", {
   )
 
   expect_snapshot(
-    cor1 <- compute_correlations(
+    compute_correlations(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
@@ -139,7 +148,7 @@ test_that("time_model", {
   )
 
   expect_snapshot(
-    auc1 <- compute_aucs(
+     compute_aucs(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
@@ -148,7 +157,7 @@ test_that("time_model", {
   )
 
   expect_snapshot(
-    slopes1 <- compute_slopes(
+    compute_slopes(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
@@ -159,13 +168,4 @@ test_that("time_model", {
   for (s in c("predicted", "observed")) {
     expect_snapshot(compute_apar(fit = res1, from = s)[AP | AR])
   }
-
-  expect_snapshot(
-    outliers1 <- compute_outliers(
-      fit = res1,
-      method = "cubic_slope",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(1, 8, 12)
-    )
-  )
 })
