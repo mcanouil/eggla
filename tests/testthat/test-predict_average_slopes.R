@@ -1,5 +1,4 @@
 set.seed(2705)
-options(digits = 4, scipen = 10)
 
 test_that("Cubic slope", {
 
@@ -12,14 +11,13 @@ test_that("Cubic slope", {
     quiet = TRUE
   )
 
-  expect_snapshot({
+  expect_no_condition(
     y1 <- compute_slopes(
       fit = x,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
     )
-    print(y1, digits = 4)
-  })
+  )
   y2 <- local({
     suppressWarnings({
       slopes_lme <- data.frame()
@@ -68,14 +66,13 @@ test_that("Linear Splines", {
     quiet = TRUE
   )
 
-  expect_snapshot({
+  expect_no_condition(
     y1 <- compute_slopes(
       fit = x,
       method = "linear_splines",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
     )
-    print(y1, digits = 4)
-  })
+  )
 
   y2 <- local({
     suppressWarnings({
@@ -144,15 +141,14 @@ test_that("Cubic Splines", {
     quiet = TRUE
   )
 
-  expect_snapshot({
+  expect_no_condition(
     y1 <- compute_slopes(
       fit = x,
       method = "cubic_splines",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(2, 8, 12)
     )
-    print(y1, digits = 4)
-  })
+  )
 
   y2 <- local({
     suppressWarnings({
