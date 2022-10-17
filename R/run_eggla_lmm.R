@@ -29,10 +29,17 @@
 #'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
 #'   Argument pass through `compute_apar()` (see `predict_bmi()`).
 #'   Default is `NULL`.
-#' @param outlier_method The outlier detection method(s). Default is `"iqr"`.
-#'   Can be `"all"` or some of `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`,
-#'   `"iqr"`, `"ci"`, `"eti"`, `"hdi"`, `"bci"`, `"mahalanobis"`,
-#'   `"mahalanobis_robust"`, `"mcd"`, `"ics"`, `"optics"` or `"lof"`.
+#' @param outlier_method The outlier detection method(s). Can be `"all"` or some of
+#'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
+#'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
+#'   `"optics"` or `"lof"`.
+#'  See `performance::check_outliers()` <https://easystats.github.io/performance/reference/check_outliers.html> for details.
+#' @param outlier_threshold A list containing the threshold values for each method (_e.g._,
+#'   `list('mahalanobis' = 7, 'cook' = 1)`), above which an observation is
+#'   considered as outlier. If `NULL`, default values will be used (see
+#'   'Details'). If a numeric value is given, it will be used as the threshold
+#'   for any of the method run.
+#'  See `performance::check_outliers()` <https://easystats.github.io/performance/reference/check_outliers.html> for details.
 #' @param outlier_exclude Whether or not the values/individuals flagged as being outliers should be excluded.
 #'   Default is `TRUE`.
 #' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
@@ -83,6 +90,7 @@ run_eggla_lmm <- function(
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   filter_apar = NULL,
   outlier_method = "iqr",
+  outlier_threshold = list(iqr = 1.7),
   outlier_exclude = TRUE,
   parallel = FALSE,
   parallel_n_chunks = 1,
@@ -295,7 +303,8 @@ run_eggla_lmm <- function(
         end = 10,
         step = 0.05,
         filter = filter_apar,
-        outlier_method = outlier_method
+        outlier_method = outlier_method,
+        outlier_threshold = outlier_threshold
       )
 
       dt <- data.table::merge.data.table(
