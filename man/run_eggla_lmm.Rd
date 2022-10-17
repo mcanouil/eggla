@@ -19,6 +19,8 @@ run_eggla_lmm(
   knots = c(1, 8, 12),
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   filter_apar = NULL,
+  outlier_method = "iqr",
+  outlier_exclude = TRUE,
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -62,6 +64,14 @@ i.e., CAR(1) as correlation structure.}
 (\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
 Argument pass through \code{compute_apar()} (see \code{predict_bmi()}).
 Default is \code{NULL}.}
+
+\item{outlier_method}{The outlier detection method(s). Default is \code{"iqr"}.
+Can be \code{"all"} or some of \code{"cook"}, \code{"pareto"}, \code{"zscore"}, \code{"zscore_robust"},
+\code{"iqr"}, \code{"ci"}, \code{"eti"}, \code{"hdi"}, \code{"bci"}, \code{"mahalanobis"},
+\code{"mahalanobis_robust"}, \code{"mcd"}, \code{"ics"}, \code{"optics"} or \code{"lof"}.}
+
+\item{outlier_exclude}{Whether or not the values/individuals flagged as being outliers should be excluded.
+Default is \code{TRUE}.}
 
 \item{parallel}{Determines if \code{growthcleanr::cleangrowth()} function shoud be run in parallel. Defaults to \code{FALSE}.}
 

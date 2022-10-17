@@ -13,7 +13,7 @@ egg_outliers(
   end = 10,
   step = 0.05,
   filter = NULL,
-  outlier_method = c("iqr", "zscore")
+  outlier_method = "iqr"
 )
 }
 \arguments{
