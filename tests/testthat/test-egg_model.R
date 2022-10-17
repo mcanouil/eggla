@@ -15,7 +15,7 @@ test_that("egg_model", {
   )
 
   expect_snapshot(
-    cor2 <- egg_correlations(
+    egg_correlations(
       fit = res2,
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
@@ -23,7 +23,7 @@ test_that("egg_model", {
   )
 
   expect_snapshot(
-    auc2 <- egg_aucs(
+    egg_aucs(
       fit = res2,
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
@@ -31,7 +31,7 @@ test_that("egg_model", {
   )
 
   expect_snapshot(
-    slopes2 <- egg_slopes(
+    egg_slopes(
       fit = res2,
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
@@ -43,7 +43,7 @@ test_that("egg_model", {
   }
 
   expect_snapshot(
-    outliers2 <- egg_outliers(
+    egg_outliers(
       fit = res2,
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
