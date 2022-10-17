@@ -1,5 +1,20 @@
 # eggla (development version)
 
+## Features
+
+- In `R/compute_outliers.R` and `R/egg_outliers.R`,
+  - feat: new arg to pass on the outlier method.
+
+## Tests
+
+- In `tests`,
+  - test: no longer uses snapshots.
+
+## Chores
+
+- In `pkgdown/_pkgdown.yml`,
+  - style: separate the `run_eggl_*()` functions from the rest.
+
 # eggla 0.16.0
 
 ## Features
