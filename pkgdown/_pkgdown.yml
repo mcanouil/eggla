@@ -8,6 +8,11 @@ authors:
   Mickaël Canouil:
     href: https://mickael.canouil.fr
 reference:
+  - title: EGG Longitudinal Analysis Workflow
+    desc: Main functions to run EGG Longitudinal Analysis
+    contents:
+    - run_eggla_lmm
+    - run_eggla_gwas
   - title: Cubic Splines (Random Cubic/Linear Splines) Functions
     desc: Functions dedicated to work with cubic Splines mixed model.
     contents:
@@ -18,8 +23,6 @@ reference:
     - egg_outliers
     - plot_egg_aucs
     - plot_egg_slopes
-    - run_eggla_lmm
-    - run_eggla_gwas
   - title: Datasets
     contents:
     - bmigrowth
