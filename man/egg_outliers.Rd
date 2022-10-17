@@ -12,7 +12,8 @@ egg_outliers(
   start = 0.25,
   end = 10,
   step = 0.05,
-  filter = NULL
+  filter = NULL,
+  outlier_method = c("iqr", "zscore")
 )
 }
 \arguments{
@@ -35,6 +36,11 @@ computation, either "predicted" or "observed". Default is "predicted".}
 \item{filter}{A string following \code{data.table} syntax for filtering on \code{"i"}
 (\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
 Default is \code{NULL}.}
+
+\item{outlier_method}{The outlier detection method(s). Can be \code{"all"} or some of
+\code{"cook"}, \code{"pareto"}, \code{"zscore"}, \code{"zscore_robust"}, \code{"iqr"}, \code{"ci"}, \code{"eti"},
+\code{"hdi"}, \code{"bci"}, \code{"mahalanobis"}, \code{"mahalanobis_robust"}, \code{"mcd"}, \code{"ics"},
+\code{"optics"} or \code{"lof"}.}
 }
 \value{
 A \code{data.frame} listing the individuals which are not outliers based on several criteria.
