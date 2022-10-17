@@ -29,6 +29,10 @@
 #'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
 #'   Argument pass through `compute_apar()` (see `predict_bmi()`).
 #'   Default is `NULL`.
+#' @param outlier_method The outlier detection method(s). Default is `"iqr"`.
+#'   Can be `"all"` or some of `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`,
+#'   `"iqr"`, `"ci"`, `"eti"`, `"hdi"`, `"bci"`, `"mahalanobis"`,
+#'   `"mahalanobis_robust"`, `"mcd"`, `"ics"`, `"optics"` or `"lof"`.
 #' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
 #' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
 #'   Only applies if parallel is set to TRUE.
@@ -76,6 +80,7 @@ run_eggla_lmm <- function(
   knots = c(1, 8, 12),
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   filter_apar = NULL,
+  outlier_method = "iqr",
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -86,7 +91,7 @@ run_eggla_lmm <- function(
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
   measurement <- param <- egg_ageyears <- NULL # no visible binding for global variable from data.table
   AP <- AR <- what <- NULL # no visible binding for global variable from data.table
-  Outlier <- outlier_colour <- Outlier_Zscore <- Outlier_IQR <- NULL # no visible binding for global variable from data.table
+  Outlier <- outlier_colour <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
 
@@ -330,7 +335,13 @@ run_eggla_lmm <- function(
       outliers_dt <- egg_outliers(
         fit = results,
         period = period,
-        knots = knots
+        knots = knots,
+        from = "predicted",
+        start = 0.25,
+        end = 10,
+        step = 0.05,
+        filter = filter_apar,
+        outlier_method = outlier_method
       )
       data.table::fwrite(
         x = outliers_dt,
@@ -374,31 +385,16 @@ run_eggla_lmm <- function(
       )
       dt <- dt[
         j = `:=`(
-          Outlier_Zscore = data.table::fifelse(is.na(Outlier_Zscore), 0, Outlier_Zscore),
-          Outlier_IQR = data.table::fifelse(is.na(Outlier_IQR), 0, Outlier_IQR)
+          Outlier = data.table::fifelse(is.na(Outlier), 0, Outlier)
         )
       ][
-        j = outlier_colour := mapply(
-          FUN = function(iqr, zs, pc) {
-            if (iqr == 1 && zs == 1) {
-              return(sprintf("<b style = 'color:%s;'>IQR & Z-score</b>", pc[1]))
-            }
-            if (iqr == 0 && zs == 1) {
-              return(sprintf("<b style = 'color:%s;'>Z-score</b>", pc[2]))
-            }
-            if (iqr == 1 && zs == 0) {
-              return(sprintf("<b style = 'color:%s;'>IQR</b>", pc[3]))
-            }
-            if (iqr == 0 && zs == 0) {
-              return(NA_character_)
-            }
-          },
-          iqr = Outlier_Zscore,
-          zs = Outlier_IQR,
-          MoreArgs = list(pc = palette_okabe_ito)
+        j = outlier_colour := data.table::fifelse(
+          test = Outlier == 1,
+          yes = sprintf("<b style = 'color:%s;'>Outlier</b>", palette_okabe_ito[1]),
+          no = NA_character_
         )
       ][
-        i = order(Outlier, Outlier_IQR)
+        i = order(Outlier)
       ][
         j = outlier_colour := factor(outlier_colour, levels = unique(outlier_colour))
       ]
@@ -451,14 +447,14 @@ run_eggla_lmm <- function(
           ggplot2::labs(
             x = "Parameter",
             y = "Values",
-            colour = "Outlier Metrics"
+            colour = NULL
           ) +
           ggplot2::facet_wrap(
             facets = ggplot2::vars(.data[["parameter"]]),
             scales = "free",
             ncol = 4
           ) +
-          ggplot2::scale_colour_manual(values = palette_okabe_ito[c(3, 2, 1)]) +
+          ggplot2::scale_colour_manual(values = palette_okabe_ito[1]) +
           ggplot2::theme(
             axis.text.x = ggplot2::element_blank(),
             axis.ticks.x = ggplot2::element_blank(),
