@@ -14,6 +14,11 @@
 #' @inheritParams predict_bmi
 #' @param from A string indicating the type of data to be used for the AP and AR
 #'   computation, either "predicted" or "observed". Default is "predicted".
+#' @param outlier_method The outlier detection method(s). Can be `"all"` or some of
+#'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
+#'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
+#'   `"optics"` or `"lof"`.
+#' 
 #' @return A `data.frame` listing the individuals which are not outliers based on several criteria.
 #'
 #' @export
@@ -50,7 +55,8 @@ compute_outliers <- function(
   start = 0.25,
   end = 10,
   step = 0.05,
-  filter = NULL
+  filter = NULL,
+  outlier_method = c("iqr", "zscore")
 ) {
   value <- what <- AP <- AR <- NULL # no visible binding for global variable from data.table
   from <- match.arg(from, c("predicted", "observed"))
@@ -129,7 +135,7 @@ compute_outliers <- function(
           ID = data[[names(fit[["groups"]])]],
           as.data.frame(performance::check_outliers(
             x = data.table::setDT(data)[j = .SD, .SDcols = -c(names(fit[["groups"]]))],
-            method = c("iqr", "zscore")
+            method = outlier_method
           ))
         )
       }
