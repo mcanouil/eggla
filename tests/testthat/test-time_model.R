@@ -1,9 +1,8 @@
 set.seed(2705)
-options(digits = 4, scipen = 10)
 
 test_that("Cubic slope", {
   for (use_car1 in c(FALSE, TRUE)) {
-    expect_snapshot({
+    expect_no_condition(
       x <- time_model(
         x = "age",
         y = "log(bmi)",
@@ -13,8 +12,7 @@ test_that("Cubic slope", {
         id_var = "ID",
         quiet = TRUE
       )
-      print(x, digits = 4)
-  })
+    )
 
     y <- nlme::lme(
       log(bmi) ~ stats::poly(age, 3),
@@ -32,7 +30,7 @@ test_that("Cubic slope", {
 
 test_that("Linear Splines", {
   for (use_car1 in c(FALSE, TRUE)) {
-    expect_snapshot({
+    expect_no_condition(
       x <- time_model(
         x = "age",
         y = "log(bmi)",
@@ -42,8 +40,7 @@ test_that("Linear Splines", {
         id_var = "ID",
         quiet = TRUE
       )
-      print(x, digits = 4)
-    })
+    )
 
     y <- nlme::lme(
       log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)),
@@ -61,7 +58,7 @@ test_that("Linear Splines", {
 
 test_that("Cubic Splines", {
   for (use_car1 in c(FALSE, TRUE)[2]) {
-    expect_snapshot({
+    expect_no_condition(
       x <- time_model(
         x = "age",
         y = "log(bmi)",
@@ -72,8 +69,7 @@ test_that("Cubic Splines", {
         id_var = "ID",
         quiet = TRUE
       )
-      print(x, digits = 4)
-    })
+    )
 
     y <- nlme::lme(
       log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
@@ -87,13 +83,13 @@ test_that("Cubic Splines", {
 
     expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
 
-    expect_snapshot(
-      print(compute_outliers(
+    expect_no_condition(
+      compute_outliers(
         fit = x,
         method = "cubic_splines",
         period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
         knots = c(1, 8, 12)
-      ), digits = 4)
+      )
     )
   }
 })
@@ -114,8 +110,8 @@ test_that("Test wrong covariates", {
 })
 
 test_that("Test covariates", {
-  expect_snapshot(
-    print(time_model(
+  expect_no_condition(
+    time_model(
       x = "age",
       y = "log(bmi)",
       cov = c("height"),
@@ -124,7 +120,7 @@ test_that("Test covariates", {
       id_var = "ID",
       use_car1 = TRUE,
       quiet = TRUE
-    ), digits = 4)
+    )
   )
 })
 
@@ -142,36 +138,34 @@ test_that("time_model", {
     quiet = TRUE
   )
 
-  expect_snapshot(
-    print(compute_correlations(
+  expect_no_condition(
+    compute_correlations(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
-    ), digits = 4)
+    )
   )
 
-  expect_snapshot(
-     print(compute_aucs(
+  expect_no_condition(
+     compute_aucs(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
-    ), digits = 4)
+    )
   )
 
-  expect_snapshot(
-    print(compute_slopes(
+  expect_no_condition(
+    compute_slopes(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
-    ), digits = 4)
+    )
   )
 
   for (s in c("predicted", "observed")) {
-    expect_snapshot(
-      print(compute_apar(fit = res1, from = s)[AP | AR], digits = 4)
-    )
+    expect_no_condition(compute_apar(fit = res1, from = s)[AP | AR])
   }
 })
