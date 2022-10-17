@@ -1,4 +1,5 @@
 set.seed(2705)
+options(digits = 4, scipen = 10)
 
 data("bmigrowth")
 library(future)

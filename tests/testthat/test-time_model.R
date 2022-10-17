@@ -1,8 +1,9 @@
 set.seed(2705)
+options(digits = 4, scipen = 10)
 
 test_that("Cubic slope", {
   for (use_car1 in c(FALSE, TRUE)) {
-    expect_snapshot(
+    expect_snapshot({
       x <- time_model(
         x = "age",
         y = "log(bmi)",
@@ -12,7 +13,8 @@ test_that("Cubic slope", {
         id_var = "ID",
         quiet = TRUE
       )
-    )
+      print(x, digits = 4)
+  })
 
     y <- nlme::lme(
       log(bmi) ~ stats::poly(age, 3),
@@ -30,7 +32,7 @@ test_that("Cubic slope", {
 
 test_that("Linear Splines", {
   for (use_car1 in c(FALSE, TRUE)) {
-    expect_snapshot(
+    expect_snapshot({
       x <- time_model(
         x = "age",
         y = "log(bmi)",
@@ -40,7 +42,8 @@ test_that("Linear Splines", {
         id_var = "ID",
         quiet = TRUE
       )
-    )
+      print(x, digits = 4)
+    })
 
     y <- nlme::lme(
       log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)),
@@ -57,41 +60,42 @@ test_that("Linear Splines", {
 })
 
 test_that("Cubic Splines", {
-for (use_car1 in c(FALSE, TRUE)[2]) {
-  expect_snapshot(
-    x <- time_model(
-      x = "age",
-      y = "log(bmi)",
+  for (use_car1 in c(FALSE, TRUE)[2]) {
+    expect_snapshot({
+      x <- time_model(
+        x = "age",
+        y = "log(bmi)",
+        data = bmigrowth[bmigrowth$sex == 0, ],
+        method = "cubic_splines",
+        knots = c(2, 8, 12),
+        use_car1 = use_car1,
+        id_var = "ID",
+        quiet = TRUE
+      )
+      print(x, digits = 4)
+    })
+
+    y <- nlme::lme(
+      log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
       data = bmigrowth[bmigrowth$sex == 0, ],
-      method = "cubic_splines",
-      knots = c(2, 8, 12),
-      use_car1 = use_car1,
-      id_var = "ID",
-      quiet = TRUE
+      random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
+      na.action = stats::na.omit,
+      method = "ML",
+      correlation = if (use_car1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
+      control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
     )
-  )
 
-  y <- nlme::lme(
-    log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
-    data = bmigrowth[bmigrowth$sex == 0, ],
-    random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
-    na.action = stats::na.omit,
-    method = "ML",
-    correlation = if (use_car1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
-    control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)
-  )
+    expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
 
-  expect_equal(stats::coefficients(summary(x)), stats::coefficients(summary(y)), ignore_attr = TRUE)
-
-  expect_snapshot(
-    compute_outliers(
-      fit = x,
-      method = "cubic_splines",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(1, 8, 12)
+    expect_snapshot(
+      print(compute_outliers(
+        fit = x,
+        method = "cubic_splines",
+        period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
+        knots = c(1, 8, 12)
+      ), digits = 4)
     )
-  )
-}
+  }
 })
 
 test_that("Test wrong covariates", {
@@ -111,7 +115,7 @@ test_that("Test wrong covariates", {
 
 test_that("Test covariates", {
   expect_snapshot(
-    time_model(
+    print(time_model(
       x = "age",
       y = "log(bmi)",
       cov = c("height"),
@@ -120,7 +124,7 @@ test_that("Test covariates", {
       id_var = "ID",
       use_car1 = TRUE,
       quiet = TRUE
-    )
+    ), digits = 4)
   )
 })
 
@@ -139,33 +143,35 @@ test_that("time_model", {
   )
 
   expect_snapshot(
-    compute_correlations(
+    print(compute_correlations(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
-    )
+    ), digits = 4)
   )
 
   expect_snapshot(
-     compute_aucs(
+     print(compute_aucs(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
-    )
+    ), digits = 4)
   )
 
   expect_snapshot(
-    compute_slopes(
+    print(compute_slopes(
       fit = res1,
       method = "cubic_slope",
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
       knots = c(1, 8, 12)
-    )
+    ), digits = 4)
   )
 
   for (s in c("predicted", "observed")) {
-    expect_snapshot(compute_apar(fit = res1, from = s)[AP | AR])
+    expect_snapshot(
+      print(compute_apar(fit = res1, from = s)[AP | AR], digits = 4)
+    )
   }
 })
