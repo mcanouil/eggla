@@ -98,7 +98,6 @@ compute_outliers <- function(
       )),
       id.vars = names(fit[["groups"]])
     )[!is.na(value)]
-=
   } else {
     long_dt <- data.table::melt.data.table(
       data = data.table::as.data.table(Reduce(
