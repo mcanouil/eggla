@@ -56,7 +56,7 @@ compute_outliers <- function(
   end = 10,
   step = 0.05,
   filter = NULL,
-  outlier_method = c("iqr", "zscore")
+  outlier_method = "iqr"
 ) {
   value <- what <- AP <- AR <- NULL # no visible binding for global variable from data.table
   from <- match.arg(from, c("predicted", "observed"))
@@ -98,15 +98,7 @@ compute_outliers <- function(
       )),
       id.vars = names(fit[["groups"]])
     )[!is.na(value)]
-    params <- c(
-      list(AUC_global = compute_aucs(fit, method, period, knots)),
-      list(SLOPE_global = compute_slopes(fit, method, period, knots)),
-      list(APAR_global = apar_dt),
-      split(
-        x = long_dt[j = .SD, .SDcols = -"variable"],
-        f = long_dt[["variable"]]
-      )
-    )
+=
   } else {
     long_dt <- data.table::melt.data.table(
       data = data.table::as.data.table(Reduce(
@@ -118,18 +110,13 @@ compute_outliers <- function(
       )),
       id.vars = names(fit[["groups"]])
     )[!is.na(value)]
-    params <- c(
-      list(AUC_global = compute_aucs(fit, method, period, knots)),
-      list(SLOPE_global = compute_slopes(fit, method, period, knots)),
-      split(
-        x = long_dt[j = .SD, .SDcols = -"variable"],
-        f = long_dt[["variable"]]
-      )
-    )
   }
   data.table::rbindlist(
     l = lapply(
-      X = params,
+      X = split(
+        x = long_dt[j = .SD, .SDcols = -"variable"],
+        f = long_dt[["variable"]]
+      ),
       FUN = function(data) {
         cbind.data.frame(
           ID = data[[names(fit[["groups"]])]],
