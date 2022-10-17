@@ -33,6 +33,8 @@
 #'   Can be `"all"` or some of `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`,
 #'   `"iqr"`, `"ci"`, `"eti"`, `"hdi"`, `"bci"`, `"mahalanobis"`,
 #'   `"mahalanobis_robust"`, `"mcd"`, `"ics"`, `"optics"` or `"lof"`.
+#' @param outlier_exclude Whether or not the values/individuals flagged as being outliers should be excluded.
+#'   Default is `TRUE`.
 #' @param parallel Determines if `growthcleanr::cleangrowth()` function shoud be run in parallel. Defaults to `FALSE`.
 #' @param parallel_n_chunks Specify the number of batches (in `growthcleanr::cleangrowth()`) to run in parallel.
 #'   Only applies if parallel is set to TRUE.
@@ -81,6 +83,7 @@ run_eggla_lmm <- function(
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   filter_apar = NULL,
   outlier_method = "iqr",
+  outlier_exclude = TRUE,
   parallel = FALSE,
   parallel_n_chunks = 1,
   working_directory = getwd(),
@@ -222,55 +225,23 @@ run_eggla_lmm <- function(
         quiet = quiet
       )
 
-      saveRDS(
-        object = results,
-        file = file.path(
-          working_directory,
-          sprintf("%s-model-object.rds", sex_literal)
+      p_model_residuals <- plot_residuals(
+        x = x_variable,
+        y = y_variable,
+        fit = results
+      ) +
+        patchwork::plot_annotation(
+          title = sprintf(
+            "Cubic Splines (Random Linear Splines) - BMI - %s",
+            c("0" = "Male", "1" = "Female")[as.character(isex)]
+          ),
+          tag_levels = "A"
         )
-      )
-
-      writeLines(
-        text = deparse1(results$call),
-        con = file.path(results_directory, "model-call.txt")
-      )
-
-      data.table::fwrite(
-        x = broom.mixed::tidy(results),
-        file = file.path(results_directory, "model-coefficients.csv")
-      )
-
-      grDevices::png(
-        filename = file.path(results_directory, "model-residuals.png"),
-        width = 4 * 2.5,
-        height = 3 * 2.5,
-        units = "in",
-        res = 120
-      )
-      print(
-        plot_residuals(
-          x = x_variable,
-          y = y_variable,
-          fit = results
-        ) +
-          patchwork::plot_annotation(
-            title = sprintf(
-              "Cubic Splines (Random Linear Splines) - BMI - %s",
-              c("0" = "Male", "1" = "Female")[as.character(isex)]
-            ),
-            tag_levels = "A"
-          )
-      )
-      invisible(grDevices::dev.off())
 
       slopes_dt <- egg_slopes(
         fit = results,
         period = period,
         knots = knots
-      )
-      data.table::fwrite(
-        x = slopes_dt,
-        file = file.path(results_directory, "derived-slopes.csv")
       )
 
       aucs_dt <- egg_aucs(
@@ -278,24 +249,11 @@ run_eggla_lmm <- function(
         period = period,
         knots = knots
       )
-      data.table::fwrite(
-        x = aucs_dt,
-        file = file.path(results_directory, "derived-aucs.csv")
-      )
 
       eggc <- egg_correlations(
         fit = results,
         period = period,
         knots = knots
-      )
-
-      data.table::fwrite(
-        x = eggc[["AUC"]],
-        file = file.path(results_directory, "derived-aucs-correlations.csv")
-      )
-      data.table::fwrite(
-        x = eggc[["SLOPE"]],
-        file = file.path(results_directory, "derived-slopes-correlations.csv")
       )
 
       apar_dt <- data.table::setnames(
@@ -327,10 +285,6 @@ run_eggla_lmm <- function(
           out
         }
       )
-      data.table::fwrite(
-        x = apar_dt,
-        file = file.path(results_directory, "derived-apar.csv")
-      )
 
       outliers_dt <- egg_outliers(
         fit = results,
@@ -342,10 +296,6 @@ run_eggla_lmm <- function(
         step = 0.05,
         filter = filter_apar,
         outlier_method = outlier_method
-      )
-      data.table::fwrite(
-        x = outliers_dt,
-        file = file.path(results_directory, "derived-outliers.csv")
       )
 
       dt <- data.table::merge.data.table(
@@ -428,6 +378,89 @@ run_eggla_lmm <- function(
           )
         )
       }
+      p_derived_outliers <- ggplot2::ggplot(data = dt) +
+        ggplot2::aes(x = .data[["parameter"]], y = .data[["value"]]) +
+        ggplot2::geom_boxplot(
+          mapping = ggplot2::aes(group = .data[["parameter"]]),
+          width = 0.25,
+          outlier.colour = NA,
+          na.rm = TRUE
+        ) +
+        ggplot2::labs(
+          x = "Parameter",
+          y = "Values",
+          colour = NULL
+        ) +
+        ggplot2::facet_wrap(
+          facets = ggplot2::vars(.data[["parameter"]]),
+          scales = "free",
+          ncol = 4
+        ) +
+        ggplot2::scale_colour_manual(values = palette_okabe_ito[1]) +
+        ggplot2::theme(
+          axis.text.x = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank(),
+          panel.grid.major.x = ggplot2::element_blank(),
+          panel.grid.minor.x = ggplot2::element_blank(),
+          legend.text = ggtext::element_markdown()
+        ) +
+        gpl
+
+      if (outlier_exclude) {
+        
+      }
+
+      if (!quiet) {
+        message(sprintf("Exporting/Writing results in '%s'.", results_directory))
+      }
+      saveRDS(
+        object = results,
+        file = file.path(
+          working_directory,
+          sprintf("%s-model-object.rds", sex_literal)
+        )
+      )
+      writeLines(
+        text = deparse1(results$call),
+        con = file.path(results_directory, "model-call.txt")
+      )
+      data.table::fwrite(
+        x = broom.mixed::tidy(results),
+        file = file.path(results_directory, "model-coefficients.csv")
+      )
+      data.table::fwrite(
+        x = slopes_dt,
+        file = file.path(results_directory, "derived-slopes.csv")
+      )
+      data.table::fwrite(
+        x = aucs_dt,
+        file = file.path(results_directory, "derived-aucs.csv")
+      )
+      data.table::fwrite(
+        x = eggc[["AUC"]],
+        file = file.path(results_directory, "derived-aucs-correlations.csv")
+      )
+      data.table::fwrite(
+        x = eggc[["SLOPE"]],
+        file = file.path(results_directory, "derived-slopes-correlations.csv")
+      )
+      data.table::fwrite(
+        x = apar_dt,
+        file = file.path(results_directory, "derived-apar.csv")
+      )
+      data.table::fwrite(
+        x = outliers_dt,
+        file = file.path(results_directory, "derived-outliers.csv")
+      )
+      grDevices::png(
+        filename = file.path(results_directory, "model-residuals.png"),
+        width = 4 * 2.5,
+        height = 3 * 2.5,
+        units = "in",
+        res = 120
+      )
+      print(p_model_residuals)
+      invisible(grDevices::dev.off())
       grDevices::png(
         filename = file.path(results_directory, "derived-outliers.png"),
         width = 4 * 2.5,
@@ -435,37 +468,12 @@ run_eggla_lmm <- function(
         units = "in",
         res = 120
       )
-      print(
-        ggplot2::ggplot(data = dt) +
-          ggplot2::aes(x = .data[["parameter"]], y = .data[["value"]]) +
-          ggplot2::geom_boxplot(
-            mapping = ggplot2::aes(group = .data[["parameter"]]),
-            width = 0.25,
-            outlier.colour = NA,
-            na.rm = TRUE
-          ) +
-          ggplot2::labs(
-            x = "Parameter",
-            y = "Values",
-            colour = NULL
-          ) +
-          ggplot2::facet_wrap(
-            facets = ggplot2::vars(.data[["parameter"]]),
-            scales = "free",
-            ncol = 4
-          ) +
-          ggplot2::scale_colour_manual(values = palette_okabe_ito[1]) +
-          ggplot2::theme(
-            axis.text.x = ggplot2::element_blank(),
-            axis.ticks.x = ggplot2::element_blank(),
-            panel.grid.major.x = ggplot2::element_blank(),
-            panel.grid.minor.x = ggplot2::element_blank(),
-            legend.text = ggtext::element_markdown()
-          ) +
-          gpl
-      )
+      print(p_derived_outliers)
       invisible(grDevices::dev.off())
 
+      if (!quiet) {
+        message("Archiving/Compressing diagnostics results ...")
+      }
       archive_tosend <- file.path(working_directory, "to-send")
       dir.create(archive_tosend, recursive = TRUE, showWarnings = FALSE)
       archive_tosend_zip <- sprintf(
@@ -486,11 +494,14 @@ run_eggla_lmm <- function(
       )
       if (!quiet) {
         message(sprintf(
-          "Diagnostics to send available at: '%s'",
+          "Diagnostics to send available at: '%s'.",
           archive_tosend_zip
         ))
       }
 
+      if (!quiet) {
+        message("Archiving/Compressing all results ...")
+      }
       utils::zip(
         zipfile = archive_filename,
         files = list.files(results_directory, full.names = TRUE),
