@@ -118,11 +118,20 @@ compute_outliers <- function(
       id.vars = names(fit[["groups"]])
     )[!is.na(value)]
   }
+  long_dt <- long_dt[
+    grep(
+      pattern = paste(
+        c("^slope_.*$", "^auc_.*$", "^AP_.*", "^AR_.*"),
+        collapse = "|"
+      ),
+      x = variable
+    )
+  ]
   data.table::rbindlist(
     l = lapply(
       X = split(
         x = long_dt[j = .SD, .SDcols = -"variable"],
-        f = long_dt[["variable"]]
+        f = droplevels(long_dt[["variable"]])
       ),
       FUN = function(data) {
         cbind.data.frame(
