@@ -53,7 +53,7 @@ egg_outliers <- function(
   outlier_method = "iqr",
   outlier_threshold = list(iqr = 2)
 ) {
-  value <- what <- AP <- AR <- NULL # no visible binding for global variable from data.table
+  value <- what <- AP <- AR <- variable <- NULL # no visible binding for global variable from data.table
   from <- match.arg(from, c("predicted", "observed"))
   long_dt <- data.table::melt.data.table(
     data = data.table::as.data.table(Reduce(
@@ -89,12 +89,22 @@ egg_outliers <- function(
       )
     )),
     id.vars = names(fit[["groups"]])
-  )[!is.na(value)]
+  )[
+    !is.na(value)
+  ][
+    grep(
+      pattern = paste(
+        c("^slope_.*$", "^auc_.*$", "^AP_.*", "^AR_.*"),
+        collapse = "|"
+      ),
+      x = variable
+    )
+  ]
   data.table::rbindlist(
     l = lapply(
       X = split(
         x = long_dt[j = .SD, .SDcols = -"variable"],
-        f = long_dt[["variable"]]
+        f = droplevels(long_dt[["variable"]])
       ),
       FUN = function(data) {
         cbind.data.frame(
