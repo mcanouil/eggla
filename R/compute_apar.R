@@ -111,5 +111,8 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
     i = (AR),
     j = AR := AR & !duplicated(AR),
     by = "egg_id"
+  ][
+    i = egg_ageyears >= 2,
+    j = c("AP", "AR") := list(FALSE, FALSE)
   ]
 }
