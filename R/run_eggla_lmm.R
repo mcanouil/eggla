@@ -90,7 +90,7 @@ run_eggla_lmm <- function(
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   filter_apar = NULL,
   outlier_method = "iqr",
-  outlier_threshold = list(iqr = 1.7),
+  outlier_threshold = list(iqr = 2),
   outlier_exclude = TRUE,
   parallel = FALSE,
   parallel_n_chunks = 1,

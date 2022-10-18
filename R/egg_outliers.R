@@ -51,7 +51,7 @@ egg_outliers <- function(
   step = 0.05,
   filter = NULL,
   outlier_method = "iqr",
-  outlier_threshold = list(iqr = 1.7)
+  outlier_threshold = list(iqr = 2)
 ) {
   value <- what <- AP <- AR <- NULL # no visible binding for global variable from data.table
   from <- match.arg(from, c("predicted", "observed"))
