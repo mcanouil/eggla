@@ -16,6 +16,13 @@
 #'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
 #'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
 #'   `"optics"` or `"lof"`.
+#'  See `performance::check_outliers()` <https://easystats.github.io/performance/reference/check_outliers.html> for details.
+#' @param outlier_threshold A list containing the threshold values for each method (_e.g._,
+#'   `list('mahalanobis' = 7, 'cook' = 1)`), above which an observation is
+#'   considered as outlier. If `NULL`, default values will be used (see
+#'   'Details'). If a numeric value is given, it will be used as the threshold
+#'   for any of the method run.
+#'  See `performance::check_outliers()` <https://easystats.github.io/performance/reference/check_outliers.html> for details.
 #'
 #' @return A `data.frame` listing the individuals which are not outliers based on several criteria.
 #'
@@ -43,9 +50,10 @@ egg_outliers <- function(
   end = 10,
   step = 0.05,
   filter = NULL,
-  outlier_method = "iqr"
+  outlier_method = "iqr",
+  outlier_threshold = list(iqr = 2)
 ) {
-  value <- what <- AP <- AR <- NULL # no visible binding for global variable from data.table
+  value <- what <- AP <- AR <- variable <- NULL # no visible binding for global variable from data.table
   from <- match.arg(from, c("predicted", "observed"))
   long_dt <- data.table::melt.data.table(
     data = data.table::as.data.table(Reduce(
@@ -81,19 +89,30 @@ egg_outliers <- function(
       )
     )),
     id.vars = names(fit[["groups"]])
-  )[!is.na(value)]
+  )[
+    !is.na(value)
+  ][
+    grep(
+      pattern = paste(
+        c("^slope_.*$", "^auc_.*$", "^AP_.*", "^AR_.*"),
+        collapse = "|"
+      ),
+      x = variable
+    )
+  ]
   data.table::rbindlist(
     l = lapply(
       X = split(
         x = long_dt[j = .SD, .SDcols = -"variable"],
-        f = long_dt[["variable"]]
+        f = droplevels(long_dt[["variable"]])
       ),
       FUN = function(data) {
         cbind.data.frame(
           ID = data[[names(fit[["groups"]])]],
           as.data.frame(performance::check_outliers(
             x = data.table::setDT(data)[j = .SD, .SDcols = -c(names(fit[["groups"]]))],
-            method = outlier_method
+            method = outlier_method,
+            threshold = outlier_threshold
           ))
         )
       }

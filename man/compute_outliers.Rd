@@ -15,7 +15,8 @@ compute_outliers(
   end = 10,
   step = 0.05,
   filter = NULL,
-  outlier_method = c("iqr", "zscore")
+  outlier_method = "iqr",
+  outlier_threshold = list(iqr = 2)
 )
 }
 \arguments{
@@ -45,7 +46,15 @@ Default is \code{NULL}.}
 \item{outlier_method}{The outlier detection method(s). Can be \code{"all"} or some of
 \code{"cook"}, \code{"pareto"}, \code{"zscore"}, \code{"zscore_robust"}, \code{"iqr"}, \code{"ci"}, \code{"eti"},
 \code{"hdi"}, \code{"bci"}, \code{"mahalanobis"}, \code{"mahalanobis_robust"}, \code{"mcd"}, \code{"ics"},
-\code{"optics"} or \code{"lof"}.}
+\code{"optics"} or \code{"lof"}.
+See \code{performance::check_outliers()} \url{https://easystats.github.io/performance/reference/check_outliers.html} for details.}
+
+\item{outlier_threshold}{A list containing the threshold values for each method (\emph{e.g.},
+\code{list('mahalanobis' = 7, 'cook' = 1)}), above which an observation is
+considered as outlier. If \code{NULL}, default values will be used (see
+'Details'). If a numeric value is given, it will be used as the threshold
+for any of the method run.
+See \code{performance::check_outliers()} \url{https://easystats.github.io/performance/reference/check_outliers.html} for details.}
 }
 \value{
 A \code{data.frame} listing the individuals which are not outliers based on several criteria.
