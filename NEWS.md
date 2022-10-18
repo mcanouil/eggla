@@ -1,10 +1,16 @@
-# eggla (development version)
+# eggla 0.17.0
 
 ## Features
 
 - In `R/run_eggla_lmm.R`, `R/compute_outliers.R`, and `R/egg_outliers.R`,
   - feat: new arg to pass on the outlier method.
   - feat: new arg to pass on the outlier method threshold.
+  - feat: now exclude flagged outliers by setting their values to NA.
+
+## Fixes
+
+- In `R/compute_outliers.R`,
+  - fix: replace AP greater than 2 by NA.
 
 ## Tests
 
