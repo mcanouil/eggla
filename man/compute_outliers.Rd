@@ -16,7 +16,7 @@ compute_outliers(
   step = 0.05,
   filter = NULL,
   outlier_method = "iqr",
-  outlier_threshold = list(iqr = 1.7)
+  outlier_threshold = list(iqr = 2)
 )
 }
 \arguments{
