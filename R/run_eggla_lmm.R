@@ -102,7 +102,7 @@ run_eggla_lmm <- function(
   egg_agedays <- egg_id <- egg_sex <- NULL # no visible binding for global variable from data.table
   measurement <- param <- egg_ageyears <- NULL # no visible binding for global variable from data.table
   AP <- AR <- what <- NULL # no visible binding for global variable from data.table
-  Outlier <- outlier_colour <- NULL # no visible binding for global variable from data.table
+  Outlier <- outlier_colour <- parameter <- ID <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
 
@@ -321,7 +321,7 @@ run_eggla_lmm <- function(
                 j = .SD,
                 .SDcols = c(grep(
                   pattern = paste(
-                    c("^egg_id$", "slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
+                    c("^egg_id$", "^slope_.*$", "^auc_.*$", "^AP_.*", "^AR_.*"),
                     collapse = "|"
                   ),
                   x = colnames(dt),
@@ -415,8 +415,32 @@ run_eggla_lmm <- function(
         ) +
         gpl
 
-      if (outlier_exclude) {
-        
+      if (outlier_exclude && sum(outliers_dt[["Outlier"]]) > 0) {
+        outliers_to_exclude <- outliers_dt[Outlier == 1]
+        for (icol in unique(outliers_to_exclude[["parameter"]])) {
+          if (any(grepl("^auc_", icol))) {
+            aucs_dt <- data.table::setDF(aucs_dt)
+            aucs_dt[
+              slopes_dt[["egg_id"]] %in% outliers_to_exclude[parameter %in% icol, ID],
+              icol
+            ] <- NA_real_
+
+          }
+          if (any(grepl("^slope_", icol))) {
+            slopes_dt <- data.table::setDF(slopes_dt)
+            slopes_dt[
+              slopes_dt[["egg_id"]] %in% outliers_to_exclude[parameter %in% icol, ID],
+              icol
+            ] <- NA_real_
+          }
+          if (any(grepl("^AR_|^AP_", icol))) {
+            apar_dt <- data.table::setDF(apar_dt)
+            apar_dt[
+              apar_dt[["egg_id"]] %in% outliers_to_exclude[parameter %in% icol, ID],
+              setdiff(colnames(apar_dt), "egg_id")
+            ] <- NA_real_
+          }
+        }
       }
 
       if (!quiet) {
@@ -438,20 +462,20 @@ run_eggla_lmm <- function(
         file = file.path(results_directory, "model-coefficients.csv")
       )
       data.table::fwrite(
-        x = slopes_dt,
-        file = file.path(results_directory, "derived-slopes.csv")
-      )
-      data.table::fwrite(
-        x = aucs_dt,
-        file = file.path(results_directory, "derived-aucs.csv")
-      )
-      data.table::fwrite(
         x = eggc[["AUC"]],
         file = file.path(results_directory, "derived-aucs-correlations.csv")
       )
       data.table::fwrite(
         x = eggc[["SLOPE"]],
         file = file.path(results_directory, "derived-slopes-correlations.csv")
+      )
+      data.table::fwrite(
+        x = slopes_dt,
+        file = file.path(results_directory, "derived-slopes.csv")
+      )
+      data.table::fwrite(
+        x = aucs_dt,
+        file = file.path(results_directory, "derived-aucs.csv")
       )
       data.table::fwrite(
         x = apar_dt,
