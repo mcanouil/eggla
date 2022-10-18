@@ -21,7 +21,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1-3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/base64enc_0.1-3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/base64enc_0.1-3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/base64enc_0.1-3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/base64enc/base64enc_0.1-3.tar.gz"],
       "target": "src/contrib/base64enc_0.1-3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -52,7 +52,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "4.0.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/bit_4.0.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bit_4.0.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/bit_4.0.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bit/bit_4.0.4.tar.gz"],
       "target": "src/contrib/bit_4.0.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -83,7 +83,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "4.0.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/bit64_4.0.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bit64_4.0.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/bit64_4.0.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bit64/bit64_4.0.5.tar.gz"],
       "target": "src/contrib/bit64_4.0.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -114,7 +114,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/bslib_0.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bslib_0.4.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/bslib_0.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bslib/bslib_0.4.0.tar.gz"],
       "target": "src/contrib/bslib_0.4.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -145,7 +145,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/cachem_1.0.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cachem_1.0.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/cachem_1.0.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cachem/cachem_1.0.6.tar.gz"],
       "target": "src/contrib/cachem_1.0.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -176,7 +176,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "4.3.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/curl_4.3.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/curl_4.3.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/curl_4.3.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/curl/curl_4.3.3.tar.gz"],
       "target": "src/contrib/curl_4.3.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -207,7 +207,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.14.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/data.table_1.14.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/data.table_1.14.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/data.table_1.14.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/data.table/data.table_1.14.2.tar.gz"],
       "target": "src/contrib/data.table_1.14.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -238,7 +238,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.6.29"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/digest_0.6.29.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/digest_0.6.29.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/digest_0.6.29.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/digest/digest_0.6.29.tar.gz"],
       "target": "src/contrib/digest_0.6.29.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -269,7 +269,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.17"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/evaluate_0.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/evaluate_0.17.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/evaluate_0.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/evaluate/evaluate_0.17.tar.gz"],
       "target": "src/contrib/evaluate_0.17.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -300,7 +300,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/fastmap_1.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fastmap_1.1.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/fastmap_1.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fastmap/fastmap_1.1.0.tar.gz"],
       "target": "src/contrib/fastmap_1.1.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -331,7 +331,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.5.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/fs_1.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fs_1.5.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/fs_1.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fs/fs_1.5.2.tar.gz"],
       "target": "src/contrib/fs_1.5.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -362,7 +362,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.6.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/glue_1.6.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/glue_1.6.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/glue_1.6.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/glue/glue_1.6.2.tar.gz"],
       "target": "src/contrib/glue_1.6.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -393,7 +393,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.9"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/highr_0.9.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/highr_0.9.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/highr_0.9.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/highr/highr_0.9.tar.gz"],
       "target": "src/contrib/highr_0.9.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -424,7 +424,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.5.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/htmltools_0.5.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/htmltools_0.5.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/htmltools_0.5.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/htmltools/htmltools_0.5.3.tar.gz"],
       "target": "src/contrib/htmltools_0.5.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -455,7 +455,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/jquerylib_0.1.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/jquerylib_0.1.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/jquerylib/jquerylib_0.1.4.tar.gz"],
       "target": "src/contrib/jquerylib_0.1.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -486,7 +486,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.8.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/jsonlite_1.8.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/jsonlite_1.8.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/jsonlite_1.8.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/jsonlite/jsonlite_1.8.2.tar.gz"],
       "target": "src/contrib/jsonlite_1.8.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -517,7 +517,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.40"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/knitr_1.40.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/knitr_1.40.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/knitr_1.40.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/knitr/knitr_1.40.tar.gz"],
       "target": "src/contrib/knitr_1.40.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -548,7 +548,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/magrittr_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/magrittr_2.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/magrittr_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/magrittr/magrittr_2.0.3.tar.gz"],
       "target": "src/contrib/magrittr_2.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -579,7 +579,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/memoise_2.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/memoise_2.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/memoise_2.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/memoise/memoise_2.0.1.tar.gz"],
       "target": "src/contrib/memoise_2.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -610,7 +610,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/nanotime_0.3.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nanotime_0.3.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/nanotime_0.3.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nanotime/nanotime_0.3.6.tar.gz"],
       "target": "src/contrib/nanotime_0.3.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -641,7 +641,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.8.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/R.methodsS3_1.8.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.methodsS3_1.8.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/R.methodsS3_1.8.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.methodsS3/R.methodsS3_1.8.2.tar.gz"],
       "target": "src/contrib/R.methodsS3_1.8.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -672,7 +672,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.25.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/R.oo_1.25.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.oo_1.25.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/R.oo_1.25.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.oo/R.oo_1.25.0.tar.gz"],
       "target": "src/contrib/R.oo_1.25.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -703,7 +703,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.12.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/R.utils_2.12.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.utils_2.12.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/R.utils_2.12.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.utils/R.utils_2.12.0.tar.gz"],
       "target": "src/contrib/R.utils_2.12.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -734,7 +734,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.5.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/R6_2.5.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R6_2.5.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/R6_2.5.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R6/R6_2.5.1.tar.gz"],
       "target": "src/contrib/R6_2.5.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -765,7 +765,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rappdirs_0.3.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rappdirs_0.3.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rappdirs_0.3.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rappdirs/rappdirs_0.3.3.tar.gz"],
       "target": "src/contrib/rappdirs_0.3.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -796,7 +796,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.9"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/Rcpp_1.0.9.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/Rcpp_1.0.9.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/Rcpp_1.0.9.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/Rcpp/Rcpp_1.0.9.tar.gz"],
       "target": "src/contrib/Rcpp_1.0.9.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -827,7 +827,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.2.11"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/RcppCCTZ_0.2.11.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RcppCCTZ_0.2.11.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/RcppCCTZ_0.2.11.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RcppCCTZ/RcppCCTZ_0.2.11.tar.gz"],
       "target": "src/contrib/RcppCCTZ_0.2.11.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -858,7 +858,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/RcppDate_0.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RcppDate_0.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/RcppDate_0.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RcppDate/RcppDate_0.0.3.tar.gz"],
       "target": "src/contrib/RcppDate_0.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -889,7 +889,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rlang_1.0.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rlang_1.0.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rlang_1.0.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rlang/rlang_1.0.6.tar.gz"],
       "target": "src/contrib/rlang_1.0.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -920,7 +920,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.17"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rmarkdown_2.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rmarkdown_2.17.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rmarkdown_2.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rmarkdown/rmarkdown_2.17.tar.gz"],
       "target": "src/contrib/rmarkdown_2.17.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -951,7 +951,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/sass_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sass_0.4.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/sass_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sass/sass_0.4.2.tar.gz"],
       "target": "src/contrib/sass_0.4.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -982,7 +982,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.7.8"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/stringi_1.7.8.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/stringi_1.7.8.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/stringi_1.7.8.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/stringi/stringi_1.7.8.tar.gz"],
       "target": "src/contrib/stringi_1.7.8.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1013,7 +1013,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.4.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/stringr_1.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/stringr_1.4.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/stringr_1.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/stringr/stringr_1.4.1.tar.gz"],
       "target": "src/contrib/stringr_1.4.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1044,7 +1044,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.42"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/tinytex_0.42.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tinytex_0.42.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/tinytex_0.42.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tinytex/tinytex_0.42.tar.gz"],
       "target": "src/contrib/tinytex_0.42.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1075,7 +1075,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.33"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/xfun_0.33.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xfun_0.33.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/xfun_0.33.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xfun/xfun_0.33.tar.gz"],
       "target": "src/contrib/xfun_0.33.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1106,7 +1106,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.12.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/xts_0.12.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xts_0.12.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/xts_0.12.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xts/xts_0.12.1.tar.gz"],
       "target": "src/contrib/xts_0.12.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1137,7 +1137,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.3.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/yaml_2.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/yaml_2.3.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/yaml_2.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/yaml/yaml_2.3.5.tar.gz"],
       "target": "src/contrib/yaml_2.3.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1168,7 +1168,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.8-11"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/zoo_1.8-11.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/zoo_1.8-11.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/zoo_1.8-11.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/zoo/zoo_1.8-11.tar.gz"],
       "target": "src/contrib/zoo_1.8-11.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1199,7 +1199,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/askpass_1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/askpass_1.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/askpass_1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/askpass/askpass_1.1.tar.gz"],
       "target": "src/contrib/askpass_1.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1230,7 +1230,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/assertthat_0.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/assertthat_0.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/assertthat_0.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/assertthat/assertthat_0.2.1.tar.gz"],
       "target": "src/contrib/assertthat_0.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1261,7 +1261,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.4.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/backports_1.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/backports_1.4.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/backports_1.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/backports/backports_1.4.1.tar.gz"],
       "target": "src/contrib/backports_1.4.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1292,7 +1292,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.30.18"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/BiocManager_1.30.18.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/BiocManager_1.30.18.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/BiocManager_1.30.18.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/BiocManager/BiocManager_1.30.18.tar.gz"],
       "target": "src/contrib/BiocManager_1.30.18.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1323,7 +1323,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0-8"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/brew_1.0-8.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/brew_1.0-8.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/brew_1.0-8.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/brew/brew_1.0-8.tar.gz"],
       "target": "src/contrib/brew_1.0-8.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1354,7 +1354,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/brio_1.1.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/brio_1.1.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/brio_1.1.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/brio/brio_1.1.3.tar.gz"],
       "target": "src/contrib/brio_1.1.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1385,7 +1385,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.7.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/callr_3.7.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/callr_3.7.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/callr_3.7.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/callr/callr_3.7.2.tar.gz"],
       "target": "src/contrib/callr_3.7.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1416,7 +1416,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.4.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/cli_3.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cli_3.4.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/cli_3.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cli/cli_3.4.1.tar.gz"],
       "target": "src/contrib/cli_3.4.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1447,7 +1447,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.8.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/clipr_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/clipr_0.8.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/clipr_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/clipr/clipr_0.8.0.tar.gz"],
       "target": "src/contrib/clipr_0.8.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1478,7 +1478,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/clisymbols_1.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/clisymbols_1.2.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/clisymbols_1.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/clisymbols/clisymbols_1.2.0.tar.gz"],
       "target": "src/contrib/clisymbols_1.2.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1509,7 +1509,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.8.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/commonmark_1.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/commonmark_1.8.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/commonmark_1.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/commonmark/commonmark_1.8.0.tar.gz"],
       "target": "src/contrib/commonmark_1.8.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1540,7 +1540,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.6.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/covr_3.6.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/covr_3.6.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/covr_3.6.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/covr/covr_3.6.1.tar.gz"],
       "target": "src/contrib/covr_3.6.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1571,7 +1571,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/cpp11_0.4.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cpp11_0.4.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/cpp11_0.4.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cpp11/cpp11_0.4.3.tar.gz"],
       "target": "src/contrib/cpp11_0.4.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1602,7 +1602,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.5.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/crayon_1.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/crayon_1.5.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/crayon_1.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/crayon/crayon_1.5.2.tar.gz"],
       "target": "src/contrib/crayon_1.5.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1633,7 +1633,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/credentials_1.3.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/credentials_1.3.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/credentials_1.3.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/credentials/credentials_1.3.2.tar.gz"],
       "target": "src/contrib/credentials_1.3.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1664,7 +1664,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/crosstalk_1.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/crosstalk_1.2.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/crosstalk_1.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/crosstalk/crosstalk_1.2.0.tar.gz"],
       "target": "src/contrib/crosstalk_1.2.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1695,7 +1695,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/cyclocomp_1.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cyclocomp_1.1.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/cyclocomp_1.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/cyclocomp/cyclocomp_1.1.0.tar.gz"],
       "target": "src/contrib/cyclocomp_1.1.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1726,7 +1726,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.4.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/desc_1.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/desc_1.4.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/desc_1.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/desc/desc_1.4.2.tar.gz"],
       "target": "src/contrib/desc_1.4.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1757,7 +1757,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.4.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/devtools_2.4.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/devtools_2.4.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/devtools_2.4.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/devtools/devtools_2.4.5.tar.gz"],
       "target": "src/contrib/devtools_2.4.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1788,7 +1788,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/diffobj_0.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/diffobj_0.3.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/diffobj_0.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/diffobj/diffobj_0.3.5.tar.gz"],
       "target": "src/contrib/diffobj_0.3.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1819,7 +1819,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/downlit_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/downlit_0.4.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/downlit_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/downlit/downlit_0.4.2.tar.gz"],
       "target": "src/contrib/downlit_0.4.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1850,7 +1850,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.25"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/DT_0.25.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/DT_0.25.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/DT_0.25.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/DT/DT_0.25.tar.gz"],
       "target": "src/contrib/DT_0.25.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1881,7 +1881,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ellipsis_0.3.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ellipsis_0.3.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ellipsis_0.3.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ellipsis/ellipsis_0.3.2.tar.gz"],
       "target": "src/contrib/ellipsis_0.3.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1912,7 +1912,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/fansi_1.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fansi_1.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/fansi_1.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fansi/fansi_1.0.3.tar.gz"],
       "target": "src/contrib/fansi_1.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1943,7 +1943,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.4.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/foghorn_1.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/foghorn_1.4.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/foghorn_1.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/foghorn/foghorn_1.4.2.tar.gz"],
       "target": "src/contrib/foghorn_1.4.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -1974,7 +1974,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/fontawesome_0.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontawesome_0.3.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/fontawesome_0.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontawesome/fontawesome_0.3.0.tar.gz"],
       "target": "src/contrib/fontawesome_0.3.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2005,7 +2005,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gargle_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gargle_1.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gargle_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gargle/gargle_1.2.1.tar.gz"],
       "target": "src/contrib/gargle_1.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2036,7 +2036,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.9.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gert_1.9.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gert_1.9.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gert_1.9.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gert/gert_1.9.1.tar.gz"],
       "target": "src/contrib/gert_1.9.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2067,7 +2067,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gh_1.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gh_1.3.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gh_1.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gh/gh_1.3.1.tar.gz"],
       "target": "src/contrib/gh_1.3.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2098,7 +2098,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gitcreds_0.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gitcreds_0.1.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gitcreds_0.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gitcreds/gitcreds_0.1.2.tar.gz"],
       "target": "src/contrib/gitcreds_0.1.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2129,7 +2129,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gmailr_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gmailr_1.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gmailr_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gmailr/gmailr_1.0.1.tar.gz"],
       "target": "src/contrib/gmailr_1.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2160,7 +2160,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.5.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/htmlwidgets_1.5.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/htmlwidgets_1.5.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/htmlwidgets_1.5.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/htmlwidgets/htmlwidgets_1.5.4.tar.gz"],
       "target": "src/contrib/htmlwidgets_1.5.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2191,7 +2191,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.6.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/httpuv_1.6.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/httpuv_1.6.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/httpuv_1.6.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/httpuv/httpuv_1.6.6.tar.gz"],
       "target": "src/contrib/httpuv_1.6.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2222,7 +2222,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.4.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/httr_1.4.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/httr_1.4.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/httr_1.4.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/httr/httr_1.4.4.tar.gz"],
       "target": "src/contrib/httr_1.4.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2253,7 +2253,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.0.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/hunspell_3.0.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/hunspell_3.0.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/hunspell_3.0.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/hunspell/hunspell_3.0.2.tar.gz"],
       "target": "src/contrib/hunspell_3.0.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2284,7 +2284,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ini_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ini_0.3.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ini_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ini/ini_0.3.1.tar.gz"],
       "target": "src/contrib/ini_0.3.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2315,7 +2315,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/later_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/later_1.3.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/later_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/later/later_1.3.0.tar.gz"],
       "target": "src/contrib/later_1.3.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2346,7 +2346,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.2.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/lazyeval_0.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lazyeval_0.2.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/lazyeval_0.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lazyeval/lazyeval_0.2.2.tar.gz"],
       "target": "src/contrib/lazyeval_0.2.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2377,7 +2377,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/lifecycle_1.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lifecycle_1.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/lifecycle_1.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lifecycle/lifecycle_1.0.3.tar.gz"],
       "target": "src/contrib/lifecycle_1.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2408,7 +2408,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/lintr_3.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lintr_3.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/lintr_3.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lintr/lintr_3.0.1.tar.gz"],
       "target": "src/contrib/lintr_3.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2439,7 +2439,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "7.3-58.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/MASS_7.3-58.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/MASS_7.3-58.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/MASS_7.3-58.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/MASS/MASS_7.3-58.1.tar.gz"],
       "target": "src/contrib/MASS_7.3-58.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2470,7 +2470,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.12"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/mime_0.12.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/mime_0.12.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/mime_0.12.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/mime/mime_0.12.tar.gz"],
       "target": "src/contrib/mime_0.12.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2501,7 +2501,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.1.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/miniUI_0.1.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/miniUI_0.1.1.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/miniUI_0.1.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/miniUI/miniUI_0.1.1.1.tar.gz"],
       "target": "src/contrib/miniUI_0.1.1.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2532,7 +2532,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/mockery_0.4.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/mockery_0.4.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/mockery_0.4.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/mockery/mockery_0.4.3.tar.gz"],
       "target": "src/contrib/mockery_0.4.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2563,7 +2563,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/openssl_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/openssl_2.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/openssl_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/openssl/openssl_2.0.3.tar.gz"],
       "target": "src/contrib/openssl_2.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2594,7 +2594,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/parsedate_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parsedate_1.3.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/parsedate_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parsedate/parsedate_1.3.0.tar.gz"],
       "target": "src/contrib/parsedate_1.3.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2625,7 +2625,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.8.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/pillar_1.8.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pillar_1.8.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/pillar_1.8.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pillar/pillar_1.8.1.tar.gz"],
       "target": "src/contrib/pillar_1.8.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2656,7 +2656,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/pingr_2.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pingr_2.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/pingr_2.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pingr/pingr_2.0.1.tar.gz"],
       "target": "src/contrib/pingr_2.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2687,7 +2687,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/pkgbuild_1.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgbuild_1.3.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/pkgbuild_1.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgbuild/pkgbuild_1.3.1.tar.gz"],
       "target": "src/contrib/pkgbuild_1.3.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2718,7 +2718,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/pkgconfig_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgconfig_2.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/pkgconfig_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgconfig/pkgconfig_2.0.3.tar.gz"],
       "target": "src/contrib/pkgconfig_2.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2749,7 +2749,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/pkgdown_2.0.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgdown_2.0.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/pkgdown_2.0.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgdown/pkgdown_2.0.6.tar.gz"],
       "target": "src/contrib/pkgdown_2.0.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2780,7 +2780,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/pkgload_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgload_1.3.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/pkgload_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/pkgload/pkgload_1.3.0.tar.gz"],
       "target": "src/contrib/pkgload_1.3.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2811,7 +2811,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/praise_1.0.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/praise_1.0.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/praise_1.0.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/praise/praise_1.0.0.tar.gz"],
       "target": "src/contrib/praise_1.0.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2842,7 +2842,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/prettyunits_1.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/prettyunits_1.1.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/prettyunits_1.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/prettyunits/prettyunits_1.1.1.tar.gz"],
       "target": "src/contrib/prettyunits_1.1.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2873,7 +2873,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.7.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/processx_3.7.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/processx_3.7.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/processx_3.7.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/processx/processx_3.7.0.tar.gz"],
       "target": "src/contrib/processx_3.7.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2904,7 +2904,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.7"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/profvis_0.3.7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/profvis_0.3.7.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/profvis_0.3.7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/profvis/profvis_0.3.7.tar.gz"],
       "target": "src/contrib/profvis_0.3.7.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2935,7 +2935,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/promises_1.2.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/promises_1.2.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/promises_1.2.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/promises/promises_1.2.0.1.tar.gz"],
       "target": "src/contrib/promises_1.2.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2966,7 +2966,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.7.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ps_1.7.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ps_1.7.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ps_1.7.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ps/ps_1.7.1.tar.gz"],
       "target": "src/contrib/ps_1.7.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -2997,7 +2997,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/purrr_0.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/purrr_0.3.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/purrr_0.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/purrr/purrr_0.3.5.tar.gz"],
       "target": "src/contrib/purrr_0.3.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3028,7 +3028,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.4.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rcmdcheck_1.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rcmdcheck_1.4.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rcmdcheck_1.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rcmdcheck/rcmdcheck_1.4.0.tar.gz"],
       "target": "src/contrib/rcmdcheck_1.4.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3059,7 +3059,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rematch_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rematch_1.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rematch_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rematch/rematch_1.0.1.tar.gz"],
       "target": "src/contrib/rematch_1.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3090,7 +3090,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.1.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rematch2_2.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rematch2_2.1.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rematch2_2.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rematch2/rematch2_2.1.2.tar.gz"],
       "target": "src/contrib/rematch2_2.1.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3121,7 +3121,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.4.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/remotes_2.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/remotes_2.4.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/remotes_2.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/remotes/remotes_2.4.2.tar.gz"],
       "target": "src/contrib/remotes_2.4.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3152,7 +3152,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rex_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rex_1.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rex_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rex/rex_1.2.1.tar.gz"],
       "target": "src/contrib/rex_1.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3183,7 +3183,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rhub_1.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rhub_1.1.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rhub_1.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rhub/rhub_1.1.2.tar.gz"],
       "target": "src/contrib/rhub_1.1.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3214,7 +3214,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "7.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/roxygen2_7.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/roxygen2_7.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/roxygen2_7.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/roxygen2/roxygen2_7.2.1.tar.gz"],
       "target": "src/contrib/roxygen2_7.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3245,7 +3245,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rprojroot_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rprojroot_2.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rprojroot_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rprojroot/rprojroot_2.0.3.tar.gz"],
       "target": "src/contrib/rprojroot_2.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3276,7 +3276,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.14"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rstudioapi_0.14.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rstudioapi_0.14.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rstudioapi_0.14.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rstudioapi/rstudioapi_0.14.tar.gz"],
       "target": "src/contrib/rstudioapi_0.14.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3307,7 +3307,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.1.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rversions_2.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rversions_2.1.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rversions_2.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rversions/rversions_2.1.2.tar.gz"],
       "target": "src/contrib/rversions_2.1.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3338,7 +3338,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/rvest_1.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rvest_1.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/rvest_1.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/rvest/rvest_1.0.3.tar.gz"],
       "target": "src/contrib/rvest_1.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3369,7 +3369,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4-2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/selectr_0.4-2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/selectr_0.4-2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/selectr_0.4-2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/selectr/selectr_0.4-2.tar.gz"],
       "target": "src/contrib/selectr_0.4-2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3400,7 +3400,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/sessioninfo_1.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sessioninfo_1.2.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/sessioninfo_1.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sessioninfo/sessioninfo_1.2.2.tar.gz"],
       "target": "src/contrib/sessioninfo_1.2.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3431,7 +3431,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.7.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/shiny_1.7.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/shiny_1.7.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/shiny_1.7.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/shiny/shiny_1.7.2.tar.gz"],
       "target": "src/contrib/shiny_1.7.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3462,7 +3462,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.7"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/sourcetools_0.1.7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sourcetools_0.1.7.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/sourcetools_0.1.7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sourcetools/sourcetools_0.1.7.tar.gz"],
       "target": "src/contrib/sourcetools_0.1.7.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3493,7 +3493,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/spelling_2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/spelling_2.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/spelling_2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/spelling/spelling_2.2.tar.gz"],
       "target": "src/contrib/spelling_2.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3524,7 +3524,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/sys_3.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sys_3.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/sys_3.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/sys/sys_3.4.tar.gz"],
       "target": "src/contrib/sys_3.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3555,7 +3555,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/systemfonts_1.0.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/systemfonts_1.0.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/systemfonts_1.0.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/systemfonts/systemfonts_1.0.4.tar.gz"],
       "target": "src/contrib/systemfonts_1.0.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3586,7 +3586,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.1.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/testthat_3.1.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/testthat_3.1.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/testthat_3.1.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/testthat/testthat_3.1.5.tar.gz"],
       "target": "src/contrib/testthat_3.1.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3617,7 +3617,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/textshaping_0.3.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/textshaping_0.3.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/textshaping_0.3.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/textshaping/textshaping_0.3.6.tar.gz"],
       "target": "src/contrib/textshaping_0.3.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3648,7 +3648,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.1.8"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/tibble_3.1.8.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tibble_3.1.8.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/tibble_3.1.8.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tibble/tibble_3.1.8.tar.gz"],
       "target": "src/contrib/tibble_3.1.8.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3679,7 +3679,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/urlchecker_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/urlchecker_1.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/urlchecker_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/urlchecker/urlchecker_1.0.1.tar.gz"],
       "target": "src/contrib/urlchecker_1.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3710,7 +3710,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.1.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/usethis_2.1.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/usethis_2.1.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/usethis_2.1.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/usethis/usethis_2.1.6.tar.gz"],
       "target": "src/contrib/usethis_2.1.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3741,7 +3741,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/utf8_1.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/utf8_1.2.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/utf8_1.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/utf8/utf8_1.2.2.tar.gz"],
       "target": "src/contrib/utf8_1.2.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3772,7 +3772,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1-0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/uuid_1.1-0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/uuid_1.1-0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/uuid_1.1-0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/uuid/uuid_1.1-0.tar.gz"],
       "target": "src/contrib/uuid_1.1-0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3803,7 +3803,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/vctrs_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/vctrs_0.4.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/vctrs_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/vctrs/vctrs_0.4.2.tar.gz"],
       "target": "src/contrib/vctrs_0.4.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3834,7 +3834,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/waldo_0.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/waldo_0.4.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/waldo_0.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/waldo/waldo_0.4.0.tar.gz"],
       "target": "src/contrib/waldo_0.4.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3865,7 +3865,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/whisker_0.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/whisker_0.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/whisker_0.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/whisker/whisker_0.4.tar.gz"],
       "target": "src/contrib/whisker_0.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3896,7 +3896,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/whoami_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/whoami_1.3.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/whoami_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/whoami/whoami_1.3.0.tar.gz"],
       "target": "src/contrib/whoami_1.3.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3927,7 +3927,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.5.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/withr_2.5.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/withr_2.5.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/withr_2.5.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/withr/withr_2.5.0.tar.gz"],
       "target": "src/contrib/withr_2.5.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3958,7 +3958,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/xml2_1.3.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xml2_1.3.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/xml2_1.3.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xml2/xml2_1.3.3.tar.gz"],
       "target": "src/contrib/xml2_1.3.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -3989,7 +3989,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/xmlparsedata_1.0.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xmlparsedata_1.0.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/xmlparsedata_1.0.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xmlparsedata/xmlparsedata_1.0.5.tar.gz"],
       "target": "src/contrib/xmlparsedata_1.0.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4020,7 +4020,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/xopen_1.0.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xopen_1.0.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/xopen_1.0.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xopen/xopen_1.0.0.tar.gz"],
       "target": "src/contrib/xopen_1.0.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4051,7 +4051,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.8-4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/xtable_1.8-4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xtable_1.8-4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/xtable_1.8-4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/xtable/xtable_1.8-4.tar.gz"],
       "target": "src/contrib/xtable_1.8-4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4082,7 +4082,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/zip_2.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/zip_2.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/zip_2.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/zip/zip_2.2.1.tar.gz"],
       "target": "src/contrib/zip_2.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4113,7 +4113,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/collections_0.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/collections_0.3.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/collections_0.3.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/collections/collections_0.3.5.tar.gz"],
       "target": "src/contrib/collections_0.3.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4144,7 +4144,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.13"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/languageserver_0.3.13.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/languageserver_0.3.13.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/languageserver_0.3.13.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/languageserver/languageserver_0.3.13.tar.gz"],
       "target": "src/contrib/languageserver_0.3.13.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4175,7 +4175,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.16.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/R.cache_0.16.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.cache_0.16.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/R.cache_0.16.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/R.cache/R.cache_0.16.0.tar.gz"],
       "target": "src/contrib/R.cache_0.16.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4206,7 +4206,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.7.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/styler_1.7.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/styler_1.7.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/styler_1.7.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/styler/styler_1.7.0.tar.gz"],
       "target": "src/contrib/styler_1.7.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4237,7 +4237,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.78.0-0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/BH_1.78.0-0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/BH_1.78.0-0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/BH_1.78.0-0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/BH/BH_1.78.0-0.tar.gz"],
       "target": "src/contrib/BH_1.78.0-0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4268,7 +4268,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/fontBitstreamVera_0.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontBitstreamVera_0.1.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/fontBitstreamVera_0.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontBitstreamVera/fontBitstreamVera_0.1.1.tar.gz"],
       "target": "src/contrib/fontBitstreamVera_0.1.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4299,7 +4299,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/fontLiberation_0.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontLiberation_0.1.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/fontLiberation_0.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontLiberation/fontLiberation_0.1.0.tar.gz"],
       "target": "src/contrib/fontLiberation_0.1.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4330,7 +4330,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/fontquiver_0.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontquiver_0.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/fontquiver_0.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/fontquiver/fontquiver_0.2.1.tar.gz"],
       "target": "src/contrib/fontquiver_0.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4361,7 +4361,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.3.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/httpgd_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/httpgd_1.3.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/httpgd_1.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/httpgd/httpgd_1.3.0.tar.gz"],
       "target": "src/contrib/httpgd_1.3.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4392,7 +4392,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.1.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/svglite_2.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/svglite_2.1.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/svglite_2.1.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/svglite/svglite_2.1.0.tar.gz"],
       "target": "src/contrib/svglite_2.1.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4423,7 +4423,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ragg_1.2.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ragg_1.2.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ragg_1.2.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ragg/ragg_1.2.3.tar.gz"],
       "target": "src/contrib/ragg_1.2.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4454,7 +4454,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.13.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/bayestestR_0.13.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bayestestR_0.13.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/bayestestR_0.13.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bayestestR/bayestestR_0.13.0.tar.gz"],
       "target": "src/contrib/bayestestR_0.13.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4485,7 +4485,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/beeswarm_0.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/beeswarm_0.4.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/beeswarm_0.4.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/beeswarm/beeswarm_0.4.0.tar.gz"],
       "target": "src/contrib/beeswarm_0.4.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4516,7 +4516,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0-7"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/bitops_1.0-7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bitops_1.0-7.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/bitops_1.0-7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/bitops/bitops_1.0-7.tar.gz"],
       "target": "src/contrib/bitops_1.0-7.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4547,7 +4547,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/broom_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/broom_1.0.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/broom_1.0.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/broom/broom_1.0.1.tar.gz"],
       "target": "src/contrib/broom_1.0.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4578,7 +4578,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.2.9.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/broom.mixed_0.2.9.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/broom.mixed_0.2.9.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/broom.mixed_0.2.9.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/broom.mixed/broom.mixed_0.2.9.4.tar.gz"],
       "target": "src/contrib/broom.mixed_0.2.9.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4609,7 +4609,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.19-4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/coda_0.19-4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/coda_0.19-4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/coda_0.19-4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/coda/coda_0.19-4.tar.gz"],
       "target": "src/contrib/coda_0.19-4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4640,7 +4640,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0-3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/colorspace_2.0-3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/colorspace_2.0-3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/colorspace_2.0-3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/colorspace/colorspace_2.0-3.tar.gz"],
       "target": "src/contrib/colorspace_2.0-3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4671,7 +4671,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.6.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/datawizard_0.6.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/datawizard_0.6.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/datawizard_0.6.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/datawizard/datawizard_0.6.2.tar.gz"],
       "target": "src/contrib/datawizard_0.6.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4702,7 +4702,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0-11"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/DEoptimR_1.0-11.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/DEoptimR_1.0-11.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/DEoptimR_1.0-11.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/DEoptimR/DEoptimR_1.0-11.tar.gz"],
       "target": "src/contrib/DEoptimR_1.0-11.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4733,7 +4733,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/distributional_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/distributional_0.3.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/distributional_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/distributional/distributional_0.3.1.tar.gz"],
       "target": "src/contrib/distributional_0.3.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4764,7 +4764,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.17"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/doParallel_1.0.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/doParallel_1.0.17.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/doParallel_1.0.17.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/doParallel/doParallel_1.0.17.tar.gz"],
       "target": "src/contrib/doParallel_1.0.17.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4795,7 +4795,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.10"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/dplyr_1.0.10.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/dplyr_1.0.10.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/dplyr_1.0.10.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/dplyr/dplyr_1.0.10.tar.gz"],
       "target": "src/contrib/dplyr_1.0.10.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4826,7 +4826,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.8.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/effectsize_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/effectsize_0.8.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/effectsize_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/effectsize/effectsize_0.8.0.tar.gz"],
       "target": "src/contrib/effectsize_0.8.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4857,7 +4857,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.1.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/farver_2.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/farver_2.1.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/farver_2.1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/farver/farver_2.1.1.tar.gz"],
       "target": "src/contrib/farver_2.1.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4888,7 +4888,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.5.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/forcats_0.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/forcats_0.5.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/forcats_0.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/forcats/forcats_0.5.2.tar.gz"],
       "target": "src/contrib/forcats_0.5.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4919,7 +4919,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.5.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/foreach_1.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/foreach_1.5.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/foreach_1.5.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/foreach/foreach_1.5.2.tar.gz"],
       "target": "src/contrib/foreach_1.5.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4950,7 +4950,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/furrr_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/furrr_0.3.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/furrr_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/furrr/furrr_0.3.1.tar.gz"],
       "target": "src/contrib/furrr_0.3.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -4981,7 +4981,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.28.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/future_1.28.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future_1.28.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/future_1.28.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future/future_1.28.0.tar.gz"],
       "target": "src/contrib/future_1.28.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5012,7 +5012,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.9.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/future.apply_1.9.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future.apply_1.9.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/future.apply_1.9.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future.apply/future.apply_1.9.1.tar.gz"],
       "target": "src/contrib/future.apply_1.9.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5043,7 +5043,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.8.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/future.callr_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future.callr_0.8.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/future.callr_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/future.callr/future.callr_0.8.0.tar.gz"],
       "target": "src/contrib/future.callr_0.8.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5074,7 +5074,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/generics_0.1.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/generics_0.1.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/generics_0.1.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/generics/generics_0.1.3.tar.gz"],
       "target": "src/contrib/generics_0.1.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5105,7 +5105,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.6.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ggbeeswarm_0.6.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggbeeswarm_0.6.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ggbeeswarm_0.6.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggbeeswarm/ggbeeswarm_0.6.0.tar.gz"],
       "target": "src/contrib/ggbeeswarm_0.6.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5136,7 +5136,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.2.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ggdist_3.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggdist_3.2.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ggdist_3.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggdist/ggdist_3.2.0.tar.gz"],
       "target": "src/contrib/ggdist_3.2.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5167,7 +5167,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.3.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ggplot2_3.3.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggplot2_3.3.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ggplot2_3.3.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.3.6.tar.gz"],
       "target": "src/contrib/ggplot2_3.3.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5198,7 +5198,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/ggtext_0.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggtext_0.1.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/ggtext_0.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/ggtext/ggtext_0.1.2.tar.gz"],
       "target": "src/contrib/ggtext_0.1.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5229,7 +5229,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.16.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/globals_0.16.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/globals_0.16.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/globals_0.16.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/globals/globals_0.16.1.tar.gz"],
       "target": "src/contrib/globals_0.16.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5260,7 +5260,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gridtext_0.1.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gridtext_0.1.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gridtext_0.1.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gridtext/gridtext_0.1.5.tar.gz"],
       "target": "src/contrib/gridtext_0.1.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5291,7 +5291,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/growthcleanr_2.0.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/growthcleanr_2.0.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/growthcleanr_2.0.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/growthcleanr/growthcleanr_2.0.2.tar.gz"],
       "target": "src/contrib/growthcleanr_2.0.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5322,7 +5322,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.7.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gt_0.7.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gt_0.7.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gt_0.7.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gt/gt_0.7.0.tar.gz"],
       "target": "src/contrib/gt_0.7.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5353,7 +5353,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/gtable_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gtable_0.3.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/gtable_0.3.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/gtable/gtable_0.3.1.tar.gz"],
       "target": "src/contrib/gtable_0.3.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5384,7 +5384,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.5.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/haven_2.5.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/haven_2.5.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/haven_2.5.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/haven/haven_2.5.1.tar.gz"],
       "target": "src/contrib/haven_2.5.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5415,7 +5415,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.2.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/HDInterval_0.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/HDInterval_0.2.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/HDInterval_0.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/HDInterval/HDInterval_0.2.2.tar.gz"],
       "target": "src/contrib/HDInterval_0.2.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5446,7 +5446,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/hms_1.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/hms_1.1.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/hms_1.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/hms/hms_1.1.2.tar.gz"],
       "target": "src/contrib/hms_1.1.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5477,7 +5477,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.18.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/insight_0.18.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/insight_0.18.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/insight_0.18.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/insight/insight_0.18.5.tar.gz"],
       "target": "src/contrib/insight_0.18.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5508,7 +5508,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.2.6"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/isoband_0.2.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/isoband_0.2.6.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/isoband_0.2.6.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/isoband/isoband_0.2.6.tar.gz"],
       "target": "src/contrib/isoband_0.2.6.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5539,7 +5539,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.0.14"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/iterators_1.0.14.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/iterators_1.0.14.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/iterators_1.0.14.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/iterators/iterators_1.0.14.tar.gz"],
       "target": "src/contrib/iterators_1.0.14.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5570,7 +5570,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1-9"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/jpeg_0.1-9.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/jpeg_0.1-9.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/jpeg_0.1-9.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/jpeg/jpeg_0.1-9.tar.gz"],
       "target": "src/contrib/jpeg_0.1-9.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5601,7 +5601,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/labeling_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/labeling_0.4.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/labeling_0.4.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/labeling/labeling_0.4.2.tar.gz"],
       "target": "src/contrib/labeling_0.4.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5632,7 +5632,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.10.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/labelled_2.10.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/labelled_2.10.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/labelled_2.10.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/labelled/labelled_2.10.0.tar.gz"],
       "target": "src/contrib/labelled_2.10.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5663,7 +5663,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.8.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/listenv_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/listenv_0.8.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/listenv_0.8.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/listenv/listenv_0.8.0.tar.gz"],
       "target": "src/contrib/listenv_0.8.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5694,7 +5694,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1-30"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/lme4_1.1-30.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lme4_1.1-30.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/lme4_1.1-30.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/lme4/lme4_1.1-30.tar.gz"],
       "target": "src/contrib/lme4_1.1-30.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5725,7 +5725,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/markdown_1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/markdown_1.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/markdown_1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/markdown/markdown_1.1.tar.gz"],
       "target": "src/contrib/markdown_1.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5756,7 +5756,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.5-1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/Matrix_1.5-1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/Matrix_1.5-1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/Matrix_1.5-1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/Matrix/Matrix_1.5-1.tar.gz"],
       "target": "src/contrib/Matrix_1.5-1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5787,7 +5787,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.4"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/minqa_1.2.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/minqa_1.2.4.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/minqa_1.2.4.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/minqa/minqa_1.2.4.tar.gz"],
       "target": "src/contrib/minqa_1.2.4.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5818,7 +5818,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.5.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/munsell_0.5.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/munsell_0.5.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/munsell_0.5.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/munsell/munsell_0.5.0.tar.gz"],
       "target": "src/contrib/munsell_0.5.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5849,7 +5849,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "3.1-160"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/nlme_3.1-160.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nlme_3.1-160.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/nlme_3.1-160.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nlme/nlme_3.1-160.tar.gz"],
       "target": "src/contrib/nlme_3.1-160.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5880,7 +5880,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.0.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/nloptr_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nloptr_2.0.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/nloptr_2.0.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/nloptr/nloptr_2.0.3.tar.gz"],
       "target": "src/contrib/nloptr_2.0.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5911,7 +5911,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2016.8-1.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/numDeriv_2016.8-1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/numDeriv_2016.8-1.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/numDeriv_2016.8-1.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/numDeriv/numDeriv_2016.8-1.1.tar.gz"],
       "target": "src/contrib/numDeriv_2016.8-1.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5942,7 +5942,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.32.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/parallelly_1.32.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parallelly_1.32.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/parallelly_1.32.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parallelly/parallelly_1.32.1.tar.gz"],
       "target": "src/contrib/parallelly_1.32.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -5973,7 +5973,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.19.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/parameters_0.19.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parameters_0.19.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/parameters_0.19.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/parameters/parameters_0.19.0.tar.gz"],
       "target": "src/contrib/parameters_0.19.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6004,7 +6004,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/patchwork_1.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/patchwork_1.1.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/patchwork_1.1.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/patchwork/patchwork_1.1.2.tar.gz"],
       "target": "src/contrib/patchwork_1.1.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6035,7 +6035,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.10.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/performance_0.10.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/performance_0.10.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/performance_0.10.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/performance/performance_0.10.0.tar.gz"],
       "target": "src/contrib/performance_0.10.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6066,7 +6066,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.8.7"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/plyr_1.8.7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/plyr_1.8.7.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/plyr_1.8.7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/plyr/plyr_1.8.7.tar.gz"],
       "target": "src/contrib/plyr_1.8.7.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6097,7 +6097,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.1-7"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/png_0.1-7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/png_0.1-7.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/png_0.1-7.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/png/png_0.1-7.tar.gz"],
       "target": "src/contrib/png_0.1-7.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6128,7 +6128,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/progress_1.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/progress_1.2.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/progress_1.2.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/progress/progress_1.2.2.tar.gz"],
       "target": "src/contrib/progress_1.2.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6159,7 +6159,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.0.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/qqplotr_0.0.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/qqplotr_0.0.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/qqplotr_0.0.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/qqplotr/qqplotr_0.0.5.tar.gz"],
       "target": "src/contrib/qqplotr_0.0.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6190,7 +6190,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.1-3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/RColorBrewer_1.1-3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RColorBrewer_1.1-3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/RColorBrewer_1.1-3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RColorBrewer/RColorBrewer_1.1-3.tar.gz"],
       "target": "src/contrib/RColorBrewer_1.1-3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6221,7 +6221,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.3.9.2"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/RcppEigen_0.3.3.9.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RcppEigen_0.3.3.9.2.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/RcppEigen_0.3.3.9.2.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/RcppEigen/RcppEigen_0.3.3.9.2.tar.gz"],
       "target": "src/contrib/RcppEigen_0.3.3.9.2.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6252,7 +6252,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "2.1.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/readr_2.1.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/readr_2.1.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/readr_2.1.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/readr/readr_2.1.3.tar.gz"],
       "target": "src/contrib/readr_2.1.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6283,7 +6283,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.95-0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/robustbase_0.95-0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/robustbase_0.95-0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/robustbase_0.95-0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/robustbase/robustbase_0.95-0.tar.gz"],
       "target": "src/contrib/robustbase_0.95-0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6314,7 +6314,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/scales_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/scales_1.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/scales_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/scales/scales_1.2.1.tar.gz"],
       "target": "src/contrib/scales_1.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6345,7 +6345,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.7.3"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/see_0.7.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/see_0.7.3.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/see_0.7.3.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/see/see_0.7.3.tar.gz"],
       "target": "src/contrib/see_0.7.3.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6376,7 +6376,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/tidyr_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tidyr_1.2.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/tidyr_1.2.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tidyr/tidyr_1.2.1.tar.gz"],
       "target": "src/contrib/tidyr_1.2.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6407,7 +6407,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.2.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/tidyselect_1.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tidyselect_1.2.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/tidyselect_1.2.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tidyselect/tidyselect_1.2.0.tar.gz"],
       "target": "src/contrib/tidyselect_1.2.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6438,7 +6438,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.3.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/tzdb_0.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tzdb_0.3.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/tzdb_0.3.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/tzdb/tzdb_0.3.0.tar.gz"],
       "target": "src/contrib/tzdb_0.3.0.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6469,7 +6469,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.5"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/vipor_0.4.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/vipor_0.4.5.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/vipor_0.4.5.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/vipor/vipor_0.4.5.tar.gz"],
       "target": "src/contrib/vipor_0.4.5.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6500,7 +6500,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "0.4.1"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/viridisLite_0.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/viridisLite_0.4.1.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/viridisLite_0.4.1.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/viridisLite/viridisLite_0.4.1.tar.gz"],
       "target": "src/contrib/viridisLite_0.4.1.tar.gz",
       "platform": "source",
       "rversion": "*",
@@ -6531,7 +6531,7 @@
         "RemotePkgPlatform": "source",
         "RemoteSha": "1.6.0"
       },
-      "sources": ["https://cloud.r-project.org/src/contrib/vroom_1.6.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/vroom_1.6.0.tar.gz"],
+      "sources": ["https://cloud.r-project.org/src/contrib/vroom_1.6.0.tar.gz", "https://cloud.r-project.org/src/contrib/Archive/vroom/vroom_1.6.0.tar.gz"],
       "target": "src/contrib/vroom_1.6.0.tar.gz",
       "platform": "source",
       "rversion": "*",
