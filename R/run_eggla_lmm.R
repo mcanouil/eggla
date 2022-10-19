@@ -29,7 +29,7 @@
 #'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
 #'   Argument pass through `compute_apar()` (see `predict_bmi()`).
 #'   Default is `NULL`.
-#' @param outlier_method The outlier detection method(s). Can be `"all"` or some of
+#' @param outlier_method The outlier detection method(s). Default is `"iqr"`. Can be `"all"` or some of
 #'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
 #'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
 #'   `"optics"` or `"lof"`.
