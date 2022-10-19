@@ -66,7 +66,7 @@ i.e., CAR(1) as correlation structure.}
 Argument pass through \code{compute_apar()} (see \code{predict_bmi()}).
 Default is \code{NULL}.}
 
-\item{outlier_method}{The outlier detection method(s). Can be \code{"all"} or some of
+\item{outlier_method}{The outlier detection method(s). Default is \code{"iqr"}. Can be \code{"all"} or some of
 \code{"cook"}, \code{"pareto"}, \code{"zscore"}, \code{"zscore_robust"}, \code{"iqr"}, \code{"ci"}, \code{"eti"},
 \code{"hdi"}, \code{"bci"}, \code{"mahalanobis"}, \code{"mahalanobis_robust"}, \code{"mcd"}, \code{"ics"},
 \code{"optics"} or \code{"lof"}.

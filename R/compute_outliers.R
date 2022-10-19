@@ -14,7 +14,7 @@
 #' @inheritParams predict_bmi
 #' @param from A string indicating the type of data to be used for the AP and AR
 #'   computation, either "predicted" or "observed". Default is "predicted".
-#' @param outlier_method The outlier detection method(s). Can be `"all"` or some of
+#' @param outlier_method The outlier detection method(s). Default is `"iqr"`. Can be `"all"` or some of
 #'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
 #'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
 #'   `"optics"` or `"lof"`.
