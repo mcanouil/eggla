@@ -22,6 +22,8 @@
 - In `pkgdown/_pkgdown.yml`,
   - style: separate the `run_eggl_*()` functions from the rest.
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.16.0...v0.17.0
+
 # eggla 0.16.0
 
 ## Features
