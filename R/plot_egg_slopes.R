@@ -97,33 +97,24 @@ plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), 
       inherit.aes = FALSE
     ) +
     (
-      if (data.table::uniqueN(fit[["groups"]]) > 500) {
+      if (data.table::uniqueN(fit[["groups"]]) < 500) {
         list(
-           ggplot2::stat_smooth(
-            method = "gam",
-            linetype = 2,
-            colour = "#b22222",
-            se = FALSE
-          )
-        )
-      } else {
-        list(
-          ggplot2::geom_path(# Comment or remove this for big cohort
+          ggplot2::geom_path(
             mapping = ggplot2::aes(group = factor(.data[[id_var]])),
             colour = "#333333",
             na.rm = TRUE,
             alpha = 0.05,
             show.legend = FALSE
-          ),
-          ggplot2::stat_smooth(
-            method = "gam",
-            formula = y ~ s(x, bs = "cr"),
-            linetype = 2,
-            colour = "#b22222",
-            se = FALSE
           )
         )
       }
+    ) +
+    ggplot2::stat_smooth(
+      method = "gam",
+      formula = y ~ s(x, bs = "cr"),
+      linetype = 2,
+      colour = "#b22222",
+      se = FALSE
     ) +
     ggplot2::scale_x_sqrt(
       expand = c(0, 0),
