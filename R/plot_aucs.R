@@ -96,7 +96,7 @@ plot_aucs <- function(
     ][
       j = period_interval := sprintf(
         "<b><i style='color: %s'>%s</i></b>",
-        okabe_ito_palette[period_interval],
+        okabe_ito_palette[c(1, 3, 5, 7, 2, 4, 6, 8)][period_interval],
         period_interval
       )
     ][
@@ -112,8 +112,8 @@ plot_aucs <- function(
       width = 0.25,
       outlier.colour = NA
     ) +
-    ggplot2::scale_colour_manual(values = okabe_ito_palette) +
-    ggplot2::scale_fill_manual(values = okabe_ito_palette) +
+    ggplot2::scale_colour_manual(values = okabe_ito_palette[c(1, 3, 5, 7, 2, 4, 6, 8)]) +
+    ggplot2::scale_fill_manual(values = okabe_ito_palette[c(1, 3, 5, 7, 2, 4, 6, 8)]) +
     ggplot2::labs(
       x = "Period Interval (years)",
       y = "Area Under The Curve (AUC)",
