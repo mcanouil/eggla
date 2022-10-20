@@ -14,22 +14,13 @@
 #' @examples
 #' library(ggplot2)
 #' library(patchwork)
+#' library(eggla)
 #' data("bmigrowth")
 #' res <- egg_model(
 #'   formula = log(bmi) ~ age,
 #'   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
 #'   id_var = "ID",
 #'   random_complexity = 1
-#' )
-#' theme_set(
-#'   theme_minimal() +
-#'   theme(
-#'     axis.line = element_line(colour = "grey20", size = rel(1)),
-#'     axis.ticks = element_line(colour = "grey20"),
-#'     panel.grid.minor.x = element_blank(),
-#'     panel.grid.minor.y = element_blank(),
-#'     panel.grid.major.x = element_blank()
-#'   )
 #' )
 #' plot_residuals(
 #'   x = "age",

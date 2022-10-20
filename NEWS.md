@@ -1,3 +1,9 @@
+# eggla (development version)
+
+## Style
+
+- style: set default `ggplot2` theme to a modified version of `theme_minimal()` and colour/fill scales to "viridis".
+
 # eggla 0.17.0
 
 ## Features

@@ -48,28 +48,14 @@ message(sprintf("Number of workers: %d", nbrOfWorkers()))
 ```
 
 ```{r ggplot-setup}
-options(
-  ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 0.15, end = 0.85),
-  ggplot2.discrete.fill = function(...) scale_fill_viridis_d(..., begin = 0.15, end = 0.85),
-  ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 0.15, end = 0.85),
-  ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 0.15, end = 0.85)
-)
-theme_set(theme_minimal())
 theme_update(
-  plot.title.position = "plot",
-  plot.caption.position = "plot",
   plot.title = element_markdown(),
   plot.subtitle = element_markdown(face = "italic"),
   plot.caption = element_markdown(face = "italic"),
   axis.title.x = element_markdown(),
   axis.text.x = element_markdown(),
   axis.title.y = element_markdown(),
-  axis.text.y = element_markdown(),
-  axis.line = element_line(colour = "grey20", size = rel(1)),
-  axis.ticks = element_line(colour = "grey20"),
-  panel.grid.minor.x = element_blank(),
-  panel.grid.minor.y = element_blank(),
-  panel.grid.major.x = element_blank()
+  axis.text.y = element_markdown()
 )
 ```
 
