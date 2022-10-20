@@ -63,7 +63,7 @@
 compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, end = 10, step = 0.05, filter = NULL) {
   stopifnot(inherits(fit, "lme"))
   match.arg(from, c("predicted", "observed"))
-  AP <- AR <- egg_ageyears <- egg_bmi <- egg_id <- NULL # no visible binding for global variable from data.table
+  AP <- AR <- egg_ageyears <- egg_bmi <- egg_id <- apar <- NULL # no visible binding for global variable from data.table
 
   id_var <- names(fit[["groups"]])
   model_vars <- all.vars(fit[["terms"]])
@@ -72,7 +72,7 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
   bmi_var <- model_vars[bmi_var_pos]
   covariates <- setdiff(model_vars, c(id_var, age_var, bmi_var))
 
-  data.table::setnames(
+  out <- data.table::setnames(
     x = switch(EXPR = from,
       "observed" = {
         data.table::as.data.table(fit[["data"]])[
@@ -104,7 +104,24 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
     j = AR := AR & !duplicated(AR),
     by = "egg_id"
   ][
-    i = egg_ageyears >= 2,
-    j = c("AP", "AR") := list(FALSE, FALSE)
+    i = egg_ageyears >= 2 & AP,
+    j = `:=`("AP" = FALSE)
   ]
+
+  bad_estimated_individuals <- data.table::dcast(
+    data = out[
+      (AP | AR)
+    ][
+      j = apar := c("10" = "AP", "01" = "AR")[paste0(as.integer(AP), as.integer(AR))]
+    ],
+    formula = egg_id ~ apar,
+    value.var = "egg_ageyears"
+  )[AP >= AR, .SD, .SDcols = c("egg_id")]
+
+  out[
+    i = egg_id %in% bad_estimated_individuals,
+    j = `:=`("AP" = FALSE, "AR" = FALSE)
+  ]
+
+  out
 }
