@@ -1,3 +1,10 @@
+# eggla 0.17.2
+
+## Fixes
+
+- In `R/compute_apar.R`,
+  - fix: update filter that removed all AR estimates and add a control for AR > AP.
+
 # eggla 0.17.1
 
 ## Fixes
