@@ -146,7 +146,7 @@ p_apar <- mapply(
     ][
       j = labels := sprintf(
         "<b style=\"color:%s;\">%s &#8771; %0.2f</b>",
-        okabe_ito_palette[c(1, 2)])[variable],
+        okabe_ito_palette[c(1, 2)][variable],
         variable,
         egg_ageyears
       )
