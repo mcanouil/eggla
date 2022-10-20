@@ -103,9 +103,6 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
     i = (AR),
     j = AR := AR & !duplicated(AR),
     by = "egg_id"
-  ][
-    i = egg_ageyears >= 2 & AP,
-    j = `:=`("AP" = FALSE)
   ]
 
   bad_estimated_individuals <- data.table::dcast(
@@ -121,6 +118,9 @@ compute_apar <- function(fit, from = c("predicted", "observed"), start = 0.25, e
   out[
     i = egg_id %in% bad_estimated_individuals,
     j = `:=`("AP" = FALSE, "AR" = FALSE)
+  ][
+    i = egg_ageyears >= 2 & AP,
+    j = `:=`("AP" = FALSE)
   ]
 
   out
