@@ -127,8 +127,8 @@ plot_egg_slopes <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), 
       labels = function(x)  sub("\\.0+", "", x)
     ) +
     yscale() +
-    ggplot2::scale_colour_manual(values = okabe_ito_palette) +
-    ggplot2::scale_fill_manual(values = okabe_ito_palette) +
+    ggplot2::scale_colour_manual(values = okabe_ito_palette[c(1, 3, 5, 7, 2, 4, 6, 8)]) +
+    ggplot2::scale_fill_manual(values = okabe_ito_palette[c(1, 3, 5, 7, 2, 4, 6, 8)]) +
     ggplot2::labs(
       x = "AGE (years)",
       y = "BMI (kg/m\u00B2)",
