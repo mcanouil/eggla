@@ -1,8 +1,15 @@
 # eggla (development version)
 
+## Fixes
+
+- In `R/compute_outliers.R`, `R/egg_outliers.R`, and `R/run_eggla_lmm.R`,
+  - fix: only allow one value for `outlier_method`.
+
 ## Style
 
 - style: set default `ggplot2` theme to a modified version of `theme_minimal()` and colour/fill scales to "viridis".
+
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.0...v0.17.1
 
 # eggla 0.17.0
 

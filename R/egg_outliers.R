@@ -12,7 +12,7 @@
 #' @inheritParams predict_bmi
 #' @param from A string indicating the type of data to be used for the AP and AR
 #'   computation, either "predicted" or "observed". Default is "predicted".
-#' @param outlier_method The outlier detection method(s). Default is `"iqr"`. Can be `"all"` or some of
+#' @param outlier_method The outlier detection method(s). Default is `"iqr"`. Can be
 #'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
 #'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
 #'   `"optics"` or `"lof"`.
@@ -55,6 +55,14 @@ egg_outliers <- function(
 ) {
   value <- what <- AP <- AR <- variable <- NULL # no visible binding for global variable from data.table
   from <- match.arg(from, c("predicted", "observed"))
+  outlier_method <- match.arg(
+    arg = outlier_method,
+    choices = c(
+      "cook", "pareto", "zscore", "zscore_robust", "iqr", "ci",
+      "eti", "hdi", "bci", "mahalanobis", "mahalanobis_robust",
+      "mcd", "ics", "optics", "lof"
+    )
+  )
   long_dt <- data.table::melt.data.table(
     data = data.table::as.data.table(Reduce(
       f = function(x, y) merge(x, y, all = TRUE),

@@ -29,7 +29,7 @@
 #'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
 #'   Argument pass through `compute_apar()` (see `predict_bmi()`).
 #'   Default is `NULL`.
-#' @param outlier_method The outlier detection method(s). Default is `"iqr"`. Can be `"all"` or some of
+#' @param outlier_method The outlier detection method(s). Default is `"iqr"`. Can be
 #'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
 #'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
 #'   `"optics"` or `"lof"`.
@@ -105,6 +105,15 @@ run_eggla_lmm <- function(
   Outlier <- outlier_colour <- parameter <- ID <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
+
+  outlier_method <- match.arg(
+    arg = outlier_method,
+    choices = c(
+      "cook", "pareto", "zscore", "zscore_robust", "iqr", "ci",
+      "eti", "hdi", "bci", "mahalanobis", "mahalanobis_robust",
+      "mcd", "ics", "optics", "lof"
+    )
+  )
 
   data <- data.table::setnames(
     x = data.table::as.data.table(data),
