@@ -25,6 +25,11 @@ plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), kn
   stopifnot(inherits(fit, "lme"))
   id_var <- names(fit[["groups"]])
 
+  okabe_ito_palette <- c(
+    "#E69F00FF", "#56B4E9FF", "#009E73FF", "#F0E442FF", "#0072B2FF",
+    "#D55E00FF", "#CC79A7FF", "#999999FF"
+  )
+
   auc_dt <- data.table::as.data.table(egg_aucs(
     fit = fit,
     period = period,
@@ -75,10 +80,7 @@ plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), kn
     ][
       j = period_interval := sprintf(
         "<b><i style='color: %s'>%s</i></b>",
-        scales::viridis_pal(
-          option = "plasma",
-          end = 0.85
-        )(length(unique(period_interval)))[period_interval],
+        okabe_ito_palette[period_interval],
         period_interval
       )
     ][
@@ -94,8 +96,8 @@ plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), kn
       width = 0.25,
       outlier.colour = NA
     ) +
-    ggplot2::scale_colour_viridis_d(option = "plasma", end = 0.85) +
-    ggplot2::scale_fill_viridis_d(option = "plasma", end = 0.85) +
+    ggplot2::scale_colour_manual(values = okabe_ito_palette) +
+    ggplot2::scale_fill_manual(values = okabe_ito_palette) +
     ggplot2::labs(
       x = "Period Interval (years)",
       y = "Area Under The Curve (AUC)",

@@ -43,6 +43,11 @@ plot_slopes <- function(
   age_var <- grep("age", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
   bmi_var <- grep("bmi", all.vars(fit[["terms"]]), value = TRUE, ignore.case = TRUE)
 
+  okabe_ito_palette <- c(
+    "#E69F00FF", "#56B4E9FF", "#009E73FF", "#F0E442FF", "#0072B2FF",
+    "#D55E00FF", "#CC79A7FF", "#999999FF"
+  )
+
   pheno_dt <- data.table::as.data.table(fit[["data"]])
   slopes_dt <- data.table::as.data.table(compute_slopes(
     fit = fit,
@@ -129,7 +134,7 @@ plot_slopes <- function(
       method = "gam",
       formula = y ~ s(x, bs = "cr"),
       linetype = 2,
-      colour = "#b22222",
+      colour = okabe_ito_palette[6],
       se = FALSE
     ) +
     ggplot2::scale_x_sqrt(
@@ -138,8 +143,8 @@ plot_slopes <- function(
       labels = function(x)  sub("\\.0+", "", x)
     ) +
     yscale() +
-    ggplot2::scale_colour_viridis_d(option = "plasma", end = 0.85) +
-    ggplot2::scale_fill_viridis_d(option = "plasma", end = 0.85) +
+    ggplot2::scale_colour_manual(values = okabe_ito_palette) +
+    ggplot2::scale_fill_manual(values = okabe_ito_palette) +
     ggplot2::labs(
       x = "AGE (years)",
       y = "BMI (kg/m\u00B2)",

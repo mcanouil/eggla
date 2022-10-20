@@ -25,6 +25,11 @@ library(patchwork)
 
 library(forcats)
 library(ggbeeswarm)
+
+okabe_ito_palette <- c(
+  "#E69F00FF", "#56B4E9FF", "#009E73FF", "#F0E442FF", "#0072B2FF",
+  "#D55E00FF", "#CC79A7FF", "#999999FF"
+)
 ```
 
 # Select the "best" model
@@ -66,7 +71,7 @@ p <- ggplot(perfs_dt) +
   aes(colour = sub(" --.*", "", model)) +
   geom_boxplot(outlier.shape = NA) +
   geom_beeswarm(shape = 1) +
-  stat_summary(geom = "point", fun = mean, shape = 18, colour = "#b22222", size = 4) +
+  stat_summary(geom = "point", fun = mean, shape = 18, colour = okabe_ito_palette[6], size = 4) +
   scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
   theme(
     plot.title = element_markdown(),

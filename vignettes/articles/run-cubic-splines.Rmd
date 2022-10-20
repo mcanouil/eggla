@@ -21,6 +21,11 @@ library(data.table, quietly = TRUE)
 # Setup for plots
 library(ggplot2, quietly = TRUE)
 library(patchwork)
+
+okabe_ito_palette <- c(
+  "#E69F00FF", "#56B4E9FF", "#009E73FF", "#F0E442FF", "#0072B2FF",
+  "#D55E00FF", "#CC79A7FF", "#999999FF"
+)
 ```
 
 # Data
@@ -50,7 +55,7 @@ library(patchwork)
       method = "gam",
       formula = y ~ s(x, bs = "cr"),
       linetype = 1,
-      colour = "#b22222",
+      colour = okabe_ito_palette[6],
       se = FALSE
     ) +
     theme(legend.position = "none") +
@@ -168,7 +173,7 @@ ggplot() +
     breaks = c(0, 0.5, 1, 1.5, 2, 5, 10, 15),
     limits = c(0, NA)
   ) +
-  scale_colour_manual(values = c("#b22222", "#2222b2")) +
+  scale_colour_manual(values = okabe_ito_palette[c(1, 2)]) +
   labs(
     x = "AGE (years)",
     y = "BMI (kg/m\u00B2)",
