@@ -4,6 +4,8 @@
 
 - In `R/compute_apar.R`,
   - fix: update filter that removed all AR estimates and add a control for AR > AP.
+- In `vignettes/articles/adiposity-peak-rebound.Rmd`,
+  - fix: missplaced parenthesis.
 
 # eggla 0.17.1
 
