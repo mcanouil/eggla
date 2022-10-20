@@ -38,7 +38,7 @@ computation, either "predicted" or "observed". Default is "predicted".}
 (\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
 Default is \code{NULL}.}
 
-\item{outlier_method}{The outlier detection method(s). Default is \code{"iqr"}. Can be \code{"all"} or some of
+\item{outlier_method}{The outlier detection method(s). Default is \code{"iqr"}. Can be
 \code{"cook"}, \code{"pareto"}, \code{"zscore"}, \code{"zscore_robust"}, \code{"iqr"}, \code{"ci"}, \code{"eti"},
 \code{"hdi"}, \code{"bci"}, \code{"mahalanobis"}, \code{"mahalanobis_robust"}, \code{"mcd"}, \code{"ics"},
 \code{"optics"} or \code{"lof"}.
