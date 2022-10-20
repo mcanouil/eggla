@@ -7,6 +7,8 @@
 - In `vignettes/articles/adiposity-peak-rebound.Rmd`,
   - fix: missplaced parenthesis.
 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.1...v0.17.2
+
 # eggla 0.17.1
 
 ## Fixes
