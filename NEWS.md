@@ -4,6 +4,8 @@
 
 - In `R/compute_outliers.R`, `R/egg_outliers.R`, and `R/run_eggla_lmm.R`,
   - fix: only allow one value for `outlier_method`.
+- In `R/plot_egg_slopes.R` and `R/plot_slopes.R`,
+  - fix: uses GAM with cubic splines everytime.
 
 ## Style
 
