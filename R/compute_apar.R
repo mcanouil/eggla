@@ -48,7 +48,7 @@
 #'       geom_abline(intercept = 0, slope = 1) +
 #'       geom_segment(aes(xend = observed, yend = observed), alpha = 0.5) +
 #'       geom_point() +
-#'       scale_colour_manual(values = c("#b22222", "#22b222")) +
+#'       scale_colour_manual(values = c("#E69F00FF", "#56B4E9FF")) +
 #'       labs(
 #'         x = sprintf("Observed: %s", sub(".*_", "", toupper(variable))),
 #'         y = sprintf("Predicted: %s", sub(".*_", "", toupper(variable))),

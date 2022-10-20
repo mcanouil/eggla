@@ -10,6 +10,7 @@
 ## Style
 
 - style: set default `ggplot2` theme to a modified version of `theme_minimal()` and colour/fill scales to "viridis".
+- style: use Okabe Ito colour palette.
 
 **Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.0...v0.17.1
 

@@ -39,6 +39,10 @@ theme_update(
   axis.title.y = element_markdown(),
   axis.text.y = element_markdown()
 )
+okabe_ito_palette <- c(
+  "#E69F00FF", "#56B4E9FF", "#009E73FF", "#F0E442FF", "#0072B2FF",
+  "#D55E00FF", "#CC79A7FF", "#999999FF"
+)
 ```
 
 # Results
@@ -84,7 +88,7 @@ one_individual_apar <- melt(
 ][
   j = labels := sprintf(
     "<b style=\"color:%s;\">%s = %s</b>",
-    c("#b22222", "#22b222")[variable],
+    okabe_ito_palette[c(1, 2)][variable],
     variable,
     egg_ageyears
   )
@@ -109,7 +113,7 @@ ggplot(data = one_individual_data) +
       labels = one_individual_apar[["labels"]]
     )
   ) +
-  scale_colour_manual(values = c("#b22222", "#22b222")) +
+  scale_colour_manual(values = okabe_ito_palette[c(1, 2)]) +
   scale_linetype_manual(values = c(2, 4)) +
   labs(
     x = "AGE (years)",
@@ -142,7 +146,7 @@ p_apar <- mapply(
     ][
       j = labels := sprintf(
         "<b style=\"color:%s;\">%s &#8771; %0.2f</b>",
-        c("#b22222", "#22b222")[variable],
+        okabe_ito_palette[c(1, 2)])[variable],
         variable,
         egg_ageyears
       )
@@ -160,7 +164,7 @@ p_apar <- mapply(
         method = "gam", # Comment for big cohort
         formula = y ~ s(x, bs = "cr"), # Comment this for big cohort
         linetype = 2,
-        colour = "#2222b2",
+        colour = okabe_ito_palette[3],
         se = FALSE
       ) +
       geom_vline(
@@ -181,7 +185,7 @@ p_apar <- mapply(
         )
       ) +
       scale_y_log10() +
-      scale_colour_manual(values = c("#b22222", "#22b222")) +
+      scale_colour_manual(values = okabe_ito_palette[c(1, 2)]) +
       scale_linetype_manual(values = c(2, 4)) +
       labs(
         x = "AGE (years)",
