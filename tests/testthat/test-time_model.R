@@ -91,6 +91,10 @@ test_that("Cubic Splines", {
         knots = c(1, 8, 12)
       )
     )
+
+    for (s in c("predicted", "observed")) {
+      expect_no_condition(compute_apar(fit = x, from = s)[AP | AR])
+    }
   }
 })
 
@@ -164,8 +168,4 @@ test_that("time_model", {
       knots = c(1, 8, 12)
     )
   )
-
-  for (s in c("predicted", "observed")) {
-    expect_no_condition(compute_apar(fit = res1, from = s)[AP | AR])
-  }
 })
