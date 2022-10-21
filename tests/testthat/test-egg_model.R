@@ -60,7 +60,7 @@ test_that("egg_model", {
     random_complexity = 1
   )
 
-  expect_no_error(predict_bmi(res)[order(egg_id, egg_ageyears)])
+  expect_warning(predict_bmi(res)[order(egg_id, egg_ageyears)])
 
   expect_no_condition(
     predict_bmi(
