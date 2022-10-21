@@ -365,6 +365,25 @@ run_eggla_lmm <- function(
         i = order(Outlier)
       ][
         j = outlier_colour := factor(outlier_colour, levels = unique(outlier_colour))
+      ][
+        j = parameter := (function(parameter) {
+          up <- sort(unique(parameter))
+          pos_slope <- grepl("^slope_", sub("--.*", "", up))
+          pos_auc <- grepl("^auc_", sub("--.*", "", up))
+          pos_apar <- grepl("^A[RP]_", up)
+          if (any(pos_slope)) {
+            up_slope <- up[pos_slope]
+            up[pos_slope] <- up_slope[order(as.numeric(sub(".+_", "", sub("--.*", "", up_slope))))]
+          }
+          if (any(pos_auc)) {
+            up_auc <- up[pos_auc]
+            up[pos_auc] <- up_auc[order(as.numeric(sub(".+_", "", sub("--.*", "", up_auc))))]
+          }
+          if (any(pos_apar)) {
+            up[pos_apar] <- sort(up[pos_apar])
+          }
+          factor(parameter, levels = up)
+        })(parameter)
       ]
 
       if (nzchar(system.file(package = "ggdist")) & nzchar(system.file(package = "ggbeeswarm"))) {
