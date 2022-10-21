@@ -5,7 +5,7 @@
 - In `R/run_eggla_lmm.R`,
   - fix: order derived parameter for outlier figure.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.1...v0.17.2
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.2...v0.17.3
 
 # eggla 0.17.2
 
