@@ -528,8 +528,8 @@ run_eggla_gwas <- function(
           USE.NAMES = FALSE
         )
 
-        info_fields_required <- c("NS", "AC_Het", "AC_Hom", "AF", "HWE", "F_MISSING", "INFO")
-        names(info_fields_required) <- c("N", "N1", "N2", "EAF", "HWE_P", "CALL_RATE", "INFO")
+        info_fields_required <- c("NS", "AC_Het", "AC_Hom", "AF", "HWE", "F_MISSING", "INFO", "R2")
+        names(info_fields_required) <- c("N", "N1", "N2", "EAF", "HWE_P", "CALL_RATE", "INFO", "INFO")
 
         annot <- data.table::fread(
           cmd = paste(
