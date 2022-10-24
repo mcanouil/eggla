@@ -1,3 +1,10 @@
+# eggla 0.17.4
+
+- In `R/run_eggla_gwas.R`,
+  - fix: rename R2 to INFO if exists.
+
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.3...v0.17.4
+
 # eggla 0.17.3
 
 ## Fixes
