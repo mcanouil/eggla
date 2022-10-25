@@ -3,7 +3,7 @@
 - In `R/run_eggla_gwas.R`,
   - fix: rename R2 to INFO if exists.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.3...v0.17.4
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.17.3...v0.17.4>
 
 # eggla 0.17.3
 
@@ -12,7 +12,7 @@
 - In `R/run_eggla_lmm.R`,
   - fix: order derived parameter for outlier figure.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.2...v0.17.3
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.17.2...v0.17.3>
 
 # eggla 0.17.2
 
@@ -23,7 +23,7 @@
 - In `vignettes/articles/adiposity-peak-rebound.Rmd`,
   - fix: missplaced parenthesis.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.1...v0.17.2
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.17.1...v0.17.2>
 
 # eggla 0.17.1
 
@@ -39,7 +39,7 @@
 - style: set default `ggplot2` theme to a modified version of `theme_minimal()` and colour/fill scales to "viridis".
 - style: use Okabe Ito colour palette.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.17.0...v0.17.1
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.17.0...v0.17.1>
 
 # eggla 0.17.0
 
@@ -65,7 +65,7 @@
 - In `pkgdown/_pkgdown.yml`,
   - style: separate the `run_eggl_*()` functions from the rest.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.16.0...v0.17.0
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.16.0...v0.17.0>
 
 # eggla 0.16.0
 
@@ -85,7 +85,7 @@
   `vignettes/articles/models-diagnostics.Rmd`, and `vignettes/articles/run-cubic-splines.Rmd`,
   - fix: standardise `ggplot` default theme and fix `gt` tables.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.15.0...v0.16.0
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.15.0...v0.16.0>
 
 # eggla 0.15.0
 
@@ -94,7 +94,7 @@
 - In `R/compute_outliers.R` and `R/egg_outliers.R`,
   - feat: now detects outliers for all slopes together, all AUCs together and for individual slopes, AUCs, AP (BMI and age), and AR (BMI and age).
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.14.0...v0.15.0
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.14.0...v0.15.0>
 
 # eggla 0.14.0
 
@@ -109,7 +109,7 @@
 - In `R/run_eggla_gwas.R`,
   - fix: now uses the filled INFO field of VCF and compute required columns for meta-analysis.
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.13.1...v0.14.0
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.13.1...v0.14.0>
 
 # eggla 0.13.1
 
@@ -118,7 +118,7 @@
 - In `pkgdown/_pkgdown.yml`,
   - chore: update template to "minty".
 
-**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.13.0...v0.13.1
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.13.0...v0.13.1>
 
 # eggla 0.13.0
 
@@ -159,7 +159,7 @@
 - In `pkgdown/_pkgdown.yml`,
   - refactor: reorder sections to focus on the main functions first.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.3...v0.13.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.12.3...v0.13.0>>
 
 # eggla 0.12.3
 
@@ -186,7 +186,7 @@
 - In `tests/testthat/test-run_eggla.R`,
   - test: new tests for run_eggla functions.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.2...v0.12.3>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.12.2...v0.12.3>>
 
 # eggla 0.12.2
 
@@ -195,7 +195,7 @@
 - In `R/run_eggla_gwas.R`,
   - fix: the condition has length > 1.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.1...v0.12.2>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.12.1...v0.12.2>>
 
 # eggla 0.12.1
 
@@ -204,7 +204,7 @@
 - In `R/run_eggla_gwas.R`,
   - fix: wrong variable in "results" input check condition.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.12.0...v0.12.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.12.0...v0.12.1>>
 
 # eggla 0.12.0
 
@@ -233,7 +233,7 @@
 
 - style: remove break line in badges section.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.11.2...v0.12.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.11.2...v0.12.0>>
 
 # eggla 0.11.2
 
@@ -241,7 +241,7 @@
 
 - fix: uses general Zenodo DOI.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.11.1...v0.11.2>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.11.1...v0.11.2>>
 
 # eggla 0.11.1
 
@@ -254,7 +254,7 @@
 - In `vinettes/eggla.Rmd`,
   - fix: uses `latest` moving tag.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.11.0...v0.11.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.11.0...v0.11.1>>
 
 # eggla 0.11.0
 
@@ -292,7 +292,7 @@
   - test: add more tests for `time_model()` and `egg_model()`.
   - test: add tests for `*_correlations()` and `*_outliers()` functions.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.4...v0.11.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.10.4...v0.11.0>>
 
 # eggla 0.10.4
 
@@ -306,7 +306,7 @@
 - In `R/`, `tests/`, and `vignettes/`,
   - fix: documentation consistency with code, i.e., replaced "AR1" with "CAR1" (#21).
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.3...v0.10.4>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.10.3...v0.10.4>>
 
 # eggla 0.10.3
 
@@ -321,7 +321,7 @@
   - Fix: remove `renv` code in the Docker section.
   - Fix: set properly the working directory.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.2...v0.10.3>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.10.2...v0.10.3>>
 
 # eggla 0.10.2
 
@@ -330,7 +330,7 @@
 - In `R/egg_model.R`,
   - Fix: try without CAR1 before reducing random effect. (#18)
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.1...v0.10.2>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.10.1...v0.10.2>>
 
 # eggla 0.10.1
 
@@ -339,7 +339,7 @@
 - In `R/egg_slopes.R`, `R/plot_egg_slopes.R`, `R/egg_aucs.R`, and `R/plot_egg_aucs.R`,
   - Fix: hardcoded knots, now as an argument. (#16, #17)
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.10.0...v0.10.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.10.0...v0.10.1>>
 
 # eggla 0.10.0
 
@@ -370,7 +370,7 @@
 - In `vignettes/eggla.Rmd`,
   - Fix: "-it" instead of "--detach" for Docker command.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.9.1...v0.10.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.9.1...v0.10.0>>
 
 # eggla 0.9.1
 
@@ -379,7 +379,7 @@
 - In `R/egg_model.R`, `R/egg_model.R`, `R/run_eggla.R`, and `R/do_eggla_gwas`,
   - Feat: add `quiet` to silent the messages.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.9.0...v0.9.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.9.0...v0.9.1>>
 
 # eggla 0.9.0
 
@@ -405,7 +405,7 @@
   - Docs: complete GWAS sections.
   - Docs: add Docker section.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.8.1...v0.9.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.8.1...v0.9.0>>
 
 # eggla 0.8.1
 
@@ -414,7 +414,7 @@
 - In `inst/setup/Dockerfile`,
   - Feat: Docker image built automatically "devel" from "main" and "tag" from "releases".
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.8.0...v0.8.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.8.0...v0.8.1>>
 
 # eggla 0.8.0
 
@@ -438,7 +438,7 @@
 - In `data-raw/lock.R`,
   - build: update script to work on local version for both `renv` and `pak`.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.7.0...v0.8.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.7.0...v0.8.0>>
 
 # eggla 0.7.0
 
@@ -454,7 +454,7 @@
 - In `vignettes/articles/run-eggla.Rmd`, `vignettes/articles/models-diagnostics.Rmd`,
   - Fix: Uses CAR1 by default in vignettes, only to speed-up computation.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.6.1...v0.7.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.6.1...v0.7.0>>
 
 # eggla 0.6.1
 
@@ -463,7 +463,7 @@
 - In `R/compute_apar.R`,
   - Fix: returns only the first local maxima (adiposity peak) and minima (adiposity rebound).
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.6.0...v0.6.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.6.0...v0.6.1>>
 
 # eggla 0.6.0
 
@@ -489,7 +489,7 @@
 - In `R/compute_apar.R`:
   - Fix: ignore case in variable search.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.2...v0.6.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.5.2...v0.6.0>>
 
 # eggla 0.5.2
 
@@ -497,14 +497,14 @@
 - Fix: Update `pak` install command.
 - Chore: Upgrade lock files.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.1...v0.5.2>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.5.1...v0.5.2>>
 
 # eggla 0.5.1
 
 - No longer uses `nlme::corCAR1(form = ~ 1 | ID)` in models.
 - Add Kimberley Burrows (@burrowsk) and Anni Heiskala as authors.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.5.0...v0.5.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.5.0...v0.5.1>>
 
 # eggla 0.5.0
 
@@ -532,7 +532,7 @@
 - In `pkgdown/_pkgdown.yml`,
   - Polish website.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.4.4...v0.5.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.4.4...v0.5.0>>
 
 # eggla 0.4.4
 
@@ -544,7 +544,7 @@
   - Add message about which model is currently being computed.
 - Add `pkgdown` website.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.4.3...v0.4.4>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.4.3...v0.4.4>>
 
 # eggla 0.4.3
 
@@ -558,14 +558,14 @@
 - In `R/run_eggla.R`,
   - Remove `ragg` dependency, uses `grDevices` instead.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.4.2...v0.4.3>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.4.2...v0.4.3>>
 
 # eggla 0.4.2
 
 - In `README.(R)md`,
   - Fix typo in `renv::init` calls.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.4.1...v0.4.2>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.4.1...v0.4.2>>
 
 # eggla 0.4.1
 
@@ -578,7 +578,7 @@
 - In `DESCRIPTION`,
   - Switch from `svglite` to `ragg` to avoid issues with high number of elements.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.4.0...v0.4.1>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.4.0...v0.4.1>>
 
 # eggla 0.4.0
 
@@ -610,7 +610,7 @@
 - In `LICENSE`,
   - Add Nicole Warrington.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.3.0...v0.4.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.3.0...v0.4.0>>
 
 # eggla 0.3.0
 
@@ -628,7 +628,7 @@
   - Decrease font size in Daymont's QC summary table .
   - Fix numbers in the summary table.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.2.0...v0.3.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.2.0...v0.3.0>>
 
 # eggla 0.2.0
 
@@ -638,7 +638,7 @@
 - In `inst/rmarkdown/templates/eggla/skeleton/skeleton.Rmd`,
   - Add `cov` to allow additional covariates.
 
-**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.1.0...v0.2.0>
+**Full Changelog**: <<https://github.com/mcanouil/eggla/compare/v0.1.0...v0.2.0>>
 
 # eggla 0.1.0
 
