@@ -314,7 +314,7 @@ wrap_plots(
       if (is.null(.x)) {
         wrap_plots(rep(list(ggplot() + geom_blank()), 3), nrow = 1, tag_level = "new")
       } else {
-        wrap_plots(plot(.x), nrow = 1, tag_level = "new")
+        wrap_plots(print(.x + theme_get()), nrow = 1, tag_level = "new")
       }
     }
   ),
@@ -397,10 +397,7 @@ ggplot(
   ) +
   theme(
     legend.position = c(0.01, 0.99),
-    legend.justification = c("left", "top"),
-    legend.background = element_rect(fill = "white", size = 0.10),
-    panel.grid = element_blank(),
-    axis.line = element_line(size = 0.10)
+    legend.justification = c("left", "top")
   )
 ```
 
