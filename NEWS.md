@@ -1,10 +1,17 @@
 # eggla 0.17.4
 
+## Fixes
+
 - In `R/run_eggla_gwas.R`,
   - fix: rename R2 to INFO if exists.
-- In `models-diagnostics.Rmd`,
+- In `vignettes/articles/models-diagnostics.Rmd`,
   - revert: set back knots to original values for diagnostics.
   - fix: hardcode performance metrics to avoid changes due to `performance` updates.
+
+## Style
+
+- In `vignettes/articles/adiposity-peak-rebound.Rmd`, `vignettes/articles/run-cubic-splines.Rmd`, and `vignettes/articles/models-diagnostics.Rmd`,
+  - style: homogenise all figures with the new theme.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.17.3...v0.17.4>
 
