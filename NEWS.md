@@ -7,6 +7,7 @@
 - In `vignettes/articles/models-diagnostics.Rmd`,
   - revert: set back knots to original values for diagnostics.
   - fix: hardcode performance metrics to avoid changes due to `performance` updates.
+  - fix: eval to FALSE to set w/o AR1.
 
 ## Style
 
