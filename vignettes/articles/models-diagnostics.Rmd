@@ -1,22 +1,22 @@
 ---
 title: "Models Diagnostics"
 author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
-params:
-  working_directory: !r tempdir()
-  pheno_file: "internal"
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE,
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
 # R setup
 
 ```{r setup}
-output_directory <- file.path(params[["working_directory"]], "models-diagnostics")
+output_directory <- file.path(tempdir(), "models-diagnostics")
 dir.create(output_directory, recursive = TRUE, showWarnings = FALSE, mode = "0775")
 
 library(eggla)
@@ -66,11 +66,8 @@ okabe_ito_palette <- c(
 # Data
 
 ```{r input-data}
-if (params[["pheno_file"]] == "internal") {
-  pheno_dt <- setDT(get(data("bmigrowth", package = "eggla")))
-} else {
-  pheno_dt <- fread(params[["pheno_file"]])
-}
+# pheno_dt <- setDT(get(data("bmigrowth", package = "eggla")))
+pheno_dt <- fread("pheno_file")
 ```
 
 ## Tidy data for Daymont's quality control 
@@ -184,7 +181,7 @@ all_models <- setDT(
       "visits_clean",
       "visits_clean[between(age, 1, 18)]"
     ),
-    correlation_structure = c("NULL", "corCAR1(form = ~ 1 | ID)")[2], # Use AR(1) correlation structure (default is without)
+    correlation_structure = c("NULL", "corCAR1(form = ~ 1 | ID)"),
     models = sprintf("fixed = %s, random = %s", fixed_effect, random_effect),
     default = paste0(
       c(
@@ -208,8 +205,6 @@ all_models <- setDT(
 *In parallel using `future`.*
 
 ```{r models-try}
-#| warning: false
-#| message: false
 all_models[["lme"]] <- future_mapply(
   FUN = function(models, dataset, sex, correlation_structure, default) {
     m <- sprintf(
@@ -517,8 +512,6 @@ if (fmt_models[fill != "Good", .N > 0]) {
     opt_row_striping()
 
   gtsave(diag_tab, file.path(output_directory, "models-diagnostics.html"))
-
-  diag_tab
 }
 ```
 
@@ -582,6 +575,4 @@ perf_tab <- gt(
   opt_row_striping()
 
 gtsave(perf_tab, file.path(output_directory, "models-performance.html"))
-
-perf_tab
 ```
