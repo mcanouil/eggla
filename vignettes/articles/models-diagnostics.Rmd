@@ -159,10 +159,10 @@ visits_long <- melt(
 random_effect <- c(
   "~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID",
   "~ 1 | ID",
-  "~ gsp(age, knots = c(1, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID",
-  "~ gsp(age, knots = c(1, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[, 1:3] | ID",
-  "~ gsp(age, knots = c(1, 8, 12), degree = rep(2, 4), smooth = rep(2, 3)) | ID",
-  "~ gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID",
+  "~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID",
+  "~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[, 1:3] | ID",
+  "~ gsp(age, knots = c(2, 8, 12), degree = rep(2, 4), smooth = rep(2, 3)) | ID",
+  "~ gsp(age, knots = c(2, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID",
   "~ 1 | ID",
   "~ poly(age, degree = 3) | ID",
   "~ poly(age, degree = 2) | ID",
@@ -172,7 +172,7 @@ random_effect <- c(
 
 fixed_effect <- c(
   rep("log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2))", 2),
-  rep("log(bmi) ~ gsp(age, knots = c(1, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))", 5),
+  rep("log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))", 5),
   rep("log(bmi) ~ poly(age, degree = 3)", 4)
 )
 
@@ -266,7 +266,18 @@ all_models[
         out
       }
     ),
-    perf_model_performance = lapply(lme, model_performance)
+    perf_model_performance = lapply(
+      X = lme,
+      FUN = function(x) {
+        suppressWarnings(performance::model_performance(
+          model = x,
+          metrics = c(
+            "AIC", "BIC", "R2_CONDITIONAL", "R2_MARGINAL",
+            "ICC", "RMSE", "SIGMA"
+          )
+        ))
+      }
+    )
   )
 ]
 
@@ -281,8 +292,8 @@ saveRDS(
 
 ```{r best-model}
 best_models <- paste(
-  "fixed = log(bmi) ~ gsp(age, knots = c(1, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),",
-  "random = ~ gsp(age, knots = c(1, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID"
+  "fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),",
+  "random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID"
 )
 best_dataset <- "visits_clean"
 ```
