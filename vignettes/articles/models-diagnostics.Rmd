@@ -266,8 +266,8 @@ all_models[
       FUN = function(x) {
         suppressWarnings(performance::model_performance(
           model = x,
-          metrics = c("AIC", "BIC", "R2_conditional", "R2_marginal", "ICC", "RMSE", "Sigma")
-        ))
+          metrics = "all"
+        )[c("AIC", "BIC", "R2_conditional", "R2_marginal", "ICC", "RMSE", "Sigma")])
       }
     )
   )
