@@ -264,10 +264,11 @@ all_models[
     perf_model_performance = lapply(
       X = lme,
       FUN = function(x) {
-        suppressWarnings(performance::model_performance(
+        performance::model_performance(
           model = x,
-          metrics = "all"
-        )[c("AIC", "BIC", "R2_conditional", "R2_marginal", "ICC", "RMSE", "Sigma")])
+          metrics = "all",
+          estimator = "ML"
+        )[c("AIC", "BIC", "R2_conditional", "R2_marginal", "ICC", "RMSE", "Sigma")]
       }
     )
   )
