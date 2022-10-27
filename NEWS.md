@@ -1,4 +1,4 @@
-# eggla (development version)
+# eggla 0.17.4
 
 ## Fixes
 
