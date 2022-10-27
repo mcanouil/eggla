@@ -9,7 +9,7 @@
   - fix: hardcode performance metrics to avoid changes due to `performance` updates.
   - fix: eval to FALSE to set w/o AR1.
 
-# Docs
+## Docs
 
 - In `vignettes/articles/models-diagnostics.Rmd`,
   - docs: new section to update and tidy perf data.
