@@ -1,3 +1,12 @@
+# eggla 0.17.5
+
+## Style
+
+- In `vignettes/articles/adiposity-peak-rebound.Rmd`,
+  - style: remove top ticks for AP/AR.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.17.4...v0.17.5>
+
 # eggla 0.17.4
 
 ## Fixes
