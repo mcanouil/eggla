@@ -13,6 +13,7 @@
 
 - In `vignettes/articles/models-diagnostics.Rmd`,
   - docs: new section to update and tidy perf data.
+
 ## Style
 
 - In `vignettes/articles/adiposity-peak-rebound.Rmd`, `vignettes/articles/run-cubic-splines.Rmd`, and `vignettes/articles/models-diagnostics.Rmd`,
