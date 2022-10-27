@@ -172,7 +172,9 @@ fixed_effect <- c(
   rep("log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))", 5),
   rep("log(bmi) ~ poly(age, degree = 3)", 4)
 )
+```
 
+```{r models-setup-data}
 all_models <- setDT(
   expand.grid(
     sex = c(0, 1),
@@ -444,8 +446,6 @@ fmt_models <- all_models[
   )
 ]
 
-names_before_unlist <- names(fmt_models)
-
 fwrite(
   x = fmt_models[
     j = unlist(perf, recursive = FALSE),
@@ -576,4 +576,100 @@ perf_tab <- gt(
   opt_row_striping()
 
 gtsave(perf_tab, file.path(output_directory, "models-performance.html"))
+```
+
+
+# Update performance metrics
+
+## Load, update, and write new performance metrics
+
+```{r update-perf}
+models_file_rds <- file.path(output_directory, "summary_models.rds")
+all_models <- readRDS()
+all_models[
+  i = (is_good),
+  j = `:=`(
+    perf_check_model = lapply(
+      X = lme,
+      FUN = function(x) {
+        devnull <- capture.output(
+          out <- check_model(
+            x = x,
+            panel = FALSE,
+            check = c("normality", "linearity", "qq"),
+            verbose = FALSE
+          )
+        )
+        out
+      }
+    ),
+    perf_model_performance = lapply(lme, model_performance)
+  )
+]
+saveRDS(object = all_models, file = models_file_rds, compress = FALSE)
+```
+
+## Export performance as CSV
+
+```{r}
+#| ref.label: ['models-setup', 'models-diagnostics']
+```
+
+## Tidy performance data (subset)
+
+```{r tidy-perf}
+performance_file_csv <- file.path(output_directory, "models-performance.csv")
+fwrite(
+  file = file.path(output_directory, "models-performance-tidy.csv"),
+  scipen = 10,
+  x = dcast(
+    data = melt(
+      data = fread(performance_file_csv)[
+        dataset %in% "Clean" & !grepl("Intercepts", model)
+      ][
+        j = .SD,
+        .SDcols = -c("dataset", "status")
+      ][
+        j = model := factor(
+          x = model,
+          levels = c(
+            "Cubic Slope -- Random Cubic Slopes",
+            "Cubic Slope -- Random Quadratic Slopes",
+            "Cubic Slope -- Random Linear Slopes",
+            "Cubic Slope -- C-AR1 -- Random Cubic Slopes",
+            "Cubic Slope -- C-AR1 -- Random Quadratic Slopes",
+            "Cubic Slope -- C-AR1 -- Random Linear Slopes",
+            "Linear Splines -- Random Linear Splines",
+            "Linear Splines -- C-AR1 -- Random Linear Splines",
+            "Cubic Splines -- Random Cubic Splines",
+            "Cubic Splines -- Random Cubic Splines (1:3)",
+            "Cubic Splines -- Random Quadratic Splines",
+            "Cubic Splines -- Random Linear Splines",
+            "Cubic Splines -- C-AR1 -- Random Cubic Splines",
+            "Cubic Splines -- C-AR1 -- Random Cubic Splines (1:3)",
+            "Cubic Splines -- C-AR1 -- Random Quadratic Splines",
+            "Cubic Splines -- C-AR1 -- Random Linear Splines"
+          )
+        )
+      ][
+        order(model)
+      ],
+      id.vars = c("model", "sex"),
+      variable.name = "perf_metrics_name",
+      value.name = "perf_metrics_value"
+    )[
+      j = perf_metrics_name := factor(
+        x = perf_metrics_name,
+        levels = c(
+          "AIC", "BIC", "R2_conditional", "R2_marginal",
+          "ICC", "RMSE", "Sigma"
+        )
+      )
+    ][
+      order(perf_metrics_name)
+    ],
+    formula = model + perf_metrics_name ~ sex,
+    value.var = "perf_metrics_value"
+  )
+)
 ```
