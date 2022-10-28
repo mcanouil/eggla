@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# EGG Longitudinal Analysis <img src="man/figures/logo.png" align="right" width="120" />
+# EGG LongituAnalysis <img src="man/figures/logo.png" align="right" width="120" />
 
 <!-- badges: start -->
 [![GitHub
