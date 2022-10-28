@@ -36,7 +36,7 @@
 #' @importFrom stats as.formula p.adjust
 #' @importFrom utils download.file unzip head
 #' @importFrom rlang hash
-# @importFrom future.apply future_lapply
+#' @importFrom future.apply future_lapply
 #'
 #' @return Path to results file.
 #'
