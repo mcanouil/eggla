@@ -1,9 +1,11 @@
-# eggla (development version)
+# eggla 0.18.0
 
 ## Features
 
 - In `R/run_eggla_lmm.R` and `R/egg_correlations.R`,
   - feat: perform correlations between all parameters.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.17.5...v0.18.0>
 
 # eggla 0.17.5
 
