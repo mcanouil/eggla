@@ -267,12 +267,6 @@ run_eggla_lmm <- function(
         knots = knots
       )
 
-      eggc <- egg_correlations(
-        fit = results,
-        period = period,
-        knots = knots
-      )
-
       apar_dt <- data.table::setnames(
         x = data.table::dcast(
           data = compute_apar(
@@ -301,6 +295,25 @@ run_eggla_lmm <- function(
           out[grepl("^egg_id$", x)] <- "egg_id"
           out
         }
+      )
+
+      eggc_dt <- Reduce(
+        f = function(x, y) merge(x, y, by = names(fit$groups)),
+        x = lapply(
+          X = list(
+            slopes_dt,
+            aucs_dt,
+            apar_dt
+          ),
+          FUN = function(data) {
+            data <- data.table::setnames(data, "egg_id", names(fit$groups), skip_absent = TRUE)
+            data[grep(paste0("^auc_|^slope_|^AP_|^AR_|^", names(fit$groups), "$"), names(data))]
+          }
+        )
+      )
+      eggc <- data.table::as.data.table(
+        x = stats::cor(eggc_dt[grep("^auc_|^slope_|^AP_|^AR_", names(eggc_dt))]),
+        keep.rownames = "term"
       )
 
       outliers_dt <- egg_outliers(
@@ -490,12 +503,8 @@ run_eggla_lmm <- function(
         file = file.path(results_directory, "model-coefficients.csv")
       )
       data.table::fwrite(
-        x = eggc[["AUC"]],
-        file = file.path(results_directory, "derived-aucs-correlations.csv")
-      )
-      data.table::fwrite(
-        x = eggc[["SLOPE"]],
-        file = file.path(results_directory, "derived-slopes-correlations.csv")
+        x = eggc,
+        file = file.path(results_directory, "derived-parameters-correlations.csv")
       )
       data.table::fwrite(
         x = slopes_dt,
@@ -547,8 +556,7 @@ run_eggla_lmm <- function(
           file.path(results_directory, "model-call.txt"),
           file.path(results_directory, "model-coefficients.csv"),
           file.path(results_directory, "model-residuals.png"),
-          file.path(results_directory, "derived-aucs-correlations.csv"),
-          file.path(results_directory, "derived-slopes-correlations.csv"),
+          file.path(results_directory, "derived-parameters-correlations.csv"),
           file.path(results_directory, "derived-outliers.png")
         ),
         flags = "-r9Xj"
