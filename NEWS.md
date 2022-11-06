@@ -1,5 +1,10 @@
 # eggla (development version)
 
+## Features
+
+- In `R/run_eggla_lmm.R` and `R/egg_correlations.R`,
+  - feat: perform correlations between all parameters.
+
 # eggla 0.17.5
 
 ## Style
