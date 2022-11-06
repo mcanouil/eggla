@@ -37,6 +37,7 @@ egg_correlations <- function(
   knots = c(1, 8, 12),
   filter_apar = NULL
 ) {
+  AP <- AR <- what <- NULL # no visible binding for global variable from data.table
   dt <- Reduce(
     f = function(x, y) merge(x, y, by = names(fit$groups)),
     x = lapply(
