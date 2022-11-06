@@ -1,6 +1,6 @@
 .onAttach <- function(...) {
   if (identical(ggplot2::theme_get(), ggplot2::theme_grey())) {
-    message("Default 'ggplot2' theme has been changed.")
+    packageStartupMessage("Default 'ggplot2' theme has been changed.")
     ggplot2::theme_set(
       ggplot2::theme_minimal() +
       ggplot2::theme(
@@ -14,7 +14,7 @@
       )
     )
   }
-  message("Default 'ggplot2' colour and fill scales set to 'viridis'.")
+  packageStartupMessage("Default 'ggplot2' colour and fill scales set to 'viridis'.")
   options(
     ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 0.15, end = 0.85),
     ggplot2.discrete.fill = function(...) scale_fill_viridis_d(..., begin = 0.15, end = 0.85),
