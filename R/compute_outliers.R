@@ -66,7 +66,7 @@ compute_outliers <- function(
   outlier_method = "iqr",
   outlier_threshold = list(iqr = 2)
 ) {
-  value <- what <- AP <- AR <- NULL # no visible binding for global variable from data.table
+  value <- what <- AP <- AR <- variable <- NULL # no visible binding for global variable from data.table
   from <- match.arg(from, c("predicted", "observed"))
   outlier_method <- match.arg(
     arg = outlier_method,
