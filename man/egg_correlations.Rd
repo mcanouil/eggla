@@ -7,7 +7,8 @@
 egg_correlations(
   fit,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = c(1, 8, 12)
+  knots = c(1, 8, 12),
+  filter_apar = NULL
 )
 }
 \arguments{
@@ -17,6 +18,10 @@ such as from a call to \code{egg_model()}.}
 \item{period}{The intervals knots on which slopes are to be computed.}
 
 \item{knots}{The knots as defined \code{fit} and according to \code{method}.}
+
+\item{filter_apar}{A string following \code{data.table} syntax for filtering on \code{"i"}
+(\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
+Default is \code{NULL}.}
 }
 \value{
 A \code{ggplot2} object with correlations between each intervals derived parameters.
