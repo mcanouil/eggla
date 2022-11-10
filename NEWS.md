@@ -1,3 +1,12 @@
+# eggla 0.18.1
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: info_type description given to genotyped variants.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.0...v0.18.1>
+
 # eggla 0.18.0
 
 ## Features
