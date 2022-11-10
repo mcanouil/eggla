@@ -39,7 +39,7 @@ egg_correlations <- function(
 ) {
   AP <- AR <- what <- NULL # no visible binding for global variable from data.table
   dt <- Reduce(
-    f = function(x, y) merge(x, y, by = names(fit$groups)),
+    f = function(x, y) merge(x, y, by = names(fit[["groups"]]), all = TRUE),
     x = lapply(
       X = list(
         AUC = egg_aucs(fit, period, knots),
@@ -75,13 +75,15 @@ egg_correlations <- function(
         )
       ),
       FUN = function(data) {
-        data <- data.table::setnames(data, "egg_id", names(fit$groups), skip_absent = TRUE)
-        data[grep(paste0("^auc_|^slope_|^AP_|^AR_|^", names(fit$groups), "$"), names(data))]
+        data.table::setnames(data, "egg_id", names(fit[["groups"]]), skip_absent = TRUE)
       }
     )
   )
   data.table::as.data.table(
-    x = stats::cor(dt[grep("^auc_|^slope_|^AP_|^AR_", names(dt))]),
+    x = stats::cor(
+      x = dt[grep("^auc_|^slope_|^AP_|^AR_", names(dt))],
+      use = "pairwise.complete.obs"
+    ),
     keep.rownames = "term"
   )
 }
