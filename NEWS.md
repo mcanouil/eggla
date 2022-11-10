@@ -1,3 +1,12 @@
+# eggla 0.18.2
+
+## Fixes
+
+- In `R/egg_correlations.R` and `R/run_eggla_lmm.R`,
+  - fix: parameters table not properly filtered and omitting missing values.
+  
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.1...v0.18.2>
+
 # eggla 0.18.1
 
 ## Fixes

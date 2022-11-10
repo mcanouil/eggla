@@ -298,7 +298,7 @@ run_eggla_lmm <- function(
       )
 
       eggc_dt <- Reduce(
-        f = function(x, y) merge(x, y, by = names(results$groups)),
+        f = function(x, y) merge(x, y, by = names(results[["groups"]]), all = TRUE),
         x = lapply(
           X = list(
             slopes_dt,
@@ -306,13 +306,15 @@ run_eggla_lmm <- function(
             apar_dt
           ),
           FUN = function(data) {
-            data <- data.table::setnames(data, "egg_id", names(results$groups), skip_absent = TRUE)
-            data[grep(paste0("^auc_|^slope_|^AP_|^AR_|^", names(results$groups), "$"), names(data))]
+            data.table::setnames(data, "egg_id", names(results[["groups"]]), skip_absent = TRUE)
           }
         )
       )
       eggc <- data.table::as.data.table(
-        x = stats::cor(eggc_dt[grep("^auc_|^slope_|^AP_|^AR_", names(eggc_dt))]),
+        x = stats::cor(
+          x = eggc_dt[grep("^auc_|^slope_|^AP_|^AR_", names(eggc_dt))],
+          use = "pairwise.complete.obs"
+        ),
         keep.rownames = "term"
       )
 
