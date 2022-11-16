@@ -559,7 +559,7 @@ run_eggla_gwas <- function(
           j = `:=`(
             N0 = N - N1 - N2,
             INFO_TYPE = data.table::fifelse(IMPUTED == 1, info_type, NA_character_),
-            HWE_P = data.table::fifelse(IMPUTED == 1, HWE_P, NA_character_)
+            HWE_P = data.table::fifelse(IMPUTED == 1, HWE_P, NA_real_)
           )
         ]
 
