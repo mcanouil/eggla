@@ -1,3 +1,12 @@
+# eggla 0.18.3
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: HWE_P should be NA for imputed variants.
+  
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.2...v0.18.3>
+
 # eggla 0.18.2
 
 ## Fixes
