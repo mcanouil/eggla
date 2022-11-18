@@ -30,7 +30,7 @@ remotes::install_github("mcanouil/eggla")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v0.17.0")
+remotes::install_github("mcanouil/eggla@v0.18.3")
 # or the latest stable version
 remotes::install_github("mcanouil/eggla@latest")
 ```
