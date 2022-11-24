@@ -1,3 +1,12 @@
+# eggla 0.18.4
+
+## Chores
+
+- In `DESCRIPTION`,
+  - chore: update email address.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.3...v0.18.4>
+
 # eggla 0.18.3
 
 ## Fixes
