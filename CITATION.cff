@@ -14,7 +14,7 @@ abstract: Tools for longitudinal analysis within the EGG (Early Growth Genetics)
 authors:
 - family-names: Canouil
   given-names: Mickaël
-  email: ***REMOVED***
+  email: mickael.canouil@cnrs.fr
   orcid: https://orcid.org/0000-0002-3396-4549
 - family-names: Warrington
   given-names: Nicole
@@ -34,7 +34,7 @@ preferred-citation:
   authors:
   - family-names: Canouil
     given-names: Mickaël
-    email: ***REMOVED***
+    email: mickael.canouil@cnrs.fr
     orcid: https://orcid.org/0000-0002-3396-4549
   - family-names: Warrington
     given-names: Nicole
@@ -54,7 +54,7 @@ preferred-citation:
   contact:
   - family-names: Canouil
     given-names: Mickaël
-    email: ***REMOVED***
+    email: mickael.canouil@cnrs.fr
     orcid: https://orcid.org/0000-0002-3396-4549
   keywords:
   - genetics
@@ -73,7 +73,7 @@ url: https://m.canouil.fr/eggla/
 contact:
 - family-names: Canouil
   given-names: Mickaël
-  email: ***REMOVED***
+  email: mickael.canouil@cnrs.fr
   orcid: https://orcid.org/0000-0002-3396-4549
 keywords:
 - genetics

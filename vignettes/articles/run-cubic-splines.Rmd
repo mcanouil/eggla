@@ -1,6 +1,6 @@
 ---
 title: "Run The Cubic Splines (Random Cubic/Linear Splines) Analysis"
-author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
+author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
 ---
 
 ```{r, include = FALSE}

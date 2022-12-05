@@ -2,7 +2,7 @@
 title: "Get Started with 'eggla'"
 description: |
   How-to run the 'eggla' workflow from quality-control to genome-wide association study.
-author: "Mickaël Canouil, *Ph.D.* (<***REMOVED***>)"
+author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
 output: 
   rmarkdown::html_vignette:
     number_sections: true
