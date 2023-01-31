@@ -24,7 +24,7 @@ such as from a call to \code{egg_model()}.}
 Default is \code{NULL}.}
 }
 \value{
-A \code{ggplot2} object with correlations between each intervals derived parameters.
+A \code{data.table} object with correlations between each intervals derived parameters.
 }
 \description{
 Based on computed area under the curves (\emph{i.e.}, \code{egg_aucs()})

@@ -1,3 +1,10 @@
+# eggla 0.18.5
+
+- In `R/egg_correlations.R`,
+  - docs: fix wrong return value in documentation.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.4...v0.18.5>
+
 # eggla 0.18.4
 
 ## Chores
