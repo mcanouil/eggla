@@ -14,7 +14,7 @@
 #'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
 #'   Default is `NULL`.
 #'
-#' @return A `ggplot2` object with correlations between each intervals derived parameters.
+#' @return A `data.table` object with correlations between each intervals derived parameters.
 #'
 #' @export
 #'
