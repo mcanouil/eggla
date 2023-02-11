@@ -1,3 +1,6 @@
+pkgs <- setdiff(rownames(old.packages(repos = "https://cloud.r-project.org/")), "pak")
+if (length(pkgs) > 0) pak::pkg_install(pkgs)
+
 lock_file <- "inst/setup/pkg.lock"
 pak::lockfile_create(
   pkg = c(".", "data.table", "devtools", "languageserver", "httpgd", "svglite", "ragg"),
