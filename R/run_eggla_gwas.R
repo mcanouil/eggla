@@ -344,7 +344,7 @@ run_eggla_gwas <- function(
       as.character(unique(unlist(
         x = lapply(
           X = paste(bin_path[["bcftools"]], "query", "--list-samples", vcfs),
-          FUN = function(x) data.table::fread(cmd = x)
+          FUN = function(x) data.table::fread(cmd = x, colClasses = "character")
         ),
         use.names = FALSE
       )))
