@@ -80,12 +80,16 @@ GWAS is performed on the formatted VCF file(s) by PLINK2 software
 \examples{
 if (interactive()) {
   data("bmigrowth")
+  bmigrowth_csv <- file.path(tempdir(), "bmigrowth.csv")
   fwrite(
     x = bmigrowth,
-    file = file.path(tempdir(), "bmigrowth.csv")
+    file = bmigrowth_csv
   )
   results_archives <- run_eggla_lmm(
-    data = fread(file.path(tempdir(), "bmigrowth.csv")),
+    data = fread(
+      file = file.path(tempdir(), "bmigrowth.csv"),
+      colClasses = list(character = "ID")
+    ),
     id_variable = "ID",
     age_days_variable = NULL,
     age_years_variable = "age",
@@ -100,13 +104,16 @@ if (interactive()) {
     working_directory = tempdir()
   )
   run_eggla_gwas(
-    data = "/tmp/bmigrowth.csv",
+    data = fread(
+      file = file.path(tempdir(), "bmigrowth.csv"),
+      colClasses = list(character = "ID")
+    ),
     results = results_archives,
     id_column = "ID",
     traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
     covariates = c("sex"),
     vcfs = list.files(
-      path = file.path(tempdir(), "vcf"),
+      path = system.file("vcf", package = "eggla"),
       pattern = "\\\\.vcf$|\\\\.vcf.gz$",
       full.names = TRUE
     ),
