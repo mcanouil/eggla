@@ -73,8 +73,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-20.04,    r: '4.2.0'}
-          - {os: ubuntu-22.04,    r: '4.2.0'}
           - {os: ubuntu-latest,   r: '4.2.0'}
     runs-on: ${{ matrix.config.os }}
     name: R-CMD-check ${{ matrix.config.os }} (${{ matrix.config.r }})
