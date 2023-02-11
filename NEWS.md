@@ -6,6 +6,7 @@
   - fix: update path to files in example.
   - fix: check for samples in VCF files.
   - fix: leading zeros in IDs in dataset were removed.
+  - fix: use PLINK2 to compute HWE P-value, N, alleles frequencies, and missing rate.
 
 ## Chores
 
