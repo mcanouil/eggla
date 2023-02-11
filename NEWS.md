@@ -5,6 +5,7 @@
 - In `R/run_eggla_gwas.R`,
   - fix: update path to files in example.
   - fix: check for samples in VCF files.
+  - fix: leading zeros in IDs in dataset were removed.
 
 ## Chores
 
