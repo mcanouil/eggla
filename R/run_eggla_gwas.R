@@ -114,8 +114,10 @@ run_eggla_gwas <- function(
   clean = TRUE
 ) {
   INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
-  CALL_RATE <- N <- N1 <- N2 <- NULL # no visible binding for global variable from data.table
-  IMPUTED <- A1 <- NULL # no visible binding for global variable from data.table
+  CALL_RATE <- N <- N1 <- N2 <- SNPID <- NULL # no visible binding for global variable from data.table
+  IMPUTED <- A1 <- F_MISS <- OBS_CT <- NULL # no visible binding for global variable from data.table
+  MISSING_CT <- NULL # no visible binding for global variable from data.table
+  HOM_A1_CT <- HET_A1_CT <- TWO_AX_CT <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
   results <- normalizePath(results)
@@ -516,6 +518,42 @@ run_eggla_gwas <- function(
         "--out", results_file
       ), collapse = " "))
 
+      if (!quiet) message(sprintf("[%s] Computing PLINK2 frequencies ...", basename(vcf)))
+      system(paste(c(
+        bin_path[["plink2"]],
+        "--vcf", vcf_file, "dosage=DS",
+        "--mach-r2-filter",
+        "--threads", threads,
+        "--freq",
+        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+        "--silent",
+        "--out", results_file
+      ), collapse = " "))
+
+      if (!quiet) message(sprintf("[%s] Computing PLINK2 missing rate ...", basename(vcf)))
+      system(paste(c(
+        bin_path[["plink2"]],
+        "--vcf", vcf_file, "dosage=DS",
+        "--mach-r2-filter",
+        "--threads", threads,
+        "--missing",
+        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+        "--silent",
+        "--out", results_file
+      ), collapse = " "))
+
+      if (!quiet) message(sprintf("[%s] Computing PLINK2 Hardy-Weinberg test ...", basename(vcf)))
+      system(paste(c(
+        bin_path[["plink2"]],
+        "--vcf", vcf_file, "dosage=DS",
+        "--mach-r2-filter",
+        "--threads", threads,
+        "--hardy",
+        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+        "--silent",
+        "--out", results_file
+      ), collapse = " "))
+
       if (use_info) {
         if (!quiet) message(sprintf("[%s] Extracting INFO ...", basename(vcf)))
         info_fields_available <- sapply(
@@ -536,8 +574,8 @@ run_eggla_gwas <- function(
           USE.NAMES = FALSE
         )
 
-        info_fields_required <- c("NS", "AC_Het", "AC_Hom", "AF", "HWE", "F_MISSING", "INFO", "R2")
-        names(info_fields_required) <- c("N", "N1", "N2", "EAF", "HWE_P", "CALL_RATE", "INFO", "INFO")
+        info_fields_required <- c("INFO", "R2")
+        names(info_fields_required) <- c("INFO", "INFO")
 
         annot <- data.table::fread(
           cmd = paste(
@@ -556,26 +594,13 @@ run_eggla_gwas <- function(
             names(info_fields_required)[which(info_fields_required %in% info_fields_available)]
           )
         )[
-          j = `:=`(
-            N1 = N1,
-            N2 = N2 / 2,
-            STRAND = strand,
-            BUILD = build,
-            IMPUTED = as.numeric(INFO != 1)
-          )
-        ][
-          j = `:=`(
-            N0 = N - N1 - N2,
-            INFO_TYPE = data.table::fifelse(IMPUTED == 1, info_type, NA_character_),
-            HWE_P = data.table::fifelse(IMPUTED == 1, HWE_P, NA_real_)
+          j = list(
+            ID = SNPID,
+            INFO,
+            IMPUTED = as.numeric(INFO != 1),
+            INFO_TYPE = data.table::fifelse(INFO != 1, info_type, NA_character_)
           )
         ]
-
-        if (any(grepl("CALL_RATE", names(annot)))) {
-          annot[j = CALL_RATE := 1 - CALL_RATE]
-        } else {
-          annot[j = CALL_RATE := data.table::fifelse(IMPUTED == 1, 1L, NA_integer_)]
-        }
       }
 
       if (!quiet) message(sprintf("[%s] Combining results files ...", basename(vcf)))
@@ -594,61 +619,48 @@ run_eggla_gwas <- function(
           idcol = "trait_model"
         ),
         old = function(x) sub("^#", "", x)
-      )[TEST %in% "ADD" & !is.na(P), -c("TEST")]
+      )[
+        TEST %in% "ADD" & !is.na(P),
+        -c("TEST", "T_STAT", "OBS_CT")
+      ]
 
       output_results_file <- sprintf("%s.results.gz", results_file)
 
       if (!quiet) message(sprintf("[%s] Writing annotated results file ...", basename(vcf)))
-      if (use_info) {
-        output_dt <- data.table::merge.data.table(
-          y = results[j = A1 := NULL],
-          x = annot,
-          by.y = c("ID", "CHROM", "POS", "ALT", "REF"),
-          by.x = c("SNPID", "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE"),
-          all.y = TRUE
-        )
-        data.table::setcolorder(
-          x = output_dt,
-          neworder = c(
-            "trait_model",
-            "SNPID", "STRAND", "BUILD",
-            "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE",
-            "N", "N0", "N1", "N2", "EAF",
-            "BETA", "SE", "P",
-            "HWE_P", "CALL_RATE",
-            "IMPUTED", "INFO_TYPE", "INFO",
-            "T_STAT", "OBS_CT", "ERRCODE"
-          )
-        )
-      } else {
-        output_dt <- data.table::setnames(
-          x = results[j = A1 := NULL][
-            j = `:=`(
-              STRAND = strand,
-              BUILD = build
-            )
-          ],
-          old = c("ID", "CHROM", "POS", "ALT", "REF"),
-          new = c("SNPID", "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE")
-        )
-        data.table::setcolorder(
-          x = output_dt,
-          neworder = intersect(
-            x = c(
-              "trait_model",
-              "SNPID", "STRAND", "BUILD",
-              "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE",
-              "N", "N0", "N1", "N2", "EAF",
-              "BETA", "SE", "P",
-              "HWE_P", "CALL_RATE",
-              "IMPUTED", "INFO_TYPE", "INFO",
-              "T_STAT", "OBS_CT", "ERRCODE"
+      data.table::fwrite(
+        x = data.table::setnames(
+          x = Reduce(
+            f = function(x, y) merge(x, y, by = intersect(colnames(x), colnames(y))),
+            x = list(
+              data.table::fread(sprintf("%s.vmiss", results_file))[
+                j = list(
+                  `#CHROM`,
+                  ID,
+                  F_MISS,
+                  N = OBS_CT - MISSING_CT
+                )
+              ],
+              data.table::fread(sprintf("%s.afreq", results_file))[j = -c("OBS_CT")],
+              data.table::fread(sprintf("%s.hardy", results_file))[
+                j = list(
+                  `#CHROM`,
+                  ID,
+                  REF = A1, # weirdly A1 for HWE is ref in PLINK2
+                  HWE_P = P,
+                  HOM_REF_N = HOM_A1_CT,
+                  HET_REF_N = HET_A1_CT,
+                  TWO_ALT_N = TWO_AX_CT
+                )
+              ],
+              if (exists("annot")) annot else NULL
             ),
-            y = colnames(output_dt)
-          )
-        )
-      }
-      data.table::fwrite(x = output_dt, file = output_results_file)
+            init = results
+          ),
+          old = c("ID", "CHROM", "POS", "A1"),
+          new = c("SNPID", "CHR", "POS", "EFFECT_ALLELE")
+        ),
+        file = output_results_file
+      )
       if (!quiet) message(sprintf("[%s] Results written in \"%s\"", basename(vcf), output_results_file))
 
       output_results_file
@@ -664,7 +676,9 @@ run_eggla_gwas <- function(
       j = `:=`(
         FDR = stats::p.adjust(P, method = "BH"),
         BONFERRONI = stats::p.adjust(P, method = "bonferroni"),
-        COVARIATES = paste(covariates, collapse = "+")
+        COVARIATES = paste(covariates, collapse = "+"),
+        STRAND = strand,
+        BUILD = build
       ),
       by = "trait_model"
     ][order(P)],
