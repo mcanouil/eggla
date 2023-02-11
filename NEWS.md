@@ -1,3 +1,11 @@
+# eggla 0.19.0
+
+## Chores
+
+- chore: split `.devcontainer` settings into a separate repositories, _i.e._, `.vscode` and `.devcontainer`.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.5...v0.19.0>
+
 # eggla 0.18.5
 
 - In `R/egg_correlations.R`,
