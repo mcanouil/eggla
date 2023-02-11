@@ -19,6 +19,7 @@
 ## Build
 
 - build: upgrade PLINK2 and BCFtools to latest versions.
+- build: update R packages to latest versions.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.5...v0.19.0>
 
