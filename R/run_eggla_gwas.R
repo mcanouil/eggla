@@ -51,7 +51,10 @@
 #'     file = bmigrowth_csv
 #'   )
 #'   results_archives <- run_eggla_lmm(
-#'     data = fread(bmigrowth_csv),
+#'     data = fread(
+#'       file = file.path(tempdir(), "bmigrowth.csv"),
+#'       colClasses = list(character = "ID")
+#'     ),
 #'     id_variable = "ID",
 #'     age_days_variable = NULL,
 #'     age_years_variable = "age",
@@ -66,7 +69,10 @@
 #'     working_directory = tempdir()
 #'   )
 #'   run_eggla_gwas(
-#'     data = bmigrowth_csv,
+#'     data = fread(
+#'       file = file.path(tempdir(), "bmigrowth.csv"),
+#'       colClasses = list(character = "ID")
+#'     ),
 #'     results = results_archives,
 #'     id_column = "ID",
 #'     traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
@@ -447,7 +453,8 @@ run_eggla_gwas <- function(
     build = build,
     strand = strand,
     info_type = info_type,
-    FUN = function(vcf, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type) {
+    use_info = use_info,
+    FUN = function(vcf, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, use_info) {
       vcf_file <- sprintf("%s__%s", basename_file, basename(vcf))
       results_file <- sub("\\.vcf.gz", "", vcf_file)
       cmd <- paste(
