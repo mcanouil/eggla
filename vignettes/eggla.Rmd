@@ -233,7 +233,7 @@ run_eggla_gwas(
   working_directory = ".",
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
-    plink2 = "https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_20220603.zip"
+    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20230109.zip"
     # check before using: https://www.cog-genomics.org/plink/2.0/
   ),
   threads = 1
@@ -355,7 +355,7 @@ run_eggla_gwas(
   working_directory = ".",
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
-    plink2 = "https://s3.amazonaws.com/plink2-assets/alpha3/plink2_linux_x86_64_20220603.zip"
+    plink2 = "https://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20230109.zip"
     # check before using: https://www.cog-genomics.org/plink/2.0/
   ),
   threads = 1

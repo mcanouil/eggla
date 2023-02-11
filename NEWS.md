@@ -12,6 +12,10 @@
 
 - chore: split `.devcontainer` settings into a separate repositories, _i.e._, `.vscode` and `.devcontainer`.
 
+## Build
+
+- build: upgrade PLINK2, BCFtools, and R to latest versions.
+
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.5...v0.19.0>
 
 # eggla 0.18.5

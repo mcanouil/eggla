@@ -46,7 +46,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         libv8-dev \
         libudunits2-dev
 
-ARG BCFTOOLS_VERSION=1.15.1
+ARG BCFTOOLS_VERSION=1.16
 RUN wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 \
     && tar -C /tmp/ -xjf /tmp/bcftools-${BCFTOOLS_VERSION}.tar.bz2 \
     && cd /tmp/bcftools-${BCFTOOLS_VERSION} \
@@ -60,7 +60,7 @@ COPY inst/bin/plink2 /usr/bin/plink2
 RUN chmod +x /usr/bin/plink2
 
 ARG RIG_VERSION="latest"
-ARG R_VERSION="4.2.0"
+ARG R_VERSION="4.2.2"
 COPY inst/setup/pkg.lock pkg.lock
 RUN wget -q -P /tmp/ "https://github.com/r-lib/rig/releases/download/${RIG_VERSION}/rig-linux-${RIG_VERSION#v}.tar.gz" \
     && tar -C /usr/local -zxvf /tmp/rig-linux-${RIG_VERSION#v}.tar.gz \
