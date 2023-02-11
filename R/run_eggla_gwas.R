@@ -333,15 +333,15 @@ run_eggla_gwas <- function(
   }
 
   if (
-    length(intersect(
-      dt[j = unique(.SD), .SDcols = "#IID"],
-      unique(unlist(
+    length(setdiff(
+      as.character(unlist(dt[j = unique(.SD), .SDcols = "#IID"], use.names = FALSE)),
+      as.character(unique(unlist(
         x = lapply(
           X = paste(bin_path[["bcftools"]], "query", "--list-samples", vcfs),
           FUN = function(x) data.table::fread(cmd = x)
         ),
         use.names = FALSE
-      ))
+      )))
     )) != 0
   ) {
     stop(paste0(
