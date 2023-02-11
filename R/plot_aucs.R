@@ -64,7 +64,6 @@ plot_aucs <- function(
         mapping = ggplot2::aes(fill = period_interval, colour = period_interval),
         shape = 21,
         alpha = 0.10,
-        groupOnX = TRUE,
         width = 0.15
       )
     )

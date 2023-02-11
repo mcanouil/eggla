@@ -414,7 +414,6 @@ run_eggla_lmm <- function(
             data = function(dt) dt[Outlier != 0],
             mapping = ggplot2::aes(group = .data[["parameter"]], colour = .data[["outlier_colour"]]),
             shape = 21,
-            groupOnX = TRUE,
             width = 0.15,
             na.rm = TRUE
           )
