@@ -1,5 +1,10 @@
 # eggla 0.19.0
 
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: update path to files in example.
+
 ## Chores
 
 - chore: split `.devcontainer` settings into a separate repositories, _i.e._, `.vscode` and `.devcontainer`.
