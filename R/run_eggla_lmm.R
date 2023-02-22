@@ -25,10 +25,7 @@
 #'   i.e., CAR(1) as correlation structure.
 #' @param knots The knots defining the splines.
 #' @param period The intervals knots on which slopes are to be computed.
-#' @param filter_apar A string following `data.table` syntax for filtering on `"i"`
-#'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
-#'   Argument pass through `compute_apar()` (see `predict_bmi()`).
-#'   Default is `NULL`.
+#' @inheritParams predict_bmi
 #' @param outlier_method The outlier detection method(s). Default is `"iqr"`. Can be
 #'   `"cook"`, `"pareto"`, `"zscore"`, `"zscore_robust"`, `"iqr"`, `"ci"`, `"eti"`,
 #'   `"hdi"`, `"bci"`, `"mahalanobis"`, `"mahalanobis_robust"`, `"mcd"`, `"ics"`,
@@ -88,7 +85,10 @@ run_eggla_lmm <- function(
   use_car1 = FALSE,
   knots = c(1, 8, 12),
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  filter_apar = NULL,
+  start = 0.25,
+  end = 10,
+  step = 0.01,
+  filter = NULL,
   outlier_method = "iqr",
   outlier_threshold = list(iqr = 2),
   outlier_exclude = TRUE,
@@ -272,10 +272,10 @@ run_eggla_lmm <- function(
           data = compute_apar(
             fit = results,
             from = "predicted",
-            start = 0.25,
-            end = 10,
-            step = 0.05,
-            filter = filter_apar
+            start = start,
+            end = end,
+            step = step,
+            filter = filter
           )[
             AP | AR
           ][
@@ -323,10 +323,10 @@ run_eggla_lmm <- function(
         period = period,
         knots = knots,
         from = "predicted",
-        start = 0.25,
-        end = 10,
-        step = 0.05,
-        filter = filter_apar,
+        start = start,
+        end = end,
+        step = step,
+        filter = filter,
         outlier_method = outlier_method,
         outlier_threshold = outlier_threshold
       )

@@ -10,9 +10,7 @@
 #'   such as from a call to `egg_model()`.
 #' @param period The intervals knots on which slopes are to be computed.
 #' @param knots The knots as defined `fit` and according to `method`.
-#' @param filter_apar A string following `data.table` syntax for filtering on `"i"`
-#'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
-#'   Default is `NULL`.
+#' @inheritParams predict_bmi
 #'
 #' @return A `data.table` object with correlations between each intervals derived parameters.
 #'
@@ -35,7 +33,10 @@ egg_correlations <- function(
   fit,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
   knots = c(1, 8, 12),
-  filter_apar = NULL
+  start = 0.25,
+  end = 10,
+  step = 0.01,
+  filter = NULL,
 ) {
   AP <- AR <- what <- NULL # no visible binding for global variable from data.table
   dt <- Reduce(
@@ -49,10 +50,10 @@ egg_correlations <- function(
             data = compute_apar(
               fit = fit,
               from = "predicted",
-              start = 0.25,
-              end = 10,
-              step = 0.05,
-              filter = filter_apar
+              start = start,
+              end = end,
+              step = step,
+              filter = filter
             )[
               AP | AR
             ][

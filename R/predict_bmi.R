@@ -11,6 +11,7 @@
 #' @param step The step to increment the sequence.
 #' @param filter A string following `data.table` syntax for filtering on `"i"`
 #'   (_i.e._, row elements), _e.g._, `filter = "source == 'A'"`.
+#'   Argument pass through `compute_apar()` (see `predict_bmi()`).
 #'   Default is `NULL`.
 #'
 #' @return A `data.table` object.
@@ -43,7 +44,7 @@
 #' predict_bmi(res)[order(egg_id, egg_ageyears)]
 #'
 #' predict_bmi(res, filter = "source == 'A'")[order(egg_id, egg_ageyears)]
-predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.05, filter = NULL) {
+predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.01, filter = NULL) {
   stopifnot(inherits(fit, "lme"))
   bmi <- egg_ageyears <- egg_bmi <- egg_id <- NULL # no visible binding for global variable from data.table
 
@@ -115,7 +116,7 @@ predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.05, filter = NULL)
   ) {
     warning(paste(
       "Multiple BMI measures (for the same age) have been detected and are aggregated using geometric mean!",
-      "Use \"filter\" (or \"filter_apar\" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = \"source == 'clinic'\".",
+      "Use \"filter\" (or \"filter\" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = \"source == 'clinic'\".",
       sep = "\n"
     ))
     out <- out[
