@@ -36,7 +36,7 @@ egg_correlations <- function(
   start = 0.25,
   end = 10,
   step = 0.01,
-  filter = NULL,
+  filter = NULL
 ) {
   AP <- AR <- what <- NULL # no visible binding for global variable from data.table
   dt <- Reduce(
