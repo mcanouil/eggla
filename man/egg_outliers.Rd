@@ -11,7 +11,7 @@ egg_outliers(
   from = c("predicted", "observed"),
   start = 0.25,
   end = 10,
-  step = 0.05,
+  step = 0.01,
   filter = NULL,
   outlier_method = "iqr",
   outlier_threshold = list(iqr = 2)
@@ -36,6 +36,7 @@ computation, either "predicted" or "observed". Default is "predicted".}
 
 \item{filter}{A string following \code{data.table} syntax for filtering on \code{"i"}
 (\emph{i.e.}, row elements), \emph{e.g.}, \code{filter = "source == 'A'"}.
+Argument pass through \code{compute_apar()} (see \code{predict_bmi()}).
 Default is \code{NULL}.}
 
 \item{outlier_method}{The outlier detection method(s). Default is \code{"iqr"}. Can be
