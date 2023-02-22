@@ -48,7 +48,7 @@ egg_outliers <- function(
   from = c("predicted", "observed"),
   start = 0.25,
   end = 10,
-  step = 0.05,
+  step = 0.01,
   filter = NULL,
   outlier_method = "iqr",
   outlier_threshold = list(iqr = 2)
