@@ -122,7 +122,7 @@ run_eggla_gwas <- function(
   working_directory <- normalizePath(working_directory)
   results <- normalizePath(results)
   if (length(results) != 2) {
-    stop("'results' must be a vector of length 2, i.e., a path for female and a path for mmale.")
+    stop("'results' must be a vector of length 2, i.e., a path for female and a path for male.")
   }
   dir.create(
     path = working_directory,
