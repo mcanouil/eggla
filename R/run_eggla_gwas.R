@@ -635,7 +635,7 @@ run_eggla_gwas <- function(
                 j = list(
                   `#CHROM`,
                   ID,
-                  F_MISS,
+                  CALL_RATE = 1 - F_MISS,
                   N = OBS_CT - MISSING_CT
                 )
               ],
