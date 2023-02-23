@@ -508,7 +508,6 @@ run_eggla_gwas <- function(
       system(paste(c(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
-        "--mach-r2-filter",
         "--threads", threads,
         "--glm sex",
         if (file.exists(sprintf("%s.cov", basename_file))) c("--covar", sprintf("%s.cov", basename_file)) else "allow-no-covars",
@@ -524,7 +523,6 @@ run_eggla_gwas <- function(
       system(paste(c(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
-        "--mach-r2-filter",
         "--threads", threads,
         "--freq",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
@@ -535,8 +533,7 @@ run_eggla_gwas <- function(
       if (!quiet) message(sprintf("[%s] Computing PLINK2 missing rate ...", basename(vcf)))
       system(paste(c(
         bin_path[["plink2"]],
-        "--vcf", vcf_file, "dosage=DS",
-        "--mach-r2-filter",
+        "--vcf", vcf_file, "dosage=DS",        
         "--threads", threads,
         "--missing",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
@@ -549,7 +546,6 @@ run_eggla_gwas <- function(
       # system(paste(c(
       #   bin_path[["plink2"]],
       #   "--vcf", vcf_file, "dosage=DS",
-      #   "--mach-r2-filter",
       #   "--threads", threads,
       #   "--hardy",
       #   if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
