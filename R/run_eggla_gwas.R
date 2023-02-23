@@ -544,17 +544,18 @@ run_eggla_gwas <- function(
         "--out", results_file
       ), collapse = " "))
 
-      if (!quiet) message(sprintf("[%s] Computing PLINK2 Hardy-Weinberg test ...", basename(vcf)))
-      system(paste(c(
-        bin_path[["plink2"]],
-        "--vcf", vcf_file, "dosage=DS",
-        "--mach-r2-filter",
-        "--threads", threads,
-        "--hardy",
-        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
-        "--silent",
-        "--out", results_file
-      ), collapse = " "))
+      # commented since it is not used but kept just in case
+      # if (!quiet) message(sprintf("[%s] Computing PLINK2 Hardy-Weinberg test ...", basename(vcf)))
+      # system(paste(c(
+      #   bin_path[["plink2"]],
+      #   "--vcf", vcf_file, "dosage=DS",
+      #   "--mach-r2-filter",
+      #   "--threads", threads,
+      #   "--hardy",
+      #   if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+      #   "--silent",
+      #   "--out", results_file
+      # ), collapse = " "))
 
       if (use_info) {
         if (!quiet) message(sprintf("[%s] Extracting INFO ...", basename(vcf)))
@@ -643,17 +644,17 @@ run_eggla_gwas <- function(
                 )
               ],
               data.table::fread(sprintf("%s.afreq", results_file))[j = -c("OBS_CT")],
-              data.table::fread(sprintf("%s.hardy", results_file))[
-                j = list(
-                  `#CHROM`,
-                  ID,
-                  REF = A1, # weirdly A1 for HWE is ref in PLINK2
-                  HWE_P = P,
-                  HOM_REF_N = HOM_A1_CT,
-                  HET_REF_N = HET_A1_CT,
-                  TWO_ALT_N = TWO_AX_CT
-                )
-              ],
+              # data.table::fread(sprintf("%s.hardy", results_file))[ # commented since it is not used but kept just in case
+              #   j = list(
+              #     `#CHROM`,
+              #     ID,
+              #     REF = A1, # weirdly A1 for HWE is ref in PLINK2
+              #     HWE_P = P,
+              #     HOM_REF_N = HOM_A1_CT,
+              #     HET_REF_N = HET_A1_CT,
+              #     TWO_ALT_N = TWO_AX_CT
+              #   )
+              # ],
               if (exists("annot")) annot else NULL
             ),
             init = results
