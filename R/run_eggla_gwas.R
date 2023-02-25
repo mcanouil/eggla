@@ -673,8 +673,8 @@ run_eggla_gwas <- function(
       use.names = TRUE
     )[
       j = `:=`(
-        FDR = stats::p.adjust(P, method = "BH"),
-        BONFERRONI = stats::p.adjust(P, method = "bonferroni"),
+        # FDR = stats::p.adjust(P, method = "BH"),
+        # BONFERRONI = stats::p.adjust(P, method = "bonferroni"),
         COVARIATES = paste(covariates, collapse = "+"),
         STRAND = strand,
         BUILD = build
