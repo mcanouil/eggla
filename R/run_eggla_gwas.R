@@ -535,7 +535,7 @@ run_eggla_gwas <- function(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",        
         "--threads", threads,
-        "--missing",
+        "--missing", "vcols=+chrom,+nmissdosage,+nobs,+fmiss",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
         "--silent",
         "--out", results_file
@@ -636,7 +636,7 @@ run_eggla_gwas <- function(
                   `#CHROM`,
                   ID,
                   CALL_RATE = 1 - F_MISS,
-                  N = OBS_CT - MISSING_CT
+                  N = OBS_CT - MISSING_DOSAGE_CT
                 )
               ],
               data.table::fread(sprintf("%s.afreq", results_file))[j = -c("OBS_CT")],
