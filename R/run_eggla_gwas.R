@@ -2,7 +2,7 @@
 #'
 #' Format VCF file(s) by filtering out all variants
 #' not satisfaying "--min-alleles 2 --max-alleles 2 --types snps"
-#' and setting IDs (if no annotation file using VEP is provided)
+#' and setting IDs
 #' with "%CHROM:%POS:%REF:%ALT" (see https://samtools.github.io/bcftools/).
 #' GWAS is performed on the formatted VCF file(s) by PLINK2 software
 #' (https://www.cog-genomics.org/plink/2.0).
@@ -18,7 +18,6 @@
 #' @param vcfs Path to the "raw" VCF file(s) containing
 #'   the genotypes of the individuals to be analysed.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
-#' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param use_info A logical indicating whether to extract all informations stored in the "INFO" field.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
@@ -83,7 +82,6 @@
 #'       full.names = TRUE
 #'     ),
 #'     working_directory = tempdir(),
-#'     vep = NULL,
 #'     bin_path = list(
 #'       bcftools = "/usr/bin/bcftools",
 #'       plink2 = "/usr/bin/plink2"
@@ -99,7 +97,6 @@ run_eggla_gwas <- function(
   covariates,
   vcfs,
   working_directory,
-  vep = NULL,
   use_info = TRUE,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
@@ -415,11 +412,10 @@ run_eggla_gwas <- function(
 
   if (!quiet) message("Formatting VCFs ...")
   if (nzchar(system.file(package = "future.apply"))) {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, use_info, FUN) {
+    eggla_lapply <- function(X, basename_file, bin_path, bcftools_view_options, build, strand, info_type, use_info, FUN) {
       future.apply::future_lapply(
         X = X,
         basename_file = basename_file,
-        vep_file = vep_file,
         bin_path = bin_path,
         bcftools_view_options = bcftools_view_options,
         build = build,
@@ -432,11 +428,10 @@ run_eggla_gwas <- function(
       )
     }
   } else {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, use_info, FUN) {
+    eggla_lapply <- function(X, basename_file, bin_path, bcftools_view_options, build, strand, info_type, use_info, FUN) {
       lapply(
         X = X,
         basename_file = basename_file,
-        vep_file = vep_file,
         bin_path = bin_path,
         bcftools_view_options = bcftools_view_options,
         build = build,
@@ -451,17 +446,16 @@ run_eggla_gwas <- function(
   list_results <- eggla_lapply(
     X = vcfs,
     basename_file = basename_file,
-    vep_file = vep,
     bin_path = bin_path,
     bcftools_view_options = bcftools_view_options,
     build = build,
     strand = strand,
     info_type = info_type,
     use_info = use_info,
-    FUN = function(vcf, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, use_info) {
+    FUN = function(vcf, basename_file, bin_path, bcftools_view_options, build, strand, info_type, use_info) {
       vcf_file <- sprintf("%s__%s", basename_file, basename(vcf))
       results_file <- sub("\\.vcf.gz", "", vcf_file)
-      cmd <- paste(
+      system(paste(
         bin_path[["bcftools"]],
           "+fill-tags", vcf,
        "|",
@@ -469,40 +463,13 @@ run_eggla_gwas <- function(
           "view",
           bcftools_view_options,
           "--force-samples",
-          "--samples-file", sprintf("%s.samples", basename_file)
-      )
-
-      if (!is.null(vep_file) && file.exists(vep_file)) {
-        cmd <- paste(
-          cmd,
-          "|",
-          bin_path[["bcftools"]],
-            "annotate",
-            "--annotations", vep_file,
-            "--header-lines", sub("_formatted.tsv.gz", ".header", vep_file),
-            "--columns CHROM,POS,Gene,Symbol,rsid",
-          "|",
-          bin_path[["bcftools"]],
-            "annotate",
-            "--set-id '%INFO/rsid'",
-          "|",
-          bin_path[["bcftools"]],
-            "annotate",
-            "--set-id +'%CHROM:%POS:%REF:%ALT'",
-            "--output-type z --output", vcf_file
-        )
-      } else {
-        cmd <- paste(
-          cmd,
-          "|",
-          bin_path[["bcftools"]],
-            "annotate",
-            "--set-id '%CHROM:%POS:%REF:%ALT'",
-            "--output-type z --output", vcf_file
-        )
-      }
-
-      system(cmd)
+          "--samples-file", sprintf("%s.samples", basename_file),
+        "|",
+        bin_path[["bcftools"]],
+          "annotate",
+          "--set-id '%CHROM:%POS:%REF:%ALT'",
+          "--output-type z --output", vcf_file
+      ))
 
       if (!quiet) message(sprintf("[%s] Performing PLINK2 regression ...", basename(vcf)))
       system(paste(c(
