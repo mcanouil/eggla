@@ -12,7 +12,6 @@ run_eggla_gwas(
   covariates,
   vcfs,
   working_directory,
-  vep = NULL,
   use_info = TRUE,
   bin_path = list(bcftools = "/usr/bin/bcftools", plink2 = "/usr/bin/plink2"),
   bcftools_view_options = NULL,
@@ -43,8 +42,6 @@ the genotypes of the individuals to be analysed.}
 
 \item{working_directory}{Directory in which computation will occur and where output files will be saved.}
 
-\item{vep}{Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.}
-
 \item{use_info}{A logical indicating whether to extract all informations stored in the "INFO" field.}
 
 \item{bin_path}{A named list containing the path to the PLINK2 and BCFtools binaries
@@ -72,7 +69,7 @@ Path to results file.
 \description{
 Format VCF file(s) by filtering out all variants
 not satisfaying "--min-alleles 2 --max-alleles 2 --types snps"
-and setting IDs (if no annotation file using VEP is provided)
+and setting IDs
 with "\%CHROM:\%POS:\%REF:\%ALT" (see https://samtools.github.io/bcftools/).
 GWAS is performed on the formatted VCF file(s) by PLINK2 software
 (https://www.cog-genomics.org/plink/2.0).
@@ -118,7 +115,6 @@ if (interactive()) {
       full.names = TRUE
     ),
     working_directory = tempdir(),
-    vep = NULL,
     bin_path = list(
       bcftools = "/usr/bin/bcftools",
       plink2 = "/usr/bin/plink2"
