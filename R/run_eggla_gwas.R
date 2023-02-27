@@ -115,6 +115,7 @@ run_eggla_gwas <- function(
   IMPUTED <- A1 <- F_MISS <- OBS_CT <- NULL # no visible binding for global variable from data.table
   MISSING_CT <- NULL # no visible binding for global variable from data.table
   HOM_A1_CT <- HET_A1_CT <- TWO_AX_CT <- NULL # no visible binding for global variable from data.table
+  NON_EFFECT_ALLELE <- EAF <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
   results <- normalizePath(results)
@@ -476,7 +477,7 @@ run_eggla_gwas <- function(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
         "--threads", threads,
-        "--glm sex",
+        "--glm sex", "cols=+chrom,+pos,+ax,+a1count,+totallele,+a1freq,+machr2,+nobs,+se,+p,+err",
         if (file.exists(sprintf("%s.cov", basename_file))) c("--covar", sprintf("%s.cov", basename_file)) else "allow-no-covars",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
         if (file.exists(sprintf("%s.sex", basename_file))) c("--update-sex", sprintf("%s.sex", basename_file)),
@@ -486,39 +487,37 @@ run_eggla_gwas <- function(
         "--out", results_file
       ), collapse = " "))
 
-      if (!quiet) message(sprintf("[%s] Computing PLINK2 frequencies ...", basename(vcf)))
-      system(paste(c(
-        bin_path[["plink2"]],
-        "--vcf", vcf_file, "dosage=DS",
-        "--threads", threads,
-        "--freq",
-        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
-        "--silent",
-        "--out", results_file
-      ), collapse = " "))
-
-      if (!quiet) message(sprintf("[%s] Computing PLINK2 missing rate ...", basename(vcf)))
-      system(paste(c(
-        bin_path[["plink2"]],
-        "--vcf", vcf_file, "dosage=DS",        
-        "--threads", threads,
-        "--missing", "vcols=+chrom,+nmissdosage,+nobs,+fmiss",
-        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
-        "--silent",
-        "--out", results_file
-      ), collapse = " "))
-
-      # commented since it is not used but kept just in case
-      # if (!quiet) message(sprintf("[%s] Computing PLINK2 Hardy-Weinberg test ...", basename(vcf)))
-      # system(paste(c(
-      #   bin_path[["plink2"]],
-      #   "--vcf", vcf_file, "dosage=DS",
-      #   "--threads", threads,
-      #   "--hardy",
-      #   if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
-      #   "--silent",
-      #   "--out", results_file
-      # ), collapse = " "))
+      if (!quiet) message(sprintf("[%s] Combining results files ...", basename(vcf)))
+      results <- data.table::setnames(
+        x = data.table::rbindlist(
+          l = lapply(
+            X = (function(x) `names<-`(x, sub("[^.]*\\.", "", x)))(
+              list.files(
+                path = dirname(results_file),
+                pattern = sprintf("%s\\..*\\.glm\\..*", basename(results_file)),
+                full.names = TRUE
+              )
+            ),
+            FUN = data.table::fread
+          ),
+          idcol = "trait_model"
+        ),
+        old = function(x) sub("^#", "", x)
+      )[
+        TEST %in% "ADD", -c("TEST", "T_STAT", "REF", "ALT")
+      ]
+      data.table::setnames(
+        x = results,
+        old = c(
+          "CHROM", "POS", "ID", "A1", "AX", "A1_CT", "ALLELE_CT", 
+          "A1_FREQ", "MACH_R2", "OBS_CT", "BETA", "SE", "P", "ERRCODE"
+        ),
+        new = c(
+          "CHR", "POS", "SNPID", "EFFECT_ALLELE", "NON_EFFECT_ALLELE", "EFFECT_ALLELE_CT", "ALLELE_CT", 
+          "EAF", "PLINK2_MACH_R2", "N", "BETA", "SE", "P", "ERRCODE"
+        )
+      )
+      output_results_file <- sprintf("%s.results.gz", results_file)
 
       if (use_info) {
         if (!quiet) message(sprintf("[%s] Extracting INFO ...", basename(vcf)))
@@ -567,66 +566,17 @@ run_eggla_gwas <- function(
             INFO_TYPE = data.table::fifelse(INFO != 1, info_type, NA_character_)
           )
         ]
+        annotated_results <- merge(
+          x = results,
+          y = annot,
+          by.x = "SNPID",
+          by.y = "ID",
+          all.x = TRUE
+        )
+      } else {
+        annotated_results <- results
       }
-
-      if (!quiet) message(sprintf("[%s] Combining results files ...", basename(vcf)))
-      results <- data.table::setnames(
-        x = data.table::rbindlist(
-          l = lapply(
-            X = (function(x) `names<-`(x, sub("[^.]*\\.", "", x)))(
-              list.files(
-                path = dirname(results_file),
-                pattern = sprintf("%s\\..*\\.glm\\..*", basename(results_file)),
-                full.names = TRUE
-              )
-            ),
-            FUN = data.table::fread
-          ),
-          idcol = "trait_model"
-        ),
-        old = function(x) sub("^#", "", x)
-      )[
-        TEST %in% "ADD" & !is.na(P),
-        -c("TEST", "T_STAT", "OBS_CT")
-      ]
-
-      output_results_file <- sprintf("%s.results.gz", results_file)
-
-      if (!quiet) message(sprintf("[%s] Writing annotated results file ...", basename(vcf)))
-      data.table::fwrite(
-        x = data.table::setnames(
-          x = Reduce(
-            f = function(x, y) merge(x, y, by = intersect(colnames(x), colnames(y))),
-            x = list(
-              data.table::fread(sprintf("%s.vmiss", results_file))[
-                j = list(
-                  `#CHROM`,
-                  ID,
-                  CALL_RATE = 1 - F_MISS,
-                  N = OBS_CT - MISSING_DOSAGE_CT
-                )
-              ],
-              data.table::fread(sprintf("%s.afreq", results_file))[j = -c("OBS_CT")],
-              # data.table::fread(sprintf("%s.hardy", results_file))[ # commented since it is not used but kept just in case
-              #   j = list(
-              #     `#CHROM`,
-              #     ID,
-              #     REF = A1, # weirdly A1 for HWE is ref in PLINK2
-              #     HWE_P = P,
-              #     HOM_REF_N = HOM_A1_CT,
-              #     HET_REF_N = HET_A1_CT,
-              #     TWO_ALT_N = TWO_AX_CT
-              #   )
-              # ],
-              if (exists("annot")) annot else NULL
-            ),
-            init = results
-          ),
-          old = c("ID", "CHROM", "POS", "A1"),
-          new = c("SNPID", "CHR", "POS", "EFFECT_ALLELE")
-        ),
-        file = output_results_file
-      )
+      data.table::fwrite(x = annotated_results, file = output_results_file)
       if (!quiet) message(sprintf("[%s] Results written in \"%s\"", basename(vcf), output_results_file))
 
       output_results_file
@@ -640,15 +590,21 @@ run_eggla_gwas <- function(
       use.names = TRUE
     )[
       j = `:=`(
-        # FDR = stats::p.adjust(P, method = "BH"),
-        # BONFERRONI = stats::p.adjust(P, method = "bonferroni"),
         COVARIATES = paste(covariates, collapse = "+"),
         STRAND = strand,
         BUILD = build
       ),
       by = "trait_model"
     ][order(P)],
-    neworder = c("trait_model", "COVARIATES")
+    neworder = c(
+      "trait_model", "COVARIATES",
+      "SNPID", "STRAND", "BUILD", "CHR", "POS",
+      "EFFECT_ALLELE", "NON_EFFECT_ALLELE", "N",
+      "EAF", "BETA", "SE", "P",
+      "IMPUTED", "INFO_TYPE", "INFO", "PLINK2_MACH_R2",
+      "EFFECT_ALLELE_CT", "ALLELE_CT",
+      "ERRCODE"
+    )
   )[
     j = list(file = (function(dt, tm) {
       rf <- sprintf(file.path(working_directory, "%s-gwas.csv.gz"), tm)
