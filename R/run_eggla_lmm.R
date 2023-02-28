@@ -464,7 +464,6 @@ run_eggla_lmm <- function(
               aucs_dt[["egg_id"]] %in% outliers_to_exclude[parameter %in% icol, ID],
               icol
             ] <- NA_real_
-
           }
           if (any(grepl("^slope_", icol))) {
             slopes_dt <- data.table::setDF(slopes_dt)
