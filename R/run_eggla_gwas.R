@@ -509,11 +509,11 @@ run_eggla_gwas <- function(
       data.table::setnames(
         x = results,
         old = c(
-          "CHROM", "POS", "ID", "A1", "AX", "A1_CT", "ALLELE_CT", 
+          "CHROM", "POS", "ID", "A1", "AX",
           "A1_FREQ", "MACH_R2", "OBS_CT", "BETA", "SE", "P", "ERRCODE"
         ),
         new = c(
-          "CHR", "POS", "SNPID", "EFFECT_ALLELE", "NON_EFFECT_ALLELE", "EFFECT_ALLELE_CT", "ALLELE_CT", 
+          "CHR", "POS", "SNPID", "EFFECT_ALLELE", "NON_EFFECT_ALLELE",
           "EAF", "PLINK2_MACH_R2", "N", "BETA", "SE", "P", "ERRCODE"
         )
       )
@@ -602,7 +602,6 @@ run_eggla_gwas <- function(
       "EFFECT_ALLELE", "NON_EFFECT_ALLELE", "N",
       "EAF", "BETA", "SE", "P",
       "IMPUTED", "INFO_TYPE", "INFO", "PLINK2_MACH_R2",
-      "EFFECT_ALLELE_CT", "ALLELE_CT",
       "ERRCODE"
     )
   )[
