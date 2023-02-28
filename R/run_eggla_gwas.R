@@ -416,35 +416,21 @@ run_eggla_gwas <- function(
 
   if (!quiet) message("Formatting VCFs ...")
   if (nzchar(system.file(package = "future.apply"))) {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, use_info, FUN) {
+    eggla_lapply <- function(X, FUN, ...) {
       future.apply::future_lapply(
         X = X,
-        basename_file = basename_file,
-        vep_file = vep_file,
-        bin_path = bin_path,
-        bcftools_view_options = bcftools_view_options,
-        build = build,
-        strand = strand,
-        info_type = info_type,
-        use_info = use_info,
         future.globals = FALSE,
         future.packages = "data.table",
-        FUN = FUN
+        FUN = FUN,
+        ...
       )
     }
   } else {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, use_info, FUN) {
+    eggla_lapply <- function(X, FUN, ...) {
       lapply(
         X = X,
-        basename_file = basename_file,
-        vep_file = vep_file,
-        bin_path = bin_path,
-        bcftools_view_options = bcftools_view_options,
-        build = build,
-        strand = strand,
-        info_type = info_type,
-        use_info = use_info,
-        FUN = FUN
+        FUN = FUN,
+        ...
       )
     }
   }
