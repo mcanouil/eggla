@@ -248,10 +248,7 @@ run_eggla_lmm <- function(
         fit = results
       ) +
         patchwork::plot_annotation(
-          title = sprintf(
-            "Cubic Splines (Random Linear Splines) - BMI - %s",
-            c("0" = "Male", "1" = "Female")[as.character(isex)]
-          ),
+          title = c("0" = "Male", "1" = "Female")[as.character(isex)],
           tag_levels = "A"
         )
 
