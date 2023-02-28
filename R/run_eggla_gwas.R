@@ -18,7 +18,7 @@
 #' @param vcfs Path to the "raw" VCF file(s) containing
 #'   the genotypes of the individuals to be analysed.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
-#' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
+#' @param vep_file Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param use_info A logical indicating whether to extract all informations stored in the "INFO" field.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
@@ -83,7 +83,7 @@
 #'       full.names = TRUE
 #'     ),
 #'     working_directory = tempdir(),
-#'     vep = NULL,
+#'     vep_file = NULL,
 #'     bin_path = list(
 #'       bcftools = "/usr/bin/bcftools",
 #'       plink2 = "/usr/bin/plink2"
@@ -99,7 +99,7 @@ run_eggla_gwas <- function(
   covariates,
   vcfs,
   working_directory,
-  vep = NULL,
+  vep_file = NULL,
   use_info = TRUE,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
@@ -438,7 +438,7 @@ run_eggla_gwas <- function(
   list_results <- eggla_lapply(
     X = vcfs,
     basename_file = basename_file,
-    vep_file = vep,
+    vep_file = vep_file,
     bin_path = bin_path,
     bcftools_view_options = bcftools_view_options,
     build = build,

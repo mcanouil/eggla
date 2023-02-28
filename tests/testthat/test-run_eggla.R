@@ -46,7 +46,7 @@ test_that("run_eggla", {
         pattern = "\\.vcf$|\\.vcf.gz$",
         full.names = TRUE
       ),
-      vep = NULL,
+      vep_file = NULL,
       working_directory = output_path,
       bin_path = list(
         bcftools = "/usr/bin/bcftools",
@@ -83,7 +83,7 @@ test_that("run_eggla", {
         pattern = "\\.vcf$|\\.vcf.gz$",
         full.names = TRUE
       ),
-      vep = NULL,
+      vep_file = NULL,
       working_directory = output_path,
       bin_path = list(
         bcftools = "/fake/path/bcftools",
@@ -108,7 +108,7 @@ test_that("run_eggla", {
         pattern = "\\.vcf$|\\.vcf.gz$",
         full.names = TRUE
       ),
-      vep = NULL,
+      vep_file = NULL,
       working_directory = output_path,
       bin_path = list(
         bcftools = "/usr/bin/bcftools",
@@ -152,7 +152,7 @@ test_that("run_eggla", {
         pattern = "\\.vcf$|\\.vcf.gz$",
         full.names = TRUE
       ),
-      vep = NULL,
+      vep_file = NULL,
       working_directory = output_path,
       use_info = TRUE,
       bin_path = list(
