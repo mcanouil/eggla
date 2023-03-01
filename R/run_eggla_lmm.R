@@ -248,10 +248,7 @@ run_eggla_lmm <- function(
         fit = results
       ) +
         patchwork::plot_annotation(
-          title = sprintf(
-            "Cubic Splines (Random Linear Splines) - BMI - %s",
-            c("0" = "Male", "1" = "Female")[as.character(isex)]
-          ),
+          title = c("0" = "Male", "1" = "Female")[as.character(isex)],
           tag_levels = "A"
         )
 
@@ -463,10 +460,9 @@ run_eggla_lmm <- function(
           if (any(grepl("^auc_", icol))) {
             aucs_dt <- data.table::setDF(aucs_dt)
             aucs_dt[
-              slopes_dt[["egg_id"]] %in% outliers_to_exclude[parameter %in% icol, ID],
+              aucs_dt[["egg_id"]] %in% outliers_to_exclude[parameter %in% icol, ID],
               icol
             ] <- NA_real_
-
           }
           if (any(grepl("^slope_", icol))) {
             slopes_dt <- data.table::setDF(slopes_dt)
