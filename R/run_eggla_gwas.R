@@ -595,6 +595,43 @@ run_eggla_gwas <- function(
       } else {
         annotated_results <- results
       }
+
+      if (!quiet) message(sprintf("[%s] Computing PLINK2 missing rate ...", basename(vcf)))
+      system(paste(c(
+        bin_path[["plink2"]],
+        "--vcf", vcf_file, "dosage=DS",
+        "--threads", threads,
+        "--missing", "vcols=+chrom,+nmissdosage,+nobs,+fmiss",
+        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+        "--silent",
+        "--out", results_file
+      ), collapse = " "))
+
+      if (!quiet) message(sprintf("[%s] Computing PLINK2 Hardy-Weinberg test ...", basename(vcf)))
+      system(paste(c(
+        bin_path[["plink2"]],
+        "--vcf", vcf_file, "dosage=DS",
+        "--threads", threads,
+        "--hardy",
+        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+        "--silent",
+        "--out", results_file
+      ), collapse = " "))
+
+      annotated_results <- merge(
+        x = annotated_results,
+        y = merge(
+          x = data.table::fread(sprintf("%s.vmiss", results_file))[j = list(ID, CALL_RATE = 1 - F_MISS)],
+          y = data.table::fread(sprintf("%s.hardy", results_file))[j = list(ID, HWE_P = P)],
+          by = "ID"
+        ),
+        by.x = "SNPID",
+        by.y = "ID"
+      )[
+        j = .SD,
+        .SDcols = -c("A1_CT", "ALLELE_CT")
+      ]
+
       data.table::fwrite(x = annotated_results, file = output_results_file)
       if (!quiet) message(sprintf("[%s] Results written in \"%s\"", basename(vcf), output_results_file))
 
@@ -621,6 +658,7 @@ run_eggla_gwas <- function(
       "EFFECT_ALLELE", "NON_EFFECT_ALLELE", "N",
       "EAF", "BETA", "SE", "P",
       "IMPUTED", "INFO_TYPE", "INFO", "PLINK2_MACH_R2",
+      "CALL_RATE", "HWE_P",
       "ERRCODE"
     )
   )[
