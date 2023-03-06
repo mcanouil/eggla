@@ -653,13 +653,13 @@ run_eggla_gwas <- function(
       by = "trait_model"
     ][order(P)],
     neworder = c(
-      "trait_model", "COVARIATES",
+      "trait_model",
       "SNPID", "STRAND", "BUILD", "CHR", "POS",
       "EFFECT_ALLELE", "NON_EFFECT_ALLELE", "N",
       "EAF", "BETA", "SE", "P",
       "IMPUTED", "INFO_TYPE", "INFO", "PLINK2_MACH_R2",
       "CALL_RATE", "HWE_P",
-      "ERRCODE"
+      "ERRCODE", "COVARIATES"
     )
   )[
     j = list(file = (function(dt, tm) {
