@@ -48,7 +48,6 @@ plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), kn
         mapping = ggplot2::aes(fill = period_interval, colour = period_interval),
         shape = 21,
         alpha = 0.10,
-        groupOnX = TRUE,
         width = 0.15
       )
     )

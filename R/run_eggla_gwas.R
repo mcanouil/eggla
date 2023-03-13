@@ -18,7 +18,7 @@
 #' @param vcfs Path to the "raw" VCF file(s) containing
 #'   the genotypes of the individuals to be analysed.
 #' @param working_directory Directory in which computation will occur and where output files will be saved.
-#' @param vep Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
+#' @param vep_file Path to the VEP annotation file to be used to set variants RSIDs and add gene SYMBOL, etc.
 #' @param use_info A logical indicating whether to extract all informations stored in the "INFO" field.
 #' @param bin_path A named list containing the path to the PLINK2 and BCFtools binaries
 #'   For PLINK2, an URL to the binary can be provided (see https://www.cog-genomics.org/plink/2.0).
@@ -45,12 +45,16 @@
 #' @examples
 #' if (interactive()) {
 #'   data("bmigrowth")
+#'   bmigrowth_csv <- file.path(tempdir(), "bmigrowth.csv")
 #'   fwrite(
 #'     x = bmigrowth,
-#'     file = file.path(tempdir(), "bmigrowth.csv")
+#'     file = bmigrowth_csv
 #'   )
 #'   results_archives <- run_eggla_lmm(
-#'     data = fread(file.path(tempdir(), "bmigrowth.csv")),
+#'     data = fread(
+#'       file = file.path(tempdir(), "bmigrowth.csv"),
+#'       colClasses = list(character = "ID")
+#'     ),
 #'     id_variable = "ID",
 #'     age_days_variable = NULL,
 #'     age_years_variable = "age",
@@ -65,18 +69,21 @@
 #'     working_directory = tempdir()
 #'   )
 #'   run_eggla_gwas(
-#'     data = "/tmp/bmigrowth.csv",
+#'     data = fread(
+#'       file = file.path(tempdir(), "bmigrowth.csv"),
+#'       colClasses = list(character = "ID")
+#'     ),
 #'     results = results_archives,
 #'     id_column = "ID",
 #'     traits = c("slope_.*", "auc_.*", "^AP_.*", "^AR_.*"),
 #'     covariates = c("sex"),
 #'     vcfs = list.files(
-#'       path = file.path(tempdir(), "vcf"),
+#'       path = system.file("vcf", package = "eggla"),
 #'       pattern = "\\.vcf$|\\.vcf.gz$",
 #'       full.names = TRUE
 #'     ),
 #'     working_directory = tempdir(),
-#'     vep = NULL,
+#'     vep_file = NULL,
 #'     bin_path = list(
 #'       bcftools = "/usr/bin/bcftools",
 #'       plink2 = "/usr/bin/plink2"
@@ -92,7 +99,7 @@ run_eggla_gwas <- function(
   covariates,
   vcfs,
   working_directory,
-  vep = NULL,
+  vep_file = NULL,
   use_info = TRUE,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",
@@ -107,13 +114,16 @@ run_eggla_gwas <- function(
   clean = TRUE
 ) {
   INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
-  CALL_RATE <- N <- N1 <- N2 <- NULL # no visible binding for global variable from data.table
-  IMPUTED <- A1 <- NULL # no visible binding for global variable from data.table
+  CALL_RATE <- N <- N1 <- N2 <- SNPID <- NULL # no visible binding for global variable from data.table
+  IMPUTED <- A1 <- F_MISS <- OBS_CT <- NULL # no visible binding for global variable from data.table
+  MISSING_CT <- NULL # no visible binding for global variable from data.table
+  HOM_A1_CT <- HET_A1_CT <- TWO_AX_CT <- NULL # no visible binding for global variable from data.table
+  NON_EFFECT_ALLELE <- EAF <- NULL # no visible binding for global variable from data.table
 
   working_directory <- normalizePath(working_directory)
   results <- normalizePath(results)
   if (length(results) != 2) {
-    stop("'results' must be a vector of length 2, i.e., a path for female and a path for mmale.")
+    stop("'results' must be a vector of length 2, i.e., a path for female and a path for male.")
   }
   dir.create(
     path = working_directory,
@@ -332,15 +342,15 @@ run_eggla_gwas <- function(
   }
 
   if (
-    length(intersect(
-      dt[j = unique(.SD), .SDcols = "#IID"],
-      unique(unlist(
+    length(setdiff(
+      as.character(unlist(dt[j = unique(.SD), .SDcols = "#IID"], use.names = FALSE)),
+      as.character(unique(unlist(
         x = lapply(
           X = paste(bin_path[["bcftools"]], "query", "--list-samples", vcfs),
-          FUN = function(x) data.table::fread(cmd = x)
+          FUN = function(x) data.table::fread(cmd = x, colClasses = "character")
         ),
         use.names = FALSE
-      ))
+      )))
     )) != 0
   ) {
     stop(paste0(
@@ -406,33 +416,21 @@ run_eggla_gwas <- function(
 
   if (!quiet) message("Formatting VCFs ...")
   if (nzchar(system.file(package = "future.apply"))) {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, FUN) {
+    eggla_lapply <- function(X, FUN, ...) {
       future.apply::future_lapply(
         X = X,
-        basename_file = basename_file,
-        vep_file = vep_file,
-        bin_path = bin_path,
-        bcftools_view_options = bcftools_view_options,
-        build = build,
-        strand = strand,
-        info_type = info_type,
         future.globals = FALSE,
         future.packages = "data.table",
-        FUN = FUN
+        FUN = FUN,
+        ...
       )
     }
   } else {
-    eggla_lapply <- function(X, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, FUN) {
+    eggla_lapply <- function(X, FUN, ...) {
       lapply(
         X = X,
-        basename_file = basename_file,
-        vep_file = vep_file,
-        bin_path = bin_path,
-        bcftools_view_options = bcftools_view_options,
-        build = build,
-        strand = strand,
-        info_type = info_type,
-        FUN = FUN
+        FUN = FUN,
+        ...
       )
     }
   }
@@ -440,13 +438,14 @@ run_eggla_gwas <- function(
   list_results <- eggla_lapply(
     X = vcfs,
     basename_file = basename_file,
-    vep_file = vep,
+    vep_file = vep_file,
     bin_path = bin_path,
     bcftools_view_options = bcftools_view_options,
     build = build,
     strand = strand,
     info_type = info_type,
-    FUN = function(vcf, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type) {
+    use_info = use_info,
+    FUN = function(vcf, basename_file, vep_file, bin_path, bcftools_view_options, build, strand, info_type, use_info) {
       vcf_file <- sprintf("%s__%s", basename_file, basename(vcf))
       results_file <- sub("\\.vcf.gz", "", vcf_file)
       cmd <- paste(
@@ -496,9 +495,8 @@ run_eggla_gwas <- function(
       system(paste(c(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
-        "--mach-r2-filter",
         "--threads", threads,
-        "--glm sex",
+        "--glm sex", "cols=+chrom,+pos,+ax,+a1count,+totallele,+a1freq,+machr2,+nobs,+se,+p,+err",
         if (file.exists(sprintf("%s.cov", basename_file))) c("--covar", sprintf("%s.cov", basename_file)) else "allow-no-covars",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
         if (file.exists(sprintf("%s.sex", basename_file))) c("--update-sex", sprintf("%s.sex", basename_file)),
@@ -507,6 +505,38 @@ run_eggla_gwas <- function(
         "--silent",
         "--out", results_file
       ), collapse = " "))
+
+      if (!quiet) message(sprintf("[%s] Combining results files ...", basename(vcf)))
+      results <- data.table::setnames(
+        x = data.table::rbindlist(
+          l = lapply(
+            X = (function(x) `names<-`(x, sub("[^.]*\\.", "", x)))(
+              list.files(
+                path = dirname(results_file),
+                pattern = sprintf("%s\\..*\\.glm\\..*", basename(results_file)),
+                full.names = TRUE
+              )
+            ),
+            FUN = data.table::fread
+          ),
+          idcol = "trait_model"
+        ),
+        old = function(x) sub("^#", "", x)
+      )[
+        TEST %in% "ADD", -c("TEST", "T_STAT", "REF", "ALT")
+      ]
+      data.table::setnames(
+        x = results,
+        old = c(
+          "CHROM", "POS", "ID", "A1", "AX",
+          "A1_FREQ", "MACH_R2", "OBS_CT", "BETA", "SE", "P", "ERRCODE"
+        ),
+        new = c(
+          "CHR", "POS", "SNPID", "EFFECT_ALLELE", "NON_EFFECT_ALLELE",
+          "EAF", "PLINK2_MACH_R2", "N", "BETA", "SE", "P", "ERRCODE"
+        )
+      )
+      output_results_file <- sprintf("%s.results.gz", results_file)
 
       if (use_info) {
         if (!quiet) message(sprintf("[%s] Extracting INFO ...", basename(vcf)))
@@ -528,8 +558,8 @@ run_eggla_gwas <- function(
           USE.NAMES = FALSE
         )
 
-        info_fields_required <- c("NS", "AC_Het", "AC_Hom", "AF", "HWE", "F_MISSING", "INFO", "R2")
-        names(info_fields_required) <- c("N", "N1", "N2", "EAF", "HWE_P", "CALL_RATE", "INFO", "INFO")
+        info_fields_required <- c("INFO", "R2")
+        names(info_fields_required) <- c("INFO", "INFO")
 
         annot <- data.table::fread(
           cmd = paste(
@@ -548,99 +578,61 @@ run_eggla_gwas <- function(
             names(info_fields_required)[which(info_fields_required %in% info_fields_available)]
           )
         )[
-          j = `:=`(
-            N1 = N1,
-            N2 = N2 / 2,
-            STRAND = strand,
-            BUILD = build,
-            IMPUTED = as.numeric(INFO != 1)
-          )
-        ][
-          j = `:=`(
-            N0 = N - N1 - N2,
-            INFO_TYPE = data.table::fifelse(IMPUTED == 1, info_type, NA_character_),
-            HWE_P = data.table::fifelse(IMPUTED == 1, HWE_P, NA_real_)
+          j = list(
+            ID = SNPID,
+            INFO,
+            IMPUTED = as.numeric(INFO != 1),
+            INFO_TYPE = data.table::fifelse(INFO != 1, info_type, NA_character_)
           )
         ]
-
-        if (any(grepl("CALL_RATE", names(annot)))) {
-          annot[j = CALL_RATE := 1 - CALL_RATE]
-        } else {
-          annot[j = CALL_RATE := data.table::fifelse(IMPUTED == 1, 1L, NA_integer_)]
-        }
-      }
-
-      if (!quiet) message(sprintf("[%s] Combining results files ...", basename(vcf)))
-      results <- data.table::setnames(
-        x = data.table::rbindlist(
-          l = lapply(
-            X = (function(x) `names<-`(x, sub("[^.]*\\.", "", x)))(
-              list.files(
-                path = dirname(results_file),
-                pattern = sprintf("%s\\..*\\.glm\\..*", basename(results_file)),
-                full.names = TRUE
-              )
-            ),
-            FUN = data.table::fread
-          ),
-          idcol = "trait_model"
-        ),
-        old = function(x) sub("^#", "", x)
-      )[TEST %in% "ADD" & !is.na(P), -c("TEST")]
-
-      output_results_file <- sprintf("%s.results.gz", results_file)
-
-      if (!quiet) message(sprintf("[%s] Writing annotated results file ...", basename(vcf)))
-      if (use_info) {
-        output_dt <- data.table::merge.data.table(
-          y = results[j = A1 := NULL],
-          x = annot,
-          by.y = c("ID", "CHROM", "POS", "ALT", "REF"),
-          by.x = c("SNPID", "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE"),
-          all.y = TRUE
-        )
-        data.table::setcolorder(
-          x = output_dt,
-          neworder = c(
-            "trait_model",
-            "SNPID", "STRAND", "BUILD",
-            "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE",
-            "N", "N0", "N1", "N2", "EAF",
-            "BETA", "SE", "P",
-            "HWE_P", "CALL_RATE",
-            "IMPUTED", "INFO_TYPE", "INFO",
-            "T_STAT", "OBS_CT", "ERRCODE"
-          )
+        annotated_results <- merge(
+          x = results,
+          y = annot,
+          by.x = "SNPID",
+          by.y = "ID",
+          all.x = TRUE
         )
       } else {
-        output_dt <- data.table::setnames(
-          x = results[j = A1 := NULL][
-            j = `:=`(
-              STRAND = strand,
-              BUILD = build
-            )
-          ],
-          old = c("ID", "CHROM", "POS", "ALT", "REF"),
-          new = c("SNPID", "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE")
-        )
-        data.table::setcolorder(
-          x = output_dt,
-          neworder = intersect(
-            x = c(
-              "trait_model",
-              "SNPID", "STRAND", "BUILD",
-              "CHR", "POS", "EFFECT_ALLELE", "NON_EFFECT_ALLELE",
-              "N", "N0", "N1", "N2", "EAF",
-              "BETA", "SE", "P",
-              "HWE_P", "CALL_RATE",
-              "IMPUTED", "INFO_TYPE", "INFO",
-              "T_STAT", "OBS_CT", "ERRCODE"
-            ),
-            y = colnames(output_dt)
-          )
-        )
+        annotated_results <- results
       }
-      data.table::fwrite(x = output_dt, file = output_results_file)
+
+      if (!quiet) message(sprintf("[%s] Computing PLINK2 missing rate ...", basename(vcf)))
+      system(paste(c(
+        bin_path[["plink2"]],
+        "--vcf", vcf_file, "dosage=DS",
+        "--threads", threads,
+        "--missing", "vcols=+chrom,+nmissdosage,+nobs,+fmiss",
+        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+        "--silent",
+        "--out", results_file
+      ), collapse = " "))
+
+      if (!quiet) message(sprintf("[%s] Computing PLINK2 Hardy-Weinberg test ...", basename(vcf)))
+      system(paste(c(
+        bin_path[["plink2"]],
+        "--vcf", vcf_file, "dosage=DS",
+        "--threads", threads,
+        "--hardy",
+        if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
+        "--silent",
+        "--out", results_file
+      ), collapse = " "))
+
+      annotated_results <- merge(
+        x = annotated_results,
+        y = merge(
+          x = data.table::fread(sprintf("%s.vmiss", results_file))[j = list(ID, CALL_RATE = 1 - F_MISS)],
+          y = data.table::fread(sprintf("%s.hardy", results_file))[j = list(ID, HWE_P = P)],
+          by = "ID"
+        ),
+        by.x = "SNPID",
+        by.y = "ID"
+      )[
+        j = .SD,
+        .SDcols = -c("A1_CT", "ALLELE_CT")
+      ]
+
+      data.table::fwrite(x = annotated_results, file = output_results_file)
       if (!quiet) message(sprintf("[%s] Results written in \"%s\"", basename(vcf), output_results_file))
 
       output_results_file
@@ -654,13 +646,21 @@ run_eggla_gwas <- function(
       use.names = TRUE
     )[
       j = `:=`(
-        FDR = stats::p.adjust(P, method = "BH"),
-        BONFERRONI = stats::p.adjust(P, method = "bonferroni"),
-        COVARIATES = paste(covariates, collapse = "+")
+        COVARIATES = paste(covariates, collapse = "+"),
+        STRAND = strand,
+        BUILD = build
       ),
       by = "trait_model"
     ][order(P)],
-    neworder = c("trait_model", "COVARIATES")
+    neworder = c(
+      "trait_model",
+      "SNPID", "STRAND", "BUILD", "CHR", "POS",
+      "EFFECT_ALLELE", "NON_EFFECT_ALLELE", "N",
+      "EAF", "BETA", "SE", "P",
+      "IMPUTED", "INFO_TYPE", "INFO", "PLINK2_MACH_R2",
+      "CALL_RATE", "HWE_P",
+      "ERRCODE", "COVARIATES"
+    )
   )[
     j = list(file = (function(dt, tm) {
       rf <- sprintf(file.path(working_directory, "%s-gwas.csv.gz"), tm)

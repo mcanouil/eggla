@@ -1,3 +1,28 @@
+# eggla 0.19.0
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: update path to files in example.
+  - fix: check for samples in VCF files.
+  - fix: leading zeros in IDs in dataset were removed.
+  - fix: use PLINK2 to compute HWE P-value, N, alleles frequencies, and missing rate.
+- In `R/plot_aucs.R`, `R/plot_egg_aucs.R`, and `R/run_eggla_lmm.R`,
+  - fix: `groupOnX` argument of `geom_quasirandom()` is deprecated as of ggbeeswarm 0.7.1.
+- In `R/plot_slopes.R` and `R/plot_egg_slopes.R`,
+  - fix: Using `size` aesthetic for lines was deprecated.
+
+## Chores
+
+- chore: split `.devcontainer` settings into a separate repositories, _i.e._, `.vscode` and `.devcontainer`.
+
+## Build
+
+- build: upgrade PLINK2 and BCFtools to latest versions.
+- build: update R packages to latest versions.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.18.5...v0.19.0>
+
 # eggla 0.18.5
 
 - In `R/egg_correlations.R`,

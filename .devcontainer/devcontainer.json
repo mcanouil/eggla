@@ -11,35 +11,5 @@
 		"ghcr.io/devcontainers/features/docker-from-docker:1": {
 			"version": "latest"
 		}
-	},
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"editor.tabSize": 2,
-				"files.trimFinalNewlines": true,
-				"files.insertFinalNewline": true,
-				"files.watcherExclude": {
-						"**.Rproj": true,
-						"**/.cache/**": true,
-						"**/.local/**": true,
-						"**/.Rproj.user/**": true,
-						"**/.vscode/**": true
-				},
-				"files.exclude": {
-						"**.Rproj": true,
-						"**/.Rproj.user": true
-				},
-				"files.eol": "\n",
-				"r.plot.useHttpgd": true,
-				"r.rterm.option": [
-					"--no-save",
-					"--no-restore-data",
-					"--quiet"
-				]
-			},
-			"extensions": [
-				"REditorSupport.r"
-			]
-		}
 	}
 }

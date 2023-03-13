@@ -160,7 +160,7 @@ plot_slopes <- function(
         yend = f(yend),
         colour = params
       ),
-      size = 1,
+      linewidth = 1,
       inherit.aes = FALSE,
       linetype = 1
     )

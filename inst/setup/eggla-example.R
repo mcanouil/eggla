@@ -43,7 +43,6 @@ result_gwas <- run_eggla_gwas(
     full.names = TRUE
   ),
   working_directory = output_path,
-  vep = NULL,
   use_info = TRUE,
   bin_path = list(
     bcftools = "/usr/bin/bcftools",

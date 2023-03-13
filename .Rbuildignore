@@ -17,5 +17,6 @@
 ^Meta$
 ^CITATION\.cff$
 ^.devcontainer$
+^.vscode$
 ^README.html$
 ^inst/article$
