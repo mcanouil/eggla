@@ -7,10 +7,19 @@
   - fix: check for samples in VCF files.
   - fix: leading zeros in IDs in dataset were removed.
   - fix: use PLINK2 to compute HWE P-value, N, alleles frequencies, and missing rate.
+  - fix: use PLINK2 to compute MACH_R2 imputation score.
+  - fix: use `vep_file` as the top level parameter instead of `vep`.
+  - fix: remove `--mach-r2-filter` PLINK2 option.
 - In `R/plot_aucs.R`, `R/plot_egg_aucs.R`, and `R/run_eggla_lmm.R`,
   - fix: `groupOnX` argument of `geom_quasirandom()` is deprecated as of ggbeeswarm 0.7.1.
 - In `R/plot_slopes.R` and `R/plot_egg_slopes.R`,
-  - fix: Using `size` aesthetic for lines was deprecated.
+  - fix: using `size` aesthetic for lines was deprecated.
+- In `R/run_eggla_lmm()`,
+  - fix: bad copy/paste. (#100)
+  - fix: wrong static title for residuals plot. (#102)
+  - fix: update step parameter for adiposity peak/rebound prediction. (#98)
+- In `R/compute_apar.R`, `R/compute_outliers.R`, `R/egg_correlations.R`, `R/egg_outliers.R`, and `R/predict_bmi.R`,
+  - fix: update step parameter for adiposity peak/rebound prediction. (#98)
 
 ## Chores
 
