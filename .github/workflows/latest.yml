@@ -1,0 +1,27 @@
+name: Latest
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  latest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Tag Latest
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git tag -a latest -m "Sliding tag" --force
+          git push --tags --force
