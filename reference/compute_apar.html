@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.18.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
 <span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"predicted"</span>, <span class="st">"observed"</span><span class="op">)</span>,</span>
 <span>  start <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  end <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  step <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>  filter <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -100,6 +100,7 @@ computation, either "predicted" or "observed". Default is "predicted".</p></dd>
 <dt>filter</dt>
 <dd><p>A string following <code>data.table</code> syntax for filtering on <code>"i"</code>
 (<em>i.e.</em>, row elements), <em>e.g.</em>, <code>filter = "source == 'A'"</code>.
+Argument pass through <code>compute_apar()</code> (see <code><a href="predict_bmi.html">predict_bmi()</a></code>).
 Default is <code>NULL</code>.</p></dd>
 
 </dl></div>
@@ -132,12 +133,12 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">compute_apar</span><span class="op">(</span>fit <span class="op">=</span> <span class="va">res</span>, from <span class="op">=</span> <span class="st">"predicted"</span><span class="op">)</span><span class="op">[</span><span class="va">AP</span> <span class="op">|</span> <span class="va">AR</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    egg_id egg_ageyears  egg_bmi    AP    AR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:    001         0.75 20.35841  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:    001         2.05 19.83158 FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:    004         0.80 17.37337  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:    001         0.77 20.36074  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:    001         2.04 19.83158 FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:    004         0.79 17.37386  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4:    004         1.90 17.02318 FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:    005         0.80 17.66387  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:    005         1.85 17.35562 FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:    005         0.79 17.66391  TRUE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:    005         1.83 17.35547 FALSE  TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Comparing observed and predicted values</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></span>

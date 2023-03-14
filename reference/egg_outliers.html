@@ -16,7 +16,7 @@ For details, see methods iqr and zscore of performance::check_outliers()."><meta
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.18.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,7 +79,7 @@ For details, see methods <code>iqr</code> and <code>zscore</code> of <code><a hr
 <span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"predicted"</span>, <span class="st">"observed"</span><span class="op">)</span>,</span>
 <span>  start <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  end <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  step <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>  filter <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  outlier_method <span class="op">=</span> <span class="st">"iqr"</span>,</span>
 <span>  outlier_threshold <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>iqr <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -121,6 +121,7 @@ computation, either "predicted" or "observed". Default is "predicted".</p></dd>
 <dt>filter</dt>
 <dd><p>A string following <code>data.table</code> syntax for filtering on <code>"i"</code>
 (<em>i.e.</em>, row elements), <em>e.g.</em>, <code>filter = "source == 'A'"</code>.
+Argument pass through <code><a href="compute_apar.html">compute_apar()</a></code> (see <code><a href="predict_bmi.html">predict_bmi()</a></code>).
 Default is <code>NULL</code>.</p></dd>
 
 
@@ -171,13 +172,13 @@ See <code><a href="https://easystats.github.io/performance/reference/check_outli
 <span class="r-in"><span>  period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">3.5</span>, <span class="fl">6.5</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">17</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  knots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">12</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">[</span><span class="va">Outlier</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     parameter  ID Row Distance_IQR Outlier_IQR Outlier</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: auc_0--0.5 048  25     1.577435           1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: auc_0--0.5 049  26     1.363501           1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     AP_bmi 001   1     1.294062           1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:     AP_bmi 033  16     1.375133           1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:     AP_bmi 044  21     1.790028           1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:     AR_bmi 044  21     1.411444           1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      parameter  ID Row Distance_IQR Outlier_IQR Outlier</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  auc_0--0.5 048  25     1.577435           1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  auc_0--0.5 049  26     1.363501           1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: AR_ageyears 081  39     1.280303           1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:      AP_bmi 001   1     1.295708           1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:      AP_bmi 033  16     1.375866           1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:      AP_bmi 044  21     1.791523           1       1</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

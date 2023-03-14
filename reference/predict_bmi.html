@@ -14,7 +14,7 @@ This function also works for any model obtained using time_model()."><meta prope
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.18.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@ This function also works for any model obtained using <code><a href="time_model.
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">fit</span>, start <span class="op">=</span> <span class="fl">0.25</span>, end <span class="op">=</span> <span class="fl">10</span>, step <span class="op">=</span> <span class="fl">0.05</span>, filter <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">fit</span>, start <span class="op">=</span> <span class="fl">0.25</span>, end <span class="op">=</span> <span class="fl">10</span>, step <span class="op">=</span> <span class="fl">0.01</span>, filter <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -94,6 +94,7 @@ such as from a call <code><a href="https://rdrr.io/pkg/nlme/man/lme.html" class=
 <dt>filter</dt>
 <dd><p>A string following <code>data.table</code> syntax for filtering on <code>"i"</code>
 (<em>i.e.</em>, row elements), <em>e.g.</em>, <code>filter = "source == 'A'"</code>.
+Argument pass through <code><a href="compute_apar.html">compute_apar()</a></code> (see <code>predict_bmi()</code>).
 Default is <code>NULL</code>.</p></dd>
 
 </dl></div>
@@ -124,18 +125,18 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       egg_id egg_ageyears  egg_bmi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1:    082         0.25 16.21582</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2:    082         0.30 16.57194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3:    082         0.35 16.88076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:    082         0.40 17.14348</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:    082         0.45 17.36196</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9796:    068         9.80 30.49370</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9797:    068         9.85 30.60051</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9798:    068         9.90 30.70758</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9799:    068         9.95 30.81492</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9800:    068        10.00 30.92255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        egg_id egg_ageyears  egg_bmi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1:    082         0.25 16.21582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2:    082         0.26 16.29086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     3:    082         0.27 16.36399</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     4:    082         0.28 16.43521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     5:    082         0.29 16.50453</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ---                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48796:    068         9.96 30.83642</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48797:    068         9.97 30.85793</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48798:    068         9.98 30.87946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48799:    068         9.99 30.90100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48800:    068        10.00 30.92255</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## For multiple sources of measures or multiple measures at one age</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span></span>
@@ -160,33 +161,33 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">egg_id</span>, <span class="va">egg_ageyears</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple BMI measures (for the same age) have been detected and are aggregated using geometric mean!</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Use "filter" (or "filter_apar" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = "source == 'clinic'".</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       egg_id egg_ageyears  egg_bmi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1:    001         0.25 18.42096</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2:    001         0.30 18.82627</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3:    001         0.35 19.17792</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:    001         0.40 19.47727</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:    001         0.45 19.72642</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9796:    099         9.80 33.31745</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9797:    099         9.85 33.44629</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9798:    099         9.90 33.57550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9799:    099         9.95 33.70508</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9800:    099        10.00 33.83508</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Use "filter" (or "filter" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = "source == 'clinic'".</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        egg_id egg_ageyears  egg_bmi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1:    001         0.25 18.42096</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2:    001         0.26 18.50635</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     3:    001         0.27 18.58958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     4:    001         0.28 18.67063</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     5:    001         0.29 18.74953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ---                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48796:    099         9.96 33.73105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48797:    099         9.97 33.75703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48798:    099         9.98 33.78303</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48799:    099         9.99 33.80905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48800:    099        10.00 33.83508</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">res</span>, filter <span class="op">=</span> <span class="st">"source == 'A'"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">egg_id</span>, <span class="va">egg_ageyears</span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       egg_id egg_source egg_ageyears  egg_bmi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1:    001          A         0.25 18.39947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2:    001          A         0.30 18.80430</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3:    001          A         0.35 19.15554</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4:    001          A         0.40 19.45454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5:    001          A         0.45 19.70340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9796:    099          A         9.80 33.27858</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9797:    099          A         9.85 33.40727</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9798:    099          A         9.90 33.53632</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9799:    099          A         9.95 33.66576</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9800:    099          A        10.00 33.79560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        egg_id egg_source egg_ageyears  egg_bmi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1:    001          A         0.25 18.39947</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2:    001          A         0.26 18.48476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     3:    001          A         0.27 18.56789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     4:    001          A         0.28 18.64885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     5:    001          A         0.29 18.72765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ---                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48796:    099          A         9.96 33.69170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48797:    099          A         9.97 33.71765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48798:    099          A         9.98 33.74362</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48799:    099          A         9.99 33.76960</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48800:    099          A        10.00 33.79560</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.18.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +56,45 @@
       <small>Source: <a href="https://github.com/mcanouil/eggla/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.19.0" id="eggla-0190">eggla 0.19.0<a class="anchor" aria-label="anchor" href="#eggla-0190"></a></h2>
+<div class="section level3">
+<h3 id="fixes-0-19-0">Fixes<a class="anchor" aria-label="anchor" href="#fixes-0-19-0"></a></h3>
+<ul><li>In <code>R/run_eggla_gwas.R</code>,
+<ul><li>fix: update path to files in example.</li>
+<li>fix: check for samples in VCF files.</li>
+<li>fix: leading zeros in IDs in dataset were removed.</li>
+<li>fix: use PLINK2 to compute HWE P-value, N, alleles frequencies, and missing rate.</li>
+<li>fix: use PLINK2 to compute MACH_R2 imputation score.</li>
+<li>fix: use <code>vep_file</code> as the top level parameter instead of <code>vep</code>.</li>
+<li>fix: remove <code>--mach-r2-filter</code> PLINK2 option.</li>
+</ul></li>
+<li>In <code>R/plot_aucs.R</code>, <code>R/plot_egg_aucs.R</code>, and <code>R/run_eggla_lmm.R</code>,
+<ul><li>fix: <code>groupOnX</code> argument of <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html" class="external-link">geom_quasirandom()</a></code> is deprecated as of ggbeeswarm 0.7.1.</li>
+</ul></li>
+<li>In <code>R/plot_slopes.R</code> and <code>R/plot_egg_slopes.R</code>,
+<ul><li>fix: using <code>size</code> aesthetic for lines was deprecated.</li>
+</ul></li>
+<li>In <code>R/run_eggla_lmm()</code>,
+<ul><li>fix: bad copy/paste. (<a href="https://github.com/mcanouil/eggla/issues/100" class="external-link">#100</a>)</li>
+<li>fix: wrong static title for residuals plot. (<a href="https://github.com/mcanouil/eggla/issues/102" class="external-link">#102</a>)</li>
+<li>fix: update step parameter for adiposity peak/rebound prediction. (<a href="https://github.com/mcanouil/eggla/issues/98" class="external-link">#98</a>)</li>
+</ul></li>
+<li>In <code>R/compute_apar.R</code>, <code>R/compute_outliers.R</code>, <code>R/egg_correlations.R</code>, <code>R/egg_outliers.R</code>, and <code>R/predict_bmi.R</code>,
+<ul><li>fix: update step parameter for adiposity peak/rebound prediction. (<a href="https://github.com/mcanouil/eggla/issues/98" class="external-link">#98</a>)</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chores-0-19-0">Chores<a class="anchor" aria-label="anchor" href="#chores-0-19-0"></a></h3>
+<ul><li>chore: split <code>.devcontainer</code> settings into a separate repositories, <em>i.e.</em>, <code>.vscode</code> and <code>.devcontainer</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="build-0-19-0">Build<a class="anchor" aria-label="anchor" href="#build-0-19-0"></a></h3>
+<ul><li>build: upgrade PLINK2 and BCFtools to latest versions.</li>
+<li>build: update R packages to latest versions.</li>
+</ul><p><strong>Full Changelog</strong>: <a href="https://github.com/mcanouil/eggla/compare/v0.18.5...v0.19.0" class="external-link uri">https://github.com/mcanouil/eggla/compare/v0.18.5...v0.19.0</a></p>
+</div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.18.5" id="eggla-0185">eggla 0.18.5<a class="anchor" aria-label="anchor" href="#eggla-0185"></a></h2>
 <ul><li>In <code>R/egg_correlations.R</code>,
