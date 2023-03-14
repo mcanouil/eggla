@@ -12,3 +12,4 @@ pak::lockfile_create(
 lock_file_json <- jsonlite::fromJSON(readLines(lock_file))
 lock_file_json[["packages"]] <- lock_file_json[["packages"]][!lock_file_json[["packages"]][["ref"]] %in% "local::.", ]
 writeLines(jsonlite::toJSON(lock_file_json, pretty = TRUE, auto_unbox = TRUE), lock_file)
+usethis::use_latest_dependencies(TRUE)

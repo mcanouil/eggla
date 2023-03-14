@@ -34,9 +34,9 @@ Imports:
     nlme,
     utils,
     grDevices,
-    data.table (>= 1.14.6),
+    data.table (>= 1.14.8),
     future.apply (>= 1.10.0),
-    growthcleanr (>= 2.0.3),
+    growthcleanr (>= 2.1.1),
     ggplot2 (>= 3.4.1),
     ggtext (>= 0.1.2),
     ggdist (>= 3.2.1),
@@ -50,7 +50,7 @@ Suggests:
     rmarkdown (>= 2.20),
     R.utils (>= 2.12.2),
     scales (>= 1.2.1),
-    future (>= 1.31.0),
+    future (>= 1.32.0),
     gt (>= 0.8.0),
     lme4 (>= 1.1.31),
     see (>= 0.7.4),
@@ -58,7 +58,7 @@ Suggests:
     future.callr (>= 0.8.1),
     forcats (>= 1.0.0),
     roxygen2 (>= 7.2.3),
-    testthat (>= 3.1.6)
+    testthat (>= 3.1.7)
 SystemRequirements:
     BCFtools (>= 1.16) (https://github.com/samtools/BCFtools),
     PLINK2 (>= 2.0) (https://www.cog-genomics.org/plink/2.0)
