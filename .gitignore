@@ -8,3 +8,5 @@ docs
 README.html
 /inst/article/
 .DS_Store
+renv/
+renv.lock
