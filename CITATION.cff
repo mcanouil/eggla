@@ -50,7 +50,7 @@ preferred-citation:
   abstract: Tools for longitudinal analysis within the EGG (Early Growth Genetics)
     Consortium.
   repository-code: https://github.com/mcanouil/eggla
-  url: https://m.canouil.fr/eggla/
+  url: https://m.canouil.dev/eggla/
   contact:
   - family-names: Canouil
     given-names: Mickaël
@@ -69,7 +69,7 @@ preferred-citation:
   license: MIT
   year: '2022'
 repository-code: https://github.com/mcanouil/eggla
-url: https://m.canouil.fr/eggla/
+url: https://m.canouil.dev/eggla/
 contact:
 - family-names: Canouil
   given-names: Mickaël

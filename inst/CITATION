@@ -14,7 +14,7 @@ citEntry(
             person(given = "Anni",
                     family = "Heiskala")),
   year = "2022",
-  url = "https://m.canouil.fr/eggla/",
+  url = "https://m.canouil.dev/eggla/",
   keywords = "genetics, growth-curves, infancy, longitudinal-analysis, mixed-effects-models, r, r-package, r-stats, spline-regression",
   abstract = "Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.",
   doi = "10.5281/zenodo.6979433",
