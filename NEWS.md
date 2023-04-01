@@ -12,6 +12,8 @@
 - In `R/run_eggla_gwas.R`,
   - docs: update missing argument.
 
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.0...v0.19.1>
+
 # eggla 0.19.0
 
 ## Fixes
