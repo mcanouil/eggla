@@ -1,3 +1,10 @@
+# eggla (development version)
+
+## Chores
+
+- In `inst/CITATION`,
+  - chore: convert to `bibentry`.
+
 # eggla 0.19.1
 
 ## Chores

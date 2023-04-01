@@ -1,9 +1,8 @@
 # cat(format(cff_to_bibtex(x = "CITATION.cff"), "R"), sep = "\n")
 
-citHeader("To cite eggla in publications, please use:")
-
-citEntry(
-  entry = "manual",
+bibentry(
+  bibtype = "manual",
+  header = "To cite eggla in publications, please use:",
   title = "eggla: Early Growth Genetics Longitudinal Analysis",
   author = c(person(given = "Mickaël",
                     family = "Canouil"),
