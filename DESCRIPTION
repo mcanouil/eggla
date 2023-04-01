@@ -1,6 +1,6 @@
 Package: eggla
 Title: Early Growth Genetics Longitudinal Analysis
-Version: 0.19.0
+Version: 0.19.1
 Authors@R:
     c(person(given = "Mickaël",
            family = "Canouil",
@@ -25,7 +25,7 @@ Description: Tools for longitudinal analysis within the EGG
     (Early Growth Genetics) Consortium (<http://egg-consortium.org/>).
 License: MIT + file LICENSE
 URL: https://github.com/mcanouil/eggla,
-    https://m.canouil.fr/eggla/
+    https://m.canouil.dev/eggla/
 BugReports: https://github.com/mcanouil/eggla/issues
 Depends:
     R (>= 4.2)
