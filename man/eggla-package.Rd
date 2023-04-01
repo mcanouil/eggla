@@ -14,7 +14,7 @@ Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortiu
 Useful links:
 \itemize{
   \item \url{https://github.com/mcanouil/eggla}
-  \item \url{https://m.canouil.fr/eggla/}
+  \item \url{https://m.canouil.dev/eggla/}
   \item Report bugs at \url{https://github.com/mcanouil/eggla/issues}
 }
 

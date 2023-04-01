@@ -1,3 +1,17 @@
+# eggla 0.19.1
+
+## Chores
+
+- In `inst/CITATION`, `pkgdown/_pkgdown.yml`, `CITATION.cff`, and `DESCRIPTION`,
+  - chore: update domain
+
+## Docs
+
+- In `R/eggla-packages.R`,
+  - docs: update domain.
+- In `R/run_eggla_gwas.R`,
+  - docs: update missing argument.
+
 # eggla 0.19.0
 
 ## Fixes
