@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run The Cubic Splines (Random Cubic/Linear Splines) Analysis">
 <meta property="og:description" content="eggla">
-<meta property="og:image" content="https://m.canouil.fr/eggla/logo.png">
+<meta property="og:image" content="https://m.canouil.dev/eggla/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -252,27 +252,26 @@ kilograms per quare metre.</p>
 <span><span class="va">sres</span><span class="op">[[</span><span class="st">"term"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"gsp\\(.*\\)\\)"</span>, <span class="st">"gsp(...)"</span>, <span class="va">sres</span><span class="op">[[</span><span class="st">"term"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="co"># simplify output</span></span>
 <span><span class="va">sres</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 8</span></span></span>
-<span><span class="co">#&gt;    effect   group    term             estimate std.er…¹    df stati…²    p.value</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> fixed    <span style="color: #BB0000;">NA</span>       (Intercept)      2.66<span style="color: #949494;">e</span>+ 0  0.032<span style="text-decoration: underline;">3</span>    409   82.1   2.97<span style="color: #949494;">e</span><span style="color: #BB0000;">-256</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)D1(0)    7.37<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  0.113     409    6.53  1.96<span style="color: #949494;">e</span><span style="color: #BB0000;">- 10</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)D2(0)   -<span style="color: #BB0000;">1.58</span><span style="color: #949494;">e</span>+ 0  0.239     409   -<span style="color: #BB0000;">6.60</span>  1.27<span style="color: #949494;">e</span><span style="color: #BB0000;">- 10</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)D3(0)    1.62<span style="color: #949494;">e</span>+ 0  0.242     409    6.68  7.70<span style="color: #949494;">e</span><span style="color: #BB0000;">- 11</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)C(1).3  -<span style="color: #BB0000;">1.63</span><span style="color: #949494;">e</span>+ 0  0.243     409   -<span style="color: #BB0000;">6.70</span>  7.13<span style="color: #949494;">e</span><span style="color: #BB0000;">- 11</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)C(8).3   1.24<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  0.003<span style="text-decoration: underline;">99</span>   409    3.12  1.97<span style="color: #949494;">e</span><span style="color: #BB0000;">-  3</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)C(12).3 -<span style="color: #BB0000;">1.74</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  0.009<span style="text-decoration: underline;">90</span>   409   -<span style="color: #BB0000;">1.76</span>  7.91<span style="color: #949494;">e</span><span style="color: #BB0000;">-  2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> ran_pars ID       sd_(Intercept)   7.66<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> ran_pars ID       cor_gsp(...)[,… -<span style="color: #BB0000;">4.82</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ran_pars ID       cor_gsp(...)[,…  3.17<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> ran_pars ID       cor_gsp(...)[,…  3.08<span style="color: #949494;">e</span><span style="color: #BB0000;">- 8</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> ran_pars ID       sd_gsp(...)[, …  2.66<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> ran_pars ID       cor_gsp(...)[,… -<span style="color: #BB0000;">9.06</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> ran_pars ID       cor_gsp(...)[,… -<span style="color: #BB0000;">3.86</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 8</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> ran_pars ID       sd_gsp(...)[, …  2.76<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> ran_pars ID       cor_gsp(...)[,…  2.08<span style="color: #949494;">e</span><span style="color: #BB0000;">- 9</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> ran_pars ID       sd_gsp(...)[, …  2.93<span style="color: #949494;">e</span><span style="color: #BB0000;">-11</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> ran_pars Residual sd_Observation   8.24<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names ¹​std.error, ²​statistic</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    effect   group    term          estimate std.error    df statistic    p.value</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> fixed    <span style="color: #BB0000;">NA</span>       (Intercept)   2.66<span style="color: #949494;">e</span>+ 0   0.032<span style="text-decoration: underline;">3</span>    409     82.1   2.97<span style="color: #949494;">e</span><span style="color: #BB0000;">-256</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)D1(…  7.37<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>   0.113     409      6.53  1.96<span style="color: #949494;">e</span><span style="color: #BB0000;">- 10</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)D2(… -<span style="color: #BB0000;">1.58</span><span style="color: #949494;">e</span>+ 0   0.239     409     -<span style="color: #BB0000;">6.60</span>  1.27<span style="color: #949494;">e</span><span style="color: #BB0000;">- 10</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)D3(…  1.62<span style="color: #949494;">e</span>+ 0   0.242     409      6.68  7.70<span style="color: #949494;">e</span><span style="color: #BB0000;">- 11</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)C(1… -<span style="color: #BB0000;">1.63</span><span style="color: #949494;">e</span>+ 0   0.243     409     -<span style="color: #BB0000;">6.70</span>  7.13<span style="color: #949494;">e</span><span style="color: #BB0000;">- 11</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)C(8…  1.24<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>   0.003<span style="text-decoration: underline;">99</span>   409      3.12  1.97<span style="color: #949494;">e</span><span style="color: #BB0000;">-  3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> fixed    <span style="color: #BB0000;">NA</span>       gsp(...)C(1… -<span style="color: #BB0000;">1.74</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>   0.009<span style="text-decoration: underline;">90</span>   409     -<span style="color: #BB0000;">1.76</span>  7.91<span style="color: #949494;">e</span><span style="color: #BB0000;">-  2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> ran_pars ID       sd_(Interce…  7.66<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> ran_pars ID       cor_gsp(...… -<span style="color: #BB0000;">4.82</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ran_pars ID       cor_gsp(...…  3.17<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> ran_pars ID       cor_gsp(...…  3.08<span style="color: #949494;">e</span><span style="color: #BB0000;">- 8</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> ran_pars ID       sd_gsp(...)…  2.66<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> ran_pars ID       cor_gsp(...… -<span style="color: #BB0000;">9.06</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> ran_pars ID       cor_gsp(...… -<span style="color: #BB0000;">3.86</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 8</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> ran_pars ID       sd_gsp(...)…  2.76<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> ran_pars ID       cor_gsp(...…  2.08<span style="color: #949494;">e</span><span style="color: #BB0000;">- 9</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> ran_pars ID       sd_gsp(...)…  2.93<span style="color: #949494;">e</span><span style="color: #BB0000;">-11</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> ran_pars Residual sd_Observat…  8.24<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   <span style="color: #949494;"> </span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="predicted-values">Predicted Values<a class="anchor" aria-label="anchor" href="#predicted-values"></a>
@@ -362,7 +361,7 @@ kilograms per quare metre.</p>
 <span><span class="co">#&gt;   slope_1.5--3.5 slope_6.5--10 slope_12--17</span></span>
 <span><span class="co">#&gt; 1     0.02581752    0.06085040   0.01908620</span></span>
 <span><span class="co">#&gt; 2     0.01099952    0.05807523   0.02940106</span></span>
-<span><span class="co">#&gt; 3     0.02874900    0.07308909   0.04144143</span></span>
+<span><span class="co">#&gt; 3     0.02874899    0.07308909   0.04144143</span></span>
 <span><span class="co">#&gt; 4     0.01699345    0.05897876   0.02477156</span></span>
 <span><span class="co">#&gt; 5     0.04557004    0.06986760   0.01643458</span></span>
 <span><span class="co">#&gt; 6     0.01192013    0.06546007   0.04381225</span></span></code></pre></div>
@@ -406,42 +405,42 @@ kilograms per quare metre.</p>
 <span>  period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">3.5</span>, <span class="fl">6.5</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">17</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;               term  auc_0--0.5 auc_1.5--3.5 auc_6.5--10  auc_12--17</span></span>
-<span><span class="co">#&gt;  1:     auc_0--0.5  1.00000000    0.7353315   0.1339844 -0.05890454</span></span>
-<span><span class="co">#&gt;  2:   auc_1.5--3.5  0.73533146    1.0000000   0.7636209  0.55930198</span></span>
-<span><span class="co">#&gt;  3:    auc_6.5--10  0.13398438    0.7636209   1.0000000  0.92716066</span></span>
-<span><span class="co">#&gt;  4:     auc_12--17 -0.05890454    0.5593020   0.9271607  1.00000000</span></span>
-<span><span class="co">#&gt;  5:   slope_0--0.5 -0.31696966    0.4092298   0.8827566  0.84524037</span></span>
-<span><span class="co">#&gt;  6: slope_1.5--3.5 -0.35080310    0.3761391   0.8765640  0.87021489</span></span>
-<span><span class="co">#&gt;  7:  slope_6.5--10 -0.50529327    0.1044868   0.6906019  0.88179769</span></span>
-<span><span class="co">#&gt;  8:   slope_12--17 -0.24988479   -0.5206577  -0.4070861 -0.05033075</span></span>
+<span><span class="co">#&gt;  1:     auc_0--0.5  1.00000000    0.7353315   0.1339844 -0.05890455</span></span>
+<span><span class="co">#&gt;  2:   auc_1.5--3.5  0.73533146    1.0000000   0.7636209  0.55930196</span></span>
+<span><span class="co">#&gt;  3:    auc_6.5--10  0.13398439    0.7636209   1.0000000  0.92716065</span></span>
+<span><span class="co">#&gt;  4:     auc_12--17 -0.05890455    0.5593020   0.9271607  1.00000000</span></span>
+<span><span class="co">#&gt;  5:   slope_0--0.5 -0.31696965    0.4092298   0.8827566  0.84524036</span></span>
+<span><span class="co">#&gt;  6: slope_1.5--3.5 -0.35080310    0.3761391   0.8765640  0.87021488</span></span>
+<span><span class="co">#&gt;  7:  slope_6.5--10 -0.50529328    0.1044868   0.6906018  0.88179768</span></span>
+<span><span class="co">#&gt;  8:   slope_12--17 -0.24988480   -0.5206577  -0.4070861 -0.05033073</span></span>
 <span><span class="co">#&gt;  9:    AP_ageyears -0.37200367    0.2662496   0.8172338  0.78849249</span></span>
-<span><span class="co">#&gt; 10:    AR_ageyears  0.36773340   -0.2764872  -0.8414245 -0.83719400</span></span>
-<span><span class="co">#&gt; 11:         AP_bmi  0.98613035    0.8780203   0.3266741  0.08070059</span></span>
-<span><span class="co">#&gt; 12:         AR_bmi  0.84773402    0.9912778   0.6586349  0.41091290</span></span>
+<span><span class="co">#&gt; 10:    AR_ageyears  0.36773340   -0.2764872  -0.8414245 -0.83719399</span></span>
+<span><span class="co">#&gt; 11:         AP_bmi  0.98613035    0.8780203   0.3266741  0.08070058</span></span>
+<span><span class="co">#&gt; 12:         AR_bmi  0.84773402    0.9912778   0.6586349  0.41091288</span></span>
 <span><span class="co">#&gt;     slope_0--0.5 slope_1.5--3.5 slope_6.5--10 slope_12--17 AP_ageyears</span></span>
-<span><span class="co">#&gt;  1:   -0.3169697     -0.3508031   -0.50529327  -0.24988479  -0.3720037</span></span>
-<span><span class="co">#&gt;  2:    0.4092298      0.3761391    0.10448685  -0.52065769   0.2662496</span></span>
-<span><span class="co">#&gt;  3:    0.8827566      0.8765640    0.69060185  -0.40708605   0.8172338</span></span>
-<span><span class="co">#&gt;  4:    0.8452404      0.8702149    0.88179769  -0.05033075   0.7884925</span></span>
-<span><span class="co">#&gt;  5:    1.0000000      0.9965866    0.80802780  -0.42159131   0.9911544</span></span>
-<span><span class="co">#&gt;  6:    0.9965866      1.0000000    0.85390585  -0.34529353   0.9869343</span></span>
-<span><span class="co">#&gt;  7:    0.8080278      0.8539058    1.00000000   0.19357033   0.7832160</span></span>
-<span><span class="co">#&gt;  8:   -0.4215913     -0.3452935    0.19357033   1.00000000  -0.2729028</span></span>
-<span><span class="co">#&gt;  9:    0.9911544      0.9869343    0.78321603  -0.27290277   1.0000000</span></span>
-<span><span class="co">#&gt; 10:   -0.9969290     -0.9992709   -0.83026092   0.20818653  -0.9867121</span></span>
-<span><span class="co">#&gt; 11:   -0.1848452     -0.2252452   -0.41171333  -0.36373209  -0.2175252</span></span>
-<span><span class="co">#&gt; 12:    0.2043257      0.1649506   -0.08689073  -0.44388761   0.1579897</span></span>
+<span><span class="co">#&gt;  1:   -0.3169697     -0.3508031   -0.50529328  -0.24988480  -0.3720037</span></span>
+<span><span class="co">#&gt;  2:    0.4092298      0.3761391    0.10448682  -0.52065771   0.2662496</span></span>
+<span><span class="co">#&gt;  3:    0.8827566      0.8765640    0.69060183  -0.40708606   0.8172338</span></span>
+<span><span class="co">#&gt;  4:    0.8452404      0.8702149    0.88179768  -0.05033073   0.7884925</span></span>
+<span><span class="co">#&gt;  5:    1.0000000      0.9965866    0.80802778  -0.42159132   0.9911544</span></span>
+<span><span class="co">#&gt;  6:    0.9965866      1.0000000    0.85390583  -0.34529354   0.9869343</span></span>
+<span><span class="co">#&gt;  7:    0.8080278      0.8539058    1.00000000   0.19357035   0.7832160</span></span>
+<span><span class="co">#&gt;  8:   -0.4215913     -0.3452935    0.19357035   1.00000000  -0.2729028</span></span>
+<span><span class="co">#&gt;  9:    0.9911544      0.9869343    0.78321602  -0.27290277   1.0000000</span></span>
+<span><span class="co">#&gt; 10:   -0.9969290     -0.9992709   -0.83026091   0.20818653  -0.9867121</span></span>
+<span><span class="co">#&gt; 11:   -0.1848452     -0.2252452   -0.41171335  -0.36373211  -0.2175252</span></span>
+<span><span class="co">#&gt; 12:    0.2043257      0.1649506   -0.08689075  -0.44388763   0.1579897</span></span>
 <span><span class="co">#&gt;     AR_ageyears      AP_bmi      AR_bmi</span></span>
 <span><span class="co">#&gt;  1:   0.3677334  0.98613035  0.84773402</span></span>
 <span><span class="co">#&gt;  2:  -0.2764872  0.87802031  0.99127780</span></span>
-<span><span class="co">#&gt;  3:  -0.8414245  0.32667408  0.65863485</span></span>
-<span><span class="co">#&gt;  4:  -0.8371940  0.08070059  0.41091290</span></span>
-<span><span class="co">#&gt;  5:  -0.9969290 -0.18484522  0.20432572</span></span>
+<span><span class="co">#&gt;  3:  -0.8414245  0.32667409  0.65863485</span></span>
+<span><span class="co">#&gt;  4:  -0.8371940  0.08070058  0.41091288</span></span>
+<span><span class="co">#&gt;  5:  -0.9969290 -0.18484521  0.20432572</span></span>
 <span><span class="co">#&gt;  6:  -0.9992709 -0.22524516  0.16495064</span></span>
-<span><span class="co">#&gt;  7:  -0.8302609 -0.41171333 -0.08689073</span></span>
-<span><span class="co">#&gt;  8:   0.2081865 -0.36373209 -0.44388761</span></span>
+<span><span class="co">#&gt;  7:  -0.8302609 -0.41171335 -0.08689075</span></span>
+<span><span class="co">#&gt;  8:   0.2081865 -0.36373211 -0.44388763</span></span>
 <span><span class="co">#&gt;  9:  -0.9867121 -0.21752515  0.15798975</span></span>
-<span><span class="co">#&gt; 10:   1.0000000  0.21535742 -0.17646094</span></span>
+<span><span class="co">#&gt; 10:   1.0000000  0.21535742 -0.17646093</span></span>
 <span><span class="co">#&gt; 11:   0.2153574  1.00000000  0.91966781</span></span>
 <span><span class="co">#&gt; 12:  -0.1764609  0.91966781  1.00000000</span></span></code></pre></div>
 </div>
