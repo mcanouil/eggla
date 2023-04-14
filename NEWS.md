@@ -1,9 +1,16 @@
-# eggla (development version)
+# eggla 0.19.2
+
+## Build
+
+- In `inst/bin`,
+  - build: update PLINK2 to 11th of April 2023 version (Linux 64-bit build).
 
 ## Chores
 
 - In `inst/CITATION`,
   - chore: convert to `bibentry`.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.1...v0.19.2>
 
 # eggla 0.19.1
 
