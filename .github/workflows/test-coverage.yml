@@ -5,6 +5,10 @@ name: Test Coverage
 on:
   push:
     branches: main
+    paths-ignore:
+      - ".github/**"
+      - "inst/setup/Dockerfile"
+      - "inst/setup/common-debian.sh"
 
 concurrency:
   group: ${{ github.workflow }}
