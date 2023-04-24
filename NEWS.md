@@ -1,3 +1,13 @@
+# eggla 0.19.3
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: update commands to get version.
+  - fix: 'ax' replaced with 'omitted' in PLINK2 output.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.2...v0.19.3>
+
 # eggla 0.19.2
 
 ## Build
