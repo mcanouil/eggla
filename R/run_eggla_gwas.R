@@ -528,7 +528,7 @@ run_eggla_gwas <- function(
       data.table::setnames(
         x = results,
         old = c(
-          "CHROM", "POS", "ID", "A1", "AX",
+          "CHROM", "POS", "ID", "A1", "OMITTED",
           "A1_FREQ", "MACH_R2", "OBS_CT", "BETA", "SE", "P", "ERRCODE"
         ),
         new = c(
