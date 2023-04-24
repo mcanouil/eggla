@@ -14,7 +14,7 @@ https://github.com/gmonette/spida2/blob/master/R/gsp_util.R"><meta property="og:
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -166,25 +166,23 @@ to 0 for any x.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lm(formula = y ~ sp(age) * G, data = simd)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residuals:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Min      1Q  Median      3Q     Max </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -3.3526 -1.0275  0.0297  0.9978  2.8886 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Min       1Q   Median       3Q      Max </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -3.10404 -0.59241  0.00237  0.72765  2.60932 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       Estimate Std. Error t value Pr(&gt;|t|)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)           1.208139   0.685023   1.764   0.0811 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)D1(0)         -0.071262   0.062450  -1.141   0.2568  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(10).2        0.005099   0.007823   0.652   0.5162  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(25).2       -0.007953   0.014582  -0.545   0.5868  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Gmale                -0.999401   0.968769  -1.032   0.3050  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)D1(0):Gmale    0.018804   0.088318   0.213   0.8319  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(10).2:Gmale  0.002053   0.011064   0.186   0.8532  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(25).2:Gmale -0.003853   0.020622  -0.187   0.8522  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        Estimate Std. Error t value Pr(&gt;|t|)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)           0.0284580  0.5890993   0.048    0.962</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)D1(0)          0.0182915  0.0537054   0.341    0.734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(10).2       -0.0044953  0.0067278  -0.668    0.506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(25).2        0.0100623  0.0125402   0.802    0.424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Gmale                -0.9992191  0.8331122  -1.199    0.233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)D1(0):Gmale    0.0542426  0.0759509   0.714    0.477</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(10).2:Gmale -0.0007132  0.0095146  -0.075    0.940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sp(age)C(25).2:Gmale -0.0072312  0.0177345  -0.408    0.684</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual standard error: 1.386 on 92 degrees of freedom</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Multiple R-squared:  0.06975,	Adjusted R-squared:  -0.001026 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> F-statistic: 0.9855 on 7 and 92 DF,  p-value: 0.4468</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual standard error: 1.192 on 92 degrees of freedom</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Multiple R-squared:  0.05106,	Adjusted R-squared:  -0.02114 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> F-statistic: 0.7072 on 7 and 92 DF,  p-value: 0.6659</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
