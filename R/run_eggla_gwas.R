@@ -174,7 +174,7 @@ run_eggla_gwas <- function(
     expr = system(
       command = sprintf("%s --version", bin_path[["plink2"]]),
       intern = TRUE,
-      ignore.stdout = TRUE,
+      ignore.stdout = FALSE,
       ignore.stderr = TRUE
     ),
     silent = TRUE
@@ -187,7 +187,7 @@ run_eggla_gwas <- function(
     expr = system(
       command = sprintf("%s --version", bin_path[["bcftools"]]),
       intern = TRUE,
-      ignore.stdout = TRUE,
+      ignore.stdout = FALSE,
       ignore.stderr = TRUE
     ),
     silent = TRUE
@@ -496,7 +496,7 @@ run_eggla_gwas <- function(
         bin_path[["plink2"]],
         "--vcf", vcf_file, "dosage=DS",
         "--threads", threads,
-        "--glm sex", "cols=+chrom,+pos,+ax,+a1count,+totallele,+a1freq,+machr2,+nobs,+se,+p,+err",
+        "--glm sex", "cols=+chrom,+pos,+omitted,+a1count,+totallele,+a1freq,+machr2,+nobs,+se,+p,+err",
         if (file.exists(sprintf("%s.cov", basename_file))) c("--covar", sprintf("%s.cov", basename_file)) else "allow-no-covars",
         if (file.exists(sprintf("%s.samples", basename_file))) c("--keep", sprintf("%s.samples", basename_file)),
         if (file.exists(sprintf("%s.sex", basename_file))) c("--update-sex", sprintf("%s.sex", basename_file)),
