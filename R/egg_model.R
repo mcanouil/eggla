@@ -93,7 +93,7 @@ egg_model <- function(
     ))
   }
 
-  f_model_call <- function(form_fixed, form_random, n_iteration, use_car1) {
+  f_model_call <- function(form_fixed, form_random, n_iteration, n_iteration_em, use_car1) {
     c(
       "nlme::lme(",
       paste0("  fixed = ", form_fixed, ","),
@@ -103,8 +103,8 @@ egg_model <- function(
       "  method = \"ML\",",
       if (use_car1) sprintf("  correlation = nlme::corCAR1(form = ~ 1 | %s),", id_var) else NULL,
       paste0(
-        "  control = nlme::lmeControl(opt = \"optim\", maxIter = ",
-        n_iteration, ", msMaxIter = ", n_iteration, ")"
+        "  control = nlme::lmeControl(opt = \"optim\", niterEM = ", n_iteration_em,
+        ", maxIter = ", n_iteration, ", msMaxIter = ", n_iteration, ")"
       ),
       ")"
     )
@@ -112,11 +112,12 @@ egg_model <- function(
 
   irandom <- 1
   res_model <- `class<-`(list(), "try-error")
-  while (inherits(res_model, "try-error") & irandom <= length(form_random)) {
+  while (inherits(res_model, "try-error") && irandom <= length(form_random)) {
     model_call <- f_model_call(
       form_fixed = form_fixed,
       form_random = form_random[[irandom]],
       n_iteration = 500,
+      n_iteration_em = 25,
       use_car1 = use_car1
     )
     if (!quiet) {
@@ -135,11 +136,14 @@ egg_model <- function(
     )
 
     if (inherits(res_model, "try-error")) {
-      if (!quiet) message("Number of iteration has been increased from 500 to 1,000.")
+      if (!quiet) {
+        message("Number of iteration has been increased from 500 to 1,000 and EM iteration from 25 to 100.")
+      }
       model_call <- f_model_call(
         form_fixed = form_fixed,
         form_random = form_random[[irandom]],
         n_iteration = 1000,
+        n_iteration_em = 100,
         use_car1 = use_car1
       )
       res_model <- try(
@@ -148,7 +152,7 @@ egg_model <- function(
       )
     }
 
-    if (inherits(res_model, "try-error") & use_car1) {
+    if (inherits(res_model, "try-error") && use_car1) {
       if (!quiet) message("Model with AR(1) auto-correlation failed, now trying without it ...")
       model_call <- f_model_call(
         form_fixed = form_fixed,

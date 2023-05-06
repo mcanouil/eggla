@@ -36,7 +36,7 @@ plot_egg_aucs <- function(fit, period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17), kn
     knots = knots
   ))
 
-  if (nzchar(system.file(package = "ggdist")) & nzchar(system.file(package = "ggbeeswarm"))) {
+  if (nzchar(system.file(package = "ggdist")) && nzchar(system.file(package = "ggbeeswarm"))) {
     gpl <- list(
       ggdist::stat_halfeye(
         mapping = ggplot2::aes(fill = period_interval),
