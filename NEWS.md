@@ -6,7 +6,7 @@
   `R/run_eggla_gwas.R`, `R/run_eggla_lmm.R`,
   - fix: linters warnings.
 - In `R/egg_model.R`,
-  - fix: in case or error, also increase the umber of EM iterations. 
+  - fix: in case or error, also increase the umber of EM iterations.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.3...v0.19.4>
 
