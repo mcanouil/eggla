@@ -14,7 +14,7 @@ This function is a specific version of time_model()."><meta property="og:image" 
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,7 +139,7 @@ the linear mixed-effects model fit.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     random = ~ gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     na.action = stats::na.omit,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     method = "ML",</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     control = nlme::lmeControl(opt = "optim", niterEM = 25, maxIter = 500, msMaxIter = 500)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   )</span>
 <span class="r-in"><span><span class="va">sres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[[</span><span class="st">"tTable"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sres</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"gsp\\(.*\\)\\)"</span>, <span class="st">"gsp(...)"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sres</span><span class="op">)</span><span class="op">)</span></span></span>

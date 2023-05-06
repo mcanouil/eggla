@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -147,7 +147,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span><span class="co">#&gt;     random = ~ gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,</span></span>
 <span><span class="co">#&gt;     na.action = stats::na.omit,</span></span>
 <span><span class="co">#&gt;     method = "ML",</span></span>
-<span><span class="co">#&gt;     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)</span></span>
+<span><span class="co">#&gt;     control = nlme::lmeControl(opt = "optim", niterEM = 25, maxIter = 500, msMaxIter = 500)</span></span>
 <span><span class="co">#&gt;   )</span></span>
 <span></span>
 <span><span class="va">res_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/egg_model.html">egg_model</a></span><span class="op">(</span></span>
@@ -163,7 +163,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span><span class="co">#&gt;     random = ~ gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,</span></span>
 <span><span class="co">#&gt;     na.action = stats::na.omit,</span></span>
 <span><span class="co">#&gt;     method = "ML",</span></span>
-<span><span class="co">#&gt;     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)</span></span>
+<span><span class="co">#&gt;     control = nlme::lmeControl(opt = "optim", niterEM = 25, maxIter = 500, msMaxIter = 500)</span></span>
 <span><span class="co">#&gt;   )</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="compute-adiposity-peak-ap-and-adiposity-rebound-ar">Compute adiposity peak (AP) and adiposity rebound (AR)<a class="anchor" aria-label="anchor" href="#compute-adiposity-peak-ap-and-adiposity-rebound-ar"></a>

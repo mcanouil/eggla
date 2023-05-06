@@ -14,7 +14,7 @@ This function also works for any model obtained using time_model()."><meta prope
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,7 +121,7 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     random = ~ gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     na.action = stats::na.omit,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     method = "ML",</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     control = nlme::lmeControl(opt = "optim", niterEM = 25, maxIter = 500, msMaxIter = 500)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[</span><span class="op">]</span></span></span>
@@ -156,7 +156,7 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     random = ~ gsp(age, knots = c(1, 8, 12), degree = rep(1, 4), smooth = rep(2, 3)) | ID,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     na.action = stats::na.omit,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     method = "ML",</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     control = nlme::lmeControl(opt = "optim", niterEM = 25, maxIter = 500, msMaxIter = 500)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">egg_id</span>, <span class="va">egg_ageyears</span><span class="op">)</span><span class="op">]</span></span></span>
