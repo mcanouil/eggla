@@ -46,7 +46,7 @@
 #' predict_bmi(res, filter = "source == 'A'")[order(egg_id, egg_ageyears)]
 predict_bmi <- function(fit, start = 0.25, end = 10, step = 0.01, filter = NULL) {
   stopifnot(inherits(fit, "lme"))
-  bmi <- egg_ageyears <- egg_bmi <- egg_id <- NULL # no visible binding for global variable from data.table
+  bmi <- egg_ageyears <- egg_bmi <- NULL # no visible binding for global variable from data.table
 
   id_var <- names(fit[["groups"]])
   model_vars <- all.vars(fit[["terms"]])

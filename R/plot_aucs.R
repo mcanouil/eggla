@@ -52,7 +52,7 @@ plot_aucs <- function(
     knots = knots
   ))
 
-  if (nzchar(system.file(package = "ggdist")) & nzchar(system.file(package = "ggbeeswarm"))) {
+  if (nzchar(system.file(package = "ggdist")) && nzchar(system.file(package = "ggbeeswarm"))) {
     gpl <- list(
       ggdist::stat_halfeye(
         mapping = ggplot2::aes(fill = period_interval),

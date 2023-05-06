@@ -113,12 +113,8 @@ run_eggla_gwas <- function(
   quiet = FALSE,
   clean = TRUE
 ) {
-  INFO <- TEST <- P <- trait_model <- NULL # no visible binding for global variable from data.table
-  CALL_RATE <- N <- N1 <- N2 <- SNPID <- NULL # no visible binding for global variable from data.table
-  IMPUTED <- A1 <- F_MISS <- OBS_CT <- NULL # no visible binding for global variable from data.table
-  MISSING_CT <- NULL # no visible binding for global variable from data.table
-  HOM_A1_CT <- HET_A1_CT <- TWO_AX_CT <- NULL # no visible binding for global variable from data.table
-  NON_EFFECT_ALLELE <- EAF <- NULL # no visible binding for global variable from data.table
+  # no visible binding for global variable from data.table
+  INFO <- TEST <- P <- trait_model <- SNPID <- F_MISS <- ID <- NULL
 
   working_directory <- normalizePath(working_directory)
   results <- normalizePath(results)
