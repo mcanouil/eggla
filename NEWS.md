@@ -1,3 +1,12 @@
+# eggla 0.19.5
+
+## Fixes
+
+- In `R/egg_model.R`,
+  - fix: turns warnings into errors when fitting the model for the first time.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.4...v0.19.5>
+
 # eggla 0.19.4
 
 ## Fixes
