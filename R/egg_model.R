@@ -130,10 +130,17 @@ egg_model <- function(
       )
     }
 
+    # To avoid complexity of the code, we use `try()` to catch errors and warnings
+    # by temporarily setting `options(warn = 2)`, which turns warnings into errors.
+    # Then, we set back the original value of `options(warn)`.
+    # This is not ideal, but it works.
+    opt_warn <- getOption("warn")
+    options(warn = 2)
     res_model <- try(
       expr = eval(parse(text = paste(model_call, collapse = ""))),
       silent = TRUE
     )
+    options(warn = opt_warn)
 
     if (inherits(res_model, "try-error")) {
       if (!quiet) {
