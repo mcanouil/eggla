@@ -58,12 +58,12 @@ test_that("run_eggla", {
     expect_equal(
       sort(basename(result_gwas)),
       sort(c(
-        "AR_bmi.glm.linear-gwas.csv.gz", "AP_bmi.glm.linear-gwas.csv.gz",
-        "auc_1.5--3.5.glm.linear-gwas.csv.gz", "auc_0--0.5.glm.linear-gwas.csv.gz",
-        "auc_6.5--10.glm.linear-gwas.csv.gz", "auc_12--17.glm.linear-gwas.csv.gz",
-        "AP_ageyears.glm.linear-gwas.csv.gz", "slope_0--0.5.glm.linear-gwas.csv.gz",
-        "slope_1.5--3.5.glm.linear-gwas.csv.gz", "slope_12--17.glm.linear-gwas.csv.gz",
-        "slope_6.5--10.glm.linear-gwas.csv.gz", "AR_ageyears.glm.linear-gwas.csv.gz",
+        "AR_bmi.glm.linear-gwas.txt.gz", "AP_bmi.glm.linear-gwas.txt.gz",
+        "auc_1.5--3.5.glm.linear-gwas.txt.gz", "auc_0--0.5.glm.linear-gwas.txt.gz",
+        "auc_6.5--10.glm.linear-gwas.txt.gz", "auc_12--17.glm.linear-gwas.txt.gz",
+        "AP_ageyears.glm.linear-gwas.txt.gz", "slope_0--0.5.glm.linear-gwas.txt.gz",
+        "slope_1.5--3.5.glm.linear-gwas.txt.gz", "slope_12--17.glm.linear-gwas.txt.gz",
+        "slope_6.5--10.glm.linear-gwas.txt.gz", "AR_ageyears.glm.linear-gwas.txt.gz",
         "male.zip", "female.zip", "gwas-software.txt"
       ))
     )
@@ -165,12 +165,12 @@ test_that("run_eggla", {
     expect_equal(
       sort(basename(result_gwas)),
       sort(c(
-        "AR_bmi.glm.linear-gwas.csv.gz", "AP_bmi.glm.linear-gwas.csv.gz",
-        "auc_1.5--3.5.glm.linear-gwas.csv.gz", "auc_0--0.5.glm.linear-gwas.csv.gz",
-        "auc_6.5--10.glm.linear-gwas.csv.gz", "auc_12--17.glm.linear-gwas.csv.gz",
-        "AP_ageyears.glm.linear-gwas.csv.gz", "slope_0--0.5.glm.linear-gwas.csv.gz",
-        "slope_1.5--3.5.glm.linear-gwas.csv.gz", "slope_12--17.glm.linear-gwas.csv.gz",
-        "slope_6.5--10.glm.linear-gwas.csv.gz", "AR_ageyears.glm.linear-gwas.csv.gz",
+        "AR_bmi.glm.linear-gwas.txt.gz", "AP_bmi.glm.linear-gwas.txt.gz",
+        "auc_1.5--3.5.glm.linear-gwas.txt.gz", "auc_0--0.5.glm.linear-gwas.txt.gz",
+        "auc_6.5--10.glm.linear-gwas.txt.gz", "auc_12--17.glm.linear-gwas.txt.gz",
+        "AP_ageyears.glm.linear-gwas.txt.gz", "slope_0--0.5.glm.linear-gwas.txt.gz",
+        "slope_1.5--3.5.glm.linear-gwas.txt.gz", "slope_12--17.glm.linear-gwas.txt.gz",
+        "slope_6.5--10.glm.linear-gwas.txt.gz", "AR_ageyears.glm.linear-gwas.txt.gz",
         "male", "female", "gwas-software.txt"
       ))
     )
