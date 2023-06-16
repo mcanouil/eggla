@@ -659,8 +659,8 @@ run_eggla_gwas <- function(
     )
   )[
     j = list(file = (function(dt, tm) {
-      rf <- sprintf(file.path(working_directory, "%s-gwas.csv.gz"), tm)
-      data.table::fwrite(x = .SD, file = rf)
+      rf <- sprintf(file.path(working_directory, "%s-gwas.txt.gz"), tm)
+      data.table::fwrite(x = .SD, file = rf, sep = "\t")
       rf
     })(.SD, trait_model)),
     by = "trait_model"
