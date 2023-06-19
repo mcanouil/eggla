@@ -4,11 +4,8 @@
     "rdebugger.r-debugger",
     "ionutvmi.path-autocomplete",
     "eamodio.gitlens",
-    "github.vscode-pull-request-github",
     "usernamehw.errorlens",
-    "ms-vscode-remote.remote-containers",
     "yzhang.markdown-all-in-one",
-    "davidanson.vscode-markdownlint",
-    "github.copilot"
+    "davidanson.vscode-markdownlint"
   ]
 }

@@ -1,3 +1,12 @@
+# eggla 0.19.6
+
+## Fixes
+
+- In `R/run_eggla_gwas.R`,
+  - fix: GWAS results are now exported as a tab-delimited compressed file (_i.e._, `txt.gz`).
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.5...v0.19.6>
+
 # eggla 0.19.5
 
 ## Fixes

@@ -122,7 +122,7 @@ _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the dir
 ```
 /home/mcanouil/eggla/
 ├── gwas_software.txt
-└── gwas.csv.gz
+└── gwas.txt.gz
 ```
 
 # Run Non-Interactively (In Bash/Shell)
@@ -246,7 +246,7 @@ EOF
 ```
 /home/mcanouil/eggla/
 ├── gwas_software.txt
-└── gwas.csv.gz
+└── gwas.txt.gz
 ```
 
 # Run Interactively In Bash/R
@@ -367,5 +367,5 @@ run_eggla_gwas(
 ```
 /home/mcanouil/eggla/
 ├── gwas_software.txt
-└── gwas.csv.gz
+└── gwas.txt.gz
 ```
