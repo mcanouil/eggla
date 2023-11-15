@@ -31,15 +31,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Move Devcontainer to root (https://github.com/devcontainers/ci/issues/212)
-        run: mv -f .github/.devcontainer/* ./.devcontainer
-
       - name: Build and run Dev Container
         uses: devcontainers/ci@v0.3
         if: github.ref_name != 'main'
         with:
-          imageName: ghcr.io/mcanouil/eggla
-          cacheFrom: ghcr.io/mcanouil/eggla
+          subFolder: .github
+          imageName: ghcr.io/${{ github.repository }}
+          cacheFrom: ghcr.io/${{ github.repository }}
           imageTag: ${{github.ref_name}}
           platform: linux/amd64
           push: always
@@ -49,8 +47,9 @@ jobs:
         uses: devcontainers/ci@v0.3
         if: github.ref_name == 'main'
         with:
-          imageName: ghcr.io/mcanouil/eggla
-          cacheFrom: ghcr.io/mcanouil/eggla
+          subFolder: .github
+          imageName: ghcr.io/${{ github.repository }}
+          cacheFrom: ghcr.io/${{ github.repository }}
           imageTag: "devel"
           platform: linux/amd64
           push: always
