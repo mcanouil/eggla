@@ -3,7 +3,8 @@ title: "Run The Cubic Splines (Random Cubic/Linear Splines) Analysis"
 author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -115,7 +116,8 @@ pheno_dt_clean <- dcast(
 
 ## Without Daymont's QC
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 pheno_dt_clean <- bmigrowth
 ```
 

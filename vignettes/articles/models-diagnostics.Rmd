@@ -3,7 +3,8 @@ title: "Models Diagnostics"
 author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -15,7 +16,8 @@ knitr::opts_chunk$set(
 
 # R setup
 
-```{r setup}
+```{r}
+#| label: setup
 output_directory <- file.path(tempdir(), "models-diagnostics")
 dir.create(output_directory, recursive = TRUE, showWarnings = FALSE, mode = "0775")
 
@@ -42,12 +44,14 @@ library(future.apply)
 library(future.callr)
 ```
 
-```{r future-setup}
+```{r}
+#| label: future-setup
 plan("callr", workers = availableCores())
 message(sprintf("Number of workers: %d", nbrOfWorkers()))
 ```
 
-```{r ggplot-setup}
+```{r}
+#| label: ggplot-setup
 theme_update(
   plot.title = element_markdown(),
   plot.subtitle = element_markdown(face = "italic"),
@@ -65,7 +69,8 @@ okabe_ito_palette <- c(
 
 # Data
 
-```{r input-data}
+```{r}
+#| label: input-data
 # pheno_dt <- setDT(get(data("bmigrowth", package = "eggla")))
 pheno_dt <- fread("pheno_file")
 ```
@@ -77,7 +82,8 @@ pheno_dt <- fread("pheno_file")
 - `WEIGHTKG` - weight in kilograms (double).
 - `HEIGHTCM` - height in centimetres (double).
 
-```{r format-data}
+```{r}
+#| label: format-data
 is_male_zero <- FALSE
 pheno_dt[
   j = `:=`(
@@ -97,7 +103,8 @@ pheno_dt[
 
 ## Add Daymont's quality control tags
 
-```{r add-daymont-data}
+```{r}
+#| label: add-daymont-data
 visits_long <- melt(
   data = pheno_dt,
   id.vars = c("ID", "age", "sex", "agedays", "sex_daymont"),
@@ -120,7 +127,8 @@ visits_long <- melt(
 
 - BMI based on raw measures
 
-    ```{r visits-raw}
+    ```{r}
+    #| label: visits-raw
     visits_raw <- dcast(
       data = visits_long,
       formula = ... ~ param,
@@ -134,7 +142,8 @@ visits_long <- melt(
 
 - BMI based on Clean measures
 
-    ```{r visits-qc}
+    ```{r}
+    #| label: visits-qc
     visits_clean <- dcast(
       data = visits_long[clean %in% "Include"], # Exclude all flags
       formula = ... ~ param,
@@ -152,9 +161,10 @@ visits_long <- melt(
 
 ## Setup all models to be tested
 
-```{r models-setup}
+```{r}
+#| label: models-setup
 random_effect <- c(
-  "~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID",
+  "~ gsp(age, knots = c(0.75, 5.5, 11), degree = rep(1, 3), smooth = rep(0, 3)) | ID",
   "~ 1 | ID",
   "~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID",
   "~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3))[, 1:3] | ID",
@@ -174,7 +184,8 @@ fixed_effect <- c(
 )
 ```
 
-```{r models-setup-data}
+```{r}
+#| label: models-setup-data
 all_models <- setDT(
   expand.grid(
     sex = c(0, 1),
@@ -206,7 +217,8 @@ all_models <- setDT(
 
 *In parallel using `future`.*
 
-```{r models-try}
+```{r}
+#| label: models-try
 all_models[["lme"]] <- future_mapply(
   FUN = function(models, dataset, sex, correlation_structure, default) {
     m <- sprintf(
@@ -285,7 +297,8 @@ saveRDS(
 
 ## Models results
 
-```{r best-model}
+```{r}
+#| label: best-model
 best_models <- paste(
   "fixed = log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)),",
   "random = ~ gsp(age, knots = c(2, 8, 12), degree = rep(3, 4), smooth = rep(2, 3)) | ID"
@@ -293,7 +306,8 @@ best_models <- paste(
 best_dataset <- "visits_clean"
 ```
 
-```{r get-best-model-results}
+```{r}
+#| label: get-best-model-results
 good_res_models <- readRDS(file.path(output_directory, "summary_models.rds"))[
   correlation_structure != "NULL" &
     models %in% best_models &
@@ -301,7 +315,9 @@ good_res_models <- readRDS(file.path(output_directory, "summary_models.rds"))[
 ]
 ```
 
-```{r models-diagnostics-plot, dev.args = list(scaling = 0.50)}
+```{r}
+#| label: models-diagnostics-plot
+#| dev.args: !expr list(scaling = 0.5)
 wrap_plots(
   lapply(
     X = good_res_models[j = perf_check_model],
@@ -322,7 +338,8 @@ wrap_plots(
   )
 ```
 
-```{r model-predict-plot}
+```{r}
+#| label: model-predict-plot
 ggplot(
   data = good_res_models[
     j = rbindlist(lapply(
@@ -396,7 +413,8 @@ ggplot(
   )
 ```
 
-```{r models-diagnostics}
+```{r}
+#| label: models-diagnostics
 fmt_models <- all_models[
   j = list(
     sex = c("0" = "Male", "1" = "Female")[as.character(sex)],
@@ -462,7 +480,9 @@ fwrite(
 
 ## Models status
 
-```{r models-success-plot, fig.asp = 1}
+```{r}
+#| label: models-success-plot
+#| fig.asp: 1.0
 ggplot(data = fmt_models) +
   aes(x = x, y = y, fill = fill) +
   facet_grid(cols = vars(sex)) +
@@ -480,7 +500,8 @@ ggplot(data = fmt_models) +
   theme(legend.position = "top")
 ```
 
-```{r models-success-table}
+```{r}
+#| label: models-success-table
 if (fmt_models[fill != "Good", .N > 0]) {
   diag_tab <- gt(
     data = fmt_models[
@@ -518,7 +539,8 @@ if (fmt_models[fill != "Good", .N > 0]) {
 
 ## Models performance
 
-```{r models-performances-table}
+```{r}
+#| label: models-performances-table
 perf_tab <- gt(
   data = fmt_models[
     i = fill %in% "Good",
@@ -583,9 +605,10 @@ gtsave(perf_tab, file.path(output_directory, "models-performance.html"))
 
 ## Load, update, and write new performance metrics
 
-```{r update-perf}
+```{r}
+#| label: update-perf
 models_file_rds <- file.path(output_directory, "summary_models.rds")
-all_models <- readRDS()
+all_models <- readRDS(models_file_rds)
 all_models[
   i = (is_good),
   j = `:=`(
@@ -617,7 +640,8 @@ saveRDS(object = all_models, file = models_file_rds, compress = FALSE)
 
 ## Tidy performance data (subset)
 
-```{r tidy-perf}
+```{r}
+#| label: tidy-perf
 performance_file_csv <- file.path(output_directory, "models-performance.csv")
 fwrite(
   file = file.path(output_directory, "models-performance-tidy.csv"),

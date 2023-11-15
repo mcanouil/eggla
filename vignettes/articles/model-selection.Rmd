@@ -2,10 +2,11 @@
 title: "Model Selection"
 author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
 params:
-  working_directory: !r tempdir()
+  working_directory: !expr tempdir()
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   eval = FALSE,
   collapse = TRUE,
@@ -15,7 +16,8 @@ knitr::opts_chunk$set(
 
 # R setup
 
-```{r setup}
+```{r}
+#| label: setup
 library(eggla)
 library(data.table)
 library(scales)
@@ -36,7 +38,8 @@ okabe_ito_palette <- c(
 
 **Note:** The following code assumes `models-performance.csv` from `vignette("models-diagnostics")` are located in `params[["working_directory"]]`.
 
-```{r select-best-model}
+```{r}
+#| label: select-best-model
 output_directory <- file.path(params[["working_directory"]], "models-diagnostics")
 
 files <- list.files(
