@@ -36,6 +36,7 @@ test_that("Linear Splines", {
         y = "log(bmi)",
         data = bmigrowth[bmigrowth$sex == 0, ],
         method = "linear_splines",
+        knots = c(0.75, 5.5, 11),
         use_car1 = use_car1,
         id_var = "ID",
         quiet = TRUE
@@ -43,9 +44,9 @@ test_that("Linear Splines", {
     )
 
     y <- nlme::lme(
-      log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)),
+      log(bmi) ~ gsp(age, knots = c(0.75, 5.5, 11), degree = c(1, 1, 1, 1), smooth = c(0, 0, 0)),
       data = bmigrowth[bmigrowth$sex == 0, ],
-      random = ~ gsp(age, knots = c(5.5, 11), degree = c(1, 1, 1), smooth = c(0, 0)) | ID,
+      random = ~ gsp(age, knots = c(0.75, 5.5, 11), degree = c(1, 1, 1, 1), smooth = c(0, 0, 0)) | ID,
       na.action = stats::na.omit,
       method = "ML",
       correlation = if (use_car1) nlme::corCAR1(form = ~ 1 | ID) else NULL,
@@ -106,6 +107,7 @@ test_that("Test wrong covariates", {
       cov = c("nothing"),
       data = bmigrowth[bmigrowth$sex == 0, ],
       method = "linear_splines",
+      knots = c(5.5, 11),
       id_var = "ID",
       use_car1 = TRUE,
       quiet = TRUE
@@ -121,6 +123,7 @@ test_that("Test covariates", {
       cov = c("height"),
       data = bmigrowth[bmigrowth$sex == 0, ],
       method = "linear_splines",
+      knots = c(5.5, 11),
       id_var = "ID",
       use_car1 = TRUE,
       quiet = TRUE

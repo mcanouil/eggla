@@ -58,6 +58,7 @@ test_that("Linear Splines", {
     y = "log(bmi)",
     data = bmigrowth[bmigrowth$sex == 0, ],
     method = "linear_splines",
+    knots = c(5.5, 11),
     use_car1 = TRUE,
     quiet = TRUE
   )
@@ -66,6 +67,7 @@ test_that("Linear Splines", {
     y1 <- compute_aucs(
       fit = x,
       method = "linear_splines",
+      knots = c(5.5, 11),
       period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)
     )
   )

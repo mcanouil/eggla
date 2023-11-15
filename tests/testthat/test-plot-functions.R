@@ -6,14 +6,16 @@ ls_mod <- time_model(
   y = "log(bmi)",
   cov = NULL,
   data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-  method = "linear_splines"
+  method = "linear_splines",
+  knots = c(5.5, 11)
 )
 
 test_that("plot_aucs", {
   expect_s3_class(
     plot_aucs(
       fit = ls_mod,
-      method = "linear_splines"
+      method = "linear_splines",
+      knots = c(5.5, 11)
     ),
     "ggplot"
   )
@@ -23,7 +25,8 @@ test_that("plot_slopes", {
   expect_s3_class(
     plot_slopes(
       fit = ls_mod,
-      method = "linear_splines"
+      method = "linear_splines",
+      knots = c(5.5, 11)
     ),
     "ggplot"
   )
