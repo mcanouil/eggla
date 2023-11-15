@@ -44,7 +44,7 @@ jobs:
           runCmd: Rscript eggla-example.R
 
       - name: Build and run Dev Container
-        uses: devcontainers/ci@v0.3
+        uses: devcontainers/ci@v0.2
         if: ${{ github.ref_name == 'main' }}
         with:
           subFolder: .github
@@ -53,3 +53,4 @@ jobs:
           imageTag: "devel"
           platform: linux/amd64
           push: always
+          runCmd: Rscript eggla-example.R
