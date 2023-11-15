@@ -1,0 +1,48 @@
+{
+	"name": "eggla",
+	"image": "ghcr.io/mcanouil/eggla:devel",
+	"remoteUser": "vscode",
+	"remoteEnv": {
+		"PKG_SYSREQS": "true"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": "true",
+			"username": "vscode",
+			"userUid": "1001",
+			"userGid": "1001",
+			"upgradePackages": "true"
+		},
+		"ghcr.io/devcontainers/features/git:1": {
+			"version": "latest",
+			"ppa": "false"
+		},
+		"ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
+			"version": "4.2.0",
+			"vscodeRSupport": "full",
+			"installDevTools": "false",
+			"installREnv": "true",
+			"installRMarkdown": "false"
+		},
+		"./bcftools": {
+			"version": "1.16"
+		},
+		"./eggla": {
+			"version": "main"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"REditorSupport.r"
+			],
+			"settings": {
+				"r.rterm.option": [
+					"--no-save",
+					"--no-restore-data",
+					"--quiet"
+				]
+			}
+		}
+	}
+}

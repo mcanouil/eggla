@@ -77,7 +77,8 @@ check_packages curl \
     libfribidi-dev \
     libv8-dev \
     libudunits2-dev \
-    libfftw3-dev
+    libfftw3-dev \
+    libgit2-dev
 
 install_pak() {
     local version=$1
@@ -102,9 +103,11 @@ echo "Install R packages..."
 mkdir /tmp/r-packages
 pushd /tmp/r-packages
 
+
 install_pak "auto"
 
-su "${USERNAME}" -c "R -q -e \"pak::lockfile_install(update = TRUE)\""
+cp ${FEATURE_DIR}/R/pkg.lock pkg.lock
+su "${USERNAME}" -c "R -q -e \"n <- 0; while(inherits(try(pak::lockfile_install(update = TRUE), silent = TRUE), 'try-error') && n < 3) n <- n + 1\""
 
 if [ "${EGGLA_VERSION}" = "main" ]; then
     su "${USERNAME}" -c "R -q -e \"pak::pkg_install('mcanouil/eggla', upgrade = FALSE, dependencies = TRUE)\""

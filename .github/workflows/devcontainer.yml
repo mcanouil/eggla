@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-docker:
+  build-devcontainer:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'workflow_dispatch' || 
