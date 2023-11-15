@@ -34,10 +34,10 @@ jobs:
       - name: Determine Tag
         id: tag
         run: |
-          if [ "${{ github.ref_name != 'main' }}" ]; then
-            echo ::set-output name=tag::${{ github.ref_name }}
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "tag=devel" >> "$GITHUB_OUTPUT"
           else
-            echo ::set-output name=tag::devel
+            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Build and run Dev Container on release
