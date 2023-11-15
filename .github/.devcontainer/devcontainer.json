@@ -1,6 +1,6 @@
 {
 	"name": "eggla",
-	"image": "ghcr.io/mcanouil/eggla:devel",
+	"image": "buildpack-deps:bullseye-curl",
 	"remoteUser": "vscode",
 	"remoteEnv": {
 		"PKG_SYSREQS": "true"
