@@ -57,6 +57,7 @@ Donwload the (latest) Docker image or a specific version from the [GitHub Regist
 ```{bash}
 docker run \
   --name eggla-docker-analysis \
+  --user vscode \
   --detach \
   --rm \
   --volume /home/mcanouil/eggla:/tmp/eggla \
@@ -109,6 +110,7 @@ Donwload the (latest) Docker image or a specific version from the [GitHub Regist
 ```{bash}
 docker run \
   --name eggla-docker-analysis \
+  --user vscode \
   --detach \
   --rm \
   --volume /home/mcanouil/eggla:/tmp/eggla \
