@@ -1,2 +1,2 @@
-ARG TAG=latest
-FROM --platform=linux/amd64 ghcr.io/mcanouil/eggla:${TAG}
+ARG VARIANT="bullseye"
+FROM --platform=linux/amd64 buildpack-deps:${VARIANT}-curl

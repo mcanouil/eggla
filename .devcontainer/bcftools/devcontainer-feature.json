@@ -1,0 +1,20 @@
+{
+	"name": "BCFtools",
+	"id": "bcftools",
+	"version": "1.0.0",
+	"description": "Installs the BCFtools software.",
+	"documentationURL": "https://github.com/mcanouil/eggla/tree/main/.devcontainer/bcftools",
+	"options": {
+		"version": {
+			"type": "string",
+			"proposals": [
+				"latest"
+			],
+			"default": "latest",
+			"description": "Select version of the BCFtools software, if not 'latest'."
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils"
+	]
+}

@@ -1,0 +1,21 @@
+{
+	"name": "eggla",
+	"id": "eggla",
+	"version": "1.0.0",
+	"description": "Installs the eggla R package.",
+	"documentationURL": "https://github.com/mcanouil/eggla/tree/main/.devcontainer/eggla",
+	"options": {
+		"version": {
+			"type": "string",
+			"proposals": [
+				"latest"
+			],
+			"default": "latest",
+			"description": "Select version of the eggla R package, if not 'latest'."
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/rocker-org/devcontainer-features/r-rig"
+	]
+}
