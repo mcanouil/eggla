@@ -51,6 +51,5 @@ jobs:
           imageName: ghcr.io/${{ github.repository }}
           cacheFrom: ghcr.io/${{ github.repository }}
           imageTag: "devel"
-          platform: linux/amd64
           push: always
           runCmd: Rscript eggla-example.R
