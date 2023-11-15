@@ -3,7 +3,12 @@
 ## Fixes
 
 - In `R`, and `vignettes/articles`,
-  - fix: add missing knot at 0.75 in linear spline model.
+  - fix: add missing knot at 0.75 in linear splines model.
+
+## Chores
+
+- In `.github`,
+  - chore: update infrastructure based on Devcontainer.
 
 **Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.6...v0.19.7>
 
