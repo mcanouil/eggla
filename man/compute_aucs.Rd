@@ -8,8 +8,8 @@ compute_aucs(
   fit,
   method,
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-  knots = list(cubic_slope = NULL, linear_splines = c(5.5, 11), cubic_splines = c(1, 8,
-    12))[[method]]
+  knots = list(cubic_slope = NULL, linear_splines = c(0.75, 5.5, 11), cubic_splines =
+    c(1, 8, 12))[[method]]
 )
 }
 \arguments{
@@ -45,7 +45,7 @@ head(compute_aucs(
   period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17)#,
   # knots = list(
   #   "cubic_slope" = NULL,
-  #   "linear_splines" = c(5.5, 11),
+  #   "linear_splines" = c(0.75, 5.5, 11),
   #   "cubic_splines" = c(1, 8, 12)
   # )[[method]]
 ))

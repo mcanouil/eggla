@@ -39,7 +39,7 @@ time_model <- function(
   method = c("cubic_slope", "linear_splines", "cubic_splines"),
   knots = list(
     "cubic_slope" = NULL,
-    "linear_splines" = c(5.5, 11),
+    "linear_splines" = c(0.75, 5.5, 11),
     "cubic_splines" = c(1, 8, 12)
   )[[method]],
   use_car1 = FALSE,

@@ -1,3 +1,12 @@
+# eggla 0.19.7
+
+## Fixes
+
+- In `R`, and `vignettes/articles`,
+  - fix: add missing knot at 0.75 in linear spline model.
+
+**Full Changelog**: <https://github.com/mcanouil/eggla/compare/v0.19.6...v0.19.7>
+
 # eggla 0.19.6
 
 ## Fixes
