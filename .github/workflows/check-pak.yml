@@ -7,14 +7,12 @@ on:
     branches: main
     paths-ignore:
       - ".github/**"
-      - "inst/setup/Dockerfile"
-      - "inst/setup/common-debian.sh"
+      - ".devcontainer/**"
   pull_request:
     branches: main
     paths-ignore:
       - ".github/**"
-      - "inst/setup/Dockerfile"
-      - "inst/setup/common-debian.sh"
+      - ".devcontainer/**"
   workflow_dispatch:
 
 concurrency:
@@ -38,7 +36,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      BCFTOOLS_VERSION: 1.15.1
+      BCFTOOLS_VERSION: 1.16
 
     steps:
       - uses: actions/checkout@v4
