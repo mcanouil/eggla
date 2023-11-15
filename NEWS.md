@@ -1,4 +1,4 @@
-# eggla 0.19.7
+# eggla 0.20.0
 
 ## Fixes
 
