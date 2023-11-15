@@ -49,4 +49,4 @@ jobs:
           cacheFrom: ghcr.io/${{ github.repository }}
           imageTag: ${{ steps.tag.outputs.tag }}
           push: always
-          runCmd: Rscript eggla-example.R
+          runCmd: Rscript /eggla-example.R

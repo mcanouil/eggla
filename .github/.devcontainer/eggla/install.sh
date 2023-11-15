@@ -117,8 +117,8 @@ fi
 
 su "${USERNAME}" -c "R -q -e \"pak::cache_clean()\""
 
-cp ${FEATURE_DIR}/tests/eggla-example.R ${user_home}/eggla-example.R
-chmod +x ${user_home}/eggla-example.R
+cp ${FEATURE_DIR}/tests/eggla-example.R /eggla-example.R
+chmod +x /eggla-example.R
 
 cp ${FEATURE_DIR}/bin/plink2 /usr/bin/plink2
 chmod +x /usr/bin/plink2
