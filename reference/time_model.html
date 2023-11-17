@@ -12,7 +12,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.20.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,8 +72,8 @@
 <span>  cov <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cubic_slope"</span>, <span class="st">"linear_splines"</span>, <span class="st">"cubic_splines"</span><span class="op">)</span>,</span>
-<span>  knots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>cubic_slope <span class="op">=</span> <span class="cn">NULL</span>, linear_splines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.5</span>, <span class="fl">11</span><span class="op">)</span>, cubic_splines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>,</span>
-<span>    <span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="va">method</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>  knots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>cubic_slope <span class="op">=</span> <span class="cn">NULL</span>, linear_splines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">5.5</span>, <span class="fl">11</span><span class="op">)</span>, cubic_splines <span class="op">=</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="va">method</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>  use_car1 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  id_var <span class="op">=</span> <span class="st">"ID"</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -138,9 +138,9 @@ to be used as the individual identifier.</p></dd>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="st">"linear_splines"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> nlme::lme(</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   fixed = log(bmi) ~ gsp(age, knots = c(0.75, 5.5, 11), degree = rep(1, 4), smooth = rep(0, 3)),</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   data = data,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   random = ~ gsp(age, knots = c(0.75, 5.5, 11), degree = rep(1, 4), smooth = rep(0, 3)) | ID,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   na.action = stats::na.omit,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   method = "ML",</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)</span>
@@ -148,11 +148,12 @@ to be used as the individual identifier.</p></dd>
 <span class="r-in"><span><span class="va">sres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ls_mod</span><span class="op">)</span><span class="op">[[</span><span class="st">"tTable"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sres</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"gsp\\(.*\\)\\)"</span>, <span class="st">"gsp(...)"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sres</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sres</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         Value   Std.Error  DF     t-value      p-value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)       2.768213585 0.012555936 481 220.4705111 0.000000e+00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gsp(...)D1(0)     0.044675074 0.004592058 481   9.7287703 1.535193e-20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gsp(...)C(5.5).1  0.019727692 0.008265921 481   2.3866296 1.738920e-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gsp(...)C(11).1  -0.005017389 0.013127743 481  -0.3821974 7.024838e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         Value   Std.Error  DF    t-value      p-value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)        2.66826332 0.016046220 480 166.286095 0.000000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gsp(...)D1(0)      0.27458917 0.024989904 480  10.988004 3.309661e-25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gsp(...)C(0.75).1 -0.25208766 0.025973809 480  -9.705456 1.873317e-20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gsp(...)C(5.5).1   0.05132095 0.007890419 480   6.504211 1.964795e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gsp(...)C(11).1   -0.02340424 0.011618719 480  -2.014356 4.452943e-02</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

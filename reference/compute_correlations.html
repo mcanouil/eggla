@@ -16,7 +16,7 @@ each intervals derived parameters."><meta property="og:image" content="https://m
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.19.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.20.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,8 +76,8 @@ each intervals derived parameters.</p>
 <span>  <span class="va">fit</span>,</span>
 <span>  <span class="va">method</span>,</span>
 <span>  period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">3.5</span>, <span class="fl">6.5</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">17</span><span class="op">)</span>,</span>
-<span>  knots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>cubic_slope <span class="op">=</span> <span class="cn">NULL</span>, linear_splines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.5</span>, <span class="fl">11</span><span class="op">)</span>, cubic_splines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>,</span>
-<span>    <span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="va">method</span><span class="op">]</span><span class="op">]</span></span>
+<span>  knots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>cubic_slope <span class="op">=</span> <span class="cn">NULL</span>, linear_splines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">5.5</span>, <span class="fl">11</span><span class="op">)</span>, cubic_splines <span class="op">=</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="va">method</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -119,9 +119,9 @@ from a call to <code><a href="time_model.html">time_model()</a></code>.</p></dd>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="st">"linear_splines"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> nlme::lme(</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   fixed = log(bmi) ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)),</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   fixed = log(bmi) ~ gsp(age, knots = c(0.75, 5.5, 11), degree = rep(1, 4), smooth = rep(0, 3)),</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   data = data,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   random = ~ gsp(age, knots = c(5.5, 11), degree = rep(1, 3), smooth = rep(0, 2)) | ID,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   random = ~ gsp(age, knots = c(0.75, 5.5, 11), degree = rep(1, 4), smooth = rep(0, 3)) | ID,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   na.action = stats::na.omit,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   method = "ML",</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   control = nlme::lmeControl(opt = "optim", maxIter = 500, msMaxIter = 500)</span>
@@ -132,23 +132,23 @@ from a call to <code><a href="time_model.html">time_model()</a></code>.</p></dd>
 <span class="r-in"><span>  period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">3.5</span>, <span class="fl">6.5</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">17</span><span class="op">)</span><span class="co">#,</span></span></span>
 <span class="r-in"><span>  <span class="co"># knots = list(</span></span></span>
 <span class="r-in"><span>  <span class="co">#   "cubic_slope" = NULL,</span></span></span>
-<span class="r-in"><span>  <span class="co">#   "linear_splines" = c(5.5, 11),</span></span></span>
+<span class="r-in"><span>  <span class="co">#   "linear_splines" = c(0.75, 5.5, 11),</span></span></span>
 <span class="r-in"><span>  <span class="co">#   "cubic_splines" = c(1, 8, 12)</span></span></span>
 <span class="r-in"><span>  <span class="co"># )[[method]]</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $AUC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            term auc_0--0.5 auc_1.5--3.5 auc_6.5--10 auc_12--17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   auc_0--0.5  1.0000000    0.6718608   0.1460928 -0.0965362</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: auc_1.5--3.5  0.6718608    1.0000000   0.8260759  0.6665989</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  auc_6.5--10  0.1460928    0.8260759   1.0000000  0.9704485</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   auc_12--17 -0.0965362    0.6665989   0.9704485  1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   auc_0--0.5 1.00000000    0.5282555   0.1096091 0.03004233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: auc_1.5--3.5 0.52825550    1.0000000   0.7244223 0.51476239</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  auc_6.5--10 0.10960912    0.7244223   1.0000000 0.95171508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   auc_12--17 0.03004233    0.5147624   0.9517151 1.00000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $SLOPE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              term slope_0--0.5 slope_1.5--3.5 slope_6.5--10 slope_12--17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   slope_0--0.5    1.0000000      1.0000000    -0.7037694    0.9934862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: slope_1.5--3.5    1.0000000      1.0000000    -0.7037694    0.9934862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  slope_6.5--10   -0.7037694     -0.7037694     1.0000000   -0.7768949</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   slope_12--17    0.9934862      0.9934862    -0.7768949    1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   slope_0--0.5    1.0000000      0.2967416    -0.8479564    0.2391561</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: slope_1.5--3.5    0.2967416      1.0000000    -0.3552805    0.8843912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  slope_6.5--10   -0.8479564     -0.3552805     1.0000000   -0.5354321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   slope_12--17    0.2391561      0.8843912    -0.5354321    1.0000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
