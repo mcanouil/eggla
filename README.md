@@ -11,7 +11,7 @@ tag](https://img.shields.io/github/tag/mcanouil/eggla.svg?label=latest%20tag&inc
 [![codecov](https://codecov.io/gh/mcanouil/eggla/branch/main/graph/badge.svg?token=D0R3SAZTWA)](https://codecov.io/gh/mcanouil/eggla)
 [![R-CMD-check](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/check-pak.yml)
 [![Build
-Docker](https://github.com/mcanouil/eggla/actions/workflows/build-docker.yml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/build-docker.yml)
+Docker](https://github.com/mcanouil/eggla/actions/workflows/devcontainer.yml/badge.svg?branch=main)](https://github.com/mcanouil/eggla/actions/workflows/devcontainer.yml)
 <!-- badges: end -->
 
 Tools for longitudinal analysis within the [EGG (Early Growth Genetics)
