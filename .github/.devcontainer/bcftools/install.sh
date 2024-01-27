@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BCFTOOLS_VERSION=${VERSION:-"1.16"}
+BCFTOOLS_VERSION=${VERSION:-"1.19"}
 
 set -e
 
