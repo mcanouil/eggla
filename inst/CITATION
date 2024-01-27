@@ -1,25 +1,17 @@
-# cat(format(cff_to_bibtex(x = "CITATION.cff"), "R"), sep = "\n")
+# cat(format(cffr::cff_to_bibtex(x = "CITATION.cff"), "R"), sep = "\n")
 
 bibentry(
-  bibtype = "manual",
-  header = "To cite eggla in publications, please use:",
+  bibtype = "Manual",
+  key = "canouilwarrington:2024",
   title = "eggla: Early Growth Genetics Longitudinal Analysis",
-  author = c(person(given = "Mickaël",
-                    family = "Canouil"),
-            person(given = "Nicole",
-                    family = "Warrington"),
-            person(given = "Kimberley",
-                    family = "Burrows"),
-            person(given = "Anni",
-                    family = "Heiskala")),
-  year = "2022",
+  author = c(
+    person(given = "Mickaël", family = "Canouil"),
+    person(given = "Nicole", family = "Warrington"),
+    person(given = "Kimberley", family = "Burrows"),
+    person(given = "Anni", family = "Heiskala")),
+  year = "2024",
+  doi = "10.5281/zenodo.6979433",
   url = "https://m.canouil.dev/eggla/",
   keywords = "genetics, growth-curves, infancy, longitudinal-analysis, mixed-effects-models, r, r-package, r-stats, spline-regression",
-  abstract = "Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium.",
-  doi = "10.5281/zenodo.6979433",
-  textVersion = paste(
-    "Canouil M, Warrington N, Burrows K, Heiskala A (2022).",
-    "_eggla: Early Growth Genetics Longitudinal Analysis_.",
-    "doi: 10.5281/zenodo.6979433"
-  )
+  abstract = "Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium."
 )
