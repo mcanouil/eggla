@@ -87,6 +87,7 @@ gsp <- function(
   ret
 }
 
+#' @export
 print.gsp <- function(x, strip.attributes = TRUE, ...) {
   nms <- colnames(x)
   ncol <- ncol(x)

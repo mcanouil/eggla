@@ -9,8 +9,8 @@
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": "true",
 			"username": "vscode",
-			"userUid": "1001",
-			"userGid": "1001",
+			"userUid": "1000",
+			"userGid": "1000",
 			"upgradePackages": "true"
 		},
 		"ghcr.io/devcontainers/features/git:1": {
@@ -18,14 +18,14 @@
 			"ppa": "false"
 		},
 		"ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
-			"version": "4.2.0",
-			"vscodeRSupport": "full",
+			"version": "4.3.2",
+			"vscodeRSupport": "none",
 			"installDevTools": "false",
 			"installREnv": "true",
 			"installRMarkdown": "false"
 		},
 		"./bcftools": {
-			"version": "1.16"
+			"version": "1.19"
 		},
 		"./eggla": {
 			"version": "main"
@@ -41,7 +41,8 @@
 					"--no-save",
 					"--no-restore-data",
 					"--quiet"
-				]
+				],
+				"r.useRenvLibPath": true
 			}
 		}
 	}

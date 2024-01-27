@@ -1,3 +1,24 @@
+# eggla 1.0.0
+
+## Build
+
+- In `inst/bin`,
+  - build: update PLINK2 to 5th of January 2024 version (Linux 64-bit build).
+- In `.github`,
+  - build: upgrade BCFtools to 1.19.
+  - build: upgrade R to 3.4.2.
+- In `DESCRIPTION`,
+  - build: upgrade R packages to latest versions.
+
+## Chores
+
+- In `inst/CITATION`,
+  - chore: convert CFF to `bibentry`.
+- In `citation.cff`,
+  - chore: update citation file.
+- In `R/gsp.R`,
+  - chore: add `@export` for S3 method.
+
 # eggla 0.20.0
 
 ## Fixes
