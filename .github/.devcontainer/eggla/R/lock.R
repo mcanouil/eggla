@@ -1,9 +1,10 @@
+pak::pkg_install("devtools")
 pkgs <- setdiff(rownames(old.packages(repos = "https://cloud.r-project.org/")), "pak")
 if (length(pkgs) > 0) pak::pkg_install(pkgs)
 
 lock_file <- ".github/.devcontainer/eggla/R/pkg.lock"
 pak::lockfile_create(
-  pkg = c(".", "data.table", "devtools", "languageserver", "httpgd", "svglite", "ragg"),
+  pkg = c(".", "data.table", "svglite", "ragg"),
   lockfile = lock_file,
   lib = NULL,
   upgrade = TRUE,
