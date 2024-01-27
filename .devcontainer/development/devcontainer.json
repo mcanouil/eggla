@@ -1,0 +1,11 @@
+{
+	"name": "Development",
+	"image": "buildpack-deps:jammy-curl",
+	"remoteUser": "vscode",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {},
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers-contrib/features/devcontainers-cli": {}
+	}
+}
