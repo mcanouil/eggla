@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Models Diagnostics">
 <meta property="og:description" content="eggla">
@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.20.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,7 +146,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 </h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pheno_dt &lt;- setDT(get(data("bmigrowth", package = "eggla")))</span></span>
-<span><span class="va">pheno_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="st">"pheno_file"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">pheno_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="st">"pheno_file"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="tidy-data-for-daymonts-quality-control">Tidy data for Daymont’s quality control<a class="anchor" aria-label="anchor" href="#tidy-data-for-daymonts-quality-control"></a>
 </h3>
@@ -181,7 +181,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <h3 id="add-daymonts-quality-control-tags">Add Daymont’s quality control tags<a class="anchor" aria-label="anchor" href="#add-daymonts-quality-control-tags"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">visits_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">visits_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">pheno_dt</span>,</span>
 <span>  id.vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ID"</span>, <span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"agedays"</span>, <span class="st">"sex_daymont"</span><span class="op">)</span>,</span>
 <span>  measure.vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WEIGHTKG"</span>, <span class="st">"HEIGHTCM"</span><span class="op">)</span>,</span>
@@ -205,7 +205,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <li>
 <p>BMI based on raw measures</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">visits_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">visits_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">visits_long</span>,</span>
 <span>  formula <span class="op">=</span> <span class="va">...</span> <span class="op">~</span> <span class="va">param</span>,</span>
 <span>  value.var <span class="op">=</span> <span class="st">"measurement"</span></span>
@@ -218,7 +218,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <li>
 <p>BMI based on Clean measures</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">visits_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">visits_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">visits_long</span><span class="op">[</span><span class="va">clean</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"Include"</span><span class="op">]</span>, <span class="co"># Exclude all flags</span></span>
 <span>  formula <span class="op">=</span> <span class="va">...</span> <span class="op">~</span> <span class="va">param</span>,</span>
 <span>  value.var <span class="op">=</span> <span class="st">"measurement"</span></span>
@@ -259,7 +259,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"log(bmi) ~ poly(age, degree = 3)"</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">all_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html" class="external-link">setDT</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">all_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/setDT.html" class="external-link">setDT</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
 <span>    sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>    dataset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -402,7 +402,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">good_res_models</span><span class="op">[</span></span>
-<span>    j <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
+<span>    j <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
 <span>      X <span class="op">=</span> <span class="va">lme</span>,</span>
 <span>      FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">.lme</span><span class="op">)</span> <span class="op">{</span></span>
 <span>        <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">.lme</span>, <span class="st">"lme"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -430,9 +430,9 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span>    formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fu">s</span><span class="op">(</span><span class="va">x</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html" class="external-link">setnames</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/setattr.html" class="external-link">setnames</a></span><span class="op">(</span></span>
 <span>      x <span class="op">=</span> <span class="va">good_res_models</span><span class="op">[</span></span>
-<span>        j <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
+<span>        j <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span>
 <span>          X <span class="op">=</span> <span class="va">lme</span>,</span>
 <span>          FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">.lme</span><span class="op">)</span> <span class="op">{</span></span>
 <span>            <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">.lme</span>, <span class="st">"lme"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -501,12 +501,12 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span>    perf <span class="op">=</span> <span class="va">perf_model_performance</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">]</span><span class="op">[</span></span>
-<span>  j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"model"</span>, <span class="st">"random"</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/tstrsplit.html" class="external-link">tstrsplit</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">" - "</span><span class="op">)</span></span>
+<span>  j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"model"</span>, <span class="st">"random"</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/tstrsplit.html" class="external-link">tstrsplit</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">" - "</span><span class="op">)</span></span>
 <span><span class="op">]</span><span class="op">[</span></span>
 <span>  j <span class="op">=</span> <span class="fu">`:=`</span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
 <span>      <span class="va">model</span>,</span>
-<span>      <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">fifelse</a></span><span class="op">(</span><span class="va">correlation_structure</span> <span class="op">==</span> <span class="st">"NULL"</span>, <span class="st">"&lt;br&gt;"</span>, <span class="st">" -- C-AR1&lt;br&gt;"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">fifelse</a></span><span class="op">(</span><span class="va">correlation_structure</span> <span class="op">==</span> <span class="st">"NULL"</span>, <span class="st">"&lt;br&gt;"</span>, <span class="st">" -- C-AR1&lt;br&gt;"</span><span class="op">)</span>,</span>
 <span>      <span class="st">"&lt;i style='font-size: 8pt'&gt;"</span>, <span class="va">random</span>, <span class="st">"&lt;/i&gt;"</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
@@ -521,7 +521,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span>  <span class="op">)</span></span>
 <span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">fmt_models</span><span class="op">[</span></span>
 <span>    j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">perf</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>    by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -599,7 +599,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span>      Sex <span class="op">=</span> <span class="va">sex</span>,</span>
 <span>      Model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"&lt;i [^&gt;]*&gt;|&lt;/i&gt;"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"&lt;br&gt;"</span>, <span class="st">" -- "</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"8pt"</span>, <span class="st">"0.75em"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      Dataset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"&lt;br&gt;"</span>, <span class="st">" "</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"|&lt;i [^&gt;]*&gt;|&lt;/i&gt;"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"6pt"</span>, <span class="st">"0.75em"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>      <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">perf</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="va">perf</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">]</span>,</span>
 <span>  groupname_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sex"</span>, <span class="st">"Dataset"</span><span class="op">)</span></span>
@@ -734,12 +734,12 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span>    perf <span class="op">=</span> <span class="va">perf_model_performance</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">]</span><span class="op">[</span></span>
-<span>  j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"model"</span>, <span class="st">"random"</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/tstrsplit.html" class="external-link">tstrsplit</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">" - "</span><span class="op">)</span></span>
+<span>  j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"model"</span>, <span class="st">"random"</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/tstrsplit.html" class="external-link">tstrsplit</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">" - "</span><span class="op">)</span></span>
 <span><span class="op">]</span><span class="op">[</span></span>
 <span>  j <span class="op">=</span> <span class="fu">`:=`</span><span class="op">(</span></span>
 <span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
 <span>      <span class="va">model</span>,</span>
-<span>      <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">fifelse</a></span><span class="op">(</span><span class="va">correlation_structure</span> <span class="op">==</span> <span class="st">"NULL"</span>, <span class="st">"&lt;br&gt;"</span>, <span class="st">" -- C-AR1&lt;br&gt;"</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">fifelse</a></span><span class="op">(</span><span class="va">correlation_structure</span> <span class="op">==</span> <span class="st">"NULL"</span>, <span class="st">"&lt;br&gt;"</span>, <span class="st">" -- C-AR1&lt;br&gt;"</span><span class="op">)</span>,</span>
 <span>      <span class="st">"&lt;i style='font-size: 8pt'&gt;"</span>, <span class="va">random</span>, <span class="st">"&lt;/i&gt;"</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
@@ -754,7 +754,7 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 <span>  <span class="op">)</span></span>
 <span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">fmt_models</span><span class="op">[</span></span>
 <span>    j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">perf</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>    by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -772,12 +772,12 @@ Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">
 </h3>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">performance_file_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">output_directory</span>, <span class="st">"models-performance.csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fwrite.html" class="external-link">fwrite</a></span><span class="op">(</span></span>
 <span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">output_directory</span>, <span class="st">"models-performance-tidy.csv"</span><span class="op">)</span>,</span>
 <span>  scipen <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  x <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span></span>
-<span>      data <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">performance_file_csv</span><span class="op">)</span><span class="op">[</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span></span>
+<span>      data <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">fread</a></span><span class="op">(</span><span class="va">performance_file_csv</span><span class="op">)</span><span class="op">[</span></span>
 <span>        <span class="va">dataset</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"Clean"</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Intercepts"</span>, <span class="va">model</span><span class="op">)</span></span>
 <span>      <span class="op">]</span><span class="op">[</span></span>
 <span>        j <span class="op">=</span> <span class="va">.SD</span>,</span>
