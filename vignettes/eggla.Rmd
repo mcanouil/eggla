@@ -156,7 +156,7 @@ utils::install.packages(
 )
 library(pak)
 utils::download.file(
-  url = "https://raw.githubusercontent.com/mcanouil/eggla/latest/inst/setup/pkg.lock",
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/latest/.github/.devcontainer/eggla/R/pkg.lock",
   destfile = "pkg.lock"
 )
 lockfile_install(lockfile = "pkg.lock", lib = temp_library)
@@ -281,11 +281,11 @@ utils::install.packages(
 )
 library(pak)
 utils::download.file(
-  url = "https://raw.githubusercontent.com/mcanouil/eggla/latest/inst/setup/pkg.lock",
+  url = "https://raw.githubusercontent.com/mcanouil/eggla/latest/.github/.devcontainer/eggla/R/pkg.lock",
   destfile = "pkg.lock"
 )
 lockfile_install(lockfile = "pkg.lock", lib = temp_library)
-pkg_install("mcanouil/eggla@0.10.4", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+pkg_install("mcanouil/eggla@v1.0.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
 ```
 
 

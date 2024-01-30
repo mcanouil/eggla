@@ -8,10 +8,16 @@
 		"version": {
 			"type": "string",
 			"proposals": [
-				"latest"
+				"latest",
+				"main"
 			],
 			"default": "latest",
 			"description": "Select version of the eggla R package, if not 'latest'."
+		},
+		"use_lock": {
+			"type": "boolean",
+			"default": false,
+			"description": "Use the lock file to install the eggla R package dependencies."
 		}
 	},
 	"installsAfter": [

@@ -2,7 +2,8 @@
 
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
-EGGLA_VERSION=${VERSION:-"main"}
+EGGLA_VERSION=${VERSION:-"latest"}
+USE_LOCK=${USELOCKFILE:-"false"}
 
 FEATURE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -103,16 +104,15 @@ echo "Install R packages..."
 mkdir /tmp/r-packages
 pushd /tmp/r-packages
 
-
 install_pak "auto"
 
-cp ${FEATURE_DIR}/R/pkg.lock pkg.lock
-su "${USERNAME}" -c "R -q -e \"n <- 0; while(inherits(try(pak::lockfile_install(update = TRUE), silent = TRUE), 'try-error') && n < 3) n <- n + 1\""
-
-if [ "${EGGLA_VERSION}" = "main" ]; then
-    su "${USERNAME}" -c "R -q -e \"pak::pkg_install('mcanouil/eggla', upgrade = FALSE, dependencies = FALSE)\""
-else
+if [ "${USE_LOCK}" = "true" ]; then
+    cp ${FEATURE_DIR}/R/pkg.lock pkg.lock
+    su "${USERNAME}" -c "R -q -e \"n <- 0; while(inherits(try(pak::lockfile_install(update = TRUE), silent = TRUE), 'try-error') && n < 3) n <- n + 1\""
     su "${USERNAME}" -c "R -q -e \"pak::pkg_install('mcanouil/eggla@${EGGLA_VERSION}', upgrade = FALSE, dependencies = FALSE)\""
+    su "${USERNAME}" -c "R -q -e \"n <- 0; while(inherits(try(pak::lockfile_install(update = TRUE), silent = TRUE), 'try-error') && n < 3) n <- n + 1\""
+else
+    su "${USERNAME}" -c "R -q -e \"pak::pkg_install('mcanouil/eggla@${EGGLA_VERSION}', upgrade = TRUE, dependencies = TRUE)\""
 fi
 
 su "${USERNAME}" -c "R -q -e \"pak::cache_clean()\""

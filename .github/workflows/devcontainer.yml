@@ -34,8 +34,10 @@ jobs:
         run: |
           if [ "${{ github.ref_name }}" == "main" ]; then
             echo "tag=devel" >> "$GITHUB_OUTPUT"
+            echo "EGGLA_VERSION=devel" >> "$GITHUB_ENV"
           else
             echo "tag=latest,${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+            echo "EGGLA_VERSION=${{ github.ref_name }}" >> "$GITHUB_ENV"
           fi
 
       - name: Build and run Dev Container on release

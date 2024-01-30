@@ -28,7 +28,8 @@
 			"version": "1.19"
 		},
 		"./eggla": {
-			"version": "main"
+			"version": "${localEnv:EGGLA_VERSION}",
+			"useLockfile": "false"
 		}
 	},
 	"customizations": {
