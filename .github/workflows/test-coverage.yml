@@ -8,6 +8,10 @@ on:
     paths-ignore:
       - ".github/**"
       - ".devcontainer/**"
+  workflow_run:
+    workflows: "R-CMD-check"
+    branches: main
+    types: completed
 
 concurrency:
   group: ${{ github.workflow }}

@@ -6,8 +6,6 @@ on:
     workflows: "R-CMD-check"
     branches: main
     types: completed
-  release:
-    types: [published]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}

@@ -3,8 +3,10 @@
 name: pkgdown
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: "R-CMD-check"
+    branches: main
+    types: completed
   workflow_dispatch:
 
 concurrency:
