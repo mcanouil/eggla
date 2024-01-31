@@ -34,7 +34,7 @@ jobs:
         run: |
           if [ "${{ github.ref_name }}" == "main" ]; then
             echo "tag=devel" >> "$GITHUB_OUTPUT"
-            echo "EGGLA_VERSION=devel" >> "$GITHUB_ENV"
+            echo "EGGLA_VERSION=main" >> "$GITHUB_ENV"
           else
             echo "tag=latest,${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
             echo "EGGLA_VERSION=${{ github.ref_name }}" >> "$GITHUB_ENV"
