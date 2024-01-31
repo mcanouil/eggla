@@ -5,14 +5,8 @@ name: R-CMD-check
 on:
   push:
     branches: main
-    paths-ignore:
-      - ".github/**"
-      - ".devcontainer/**"
   pull_request:
     branches: main
-    paths-ignore:
-      - ".github/**"
-      - ".devcontainer/**"
   workflow_dispatch:
   release:
     types: [published]
