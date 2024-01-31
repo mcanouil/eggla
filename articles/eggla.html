@@ -237,7 +237,7 @@ the appropriate parameters.</p>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">library(pak)</span></span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">utils::download.file(</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">  url = "https://raw.githubusercontent.com/mcanouil/eggla/latest/inst/setup/pkg.lock",</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">  url = "https://raw.githubusercontent.com/mcanouil/eggla/latest/.github/.devcontainer/eggla/R/pkg.lock",</span></span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="st">  destfile = "pkg.lock"</span></span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
 <span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="st">lockfile_install(lockfile = "pkg.lock", lib = temp_library)</span></span>
@@ -358,11 +358,11 @@ restore predefined version of packages.</p>
 <span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pak.r-lib.org/" class="external-link">pak</a></span><span class="op">)</span></span>
 <span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span></span>
-<span>  url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/mcanouil/eggla/latest/inst/setup/pkg.lock"</span>,</span>
+<span>  url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/mcanouil/eggla/latest/.github/.devcontainer/eggla/R/pkg.lock"</span>,</span>
 <span>  destfile <span class="op">=</span> <span class="st">"pkg.lock"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pak.r-lib.org/reference/lockfile_install.html" class="external-link">lockfile_install</a></span><span class="op">(</span>lockfile <span class="op">=</span> <span class="st">"pkg.lock"</span>, lib <span class="op">=</span> <span class="va">temp_library</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"mcanouil/eggla@0.10.4"</span>, lib <span class="op">=</span> <span class="va">temp_library</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span>, dependencies <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"mcanouil/eggla@v1.0.0"</span>, lib <span class="op">=</span> <span class="va">temp_library</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span>, dependencies <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-the-analysis-1">Run the analysis<a class="anchor" aria-label="anchor" href="#run-the-analysis-1"></a>
