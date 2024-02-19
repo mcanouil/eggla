@@ -49,3 +49,16 @@ jobs:
           imageTag: ${{ steps.tag.outputs.tag }}
           push: always
           runCmd: Rscript /eggla-example.R
+          
+  clean:
+    needs: 'build-devcontainer'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Delete obsolete/untagged versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ github.event.repository.name }}
+          package-type: "container"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-only-untagged-versions: "true"
