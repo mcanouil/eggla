@@ -4,6 +4,8 @@
 
 - In `DESCRIPTION`,
   - build: add `growthcleanr` GitHub repository as remote.
+ 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v1.0.0...v1.0.1
 
 # eggla 1.0.0
 
@@ -25,6 +27,8 @@
   - chore: update citation file.
 - In `R/gsp.R`,
   - chore: add `@export` for S3 method.
+ 
+**Full Changelog**: https://github.com/mcanouil/eggla/compare/v0.20.0...v1.0.0
 
 # eggla 0.20.0
 
