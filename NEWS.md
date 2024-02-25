@@ -1,3 +1,10 @@
+# eggla 1.0.1
+
+## Build
+
+- In `DESCRIPTION`,
+  - build: add `growthcleanr` GitHub repository as remote.
+
 # eggla 1.0.0
 
 ## Build
