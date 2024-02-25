@@ -36,7 +36,7 @@ Imports:
     grDevices,
     data.table (>= 1.14.10),
     future.apply (>= 1.11.1),
-    growthcleanr (>= 2.1.1),
+    growthcleanr (>= 2.2.0),
     ggplot2 (>= 3.4.4),
     ggtext (>= 0.1.2),
     ggdist (>= 3.3.1),
@@ -59,6 +59,8 @@ Suggests:
     forcats (>= 1.0.0),
     roxygen2 (>= 7.2.3),
     testthat (>= 3.1.7)
+Remotes:
+    github::carriedaymont/growthcleanr@v2.2.0
 SystemRequirements:
     BCFtools (>= 1.16) (https://github.com/samtools/BCFtools),
     PLINK2 (>= 2.0) (https://www.cog-genomics.org/plink/2.0)
