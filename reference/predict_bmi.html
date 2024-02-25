@@ -14,7 +14,7 @@ This function also works for any model obtained using time_model()."><meta prope
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,6 +126,7 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        egg_id egg_ageyears  egg_bmi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;char&gt;        &lt;num&gt;    &lt;num&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     1:    082         0.25 16.21582</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2:    082         0.26 16.29086</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     3:    082         0.27 16.36399</span>
@@ -163,6 +164,7 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple BMI measures (for the same age) have been detected and are aggregated using geometric mean!</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Use "filter" (or "filter" in `run_eggla_lmm()`) parameter to apply some filtering, e.g., filter = "source == 'clinic'".</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        egg_id egg_ageyears  egg_bmi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;char&gt;        &lt;num&gt;    &lt;num&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     1:    001         0.25 18.42096</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2:    001         0.26 18.50635</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     3:    001         0.27 18.58958</span>
@@ -177,6 +179,7 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">predict_bmi</span><span class="op">(</span><span class="va">res</span>, filter <span class="op">=</span> <span class="st">"source == 'A'"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">egg_id</span>, <span class="va">egg_ageyears</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        egg_id egg_source egg_ageyears  egg_bmi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;char&gt;     &lt;char&gt;        &lt;num&gt;    &lt;num&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     1:    001          A         0.25 18.39947</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2:    001          A         0.26 18.48476</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     3:    001          A         0.27 18.56789</span>

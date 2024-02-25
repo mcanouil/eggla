@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,16 +138,17 @@ kilograms per quare metre.</p>
 <span><span class="va">bmigrowth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">bmigrowth</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bmigrowth</span><span class="op">[</span><span class="va">bmigrowth</span><span class="op">[[</span><span class="st">"ID"</span><span class="op">]</span><span class="op">]</span> <span class="op">==</span> <span class="st">"001"</span><span class="op">]</span></span>
-<span><span class="co">#&gt;     ID   age sex    weight height      bmi</span></span>
-<span><span class="co">#&gt; 1: 001  0.00   0  3.318845     47 15.02420</span></span>
-<span><span class="co">#&gt; 2: 001  0.25   0  6.585227     60 18.29230</span></span>
-<span><span class="co">#&gt; 3: 001  0.50   0  7.239751     64 17.67517</span></span>
-<span><span class="co">#&gt; 4: 001  0.75   0  9.474914     66 21.75141</span></span>
-<span><span class="co">#&gt; 5: 001  2.00   0 13.990333     79 22.41681</span></span>
-<span><span class="co">#&gt; 6: 001  4.00   0 25.909311    105 23.50051</span></span>
-<span><span class="co">#&gt; 7: 001  6.00   0 30.117745    106 26.80469</span></span>
-<span><span class="co">#&gt; 8: 001 12.00   0 77.958539    148 35.59101</span></span>
-<span><span class="co">#&gt; 9: 001 14.00   0 92.021767    156 37.81302</span></span></code></pre></div>
+<span><span class="co">#&gt;        ID   age   sex    weight height      bmi</span></span>
+<span><span class="co">#&gt;    &lt;char&gt; &lt;num&gt; &lt;int&gt;     &lt;num&gt;  &lt;int&gt;    &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:    001  0.00     0  3.318845     47 15.02420</span></span>
+<span><span class="co">#&gt; 2:    001  0.25     0  6.585227     60 18.29230</span></span>
+<span><span class="co">#&gt; 3:    001  0.50     0  7.239751     64 17.67517</span></span>
+<span><span class="co">#&gt; 4:    001  0.75     0  9.474914     66 21.75141</span></span>
+<span><span class="co">#&gt; 5:    001  2.00     0 13.990333     79 22.41681</span></span>
+<span><span class="co">#&gt; 6:    001  4.00     0 25.909311    105 23.50051</span></span>
+<span><span class="co">#&gt; 7:    001  6.00     0 30.117745    106 26.80469</span></span>
+<span><span class="co">#&gt; 8:    001 12.00     0 77.958539    148 35.59101</span></span>
+<span><span class="co">#&gt; 9:    001 14.00     0 92.021767    156 37.81302</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bmigrowth</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">bmi</span>, colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ID</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -317,7 +318,13 @@ kilograms per quare metre.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
 <span>    legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.99</span><span class="op">)</span>,</span>
 <span>    legend.justification <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="st">"top"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2</span></span>
+<span><span class="co">#&gt; 3.5.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use the `legend.position.inside` argument of `theme()` instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span></code></pre></div>
 <p><img src="run-cubic-splines_files/figure-html/unnamed-chunk-10-1.png" width="700.0000032"></p>
 </div>
 <div class="section level2">
@@ -370,7 +377,8 @@ kilograms per quare metre.</p>
 <span>  fit <span class="op">=</span> <span class="va">res</span>,</span>
 <span>  period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">3.5</span>, <span class="fl">6.5</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">17</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Transformation introduced infinite values in continuous y-axis</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning in scale_y_continuous(..., transform = transform_log10()):</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">log-10</span> transformation introduced infinite values.</span></span></code></pre></div>
 <p><img src="run-cubic-splines_files/figure-html/unnamed-chunk-13-1.png" width="700.0000032"></p>
 </div>
 <div class="section level2">
@@ -405,6 +413,7 @@ kilograms per quare metre.</p>
 <span>  period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">3.5</span>, <span class="fl">6.5</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">17</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;               term  auc_0--0.5 auc_1.5--3.5 auc_6.5--10  auc_12--17</span></span>
+<span><span class="co">#&gt;             &lt;char&gt;       &lt;num&gt;        &lt;num&gt;       &lt;num&gt;       &lt;num&gt;</span></span>
 <span><span class="co">#&gt;  1:     auc_0--0.5  1.00000000    0.7353315   0.1339844 -0.05890455</span></span>
 <span><span class="co">#&gt;  2:   auc_1.5--3.5  0.73533146    1.0000000   0.7636209  0.55930196</span></span>
 <span><span class="co">#&gt;  3:    auc_6.5--10  0.13398439    0.7636209   1.0000000  0.92716065</span></span>
@@ -418,6 +427,7 @@ kilograms per quare metre.</p>
 <span><span class="co">#&gt; 11:         AP_bmi  0.98613035    0.8780203   0.3266741  0.08070058</span></span>
 <span><span class="co">#&gt; 12:         AR_bmi  0.84773402    0.9912778   0.6586349  0.41091288</span></span>
 <span><span class="co">#&gt;     slope_0--0.5 slope_1.5--3.5 slope_6.5--10 slope_12--17 AP_ageyears</span></span>
+<span><span class="co">#&gt;            &lt;num&gt;          &lt;num&gt;         &lt;num&gt;        &lt;num&gt;       &lt;num&gt;</span></span>
 <span><span class="co">#&gt;  1:   -0.3169697     -0.3508031   -0.50529328  -0.24988480  -0.3720037</span></span>
 <span><span class="co">#&gt;  2:    0.4092298      0.3761391    0.10448682  -0.52065771   0.2662496</span></span>
 <span><span class="co">#&gt;  3:    0.8827566      0.8765640    0.69060183  -0.40708606   0.8172338</span></span>
@@ -431,6 +441,7 @@ kilograms per quare metre.</p>
 <span><span class="co">#&gt; 11:   -0.1848452     -0.2252452   -0.41171335  -0.36373211  -0.2175252</span></span>
 <span><span class="co">#&gt; 12:    0.2043257      0.1649506   -0.08689075  -0.44388763   0.1579897</span></span>
 <span><span class="co">#&gt;     AR_ageyears      AP_bmi      AR_bmi</span></span>
+<span><span class="co">#&gt;           &lt;num&gt;       &lt;num&gt;       &lt;num&gt;</span></span>
 <span><span class="co">#&gt;  1:   0.3677334  0.98613035  0.84773402</span></span>
 <span><span class="co">#&gt;  2:  -0.2764872  0.87802031  0.99127780</span></span>
 <span><span class="co">#&gt;  3:  -0.8414245  0.32667409  0.65863485</span></span>
@@ -457,13 +468,14 @@ kilograms per quare metre.</p>
 <span>  j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.SD</span><span class="op">)</span>,</span>
 <span>  by <span class="op">=</span> <span class="st">"parameter"</span></span>
 <span><span class="op">]</span></span>
-<span><span class="co">#&gt;       parameter  ID Row Distance_IQR Outlier_IQR Outlier</span></span>
-<span><span class="co">#&gt; 1:   auc_0--0.5 064  32     1.395147           1       1</span></span>
-<span><span class="co">#&gt; 2: auc_1.5--3.5 007   5     1.307930           1       1</span></span>
-<span><span class="co">#&gt; 3: auc_1.5--3.5 044  22     1.358904           1       1</span></span>
-<span><span class="co">#&gt; 4:       AP_bmi 044  21     1.319709           1       1</span></span>
-<span><span class="co">#&gt; 5:       AR_bmi 033  16     1.331621           1       1</span></span>
-<span><span class="co">#&gt; 6:       AR_bmi 044  21     1.622874           1       1</span></span></code></pre></div>
+<span><span class="co">#&gt;       parameter     ID   Row Distance_IQR Outlier_IQR Outlier</span></span>
+<span><span class="co">#&gt;          &lt;char&gt; &lt;char&gt; &lt;int&gt;        &lt;num&gt;       &lt;num&gt;   &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:   auc_0--0.5    064    32     1.395147           1       1</span></span>
+<span><span class="co">#&gt; 2: auc_1.5--3.5    007     5     1.307930           1       1</span></span>
+<span><span class="co">#&gt; 3: auc_1.5--3.5    044    22     1.358904           1       1</span></span>
+<span><span class="co">#&gt; 4:       AP_bmi    044    21     1.319709           1       1</span></span>
+<span><span class="co">#&gt; 5:       AR_bmi    033    16     1.331621           1       1</span></span>
+<span><span class="co">#&gt; 6:       AR_bmi    044    21     1.622874           1       1</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

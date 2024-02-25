@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,13 +132,14 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">compute_apar</span><span class="op">(</span>fit <span class="op">=</span> <span class="va">res</span>, from <span class="op">=</span> <span class="st">"predicted"</span><span class="op">)</span><span class="op">[</span><span class="va">AP</span> <span class="op">|</span> <span class="va">AR</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    egg_id egg_ageyears  egg_bmi    AP    AR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:    001         0.77 20.36074  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:    001         2.04 19.83158 FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:    004         0.79 17.37386  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:    004         1.90 17.02318 FALSE  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:    005         0.79 17.66391  TRUE FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6:    005         1.83 17.35547 FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    egg_id egg_ageyears  egg_bmi     AP     AR</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;char&gt;        &lt;num&gt;    &lt;num&gt; &lt;lgcl&gt; &lt;lgcl&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:    001         0.77 20.36074   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:    001         2.04 19.83158  FALSE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:    004         0.79 17.37386   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:    004         1.90 17.02318  FALSE   TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:    005         0.79 17.66391   TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:    005         1.83 17.35547  FALSE   TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Comparing observed and predicted values</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></span>
@@ -180,10 +181,14 @@ Default is <code>NULL</code>.</p></dd>
 <span class="r-in"><span>  by <span class="op">=</span> <span class="st">"variable"</span></span></span>
 <span class="r-in"><span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">list_gg</span><span class="op">[[</span><span class="st">"gg"</span><span class="op">]</span><span class="op">]</span>, guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values (`geom_segment()`).</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values (`geom_point()`).</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values (`geom_segment()`).</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values (`geom_point()`).</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values or values outside the scale range</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> (`geom_segment()`).</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values or values outside the scale range</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> (`geom_point()`).</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values or values outside the scale range</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> (`geom_segment()`).</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 rows containing missing values or values outside the scale range</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> (`geom_point()`).</span>
 <span class="r-plt img"><img src="compute_apar-1.png" alt="" width="700" height="394"></span>
 </code></pre></div>
     </div>
