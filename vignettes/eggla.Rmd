@@ -14,21 +14,13 @@ vignette: |
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  eval = FALSE
-)
-```
-
 # Run Using Docker
 
 ## Create `run_eggla.R` script
 
 Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla.R`) on the server that will run the analysis with the appropriate parameters.
 
-```{r}
+```r
 library(eggla)
 library(data.table)
 working_directory <- tempdir() # To be modified by user
@@ -54,7 +46,7 @@ res <- try(run_eggla_lmm(
 
 Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
-```{bash}
+```bash
 docker run \
   --name eggla-docker-analysis \
   --user vscode \
@@ -78,7 +70,7 @@ _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the dir
 
 Copy and edit the following code to a new file (_e.g._, `/home/mcanouil/eggla/run_eggla_gwas.R`) on the server that will run the analysis with the appropriate parameters.
 
-```{r}
+```r
 working_directory <- "/home/mcanouil/eggla"
 setwd(working_directory)
 library(eggla)
@@ -107,7 +99,7 @@ run_eggla_gwas(
 
 Donwload the (latest) Docker image or a specific version from the [GitHub Registry](https://github.com/users/mcanouil/packages/container/package/eggla) and run it with the following command:
 
-```{bash}
+```bash
 docker run \
   --name eggla-docker-analysis \
   --user vscode \
@@ -133,7 +125,7 @@ _Note_: the left-hand side (LHS) of `/home/mcanouil/eggla:/tmp/eggla` is the dir
 
 Copy and edit the following code to a new file (_e.g._, `run_eggla.sh`) on the server that will run the analysis with the appropriate parameters.
 
-```{bash}
+```bash
 #!/bin/bash
 
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
@@ -188,7 +180,7 @@ EOF
 
 ## Run the analysis
 
-```{bash}
+```bash
 bash run_eggla.sh
 ```
 
@@ -204,7 +196,7 @@ bash run_eggla.sh
 
 Run GWASs on slopes and AUCs for male and female.
 
-```{bash}
+```bash
 #!/bin/bash
 
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
@@ -255,7 +247,7 @@ EOF
 
 ## Create the working directory
 
-```{bash}
+```bash
 home_analysis="/home/mcanouil/eggla" # to be changed to the folder in which "egg_analysis" is to be performed
 
 mkdir $home_analysis 
@@ -267,7 +259,7 @@ cd $home_analysis || exit
 
 Start R and setup the working directory using `pak` to restore predefined version of packages.
 
-```{r}
+```r
 temp_library <- file.path(".", "R")
 dir.create(temp_library, recursive = TRUE)
 .libPaths(temp_library)
@@ -288,12 +280,11 @@ lockfile_install(lockfile = "pkg.lock", lib = temp_library)
 pkg_install("mcanouil/eggla@v1.0.0", lib = temp_library, upgrade = FALSE, dependencies = FALSE)
 ```
 
-
 ## Run the analysis
 
 Restart R before running the analysis.
 
-```{r}
+```r
 # setwd("/home/mcanouil/eggla") # already set if step 1 was done
 library(eggla)
 library(data.table)
@@ -330,7 +321,7 @@ if (inherits(res, "try-error")) unlink(wd, recursive = TRUE)
 
 Run the GWASs on slopes and AUCs for male and female.
 
-```{r}
+```r
 # setwd("/home/mcanouil/eggla") # already set if step 1 was done
 library(eggla)
 chr_in_parallel <- FALSE # or 11 to run 11 chromosomes in 11 processes/cores
