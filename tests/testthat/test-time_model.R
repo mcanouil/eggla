@@ -134,41 +134,42 @@ test_that("Test covariates", {
 data("bmigrowth")
 
 test_that("time_model", {
-  res1 <- time_model(
-    y = "log(bmi)",
-    x = "age",
-    data = bmigrowth[bmigrowth[["sex"]] == 0, ],
-    method = "cubic_slope",
-    knots = c(1, 8, 12),
-    id_var = "ID",
-    use_car1 = TRUE,
-    quiet = TRUE
-  )
-
   expect_no_condition(
-    compute_correlations(
-      fit = res1,
-      method = "cubic_slope",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(1, 8, 12)
+    res <- list(
+      "cubic_slopes" = time_model(
+        y = "log(bmi)",
+        x = "age",
+        data = bmigrowth[bmigrowth[["sex"]] == 0, ],
+        method = "cubic_slope",
+        knots = c(1, 8, 12),
+        id_var = "ID",
+        use_car1 = TRUE,
+        quiet = TRUE
+      ),
+      "linear_splines" = time_model(
+        x = "age",
+        y = "log(bmi)",
+        data = bmigrowth[bmigrowth$sex == 0, ],
+        method = "linear_splines",
+        knots = c(5.5, 11),
+        use_car1 = TRUE,
+        quiet = TRUE
+      ),
+      "cubic_splines" = time_model(
+        x = "age",
+        y = "log(bmi)",
+        data = bmigrowth[bmigrowth$sex == 0, ],
+        method = "cubic_splines",
+        knots = c(2, 8, 12),
+        use_car1 = TRUE,
+        quiet = TRUE
+      )
     )
   )
 
-  expect_no_condition(
-     compute_aucs(
-      fit = res1,
-      method = "cubic_slope",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(1, 8, 12)
-    )
-  )
-
-  expect_no_condition(
-    compute_slopes(
-      fit = res1,
-      method = "cubic_slope",
-      period = c(0, 0.5, 1.5, 3.5, 6.5, 10, 12, 17),
-      knots = c(1, 8, 12)
-    )
-  )
+  for (i in names(res)) {
+    expect_snapshot(head(compute_correlations(fit = res[[i]], method = i), 10))
+    expect_snapshot(head(compute_aucs(fit = res[[i]], method = i), 10))
+    expect_snapshot(head(compute_slopes(fit = res[[i]], method = i), 10))
+  }
 })
