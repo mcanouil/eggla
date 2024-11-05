@@ -1,7 +1,7 @@
 #' Derived areas under the curve from a cubic splines mixed-effects model by `egg_model()`.
 #'
 #' Derived areas under the curve (AUCs) for differentintervals based
-#' on a fitted cubic splines mixed-effects model from `egg_model()`. 
+#' on a fitted cubic splines mixed-effects model from `egg_model()`.
 #' This function is a specific version of `compute_aucs`
 #' designed to work specifically on `egg_model()`.
 #'
@@ -39,24 +39,25 @@ egg_aucs <- function(
 
   pred_auc <- matrix(
     data = NA_real_,
-    nrow = length(unique(fit$data[[id_var]])),
-    ncol = length(period) / 2
-  )
-  colnames(pred_auc) <- paste0(
-    "auc_",
-    sapply(split(
-      x = period,
-      f = rep(
-        x = seq(1, length(period), length(period) %/% 4),
-        each = length(period) %/% 4
+    nrow = length(unique(fit[["data"]][[id_var]])),
+    ncol = length(period) / 2,
+    dimnames = list(
+      as.character(unique(fit[["data"]][[id_var]])),
+      paste0(
+        "auc_",
+        sapply(split(
+          x = period,
+          f = rep(
+            x = seq(1, length(period), length(period) %/% 4),
+            each = length(period) %/% 4
+          )
+        ), paste, collapse = "--")
       )
-    ), paste, collapse = "--")
+    )
   )
 
   fxef <- nlme::fixef(fit)
-  fxef <- unname(fxef[
-    grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))
-  ])
+  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))])
   rnef <- nlme::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
@@ -73,26 +74,25 @@ egg_aucs <- function(
     sapply(
       X = x,
       FUN = function(x) {
-        y_tmp <- coeff *
-          c(x^0, x^1, x^2, x^3, (x - knots)^3) /
-          c(1, 1, 2, rep(6, 4))
-        sum(y_tmp[1:(4 + findInterval(x, knots, left.open = TRUE))])
+        y_tmp <- coeff * c(x^0, x^1, x^2, x^3, (x - knots)^3) / c(1, 1, 2, rep(6, 4))
+        sum(y_tmp[seq_len(4 + findInterval(x, knots, left.open = TRUE))])
       }
     )
   }
-  for (i in seq_along(unique(fit$data[[id_var]]))) {
+  for (i in as.character(unique(fit[["data"]][[id_var]]))) {
     coeff <- fxef + as.numeric(rnef[i, ])
-    for (j in 1:(length(period) / 2)) {
+    for (j in seq_len(length(period) / 2)) {
         pred_auc[i, j] <- stats::integrate(
           f = y,
           coeff = coeff,
           knots = knots,
           lower = period[j * 2 - 1],
           upper = period[j * 2]
-        )$value
+        )[["value"]]
     }
   }
-  out <- cbind.data.frame(ID = unique(fit$data[[id_var]]), pred_auc)
-  names(out)[1] <- id_var
+
+  out <- cbind.data.frame(Row.names = rownames(pred_auc), pred_auc)
+  names(out)[grepl("Row.names", names(out), fixed = TRUE)] <- id_var
   out
 }

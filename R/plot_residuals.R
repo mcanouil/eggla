@@ -43,7 +43,7 @@ plot_residuals <- function(x, y, fit) {
   revert_trans <- if (grepl("log", y)) exp else identity
   y <- sub("log\\((.*)\\)", "\\1", y)
 
-  model_data <- as.data.frame(fit$data)
+  model_data <- as.data.frame(fit[["data"]])
   model_data[["resid"]] <- stats::residuals(fit, level = 1, type = "p")
   model_data[["fitted"]] <- stats::fitted(fit, level = 1)
 

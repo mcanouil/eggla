@@ -1,3 +1,15 @@
+# eggla 1.0.2
+
+## Fixes
+
+- In `R/*_aucs.R`, `R/*_slopes.R`,
+  - fix: use ID as character and use merge to combine data.frames/matrices.
+
+## Chores
+
+- In `R`, `tests/testthat`,
+  - chore: replace `1:` with `seq_len` and `$` with `[[`.
+
 # eggla 1.0.1
 
 ## Build

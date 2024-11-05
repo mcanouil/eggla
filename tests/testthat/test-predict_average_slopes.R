@@ -24,7 +24,7 @@ test_that("Cubic slope", {
       pred_bmi_lme <- data.frame()
       ave_slope_lme <- function(fit, data, period) {
         fxef <- as.numeric(nlme::fixef(fit))
-        for (j in 1:(length(period) / 2)) {
+        for (j in seq_len(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
             coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]))
             x1 <- period[j * 2 - 1]
@@ -84,7 +84,7 @@ test_that("Linear Splines", {
       pred_bmi_lsplines <- data.frame()
       ave_slope_lsplines <- function(fit, data, period) {
         fxef <- as.numeric(nlme::fixef(fit))
-        for (j in 1:(length(period) / 2)) {
+        for (j in seq_len(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
             coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]))
             x1 <- period[j * 2 - 1]
@@ -161,7 +161,7 @@ test_that("Cubic Splines", {
       pred_bmi_csplines <- data.frame()
       ave_slope_csplines <- function(fit, data, period) {
         fxef <- as.numeric(nlme::fixef(fit))
-        for (j in 1:(length(period) / 2)) {
+        for (j in seq_len(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
             coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]), rep(0, 3))
             x1 <- period[j * 2 - 1]

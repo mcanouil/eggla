@@ -24,7 +24,7 @@ test_that("Cubic slope", {
       pred_auc_lme <- data.frame()
       auc_lme <- function(fit, data, period) {
         fxef <- as.numeric(nlme::fixef(fit))
-        for (j in 1:(length(period) / 2)) {
+        for (j in seq_len(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
             coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]))
             x1 <- period[j * 2 - 1]
@@ -146,7 +146,7 @@ test_that("Cubic Splines", {
       pred_auc_csplines <- data.frame()
       auc_csplines <- function(fit, data, period) {
         fxef <- as.numeric(nlme::fixef(fit))
-        for (j in 1:(length(period) / 2)) {
+        for (j in seq_len(length(period) / 2)) {
           for (i in seq_len(nrow(data))) {
             coeff <- fxef + c(as.numeric(nlme::ranef(fit)[i, ]), rep(0, 3))
             x1 <- period[j * 2 - 1]
