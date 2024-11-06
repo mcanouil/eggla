@@ -10,6 +10,12 @@
 - In `R`, `tests/testthat`,
   - chore: replace `1:` with `seq_len` and `$` with `[[`.
 
+## Tests
+
+- In `tests/testthat`,
+  - test: cleanup duplicated and outdated tests.
+  - test: add snapshot tests.
+
 # eggla 1.0.1
 
 ## Build
