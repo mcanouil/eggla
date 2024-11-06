@@ -6,7 +6,7 @@ test_that("Cubic slope", {
       x <- time_model(
         x = "age",
         y = "log(bmi)",
-        data = bmigrowth[bmigrowth$sex == 0, ],
+        data = bmigrowth[bmigrowth[["sex"]] == 0, ],
         method = "cubic_slope",
         use_car1 = use_car1,
         id_var = "ID",
@@ -16,7 +16,7 @@ test_that("Cubic slope", {
 
     y <- nlme::lme(
       log(bmi) ~ stats::poly(age, 3),
-      data = bmigrowth[bmigrowth$sex == 0, ],
+      data = bmigrowth[bmigrowth[["sex"]] == 0, ],
       random = ~  stats::poly(age, 3) | ID,
       na.action = stats::na.omit,
       method = "ML",
@@ -34,7 +34,7 @@ test_that("Linear Splines", {
       x <- time_model(
         x = "age",
         y = "log(bmi)",
-        data = bmigrowth[bmigrowth$sex == 0, ],
+        data = bmigrowth[bmigrowth[["sex"]] == 0, ],
         method = "linear_splines",
         knots = c(0.75, 5.5, 11),
         use_car1 = use_car1,
@@ -45,7 +45,7 @@ test_that("Linear Splines", {
 
     y <- nlme::lme(
       log(bmi) ~ gsp(age, knots = c(0.75, 5.5, 11), degree = c(1, 1, 1, 1), smooth = c(0, 0, 0)),
-      data = bmigrowth[bmigrowth$sex == 0, ],
+      data = bmigrowth[bmigrowth[["sex"]] == 0, ],
       random = ~ gsp(age, knots = c(0.75, 5.5, 11), degree = c(1, 1, 1, 1), smooth = c(0, 0, 0)) | ID,
       na.action = stats::na.omit,
       method = "ML",
@@ -63,7 +63,7 @@ test_that("Cubic Splines", {
       x <- time_model(
         x = "age",
         y = "log(bmi)",
-        data = bmigrowth[bmigrowth$sex == 0, ],
+        data = bmigrowth[bmigrowth[["sex"]] == 0, ],
         method = "cubic_splines",
         knots = c(2, 8, 12),
         use_car1 = use_car1,
@@ -74,7 +74,7 @@ test_that("Cubic Splines", {
 
     y <- nlme::lme(
       log(bmi) ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)),
-      data = bmigrowth[bmigrowth$sex == 0, ],
+      data = bmigrowth[bmigrowth[["sex"]] == 0, ],
       random = ~ gsp(age, knots = c(2, 8, 12), degree = c(3, 3, 3, 3), smooth = c(2, 2, 2)) | ID,
       na.action = stats::na.omit,
       method = "ML",
@@ -105,7 +105,7 @@ test_that("Test wrong covariates", {
       x = "age",
       y = "log(bmi)",
       cov = c("nothing"),
-      data = bmigrowth[bmigrowth$sex == 0, ],
+      data = bmigrowth[bmigrowth[["sex"]] == 0, ],
       method = "linear_splines",
       knots = c(5.5, 11),
       id_var = "ID",
@@ -121,7 +121,7 @@ test_that("Test covariates", {
       x = "age",
       y = "log(bmi)",
       cov = c("height"),
-      data = bmigrowth[bmigrowth$sex == 0, ],
+      data = bmigrowth[bmigrowth[["sex"]] == 0, ],
       method = "linear_splines",
       knots = c(5.5, 11),
       id_var = "ID",
@@ -136,9 +136,9 @@ data("bmigrowth")
 test_that("time_model", {
   expect_no_condition(
     res <- list(
-      "cubic_slopes" = time_model(
-        y = "log(bmi)",
+      "cubic_slope" = time_model(
         x = "age",
+        y = "log(bmi)",
         data = bmigrowth[bmigrowth[["sex"]] == 0, ],
         method = "cubic_slope",
         knots = c(1, 8, 12),
@@ -149,7 +149,7 @@ test_that("time_model", {
       "linear_splines" = time_model(
         x = "age",
         y = "log(bmi)",
-        data = bmigrowth[bmigrowth$sex == 0, ],
+        data = bmigrowth[bmigrowth[["sex"]] == 0, ],
         method = "linear_splines",
         knots = c(5.5, 11),
         use_car1 = TRUE,
@@ -158,7 +158,7 @@ test_that("time_model", {
       "cubic_splines" = time_model(
         x = "age",
         y = "log(bmi)",
-        data = bmigrowth[bmigrowth$sex == 0, ],
+        data = bmigrowth[bmigrowth[["sex"]] == 0, ],
         method = "cubic_splines",
         knots = c(2, 8, 12),
         use_car1 = TRUE,
@@ -168,11 +168,7 @@ test_that("time_model", {
   )
 
   for (i in names(res)) {
-    expect_snapshot(
-      as.data.table(
-        compute_correlations(fit = res[[i]], method = i)
-      )[, lapply(.SD, round, digits = 2L), .SDcols = is.numeric]
-    )
+    expect_snapshot(compute_correlations(fit = res[[i]], method = i))
     expect_snapshot({
       out <- compute_aucs(fit = res[[i]], method = i)
       out[, names(out)[-1L]] <- round(out[, names(out)[-1L]], digits = 2L)
