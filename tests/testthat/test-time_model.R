@@ -168,8 +168,18 @@ test_that("time_model", {
   )
 
   for (i in names(res)) {
-    expect_snapshot(head(compute_correlations(fit = res[[i]], method = i), 10))
-    expect_snapshot(head(compute_aucs(fit = res[[i]], method = i), 10))
-    expect_snapshot(head(compute_slopes(fit = res[[i]], method = i), 10))
+    expect_snapshot(
+      compute_correlations(fit = res[[i]], method = i)[, lapply(.SD, round, digits = 2L), .SDcols = is.numeric]
+    )
+    expect_snapshot({
+      out <- compute_aucs(fit = res[[i]], method = i)
+      out[, names(out)[-1L]] <- round(out[, names(out)[-1L]], digits = 2L)
+      out
+    })
+    expect_snapshot({
+      out <- compute_slopes(fit = res[[i]], method = i)
+      out[, names(out)[-1L]] <- round(out[, names(out)[-1L]], digits = 2L)
+      out
+    })
   }
 })
