@@ -169,7 +169,9 @@ test_that("time_model", {
 
   for (i in names(res)) {
     expect_snapshot(
-      compute_correlations(fit = res[[i]], method = i)[, lapply(.SD, round, digits = 2L), .SDcols = is.numeric]
+      as.data.table(
+        compute_correlations(fit = res[[i]], method = i)
+      )[, lapply(.SD, round, digits = 2L), .SDcols = is.numeric]
     )
     expect_snapshot({
       out <- compute_aucs(fit = res[[i]], method = i)
