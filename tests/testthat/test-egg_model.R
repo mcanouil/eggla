@@ -22,7 +22,7 @@ test_that("egg_model", {
     expect_snapshot(head(compute_apar(fit = res2, from = s)[AP | AR], 10))
   }
 
-  expect_snapshot(head(egg_outliers(fit = res2, 10)))
+  expect_snapshot(head(egg_outliers(fit = res2), 10))
 
   set.seed(1234)
   dta <- bmigrowth[bmigrowth[["sex"]] == 0, ]
