@@ -134,6 +134,7 @@ test_that("Test covariates", {
 data("bmigrowth")
 
 test_that("time_model", {
+  set.seed(2705)
   expect_no_condition(
     res <- list(
       "cubic_slope" = time_model(
