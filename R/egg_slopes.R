@@ -39,30 +39,34 @@ egg_slopes <- function(
 
   slopes <- matrix(
     data = NA_real_,
-    nrow = length(unique(fit$data[[id_var]])),
-    ncol = length(period) / 2
-  )
-  colnames(slopes) <- paste0(
-    "slope_",
-    sapply(split(
-      x = period,
-      f = rep(
-        x = seq(1, length(period), length(period) %/% 4),
-        each = length(period) %/% 4
+    nrow = length(unique(fit[["data"]][[id_var]])),
+    ncol = length(period) / 2,
+    dimnames = list(
+      as.character(unique(fit[["data"]][[id_var]])),
+      paste0(
+        "slope_",
+        sapply(split(
+          x = period,
+          f = rep(
+            x = seq(1, length(period), length(period) %/% 4),
+            each = length(period) %/% 4
+          )
+        ), paste, collapse = "--")
       )
-    ), paste, collapse = "--")
+    )
   )
   pred <- matrix(
     data = NA_real_,
-    nrow = length(unique(fit$data[[id_var]])),
-    ncol = length(period)
+    nrow = length(unique(fit[["data"]][[id_var]])),
+    ncol = length(period),
+    dimnames = list(
+      as.character(unique(fit[["data"]][[id_var]])),
+      paste0("pred_period_", round(period, digits = 1))
+    )
   )
-  colnames(pred) <- paste0("pred_period_", round(period, digits = 1))
 
   fxef <- nlme::fixef(fit)
-  fxef <- unname(fxef[
-    grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))
-  ])
+  fxef <- unname(fxef[grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(fxef))])
   rnef <- nlme::ranef(fit)
   rnef <- rnef[, grep("\\(Intercept\\)|gsp\\(.*\\)|poly\\(.*\\)", names(rnef))]
 
@@ -75,27 +79,27 @@ egg_slopes <- function(
     )
   )
 
-  for (i in seq_along(unique(fit$data[[id_var]]))) {
+  for (i in as.character(unique(fit[["data"]][[id_var]]))) {
      coeff <- fxef + as.numeric(rnef[i, ])
-    for (j in 1:(length(period) / 2)) {
+    for (j in seq_len(length(period) / 2)) {
       x1 <- period[j * 2 - 1]
       y1_tmp <- coeff *
         c(x1^0, x1^1, x1^2, x1^3, (x1 - knots)^3) /
         c(1, 1, 2, rep(6, 4))
-      y1 <- sum(y1_tmp[1:(4 + findInterval(x1, knots, left.open = TRUE))])
+      y1 <- sum(y1_tmp[seq_len(4 + findInterval(x1, knots, left.open = TRUE))])
 
       x2 <- period[j * 2]
       y2_tmp <- coeff *
         c(x2^0, x2^1, x2^2, x2^3, (x2 - knots)^3) /
         c(1, 1, 2, rep(6, 4))
-      y2 <- sum(y2_tmp[1:(4 + findInterval(x2, knots, left.open = TRUE))])
+      y2 <- sum(y2_tmp[seq_len(4 + findInterval(x2, knots, left.open = TRUE))])
 
       pred[i, j * 2 - 1] <- y1
       pred[i, j * 2] <- y2
       slopes[i, j] <- (y2 - y1) / (x2 - x1)
     }
   }
-  out <- cbind.data.frame(ID = unique(fit$data[[id_var]]), pred, slopes)
-  names(out)[1] <- id_var
+  out <- merge(x = pred, y = slopes, by = "row.names")
+  names(out)[grepl("Row.names", names(out), fixed = TRUE)] <- id_var
   out
 }
