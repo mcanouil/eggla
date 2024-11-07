@@ -1,14 +1,13 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  adiposity-peak-rebound: adiposity-peak-rebound.html
-  model-selection: model-selection.html
-  models-diagnostics: models-diagnostics.html
-  run-cubic-splines: run-cubic-splines.html
+  articles/adiposity-peak-rebound: adiposity-peak-rebound.html
   eggla: eggla.html
-last_built: 2024-02-25T20:56Z
+  articles/model-selection: model-selection.html
+  articles/models-diagnostics: models-diagnostics.html
+  articles/run-cubic-splines: run-cubic-splines.html
+last_built: 2024-11-07T20:01Z
 urls:
   reference: https://m.canouil.dev/eggla/reference
   article: https://m.canouil.dev/eggla/articles
-
