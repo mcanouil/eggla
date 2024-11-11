@@ -74,7 +74,7 @@ egg_aucs <- function(
     sapply(
       X = x,
       FUN = function(x) {
-        y_tmp <- coeff * c(x^0, x^1, x^2, x^3, (x - knots)^3) / c(1, 1, 2, rep(6, 4))
+        y_tmp <- coeff * c(x^0, x^1, x^2, x^3, (x - knots)^3) / c(1, 1, 2, rep(6, length(knots) + 1))
         sum(y_tmp[seq_len(4 + findInterval(x, knots, left.open = TRUE))])
       }
     )
@@ -93,6 +93,7 @@ egg_aucs <- function(
   }
 
   out <- cbind.data.frame(Row.names = rownames(pred_auc), pred_auc)
+  out <- out[order(out[["Row.names"]]), ]
   names(out)[grepl("Row.names", names(out), fixed = TRUE)] <- id_var
   out
 }

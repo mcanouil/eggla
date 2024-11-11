@@ -119,11 +119,11 @@ compute_slopes <- function(
         coeff <- fxef + as.numeric(rnef[i, ]) # this implies fixed = random
         for (j in seq_len(length(period) / 2)) {
           x1 <- period[j * 2 - 1]
-          y1_tmp <- coeff * c(x1^0, x1^1, x1^2, x1^3, (x1 - knots)^3) / c(1, 1, 2, rep(6, 4))
+          y1_tmp <- coeff * c(x1^0, x1^1, x1^2, x1^3, (x1 - knots)^3) / c(1, 1, 2, rep(6, length(knots) + 1))
           y1 <- sum(y1_tmp[seq_len(4 + findInterval(x1, knots, left.open = TRUE))])
 
           x2 <- period[j * 2]
-          y2_tmp <- coeff * c(x2^0, x2^1, x2^2, x2^3, (x2 - knots)^3) / c(1, 1, 2, rep(6, 4))
+          y2_tmp <- coeff * c(x2^0, x2^1, x2^2, x2^3, (x2 - knots)^3) / c(1, 1, 2, rep(6, length(knots) + 1))
           y2 <- sum(y2_tmp[seq_len(4 + findInterval(x2, knots, left.open = TRUE))])
 
           pred[i, j * 2 - 1] <- y1
