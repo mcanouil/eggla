@@ -1,3 +1,16 @@
+# eggla 1.0.3
+
+## Fixes
+
+- In `R/*_aucs.R`, `R/*_slopes.R`,
+  - fix: sort rows by IDs ([#127](https://github.com/mcanouil/eggla/issues/127), thanks @DrGengWang).
+  - fix: ensure denominator's length depends on the number of knots. ([#127](https://github.com/mcanouil/eggla/issues/127), thanks @DrGengWang)
+
+## Tests
+
+- In `tests/testthat`,
+  - test: update snapshots
+
 # eggla 1.0.2
 
 ## Fixes
