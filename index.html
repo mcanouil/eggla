@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Early Growth Genetics Longitudinal Analysis">
 <meta name="description" content="Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium (&lt;http://egg-consortium.org/&gt;).">
 <meta property="og:description" content="Tools for longitudinal analysis within the EGG (Early Growth Genetics) Consortium (&lt;http://egg-consortium.org/&gt;).">
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,19 +75,37 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <ul>
-<li>Install the development version from GitHub:</li>
-</ul>
+<li>
+<p>Install <a href="https://pak.r-lib.org/" class="external-link"><code>pak</code></a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mcanouil/eggla"</span><span class="op">)</span></span></code></pre></div>
-<ul>
-<li>Install a particular version:</li>
-</ul>
+<code class="sourceCode R"><span><span class="va">temp_library</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"R"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">temp_library</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths</a></span><span class="op">(</span><span class="va">temp_library</span><span class="op">)</span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
+<span>  pkgs <span class="op">=</span> <span class="st">"pak"</span>,</span>
+<span>  lib <span class="op">=</span> <span class="va">temp_library</span>,</span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span></span>
+<span>    <span class="st">"https://r-lib.github.io/p/pak/stable/%s/%s/%s"</span>,</span>
+<span>    <span class="va">.Platform</span><span class="op">[[</span><span class="st">"pkgType"</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="st">"os"</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="st">"arch"</span><span class="op">]</span><span class="op">]</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p>Install <code>eggla</code> and its dependencies</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mcanouil/eggla@v1.0.0"</span><span class="op">)</span></span>
-<span><span class="co"># or the latest stable version</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mcanouil/eggla@latest"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pak.r-lib.org/" class="external-link">pak</a></span><span class="op">)</span></span>
+<span><span class="va">VERSION</span> <span class="op">&lt;-</span> <span class="st">"latest"</span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span></span>
+<span>  url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span></span>
+<span>    <span class="st">"https://raw.githubusercontent.com/mcanouil/eggla/%s/.github/.devcontainer/eggla/R/pkg.lock"</span>,</span>
+<span>    <span class="va">VERSION</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  destfile <span class="op">=</span> <span class="st">"pkg.lock"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pak.r-lib.org/reference/lockfile_install.html" class="external-link">lockfile_install</a></span><span class="op">(</span>lockfile <span class="op">=</span> <span class="st">"pkg.lock"</span>, lib <span class="op">=</span> <span class="va">temp_library</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"mcanouil/eggla@%s"</span>, <span class="va">VERSION</span><span class="op">)</span>, lib <span class="op">=</span> <span class="va">temp_library</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span>, dependencies <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="docker-images">Docker Images<a class="anchor" aria-label="anchor" href="#docker-images"></a>

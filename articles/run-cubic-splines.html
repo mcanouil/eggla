@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run The Cubic Splines (Random Cubic/Linear Splines) Analysis">
 </head>
 <body>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">eggla</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,10 +67,11 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Run The Cubic Splines (Random Cubic/Linear Splines) Analysis</h1>
                         <h4 data-toc-skip class="author">Mickaël
-Canouil, <em>Ph.D.</em> (<a href="mailto:mickael.canouil@cnrs.fr" class="email">mickael.canouil@cnrs.fr</a>)</h4>
+Canouil, <em>Ph.D.</em>
+</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mcanouil/eggla/blob/v1.0.3/vignettes/articles/run-cubic-splines.Rmd" class="external-link"><code>vignettes/articles/run-cubic-splines.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mcanouil/eggla/blob/v1.0.4/vignettes/articles/run-cubic-splines.Rmd" class="external-link"><code>vignettes/articles/run-cubic-splines.Rmd</code></a></small>
       <div class="d-none name"><code>run-cubic-splines.Rmd</code></div>
     </div>
 
@@ -116,7 +117,7 @@ centimetres.</p></li>
 kilograms per quare metre.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"bmigrowth"</span><span class="op">)</span></span>
-<span><span class="va">bmigrowth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">bmigrowth</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">bmigrowth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">bmigrowth</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bmigrowth</span><span class="op">[</span><span class="va">bmigrowth</span><span class="op">[[</span><span class="st">"ID"</span><span class="op">]</span><span class="op">]</span> <span class="op">==</span> <span class="st">"001"</span><span class="op">]</span></span>
 <span><span class="co">#&gt;        ID   age   sex    weight height      bmi</span></span>
@@ -172,7 +173,7 @@ kilograms per quare metre.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">]</span></span>
 <span></span>
-<span><span class="va">pheno_dt_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span></span>
+<span><span class="va">pheno_dt_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/melt.data.table.html" class="external-link">melt</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">pheno_dt</span>,</span>
 <span>  id.vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ID"</span>, <span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"agedays"</span>, <span class="st">"sex_daymont"</span><span class="op">)</span>,</span>
 <span>  measure.vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WEIGHTKG"</span>, <span class="st">"HEIGHTCM"</span><span class="op">)</span>,</span>
@@ -188,7 +189,7 @@ kilograms per quare metre.</p>
 <span>    quietly <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">]</span></span>
-<span><span class="va">pheno_dt_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
+<span><span class="va">pheno_dt_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/dcast.data.table.html" class="external-link">dcast</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">pheno_dt_long</span><span class="op">[</span><span class="va">clean</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="st">"Include"</span><span class="op">]</span>, <span class="co"># Exclude all flags</span></span>
 <span>  formula <span class="op">=</span> <span class="va">...</span> <span class="op">~</span> <span class="va">param</span>,</span>
 <span>  value.var <span class="op">=</span> <span class="st">"measurement"</span></span>
@@ -275,7 +276,7 @@ kilograms per quare metre.</p>
 <span>    formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fu">s</span><span class="op">(</span><span class="va">x</span>, bs <span class="op">=</span> <span class="st">"cr"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/setattr.html" class="external-link">setnames</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setattr.html" class="external-link">setnames</a></span><span class="op">(</span></span>
 <span>      x <span class="op">=</span> <span class="fu"><a href="../reference/predict_bmi.html">predict_bmi</a></span><span class="op">(</span><span class="va">res</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">pheno_dt_female</span><span class="op">[[</span><span class="st">"age"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">pheno_dt_female</span><span class="op">[[</span><span class="st">"age"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"egg_ageyears"</span>, <span class="st">"egg_bmi"</span><span class="op">)</span>,</span>
 <span>      new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"bmi"</span><span class="op">)</span></span>
