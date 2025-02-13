@@ -19,23 +19,37 @@ Tools for longitudinal analysis within the [EGG (Early Growth Genetics) Consorti
 
 ## Installation
 
-* Install the development version from GitHub:
+* Install [`pak`](https://pak.r-lib.org/)
 
-```{r}
-#| eval: false
-# install.packages("remotes")
-remotes::install_github("mcanouil/eggla")
-```
+  ```r
+  temp_library <- file.path(".", "R")
+  dir.create(temp_library, recursive = TRUE)
+  .libPaths(temp_library)
+  utils::install.packages(
+    pkgs = "pak",
+    lib = temp_library,
+    repos = sprintf(
+      "https://r-lib.github.io/p/pak/stable/%s/%s/%s",
+      .Platform[["pkgType"]], R.Version()[["os"]], R.Version()[["arch"]]
+    )
+  )
+  ```
 
-* Install a particular version:
+* Install `eggla` and its dependencies
 
-```{r}
-#| eval: false
-# install.packages("remotes")
-remotes::install_github("mcanouil/eggla@v1.0.0")
-# or the latest stable version
-remotes::install_github("mcanouil/eggla@latest")
-```
+  ```r
+  library(pak)
+  VERSION <- "latest"
+  utils::download.file(
+    url = sprintf(
+      "https://raw.githubusercontent.com/mcanouil/eggla/%s/.github/.devcontainer/eggla/R/pkg.lock",
+      VERSION
+    ),
+    destfile = "pkg.lock"
+  )
+  lockfile_install(lockfile = "pkg.lock", lib = temp_library)
+  pkg_install(sprintf("mcanouil/eggla@%s", VERSION), lib = temp_library, upgrade = FALSE, dependencies = FALSE)
+  ```
 
 ## Docker Images
 
