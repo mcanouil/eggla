@@ -1,6 +1,6 @@
 ---
 title: "Models Diagnostics"
-author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
+author: "Mickaël Canouil, *Ph.D.*"
 ---
 
 ```{r}

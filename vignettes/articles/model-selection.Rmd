@@ -1,6 +1,6 @@
 ---
 title: "Model Selection"
-author: "Mickaël Canouil, *Ph.D.* (<mickael.canouil@cnrs.fr>)"
+author: "Mickaël Canouil, *Ph.D.*"
 params:
   working_directory: !expr tempdir()
 ---
