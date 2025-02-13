@@ -1,0 +1,235 @@
+name: R-CMD-check
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+  workflow_dispatch:
+  release:
+    types: [published]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+env:
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+  R_KEEP_PKG_SOURCE: yes
+  BCFTOOLS_VERSION: 1.19
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "4.3.2" }
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install libcurl
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck, local::.
+
+      - name: Install BCFtools
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update && \
+          sudo apt-get install -y --no-install-recommends \
+            libxt6 \
+            ca-certificates \
+            bzip2 \
+            wget \
+            autoconf \
+            automake \
+            make \
+            cmake \
+            libbz2-dev \
+            liblzma-dev \
+            libjpeg-dev \
+            libxml2-dev \
+            zlib1g-dev \
+            libgdal-dev
+          wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
+            tar -C /tmp/ -xjf /tmp/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
+            cd /tmp/bcftools-${BCFTOOLS_VERSION} && \
+            sudo autoreconf -i && \
+            sudo ./configure --prefix=/usr && \
+            sudo make && \
+            sudo make install
+
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual")'
+          error-on: '"error"'
+
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
+
+  pkgdown:
+    needs: R-CMD-check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::.
+          needs: website
+
+      - name: Deploy package
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+
+  test-coverage:
+    needs: R-CMD-check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::covr, local::.
+          needs: coverage
+
+      - name: Install BCFtools
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update && \
+          sudo apt-get install -y --no-install-recommends \
+            libxt6 \
+            ca-certificates \
+            bzip2 \
+            wget \
+            autoconf \
+            automake \
+            make \
+            cmake \
+            libbz2-dev \
+            liblzma-dev \
+            libjpeg-dev \
+            libxml2-dev \
+            zlib1g-dev \
+            libgdal-dev
+          wget -q -P /tmp/ https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
+            tar -C /tmp/ -xjf /tmp/bcftools-${BCFTOOLS_VERSION}.tar.bz2 && \
+            cd /tmp/bcftools-${BCFTOOLS_VERSION} && \
+            sudo autoreconf -i && \
+            sudo ./configure --prefix=/usr && \
+            sudo make && \
+            sudo make install
+
+      - name: Test coverage
+        run: covr::codecov(quiet = FALSE)
+        shell: Rscript {0}
+
+  build-devcontainer:
+    needs: R-CMD-check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Determine Tag
+        id: tag
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "tag=devel" >> "$GITHUB_OUTPUT"
+            echo "EGGLA_VERSION=main" >> "$GITHUB_ENV"
+          else
+            echo "tag=latest,${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+            echo "EGGLA_VERSION=${{ github.ref_name }}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build and run Dev Container on release
+        uses: devcontainers/ci@v0.3
+        if:
+        with:
+          subFolder: .github
+          imageName: ghcr.io/${{ github.repository }}
+          imageTag: ${{ steps.tag.outputs.tag }}
+          push: always
+          runCmd: Rscript /eggla-example.R
+
+  clean:
+    needs: build-devcontainer
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Delete obsolete/untagged versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ github.event.repository.name }}
+          package-type: "container"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-only-untagged-versions: "true"
+
+  latest:
+    needs:
+      - pkgdown
+      - build-devcontainer
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag Latest
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git tag -a latest -m "Sliding tag" --force
+          git push --tags --force
