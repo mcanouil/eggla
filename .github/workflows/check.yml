@@ -122,7 +122,7 @@ jobs:
   test-coverage:
     needs: R-CMD-check
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     strategy:
       fail-fast: false
     steps:
@@ -171,7 +171,7 @@ jobs:
   build-devcontainer:
     needs: R-CMD-check
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     strategy:
       fail-fast: false
     steps:
