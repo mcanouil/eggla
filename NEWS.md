@@ -1,3 +1,12 @@
+# eggla 1.0.4
+
+## Documentation
+
+- In `README.Rmd`,
+  - docs: replace previous instructions with instructions using "lock" file for dependencies.
+- In `vignettes/`,
+  - docs: remove outdated email address.
+
 # eggla 1.0.3
 
 ## Fixes
