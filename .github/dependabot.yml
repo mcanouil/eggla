@@ -4,11 +4,17 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - "Type: Dependencies :arrow_up:"
   - package-ecosystem: "devcontainers"
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - "Type: Dependencies :arrow_up:"
   - package-ecosystem: "devcontainers"
     directory: "/.github/"
     schedule:
       interval: "weekly"
+    labels:
+      - "Type: Dependencies :arrow_up:"
