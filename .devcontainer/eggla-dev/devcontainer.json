@@ -1,5 +1,5 @@
 {
-	"name": "eggla",
+	"name": "eggla - development",
 	"image": "ghcr.io/mcanouil/eggla:devel",
 	"remoteUser": "vscode",
 	"customizations": {

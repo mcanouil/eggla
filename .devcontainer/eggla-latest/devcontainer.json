@@ -1,0 +1,19 @@
+{
+	"name": "eggla - latest",
+	"image": "ghcr.io/mcanouil/eggla:latest",
+	"remoteUser": "vscode",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"REditorSupport.r"
+			],
+			"settings": {
+				"r.rterm.option": [
+					"--no-save",
+					"--no-restore-data",
+					"--quiet"
+				]
+			}
+		}
+	}
+}
