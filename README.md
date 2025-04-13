@@ -15,7 +15,7 @@ tag](https://img.shields.io/github/tag/mcanouil/eggla.svg?label=latest%20tag&inc
 Tools for longitudinal analysis within the [EGG (Early Growth Genetics)
 Consortium](http://egg-consortium.org/).
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/mcanouil/eggla?quickstart=1&devcontainer_path=..devcontainer%2Feggla-latest%2Fdevcontainer.json)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/mcanouil/eggla?quickstart=1&devcontainer_path=.devcontainer%2Feggla-latest%2Fdevcontainer.json)
 
 ## Installation
 
